@@ -1,0 +1,38 @@
+import { Meta, ColorPalette, ColorItem, Typeset } from '@storybook/addon-docs/blocks'
+
+<Meta title="Fondamenta/Token" />
+
+# Token del Design System
+
+Valori definiti in `src/styles/tokens.css`. Ogni colore di testo rispetta il contrasto WCAG 2.1 AA (4,5:1) sullo sfondo indicato.
+
+## Colori
+
+<ColorPalette>
+  <ColorItem title="Brand" subtitle="Accento, solo testo grande o grafica" colors={{ '--color-brand': '#D14040' }} />
+  <ColorItem title="Brand istituzionale" subtitle="Header, pulsanti primari" colors={{ '--color-brand-strong': '#A23130' }} />
+  <ColorItem title="Brand scuro" subtitle="Top bar, hover primario" colors={{ '--color-brand-dark': '#5B1B1B' }} />
+  <ColorItem title="Testo" colors={{ '--color-text': '#12191D' }} />
+  <ColorItem title="Titoli e link" colors={{ '--color-heading': '#202F37' }} />
+  <ColorItem title="Link hover" subtitle="Era #657A85 (4,49): ora 4,89 su bianco" colors={{ '--color-link-hover': '#5F747F' }} />
+  <ColorItem title="Superfici" colors={{ '--color-bg': '#FFFFFF', '--color-surface': '#F9F9F9' }} />
+  <ColorItem title="Info" subtitle="Testo era #3A74A2 (4,05): ora 5,92" colors={{ bg: '#D8EAF6', text: '#2B5A80' }} />
+  <ColorItem title="Successo" colors={{ bg: '#E3F1E7', text: '#1F6B3A' }} />
+  <ColorItem title="Attenzione" colors={{ bg: '#FBF0D9', text: '#7A4F00' }} />
+  <ColorItem title="Errore" colors={{ bg: '#FBE5E5', text: '#A23130' }} />
+</ColorPalette>
+
+## Tipografia
+
+Albert Sans, servito dal nostro server (nessuna chiamata a Google Fonts). Testo base 17px, interlinea 1,5.
+
+<Typeset
+  fontFamily="'Albert Sans', sans-serif"
+  fontSizes={[14, 16, 17, 20, 24, 36, 48]}
+  fontWeight={400}
+  sampleText="Accademia Albertina di Belle Arti di Torino"
+/>
+
+## Spaziature e layout
+
+Scala 4 · 8 · 16 · 24 · 32 · 48 · 64 · 96 px. Contenitore massimo 1240px, gap 30px, sezioni fino a 90px di padding verticale.

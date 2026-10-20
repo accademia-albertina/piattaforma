@@ -1,0 +1,134 @@
+.header {
+  --color-focus: #ffffff;
+  --color-focus-contrast: #12191d;
+  color: var(--color-on-brand);
+}
+
+.header a {
+  color: inherit;
+}
+
+.header a:hover {
+  color: inherit;
+}
+
+.topBar {
+  background: var(--color-brand-dark);
+  font-size: var(--font-size-xs);
+}
+
+.topBarInner {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.utilityList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin: 0;
+  padding: var(--space-2) 0;
+  list-style: none;
+}
+
+.utilityList a {
+  text-decoration: none;
+}
+
+.utilityList a:hover {
+  text-decoration: underline;
+}
+
+.main {
+  background: var(--color-brand-strong);
+}
+
+.mainInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-block: var(--space-4);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  line-height: var(--line-height-tight);
+}
+
+.brandName {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.brandSub {
+  font-size: var(--font-size-sm);
+}
+
+.menuToggle {
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid currentColor;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.menuToggle:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.nav {
+  display: none;
+  flex-basis: 100%;
+}
+
+.nav[data-open] {
+  display: block;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navList a {
+  display: flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding-inline: var(--space-2);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.navList a:hover,
+.navList a[aria-current='page'] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+@media (min-width: 64rem) {
+  .menuToggle {
+    display: none;
+  }
+
+  .nav {
+    display: block;
+    flex-basis: auto;
+  }
+
+  .navList {
+    flex-direction: row;
+    gap: var(--space-3);
+  }
+}
