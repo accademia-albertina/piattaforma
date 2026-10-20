@@ -1,0 +1,44 @@
+name: CodeQL
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '30 4 * * 1'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  analizza:
+    name: Analisi statica di sicurezza
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: github/codeql-action/init@v4
+        with:
+          languages: javascript-typescript
+          queries: security-extended
+      # Il repository è privato senza GitHub Advanced Security: niente upload a Code Scanning,
+      # i risultati restano come artifact e il job fallisce se CodeQL trova problemi.
+      - uses: github/codeql-action/analyze@v4
+        with:
+          upload: never
+          output: codeql-results
+      - name: Controlla i risultati
+        run: |
+          count=$(jq '[.runs[].results[]] | length' codeql-results/*.sarif)
+          if [ "$count" -gt 0 ]; then
+            jq -r '.runs[].results[] | "::error file=\(.locations[0].physicalLocation.artifactLocation.uri),line=\(.locations[0].physicalLocation.region.startLine)::\(.ruleId): \(.message.text)"' codeql-results/*.sarif
+            echo "CodeQL ha trovato $count problemi"
+            exit 1
+          fi
+          echo "Nessun problema trovato"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: codeql-sarif
+          path: codeql-results/
+          retention-days: 30

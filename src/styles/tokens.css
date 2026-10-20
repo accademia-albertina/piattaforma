@@ -1,0 +1,130 @@
+/*
+ * Design token dell'Accademia Albertina.
+ * Fonte: https://albertina-academy.it/design-system/ + misure del sito attuale (zoom 90%).
+ * Ogni coppia testo/sfondo indicata nei commenti rispetta WCAG 2.1 AA (≥ 4,5:1).
+ */
+
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/albert-sans-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/albert-sans-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/albert-sans-latin-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+    U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Albert Sans';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/albert-sans-latin-ext-wght-italic.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
+:root {
+  /* Colori del Design System */
+  --color-brand: #d14040; /* accento: 4,65 su bianco, 4,41 su surface → solo testo grande o elementi grafici */
+  --color-brand-strong: #a23130; /* istituzionale (header): bianco sopra 6,96 */
+  --color-brand-dark: #5b1b1b; /* top bar: bianco sopra 12,98 */
+  --color-text: #12191d; /* 17,76 su bianco */
+  --color-heading: #202f37; /* 13,79 su bianco */
+  --color-link: #202f37;
+  --color-link-hover: #5f747f; /* era #657a85 (4,49, non AA): ora 4,89 su bianco, 4,65 su surface */
+  --color-text-muted: #5f747f;
+  --color-bg: #ffffff;
+  --color-surface: #f9f9f9;
+  --color-on-brand: #ffffff;
+
+  /* Bordi: quelli dei controlli devono avere almeno 3:1 sullo sfondo */
+  --color-border: #e1e6e9;
+  --color-border-control: #5f747f;
+
+  /* Stati */
+  --color-info-bg: #d8eaf6;
+  --color-info-text: #2b5a80; /* era #3a74a2 (4,05): ora 5,92 */
+  --color-success-bg: #e3f1e7;
+  --color-success-text: #1f6b3a; /* 5,59 */
+  --color-warning-bg: #fbf0d9;
+  --color-warning-text: #7a4f00; /* 6,30 */
+  --color-error-bg: #fbe5e5;
+  --color-error-text: #a23130; /* 5,78 */
+
+  /* Focus: visibile su ogni sfondo grazie al doppio anello */
+  --color-focus: #12191d;
+  --color-focus-contrast: #ffffff;
+  --focus-ring: 0 0 0 2px var(--color-focus-contrast), 0 0 0 5px var(--color-focus);
+
+  /* Tipografia */
+  --font-family: 'Albert Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-size-xs: 0.875rem; /* 14 */
+  --font-size-sm: 1rem; /* 16 */
+  --font-size-md: 1.0625rem; /* 17: testo base */
+  --font-size-lg: 1.25rem; /* 20 */
+  --font-size-xl: 1.5rem; /* 24 */
+  --font-size-2xl: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem); /* 28→36 */
+  --font-size-3xl: clamp(2.125rem, 1.6rem + 2vw, 3rem); /* 34→48 */
+
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.35;
+  --line-height-body: 1.5;
+  --measure: 70ch;
+
+  /* Spaziature (scala 4/8) */
+  --space-1: 0.25rem; /* 4 */
+  --space-2: 0.5rem; /* 8 */
+  --space-3: 1rem; /* 16 */
+  --space-4: 1.5rem; /* 24 */
+  --space-5: 2rem; /* 32 */
+  --space-6: 3rem; /* 48 */
+  --space-7: 4rem; /* 64 */
+  --space-8: 6rem; /* 96 */
+
+  /* Layout */
+  --container-max: 1240px;
+  --container-pad: clamp(1rem, 3vw, 2rem);
+  --gap: 1.875rem; /* 30 */
+  --section-pad: clamp(3rem, 2rem + 4vw, 5.625rem); /* fino a 90 */
+
+  /* Forme ed effetti */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgb(18 25 29 / 0.06), 0 4px 12px rgb(18 25 29 / 0.06);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --target-min: 44px; /* area minima dei controlli touch */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+  }
+}
