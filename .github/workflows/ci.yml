@@ -89,5 +89,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
+          # Nessuna installazione in questo job: senza store pnpm il salvataggio della cache fallisce.
+          package-manager-cache: false
       - name: pnpm audit (solo dipendenze di produzione, gravità alta)
         run: pnpm audit --prod --audit-level high
