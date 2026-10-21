@@ -1,0 +1,28 @@
+.nav {
+  font-size: var(--font-size-xs);
+  margin-bottom: var(--space-4);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-muted);
+}
+
+.item:not(:last-child)::after {
+  content: '/';
+  margin-left: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.item a {
+  color: var(--color-link);
+}
+
+.item [aria-current='page'] {
+  color: var(--color-text);
+}

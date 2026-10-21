@@ -8,6 +8,8 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Avvisi } from './collections/Avvisi'
+import { Scuole } from './collections/Scuole'
 import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
@@ -31,7 +33,7 @@ export default buildConfig({
     supportedLanguages: { it },
     fallbackLanguage: 'it',
   },
-  collections: [Users, Media],
+  collections: [Avvisi, Scuole, Media, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',

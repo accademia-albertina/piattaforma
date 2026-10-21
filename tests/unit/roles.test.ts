@@ -72,3 +72,18 @@ describe('permessi', () => {
     expect(canAccessBackend({ roles: ['segreteria'] })).toBe(true)
   })
 })
+
+describe('categorie degli avvisi', () => {
+  it('ogni ruolo ha le sue categorie, l’admin tutte', async () => {
+    const { categorieConsentite, CATEGORIE_AVVISI } = await import('@/access/avvisi')
+    expect(categorieConsentite({ roles: ['admin'] })).toEqual([...CATEGORIE_AVVISI])
+    expect(categorieConsentite({ roles: ['erasmus'] })).toEqual(['bandi-e-concorsi'])
+    expect(categorieConsentite({ roles: ['studente'] })).toEqual([])
+    expect(categorieConsentite({ roles: ['redazione', 'erasmus'] })).toEqual([
+      'in-evidenza',
+      'generali',
+      'eventi',
+      'bandi-e-concorsi',
+    ])
+  })
+})

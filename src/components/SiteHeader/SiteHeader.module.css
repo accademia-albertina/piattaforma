@@ -111,7 +111,7 @@
 }
 
 .navList a:hover,
-.navList a[aria-current='page'] {
+.navList a[aria-current] {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.3em;
