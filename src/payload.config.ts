@@ -27,6 +27,15 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: ' · Accademia Albertina',
+      icons: [{ rel: 'icon', type: 'image/svg+xml', url: '/brand/stemma-albertina.svg' }],
+    },
+    // Niente Gravatar: è un servizio esterno (privacy) e la CSP lo blocca.
+    avatar: 'default',
+    components: {
+      graphics: {
+        Logo: '/components/admin/Logo',
+        Icon: '/components/admin/Icon',
+      },
     },
   },
   i18n: {

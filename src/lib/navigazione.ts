@@ -1,0 +1,116 @@
+/**
+ * Struttura dei menu del sito, ripresa dal mega menu attuale.
+ * Più avanti diventerà un global di Payload, così gli admin la modificano dal pannello.
+ */
+
+export type VoceMenu = { label: string; href: string; esterno?: boolean }
+export type GruppoMenu = { titolo: string; voci: VoceMenu[] }
+
+export const MENU_SERVIZI: { sinistra: VoceMenu[]; destra: VoceMenu[] } = {
+  sinistra: [
+    {
+      label: 'Ministero dell’Università e della Ricerca',
+      href: 'https://www.mur.gov.it/it',
+      esterno: true,
+    },
+  ],
+  destra: [
+    {
+      label: 'Isidata',
+      href: 'https://servizi13.isidata.net/SSDidatticheAC/MainGeneraleRes.aspx',
+      esterno: true,
+    },
+    { label: 'Amministrazione trasparente', href: '/amministrazione-trasparente' },
+  ],
+}
+
+export const MENU_IN_EVIDENZA: VoceMenu[] = [
+  { label: 'Open Days', href: '/open-days' },
+  { label: 'Segreteria didattica', href: '/studenti/segreteria' },
+  { label: 'Albo online', href: '/albo' },
+  { label: 'Troubleshooting', href: '/troubleshooting' },
+  { label: 'Contatti', href: '/contatti' },
+]
+
+/** Colonne del mega menu. Un elemento con più gruppi va nella stessa colonna. */
+export const MENU_PRINCIPALE: GruppoMenu[][] = [
+  [
+    {
+      titolo: 'Accademia',
+      voci: [
+        { label: 'Storia e sedi', href: '/accademia/storia-e-sedi' },
+        { label: 'Ordinamento', href: '/accademia/ordinamento' },
+        { label: 'Organigramma', href: '/accademia/organigramma' },
+        { label: 'Il saluto del Direttore', href: '/accademia/saluto-del-direttore' },
+        { label: 'Albertina Press', href: '/accademia/albertina-press' },
+        { label: 'Biblioteca', href: '/accademia/biblioteca' },
+        { label: 'Pinacoteca', href: 'https://www.pinacotecalbertina.it', esterno: true },
+      ],
+    },
+  ],
+  [
+    {
+      titolo: 'Didattica',
+      voci: [
+        { label: 'Offerta formativa', href: '/didattica/offerta-formativa' },
+        { label: 'Manifesto degli studi', href: '/didattica/manifesto-degli-studi' },
+        { label: 'Corsi', href: '/didattica/corsi' },
+        { label: 'Docenti', href: '/didattica/docenti' },
+        { label: 'Calendari', href: '/didattica/calendari' },
+        { label: 'Orario lezioni', href: '/didattica/orario-lezioni' },
+        { label: 'Ammissioni', href: '/didattica/ammissioni' },
+        { label: 'Iscrizioni', href: '/didattica/iscrizioni' },
+        { label: 'Trasferimenti', href: '/didattica/trasferimenti' },
+      ],
+    },
+  ],
+  [
+    {
+      titolo: 'Dottorati',
+      voci: [
+        { label: 'Dottorati Accademia Albertina', href: '/dottorati' },
+        { label: 'Dottorati convenzionati', href: '/dottorati/convenzionati' },
+      ],
+    },
+    {
+      titolo: 'Erasmus+',
+      voci: [
+        { label: 'Bandi Erasmus', href: '/erasmus/bandi' },
+        { label: 'Mobilità studenti', href: '/erasmus/mobilita-studenti' },
+        { label: 'Mobilità docenti e staff', href: '/erasmus/mobilita-docenti-staff' },
+        { label: 'Incoming students', href: '/erasmus/incoming-students' },
+      ],
+    },
+  ],
+  [
+    {
+      titolo: 'Studente',
+      voci: [
+        { label: 'Modulistica', href: '/studenti/modulistica' },
+        { label: 'Tasse', href: '/studenti/tasse' },
+        { label: 'Consulta', href: '/studenti/consulta' },
+        { label: 'Tesi', href: '/studenti/tesi' },
+        { label: 'Borse di studio', href: '/studenti/borse-di-studio' },
+        { label: 'Segreteria', href: '/studenti/segreteria' },
+        { label: 'Stage e tirocinio', href: '/studenti/stage-e-tirocinio' },
+        { label: 'Sportelli', href: '/studenti/sportelli' },
+        { label: 'Tutoraggio interculturale', href: '/studenti/tutoraggio-interculturale' },
+      ],
+    },
+  ],
+  [
+    {
+      titolo: 'Avvisi',
+      voci: [
+        { label: 'Tutti gli avvisi', href: '/avvisi' },
+        { label: 'Generali', href: '/avvisi?categoria=generali' },
+        { label: 'Lezioni', href: '/avvisi?categoria=lezioni' },
+        { label: 'Esami', href: '/avvisi?categoria=esami' },
+        { label: 'Tasse', href: '/avvisi?categoria=tasse' },
+        { label: 'Coordinatori', href: '/avvisi?categoria=coordinatori' },
+        { label: 'Eventi', href: '/avvisi?categoria=eventi' },
+        { label: 'Bandi e concorsi', href: '/avvisi?categoria=bandi-e-concorsi' },
+      ],
+    },
+  ],
+]

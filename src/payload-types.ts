@@ -148,6 +148,10 @@ export interface Avviso {
    */
   scuole?: (number | Scuola)[] | null;
   pubblicatoIl: string;
+  /**
+   * Facoltativa. Per gli avvisi In evidenza è lo sfondo dello slider in homepage (formato orizzontale, almeno 1920 px).
+   */
+  immagine?: (number | null) | Media;
   contenuto?: {
     root: {
       type: string;
@@ -359,6 +363,7 @@ export interface AvvisiSelect<T extends boolean = true> {
   categorie?: T;
   scuole?: T;
   pubblicatoIl?: T;
+  immagine?: T;
   contenuto?: T;
   allegati?:
     | T

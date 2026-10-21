@@ -113,8 +113,8 @@
   --section-pad: clamp(3rem, 2rem + 4vw, 5.625rem); /* fino a 90 */
 
   /* Forme ed effetti */
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  --radius-sm: 0; /* Fede 2026-10-21: box, filtri e pulsanti squadrati */
+  --radius-md: 0;
   --radius-pill: 999px;
   --shadow-card: 0 1px 2px rgb(18 25 29 / 0.06), 0 4px 12px rgb(18 25 29 / 0.06);
   --duration-fast: 120ms;

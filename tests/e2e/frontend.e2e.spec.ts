@@ -17,16 +17,20 @@ test.describe('Frontend', () => {
     expect(results.violations.map((v) => `${v.id}: ${v.help}`)).toEqual([])
   })
 
-  test('menu mobile accessibile da tastiera', async ({ page }) => {
+  test('mega menu accessibile da tastiera', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
     await page.goto('http://localhost:3000')
     const toggle = page.getByRole('button', { name: 'Menu' })
     await toggle.focus()
     await page.keyboard.press('Enter')
-    await expect(page.getByRole('button', { name: 'Chiudi menu' })).toHaveAttribute('aria-expanded', 'true')
-    await expect(page.getByRole('navigation', { name: 'Principale' }).getByRole('link').first()).toBeVisible()
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    const menu = page.getByRole('navigation', { name: 'Principale' })
+    await expect(menu.getByRole('link', { name: 'Tutti gli avvisi' })).toBeVisible()
     const results = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze()
     expect(results.violations.map((v) => `${v.id}: ${v.help}`)).toEqual([])
+    await page.keyboard.press('Escape')
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    await expect(toggle).toBeFocused()
   })
 
   test('skip link porta al contenuto', async ({ page }) => {

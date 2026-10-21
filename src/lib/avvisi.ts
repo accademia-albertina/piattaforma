@@ -101,3 +101,32 @@ export async function ultimiAvvisi(limit = 3) {
   })
   return res.docs
 }
+
+/** Avvisi della categoria In evidenza per lo slider della homepage, con l'immagine. */
+export async function avvisiInEvidenza(limit = 5) {
+  const payload = await payloadClient()
+  const res = await payload.find({
+    collection: 'avvisi',
+    where: { categorie: { contains: 'in-evidenza' } },
+    sort: '-pubblicatoIl',
+    limit,
+    overrideAccess: false,
+    depth: 1,
+    pagination: false,
+  })
+  return res.docs
+}
+
+/** Ricerca semplice negli avvisi per titolo e sommario. */
+export async function cercaAvvisi(q: string, pagina = 1) {
+  const payload = await payloadClient()
+  return payload.find({
+    collection: 'avvisi',
+    where: { or: [{ titolo: { like: q } }, { sommario: { like: q } }] },
+    sort: '-pubblicatoIl',
+    limit: AVVISI_PER_PAGINA,
+    page: pagina,
+    overrideAccess: false,
+    depth: 0,
+  })
+}
