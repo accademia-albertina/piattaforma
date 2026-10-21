@@ -13,6 +13,8 @@ import {
   type VoceMenu,
 } from '@/lib/navigazione'
 
+import { MenuLink } from '../MenuLink/MenuLink'
+
 import styles from './SiteHeader.module.css'
 
 export type SiteHeaderProps = {
@@ -21,31 +23,6 @@ export type SiteHeaderProps = {
   servizi?: typeof MENU_SERVIZI
   inEvidenza?: VoceMenu[]
   colonne?: GruppoMenu[][]
-}
-
-function MenuLink({
-  voce,
-  className,
-  current,
-}: {
-  voce: VoceMenu
-  className?: string
-  current?: 'page'
-}) {
-  if (voce.esterno) {
-    return (
-      <a href={voce.href} className={className} target="_blank" rel="noopener noreferrer">
-        {voce.label}
-        <span aria-hidden="true">↗</span>
-        <span className="visually-hidden"> (si apre in una nuova scheda)</span>
-      </a>
-    )
-  }
-  return (
-    <Link href={voce.href} className={className} aria-current={current}>
-      {voce.label}
-    </Link>
-  )
 }
 
 const Icona = {

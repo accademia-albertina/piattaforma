@@ -114,3 +114,54 @@ export const MENU_PRINCIPALE: GruppoMenu[][] = [
     },
   ],
 ]
+
+/** Dati istituzionali mostrati nel footer (dal footer del sito attuale). */
+export const CONTATTI = {
+  indirizzo: ['Via Accademia Albertina 6', '10123 Torino (TO)'],
+  mappa: 'https://maps.app.goo.gl/WXoEjxb119DN2izk6',
+  telefono: { label: '011 88 90 20', href: 'tel:+39011889020' },
+  peo: 'protocollo@albertina.academy',
+  pec: 'accademia.torino@pec.it',
+  codiceFiscale: '80092570011',
+  partitaIva: '11112140014',
+}
+
+export const MENU_FOOTER: VoceMenu[] = [
+  { label: 'Avvisi', href: '/avvisi' },
+  { label: 'Guide', href: '/guide' },
+  { label: 'Orario lezioni', href: '/didattica/orario-lezioni' },
+  {
+    label: 'Isidata',
+    href: 'https://servizi13.isidata.net/SSDidatticheAC/MainGeneraleRes.aspx',
+    esterno: true,
+  },
+  { label: 'Virtual tour', href: 'https://tour.albertina-academy.it/', esterno: true },
+  { label: 'Troubleshooting', href: '/troubleshooting' },
+  { label: 'Amministrazione trasparente', href: '/amministrazione-trasparente' },
+  { label: 'Albo online', href: '/albo' },
+]
+
+export const SOCIAL: VoceMenu[] = [
+  { label: 'Instagram', href: 'https://www.instagram.com/accademia_albertina/', esterno: true },
+  { label: 'Facebook', href: 'https://www.facebook.com/groups/accademialbertina', esterno: true },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/school/accademia-albertina-torino/',
+    esterno: true,
+  },
+  {
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@AccademiaAlbertinadiBelleArti',
+    esterno: true,
+  },
+  { label: 'Telegram', href: 'https://t.me/accademialbertina', esterno: true },
+]
+
+/** Link obbligatori per una PA (AGID, GDPR). */
+export const MENU_LEGALE: VoceMenu[] = [
+  { label: 'Privacy', href: '/privacy' },
+  { label: 'Cookie', href: '/cookie' },
+  { label: 'Note legali', href: '/note-legali' },
+  { label: 'Dichiarazione di accessibilità', href: '/dichiarazione-accessibilita' },
+  { label: 'Segnalazioni di accessibilità', href: '/segnalazioni-accessibilita' },
+]
