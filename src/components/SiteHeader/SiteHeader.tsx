@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useId, useState } from 'react'
 
 import styles from './SiteHeader.module.css'
@@ -8,7 +9,7 @@ import styles from './SiteHeader.module.css'
 export type NavItem = { label: string; href: string }
 
 export type SiteHeaderProps = {
-  /** Voce di menu della pagina corrente (per aria-current). */
+  /** Voce di menu della pagina corrente (per aria-current). Se assente si ricava dall'URL. */
   currentHref?: string
   mainNav?: NavItem[]
   utilityNav?: NavItem[]
@@ -36,6 +37,14 @@ export function SiteHeader({
 }: SiteHeaderProps) {
   const [open, setOpen] = useState(false)
   const menuId = useId()
+  const pathname = usePathname()
+  // 'page' sulla pagina esatta, 'true' sulle sottopagine della sezione.
+  const ariaCurrent = (href: string): 'page' | 'true' | undefined => {
+    const path = currentHref ?? pathname
+    if (path === href) return 'page'
+    if (path?.startsWith(`${href}/`)) return 'true'
+    return undefined
+  }
 
   return (
     <header className={styles.header}>
@@ -68,11 +77,16 @@ export function SiteHeader({
             {open ? 'Chiudi menu' : 'Menu'}
           </button>
 
-          <nav aria-label="Principale" id={menuId} className={styles.nav} data-open={open || undefined}>
+          <nav
+            aria-label="Principale"
+            id={menuId}
+            className={styles.nav}
+            data-open={open || undefined}
+          >
             <ul className={styles.navList}>
               {mainNav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} aria-current={item.href === currentHref ? 'page' : undefined}>
+                  <Link href={item.href} aria-current={ariaCurrent(item.href)}>
                     {item.label}
                   </Link>
                 </li>

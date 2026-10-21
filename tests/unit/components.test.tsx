@@ -1,7 +1,18 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { Alert, Button, SiteHeader, SkipLink, Tag } from '@/components'
+import {
+  Alert,
+  Attachments,
+  AvvisoCard,
+  Breadcrumbs,
+  Button,
+  Pagination,
+  SiteHeader,
+  SkipLink,
+  Tag,
+} from '@/components'
+import { pageWindow } from '@/components/Pagination/Pagination'
 
 import { axeViolations } from './axe'
 
@@ -12,6 +23,8 @@ vi.mock('next/link', () => ({
     </a>
   ),
 }))
+
+vi.mock('next/navigation', () => ({ usePathname: () => '/' }))
 
 afterEach(cleanup)
 
@@ -40,9 +53,9 @@ describe('componenti accessibili', () => {
 
   it('SkipLink punta al contenuto principale', () => {
     render(<SkipLink />)
-    expect(screen.getByRole('link', { name: 'Vai al contenuto principale' }).getAttribute('href')).toBe(
-      '#contenuto',
-    )
+    expect(
+      screen.getByRole('link', { name: 'Vai al contenuto principale' }).getAttribute('href'),
+    ).toBe('#contenuto')
   })
 
   it('SiteHeader: menu apribile e pagina corrente segnalata', async () => {
@@ -50,8 +63,78 @@ describe('componenti accessibili', () => {
     const toggle = screen.getByRole('button', { name: 'Menu' })
     expect(toggle.getAttribute('aria-expanded')).toBe('false')
     fireEvent.click(toggle)
-    expect(screen.getByRole('button', { name: 'Chiudi menu' }).getAttribute('aria-expanded')).toBe('true')
-    expect(screen.getByRole('link', { name: 'Didattica' }).getAttribute('aria-current')).toBe('page')
+    expect(screen.getByRole('button', { name: 'Chiudi menu' }).getAttribute('aria-expanded')).toBe(
+      'true',
+    )
+    expect(screen.getByRole('link', { name: 'Didattica' }).getAttribute('aria-current')).toBe(
+      'page',
+    )
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('Breadcrumbs: l’ultima voce è la pagina corrente', async () => {
+    const { container } = render(
+      <Breadcrumbs
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Avvisi', href: '/avvisi' },
+          { label: 'Dettaglio' },
+        ]}
+      />,
+    )
+    expect(screen.getByRole('navigation', { name: 'Percorso' })).toBeTruthy()
+    expect(screen.getByText('Dettaglio').getAttribute('aria-current')).toBe('page')
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('AvvisoCard: titolo come link e data leggibile', async () => {
+    const { container } = render(
+      <AvvisoCard
+        titolo="Calendario esami"
+        href="/avvisi/calendario-esami"
+        data="2026-10-21T09:00:00.000Z"
+        categorie={[{ label: 'Esami', href: '/avvisi?categoria=esami' }]}
+        sommario="Sessione invernale."
+      />,
+    )
+    expect(screen.getByRole('heading', { level: 2, name: 'Calendario esami' })).toBeTruthy()
+    expect(screen.getByRole('link', { name: 'Calendario esami' }).getAttribute('href')).toBe(
+      '/avvisi/calendario-esami',
+    )
+    expect(container.querySelector('time')?.getAttribute('datetime')).toBe(
+      '2026-10-21T09:00:00.000Z',
+    )
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('Pagination: finestra di pagine e pagina corrente', async () => {
+    expect(pageWindow(1, 3)).toEqual([1, 2, 3])
+    expect(pageWindow(5, 90)).toEqual([1, '…', 4, 5, 6, '…', 90])
+    const { container } = render(
+      <Pagination page={5} totalPages={90} hrefFor={(p) => `/avvisi?pagina=${p}`} />,
+    )
+    expect(screen.getByRole('navigation', { name: 'Paginazione' })).toBeTruthy()
+    expect(screen.getByRole('link', { name: /5/ }).getAttribute('aria-current')).toBe('page')
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('Attachments: nome, tipo e dimensione del file', async () => {
+    const { container } = render(
+      <Attachments
+        items={[
+          {
+            nome: 'Bando',
+            url: '/media/bando.pdf',
+            mimeType: 'application/pdf',
+            filesize: 248_000,
+          },
+        ]}
+      />,
+    )
+    expect(screen.getByRole('heading', { name: 'Allegati' })).toBeTruthy()
+    expect(screen.getByRole('link', { name: /Bando/ }).getAttribute('href')).toBe(
+      '/media/bando.pdf',
+    )
     expect(await axeViolations(container)).toEqual([])
   })
 })

@@ -1,0 +1,80 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.schoolForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+.schoolForm label {
+  font-weight: var(--font-weight-semibold);
+}
+
+.schoolForm select {
+  min-height: var(--target-min);
+  min-width: 16rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.apply {
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid var(--color-heading);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-heading);
+  font: inherit;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.apply:hover {
+  background: var(--color-heading);
+  color: var(--color-bg);
+}
+
+.count {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid > li {
+  display: flex;
+}
+
+.grid > li > * {
+  flex: 1;
+}

@@ -8,5 +8,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
     include: ['tests/unit/**/*.test.{ts,tsx}', 'tests/int/**/*.int.spec.ts'],
+    // I test di integrazione condividono lo stesso database: niente esecuzione in parallelo.
+    fileParallelism: false,
   },
 })

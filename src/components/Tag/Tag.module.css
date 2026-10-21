@@ -37,3 +37,13 @@ a.brand:hover {
   color: var(--color-on-brand);
   background: var(--color-brand-dark);
 }
+
+a.tag[aria-current='page'] {
+  background: var(--color-heading);
+  border-color: var(--color-heading);
+  color: var(--color-bg);
+}
+
+a.tag[aria-current='page']:hover {
+  color: var(--color-bg);
+}

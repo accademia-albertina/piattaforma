@@ -67,8 +67,10 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
+    avvisi: Avviso;
+    scuole: Scuola;
     media: Media;
+    users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,8 +78,10 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
+    avvisi: AvvisiSelect<false> | AvvisiSelect<true>;
+    scuole: ScuoleSelect<false> | ScuoleSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -116,6 +120,108 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "avvisi".
+ */
+export interface Avviso {
+  id: number;
+  titolo: string;
+  /**
+   * Una o due frasi mostrate negli elenchi e nei risultati di Google. Se vuoto si usa l’inizio del testo.
+   */
+  sommario?: string | null;
+  categorie: (
+    | 'in-evidenza'
+    | 'generali'
+    | 'lezioni'
+    | 'esami'
+    | 'eventi'
+    | 'bandi-e-concorsi'
+    | 'iscrizioni'
+    | 'coordinatori'
+    | 'tasse'
+  )[];
+  /**
+   * Lascia vuoto se l’avviso riguarda tutta l’Accademia.
+   */
+  scuole?: (number | Scuola)[] | null;
+  pubblicatoIl: string;
+  contenuto?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  allegati?:
+    | {
+        /**
+         * Descrivi il documento, es. “Calendario esami sessione invernale”.
+         */
+        nome: string;
+        file: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  autore?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scuole".
+ */
+export interface Scuola {
+  id: number;
+  nome: string;
+  /**
+   * Forma breve usata nei filtri, es. PAI, NTA.
+   */
+  sigla?: string | null;
+  descrizione?: string | null;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  /**
+   * Descrivi cosa mostra l’immagine per chi usa uno screen reader.
+   */
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -163,28 +269,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  /**
-   * Descrivi cosa mostra l’immagine per chi usa uno screen reader.
-   */
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -208,12 +292,20 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'avvisi';
+        value: number | Avviso;
+      } | null)
+    | ({
+        relationTo: 'scuole';
+        value: number | Scuola;
       } | null)
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -259,6 +351,60 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "avvisi_select".
+ */
+export interface AvvisiSelect<T extends boolean = true> {
+  titolo?: T;
+  sommario?: T;
+  categorie?: T;
+  scuole?: T;
+  pubblicatoIl?: T;
+  contenuto?: T;
+  allegati?:
+    | T
+    | {
+        nome?: T;
+        file?: T;
+        id?: T;
+      };
+  slug?: T;
+  autore?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scuole_select".
+ */
+export interface ScuoleSelect<T extends boolean = true> {
+  nome?: T;
+  sigla?: T;
+  descrizione?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
@@ -282,24 +428,6 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
