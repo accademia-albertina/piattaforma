@@ -1,7 +1,7 @@
 .footer {
   --color-focus: #ffffff;
   --color-focus-contrast: #12191d;
-  background: var(--color-brand-dark);
+  background: var(--color-footer);
   color: var(--color-on-brand);
   font-size: var(--font-size-sm);
 }
@@ -34,6 +34,25 @@
 }
 
 .logo img {
+  width: auto;
+  height: 80px;
+}
+
+.istituzioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.istituzioni a {
+  display: block;
+  line-height: 0;
+}
+
+.istituzioni img {
   width: auto;
   height: 80px;
 }
@@ -79,7 +98,7 @@
 }
 
 .bottom {
-  border-top: 1px solid rgb(255 255 255 / 0.25);
+  background: var(--color-footer-dark);
   font-size: var(--font-size-xs);
 }
 

@@ -6,6 +6,21 @@ import { MenuLink } from '../MenuLink/MenuLink'
 
 import styles from './SiteFooter.module.css'
 
+const ISTITUZIONI = [
+  {
+    nome: 'Ministero dell’Università e della Ricerca',
+    href: 'https://www.mur.gov.it/it',
+    logo: '/brand/mur.png',
+    w: 87,
+  },
+  {
+    nome: 'AFAM – Alta Formazione Artistica, Musicale e Coreutica',
+    href: 'https://www.mur.gov.it/it/aree-tematiche/afam',
+    logo: '/brand/afam.png',
+    w: 91,
+  },
+]
+
 export function SiteFooter({ anno = new Date().getFullYear() }: { anno?: number }) {
   return (
     <footer className={styles.footer}>
@@ -21,16 +36,24 @@ export function SiteFooter({ anno = new Date().getFullYear() }: { anno?: number 
             />
           </Link>
           <p className={styles.ente}>
-            Istituzione di Alta Formazione Artistica e Musicale (AFAM) del{' '}
-            <a
-              href="https://www.mur.gov.it/it/aree-tematiche/afam"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Ministero dell’Università e della Ricerca
-              <span className="visually-hidden"> (si apre in una nuova scheda)</span>
-            </a>
+            Istituzione di Alta Formazione Artistica e Musicale (AFAM) del Ministero dell’Università
+            e della Ricerca
           </p>
+          <ul className={styles.istituzioni}>
+            {ISTITUZIONI.map((i) => (
+              <li key={i.href}>
+                <a href={i.href} target="_blank" rel="noopener noreferrer">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- PNG statico già ottimizzato */}
+                  <img
+                    src={i.logo}
+                    alt={`${i.nome} (si apre in una nuova scheda)`}
+                    width={i.w}
+                    height={80}
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <section aria-labelledby="footer-contatti">
