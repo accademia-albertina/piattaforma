@@ -9,6 +9,7 @@ import {
   Button,
   HeroSlider,
   Pagination,
+  SiteFooter,
   SiteHeader,
   SkipLink,
   Tag,
@@ -164,6 +165,17 @@ describe('componenti accessibili', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Avviso precedente' }))
     fireEvent.click(screen.getByRole('button', { name: 'Avviso precedente' }))
     expect(screen.getByRole('heading', { name: 'Avviso 3' })).toBeTruthy()
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('SiteFooter: contatti, link legali e accessibilità', async () => {
+    const { container } = render(<SiteFooter anno={2026} />)
+    expect(screen.getByRole('contentinfo')).toBeTruthy()
+    expect(screen.getByRole('link', { name: 'accademia.torino@pec.it' }).getAttribute('href')).toBe(
+      'mailto:accademia.torino@pec.it',
+    )
+    expect(screen.getByRole('link', { name: 'Dichiarazione di accessibilità' })).toBeTruthy()
+    expect(screen.getByText(/© 2022–2026/)).toBeTruthy()
     expect(await axeViolations(container)).toEqual([])
   })
 })

@@ -48,6 +48,8 @@
   --color-brand: #d14040; /* accento: 4,65 su bianco, 4,41 su surface → solo testo grande o elementi grafici */
   --color-brand-strong: #a23130; /* istituzionale (header): bianco sopra 6,96 */
   --color-brand-dark: #5b1b1b; /* top bar: bianco sopra 12,98 */
+  --color-footer: #1c3038; /* footer, come il sito attuale: bianco sopra 13,73 */
+  --color-footer-dark: #10191d; /* barra finale del footer: bianco sopra 17,81 */
   --color-text: #12191d; /* 17,76 su bianco */
   --color-heading: #202f37; /* 13,79 su bianco */
   --color-link: #202f37;

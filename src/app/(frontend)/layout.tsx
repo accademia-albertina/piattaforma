@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import React from 'react'
 
-import { SiteHeader, SkipLink } from '@/components'
+import { SiteFooter, SiteHeader, SkipLink } from '@/components'
 import '@/styles/global.css'
 
 export const metadata: Metadata = {
@@ -35,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="contenuto" tabIndex={-1}>
           {children}
         </main>
+        <SiteFooter />
       </body>
     </html>
   )
