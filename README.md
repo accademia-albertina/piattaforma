@@ -41,9 +41,36 @@ src/
   app/(frontend)/        sito pubblico
   app/(payload)/         pannello di amministrazione e API (generati da Payload)
   migrations/            migrazioni del database
+  seed/                  contenuti demo pubblici per l'anteprima online
+  proxy.ts               password dell'anteprima online (attiva solo con ANTEPRIMA_PASSWORD)
 public/fonts/            Albert Sans servito in locale (licenza OFL)
 tests/                   unit, int (database) ed e2e (Playwright + axe)
 ```
+
+## Anteprima online (Railway)
+
+Serve a far provare il sito agli admin prima della messa in produzione. Contiene solo contenuti pubblici (`src/seed/`), nessun dato personale.
+
+1. Su [railway.com](https://railway.com) crea un progetto con l’account dell’ente e aggiungi **PostgreSQL**.
+2. **+ New → GitHub Repo** → `accademia-albertina/piattaforma` (branch `main`). Railway compila con `pnpm build` e avvia con `pnpm start`; le migrazioni partono da sole all’avvio.
+3. Nel servizio dell’app:
+   - **Settings → Region:** EU West (Amsterdam).
+   - **Settings → Networking → Generate Domain**, poi **Healthcheck Path:** `/salute`.
+   - **Volume:** clic destro sul servizio → *Attach volume*, mount path `/data`.
+   - **Variables:**
+
+     | Variabile | Valore |
+     |---|---|
+     | `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` |
+     | `PAYLOAD_SECRET` | stringa casuale (`openssl rand -hex 32`) |
+     | `NEXT_PUBLIC_SERVER_URL` | il dominio generato, es. `https://piattaforma-production.up.railway.app` |
+     | `ANTEPRIMA_PASSWORD` | password da dare agli admin |
+     | `SEED_DEMO` | `true` |
+     | `MEDIA_DIR` | `/data/media` |
+
+4. Dopo il deploy apri il dominio (utente `albertina` + la password), vai su `/admin` e crea il primo utente: diventa amministratore.
+
+Ogni push su `main` aggiorna l’anteprima. Per azzerare i contenuti demo svuota il database: al riavvio vengono ricaricati.
 
 ## Regole del progetto
 

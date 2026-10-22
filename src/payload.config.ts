@@ -13,6 +13,7 @@ import { Scuole } from './collections/Scuole'
 import { Pagine } from './collections/Pagine'
 import { Navigazione } from './globals/Navigazione'
 import { migrations } from './migrations'
+import { seedDemo } from './seed/demo'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -66,5 +67,9 @@ export default buildConfig({
     },
   }),
   sharp,
+  // Anteprima online: al primo avvio carica i contenuti demo se il database è vuoto.
+  onInit: async (payload) => {
+    if (process.env.SEED_DEMO === 'true') await seedDemo(payload)
+  },
   plugins: [],
 })
