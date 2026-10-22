@@ -11,11 +11,24 @@
 
 .chips {
   display: flex;
-  flex-wrap: wrap;
   gap: var(--space-2);
   margin: 0;
-  padding: 0;
+  padding: 0 0 var(--space-2);
   list-style: none;
+  /* Su mobile i filtri scorrono in orizzontale invece di occupare più righe */
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.chips > li {
+  flex: none;
+}
+
+@media (min-width: 48rem) {
+  .chips {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
 }
 
 .schoolForm {

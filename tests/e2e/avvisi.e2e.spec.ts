@@ -41,6 +41,16 @@ test.describe('Avvisi', () => {
     }
     await payload.create({
       collection: 'avvisi',
+      draft: false,
+      data: {
+        titolo: 'Open Days 2026',
+        categorie: ['in-evidenza', 'eventi'],
+        pubblicatoIl: new Date(ora - 100 * 3_600_000).toISOString(),
+        _status: 'published',
+      },
+    })
+    await payload.create({
+      collection: 'avvisi',
       draft: true,
       data: {
         titolo: 'Bozza nascosta',
@@ -58,7 +68,7 @@ test.describe('Avvisi', () => {
   test('elenco con paginazione, senza bozze e senza violazioni WCAG', async ({ page }) => {
     await page.goto(`${BASE}/avvisi`)
     await expect(page.getByRole('heading', { level: 1, name: 'Avvisi' })).toBeVisible()
-    await expect(page.getByText('14 avvisi')).toBeVisible()
+    await expect(page.getByText('15 avvisi')).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Bozza nascosta' })).toHaveCount(0)
     await expect(page.locator('main ul li h2')).toHaveCount(12)
     await expect(page.getByRole('navigation', { name: 'Paginazione' })).toBeVisible()
@@ -100,7 +110,25 @@ test.describe('Avvisi', () => {
   test('la homepage mostra gli ultimi avvisi', async ({ page }) => {
     await page.goto(BASE)
     const sezione = page.getByRole('region', { name: 'Ultimi avvisi' })
-    await expect(sezione.getByRole('heading', { level: 3 })).toHaveCount(3)
+    await expect(sezione.getByRole('heading', { level: 3 })).toHaveCount(6)
     await expect(sezione.getByRole('heading', { level: 3 }).first()).toHaveText('Avviso di prova 1')
+  })
+
+  test('lo slider in homepage mostra gli avvisi in evidenza', async ({ page }) => {
+    await page.goto(BASE)
+    const slider = page.getByRole('region', { name: 'Avvisi in evidenza' })
+    await expect(slider.getByRole('heading', { level: 2, name: 'Open Days 2026' })).toBeVisible()
+    await slider.getByRole('link', { name: /Leggi l’avviso/ }).click()
+    await expect(page).toHaveURL(/\/avvisi\/open-days-2026$/)
+  })
+
+  test('la ricerca trova gli avvisi per titolo', async ({ page }) => {
+    await page.goto(BASE)
+    await page.getByRole('link', { name: 'Cerca nel sito' }).click()
+    await page.getByLabel('Cosa cerchi?').fill('prova 1')
+    await page.getByRole('button', { name: 'Cerca' }).click()
+    await expect(page.getByRole('status')).toContainText('per “prova 1”')
+    await expect(page.getByRole('link', { name: 'Avviso di prova 1', exact: true })).toBeVisible()
+    expect(await violazioni(page)).toEqual([])
   })
 })

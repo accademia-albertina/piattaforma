@@ -2,99 +2,190 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useId, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Button, Disclosure, DisclosurePanel } from 'react-aria-components'
+
+import {
+  MENU_IN_EVIDENZA,
+  MENU_PRINCIPALE,
+  MENU_SERVIZI,
+  type GruppoMenu,
+  type VoceMenu,
+} from '@/lib/navigazione'
 
 import styles from './SiteHeader.module.css'
 
-export type NavItem = { label: string; href: string }
-
 export type SiteHeaderProps = {
-  /** Voce di menu della pagina corrente (per aria-current). Se assente si ricava dall'URL. */
+  /** Pagina corrente (per aria-current). Se assente si ricava dall'URL. */
   currentHref?: string
-  mainNav?: NavItem[]
-  utilityNav?: NavItem[]
+  servizi?: typeof MENU_SERVIZI
+  inEvidenza?: VoceMenu[]
+  colonne?: GruppoMenu[][]
 }
 
-// Voci provvisorie: la struttura definitiva arriva con l'architettura dell'informazione.
-const DEFAULT_MAIN_NAV: NavItem[] = [
-  { label: 'Accademia', href: '/accademia' },
-  { label: 'Didattica', href: '/didattica' },
-  { label: 'Studenti', href: '/studenti' },
-  { label: 'Avvisi', href: '/avvisi' },
-  { label: 'Contatti', href: '/contatti' },
-]
+function MenuLink({
+  voce,
+  className,
+  current,
+}: {
+  voce: VoceMenu
+  className?: string
+  current?: 'page'
+}) {
+  if (voce.esterno) {
+    return (
+      <a href={voce.href} className={className} target="_blank" rel="noopener noreferrer">
+        {voce.label}
+        <span aria-hidden="true">↗</span>
+        <span className="visually-hidden"> (si apre in una nuova scheda)</span>
+      </a>
+    )
+  }
+  return (
+    <Link href={voce.href} className={className} aria-current={current}>
+      {voce.label}
+    </Link>
+  )
+}
 
-const DEFAULT_UTILITY_NAV: NavItem[] = [
-  { label: 'Albo online', href: '/albo' },
-  { label: 'Amministrazione trasparente', href: '/amministrazione-trasparente' },
-  { label: 'Area riservata', href: '/admin' },
-]
+const Icona = {
+  utente: (
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" strokeWidth="1.75" />
+      <path
+        d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+      />
+    </svg>
+  ),
+  cerca: (
+    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false">
+      <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" strokeWidth="2" />
+      <path d="M15.5 15.5 21 21" stroke="currentColor" strokeWidth="2" strokeLinecap="square" />
+    </svg>
+  ),
+}
 
 export function SiteHeader({
   currentHref,
-  mainNav = DEFAULT_MAIN_NAV,
-  utilityNav = DEFAULT_UTILITY_NAV,
+  servizi = MENU_SERVIZI,
+  inEvidenza = MENU_IN_EVIDENZA,
+  colonne = MENU_PRINCIPALE,
 }: SiteHeaderProps) {
   const [open, setOpen] = useState(false)
-  const menuId = useId()
+  const triggerRef = useRef<HTMLButtonElement>(null)
   const pathname = usePathname()
-  // 'page' sulla pagina esatta, 'true' sulle sottopagine della sezione.
-  const ariaCurrent = (href: string): 'page' | 'true' | undefined => {
-    const path = currentHref ?? pathname
-    if (path === href) return 'page'
-    if (path?.startsWith(`${href}/`)) return 'true'
-    return undefined
+  const path = currentHref ?? pathname
+
+  // Il menu si chiude quando si cambia pagina (stato aggiornato durante il render, senza effetto).
+  const [ultimoPath, setUltimoPath] = useState(pathname)
+  if (ultimoPath !== pathname) {
+    setUltimoPath(pathname)
+    setOpen(false)
   }
+
+  // Esc chiude il menu e riporta il focus sul pulsante.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      setOpen(false)
+      triggerRef.current?.focus()
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [open])
+
+  const current = (href: string) => (path === href ? 'page' : undefined)
 
   return (
     <header className={styles.header}>
       <div className={styles.topBar}>
         <nav aria-label="Servizi" className={`container ${styles.topBarInner}`}>
           <ul className={styles.utilityList}>
-            {utilityNav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href}>{item.label}</Link>
+            {servizi.sinistra.map((v) => (
+              <li key={v.href}>
+                <MenuLink voce={v} />
+              </li>
+            ))}
+          </ul>
+          <ul className={styles.utilityList}>
+            {servizi.destra.map((v) => (
+              <li key={v.href}>
+                <MenuLink voce={v} />
               </li>
             ))}
           </ul>
         </nav>
       </div>
 
-      <div className={styles.main}>
+      <Disclosure isExpanded={open} onExpandedChange={setOpen} className={styles.main}>
         <div className={`container ${styles.mainInner}`}>
           <Link href="/" className={styles.brand}>
-            <span className={styles.brandName}>Accademia Albertina</span>
-            <span className={styles.brandSub}>di Belle Arti di Torino</span>
+            {/* eslint-disable-next-line @next/next/no-img-element -- SVG statico, non serve l'ottimizzazione di next/image */}
+            <img
+              src="/brand/logo-albertina-bianco.svg"
+              alt="Accademia Albertina di Belle Arti di Torino, home"
+              width={166}
+              height={76}
+            />
           </Link>
 
-          <button
-            type="button"
-            className={styles.menuToggle}
-            aria-expanded={open}
-            aria-controls={menuId}
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? 'Chiudi menu' : 'Menu'}
-          </button>
-
-          <nav
-            aria-label="Principale"
-            id={menuId}
-            className={styles.nav}
-            data-open={open || undefined}
-          >
-            <ul className={styles.navList}>
-              {mainNav.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} aria-current={ariaCurrent(item.href)}>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <div className={styles.actions}>
+            <Link href="/admin" className={styles.iconButton} aria-label="Area riservata">
+              {Icona.utente}
+            </Link>
+            <Link
+              href="/cerca"
+              className={styles.iconButton}
+              aria-label="Cerca nel sito"
+              aria-current={current('/cerca')}
+            >
+              {Icona.cerca}
+            </Link>
+            <Button slot="trigger" ref={triggerRef} className={styles.menuToggle} aria-label="Menu">
+              <span className={styles.burger} aria-hidden="true" data-open={open || undefined}>
+                <span />
+                <span />
+                <span />
+              </span>
+            </Button>
+          </div>
         </div>
-      </div>
+
+        <DisclosurePanel className={styles.panel}>
+          <nav aria-label="Principale" className={`container ${styles.megaMenu}`}>
+            <div className={styles.column}>
+              <h2 className={styles.highlightTitle}>In evidenza</h2>
+              <ul className={styles.highlightList}>
+                {inEvidenza.map((v) => (
+                  <li key={v.href}>
+                    <MenuLink voce={v} current={current(v.href)} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {colonne.map((gruppi) => (
+              <div key={gruppi[0].titolo} className={styles.column}>
+                {gruppi.map((g) => (
+                  <div key={g.titolo} className={styles.group}>
+                    <h2 className={styles.groupTitle}>{g.titolo}</h2>
+                    <ul className={styles.groupList}>
+                      {g.voci.map((v) => (
+                        <li key={v.href}>
+                          <MenuLink voce={v} current={current(v.href)} />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </nav>
+        </DisclosurePanel>
+      </Disclosure>
     </header>
   )
 }

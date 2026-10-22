@@ -103,6 +103,17 @@ export const Avvisi: CollectionConfig = {
         date: { pickerAppearance: 'dayAndTime', displayFormat: 'd MMM yyyy, HH:mm' },
       },
     },
+    {
+      name: 'immagine',
+      label: 'Immagine',
+      type: 'upload',
+      relationTo: 'media',
+      filterOptions: { mimeType: { contains: 'image' } },
+      admin: {
+        description:
+          'Facoltativa. Per gli avvisi In evidenza è lo sfondo dello slider in homepage (formato orizzontale, almeno 1920 px).',
+      },
+    },
     { name: 'contenuto', label: 'Testo', type: 'richText' },
     {
       name: 'allegati',

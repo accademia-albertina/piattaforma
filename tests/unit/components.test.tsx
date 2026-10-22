@@ -7,6 +7,7 @@ import {
   AvvisoCard,
   Breadcrumbs,
   Button,
+  HeroSlider,
   Pagination,
   SiteHeader,
   SkipLink,
@@ -58,18 +59,21 @@ describe('componenti accessibili', () => {
     ).toBe('#contenuto')
   })
 
-  it('SiteHeader: menu apribile e pagina corrente segnalata', async () => {
-    const { container } = render(<SiteHeader currentHref="/didattica" />)
+  it('SiteHeader: mega menu apribile e chiudibile con Esc', async () => {
+    const { container } = render(<SiteHeader currentHref="/avvisi" />)
     const toggle = screen.getByRole('button', { name: 'Menu' })
     expect(toggle.getAttribute('aria-expanded')).toBe('false')
     fireEvent.click(toggle)
-    expect(screen.getByRole('button', { name: 'Chiudi menu' }).getAttribute('aria-expanded')).toBe(
-      'true',
-    )
-    expect(screen.getByRole('link', { name: 'Didattica' }).getAttribute('aria-current')).toBe(
-      'page',
-    )
+    expect(toggle.getAttribute('aria-expanded')).toBe('true')
+    const menu = screen.getByRole('navigation', { name: 'Principale' })
+    expect(menu).toBeTruthy()
+    expect(
+      screen.getByRole('link', { name: 'Tutti gli avvisi' }).getAttribute('aria-current'),
+    ).toBe('page')
+    expect(screen.getByRole('img', { name: /Accademia Albertina/ })).toBeTruthy()
     expect(await axeViolations(container)).toEqual([])
+    fireEvent.keyDown(document, { key: 'Escape' })
+    expect(toggle.getAttribute('aria-expanded')).toBe('false')
   })
 
   it('Breadcrumbs: l’ultima voce è la pagina corrente', async () => {
@@ -135,6 +139,31 @@ describe('componenti accessibili', () => {
     expect(screen.getByRole('link', { name: /Bando/ }).getAttribute('href')).toBe(
       '/media/bando.pdf',
     )
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('HeroSlider: carousel accessibile, una slide visibile alla volta', async () => {
+    const slides = [1, 2, 3].map((n) => ({
+      titolo: `Avviso ${n}`,
+      href: `/avvisi/avviso-${n}`,
+      data: '2026-10-21T09:00:00.000Z',
+    }))
+    const { container } = render(<HeroSlider slides={slides} />)
+    expect(
+      screen
+        .getByRole('region', { name: 'Avvisi in evidenza' })
+        .getAttribute('aria-roledescription'),
+    ).toBe('carousel')
+    expect(screen.getByRole('heading', { name: 'Avviso 1' })).toBeTruthy()
+    expect(screen.queryByRole('heading', { name: 'Avviso 2' })).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Avviso successivo' }))
+    expect(screen.getByRole('heading', { name: 'Avviso 2' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Avviso 2 di 3' }).getAttribute('aria-current')).toBe(
+      'true',
+    )
+    fireEvent.click(screen.getByRole('button', { name: 'Avviso precedente' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Avviso precedente' }))
+    expect(screen.getByRole('heading', { name: 'Avviso 3' })).toBeTruthy()
     expect(await axeViolations(container)).toEqual([])
   })
 })
