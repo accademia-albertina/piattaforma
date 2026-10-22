@@ -8,6 +8,7 @@ import {
   puoScrivereAvvisi,
 } from '@/access/avvisi'
 import { canAccessBackend, isAdmin } from '@/access/roles'
+import { rowLabel } from '@/fields/rowLabel'
 import { slugField } from '@/fields/slug'
 
 /** Il pubblico vede solo gli avvisi pubblicati; chi lavora nel pannello vede anche le bozze. */
@@ -120,6 +121,7 @@ export const Avvisi: CollectionConfig = {
       label: 'Allegati',
       type: 'array',
       labels: { singular: 'Allegato', plural: 'Allegati' },
+      admin: rowLabel('nome', 'Allegato'),
       fields: [
         {
           name: 'nome',

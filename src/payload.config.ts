@@ -11,6 +11,7 @@ import { Media } from './collections/Media'
 import { Avvisi } from './collections/Avvisi'
 import { Scuole } from './collections/Scuole'
 import { Pagine } from './collections/Pagine'
+import { Navigazione } from './globals/Navigazione'
 import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
@@ -44,6 +45,7 @@ export default buildConfig({
     fallbackLanguage: 'it',
   },
   collections: [Pagine, Avvisi, Scuole, Media, Users],
+  globals: [Navigazione],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { CONTATTI, MENU_FOOTER, MENU_LEGALE, SOCIAL } from '@/lib/navigazione'
+import { CONTATTI, MENU_FOOTER, MENU_LEGALE, SOCIAL, type VoceMenu } from '@/lib/navigazione'
 
 import { MenuLink } from '../MenuLink/MenuLink'
 
@@ -21,7 +21,19 @@ const ISTITUZIONI = [
   },
 ]
 
-export function SiteFooter({ anno = new Date().getFullYear() }: { anno?: number }) {
+export type SiteFooterProps = {
+  anno?: number
+  link?: VoceMenu[]
+  social?: VoceMenu[]
+  legale?: VoceMenu[]
+}
+
+export function SiteFooter({
+  anno = new Date().getFullYear(),
+  link = MENU_FOOTER,
+  social = SOCIAL,
+  legale = MENU_LEGALE,
+}: SiteFooterProps) {
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.grid}`}>
@@ -87,7 +99,7 @@ export function SiteFooter({ anno = new Date().getFullYear() }: { anno?: number 
             Link utili
           </h2>
           <ul className={styles.list}>
-            {MENU_FOOTER.map((v) => (
+            {link.map((v) => (
               <li key={v.href}>
                 <MenuLink voce={v} />
               </li>
@@ -100,7 +112,7 @@ export function SiteFooter({ anno = new Date().getFullYear() }: { anno?: number 
             Seguici
           </h2>
           <ul className={styles.list}>
-            {SOCIAL.map((v) => (
+            {social.map((v) => (
               <li key={v.href}>
                 <MenuLink voce={v} />
               </li>
@@ -114,7 +126,7 @@ export function SiteFooter({ anno = new Date().getFullYear() }: { anno?: number 
           <p>© 2022–{anno} Accademia Albertina di Belle Arti di Torino</p>
           <nav aria-label="Note legali e accessibilità">
             <ul className={styles.legal}>
-              {MENU_LEGALE.map((v) => (
+              {legale.map((v) => (
                 <li key={v.href}>
                   <MenuLink voce={v} />
                 </li>
