@@ -1,6 +1,7 @@
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
 
+import { risolviLink } from '@/lib/link'
 import type { Media, Pagina } from '@/payload-types'
 
 import { Attachments } from '../Attachments/Attachments'
@@ -28,16 +29,6 @@ function Immagine({ m, didascalia }: { m: Media; didascalia?: string | null }) {
       {didascalia ? <figcaption>{didascalia}</figcaption> : null}
     </figure>
   )
-}
-
-type VoceLink = Extract<Blocco, { blockType: 'link' }>['voci'][number]
-
-function hrefLink(v: VoceLink): { href: string; esterno: boolean } | null {
-  if (v.tipo === 'esterno') return v.url ? { href: v.url, esterno: true } : null
-  const p = v.pagina
-  return p && typeof p === 'object' && p.percorso
-    ? { href: `/${p.percorso}`, esterno: false }
-    : null
 }
 
 /** Titolo di sezione e id per aria-labelledby, se il blocco ne ha uno. */
@@ -107,12 +98,12 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
         <Sezione id={id} titolo={b.titolo}>
           <ul className={styles.link}>
             {b.voci.map((v, k) => {
-              const l = hrefLink(v)
+              const l = risolviLink(v)
               if (!l) return null
               const contenuto = (
                 <>
                   <span className={styles.linkNome}>
-                    {v.etichetta}
+                    {l.label}
                     {l.esterno ? (
                       <>
                         <span aria-hidden="true"> ↗</span>

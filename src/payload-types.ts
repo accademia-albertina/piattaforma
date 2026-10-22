@@ -93,8 +93,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    navigazione: Navigazione;
+  };
+  globalsSelect: {
+    navigazione: NavigazioneSelect<false> | NavigazioneSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -243,8 +247,11 @@ export interface BloccoLink {
   titolo?: string | null;
   voci: {
     etichetta: string;
-    tipo?: ('interno' | 'esterno') | null;
+    tipo?: ('interno' | 'percorso' | 'esterno') | null;
     pagina?: (number | null) | Pagina;
+    /**
+     * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
+     */
     url?: string | null;
     descrizione?: string | null;
     id?: string | null;
@@ -796,6 +803,207 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Le modifiche sono visibili sul sito appena salvi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigazione".
+ */
+export interface Navigazione {
+  id: number;
+  /**
+   * Prima colonna del menu, in grande.
+   */
+  inEvidenza?:
+    | {
+        etichetta: string;
+        tipo?: ('interno' | 'percorso' | 'esterno') | null;
+        pagina?: (number | null) | Pagina;
+        /**
+         * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
+         */
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Fino a 5 colonne; una colonna può contenere più gruppi uno sotto l’altro.
+   */
+  colonne?:
+    | {
+        gruppi?:
+          | {
+              titolo: string;
+              voci?:
+                | {
+                    etichetta: string;
+                    tipo?: ('interno' | 'percorso' | 'esterno') | null;
+                    pagina?: (number | null) | Pagina;
+                    /**
+                     * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
+                     */
+                    url?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  serviziSinistra?:
+    | {
+        etichetta: string;
+        tipo?: ('interno' | 'percorso' | 'esterno') | null;
+        pagina?: (number | null) | Pagina;
+        /**
+         * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
+         */
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  serviziDestra?:
+    | {
+        etichetta: string;
+        tipo?: ('interno' | 'percorso' | 'esterno') | null;
+        pagina?: (number | null) | Pagina;
+        /**
+         * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
+         */
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  footerLink?:
+    | {
+        etichetta: string;
+        tipo?: ('interno' | 'percorso' | 'esterno') | null;
+        pagina?: (number | null) | Pagina;
+        /**
+         * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
+         */
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Il testo del link è il nome del social.
+   */
+  footerSocial?:
+    | {
+        etichetta: string;
+        tipo?: ('interno' | 'percorso' | 'esterno') | null;
+        pagina?: (number | null) | Pagina;
+        /**
+         * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
+         */
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Barra in fondo alla pagina.
+   */
+  footerLegale?:
+    | {
+        etichetta: string;
+        tipo?: ('interno' | 'percorso' | 'esterno') | null;
+        pagina?: (number | null) | Pagina;
+        /**
+         * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
+         */
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigazione_select".
+ */
+export interface NavigazioneSelect<T extends boolean = true> {
+  inEvidenza?:
+    | T
+    | {
+        etichetta?: T;
+        tipo?: T;
+        pagina?: T;
+        url?: T;
+        id?: T;
+      };
+  colonne?:
+    | T
+    | {
+        gruppi?:
+          | T
+          | {
+              titolo?: T;
+              voci?:
+                | T
+                | {
+                    etichetta?: T;
+                    tipo?: T;
+                    pagina?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  serviziSinistra?:
+    | T
+    | {
+        etichetta?: T;
+        tipo?: T;
+        pagina?: T;
+        url?: T;
+        id?: T;
+      };
+  serviziDestra?:
+    | T
+    | {
+        etichetta?: T;
+        tipo?: T;
+        pagina?: T;
+        url?: T;
+        id?: T;
+      };
+  footerLink?:
+    | T
+    | {
+        etichetta?: T;
+        tipo?: T;
+        pagina?: T;
+        url?: T;
+        id?: T;
+      };
+  footerSocial?:
+    | T
+    | {
+        etichetta?: T;
+        tipo?: T;
+        pagina?: T;
+        url?: T;
+        id?: T;
+      };
+  footerLegale?:
+    | T
+    | {
+        etichetta?: T;
+        tipo?: T;
+        pagina?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import React from 'react'
 
 import { SiteFooter, SiteHeader, SkipLink } from '@/components'
+import { menuSito } from '@/lib/menu'
 import '@/styles/global.css'
 
 export const metadata: Metadata = {
@@ -17,7 +18,8 @@ export const viewport: Viewport = {
   themeColor: '#a23130',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const menu = await menuSito()
   return (
     <html lang="it">
       <head>
@@ -31,11 +33,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <SkipLink />
-        <SiteHeader />
+        <SiteHeader servizi={menu.servizi} inEvidenza={menu.inEvidenza} colonne={menu.colonne} />
         <main id="contenuto" tabIndex={-1}>
           {children}
         </main>
-        <SiteFooter />
+        <SiteFooter {...menu.footer} />
       </body>
     </html>
   )

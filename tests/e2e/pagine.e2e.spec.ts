@@ -78,6 +78,20 @@ test.describe('Pagine istituzionali', () => {
         ],
       },
     })
+    const ammissioni = await payload.find({
+      collection: 'pagine',
+      where: { slug: { equals: 'ammissioni' } },
+      limit: 1,
+    })
+    await payload.updateGlobal({
+      slug: 'navigazione',
+      data: {
+        inEvidenza: [
+          { etichetta: 'Ammissioni 2026', tipo: 'interno', pagina: ammissioni.docs[0].id },
+          { etichetta: 'Avvisi di esame', tipo: 'percorso', url: '/avvisi?categoria=esami' },
+        ],
+      },
+    })
     await payload.create({
       collection: 'pagine',
       draft: true,
@@ -117,5 +131,23 @@ test.describe('Pagine istituzionali', () => {
   test('una bozza non è visibile al pubblico', async ({ page }) => {
     const res = await page.goto(`${BASE}/didattica/pagina-in-lavorazione`)
     expect(res?.status()).toBe(404)
+  })
+
+  test('il menu modificato dal pannello compare nel sito', async ({ page }) => {
+    await page.goto(`${BASE}/`)
+    await page.getByRole('button', { name: 'Menu' }).click()
+    const menu = page.getByRole('navigation', { name: 'Principale' })
+    await expect(menu.getByRole('link', { name: 'Ammissioni 2026' })).toHaveAttribute(
+      'href',
+      '/didattica/ammissioni',
+    )
+    await expect(menu.getByRole('link', { name: 'Avvisi di esame' })).toHaveAttribute(
+      'href',
+      '/avvisi?categoria=esami',
+    )
+  })
+
+  test.afterAll(async () => {
+    await payload.updateGlobal({ slug: 'navigazione', data: { inEvidenza: [] } })
   })
 })

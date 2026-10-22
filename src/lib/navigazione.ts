@@ -1,6 +1,6 @@
 /**
  * Struttura dei menu del sito, ripresa dal mega menu attuale.
- * Più avanti diventerà un global di Payload, così gli admin la modificano dal pannello.
+ * Sono i valori predefiniti: il menu vero si modifica dal pannello (global Navigazione, vedi src/lib/menu.ts).
  */
 
 export type VoceMenu = { label: string; href: string; esterno?: boolean }

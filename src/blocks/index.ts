@@ -1,5 +1,8 @@
 import type { Block, Field } from 'payload'
 
+import { linkFields } from '@/fields/link'
+import { rowLabel } from '@/fields/rowLabel'
+
 /**
  * Blocchi con cui si compongono le pagine istituzionali.
  * Ognuno ha un componente in src/components/blocchi e va aggiunto a BLOCCHI qui sotto.
@@ -12,42 +15,6 @@ const titoloFacoltativo: Field = {
   admin: { description: 'Facoltativo. Diventa un titolo di livello 2 nella pagina.' },
 }
 
-const linkFields: Field[] = [
-  { name: 'etichetta', label: 'Testo del link', type: 'text', required: true },
-  {
-    name: 'tipo',
-    label: 'Destinazione',
-    type: 'radio',
-    defaultValue: 'interno',
-    options: [
-      { label: 'Pagina del sito', value: 'interno' },
-      { label: 'Indirizzo esterno', value: 'esterno' },
-    ],
-    admin: { layout: 'horizontal' },
-  },
-  {
-    name: 'pagina',
-    label: 'Pagina',
-    type: 'relationship',
-    relationTo: 'pagine',
-    required: true,
-    admin: { condition: (_, s) => s?.tipo !== 'esterno' },
-  },
-  {
-    name: 'url',
-    label: 'Indirizzo',
-    type: 'text',
-    required: true,
-    admin: { condition: (_, s) => s?.tipo === 'esterno', placeholder: 'https://' },
-    validate: (v: unknown, { siblingData }: { siblingData: { tipo?: string } }) => {
-      if (siblingData?.tipo !== 'esterno') return true
-      return typeof v === 'string' && /^https:\/\/\S+$/.test(v)
-        ? true
-        : 'Inserisci un indirizzo completo che inizi con https://'
-    },
-  },
-]
-
 export const BloccoTesto: Block = {
   slug: 'testo',
   labels: { singular: 'Testo', plural: 'Testi' },
@@ -58,6 +25,7 @@ export const BloccoTesto: Block = {
 export const BloccoImmagine: Block = {
   slug: 'immagine',
   labels: { singular: 'Immagine', plural: 'Immagini' },
+  admin: rowLabel('didascalia', 'Immagine'),
   interfaceName: 'BloccoImmagine',
   fields: [
     {
@@ -123,6 +91,7 @@ export const BloccoLink: Block = {
       minRows: 1,
       required: true,
       labels: { singular: 'Link', plural: 'Link' },
+      admin: rowLabel('etichetta', 'Link'),
       fields: [
         ...linkFields,
         { name: 'descrizione', label: 'Descrizione breve', type: 'text', maxLength: 160 },
@@ -144,6 +113,7 @@ export const BloccoFisarmonica: Block = {
       minRows: 1,
       required: true,
       labels: { singular: 'Voce', plural: 'Voci' },
+      admin: rowLabel('titolo', 'Voce'),
       fields: [
         { name: 'titolo', label: 'Titolo (sempre visibile)', type: 'text', required: true },
         { name: 'testo', label: 'Contenuto (si apre al clic)', type: 'richText', required: true },
@@ -165,6 +135,7 @@ export const BloccoContatti: Block = {
       minRows: 1,
       required: true,
       labels: { singular: 'Contatto', plural: 'Contatti' },
+      admin: rowLabel('nome', 'Contatto'),
       fields: [
         { name: 'nome', label: 'Ufficio o persona', type: 'text', required: true },
         { name: 'ruolo', label: 'Ruolo', type: 'text' },
@@ -194,6 +165,7 @@ export const BloccoAllegati: Block = {
       minRows: 1,
       required: true,
       labels: { singular: 'Allegato', plural: 'Allegati' },
+      admin: rowLabel('nome', 'Allegato'),
       fields: [
         {
           name: 'nome',
