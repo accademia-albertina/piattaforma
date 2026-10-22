@@ -1,6 +1,7 @@
 import * as migration_20261020_155718_iniziale from './20261020_155718_iniziale';
 import * as migration_20261021_140338_avvisi from './20261021_140338_avvisi';
 import * as migration_20261021_144732_avvisi_immagine from './20261021_144732_avvisi_immagine';
+import * as migration_20261022_164339_pagine from './20261022_164339_pagine';
 
 export const migrations = [
   {
@@ -16,6 +17,11 @@ export const migrations = [
   {
     up: migration_20261021_144732_avvisi_immagine.up,
     down: migration_20261021_144732_avvisi_immagine.down,
-    name: '20261021_144732_avvisi_immagine'
+    name: '20261021_144732_avvisi_immagine',
+  },
+  {
+    up: migration_20261022_164339_pagine.up,
+    down: migration_20261022_164339_pagine.down,
+    name: '20261022_164339_pagine'
   },
 ];

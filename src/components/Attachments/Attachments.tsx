@@ -11,11 +11,20 @@ export type Allegato = {
 }
 
 /** Elenco degli allegati con formato e peso, come richiesto dalle linee guida AGID. */
-export function Attachments({ items, title = 'Allegati' }: { items: Allegato[]; title?: string }) {
+export function Attachments({
+  items,
+  title = 'Allegati',
+  id = 'allegati-titolo',
+}: {
+  items: Allegato[]
+  title?: string
+  /** Da cambiare se nella pagina ci sono più elenchi di allegati. */
+  id?: string
+}) {
   if (items.length === 0) return null
   return (
-    <section aria-labelledby="allegati-titolo" className={styles.section}>
-      <h2 id="allegati-titolo" className={styles.title}>
+    <section aria-labelledby={id} className={styles.section}>
+      <h2 id={id} className={styles.title}>
         {title}
       </h2>
       <ul className={styles.list}>

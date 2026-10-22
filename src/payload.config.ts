@@ -10,6 +10,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Avvisi } from './collections/Avvisi'
 import { Scuole } from './collections/Scuole'
+import { Pagine } from './collections/Pagine'
 import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
@@ -42,7 +43,7 @@ export default buildConfig({
     supportedLanguages: { it },
     fallbackLanguage: 'it',
   },
-  collections: [Avvisi, Scuole, Media, Users],
+  collections: [Pagine, Avvisi, Scuole, Media, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',

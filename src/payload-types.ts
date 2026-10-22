@@ -67,6 +67,7 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    pagine: Pagina;
     avvisi: Avviso;
     scuole: Scuola;
     media: Media;
@@ -78,6 +79,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    pagine: PagineSelect<false> | PagineSelect<true>;
     avvisi: AvvisiSelect<false> | AvvisiSelect<true>;
     scuole: ScuoleSelect<false> | ScuoleSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -120,6 +122,213 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pagine".
+ */
+export interface Pagina {
+  id: number;
+  titolo: string;
+  /**
+   * Una o due frasi sotto il titolo; si usano anche nei risultati di Google e nelle anteprime social.
+   */
+  sommario?: string | null;
+  blocchi?:
+    | (
+        BloccoTesto | BloccoImmagine | BloccoGalleria | BloccoLink | BloccoFisarmonica | BloccoContatti | BloccoAllegati
+      )[]
+    | null;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  /**
+   * Determina indirizzo e briciole di pane, es. Accademia › Storia.
+   */
+  genitore?: (number | null) | Pagina;
+  percorso?: string | null;
+  /**
+   * Oltre a redazione e vicedirezione. Es. la pagina Iscrizioni alla Segreteria didattica.
+   */
+  ufficiEditori?: ('segreteria' | 'amministrativo' | 'erasmus')[] | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoTesto".
+ */
+export interface BloccoTesto {
+  testo: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testo';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoImmagine".
+ */
+export interface BloccoImmagine {
+  immagine: number | Media;
+  didascalia?: string | null;
+  larghezza?: ('testo' | 'piena') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'immagine';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  /**
+   * Descrivi cosa mostra l’immagine per chi usa uno screen reader.
+   */
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoGalleria".
+ */
+export interface BloccoGalleria {
+  /**
+   * Facoltativo. Diventa un titolo di livello 2 nella pagina.
+   */
+  titolo?: string | null;
+  immagini: {
+    immagine: number | Media;
+    didascalia?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'galleria';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoLink".
+ */
+export interface BloccoLink {
+  /**
+   * Facoltativo. Diventa un titolo di livello 2 nella pagina.
+   */
+  titolo?: string | null;
+  voci: {
+    etichetta: string;
+    tipo?: ('interno' | 'esterno') | null;
+    pagina?: (number | null) | Pagina;
+    url?: string | null;
+    descrizione?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'link';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoFisarmonica".
+ */
+export interface BloccoFisarmonica {
+  /**
+   * Facoltativo. Diventa un titolo di livello 2 nella pagina.
+   */
+  titolo?: string | null;
+  voci: {
+    titolo: string;
+    testo: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'fisarmonica';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoContatti".
+ */
+export interface BloccoContatti {
+  /**
+   * Facoltativo. Diventa un titolo di livello 2 nella pagina.
+   */
+  titolo?: string | null;
+  voci: {
+    nome: string;
+    ruolo?: string | null;
+    email?: string | null;
+    telefono?: string | null;
+    /**
+     * Una riga per fascia, es. “Lunedì 9–12”.
+     */
+    orari?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contatti';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoAllegati".
+ */
+export interface BloccoAllegati {
+  /**
+   * Facoltativo. Diventa un titolo di livello 2 nella pagina.
+   */
+  titolo?: string | null;
+  documenti: {
+    /**
+     * Descrivi il documento, es. “Regolamento didattico 2026”.
+     */
+    nome: string;
+    file: number | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'allegati';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -207,28 +416,6 @@ export interface Scuola {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  /**
-   * Descrivi cosa mostra l’immagine per chi usa uno screen reader.
-   */
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -296,6 +483,10 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
+        relationTo: 'pagine';
+        value: number | Pagina;
+      } | null)
+    | ({
         relationTo: 'avvisi';
         value: number | Avviso;
       } | null)
@@ -352,6 +543,138 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pagine_select".
+ */
+export interface PagineSelect<T extends boolean = true> {
+  titolo?: T;
+  sommario?: T;
+  blocchi?:
+    | T
+    | {
+        testo?: T | BloccoTestoSelect<T>;
+        immagine?: T | BloccoImmagineSelect<T>;
+        galleria?: T | BloccoGalleriaSelect<T>;
+        link?: T | BloccoLinkSelect<T>;
+        fisarmonica?: T | BloccoFisarmonicaSelect<T>;
+        contatti?: T | BloccoContattiSelect<T>;
+        allegati?: T | BloccoAllegatiSelect<T>;
+      };
+  slug?: T;
+  genitore?: T;
+  percorso?: T;
+  ufficiEditori?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoTesto_select".
+ */
+export interface BloccoTestoSelect<T extends boolean = true> {
+  testo?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoImmagine_select".
+ */
+export interface BloccoImmagineSelect<T extends boolean = true> {
+  immagine?: T;
+  didascalia?: T;
+  larghezza?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoGalleria_select".
+ */
+export interface BloccoGalleriaSelect<T extends boolean = true> {
+  titolo?: T;
+  immagini?:
+    | T
+    | {
+        immagine?: T;
+        didascalia?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoLink_select".
+ */
+export interface BloccoLinkSelect<T extends boolean = true> {
+  titolo?: T;
+  voci?:
+    | T
+    | {
+        etichetta?: T;
+        tipo?: T;
+        pagina?: T;
+        url?: T;
+        descrizione?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoFisarmonica_select".
+ */
+export interface BloccoFisarmonicaSelect<T extends boolean = true> {
+  titolo?: T;
+  voci?:
+    | T
+    | {
+        titolo?: T;
+        testo?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoContatti_select".
+ */
+export interface BloccoContattiSelect<T extends boolean = true> {
+  titolo?: T;
+  voci?:
+    | T
+    | {
+        nome?: T;
+        ruolo?: T;
+        email?: T;
+        telefono?: T;
+        orari?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoAllegati_select".
+ */
+export interface BloccoAllegatiSelect<T extends boolean = true> {
+  titolo?: T;
+  documenti?:
+    | T
+    | {
+        nome?: T;
+        file?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
