@@ -26,6 +26,8 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
+    // Sull'hosting i file vanno su un volume persistente (es. MEDIA_DIR=/data/media).
+    ...(process.env.MEDIA_DIR ? { staticDir: process.env.MEDIA_DIR } : {}),
     // Solo immagini e PDF; il controllo antivirus arriva con l'integrazione Drive.
     mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/svg+xml', 'application/pdf'],
   },
