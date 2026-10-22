@@ -1,0 +1,151 @@
+.blocchi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.blocco {
+  margin: 0;
+}
+
+.titolo {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-xl);
+}
+
+.testo,
+.stretta,
+.link,
+.contatti {
+  max-width: var(--measure);
+}
+
+.testo :where(ul, ol) {
+  padding-left: var(--space-4);
+  margin: 0 0 var(--space-3);
+}
+
+.testo :where(h2, h3) {
+  margin-top: var(--space-5);
+}
+
+.testo > :last-child {
+  margin-bottom: 0;
+}
+
+.figure {
+  margin: 0;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure figcaption {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.galleria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.galleria img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.link {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.link li {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.link a {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-height: var(--target-min);
+  padding: var(--space-3) var(--space-2);
+  text-decoration: none;
+}
+
+.link a:hover {
+  background: var(--color-surface);
+}
+
+.link a:hover .linkNome {
+  text-decoration: underline;
+}
+
+.linkNome {
+  font-weight: var(--font-weight-semibold);
+}
+
+.linkDesc {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.contatti {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr));
+  gap: var(--gap);
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contatto {
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.contattoNome {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-heading);
+}
+
+.contattoRuolo {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+}
+
+.contatto dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-1) var(--space-3);
+  margin: var(--space-3) 0 0;
+}
+
+.contatto dt {
+  font-weight: var(--font-weight-semibold);
+}
+
+.contatto dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.orari {
+  white-space: pre-line;
+}

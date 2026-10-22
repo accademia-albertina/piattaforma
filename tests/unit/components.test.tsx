@@ -5,8 +5,10 @@ import {
   Alert,
   Attachments,
   AvvisoCard,
+  Blocchi,
   Breadcrumbs,
   Button,
+  Fisarmonica,
   HeroSlider,
   Pagination,
   SiteFooter,
@@ -176,6 +178,85 @@ describe('componenti accessibili', () => {
     )
     expect(screen.getByRole('link', { name: 'Dichiarazione di accessibilità' })).toBeTruthy()
     expect(screen.getByText(/© 2022–2026/)).toBeTruthy()
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('Fisarmonica: le voci si aprono e chiudono da tastiera e mouse', async () => {
+    const { container } = render(
+      <Fisarmonica
+        livello={2}
+        voci={[
+          { id: 'a', titolo: 'Quando si presenta la domanda?', contenuto: <p>Dal 1° luglio.</p> },
+          { id: 'b', titolo: 'Serve un portfolio?', contenuto: <p>Sì.</p> },
+        ]}
+      />,
+    )
+    const pulsante = screen.getByRole('button', { name: 'Quando si presenta la domanda?' })
+    expect(pulsante.getAttribute('aria-expanded')).toBe('false')
+    expect(
+      screen.getByRole('heading', { level: 2, name: 'Quando si presenta la domanda?' }),
+    ).toBeTruthy()
+    fireEvent.click(pulsante)
+    expect(pulsante.getAttribute('aria-expanded')).toBe('true')
+    expect(screen.getByText('Dal 1° luglio.')).toBeTruthy()
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('Blocchi: link, contatti e allegati accessibili', async () => {
+    const { container } = render(
+      <Blocchi
+        blocchi={[
+          {
+            blockType: 'link',
+            titolo: 'Servizi',
+            voci: [
+              { etichetta: 'Isidata', tipo: 'esterno', url: 'https://servizi13.isidata.net/' },
+              {
+                etichetta: 'Iscrizioni',
+                tipo: 'interno',
+                pagina: { id: 1, titolo: 'Iscrizioni', percorso: 'didattica/iscrizioni' } as never,
+              },
+            ],
+          },
+          {
+            blockType: 'contatti',
+            titolo: 'Contatti',
+            voci: [
+              {
+                nome: 'Segreteria didattica',
+                email: 'segreteria@albertina.academy',
+                telefono: '011 88 90 20',
+                orari: 'Lunedì 9–12',
+              },
+            ],
+          },
+          {
+            blockType: 'allegati',
+            titolo: 'Documenti',
+            documenti: [
+              {
+                nome: 'Regolamento',
+                file: {
+                  id: 1,
+                  alt: 'Regolamento',
+                  url: '/media/regolamento.pdf',
+                  mimeType: 'application/pdf',
+                  filesize: 120000,
+                } as never,
+              },
+            ],
+          },
+        ]}
+      />,
+    )
+    expect(screen.getByRole('link', { name: /Iscrizioni/ }).getAttribute('href')).toBe(
+      '/didattica/iscrizioni',
+    )
+    expect(screen.getByRole('link', { name: /Isidata.*nuova scheda/ })).toBeTruthy()
+    expect(screen.getByRole('link', { name: '011 88 90 20' }).getAttribute('href')).toBe(
+      'tel:011889020',
+    )
+    expect(screen.getByRole('region', { name: 'Documenti' })).toBeTruthy()
     expect(await axeViolations(container)).toEqual([])
   })
 })
