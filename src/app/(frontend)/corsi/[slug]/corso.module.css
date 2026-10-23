@@ -1,0 +1,129 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+.header {
+  max-width: var(--measure);
+  margin-bottom: var(--space-5);
+}
+
+.header h1 {
+  margin-bottom: var(--space-3);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.docenti {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+
+.avviso {
+  max-width: var(--measure);
+  margin-bottom: var(--space-5);
+}
+
+.layout {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 64rem) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    align-items: start;
+  }
+}
+
+.main {
+  max-width: var(--measure);
+}
+
+.main section + section {
+  margin-top: var(--space-6);
+}
+
+.main h2 {
+  font-size: var(--font-size-xl);
+}
+
+.body :where(ul, ol) {
+  padding-left: var(--space-4);
+  margin: 0 0 var(--space-3);
+}
+
+.vuoto {
+  color: var(--color-text-muted);
+}
+
+.scheda {
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: 4px solid var(--color-brand-strong);
+}
+
+@media (min-width: 64rem) {
+  .scheda {
+    position: sticky;
+    top: var(--space-5);
+  }
+}
+
+.schedaTitolo {
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-lg);
+}
+
+.dati {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.dati dt {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.dati dd {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+}
+
+.sottotitolo {
+  margin: var(--space-5) 0 var(--space-2);
+  padding-top: var(--space-4);
+  font-size: var(--font-size-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.periodo + .periodo {
+  margin-top: var(--space-3);
+}
+
+.periodoNome {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.orari,
+.ricevimento {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ricevimento a {
+  overflow-wrap: anywhere;
+}

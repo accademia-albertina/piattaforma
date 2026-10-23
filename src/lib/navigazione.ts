@@ -54,8 +54,8 @@ export const MENU_PRINCIPALE: GruppoMenu[][] = [
       voci: [
         { label: 'Offerta formativa', href: '/didattica/offerta-formativa' },
         { label: 'Manifesto degli studi', href: '/didattica/manifesto-degli-studi' },
-        { label: 'Corsi', href: '/didattica/corsi' },
-        { label: 'Docenti', href: '/didattica/docenti' },
+        { label: 'Corsi', href: '/corsi' },
+        { label: 'Docenti', href: '/docenti' },
         { label: 'Calendari', href: '/didattica/calendari' },
         { label: 'Orario lezioni', href: '/didattica/orario-lezioni' },
         { label: 'Ammissioni', href: '/didattica/ammissioni' },

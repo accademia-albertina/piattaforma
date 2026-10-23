@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     pagine: Pagina;
     avvisi: Avviso;
+    corsi: Corso;
+    docenti: Docente;
     scuole: Scuola;
     media: Media;
     users: User;
@@ -81,6 +83,8 @@ export interface Config {
   collectionsSelect: {
     pagine: PagineSelect<false> | PagineSelect<true>;
     avvisi: AvvisiSelect<false> | AvvisiSelect<true>;
+    corsi: CorsiSelect<false> | CorsiSelect<true>;
+    docenti: DocentiSelect<false> | DocentiSelect<true>;
     scuole: ScuoleSelect<false> | ScuoleSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -409,7 +413,7 @@ export interface Avviso {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Le scuole dell’Accademia, usate per filtrare gli avvisi.
+ * Le scuole dell’Accademia, usate per filtrare avvisi e corsi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "scuole".
@@ -476,6 +480,152 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Corsi e programmi per anno accademico. Vicedirezione e admin creano i corsi e assegnano i docenti; il docente aggiorna il programma.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "corsi".
+ */
+export interface Corso {
+  id: number;
+  /**
+   * Solo il nome della materia, senza [T] o [B]: il livello si sceglie sotto.
+   */
+  titolo: string;
+  livelli: ('triennio' | 'biennio')[];
+  annoAccademico: string;
+  /**
+   * Più di un docente solo in caso di co-docenza.
+   */
+  docenti: (number | Docente)[];
+  scuole?: (number | Scuola)[] | null;
+  crediti?: number | null;
+  /**
+   * Es. ABPR19 o il nome del settore.
+   */
+  settore?: string | null;
+  areaDisciplinare?: string | null;
+  descrizione?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  bibliografia?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  esoneri?: boolean | null;
+  revisioni?: boolean | null;
+  altreInformazioni?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Una riga per ogni giorno di lezione.
+   */
+  orari?:
+    | {
+        semestre: 'primo' | 'secondo' | 'annuale';
+        giorno: 'lunedi' | 'martedi' | 'mercoledi' | 'giovedi' | 'venerdi' | 'sabato';
+        dalle: string;
+        alle: string;
+        aula?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Profili pubblici dei docenti, in /docenti e nelle schede dei corsi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "docenti".
+ */
+export interface Docente {
+  id: number;
+  nome: string;
+  cognome: string;
+  nomeCompleto?: string | null;
+  email?: string | null;
+  ruolo?: ('tempo-indeterminato' | 'tempo-determinato' | 'contratto') | null;
+  scuole?: (number | Scuola)[] | null;
+  /**
+   * Facoltativa. Formato quadrato o verticale.
+   */
+  foto?: (number | null) | Media;
+  /**
+   * Es. “Mercoledì 16–17, su appuntamento via email”. Se vuoto: su appuntamento.
+   */
+  ricevimento?: string | null;
+  biografia?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  cv?: (number | null) | Media;
+  /**
+   * Togli la spunta per chi non insegna più: il profilo resta per i corsi passati.
+   */
+  attivo?: boolean | null;
+  /**
+   * L’utente che può modificare questo profilo e il programma dei suoi corsi.
+   */
+  account?: (number | null) | User;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -506,6 +656,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'avvisi';
         value: number | Avviso;
+      } | null)
+    | ({
+        relationTo: 'corsi';
+        value: number | Corso;
+      } | null)
+    | ({
+        relationTo: 'docenti';
+        value: number | Docente;
       } | null)
     | ({
         relationTo: 'scuole';
@@ -717,6 +875,60 @@ export interface AvvisiSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "corsi_select".
+ */
+export interface CorsiSelect<T extends boolean = true> {
+  titolo?: T;
+  livelli?: T;
+  annoAccademico?: T;
+  docenti?: T;
+  scuole?: T;
+  crediti?: T;
+  settore?: T;
+  areaDisciplinare?: T;
+  descrizione?: T;
+  bibliografia?: T;
+  esoneri?: T;
+  revisioni?: T;
+  altreInformazioni?: T;
+  orari?:
+    | T
+    | {
+        semestre?: T;
+        giorno?: T;
+        dalle?: T;
+        alle?: T;
+        aula?: T;
+        id?: T;
+      };
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "docenti_select".
+ */
+export interface DocentiSelect<T extends boolean = true> {
+  nome?: T;
+  cognome?: T;
+  nomeCompleto?: T;
+  email?: T;
+  ruolo?: T;
+  scuole?: T;
+  foto?: T;
+  ricevimento?: T;
+  biografia?: T;
+  cv?: T;
+  attivo?: T;
+  account?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -11,6 +11,8 @@ import { Media } from './collections/Media'
 import { Avvisi } from './collections/Avvisi'
 import { Scuole } from './collections/Scuole'
 import { Pagine } from './collections/Pagine'
+import { Corsi } from './collections/Corsi'
+import { Docenti } from './collections/Docenti'
 import { Navigazione } from './globals/Navigazione'
 import { migrations } from './migrations'
 import { seedDemo } from './seed/demo'
@@ -57,7 +59,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Pagine, Avvisi, Scuole, Media, Users],
+  collections: [Pagine, Avvisi, Corsi, Docenti, Scuole, Media, Users],
   globals: [Navigazione],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
