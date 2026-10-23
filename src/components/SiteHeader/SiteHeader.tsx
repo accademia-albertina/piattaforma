@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { Button, Disclosure, DisclosurePanel } from 'react-aria-components'
+import { Button, Disclosure, DisclosurePanel, Heading } from 'react-aria-components'
 
 import {
   MENU_IN_EVIDENZA,
@@ -14,6 +14,8 @@ import {
 } from '@/lib/navigazione'
 
 import { MenuLink } from '../MenuLink/MenuLink'
+
+import { useMediaQuery, useNascondiScorrendo } from './hooks'
 
 import styles from './SiteHeader.module.css'
 
@@ -35,6 +37,11 @@ const Icona = {
         stroke="currentColor"
         strokeWidth="1.75"
       />
+    </svg>
+  ),
+  freccia: (
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+      <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" />
     </svg>
   ),
   cerca: (
@@ -75,10 +82,56 @@ export function SiteHeader({
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
+  // Con il menu aperto la pagina sotto non scorre: scorre solo il pannello.
+  useEffect(() => {
+    if (!open) return
+    const html = document.documentElement
+    const prima = html.style.overflow
+    html.style.overflow = 'hidden'
+    return () => {
+      html.style.overflow = prima
+    }
+  }, [open])
+
+  // L'header resta in alto mentre si scorre: lo spazio che occupa non deve coprire
+  // l'elemento che riceve il focus (scroll-padding).
+  const headerRef = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const header = headerRef.current
+    if (!header || typeof ResizeObserver === 'undefined') return
+    const html = document.documentElement
+    const osserva = new ResizeObserver(() => {
+      html.style.scrollPaddingTop = `${header.offsetHeight}px`
+    })
+    osserva.observe(header)
+    return () => {
+      osserva.disconnect()
+      html.style.scrollPaddingTop = ''
+    }
+  }, [])
+
+  const [nascosto, mostra] = useNascondiScorrendo()
+  const desktop = useMediaQuery('(min-width: 64rem)', true)
+
   const current = (href: string) => (path === href ? 'page' : undefined)
 
+  const voci = (g: GruppoMenu) => (
+    <ul className={styles.groupList}>
+      {g.voci.map((v) => (
+        <li key={v.href}>
+          <MenuLink voce={v} current={current(v.href)} />
+        </li>
+      ))}
+    </ul>
+  )
+
   return (
-    <header className={styles.header}>
+    <header
+      ref={headerRef}
+      className={styles.header}
+      data-nascosto={(nascosto && !open) || undefined}
+      onFocus={mostra}
+    >
       <div className={styles.topBar}>
         <nav aria-label="Servizi" className={`container ${styles.topBarInner}`}>
           <ul className={styles.utilityList}>
@@ -111,28 +164,50 @@ export function SiteHeader({
           </Link>
 
           <div className={styles.actions}>
-            <Link href="/admin" className={styles.iconButton} aria-label="Area riservata">
+            <Link href="/admin" className={styles.iconButton}>
               {Icona.utente}
+              <span className={styles.iconLabel}>Area riservata</span>
             </Link>
-            <Link
-              href="/cerca"
-              className={styles.iconButton}
-              aria-label="Cerca nel sito"
-              aria-current={current('/cerca')}
-            >
+            <Link href="/cerca" className={styles.iconButton} aria-current={current('/cerca')}>
               {Icona.cerca}
+              <span className={styles.iconLabel}>Cerca</span>
             </Link>
-            <Button slot="trigger" ref={triggerRef} className={styles.menuToggle} aria-label="Menu">
+            <Button slot="trigger" ref={triggerRef} className={styles.menuToggle}>
               <span className={styles.burger} aria-hidden="true" data-open={open || undefined}>
                 <span />
                 <span />
                 <span />
               </span>
+              <span className={styles.iconLabel}>Menu</span>
             </Button>
           </div>
         </div>
 
+        {open && (
+          // Il velo chiude il menu al clic; da tastiera si chiude con Esc o con il pulsante.
+          <div className={styles.velo} aria-hidden="true" onClick={() => setOpen(false)} />
+        )}
+
         <DisclosurePanel className={styles.panel}>
+          <form action="/cerca" method="get" role="search" className={`container ${styles.cerca}`}>
+            <label htmlFor="menu-cerca" className={styles.cercaLabel}>
+              Cerca nel sito
+            </label>
+            <div className={styles.cercaRiga}>
+              <input
+                id="menu-cerca"
+                name="q"
+                type="search"
+                minLength={2}
+                maxLength={100}
+                required
+                className={styles.cercaInput}
+              />
+              <button type="submit" className={styles.cercaInvia}>
+                Cerca
+              </button>
+            </div>
+          </form>
           <nav aria-label="Principale" className={`container ${styles.megaMenu}`}>
             <div className={styles.column}>
               <h2 className={styles.highlightTitle}>In evidenza</h2>
@@ -146,18 +221,29 @@ export function SiteHeader({
             </div>
             {colonne.map((gruppi) => (
               <div key={gruppi[0].titolo} className={styles.column}>
-                {gruppi.map((g) => (
-                  <div key={g.titolo} className={styles.group}>
-                    <h2 className={styles.groupTitle}>{g.titolo}</h2>
-                    <ul className={styles.groupList}>
-                      {g.voci.map((v) => (
-                        <li key={v.href}>
-                          <MenuLink voce={v} current={current(v.href)} />
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                {gruppi.map((g) =>
+                  desktop ? (
+                    <div key={g.titolo} className={styles.group}>
+                      <h2 className={styles.groupTitle}>{g.titolo}</h2>
+                      {voci(g)}
+                    </div>
+                  ) : (
+                    // Su mobile i gruppi sono a fisarmonica: la lista intera sarebbe lunghissima.
+                    <Disclosure
+                      key={g.titolo}
+                      className={styles.group}
+                      defaultExpanded={g.voci.some((v) => v.href === path)}
+                    >
+                      <Heading level={2} className={styles.groupTitle}>
+                        <Button slot="trigger" className={styles.groupToggle}>
+                          {g.titolo}
+                          {Icona.freccia}
+                        </Button>
+                      </Heading>
+                      <DisclosurePanel>{voci(g)}</DisclosurePanel>
+                    </Disclosure>
+                  ),
+                )}
               </div>
             ))}
           </nav>

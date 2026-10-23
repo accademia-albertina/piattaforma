@@ -34,6 +34,9 @@
   --color-error-bg: #fbe5e5;
   --color-error-text: #a23130; /* 5,78 */
 
+  /* Velo dietro il mega menu (nessun testo sopra: il contrasto non si applica) */
+  --color-overlay: rgb(18 25 29 / 0.55);
+
   /* Focus: visibile su ogni sfondo grazie al doppio anello */
   --color-focus: #12191d;
   --color-focus-contrast: #ffffff;

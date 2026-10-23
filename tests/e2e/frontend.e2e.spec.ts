@@ -25,6 +25,11 @@ test.describe('Frontend', () => {
     await page.keyboard.press('Enter')
     await expect(toggle).toHaveAttribute('aria-expanded', 'true')
     const menu = page.getByRole('navigation', { name: 'Principale' })
+    // Su mobile i gruppi sono a fisarmonica: si aprono da tastiera.
+    const gruppo = menu.getByRole('button', { name: 'Avvisi' })
+    await gruppo.focus()
+    await page.keyboard.press('Enter')
+    await expect(gruppo).toHaveAttribute('aria-expanded', 'true')
     await expect(menu.getByRole('link', { name: 'Tutti gli avvisi' })).toBeVisible()
     const results = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze()
     expect(results.violations.map((v) => `${v.id}: ${v.help}`)).toEqual([])
