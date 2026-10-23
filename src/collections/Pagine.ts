@@ -17,7 +17,7 @@ import { BLOCCHI } from '@/blocks'
 import { slugField } from '@/fields/slug'
 
 /** Indirizzi già usati da pagine fisse del sito: una pagina di primo livello non può prenderli. */
-export const SLUG_RISERVATI = ['admin', 'api', 'avvisi', 'cerca', 'next', 'brand', 'media']
+export const SLUG_RISERVATI = ['admin', 'api', 'avvisi', 'cerca', 'corsi', 'docenti', 'next', 'brand', 'media']
 
 const idDi = (v: unknown) =>
   (v && typeof v === 'object' ? (v as { id: number }).id : v) as number | null | undefined

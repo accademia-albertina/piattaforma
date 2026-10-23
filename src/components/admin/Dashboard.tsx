@@ -19,6 +19,8 @@ type Sezione = {
 const SEZIONI: Sezione[] = [
   { slug: 'avvisi', tipo: 'collezione', serve: 'read', nuovo: 'Nuovo avviso' },
   { slug: 'pagine', tipo: 'collezione', serve: 'read', nuovo: 'Nuova pagina' },
+  { slug: 'corsi', tipo: 'collezione', serve: 'read' },
+  { slug: 'docenti', tipo: 'collezione', serve: 'read' },
   { slug: 'media', tipo: 'collezione', serve: 'read', nuovo: 'Carica un file' },
   { slug: 'scuole', tipo: 'collezione', serve: 'read' },
   { slug: 'navigazione', tipo: 'globale', serve: 'update' },
@@ -29,6 +31,7 @@ const SEZIONI: Sezione[] = [
 const CON_BOZZE = [
   { slug: 'avvisi', tipo: 'Avviso' },
   { slug: 'pagine', tipo: 'Pagina' },
+  { slug: 'corsi', tipo: 'Corso' },
 ] as const
 
 const data = new Intl.DateTimeFormat('it-IT', {

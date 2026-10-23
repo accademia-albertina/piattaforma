@@ -1,0 +1,161 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+.header {
+  max-width: var(--measure);
+  margin-bottom: var(--space-5);
+}
+
+.header h1 {
+  margin-bottom: var(--space-3);
+}
+
+.intro {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+}
+
+/* Filtri: una riga su desktop, impilati su mobile */
+.filters {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  align-items: end;
+  margin-bottom: var(--space-5);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+@media (min-width: 48rem) {
+  .filters {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .filters {
+    grid-template-columns: 2fr repeat(3, 1fr) auto;
+  }
+}
+
+.field {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.field label {
+  font-weight: var(--font-weight-semibold);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-control);
+  border-radius: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.apply:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.apply {
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-5);
+  border: 0;
+  border-radius: 0;
+  background: var(--color-brand-strong);
+  color: var(--color-on-brand);
+  font: inherit;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.apply:hover {
+  background: var(--color-brand-dark);
+}
+
+.count {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: var(--space-3) var(--space-3);
+  text-align: start;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table thead th {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--color-heading);
+}
+
+.table tbody th {
+  font-weight: var(--font-weight-regular);
+}
+
+.table tbody tr:hover {
+  background: var(--color-surface);
+}
+
+.corso {
+  font-weight: var(--font-weight-bold);
+}
+
+.table .num {
+  text-align: end;
+  white-space: nowrap;
+}
+
+/* Su mobile ogni corso diventa una scheda: la tabella resta tale per i lettori di schermo */
+@media (max-width: 47.99rem) {
+  .table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .table tr {
+    display: block;
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .table th,
+  .table td {
+    display: block;
+    padding: var(--space-1) 0;
+    border: 0;
+  }
+
+  .table td::before {
+    content: attr(data-label) ': ';
+    color: var(--color-text-muted);
+  }
+
+  .table .num {
+    text-align: start;
+  }
+}
