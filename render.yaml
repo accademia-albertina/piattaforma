@@ -1,13 +1,15 @@
 # Anteprima online su Render (Blueprint). Istruzioni nel README, "Anteprima online".
-# Contiene solo contenuti demo pubblici; in produzione si userà l'hosting MEPA.
+# Contiene solo contenuti demo pubblici. Server da 512 MB: in prova il sito usa meno di 300 MB.
 services:
   - type: web
     name: albertina-anteprima
     runtime: node
     region: frankfurt
-    plan: 1c-2g
+    plan: 0.5c-512mb
     buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build
-    startCommand: pnpm start
+    # next start diretto (pnpm e cross-env occuperebbero circa 100 MB in più) e heap limitato
+    # all'avvio: con NODE_OPTIONS il limite varrebbe anche per la build, che ne ha bisogno di più.
+    startCommand: node --no-deprecation --max-old-space-size=320 node_modules/next/dist/bin/next start
     healthCheckPath: /salute
     autoDeployTrigger: commit
     disk:
