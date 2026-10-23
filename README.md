@@ -47,30 +47,18 @@ public/fonts/            Albert Sans servito in locale (licenza OFL)
 tests/                   unit, int (database) ed e2e (Playwright + axe)
 ```
 
-## Anteprima online (Railway)
+## Anteprima online (Render)
 
-Serve a far provare il sito agli admin prima della messa in produzione. Contiene solo contenuti pubblici (`src/seed/`), nessun dato personale.
+Serve a far provare il sito agli admin prima della messa in produzione. Contiene solo contenuti pubblici (`src/seed/`), nessun dato personale. La configurazione è in `render.yaml`: server e database a Francoforte, disco per i file, password del browser, contenuti demo al primo avvio.
 
-1. Su [railway.com](https://railway.com) crea un progetto con l’account dell’ente e aggiungi **PostgreSQL**.
-2. **+ New → GitHub Repo** → `accademia-albertina/piattaforma` (branch `main`). Railway compila con `pnpm build` e avvia con `pnpm start`; le migrazioni partono da sole all’avvio.
-3. Nel servizio dell’app:
-   - **Settings → Region:** EU West (Amsterdam).
-   - **Settings → Networking → Generate Domain**, poi **Healthcheck Path:** `/salute`.
-   - **Volume:** clic destro sul servizio → *Attach volume*, mount path `/data`.
-   - **Variables:**
+1. Su [render.com](https://render.com) crea un account con l’email dell’ente e collega GitHub (organizzazione `accademia-albertina`, solo il repo `piattaforma`).
+2. **New → Blueprint** → scegli `piattaforma`, branch `main`. Render legge `render.yaml` e chiede due valori:
+   - `NEXT_PUBLIC_SERVER_URL`: `https://albertina-anteprima.onrender.com` (se Render assegna un nome diverso, correggilo dopo in *Environment* e rifai il deploy);
+   - `ANTEPRIMA_PASSWORD`: la password da dare agli admin.
+3. **Apply.** Il primo deploy dura qualche minuto; le migrazioni e i contenuti demo partono da soli.
+4. Apri l’indirizzo (utente `albertina` + la password), vai su `/admin` e crea il primo utente: diventa amministratore.
 
-     | Variabile | Valore |
-     |---|---|
-     | `DATABASE_URL` | `${{Postgres.DATABASE_URL}}` |
-     | `PAYLOAD_SECRET` | stringa casuale (`openssl rand -hex 32`) |
-     | `NEXT_PUBLIC_SERVER_URL` | il dominio generato, es. `https://piattaforma-production.up.railway.app` |
-     | `ANTEPRIMA_PASSWORD` | password da dare agli admin |
-     | `SEED_DEMO` | `true` |
-     | `MEDIA_DIR` | `/data/media` |
-
-4. Dopo il deploy apri il dominio (utente `albertina` + la password), vai su `/admin` e crea il primo utente: diventa amministratore.
-
-Ogni push su `main` aggiorna l’anteprima. Per azzerare i contenuti demo svuota il database: al riavvio vengono ricaricati.
+Ogni push su `main` aggiorna l’anteprima (con il disco collegato il sito resta offline per qualche secondo durante l’aggiornamento). Per azzerare i contenuti demo svuota il database: al riavvio vengono ricaricati.
 
 ## Regole del progetto
 
