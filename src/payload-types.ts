@@ -128,6 +128,8 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Pagine istituzionali composte a blocchi, come Didattica o Ammissioni.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pagine".
  */
@@ -197,6 +199,8 @@ export interface BloccoImmagine {
   blockType: 'immagine';
 }
 /**
+ * Immagini e documenti usati in avvisi e pagine.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
@@ -338,6 +342,8 @@ export interface BloccoAllegati {
   blockType: 'allegati';
 }
 /**
+ * Comunicazioni per studenti e docenti, in /avvisi e in homepage.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "avvisi".
  */
@@ -403,6 +409,8 @@ export interface Avviso {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Le scuole dell’Accademia, usate per filtrare gli avvisi.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "scuole".
  */
@@ -422,6 +430,8 @@ export interface Scuola {
   createdAt: string;
 }
 /**
+ * Chi entra nel pannello e con quali ruoli.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
@@ -805,7 +815,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Le modifiche sono visibili sul sito appena salvi.
+ * Mega menu, barra in alto e link del footer. Le modifiche sono visibili sul sito appena salvi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navigazione".

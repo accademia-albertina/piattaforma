@@ -6,8 +6,11 @@ const backendUser: Access = ({ req }) => canAccessBackend(req.user)
 
 export const Media: CollectionConfig = {
   slug: 'media',
-  labels: { singular: 'Media', plural: 'Media' },
-  admin: { group: 'Contenuti' },
+  labels: { singular: 'File', plural: 'File e immagini' },
+  admin: {
+    group: 'Contenuti',
+    description: 'Immagini e documenti usati in avvisi e pagine.',
+  },
   access: {
     read: () => true,
     create: backendUser,

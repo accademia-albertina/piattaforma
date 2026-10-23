@@ -1,0 +1,166 @@
+/* Pagina iniziale del pannello. Usa le variabili del tema Payload (chiaro e scuro). */
+
+.dashboard {
+  padding-block: var(--base) calc(var(--base) * 3);
+}
+
+.intestazione {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--base);
+  padding-block-end: var(--base);
+  border-block-end: 1px solid var(--theme-elevation-150);
+}
+
+.saluto {
+  margin: 0;
+}
+
+.ruoli {
+  margin: calc(var(--base) / 4) 0 0;
+  color: var(--theme-elevation-600);
+}
+
+.sito {
+  font-weight: 600;
+  color: var(--theme-text);
+  text-underline-offset: 0.2em;
+}
+
+.nascosto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.sezione {
+  margin-block-start: calc(var(--base) * 2);
+}
+
+.titoloSezione {
+  margin: 0 0 var(--base);
+  font-size: 1.25rem;
+}
+
+.azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--base) / 2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.azione {
+  display: inline-flex;
+  gap: 0.5em;
+  align-items: center;
+  padding: calc(var(--base) / 2) var(--base);
+  font-weight: 600;
+  color: var(--color-on-brand);
+  text-decoration: none;
+  background: var(--color-brand-strong);
+}
+
+.azione:hover {
+  background: var(--color-brand-dark);
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: var(--base);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.scheda {
+  position: relative;
+  padding: var(--base);
+  background: var(--theme-elevation-50);
+  border: 1px solid var(--theme-elevation-150);
+}
+
+.scheda:hover {
+  border-color: var(--theme-elevation-400);
+}
+
+.titoloScheda {
+  margin: 0 0 calc(var(--base) / 2);
+  font-size: 1.125rem;
+}
+
+.titoloScheda a {
+  color: var(--theme-text);
+  text-decoration: none;
+}
+
+/* Tutta la scheda è cliccabile, il link resta uno solo per i lettori di schermo. */
+.titoloScheda a::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+}
+
+.titoloScheda a:focus-visible {
+  outline: none;
+}
+
+.scheda:has(a:focus-visible) {
+  outline: 2px solid var(--theme-text);
+  outline-offset: 2px;
+}
+
+.descrizione {
+  margin: 0;
+  color: var(--theme-elevation-700);
+}
+
+.conteggio {
+  margin: calc(var(--base) / 2) 0 0;
+  color: var(--theme-elevation-700);
+}
+
+.tabella {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabella th,
+.tabella td {
+  padding: calc(var(--base) / 2);
+  text-align: start;
+  border-block-end: 1px solid var(--theme-elevation-150);
+}
+
+.tabella th {
+  font-weight: 600;
+  color: var(--theme-elevation-700);
+}
+
+.tabella a {
+  color: var(--theme-text);
+}
+
+.pubblicato,
+.bozza {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  font-size: 0.875em;
+  border: 1px solid currentcolor;
+}
+
+.pubblicato {
+  color: var(--theme-text);
+}
+
+.bozza {
+  color: var(--theme-elevation-700);
+  border-style: dashed;
+}

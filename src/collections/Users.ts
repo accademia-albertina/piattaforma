@@ -18,6 +18,7 @@ export const Users: CollectionConfig = {
   labels: { singular: 'Utente', plural: 'Utenti' },
   admin: {
     useAsTitle: 'email',
+    description: 'Chi entra nel pannello e con quali ruoli.',
     defaultColumns: ['email', 'nome', 'cognome', 'roles'],
     group: 'Sistema',
   },

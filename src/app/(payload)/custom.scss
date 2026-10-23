@@ -1,7 +1,47 @@
 @import '../../styles/fonts.css';
+@import '../../styles/colori.css';
 
 // Il pannello usa il font istituzionale, anche nell'editor di testo (Payload di default usa un serif).
+// Angoli squadrati come nel sito (scelta di Fede: niente border radius).
 :root {
   --font-body: 'Albert Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-serif: var(--font-body);
+  --style-radius-s: 0;
+  --style-radius-m: 0;
+  --style-radius-l: 0;
+}
+
+// Pulsante principale (Salva, Pubblica, Crea) nel rosso istituzionale: bianco sopra 6,96:1.
+.btn--style-primary:not(.btn--disabled) {
+  --color: var(--color-on-brand);
+  --bg-color: var(--color-brand-strong);
+  --hover-bg: var(--color-brand-dark);
+  --hover-color: var(--color-on-brand);
+}
+
+// Intestazione dei blocchi delle pagine (componente BlockLabel).
+.etichetta-blocco {
+  display: inline-flex;
+  gap: calc(var(--base) / 2);
+  align-items: center;
+  min-width: 0;
+  pointer-events: none;
+
+  &__numero {
+    color: var(--theme-elevation-600);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__riassunto {
+    overflow: hidden;
+    color: var(--theme-elevation-800);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// Testi d'aiuto e pulsanti “Aggiungi”: il grigio di Payload (#9a9a9a, 2,8:1) non è leggibile.
+.field-description,
+.btn--icon-style-with-border .btn__label {
+  color: var(--theme-elevation-650);
 }

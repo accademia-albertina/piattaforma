@@ -21,8 +21,10 @@ test.describe('Admin Panel', () => {
   test('can navigate to dashboard', async () => {
     await page.goto('http://localhost:3000/admin')
     await expect(page).toHaveURL('http://localhost:3000/admin')
-    const dashboardArtifact = page.locator('span[title="Dashboard"]').first()
-    await expect(dashboardArtifact).toBeVisible()
+    await expect(page.getByRole('heading', { level: 1, name: /^Ciao/ })).toBeVisible()
+    const sezioni = page.getByRole('region', { name: 'Contenuti e impostazioni' })
+    await expect(sezioni.getByRole('link', { name: 'Avvisi', exact: true })).toBeVisible()
+    await expect(page.getByRole('link', { name: /Apri il sito/ })).toHaveAttribute('href', '/')
   })
 
   test('can navigate to list view', async () => {
