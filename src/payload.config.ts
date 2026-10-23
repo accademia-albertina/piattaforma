@@ -15,6 +15,7 @@ import { Corsi } from './collections/Corsi'
 import { Docenti } from './collections/Docenti'
 import { Navigazione } from './globals/Navigazione'
 import { migrations } from './migrations'
+import { seedCorsi } from './seed/corsi'
 import { seedDemo } from './seed/demo'
 
 const filename = fileURLToPath(import.meta.url)
@@ -83,7 +84,9 @@ export default buildConfig({
   sharp,
   // Anteprima online: al primo avvio carica i contenuti demo se il database è vuoto.
   onInit: async (payload) => {
-    if (process.env.SEED_DEMO === 'true') await seedDemo(payload)
+    if (process.env.SEED_DEMO !== 'true') return
+    await seedDemo(payload)
+    await seedCorsi(payload)
   },
   plugins: [],
 })
