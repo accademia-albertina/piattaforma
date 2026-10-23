@@ -1,7 +1,22 @@
 .header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 20;
   color: var(--color-on-brand);
+  transition: transform var(--duration-base) ease;
+}
+
+/* Scorrendo in giù l'header esce dallo schermo; ricompare scorrendo in su o con il focus. */
+.header[data-nascosto] {
+  transform: translateY(-100%);
+}
+
+/* Velo sopra la pagina quando il mega menu è aperto (sotto le barre dell'header). */
+.velo {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-overlay);
 }
 
 /* Sulla barra rossa il focus è bianco */
@@ -79,8 +94,12 @@
 .iconButton,
 .menuToggle {
   display: inline-flex;
+  flex-direction: column;
+  gap: var(--space-1);
   align-items: center;
   justify-content: center;
+  font: inherit;
+  text-decoration: none;
   min-width: var(--target-min);
   min-height: var(--target-min);
   padding: var(--space-1);
@@ -143,6 +162,16 @@
   transform: translateY(-10px) rotate(-45deg);
 }
 
+/* Su mobile le etichette restano solo per i lettori di schermo; su desktop si vedono. */
+.iconLabel {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* Mega menu: pannello bianco sopra il contenuto della pagina */
 .panel {
   position: absolute;
@@ -156,17 +185,73 @@
   box-shadow: var(--shadow-card);
 }
 
+.cerca {
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-4) 0;
+}
+
+.cercaLabel {
+  font-weight: var(--font-weight-semibold);
+}
+
+.cercaRiga {
+  display: flex;
+  max-width: 40rem;
+}
+
+.cercaInput {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-control);
+  border-inline-end: 0;
+  border-radius: 0;
+}
+
+.cercaInvia {
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-4);
+  font: inherit;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-on-brand);
+  background: var(--color-brand-strong);
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.cercaInvia:hover {
+  background: var(--color-brand-dark);
+}
+
+.cercaInput:focus-visible,
+.cercaInvia:focus-visible,
+.groupToggle:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
 .megaMenu {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
-  gap: var(--space-5) var(--gap);
+  gap: 0 var(--gap);
   padding-block: var(--space-5) var(--space-6);
 }
 
 .column {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+}
+
+/* Su mobile “In evidenza” resta aperta sopra i gruppi a fisarmonica. */
+.column:first-child {
+  gap: var(--space-3);
+  margin-block-end: var(--space-4);
 }
 
 .group {
@@ -184,6 +269,32 @@
 .groupTitle {
   margin: 0;
   font-size: var(--font-size-lg);
+}
+
+/* Titolo-pulsante dei gruppi a fisarmonica (solo mobile). */
+.groupToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--target-min);
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  background: none;
+  border: 0;
+  border-block-end: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.groupToggle svg {
+  flex: none;
+  transition: transform var(--duration-fast) ease;
+}
+
+.groupToggle[aria-expanded='true'] svg {
+  transform: rotate(180deg);
 }
 
 .highlightList,
@@ -225,7 +336,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .burger span {
+  .header,
+  .burger span,
+  .groupToggle svg {
     transition: none;
   }
 }
@@ -239,7 +352,30 @@
     gap: var(--space-2);
   }
 
+  .iconButton,
+  .menuToggle {
+    min-width: 5.5rem;
+    padding-inline: var(--space-2);
+  }
+
+  .iconLabel {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    font-size: var(--font-size-xs);
+    line-height: 1;
+  }
+
   .megaMenu {
     grid-template-columns: 1.1fr repeat(5, 1fr);
+    row-gap: var(--space-5);
+  }
+
+  .column,
+  .column:first-child {
+    gap: var(--space-5);
+    margin-block-end: 0;
   }
 }

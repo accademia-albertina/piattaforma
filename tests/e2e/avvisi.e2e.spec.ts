@@ -124,7 +124,7 @@ test.describe('Avvisi', () => {
 
   test('la ricerca trova gli avvisi per titolo', async ({ page }) => {
     await page.goto(BASE)
-    await page.getByRole('link', { name: 'Cerca nel sito' }).click()
+    await page.getByRole('link', { name: 'Cerca', exact: true }).click()
     await page.getByLabel('Cosa cerchi?').fill('prova 1')
     await page.getByRole('button', { name: 'Cerca' }).click()
     await expect(page.getByRole('status')).toContainText('per “prova 1”')
