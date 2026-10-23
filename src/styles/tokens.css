@@ -5,42 +5,9 @@
  */
 
 @import './fonts.css';
+@import './colori.css';
 
 :root {
-  /* Colori del Design System */
-  --color-brand: #d14040; /* accento: 4,65 su bianco, 4,41 su surface → solo testo grande o elementi grafici */
-  --color-brand-strong: #a23130; /* istituzionale (header): bianco sopra 6,96 */
-  --color-brand-dark: #5b1b1b; /* top bar: bianco sopra 12,98 */
-  --color-footer: #1c3038; /* footer, come il sito attuale: bianco sopra 13,73 */
-  --color-footer-dark: #10191d; /* barra finale del footer: bianco sopra 17,81 */
-  --color-text: #12191d; /* 17,76 su bianco */
-  --color-heading: #202f37; /* 13,79 su bianco */
-  --color-link: #202f37;
-  --color-link-hover: #5f747f; /* era #657a85 (4,49, non AA): ora 4,89 su bianco, 4,65 su surface */
-  --color-text-muted: #5f747f;
-  --color-bg: #ffffff;
-  --color-surface: #f9f9f9;
-  --color-on-brand: #ffffff;
-
-  /* Bordi: quelli dei controlli devono avere almeno 3:1 sullo sfondo */
-  --color-border: #e1e6e9;
-  --color-border-control: #5f747f;
-
-  /* Stati */
-  --color-info-bg: #d8eaf6;
-  --color-info-text: #2b5a80; /* era #3a74a2 (4,05): ora 5,92 */
-  --color-success-bg: #e3f1e7;
-  --color-success-text: #1f6b3a; /* 5,59 */
-  --color-warning-bg: #fbf0d9;
-  --color-warning-text: #7a4f00; /* 6,30 */
-  --color-error-bg: #fbe5e5;
-  --color-error-text: #a23130; /* 5,78 */
-
-  /* Focus: visibile su ogni sfondo grazie al doppio anello */
-  --color-focus: #12191d;
-  --color-focus-contrast: #ffffff;
-  --focus-ring: 0 0 0 2px var(--color-focus-contrast), 0 0 0 5px var(--color-focus);
-
   /* Tipografia */
   --font-family: 'Albert Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-weight-regular: 400;

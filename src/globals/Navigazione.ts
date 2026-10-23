@@ -29,7 +29,8 @@ export const Navigazione: GlobalConfig = {
   label: 'Menu del sito',
   admin: {
     group: 'Impostazioni',
-    description: 'Le modifiche sono visibili sul sito appena salvi.',
+    description:
+      'Mega menu, barra in alto e link del footer. Le modifiche sono visibili sul sito appena salvi.',
   },
   hooks: {
     // Le pagine statiche si rigenerano con il menu nuovo.

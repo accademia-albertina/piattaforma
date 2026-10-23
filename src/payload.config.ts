@@ -32,6 +32,8 @@ export default buildConfig({
       titleSuffix: ' · Accademia Albertina',
       icons: [{ rel: 'icon', type: 'image/svg+xml', url: '/brand/stemma-albertina.svg' }],
     },
+    // Date in formato italiano (Payload di default usa “ottobre 22 2026, 5:34 PM”).
+    dateFormat: 'd MMMM yyyy, HH:mm',
     // Niente Gravatar: è un servizio esterno (privacy) e la CSP lo blocca.
     avatar: 'default',
     components: {
@@ -39,11 +41,21 @@ export default buildConfig({
         Logo: '/components/admin/Logo',
         Icon: '/components/admin/Icon',
       },
+      views: {
+        dashboard: { Component: '/components/admin/Dashboard' },
+      },
     },
   },
   i18n: {
     supportedLanguages: { it },
     fallbackLanguage: 'it',
+    // Correzioni alla traduzione italiana di Payload.
+    translations: {
+      it: {
+        general: { edit: 'Modifica' },
+        version: { saveDraft: 'Salva bozza' },
+      },
+    },
   },
   collections: [Pagine, Avvisi, Scuole, Media, Users],
   globals: [Navigazione],

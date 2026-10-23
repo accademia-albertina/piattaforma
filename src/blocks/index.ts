@@ -1,7 +1,7 @@
 import type { Block, Field } from 'payload'
 
 import { linkFields } from '@/fields/link'
-import { rowLabel } from '@/fields/rowLabel'
+import { etichettaBlocco, rowLabel } from '@/fields/rowLabel'
 
 /**
  * Blocchi con cui si compongono le pagine istituzionali.
@@ -18,6 +18,7 @@ const titoloFacoltativo: Field = {
 export const BloccoTesto: Block = {
   slug: 'testo',
   labels: { singular: 'Testo', plural: 'Testi' },
+  admin: etichettaBlocco('Testo'),
   interfaceName: 'BloccoTesto',
   fields: [{ name: 'testo', label: 'Testo', type: 'richText', required: true }],
 }
@@ -25,7 +26,7 @@ export const BloccoTesto: Block = {
 export const BloccoImmagine: Block = {
   slug: 'immagine',
   labels: { singular: 'Immagine', plural: 'Immagini' },
-  admin: rowLabel('didascalia', 'Immagine'),
+  admin: etichettaBlocco('Immagine'),
   interfaceName: 'BloccoImmagine',
   fields: [
     {
@@ -53,6 +54,7 @@ export const BloccoImmagine: Block = {
 export const BloccoGalleria: Block = {
   slug: 'galleria',
   labels: { singular: 'Galleria', plural: 'Gallerie' },
+  admin: etichettaBlocco('Galleria'),
   interfaceName: 'BloccoGalleria',
   fields: [
     titoloFacoltativo,
@@ -81,6 +83,7 @@ export const BloccoGalleria: Block = {
 export const BloccoLink: Block = {
   slug: 'link',
   labels: { singular: 'Elenco di link', plural: 'Elenchi di link' },
+  admin: etichettaBlocco('Elenco di link'),
   interfaceName: 'BloccoLink',
   fields: [
     titoloFacoltativo,
@@ -103,6 +106,7 @@ export const BloccoLink: Block = {
 export const BloccoFisarmonica: Block = {
   slug: 'fisarmonica',
   labels: { singular: 'Fisarmonica (domande e risposte)', plural: 'Fisarmoniche' },
+  admin: etichettaBlocco('Fisarmonica'),
   interfaceName: 'BloccoFisarmonica',
   fields: [
     titoloFacoltativo,
@@ -125,6 +129,7 @@ export const BloccoFisarmonica: Block = {
 export const BloccoContatti: Block = {
   slug: 'contatti',
   labels: { singular: 'Contatti', plural: 'Contatti' },
+  admin: etichettaBlocco('Contatti'),
   interfaceName: 'BloccoContatti',
   fields: [
     titoloFacoltativo,
@@ -155,6 +160,7 @@ export const BloccoContatti: Block = {
 export const BloccoAllegati: Block = {
   slug: 'allegati',
   labels: { singular: 'Allegati', plural: 'Allegati' },
+  admin: etichettaBlocco('Allegati'),
   interfaceName: 'BloccoAllegati',
   fields: [
     { ...titoloFacoltativo, defaultValue: 'Allegati' } as Field,

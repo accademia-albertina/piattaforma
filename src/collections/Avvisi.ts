@@ -31,6 +31,7 @@ export const Avvisi: CollectionConfig = {
   typescript: { interface: 'Avviso' },
   admin: {
     useAsTitle: 'titolo',
+    description: 'Comunicazioni per studenti e docenti, in /avvisi e in homepage.',
     defaultColumns: ['titolo', 'categorie', 'pubblicatoIl', '_status'],
     group: 'Contenuti',
     listSearchableFields: ['titolo', 'sommario'],

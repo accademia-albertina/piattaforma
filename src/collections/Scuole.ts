@@ -11,6 +11,7 @@ export const Scuole: CollectionConfig = {
   typescript: { interface: 'Scuola' },
   admin: {
     useAsTitle: 'nome',
+    description: 'Le scuole dell’Accademia, usate per filtrare gli avvisi.',
     defaultColumns: ['nome', 'sigla'],
     group: 'Didattica',
   },

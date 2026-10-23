@@ -80,6 +80,7 @@ export const Pagine: CollectionConfig = {
   typescript: { interface: 'Pagina' },
   admin: {
     useAsTitle: 'titolo',
+    description: 'Pagine istituzionali composte a blocchi, come Didattica o Ammissioni.',
     defaultColumns: ['titolo', 'percorso', 'updatedAt', '_status'],
     group: 'Contenuti',
     listSearchableFields: ['titolo', 'percorso'],
