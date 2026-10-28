@@ -102,7 +102,12 @@ export const Avvisi: CollectionConfig = {
       defaultValue: () => new Date().toISOString(),
       admin: {
         position: 'sidebar',
-        date: { pickerAppearance: 'dayAndTime', displayFormat: 'd MMM yyyy, HH:mm' },
+        date: {
+          pickerAppearance: 'dayAndTime',
+          displayFormat: 'd MMM yyyy, HH:mm',
+          timeFormat: 'HH:mm',
+          overrides: { timeCaption: 'Ora' },
+        },
       },
     },
     {

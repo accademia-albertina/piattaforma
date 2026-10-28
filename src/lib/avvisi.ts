@@ -2,7 +2,8 @@ import type { Where } from 'payload'
 
 import { CATEGORIA_LABELS, isCategoria, type CategoriaAvviso } from '@/access/avvisi'
 import type { Avviso, Scuola } from '@/payload-types'
-import { lexicalToText } from '@/utilities/lexicalText'
+import { senzaLink } from '@/utilities/autolink'
+import { lexicalToText, tronca } from '@/utilities/lexicalText'
 
 import { payloadClient } from './payload'
 
@@ -77,7 +78,9 @@ export async function trovaAvviso(slug: string) {
 }
 
 export function sommarioAvviso(avviso: Pick<Avviso, 'sommario' | 'contenuto'>): string {
-  return avviso.sommario?.trim() || lexicalToText(avviso.contenuto, 200)
+  // Gli indirizzi (moduli, Classroom) restano nel testo dell'avviso: nell'anteprima sono solo rumore.
+  const testo = avviso.sommario?.trim() || lexicalToText(avviso.contenuto, 2000)
+  return tronca(senzaLink(testo), 200)
 }
 
 export function categorieAvviso(avviso: Pick<Avviso, 'categorie'>) {

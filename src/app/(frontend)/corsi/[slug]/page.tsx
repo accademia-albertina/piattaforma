@@ -1,4 +1,5 @@
-import { RichText } from '@payloadcms/richtext-lexical/react'
+import { Testo } from '@/components/Testo/Testo'
+import { emailSpezzabile } from '@/utilities/email'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -108,7 +109,7 @@ export default async function CorsoPage({ params }: Props) {
           {corso.descrizione ? (
             <section aria-labelledby="obiettivi">
               <h2 id="obiettivi">Obiettivi e contenuti</h2>
-              <RichText data={corso.descrizione} className={styles.body} />
+              <Testo data={corso.descrizione} className={styles.body} />
             </section>
           ) : (
             <p className={styles.vuoto}>Il programma di questo corso non è ancora pubblicato.</p>
@@ -116,13 +117,13 @@ export default async function CorsoPage({ params }: Props) {
           {corso.bibliografia ? (
             <section aria-labelledby="bibliografia">
               <h2 id="bibliografia">Bibliografia</h2>
-              <RichText data={corso.bibliografia} className={styles.body} />
+              <Testo data={corso.bibliografia} className={styles.body} />
             </section>
           ) : null}
           {corso.altreInformazioni ? (
             <section aria-labelledby="altre-informazioni">
               <h2 id="altre-informazioni">Altre informazioni</h2>
-              <RichText data={corso.altreInformazioni} className={styles.body} />
+              <Testo data={corso.altreInformazioni} className={styles.body} />
             </section>
           ) : null}
         </div>
@@ -196,7 +197,7 @@ export default async function CorsoPage({ params }: Props) {
                     {d.email ? (
                       <>
                         {' '}
-                        <a href={`mailto:${d.email}`}>{d.email}</a>
+                        <a href={`mailto:${d.email}`}>{emailSpezzabile(d.email)}</a>
                       </>
                     ) : null}
                   </li>
