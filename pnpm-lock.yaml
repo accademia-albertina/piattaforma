@@ -7,6 +7,8 @@ settings:
 overrides:
   esbuild@<0.25.0: '>=0.25.0'
   dompurify: '>=3.4.16'
+  undici@>=7.0.0 <7.30.1: 7.30.1
+  happy-dom@>=17.0.0 <21.0.4: 21.0.4
 
 importers:
 
@@ -123,7 +125,7 @@ importers:
         version: 6.0.5(typescript@5.7.3)(vite@7.3.7(@types/node@22.19.9)(sass@1.77.4)(tsx@4.23.15))
       vitest:
         specifier: 4.0.18
-        version: 4.0.18(@types/node@22.19.9)(happy-dom@20.14.6)(jsdom@28.0.0)(sass@1.77.4)(tsx@4.23.15)
+        version: 4.0.18(@types/node@22.19.9)(happy-dom@21.0.4)(jsdom@28.0.0)(sass@1.77.4)(tsx@4.23.15)
 
 packages:
 
@@ -3108,8 +3110,8 @@ packages:
     resolution: {integrity: sha512-Chq1s4CY7jmh8gO2qvLIJyfCDIN+EHLFW/9iShnp1z8FjBQMoodWP1kDC36VAMXXIvAjj4ARa7ntfAV2BrjsbA==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
 
-  happy-dom@20.14.6:
-    resolution: {integrity: sha512-5DDsf4QmEIlRL6NkCv/fxSjYHHkZceL/IaYQdJc2h3G7DRTEai++VTjbfL0LB9geW2VrA3+vrjF3Efx+OTtX0Q==}
+  happy-dom@21.0.4:
+    resolution: {integrity: sha512-tFm+GaLBgo6o0awHnvHaNoraVo27qJ+2tZEtZ+cIa08hXbeitrxAJajLI05hsUy/2/YTKcUjQYzHe5mCcraLBw==}
     engines: {node: '>=20.0.0'}
 
   has-bigints@1.1.0:
@@ -4514,10 +4516,6 @@ packages:
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
-  undici@7.29.1:
-    resolution: {integrity: sha512-RYONW2MeafgYlkVOKYKkA/Ag7BmXqgIWCa8t1m0JcxrQg9pI9lEqRhAOruOBCbAohOa/gkCF+iPi9hrgvTzu6Q==}
-    engines: {node: '>=20.18.1'}
-
   undici@7.30.1:
     resolution: {integrity: sha512-03KrMbjIFDWQR5RNPrSw3bd1r12JpyFQl9/yxjUbJtqkjmllqC5lFjZh6ujeuJCKr8EOQvRW872Oy/az+nLYxg==}
     engines: {node: '>=20.18.1'}
@@ -4655,7 +4653,7 @@ packages:
       '@vitest/browser-preview': 4.0.18
       '@vitest/browser-webdriverio': 4.0.18
       '@vitest/ui': 4.0.18
-      happy-dom: '*'
+      happy-dom: 21.0.4
       jsdom: '*'
     peerDependenciesMeta:
       '@edge-runtime/vm':
@@ -5611,7 +5609,7 @@ snapshots:
   '@lexical/headless@0.50.0(typescript@5.7.3)':
     dependencies:
       '@lexical/internal': 0.50.0(typescript@5.7.3)
-      happy-dom: 20.14.6
+      happy-dom: 21.0.4
       lexical: 0.50.0(typescript@5.7.3)
     optionalDependencies:
       typescript: 5.7.3
@@ -7851,7 +7849,7 @@ snapshots:
 
   graphql@16.14.2: {}
 
-  happy-dom@20.14.6:
+  happy-dom@21.0.4:
     dependencies:
       '@types/node': 22.19.9
       '@types/whatwg-mimetype': 3.0.2
@@ -8787,7 +8785,7 @@ snapshots:
       sax: 1.6.1
       ts-essentials: 10.0.3(typescript@5.7.3)
       tsx: 4.23.15
-      undici: 7.29.1
+      undici: 7.30.1
       uuid: 13.0.2
       ws: 8.22.0
     transitivePeerDependencies:
@@ -9625,8 +9623,6 @@ snapshots:
 
   undici-types@6.21.0: {}
 
-  undici@7.29.1: {}
-
   undici@7.30.1: {}
 
   unist-util-is@6.0.1:
@@ -9774,7 +9770,7 @@ snapshots:
       sass: 1.77.4
       tsx: 4.23.15
 
-  vitest@4.0.18(@types/node@22.19.9)(happy-dom@20.14.6)(jsdom@28.0.0)(sass@1.77.4)(tsx@4.23.15):
+  vitest@4.0.18(@types/node@22.19.9)(happy-dom@21.0.4)(jsdom@28.0.0)(sass@1.77.4)(tsx@4.23.15):
     dependencies:
       '@vitest/expect': 4.0.18
       '@vitest/mocker': 4.0.18(vite@7.3.7(@types/node@22.19.9)(sass@1.77.4)(tsx@4.23.15))
@@ -9798,7 +9794,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.19.9
-      happy-dom: 20.14.6
+      happy-dom: 21.0.4
       jsdom: 28.0.0
     transitivePeerDependencies:
       - jiti
