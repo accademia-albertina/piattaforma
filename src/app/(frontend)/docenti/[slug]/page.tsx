@@ -1,4 +1,5 @@
-import { RichText } from '@payloadcms/richtext-lexical/react'
+import { Testo } from '@/components/Testo/Testo'
+import { emailSpezzabile } from '@/utilities/email'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -124,7 +125,7 @@ export default async function DocentePage({ params }: Props) {
           {docente.biografia ? (
             <section aria-labelledby="biografia">
               <h2 id="biografia">Biografia</h2>
-              <RichText data={docente.biografia} className={styles.body} />
+              <Testo data={docente.biografia} className={styles.body} />
             </section>
           ) : null}
         </div>
@@ -138,7 +139,7 @@ export default async function DocentePage({ params }: Props) {
               <div>
                 <dt>Email</dt>
                 <dd>
-                  <a href={`mailto:${docente.email}`}>{docente.email}</a>
+                  <a href={`mailto:${docente.email}`}>{emailSpezzabile(docente.email)}</a>
                 </dd>
               </div>
             ) : null}

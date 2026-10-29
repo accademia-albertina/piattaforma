@@ -1,4 +1,5 @@
-import { RichText } from '@payloadcms/richtext-lexical/react'
+import { Testo } from '@/components/Testo/Testo'
+import { emailSpezzabile } from '@/utilities/email'
 import Link from 'next/link'
 
 import { risolviLink } from '@/lib/link'
@@ -63,7 +64,7 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
   const id = `b${b.id ?? i}`
   switch (b.blockType) {
     case 'testo':
-      return <RichText data={b.testo} className={`${styles.blocco} ${styles.testo}`} />
+      return <Testo data={b.testo} className={`${styles.blocco} ${styles.testo}`} />
 
     case 'immagine': {
       const m = media(b.immagine)
@@ -138,7 +139,7 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
             voci={b.voci.map((v, k) => ({
               id: v.id ?? `${id}-${k}`,
               titolo: v.titolo,
-              contenuto: <RichText data={v.testo} />,
+              contenuto: <Testo data={v.testo} />,
             }))}
           />
         </Sezione>
@@ -157,7 +158,7 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
                     <>
                       <dt>Email</dt>
                       <dd>
-                        <a href={`mailto:${c.email}`}>{c.email}</a>
+                        <a href={`mailto:${c.email}`}>{emailSpezzabile(c.email)}</a>
                       </dd>
                     </>
                   ) : null}

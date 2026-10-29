@@ -12,7 +12,11 @@ export function lexicalToText(value: unknown, max = 200): string {
       parts.push(' ')
   }
   walk(root)
-  const text = parts.join('').replace(/\s+/g, ' ').trim()
+  return tronca(parts.join('').replace(/\s+/g, ' ').trim(), max)
+}
+
+/** Accorcia un testo all'ultima parola intera entro `max` caratteri. */
+export function tronca(text: string, max: number): string {
   if (text.length <= max) return text
   return `${text.slice(0, max).replace(/\s+\S*$/, '')}…`
 }

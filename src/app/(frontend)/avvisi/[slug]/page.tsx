@@ -1,4 +1,4 @@
-import { RichText } from '@payloadcms/richtext-lexical/react'
+import { Testo } from '@/components/Testo/Testo'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -89,7 +89,7 @@ export default async function AvvisoPage({ params }: Props) {
         </ul>
       </header>
 
-      {avviso.contenuto ? <RichText data={avviso.contenuto} className={styles.body} /> : null}
+      {avviso.contenuto ? <Testo data={avviso.contenuto} className={styles.body} /> : null}
 
       <Attachments items={allegati} />
 
