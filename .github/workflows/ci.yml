@@ -48,7 +48,8 @@ jobs:
 
   accessibilita:
     name: Test end-to-end e accessibilità
-    runs-on: ubuntu-latest
+    # ubuntu-latest è passato a 26.04, che Playwright non supporta ancora
+    runs-on: ubuntu-24.04
     services:
       postgres:
         image: postgres:16
