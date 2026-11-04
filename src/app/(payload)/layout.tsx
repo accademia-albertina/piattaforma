@@ -2,12 +2,23 @@
 /* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
 import config from '@payload-config'
 import '@payloadcms/next/css'
+import type { Viewport } from 'next'
 import type { ServerFunctionClient } from 'payload'
 import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 import React from 'react'
 
 import { importMap } from './admin/importMap.js'
 import './custom.scss'
+
+// Aggiunta a mano: pannello a tutto schermo su iPhone (aree sicure) e barra del browser
+// dello stesso colore del pannello, chiaro o scuro.
+export const viewport: Viewport = {
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#141414' },
+  ],
+}
 
 type Args = {
   children: React.ReactNode
