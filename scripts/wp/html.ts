@@ -1,16 +1,18 @@
 /** Pulizia dell'HTML di WordPress prima della conversione in Lexical. */
+import { JSDOM } from 'jsdom'
+
 // Gli URL dei file puntano ancora al vecchio dominio di sviluppo del sito WP
 export const dominio = (s: string) =>
   s.replace(/https?:\/\/(www\.)?newalbertina\.eu/g, 'https://albertina-academy.it')
 
-/** Toglie i commenti HTML ripetendo finché non ne restano (un solo passaggio non basta per CodeQL). */
+/** Toglie i commenti HTML (blocchi Gutenberg) con un parser vero, non con espressioni regolari. */
 function senzaCommenti(html: string) {
-  let prima: string
-  do {
-    prima = html
-    html = html.replace(/<!--[\s\S]*?-->/g, '')
-  } while (html !== prima)
-  return html.replace(/<!--|-->/g, '')
+  const { document, NodeFilter } = new JSDOM(`<body>${html}</body>`).window
+  const it = document.createNodeIterator(document.body, NodeFilter.SHOW_COMMENT)
+  const commenti: Node[] = []
+  for (let n = it.nextNode(); n; n = it.nextNode()) commenti.push(n)
+  for (const c of commenti) c.parentNode?.removeChild(c)
+  return document.body.innerHTML
 }
 
 export function pulisci(html: string) {
