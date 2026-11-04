@@ -13,6 +13,12 @@ import type { Payload } from 'payload'
 
 import type { Avviso } from '@/payload-types'
 
+import { slugify } from '@/utilities/slugify'
+
+import { SCUOLE } from './scuole-wp'
+
+const MAX_TITOLO = 160
+
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 type AvvisoWp = {
@@ -24,20 +30,6 @@ type AvvisoWp = {
   categorie: Avviso['categorie']
   scuole: string[]
   contenuto: Avviso['contenuto']
-}
-
-/** Chiavi dei tag WP → nome della scuola nel pannello. */
-const SCUOLE: Record<string, string> = {
-  pittura: 'Pittura',
-  scultura: 'Scultura',
-  decorazione: 'Decorazione',
-  grafica: "Grafica d'Arte",
-  scenografia: 'Scenografia',
-  nta: "Nuove Tecnologie dell'Arte",
-  didattica: "Didattica dell'Arte",
-  comunicazione: 'Comunicazione e Valorizzazione del Patrimonio Artistico Contemporaneo',
-  pai: "Progettazione Artistica per l'Impresa",
-  cinema: 'Cinema, Fotografia e Audiovisivo',
 }
 
 export async function importaAvvisiWp(payload: Payload) {
@@ -54,8 +46,11 @@ export async function importaAvvisiWp(payload: Payload) {
   })
   const slug = new Set(esistenti.docs.map((d) => d.slug))
   const titoli = new Set(esistenti.docs.map((d) => d.titolo.trim().toLowerCase()))
+  // Titoli e slug troppo lunghi vengono accorciati al salvataggio: si confrontano già accorciati,
+  // altrimenti a ogni avvio si creerebbero doppioni.
   const mancanti = avvisi.filter(
-    (a) => !slug.has(a.slug) && !titoli.has(a.titolo.trim().toLowerCase()),
+    (a) =>
+      !slug.has(slugify(a.slug)) && !titoli.has(a.titolo.slice(0, MAX_TITOLO).trim().toLowerCase()),
   )
   if (mancanti.length === 0) return
 
@@ -71,7 +66,7 @@ export async function importaAvvisiWp(payload: Payload) {
         draft: false,
         context: { importazione: true },
         data: {
-          titolo: a.titolo.slice(0, 160),
+          titolo: a.titolo.slice(0, MAX_TITOLO),
           slug: a.slug,
           sommario: a.sommario ?? undefined,
           categorie: a.categorie,

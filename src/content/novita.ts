@@ -16,6 +16,7 @@ export const NOVITA: Novita[] = [
     punti: [
       'Importati i 1.077 avvisi del sito attuale, con gli stessi indirizzi e gli allegati come link.',
       'Pagina docente ordinata anche quando manca la biografia: contatti in alto, corsi in righe.',
+      'Profili docenti dal sito attuale: biografie, orari di ricevimento e link al curriculum.',
       'Più aria tra le voci del menu del pannello.',
       'Icone del sito e della web app ricavate dallo stemma ufficiale; una sola ricerca nell’header.',
     ],

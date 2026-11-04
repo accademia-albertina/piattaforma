@@ -17,6 +17,7 @@ import { Navigazione } from './globals/Navigazione'
 import { migrations } from './migrations'
 import { seedCorsi } from './seed/corsi'
 import { importaAvvisiWp } from './seed/avvisi-wp'
+import { importaDocentiWp } from './seed/docenti-wp'
 import { seedDemo } from './seed/demo'
 
 const filename = fileURLToPath(import.meta.url)
@@ -103,6 +104,9 @@ export default buildConfig({
     // senza ritardare l'avvio (l'hosting controlla /salute dopo pochi secondi).
     void importaAvvisiWp(payload).catch((e) =>
       payload.logger.error(`Importazione avvisi non riuscita: ${(e as Error).message}`),
+    )
+    void importaDocentiWp(payload).catch((e) =>
+      payload.logger.error(`Importazione profili docenti non riuscita: ${(e as Error).message}`),
     )
   },
   plugins: [],
