@@ -233,57 +233,6 @@
   }
 }
 
-.cerca {
-  display: grid;
-  gap: var(--space-2);
-  padding-block: var(--space-4) 0;
-}
-
-.cercaLabel {
-  font-weight: var(--font-weight-semibold);
-}
-
-.cercaRiga {
-  display: flex;
-  max-width: 40rem;
-}
-
-.cercaInput {
-  flex: 1;
-  min-width: 0;
-  min-height: var(--target-min);
-  padding: var(--space-2) var(--space-3);
-  font: inherit;
-  color: var(--color-text);
-  background: var(--color-bg);
-  border: 1px solid var(--color-border-control);
-  border-inline-end: 0;
-  border-radius: 0;
-}
-
-.cercaInvia {
-  min-height: var(--target-min);
-  padding: var(--space-2) var(--space-4);
-  font: inherit;
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-on-brand);
-  background: var(--color-ink);
-  border: 0;
-  border-radius: 0;
-  cursor: pointer;
-}
-
-.cercaInvia:hover {
-  background: var(--color-ink-hover);
-}
-
-.cercaInput:focus-visible,
-.cercaInvia:focus-visible,
-.groupToggle:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
-
 .megaMenu {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));

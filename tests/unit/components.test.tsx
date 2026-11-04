@@ -96,15 +96,14 @@ describe('componenti accessibili', () => {
     expect(toggle.getAttribute('aria-expanded')).toBe('false')
   })
 
-  it('SiteHeader: etichette delle icone, ricerca nel menu, chiusura con clic fuori', async () => {
+  it('SiteHeader: etichette delle icone, una sola ricerca, chiusura con clic fuori', async () => {
     const { container } = render(<SiteHeader currentHref="/" />)
     expect(screen.getByRole('link', { name: 'Area riservata' }).getAttribute('href')).toBe('/admin')
     expect(screen.getByRole('link', { name: 'Cerca' }).getAttribute('href')).toBe('/cerca')
     const toggle = screen.getByRole('button', { name: 'Menu' })
     fireEvent.click(toggle)
-    const ricerca = screen.getByRole('search')
-    expect(ricerca.getAttribute('action')).toBe('/cerca')
-    expect(screen.getByRole('searchbox', { name: 'Cerca nel sito' }).getAttribute('name')).toBe('q')
+    // La ricerca si apre solo dall'icona Cerca: nel menu non c'è un secondo campo
+    expect(screen.queryByRole('search')).toBeNull()
     expect(await axeViolations(container)).toEqual([])
     const velo = container.querySelector('[aria-hidden="true"][class*="velo"]')
     expect(velo).toBeTruthy()

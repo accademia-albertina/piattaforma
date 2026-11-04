@@ -168,30 +168,6 @@ export function SiteHeader({
           )}
 
           <DisclosurePanel className={styles.panel}>
-            <form
-              action="/cerca"
-              method="get"
-              role="search"
-              className={`container ${styles.cerca}`}
-            >
-              <label htmlFor="menu-cerca" className={styles.cercaLabel}>
-                Cerca nel sito
-              </label>
-              <div className={styles.cercaRiga}>
-                <input
-                  id="menu-cerca"
-                  name="q"
-                  type="search"
-                  minLength={2}
-                  maxLength={100}
-                  required
-                  className={styles.cercaInput}
-                />
-                <button type="submit" className={styles.cercaInvia}>
-                  Cerca
-                </button>
-              </div>
-            </form>
             <nav aria-label="Principale" className={`container ${styles.megaMenu}`}>
               <div className={styles.column}>
                 <h2 className={styles.highlightTitle}>In evidenza</h2>
