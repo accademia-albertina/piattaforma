@@ -23,6 +23,12 @@
   color: var(--theme-elevation-600);
 }
 
+.collegamenti {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
 .sito {
   display: inline-flex;
   gap: 0.25em;

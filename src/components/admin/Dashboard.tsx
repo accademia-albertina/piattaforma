@@ -137,10 +137,16 @@ export default async function Dashboard({
           <h1 className={styles.saluto}>Ciao{nome ? `, ${nome}` : ''}</h1>
           {ruoli.length > 0 && <p className={styles.ruoli}>{ruoli.join(' · ')}</p>}
         </div>
-        <a className={styles.sito} href="/" target="_blank" rel="noopener">
-          Apri il sito <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
-          <span className={styles.nascosto}> (si apre in una nuova scheda)</span>
-        </a>
+        <div className={styles.collegamenti}>
+          <a className={styles.sito} href="/novita" target="_blank" rel="noopener">
+            Novità <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
+            <span className={styles.nascosto}> (si apre in una nuova scheda)</span>
+          </a>
+          <a className={styles.sito} href="/" target="_blank" rel="noopener">
+            Apri il sito <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
+            <span className={styles.nascosto}> (si apre in una nuova scheda)</span>
+          </a>
+        </div>
       </div>
 
       {azioni.length > 0 && (
