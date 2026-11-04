@@ -34,7 +34,8 @@ export default buildConfig({
     meta: {
       titleSuffix: ' · Accademia Albertina',
       icons: [
-        { rel: 'icon', type: 'image/svg+xml', url: '/brand/stemma-albertina.svg' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', url: '/brand/stemma-favicon-32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '192x192', url: '/brand/stemma-favicon-192.png' },
         { rel: 'apple-touch-icon', url: '/pannello/icona-180.png', sizes: '180x180' },
       ],
       // Web app su iPhone/Android: da Safari “Aggiungi alla schermata Home” si apre a schermo intero.

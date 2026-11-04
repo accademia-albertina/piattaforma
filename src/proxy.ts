@@ -39,6 +39,10 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  // Tutto tranne il controllo di salute usato dall'hosting.
-  matcher: ['/((?!salute$).*)'],
+  // Tutto tranne il controllo di salute usato dall'hosting e le icone/manifest: iPhone e
+  // browser li scaricano senza password, e senza questa eccezione l'icona della schermata
+  // Home diventa una lettera su fondo colorato. Sono file pubblici, nessun dato riservato.
+  matcher: [
+    '/((?!salute$|pannello/|brand/|icon\\.png|apple-icon\\.png|apple-touch-icon|favicon\\.ico).*)',
+  ],
 }
