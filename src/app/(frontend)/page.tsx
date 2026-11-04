@@ -1,14 +1,26 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { Alert, AvvisoCard, HeroSlider } from '@/components'
-import { avvisiInEvidenza, categorieAvviso, sommarioAvviso, ultimiAvvisi } from '@/lib/avvisi'
+import {
+  avvisiInEvidenza,
+  categorieAvviso,
+  sommarioAvviso,
+  trovaScuole,
+  ultimiAvvisi,
+} from '@/lib/avvisi'
+import { IMMAGINI_SCUOLE } from '@/lib/immagini-scuole'
 
 import styles from './home.module.css'
 
 export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
-  const [evidenza, avvisi] = await Promise.all([avvisiInEvidenza(5), ultimiAvvisi(6)])
+  const [evidenza, avvisi, scuole] = await Promise.all([
+    avvisiInEvidenza(5),
+    ultimiAvvisi(6),
+    trovaScuole(),
+  ])
 
   return (
     <>
@@ -50,6 +62,36 @@ export default async function HomePage() {
             <p>Non ci sono avvisi pubblicati.</p>
           )}
         </section>
+
+        {scuole.length > 0 && (
+          <section aria-labelledby="scuole" className={styles.section}>
+            <div className={styles.sectionHead}>
+              <h2 id="scuole">Le scuole</h2>
+              <Link href="/corsi">Tutti i corsi</Link>
+            </div>
+            <ul className={styles.scuole}>
+              {scuole.map((s) => {
+                const img = IMMAGINI_SCUOLE[s.slug ?? '']
+                return (
+                  <li key={s.id}>
+                    <Link href={`/corsi?scuola=${s.slug}`} className={styles.scuola}>
+                      {img && (
+                        <Image
+                          src={img}
+                          alt=""
+                          sizes="(min-width: 75rem) 20vw, (min-width: 40rem) 33vw, 50vw"
+                          placeholder="blur"
+                          className={styles.scuolaImg}
+                        />
+                      )}
+                      <span className={styles.scuolaNome}>{s.nome}</span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </section>
+        )}
 
         <Alert tone="info" title="Sito in costruzione">
           <p>
