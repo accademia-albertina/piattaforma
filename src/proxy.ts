@@ -43,6 +43,6 @@ export const config = {
   // browser li scaricano senza password, e senza questa eccezione l'icona della schermata
   // Home diventa una lettera su fondo colorato. Sono file pubblici, nessun dato riservato.
   matcher: [
-    '/((?!salute$|pannello/|brand/|icon\\.png|apple-icon\\.png|apple-touch-icon|favicon\\.ico).*)',
+    '/((?!salute$|pannello/|brand/|icon\\.png|apple-icon\\.png|apple-touch-icon|favicon\\.ico|opengraph-image).*)',
   ],
 }

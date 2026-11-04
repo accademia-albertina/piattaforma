@@ -12,6 +12,17 @@ export type Novita = {
 export const NOVITA: Novita[] = [
   {
     data: '2026-11-04',
+    titolo: 'Immagini e pagina 404',
+    punti: [
+      'Foto dei docenti caricate dal sito attuale.',
+      'In homepage la sezione “Le scuole”, con le immagini di repertorio scelte per ogni scuola.',
+      'Immagine di anteprima quando si condivide un link del sito.',
+      'Nuova pagina 404 con ricerca e link alle pagine più utili.',
+    ],
+    pr: [35],
+  },
+  {
+    data: '2026-11-04',
     titolo: 'Contenuti veri e rifiniture',
     punti: [
       'Importati i 1.077 avvisi del sito attuale, con gli stessi indirizzi e gli allegati come link.',

@@ -39,3 +39,66 @@
 .grid > li > * {
   flex: 1;
 }
+
+/* ——— Le scuole: riquadri con immagine di repertorio ——— */
+.scuole {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .scuole {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 75rem) {
+  .scuole {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.scuola {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.scuolaImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: filter var(--duration-base) var(--ease-out);
+}
+
+.scuolaNome {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color var(--duration-base);
+}
+
+.scuola:hover .scuolaNome,
+.scuola:focus-visible .scuolaNome {
+  text-decoration-color: currentColor;
+}
+
+.scuola:hover .scuolaImg {
+  filter: brightness(0.92);
+}
+
+.scuola:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+}
