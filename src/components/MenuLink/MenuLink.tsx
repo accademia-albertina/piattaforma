@@ -1,3 +1,4 @@
+import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 
 import type { VoceMenu } from '@/lib/navigazione'
@@ -16,7 +17,7 @@ export function MenuLink({
     return (
       <a href={voce.href} className={className} target="_blank" rel="noopener noreferrer">
         {voce.label}
-        <span aria-hidden="true">↗</span>
+        <ArrowUpRight size={14} strokeWidth={1.75} aria-hidden />
         <span className="visually-hidden"> (si apre in una nuova scheda)</span>
       </a>
     )

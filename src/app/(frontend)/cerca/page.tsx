@@ -38,7 +38,9 @@ export default async function CercaPage({ searchParams }: Props) {
             maxLength={100}
             required
           />
-          <button type="submit">Cerca</button>
+          <button type="submit" className="btn btn-primario">
+            Cerca
+          </button>
         </div>
       </form>
 

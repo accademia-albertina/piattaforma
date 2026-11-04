@@ -12,12 +12,57 @@
   --style-radius-l: 0;
 }
 
-// Pulsante principale (Salva, Pubblica, Crea) nel rosso istituzionale: bianco sopra 6,96:1.
-.btn--style-primary:not(.btn--disabled) {
-  --color: var(--color-on-brand);
-  --bg-color: var(--color-brand-strong);
-  --hover-bg: var(--color-brand-dark);
-  --hover-color: var(--color-on-brand);
+// Pulsante principale (Salva, Pubblica, Crea) scuro, mai rosso: in UX il rosso indica
+// un'azione distruttiva. Bianco su #202f37: 13,79:1. Nel tema scuro resta quello di Payload.
+html[data-theme='light'] .btn--style-primary:not(.btn--disabled) {
+  --color: #fff;
+  --bg-color: var(--color-ink);
+  --hover-bg: var(--color-ink-hover);
+  --hover-color: #fff;
+}
+
+// Pagina di accesso: logo misurato, titolo e occhiello come nel sito.
+.login__brand,
+.forgot-password__brand,
+.create-first-user__brand {
+  margin-bottom: calc(var(--base) * 1.5);
+
+  .logo-accesso {
+    display: block;
+    width: 176px;
+    height: auto;
+  }
+}
+
+html[data-theme='dark'] .logo-accesso {
+  // Il logo ha il testo nero: nel tema scuro si usa la versione chiara
+  content: url('/brand/logo-albertina-bianco.svg');
+}
+
+.prima-del-login {
+  margin-bottom: calc(var(--base) * 1.25);
+
+  &__occhiello {
+    margin: 0 0 calc(var(--base) / 3);
+    color: var(--theme-elevation-650);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__titolo {
+    margin: 0 0 calc(var(--base) / 3);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  &__testo {
+    margin: 0;
+    color: var(--theme-elevation-650);
+  }
 }
 
 // Intestazione dei blocchi delle pagine (componente BlockLabel).

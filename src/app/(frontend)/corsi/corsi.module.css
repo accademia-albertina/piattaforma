@@ -64,26 +64,9 @@
 }
 
 .field input:focus-visible,
-.field select:focus-visible,
-.apply:focus-visible {
+.field select:focus-visible {
   outline: none;
   box-shadow: var(--focus-ring);
-}
-
-.apply {
-  min-height: var(--target-min);
-  padding: var(--space-2) var(--space-5);
-  border: 0;
-  border-radius: 0;
-  background: var(--color-brand-strong);
-  color: var(--color-on-brand);
-  font: inherit;
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-}
-
-.apply:hover {
-  background: var(--color-brand-dark);
 }
 
 .count {

@@ -93,7 +93,7 @@ export default async function CorsiPage({ searchParams }: Props) {
             ))}
           </select>
         </div>
-        <button type="submit" className={styles.apply}>
+        <button type="submit" className="btn btn-primario">
           Cerca
         </button>
       </form>

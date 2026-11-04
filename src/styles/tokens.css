@@ -15,17 +15,22 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
+  --font-size-2xs: 0.75rem; /* 12: etichette maiuscole */
   --font-size-xs: 0.875rem; /* 14 */
   --font-size-sm: 1rem; /* 16 */
   --font-size-md: 1.0625rem; /* 17: testo base */
   --font-size-lg: 1.25rem; /* 20 */
   --font-size-xl: 1.5rem; /* 24 */
-  --font-size-2xl: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem); /* 28→36 */
-  --font-size-3xl: clamp(2.125rem, 1.6rem + 2vw, 3rem); /* 34→48 */
+  --font-size-2xl: clamp(1.625rem, 1.3rem + 1.3vw, 2.25rem); /* 26→36 */
+  --font-size-3xl: clamp(2.125rem, 1.4rem + 2.8vw, 3.5rem); /* 34→56 */
+  --font-size-display: clamp(2.375rem, 1.4rem + 3.8vw, 4rem); /* 38→64: titoli di pagina e hero */
+
+  --letter-spacing-tight: -0.015em; /* titoli grandi */
+  --letter-spacing-caps: 0.08em; /* etichette maiuscole */
 
   --line-height-tight: 1.2;
   --line-height-snug: 1.35;
-  --line-height-body: 1.5;
+  --line-height-body: 1.6;
   --measure: 70ch;
 
   /* Spaziature (scala 4/8) */
@@ -49,8 +54,15 @@
   --radius-md: 0;
   --radius-pill: 999px;
   --shadow-card: 0 1px 2px rgb(18 25 29 / 0.06), 0 4px 12px rgb(18 25 29 / 0.06);
-  --duration-fast: 120ms;
-  --duration-base: 200ms;
+  --shadow-header: 0 1px 0 rgb(0 0 0 / 0.08), 0 6px 18px rgb(18 25 29 / 0.18);
+  --duration-fast: 140ms;
+  --duration-base: 240ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Icone (Lucide): tratto sottile, dimensioni fisse */
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
   --target-min: 44px; /* area minima dei controlli touch */
 }
 

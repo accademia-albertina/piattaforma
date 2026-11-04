@@ -8,6 +8,7 @@ import {
   Blocchi,
   Breadcrumbs,
   Button,
+  FiltriSchede,
   Fisarmonica,
   HeroSlider,
   Pagination,
@@ -52,6 +53,22 @@ describe('componenti accessibili', () => {
 
   it('Tag link non ha violazioni axe', async () => {
     const { container } = render(<Tag href="/avvisi?categoria=esami">Esami</Tag>)
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('FiltriSchede: la scheda attiva è la pagina corrente', async () => {
+    const { container } = render(
+      <FiltriSchede
+        label="Categorie"
+        schede={[
+          { label: 'Tutte', href: '/avvisi', attiva: true },
+          { label: 'Esami', href: '/avvisi?categoria=esami' },
+        ]}
+      />,
+    )
+    expect(screen.getByRole('navigation', { name: 'Categorie' })).toBeTruthy()
+    expect(screen.getByRole('link', { name: 'Tutte' }).getAttribute('aria-current')).toBe('page')
+    expect(screen.getByRole('link', { name: 'Esami' }).getAttribute('aria-current')).toBeNull()
     expect(await axeViolations(container)).toEqual([])
   })
 
