@@ -19,7 +19,7 @@ export const NOVITA: Novita[] = [
       'Immagine di anteprima quando si condivide un link del sito.',
       'Nuova pagina 404 con ricerca e link alle pagine più utili.',
     ],
-    pr: [35],
+    pr: [36],
   },
   {
     data: '2026-11-04',
