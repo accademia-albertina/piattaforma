@@ -16,6 +16,7 @@ import { Docenti } from './collections/Docenti'
 import { Navigazione } from './globals/Navigazione'
 import { migrations } from './migrations'
 import { seedCorsi } from './seed/corsi'
+import { importaAvvisiWp } from './seed/avvisi-wp'
 import { seedDemo } from './seed/demo'
 
 const filename = fileURLToPath(import.meta.url)
@@ -98,6 +99,11 @@ export default buildConfig({
     if (process.env.SEED_DEMO !== 'true') return
     await seedDemo(payload)
     await seedCorsi(payload)
+    // Gli avvisi del sito attuale sono più di mille: si importano in background,
+    // senza ritardare l'avvio (l'hosting controlla /salute dopo pochi secondi).
+    void importaAvvisiWp(payload).catch((e) =>
+      payload.logger.error(`Importazione avvisi non riuscita: ${(e as Error).message}`),
+    )
   },
   plugins: [],
 })

@@ -98,7 +98,8 @@ export default async function DocentePage({ params }: Props) {
         </div>
       </header>
 
-      <div className={styles.layout}>
+      {/* Senza biografia la scheda contatti va in alto, in orizzontale: niente colonna vuota */}
+      <div className={styles.layout} data-senza-bio={docente.biografia ? undefined : true}>
         <div className={styles.main}>
           <section aria-labelledby="corsi-correnti">
             <h2 id="corsi-correnti">Corsi A.A. {anno}</h2>
