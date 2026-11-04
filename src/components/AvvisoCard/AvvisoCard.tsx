@@ -26,14 +26,14 @@ export function AvvisoCard({
   const Heading = `h${headingLevel}` as const
   return (
     <article className={styles.card}>
+      <p className={styles.meta}>
+        <time dateTime={data}>{formatData(data)}</time>
+      </p>
       <Heading className={styles.title}>
         <Link href={href} className={styles.link}>
           {titolo}
         </Link>
       </Heading>
-      <p className={styles.meta}>
-        <time dateTime={data}>{formatData(data)}</time>
-      </p>
       {sommario ? <p className={styles.summary}>{sommario}</p> : null}
       {categorie.length > 0 ? (
         <ul className={styles.tags} aria-label="Categorie">

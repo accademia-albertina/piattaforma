@@ -24,37 +24,32 @@ export function useMediaQuery(query: string, serverValue: boolean): boolean {
   )
 }
 
-/** Pixel da scorrere prima che l'header possa nascondersi. */
-const SOGLIA = 200
-/** Movimenti più piccoli vengono ignorati (tremolio del trackpad). */
-const TOLLERANZA = 8
+/** Pixel da scorrere prima che la barra rossa diventi compatta. */
+const SOGLIA = 48
 
 /**
- * Header che si nasconde scorrendo in giù e ricompare scorrendo in su.
- * Restituisce lo stato e una funzione per farlo ricomparire (es. quando riceve il focus).
+ * Vero quando la pagina è stata scorsa oltre la soglia: l'header si fa più basso
+ * (logo più piccolo, meno spazio) con una transizione.
  */
-export function useNascondiScorrendo(): [boolean, () => void] {
-  const [nascosto, setNascosto] = useState(false)
+export function useCompatto(): boolean {
+  const [compatto, setCompatto] = useState(false)
 
   useEffect(() => {
-    let ultimo = window.scrollY
     let inAttesa = false
+    const aggiorna = () => {
+      inAttesa = false
+      // Isteresi: evita lo sfarfallio quando ci si ferma proprio sulla soglia
+      setCompatto((prima) => (prima ? window.scrollY > SOGLIA / 2 : window.scrollY > SOGLIA))
+    }
     const onScroll = () => {
       if (inAttesa) return
       inAttesa = true
-      requestAnimationFrame(() => {
-        const y = window.scrollY
-        const delta = y - ultimo
-        if (Math.abs(delta) > TOLLERANZA) {
-          setNascosto(delta > 0 && y > SOGLIA)
-          ultimo = y
-        }
-        inAttesa = false
-      })
+      requestAnimationFrame(aggiorna)
     }
+    aggiorna()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  return [nascosto, () => setNascosto(false)]
+  return compatto
 }

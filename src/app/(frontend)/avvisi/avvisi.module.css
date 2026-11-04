@@ -9,28 +9,6 @@
   margin-bottom: var(--space-5);
 }
 
-.chips {
-  display: flex;
-  gap: var(--space-2);
-  margin: 0;
-  padding: 0 0 var(--space-2);
-  list-style: none;
-  /* Su mobile i filtri scorrono in orizzontale invece di occupare più righe */
-  overflow-x: auto;
-  scrollbar-width: thin;
-}
-
-.chips > li {
-  flex: none;
-}
-
-@media (min-width: 48rem) {
-  .chips {
-    flex-wrap: wrap;
-    overflow-x: visible;
-  }
-}
-
 .schoolForm {
   display: flex;
   flex-wrap: wrap;
@@ -51,23 +29,6 @@
   background: var(--color-bg);
   color: var(--color-text);
   font: inherit;
-}
-
-.apply {
-  min-height: var(--target-min);
-  padding: var(--space-2) var(--space-4);
-  border: 2px solid var(--color-heading);
-  border-radius: var(--radius-sm);
-  background: var(--color-bg);
-  color: var(--color-heading);
-  font: inherit;
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-}
-
-.apply:hover {
-  background: var(--color-heading);
-  color: var(--color-bg);
 }
 
 .count {

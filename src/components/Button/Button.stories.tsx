@@ -7,7 +7,7 @@ const meta = {
   component: Button,
   args: { children: 'Iscriviti al corso' },
   argTypes: {
-    variant: { control: 'inline-radio', options: ['primary', 'secondary', 'ghost'] },
+    variant: { control: 'inline-radio', options: ['primary', 'secondary', 'ghost', 'light', 'outlineLight'] },
     size: { control: 'inline-radio', options: ['md', 'lg'] },
   },
 } satisfies Meta<typeof Button>

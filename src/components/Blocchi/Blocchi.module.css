@@ -149,3 +149,7 @@
 .orari {
   white-space: pre-line;
 }
+
+.esterno {
+  vertical-align: -0.1em;
+}

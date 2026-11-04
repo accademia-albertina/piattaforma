@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { CATEGORIA_LABELS, CATEGORIE_AVVISI } from '@/access/avvisi'
-import { AvvisoCard, Breadcrumbs, Pagination, Tag } from '@/components'
+import { AvvisoCard, Breadcrumbs, FiltriSchede, Pagination } from '@/components'
 import {
   categorieAvviso,
   hrefAvvisi,
@@ -43,25 +43,21 @@ export default async function AvvisiPage({ searchParams }: Props) {
         <h2 id="filtri-titolo" className="visually-hidden">
           Filtri
         </h2>
-        <nav aria-label="Categorie degli avvisi">
-          <ul className={styles.chips}>
-            <li>
-              <Tag href={hrefAvvisi({ scuola: filtri.scuola })} current={!filtri.categoria}>
-                Tutte
-              </Tag>
-            </li>
-            {CATEGORIE_AVVISI.map((c) => (
-              <li key={c}>
-                <Tag
-                  href={hrefAvvisi({ categoria: c, scuola: filtri.scuola })}
-                  current={filtri.categoria === c}
-                >
-                  {CATEGORIA_LABELS[c]}
-                </Tag>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <FiltriSchede
+          label="Categorie degli avvisi"
+          schede={[
+            {
+              label: 'Tutte',
+              href: hrefAvvisi({ scuola: filtri.scuola }),
+              attiva: !filtri.categoria,
+            },
+            ...CATEGORIE_AVVISI.map((c) => ({
+              label: CATEGORIA_LABELS[c],
+              href: hrefAvvisi({ categoria: c, scuola: filtri.scuola }),
+              attiva: filtri.categoria === c,
+            })),
+          ]}
+        />
 
         {scuole.length > 0 ? (
           <form method="get" action="/avvisi" className={styles.schoolForm}>
@@ -77,7 +73,7 @@ export default async function AvvisiPage({ searchParams }: Props) {
                 </option>
               ))}
             </select>
-            <button type="submit" className={styles.apply}>
+            <button type="submit" className="btn btn-secondario">
               Applica
             </button>
           </form>

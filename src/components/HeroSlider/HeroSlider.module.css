@@ -1,9 +1,41 @@
 .slider {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: var(--color-brand-dark);
   color: var(--color-on-brand);
   --color-focus: #ffffff;
   --color-focus-contrast: #12191d;
+}
+
+/*
+ * Sfondo cangiante: macchie di rosso istituzionale, ardesia e blu del footer che si
+ * spostano lentamente. Si vede quando l'avviso non ha un'immagine.
+ * Il colore più chiaro (#5f747f) regge il testo bianco a 4,89:1.
+ */
+.sfondo {
+  position: absolute;
+  inset: -25%;
+  z-index: -1;
+  background:
+    radial-gradient(45% 55% at 18% 28%, #b5383a 0%, rgb(181 56 58 / 0) 70%),
+    radial-gradient(40% 50% at 82% 22%, #5f747f 0%, rgb(95 116 127 / 0) 70%),
+    radial-gradient(55% 60% at 70% 85%, #1c3038 0%, rgb(28 48 56 / 0) 72%),
+    radial-gradient(40% 45% at 30% 90%, #3a1416 0%, rgb(58 20 22 / 0) 70%),
+    linear-gradient(135deg, #7a2526 0%, #5b1b1b 45%, #263b44 100%);
+  animation: deriva 28s ease-in-out infinite alternate;
+}
+
+@keyframes deriva {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, -4%, 0) rotate(8deg) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-5%, 5%, 0) rotate(-6deg) scale(1.04);
+  }
 }
 
 .track {
@@ -16,13 +48,13 @@
   grid-area: 1 / 1;
   display: flex;
   align-items: flex-end;
-  min-height: clamp(26rem, 62vh, 40rem);
+  min-height: clamp(28rem, 66vh, 42rem);
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity var(--duration-base) ease,
-    visibility var(--duration-base);
+    opacity 600ms var(--ease-out),
+    visibility 600ms;
 }
 
 .slide[data-active] {
@@ -36,14 +68,25 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: scale(1.04);
+  transition: transform 7s linear;
 }
 
-/* Sfumatura scura sotto il testo: garantisce il contrasto con qualsiasi foto */
-.slide::after {
+.slide[data-active] .image {
+  transform: scale(1);
+}
+
+/* Velo grigio-blu sotto il testo, come il sito attuale: contrasto con qualsiasi foto */
+.slide[data-immagine]::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgb(18 25 29 / 0) 25%, rgb(18 25 29 / 0.88) 75%);
+  background: linear-gradient(
+    to top,
+    rgb(18 25 29 / 0.9) 0%,
+    rgb(18 25 29 / 0.6) 40%,
+    rgb(18 25 29 / 0.15) 75%
+  );
 }
 
 .content {
@@ -54,108 +97,141 @@
   align-items: flex-start;
   gap: var(--space-3);
   width: 100%;
-  padding-block: var(--space-7) var(--space-8);
+  /* Spazio in basso per la riga dei comandi */
+  padding-block: var(--space-7) calc(var(--space-7) + 2.5rem);
 }
 
 .date {
   margin: 0;
-  font-size: var(--font-size-sm);
-  letter-spacing: 0.04em;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-caps);
   text-transform: uppercase;
+  opacity: 0.9;
 }
 
 .title {
-  max-width: 22ch;
-  margin: 0;
+  max-width: 20ch;
+  margin: 0 0 var(--space-2);
   color: inherit;
-  font-size: var(--font-size-3xl);
-  line-height: var(--line-height-tight);
+  font-size: var(--font-size-display);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
-.cta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  min-height: var(--target-min);
-  padding: var(--space-2) var(--space-4);
-  border: 2px solid currentColor;
-  color: inherit;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  text-decoration: none;
-}
-
-.cta:hover {
-  background: var(--color-on-brand);
-  color: var(--color-text);
-}
-
-.cta:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
-
+/* Comandi minimal: quadratini con filo sottile, linee al posto dei pallini */
 .controls {
   position: absolute;
   inset-inline: 0;
-  bottom: var(--space-4);
+  bottom: var(--space-5);
   z-index: 2;
   display: flex;
   align-items: center;
   gap: var(--space-2);
 }
 
-.arrow {
+.comando {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--target-min);
-  height: var(--target-min);
-  border: 2px solid currentColor;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.45);
   background: transparent;
   color: inherit;
-  font-size: var(--font-size-lg);
   cursor: pointer;
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease;
 }
 
-.arrow[data-hovered] {
-  background: var(--color-on-brand);
-  color: var(--color-text);
+.comando[data-hovered] {
+  background: rgb(255 255 255 / 0.12);
+  border-color: #fff;
 }
 
-.dots {
+.linee {
   display: flex;
-  margin: 0;
+  margin: 0 var(--space-1);
   padding: 0;
   list-style: none;
 }
 
-/* Area cliccabile 44px, pallino visibile più piccolo */
-.dot {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--target-min);
-  height: var(--target-min);
+/* Area cliccabile 32×40, linea visibile di 2px */
+.linea {
+  position: relative;
+  width: 36px;
+  height: 40px;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
 }
 
-.dot::before {
+.linea::before {
   content: '';
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--color-on-brand);
+  position: absolute;
+  inset-inline: 4px;
+  top: 50%;
+  height: 2px;
+  background: rgb(255 255 255 / 0.35);
+  transition: background-color var(--duration-fast) ease;
 }
 
-.dot[aria-current]::before {
-  background: var(--color-on-brand);
+.linea[data-hovered]::before {
+  background: rgb(255 255 255 / 0.7);
 }
 
-.arrow[data-focus-visible],
-.dot[data-focus-visible] {
+/* Avanzamento della slide attiva: la linea si riempie di bianco */
+.avanzamento {
+  position: absolute;
+  inset-inline: 4px;
+  top: 50%;
+  height: 2px;
+  background: #fff;
+  transform-origin: left;
+  animation: avanza linear forwards;
+}
+
+.avanzamento[data-fermo] {
+  animation: none;
+}
+
+@keyframes avanza {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.contatore {
+  margin: 0 var(--space-2);
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+}
+
+.comando[data-focus-visible],
+.linea[data-focus-visible] {
   outline: none;
   box-shadow: var(--focus-ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sfondo,
+  .avanzamento {
+    animation: none;
+  }
+
+  .slide,
+  .image {
+    transition: none;
+  }
+}
+
+@media (max-width: 30rem) {
+  .linea {
+    width: 28px;
+  }
 }

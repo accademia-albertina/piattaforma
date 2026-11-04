@@ -41,6 +41,7 @@ export default buildConfig({
     avatar: 'default',
     components: {
       providers: ['/components/admin/LinguaDate'],
+      beforeLogin: ['/components/admin/PrimaDelLogin'],
       graphics: {
         Logo: '/components/admin/Logo',
         Icon: '/components/admin/Icon',
@@ -57,6 +58,7 @@ export default buildConfig({
     translations: {
       it: {
         general: { edit: 'Modifica' },
+        authentication: { login: 'Accedi' },
         version: { saveDraft: 'Salva bozza' },
       },
     },

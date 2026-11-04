@@ -29,23 +29,6 @@
   font: inherit;
 }
 
-.row button {
-  min-height: var(--target-min);
-  padding: var(--space-2) var(--space-4);
-  border: 2px solid var(--color-brand-strong);
-  border-radius: var(--radius-sm);
-  background: var(--color-brand-strong);
-  color: var(--color-on-brand);
-  font: inherit;
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-}
-
-.row button:hover {
-  background: var(--color-brand-dark);
-  border-color: var(--color-brand-dark);
-}
-
 .count {
   color: var(--color-text-muted);
   margin-bottom: var(--space-4);

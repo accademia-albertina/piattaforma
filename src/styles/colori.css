@@ -16,6 +16,17 @@
   --color-link: #202f37;
   --color-link-hover: #5f747f; /* era #657a85 (4,49, non AA): ora 4,89 su bianco, 4,65 su surface */
   --color-text-muted: #5f747f;
+  /* Azioni: i pulsanti sono scuri, mai rossi (in UX il rosso indica un'azione distruttiva) */
+  --color-ink: #202f37; /* pulsante primario: bianco sopra 13,79 */
+  --color-ink-hover: #12191d; /* bianco sopra 17,76 */
+
+  /* Azzurro-grigio del Design System, per superfici e pannelli (come la Vetrina tesi PAI) */
+  --color-azzurro-50: #f1f5f7; /* hover leggero; #202f37 sopra 12,6 (#5f747f sopra 4,46: non per il testo grigio) */
+  --color-azzurro-100: #e3eaee; /* etichette; #202f37 sopra 11,3 */
+  --color-azzurro-200: #d6e0e6; /* pannello chiaro; #202f37 sopra 10,3 */
+  --color-ardesia: #5f747f; /* pannello scuro; bianco sopra 4,89 */
+  --color-ardesia-dark: #46585f; /* bianco sopra 7,4 */
+
   --color-bg: #ffffff;
   --color-surface: #f9f9f9;
   --color-on-brand: #ffffff;
