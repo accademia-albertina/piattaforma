@@ -1,0 +1,21 @@
+{
+  "name": "Pannello Accademia Albertina",
+  "short_name": "Albertina",
+  "description": "Pannello di gestione del sito dell’Accademia Albertina di Belle Arti di Torino.",
+  "lang": "it",
+  "start_url": "/admin",
+  "scope": "/admin",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "/pannello/icona-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/pannello/icona-512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "/pannello/icona-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

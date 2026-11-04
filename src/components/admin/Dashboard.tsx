@@ -1,9 +1,12 @@
 import type { AdminViewServerProps, CollectionSlug, GlobalSlug, PayloadRequest } from 'payload'
 
 import { Gutter } from '@payloadcms/ui'
+import { ArrowUpRight, Plus } from 'lucide-react'
 import Link from 'next/link'
 
 import { ROLE_LABELS, type Role } from '@/access/roles'
+
+import { ICONE_SEZIONI } from './icone'
 
 import styles from './Dashboard.module.css'
 
@@ -135,7 +138,7 @@ export default async function Dashboard({
           {ruoli.length > 0 && <p className={styles.ruoli}>{ruoli.join(' · ')}</p>}
         </div>
         <a className={styles.sito} href="/" target="_blank" rel="noopener">
-          Apri il sito <span aria-hidden="true">↗</span>
+          Apri il sito <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
           <span className={styles.nascosto}> (si apre in una nuova scheda)</span>
         </a>
       </div>
@@ -149,7 +152,7 @@ export default async function Dashboard({
             {azioni.map((s) => (
               <li key={s.slug}>
                 <Link className={styles.azione} href={`${urlSezione(s)}/create`}>
-                  <span aria-hidden="true">+</span> {s.nuovo}
+                  <Plus size={18} strokeWidth={1.75} aria-hidden /> {s.nuovo}
                 </Link>
               </li>
             ))}
@@ -164,8 +167,12 @@ export default async function Dashboard({
         <ul className={styles.griglia}>
           {visibili.map((s, i) => {
             const { totale, bozze } = conteggi[i]
+            const Icona = ICONE_SEZIONI[s.slug]
             return (
               <li key={s.slug} className={styles.scheda}>
+                {Icona && (
+                  <Icona className={styles.icona} size={24} strokeWidth={1.5} aria-hidden />
+                )}
                 <h3 className={styles.titoloScheda}>
                   <Link href={urlSezione(s)}>{s.titolo}</Link>
                 </h3>
@@ -191,7 +198,9 @@ export default async function Dashboard({
             <thead>
               <tr>
                 <th scope="col">Titolo</th>
-                <th scope="col">Tipo</th>
+                <th scope="col" className={styles.soloLargo}>
+                  Tipo
+                </th>
                 <th scope="col">Stato</th>
                 <th scope="col">Modificato</th>
               </tr>
@@ -204,7 +213,7 @@ export default async function Dashboard({
                       {doc.titolo || 'Senza titolo'}
                     </Link>
                   </td>
-                  <td>{doc.tipo}</td>
+                  <td className={styles.soloLargo}>{doc.tipo}</td>
                   <td>
                     <span
                       className={doc._status === 'published' ? styles.pubblicato : styles.bozza}

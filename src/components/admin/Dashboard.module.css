@@ -24,6 +24,9 @@
 }
 
 .sito {
+  display: inline-flex;
+  gap: 0.25em;
+  align-items: center;
   font-weight: 600;
   color: var(--theme-text);
   text-underline-offset: 0.2em;
@@ -60,15 +63,29 @@
   display: inline-flex;
   gap: 0.5em;
   align-items: center;
-  padding: calc(var(--base) / 2) var(--base);
+  min-height: 44px;
+  padding: 0 var(--base);
   font-weight: 600;
-  color: var(--color-on-brand);
+  color: var(--theme-text);
   text-decoration: none;
-  background: var(--color-brand-strong);
+  background: var(--theme-bg);
+  border: 1px solid var(--theme-elevation-800);
+  transition: background-color 140ms ease;
+}
+
+/* Il primo è l'azione principale: scuro, mai rosso (il rosso indica azioni distruttive) */
+.azioni li:first-child .azione {
+  color: var(--theme-bg);
+  background: var(--theme-elevation-900);
+  border-color: var(--theme-elevation-900);
 }
 
 .azione:hover {
-  background: var(--color-brand-dark);
+  background: var(--theme-elevation-50);
+}
+
+.azioni li:first-child .azione:hover {
+  background: var(--theme-elevation-1000);
 }
 
 .griglia {
@@ -89,6 +106,12 @@
 
 .scheda:hover {
   border-color: var(--theme-elevation-400);
+}
+
+.icona {
+  display: block;
+  margin-block-end: calc(var(--base) * 0.75);
+  color: var(--theme-elevation-700);
 }
 
 .titoloScheda {
@@ -163,4 +186,47 @@
 .bozza {
   color: var(--theme-elevation-700);
   border-style: dashed;
+}
+
+/* Telefono: schede compatte su due colonne, senza descrizione; tabella più stretta */
+@media (max-width: 640px) {
+  .griglia {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--base) / 2);
+  }
+
+  .scheda {
+    padding: calc(var(--base) * 0.75);
+  }
+
+  .descrizione,
+  .soloLargo {
+    display: none;
+  }
+
+  .titoloScheda {
+    margin-block-end: calc(var(--base) / 4);
+    font-size: 1rem;
+  }
+
+  .conteggio {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .azioni {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .azione {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .tabella th,
+  .tabella td {
+    padding-inline: calc(var(--base) / 4);
+    font-size: 0.875rem;
+  }
 }

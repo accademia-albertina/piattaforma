@@ -33,7 +33,13 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: ' · Accademia Albertina',
-      icons: [{ rel: 'icon', type: 'image/svg+xml', url: '/brand/stemma-albertina.svg' }],
+      icons: [
+        { rel: 'icon', type: 'image/svg+xml', url: '/brand/stemma-albertina.svg' },
+        { rel: 'apple-touch-icon', url: '/pannello/icona-180.png', sizes: '180x180' },
+      ],
+      // Web app su iPhone/Android: da Safari “Aggiungi alla schermata Home” si apre a schermo intero.
+      manifest: '/pannello/manifest.webmanifest',
+      appleWebApp: { capable: true, title: 'Albertina', statusBarStyle: 'default' },
     },
     // Date in formato italiano (Payload di default usa “ottobre 22 2026, 5:34 PM”).
     dateFormat: 'd MMMM yyyy, HH:mm',
@@ -42,6 +48,7 @@ export default buildConfig({
     components: {
       providers: ['/components/admin/LinguaDate'],
       beforeLogin: ['/components/admin/PrimaDelLogin'],
+      actions: ['/components/admin/CambiaTema'],
       graphics: {
         Logo: '/components/admin/Logo',
         Icon: '/components/admin/Icon',

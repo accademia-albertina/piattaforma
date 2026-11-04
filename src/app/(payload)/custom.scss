@@ -1,5 +1,6 @@
 @import '../../styles/fonts.css';
 @import '../../styles/colori.css';
+@import './icone-menu';
 
 // Il pannello usa il font istituzionale, anche nell'editor di testo (Payload di default usa un serif).
 // Angoli squadrati come nel sito (scelta di Fede: niente border radius).
@@ -89,4 +90,111 @@ html[data-theme='dark'] .logo-accesso {
 .field-description,
 .btn--icon-style-with-border .btn__label {
   color: var(--theme-elevation-650);
+}
+
+// ——— Menu laterale con icone ———
+.nav__link {
+  display: flex;
+  gap: 0.625rem;
+  align-items: center;
+
+  &::before {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    content: '';
+    background-color: currentColor;
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    opacity: 0.8;
+  }
+}
+
+.nav-group__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+// ——— Cambio tema nell'intestazione ———
+.cambia-tema {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: var(--theme-text);
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--theme-elevation-150);
+
+  &:hover {
+    background: var(--theme-elevation-50);
+    border-color: var(--theme-elevation-400);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--theme-text);
+    outline-offset: 2px;
+  }
+}
+
+// ——— Telefono e web app su iPhone ———
+// Aree sicure (notch, barra Home) quando il pannello è aperto a tutto schermo.
+.app-header {
+  padding-top: env(safe-area-inset-top);
+}
+
+.nav,
+.nav__scroll {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 768px) {
+  // Sotto i 16px Safari ingrandisce la pagina quando si tocca un campo.
+  input,
+  textarea,
+  select,
+  .rs__input input,
+  .ContentEditable__root {
+    font-size: 16px !important;
+  }
+
+  // Comandi del documento (Salva, Pubblica…) attaccati in basso, raggiungibili col pollice.
+  .doc-controls {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  // La riga Stato/Ultima modifica va a capo invece di uscire dallo schermo.
+  .doc-controls__meta {
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  // Con il pulsante del tema le briciole devono restringersi, o l'account esce dallo schermo.
+  .app-header__controls-wrapper {
+    min-width: 0;
+    gap: 0.5rem;
+  }
+
+  .app-header__step-nav-wrapper {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .app-header__actions-wrapper,
+  .app-header__account {
+    flex: none;
+  }
 }
