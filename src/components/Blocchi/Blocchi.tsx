@@ -1,5 +1,6 @@
 import { Testo } from '@/components/Testo/Testo'
 import { emailSpezzabile } from '@/utilities/email'
+import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 
 import { risolviLink } from '@/lib/link'
@@ -107,7 +108,13 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
                     {l.label}
                     {l.esterno ? (
                       <>
-                        <span aria-hidden="true"> ↗</span>
+                        {' '}
+                        <ArrowUpRight
+                          size={14}
+                          strokeWidth={1.75}
+                          aria-hidden
+                          className={styles.esterno}
+                        />
                         <span className="visually-hidden"> (si apre in una nuova scheda)</span>
                       </>
                     ) : null}

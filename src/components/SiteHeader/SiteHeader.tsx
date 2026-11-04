@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import { ChevronDown, Search, UserRound } from 'lucide-react'
 import { Button, Disclosure, DisclosurePanel, Heading } from 'react-aria-components'
 
 import {
@@ -15,7 +16,7 @@ import {
 
 import { MenuLink } from '../MenuLink/MenuLink'
 
-import { useMediaQuery, useNascondiScorrendo } from './hooks'
+import { useCompatto, useMediaQuery } from './hooks'
 
 import styles from './SiteHeader.module.css'
 
@@ -27,30 +28,7 @@ export type SiteHeaderProps = {
   colonne?: GruppoMenu[][]
 }
 
-const Icona = {
-  utente: (
-    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false">
-      <circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" strokeWidth="1.75" />
-      <path
-        d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-      />
-    </svg>
-  ),
-  freccia: (
-    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-      <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  ),
-  cerca: (
-    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false">
-      <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" strokeWidth="2" />
-      <path d="M15.5 15.5 21 21" stroke="currentColor" strokeWidth="2" strokeLinecap="square" />
-    </svg>
-  ),
-}
+const ICONA = { size: 24, strokeWidth: 1.5, 'aria-hidden': true } as const
 
 export function SiteHeader({
   currentHref,
@@ -93,7 +71,7 @@ export function SiteHeader({
     }
   }, [open])
 
-  // L'header resta in alto mentre si scorre: lo spazio che occupa non deve coprire
+  // La barra rossa resta in alto mentre si scorre: lo spazio che occupa non deve coprire
   // l'elemento che riceve il focus (scroll-padding).
   const headerRef = useRef<HTMLElement>(null)
   useEffect(() => {
@@ -110,7 +88,7 @@ export function SiteHeader({
     }
   }, [])
 
-  const [nascosto, mostra] = useNascondiScorrendo()
+  const compatto = useCompatto()
   const desktop = useMediaQuery('(min-width: 64rem)', true)
 
   const current = (href: string) => (path === href ? 'page' : undefined)
@@ -126,15 +104,11 @@ export function SiteHeader({
   )
 
   return (
-    <header
-      ref={headerRef}
-      className={styles.header}
-      data-nascosto={(nascosto && !open) || undefined}
-      onFocus={mostra}
-    >
+    <>
+      {/* La barra dei servizi scorre via con la pagina; resta fissa solo la barra rossa. */}
       <div className={styles.topBar}>
         <nav aria-label="Servizi" className={`container ${styles.topBarInner}`}>
-          <ul className={styles.utilityList}>
+          <ul className={`${styles.utilityList} ${styles.utilitySinistra}`}>
             {servizi.sinistra.map((v) => (
               <li key={v.href}>
                 <MenuLink voce={v} />
@@ -151,104 +125,115 @@ export function SiteHeader({
         </nav>
       </div>
 
-      <Disclosure isExpanded={open} onExpandedChange={setOpen} className={styles.main}>
-        <div className={`container ${styles.mainInner}`}>
-          <Link href="/" className={styles.brand}>
-            {/* eslint-disable-next-line @next/next/no-img-element -- SVG statico, non serve l'ottimizzazione di next/image */}
-            <img
-              src="/brand/logo-albertina-bianco.svg"
-              alt="Accademia Albertina di Belle Arti di Torino, home"
-              width={166}
-              height={76}
-            />
-          </Link>
-
-          <div className={styles.actions}>
-            <Link href="/admin" className={styles.iconButton}>
-              {Icona.utente}
-              <span className={styles.iconLabel}>Area riservata</span>
-            </Link>
-            <Link href="/cerca" className={styles.iconButton} aria-current={current('/cerca')}>
-              {Icona.cerca}
-              <span className={styles.iconLabel}>Cerca</span>
-            </Link>
-            <Button slot="trigger" ref={triggerRef} className={styles.menuToggle}>
-              <span className={styles.burger} aria-hidden="true" data-open={open || undefined}>
-                <span />
-                <span />
-                <span />
-              </span>
-              <span className={styles.iconLabel}>Menu</span>
-            </Button>
-          </div>
-        </div>
-
-        {open && (
-          // Il velo chiude il menu al clic; da tastiera si chiude con Esc o con il pulsante.
-          <div className={styles.velo} aria-hidden="true" onClick={() => setOpen(false)} />
-        )}
-
-        <DisclosurePanel className={styles.panel}>
-          <form action="/cerca" method="get" role="search" className={`container ${styles.cerca}`}>
-            <label htmlFor="menu-cerca" className={styles.cercaLabel}>
-              Cerca nel sito
-            </label>
-            <div className={styles.cercaRiga}>
-              <input
-                id="menu-cerca"
-                name="q"
-                type="search"
-                minLength={2}
-                maxLength={100}
-                required
-                className={styles.cercaInput}
+      <header
+        ref={headerRef}
+        className={styles.header}
+        data-compatto={compatto || undefined}
+      >
+        <Disclosure isExpanded={open} onExpandedChange={setOpen} className={styles.main}>
+          <div className={`container ${styles.mainInner}`}>
+            <Link href="/" className={styles.brand}>
+              {/* eslint-disable-next-line @next/next/no-img-element -- SVG statico, non serve l'ottimizzazione di next/image */}
+              <img
+                src="/brand/logo-albertina-bianco.svg"
+                alt="Accademia Albertina di Belle Arti di Torino, home"
+                width={166}
+                height={76}
               />
-              <button type="submit" className={styles.cercaInvia}>
-                Cerca
-              </button>
+            </Link>
+
+            <div className={styles.actions}>
+              <Link href="/admin" className={styles.iconButton}>
+                <UserRound {...ICONA} />
+                <span className={styles.iconLabel}>Area riservata</span>
+              </Link>
+              <Link href="/cerca" className={styles.iconButton} aria-current={current('/cerca')}>
+                <Search {...ICONA} />
+                <span className={styles.iconLabel}>Cerca</span>
+              </Link>
+              <Button slot="trigger" ref={triggerRef} className={styles.menuToggle}>
+                <span className={styles.burger} aria-hidden="true" data-open={open || undefined}>
+                  <span />
+                  <span />
+                  <span />
+                </span>
+                <span className={styles.iconLabel}>Menu</span>
+              </Button>
             </div>
-          </form>
-          <nav aria-label="Principale" className={`container ${styles.megaMenu}`}>
-            <div className={styles.column}>
-              <h2 className={styles.highlightTitle}>In evidenza</h2>
-              <ul className={styles.highlightList}>
-                {inEvidenza.map((v) => (
-                  <li key={v.href}>
-                    <MenuLink voce={v} current={current(v.href)} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {colonne.map((gruppi) => (
-              <div key={gruppi[0].titolo} className={styles.column}>
-                {gruppi.map((g) =>
-                  desktop ? (
-                    <div key={g.titolo} className={styles.group}>
-                      <h2 className={styles.groupTitle}>{g.titolo}</h2>
-                      {voci(g)}
-                    </div>
-                  ) : (
-                    // Su mobile i gruppi sono a fisarmonica: la lista intera sarebbe lunghissima.
-                    <Disclosure
-                      key={g.titolo}
-                      className={styles.group}
-                      defaultExpanded={g.voci.some((v) => v.href === path)}
-                    >
-                      <Heading level={2} className={styles.groupTitle}>
-                        <Button slot="trigger" className={styles.groupToggle}>
-                          {g.titolo}
-                          {Icona.freccia}
-                        </Button>
-                      </Heading>
-                      <DisclosurePanel>{voci(g)}</DisclosurePanel>
-                    </Disclosure>
-                  ),
-                )}
+          </div>
+
+          {open && (
+            // Il velo chiude il menu al clic; da tastiera si chiude con Esc o con il pulsante.
+            <div className={styles.velo} aria-hidden="true" onClick={() => setOpen(false)} />
+          )}
+
+          <DisclosurePanel className={styles.panel}>
+            <form
+              action="/cerca"
+              method="get"
+              role="search"
+              className={`container ${styles.cerca}`}
+            >
+              <label htmlFor="menu-cerca" className={styles.cercaLabel}>
+                Cerca nel sito
+              </label>
+              <div className={styles.cercaRiga}>
+                <input
+                  id="menu-cerca"
+                  name="q"
+                  type="search"
+                  minLength={2}
+                  maxLength={100}
+                  required
+                  className={styles.cercaInput}
+                />
+                <button type="submit" className={styles.cercaInvia}>
+                  Cerca
+                </button>
               </div>
-            ))}
-          </nav>
-        </DisclosurePanel>
-      </Disclosure>
-    </header>
+            </form>
+            <nav aria-label="Principale" className={`container ${styles.megaMenu}`}>
+              <div className={styles.column}>
+                <h2 className={styles.highlightTitle}>In evidenza</h2>
+                <ul className={styles.highlightList}>
+                  {inEvidenza.map((v) => (
+                    <li key={v.href}>
+                      <MenuLink voce={v} current={current(v.href)} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {colonne.map((gruppi) => (
+                <div key={gruppi[0].titolo} className={styles.column}>
+                  {gruppi.map((g) =>
+                    desktop ? (
+                      <div key={g.titolo} className={styles.group}>
+                        <h2 className={styles.groupTitle}>{g.titolo}</h2>
+                        {voci(g)}
+                      </div>
+                    ) : (
+                      // Su mobile i gruppi sono a fisarmonica: la lista intera sarebbe lunghissima.
+                      <Disclosure
+                        key={g.titolo}
+                        className={styles.group}
+                        defaultExpanded={g.voci.some((v) => v.href === path)}
+                      >
+                        <Heading level={2} className={styles.groupTitle}>
+                          <Button slot="trigger" className={styles.groupToggle}>
+                            {g.titolo}
+                            <ChevronDown size={20} strokeWidth={1.5} aria-hidden />
+                          </Button>
+                        </Heading>
+                        <DisclosurePanel>{voci(g)}</DisclosurePanel>
+                      </Disclosure>
+                    ),
+                  )}
+                </div>
+              ))}
+            </nav>
+          </DisclosurePanel>
+        </Disclosure>
+      </header>
+    </>
   )
 }
