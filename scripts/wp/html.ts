@@ -3,10 +3,19 @@
 export const dominio = (s: string) =>
   s.replace(/https?:\/\/(www\.)?newalbertina\.eu/g, 'https://albertina-academy.it')
 
+/** Toglie i commenti HTML ripetendo finché non ne restano (un solo passaggio non basta per CodeQL). */
+function senzaCommenti(html: string) {
+  let prima: string
+  do {
+    prima = html
+    html = html.replace(/<!--[\s\S]*?-->/g, '')
+  } while (html !== prima)
+  return html.replace(/<!--|-->/g, '')
+}
+
 export function pulisci(html: string) {
   return (
-    dominio(html)
-      .replace(/<!--[\s\S]*?-->/g, '') // commenti dei blocchi Gutenberg
+    senzaCommenti(dominio(html)) // commenti dei blocchi Gutenberg
       // Le immagini nel testo richiedono i file nella libreria media: per l'anteprima si tolgono
       .replace(/<figure[^>]*>[\s\S]*?<\/figure>/g, '')
       .replace(/<img[^>]*>/g, '')
