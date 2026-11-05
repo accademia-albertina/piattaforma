@@ -1,7 +1,7 @@
 import type { Access, CollectionConfig } from 'payload'
 
 import { canAccessBackend } from '@/access/roles'
-import { altDaNomeFile, generaAlt } from '@/utilities/testoAlternativo'
+import { altDaNomeFile } from '@/utilities/testoAlternativo'
 
 const backendUser: Access = ({ req }) => canAccessBackend(req.user)
 
@@ -32,15 +32,10 @@ export const Media: CollectionConfig = {
   ],
   hooks: {
     beforeChange: [
-      // Testo alternativo automatico: lo scrive Claude guardando l'immagine (o dal nome del file)
-      async ({ data, req }) => {
+      // Testo alternativo automatico, ricavato dal nome del file (sempre correggibile)
+      ({ data, req }) => {
         if (data.alt?.trim()) return data
-        const nomeFile = req.file?.name ?? data.filename ?? ''
-        const immagine = req.file?.mimetype?.startsWith('image/') && req.file.mimetype !== 'image/svg+xml'
-        data.alt =
-          immagine && req.file?.data
-            ? await generaAlt({ dati: req.file.data, nomeFile, sharp: req.payload.config.sharp })
-            : altDaNomeFile(nomeFile)
+        data.alt = altDaNomeFile(req.file?.name ?? data.filename ?? '')
         return data
       },
     ],

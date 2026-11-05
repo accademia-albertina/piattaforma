@@ -39,7 +39,7 @@ export const CHANGELOG: Versione[] = [
       {
         tipo: 'nuovo',
         testo:
-          'Il testo alternativo delle immagini si scrive da solo al caricamento; si può sempre correggere.',
+          'Il testo alternativo delle immagini si scrive da solo al caricamento, dal nome del file; si può sempre correggere.',
       },
       {
         tipo: 'nuovo',
