@@ -67,6 +67,11 @@ export const CHANGELOG: Versione[] = [
       {
         tipo: 'migliorato',
         testo:
+          'Nello slider della home i titoli lunghi stanno su tre righe al massimo, con un corpo più contenuto.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
           'Gli avvisi in evidenza senza foto mostrano un’immagine di repertorio: quella della scuola, o una delle sedi.',
       },
       {
