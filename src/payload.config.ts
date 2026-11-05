@@ -28,6 +28,7 @@ import { importaAlboWp, importaTrasparenzaWp } from './seed/albo-trasparenza-wp'
 import { aggiornaLinkCalendari } from './seed/link-calendari'
 import { aggiornaLinkPagine } from './seed/link-pagine'
 import { importaPagineWp } from './seed/pagine-wp'
+import { completaSommariPagine } from './seed/sommari-pagine'
 import { correggiTitoliMaiuscoli } from './seed/titoli-maiuscoli'
 import { importaCalendari } from './seed/calendari'
 import { correggiFacciata, seedDemo } from './seed/demo'
@@ -59,7 +60,7 @@ export default buildConfig({
     // Date in formato italiano (Payload di default usa “ottobre 22 2026, 5:34 PM”).
     dateFormat: 'd MMMM yyyy, HH:mm',
     // Niente Gravatar: è un servizio esterno (privacy) e la CSP lo blocca.
-    avatar: 'default',
+    avatar: { Component: '/components/admin/Avatar' },
     components: {
       providers: ['/components/admin/LinguaDate'],
       beforeLogin: ['/components/admin/PrimaDelLogin'],
@@ -121,6 +122,7 @@ export default buildConfig({
     // Dopo le pagine: toglie i vecchi profili dei dottorandi importati come sottopagine
     void importaPagineWp(payload)
       .then(() => importaDottorandiWp(payload))
+      .then(() => completaSommariPagine(payload))
       .catch((e) =>
       payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
     )

@@ -149,7 +149,7 @@ export interface Pagina {
   id: number;
   titolo: string;
   /**
-   * Una o due frasi sotto il titolo; si usano anche nei risultati di Google e nelle anteprime social.
+   * Una o due frasi sotto il titolo; compaiono anche nel box della pagina genitore, nei risultati di Google e nelle anteprime social.
    */
   sommario?: string | null;
   blocchi?:

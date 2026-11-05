@@ -13,6 +13,7 @@ import {
 import { rowLabel } from '@/fields/rowLabel'
 import { slugField } from '@/fields/slug'
 import { validaTitolo } from '@/fields/titolo'
+import { linkSulSito } from '@/fields/linkSulSito'
 
 export const SEMESTRI = [
   { value: 'primo', label: 'Primo semestre' },
@@ -59,6 +60,7 @@ export const Corsi: CollectionConfig = {
     delete: soloDidattica,
   },
   fields: [
+    linkSulSito('/corsi/'),
     {
       name: 'titolo',
       label: 'Titolo',

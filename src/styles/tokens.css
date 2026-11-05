@@ -46,6 +46,9 @@
   /* Layout */
   --container-max: 1240px;
   --container-pad: clamp(1rem, 3vw, 2rem);
+  /* Altezza dell’header ridotto (desktop): i box laterali sticky stanno sotto, con aria */
+  --altezza-header-compatto: 68px;
+  --sticky-top: calc(var(--altezza-header-compatto) + var(--space-5));
   --gap: 1.875rem; /* 30 */
   --section-pad: clamp(3rem, 2rem + 4vw, 5.625rem); /* fino a 90 */
 

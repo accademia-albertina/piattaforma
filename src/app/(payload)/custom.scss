@@ -155,7 +155,7 @@ html[data-theme='dark'] .logo-accesso {
   text-transform: uppercase;
 }
 
-// ——— Pulsante «Apri il sito» nell'intestazione ———
+// ——— Pulsante «Apri il sito» e account nell'intestazione: icone a filo, senza riquadro ———
 .azione-header {
   display: inline-flex;
   align-items: center;
@@ -166,11 +166,10 @@ html[data-theme='dark'] .logo-accesso {
   color: var(--theme-text);
   cursor: pointer;
   background: transparent;
-  border: 1px solid var(--theme-elevation-150);
+  border: 0;
 
   &:hover {
-    background: var(--theme-elevation-50);
-    border-color: var(--theme-elevation-400);
+    background: var(--theme-elevation-100);
   }
 
   &:focus-visible {
@@ -516,6 +515,44 @@ body {
   display: inline-flex;
   align-items: center;
   color: var(--theme-text);
+
+  // La casetta allineata al centro del testo delle briciole: il tetto la fa sembrare alta
+  svg {
+    display: block;
+    transform: translateY(2px);
+  }
+}
+
+.step-nav {
+  align-items: center;
+
+  > * {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+// Account: stessa icona a filo di «Apri il sito», con lo stesso sfondo al passaggio
+.icona-account {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--pulsante-header, 40px);
+  height: var(--pulsante-header, 40px);
+  color: var(--theme-text);
+
+  svg {
+    display: block;
+  }
+}
+
+.app-header__account:hover .icona-account {
+  background: var(--theme-elevation-100);
+}
+
+.app-header__account:focus-visible {
+  outline: 2px solid var(--theme-text);
+  outline-offset: 2px;
 }
 
 .sr-only-pannello {
@@ -525,4 +562,41 @@ body {
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+// ——— «Vedi sul sito» in cima alla colonna laterale del documento ———
+.link-sul-sito {
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: var(--base);
+
+  a {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 1rem;
+    color: var(--theme-text);
+    font-weight: 500;
+    text-decoration: none;
+    background: var(--theme-elevation-100);
+
+    &:hover {
+      background: var(--theme-elevation-150);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--theme-text);
+      outline-offset: 2px;
+    }
+  }
+}
+
+.link-sul-sito__indirizzo {
+  overflow: hidden;
+  font-size: 0.8125rem;
+  color: var(--theme-elevation-600);
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

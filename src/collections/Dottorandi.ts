@@ -3,6 +3,7 @@ import type { CollectionConfig } from 'payload'
 import { campoSoloDidattica, modificaDottorando, soloDidattica } from '@/access/corsi'
 import { canAccessBackend } from '@/access/roles'
 import { slugField } from '@/fields/slug'
+import { linkSulSito } from '@/fields/linkSulSito'
 
 export const CURRICULA = ['new-media-art', 'processi-espositivi'] as const
 
@@ -48,6 +49,7 @@ export const Dottorandi: CollectionConfig = {
     ],
   },
   fields: [
+    linkSulSito('/dottorati/albertina/dottorandi/'),
     {
       type: 'row',
       fields: [
