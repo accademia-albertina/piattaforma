@@ -8,6 +8,7 @@ import * as migration_20261105_071837_calendari from './20261105_071837_calendar
 import * as migration_20261105_081212_albo_trasparenza from './20261105_081212_albo_trasparenza';
 import * as migration_20261105_132425_dottorandi from './20261105_132425_dottorandi';
 import * as migration_20261105_165306_media_alt_facoltativo from './20261105_165306_media_alt_facoltativo';
+import * as migration_20261105_170559_scuole_dipartimento_immagine from './20261105_170559_scuole_dipartimento_immagine';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20261105_165306_media_alt_facoltativo.up,
     down: migration_20261105_165306_media_alt_facoltativo.down,
-    name: '20261105_165306_media_alt_facoltativo'
+    name: '20261105_165306_media_alt_facoltativo',
+  },
+  {
+    up: migration_20261105_170559_scuole_dipartimento_immagine.up,
+    down: migration_20261105_170559_scuole_dipartimento_immagine.down,
+    name: '20261105_170559_scuole_dipartimento_immagine'
   },
 ];

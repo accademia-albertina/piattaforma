@@ -1,7 +1,7 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
-import { Alert, AvvisoCard, HeroSlider } from '@/components'
+import { Alert, AvvisoCard, HeroSlider, SchedaScuola } from '@/components'
+import { nomeDipartimento } from '@/collections/Scuole'
 import {
   avvisiInEvidenza,
   categorieAvviso,
@@ -79,21 +79,21 @@ export default async function HomePage() {
             </div>
             <ul className={styles.scuole}>
               {scuole.map((s) => {
-                const img = IMMAGINI_SCUOLE[s.slug ?? '']
+                const caricata = typeof s.immagine === 'object' && s.immagine?.url ? s.immagine : null
                 return (
                   <li key={s.id}>
-                    <Link href={`/corsi?scuola=${s.slug}`} className={styles.scuola}>
-                      {img && (
-                        <Image
-                          src={img}
-                          alt=""
-                          sizes="(min-width: 75rem) 20vw, (min-width: 40rem) 33vw, 50vw"
-                          placeholder="blur"
-                          className={styles.scuolaImg}
-                        />
-                      )}
-                      <span className={styles.scuolaNome}>{s.nome}</span>
-                    </Link>
+                    <SchedaScuola
+                      nome={s.nome}
+                      slug={s.slug ?? ''}
+                      href={`/corsi?scuola=${s.slug}`}
+                      dipartimento={nomeDipartimento(s.dipartimento)}
+                      immagine={
+                        caricata
+                          ? { url: caricata.url!, width: caricata.width, height: caricata.height }
+                          : IMMAGINI_SCUOLE[s.slug ?? '']
+                      }
+                      invito="Vedi i corsi"
+                    />
                   </li>
                 )
               })}

@@ -433,7 +433,13 @@ export interface Scuola {
    * Forma breve usata nei filtri, es. PAI, NTA.
    */
   sigla?: string | null;
+  dipartimento?:
+    ('arti-visive' | 'arti-della-progettazione' | 'arti-tecnologiche' | 'comunicazione-e-didattica') | null;
   descrizione?: string | null;
+  /**
+   * Facoltativa: sostituisce la foto di repertorio nella scheda della scuola in home.
+   */
+  immagine?: (number | null) | Media;
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
@@ -1271,7 +1277,9 @@ export interface TrasparenzaSelect<T extends boolean = true> {
 export interface ScuoleSelect<T extends boolean = true> {
   nome?: T;
   sigla?: T;
+  dipartimento?: T;
   descrizione?: T;
+  immagine?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
