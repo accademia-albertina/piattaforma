@@ -1,0 +1,372 @@
+/* Albo online e Amministrazione trasparente: pannelli pieni azzurri, senza rosso */
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+/* Schede delle sezioni */
+.sezioni ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sezioni a {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+  padding: var(--space-5);
+  color: var(--color-heading);
+  background: var(--color-azzurro-200);
+  text-decoration: none;
+}
+
+.sezioni a:hover {
+  background: var(--color-azzurro-100);
+}
+
+.sezioni a:hover .sezioneTitolo {
+  text-decoration: underline;
+}
+
+.sezioneTitolo {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+.sezioneSommario {
+  color: var(--color-heading);
+}
+
+.piede {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-ardesia-dark);
+}
+
+.apri {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+  border: 1px solid var(--color-heading);
+}
+
+.sezioni a:hover .apri {
+  color: var(--color-on-brand);
+  background: var(--color-heading);
+}
+
+.sezioni a:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* Blocco con titolo e filetto */
+.blocco {
+  margin-top: var(--section-pad);
+}
+
+.bloccoTesta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-2);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bloccoTesta h2 {
+  margin: 0;
+  font-size: var(--font-size-3xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.bloccoTesta p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+/* Corpo delle sezioni: elenco a sinistra, menu della sezione a destra */
+.corpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+}
+
+.principale {
+  min-width: 0;
+}
+
+@media (min-width: 64rem) {
+  .corpo {
+    grid-template-columns: minmax(0, 1fr) 19rem;
+    column-gap: var(--space-7);
+    align-items: start;
+  }
+
+  .lato {
+    position: sticky;
+    top: var(--space-5);
+  }
+}
+
+.latoTitolo {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+}
+
+.latoTitolo a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.latoTitolo a:hover {
+  color: var(--color-heading);
+  text-decoration: underline;
+}
+
+.lato ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.lato li {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.lato li a {
+  display: flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid transparent;
+  text-decoration: none;
+}
+
+.lato li a:hover {
+  background: var(--color-azzurro-50);
+}
+
+.lato li a[aria-current='page'] {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+  border-left-color: var(--color-heading);
+  background: var(--color-azzurro-200);
+}
+
+/* Filtri su pannello azzurro chiaro */
+.filtri {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-azzurro-50);
+}
+
+.campo {
+  display: flex;
+  flex: 1 1 12rem;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.campo label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-control);
+  border-radius: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.spunta {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  min-height: var(--target-min);
+  font-size: var(--font-size-sm);
+}
+
+.spunta input {
+  width: 1.125rem;
+  height: 1.125rem;
+  accent-color: var(--color-heading);
+}
+
+.azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.conteggio {
+  margin: var(--space-4) 0 0;
+  color: var(--color-text-muted);
+}
+
+/* Atti */
+.atti {
+  display: grid;
+}
+
+.atto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-block: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.categoria {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-ardesia-dark);
+}
+
+.attoTitolo {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.attoTitolo a {
+  color: var(--color-heading);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.attoTitolo a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.formato {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  color: var(--color-ardesia-dark);
+}
+
+.scadenza {
+  align-self: flex-start;
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.scadenza[data-aperto] {
+  padding: var(--space-1) var(--space-3);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+  background: var(--color-azzurro-200);
+}
+
+.descrizione {
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.atto > ul {
+  margin-top: var(--space-2);
+}
+
+/* Amministrazione trasparente: indice per sezioni */
+.indice {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  gap: var(--space-6) var(--space-7);
+  margin-top: var(--space-6);
+}
+
+.indice section h2 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-lg);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.indice ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.indice li {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.indice li a {
+  display: flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
+  text-decoration: none;
+}
+
+.indice li a:hover {
+  background: var(--color-azzurro-50);
+  text-decoration: underline;
+}
+
+.testo {
+  max-width: var(--measure);
+}
+
+.testo p {
+  white-space: pre-line;
+}
+
+.testo a {
+  overflow-wrap: anywhere;
+}
+
+.vuoto {
+  color: var(--color-text-muted);
+}
+
+.documentiTitolo {
+  margin: var(--space-6) 0 var(--space-3);
+  font-size: var(--font-size-xl);
+}

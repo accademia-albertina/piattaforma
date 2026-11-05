@@ -1,6 +1,7 @@
 import {
   BookOpen,
   CalendarDays,
+  ClipboardList,
   FileText,
   GraduationCap,
   Images,
@@ -8,6 +9,7 @@ import {
   type LucideIcon,
   Megaphone,
   PanelsTopLeft,
+  Scale,
   Users,
 } from 'lucide-react'
 
@@ -22,6 +24,8 @@ export const ICONE_SEZIONI: Record<string, LucideIcon> = {
   corsi: BookOpen,
   docenti: GraduationCap,
   calendari: CalendarDays,
+  albo: ClipboardList,
+  trasparenza: Scale,
   scuole: Landmark,
   users: Users,
   navigazione: PanelsTopLeft,

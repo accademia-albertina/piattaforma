@@ -72,6 +72,8 @@ export interface Config {
     corsi: Corso;
     docenti: Docente;
     calendari: Calendario;
+    albo: AttoAlbo;
+    trasparenza: Trasparenza;
     scuole: Scuola;
     media: Media;
     users: User;
@@ -87,6 +89,8 @@ export interface Config {
     corsi: CorsiSelect<false> | CorsiSelect<true>;
     docenti: DocentiSelect<false> | DocentiSelect<true>;
     calendari: CalendariSelect<false> | CalendariSelect<true>;
+    albo: AlboSelect<false> | AlboSelect<true>;
+    trasparenza: TrasparenzaSelect<false> | TrasparenzaSelect<true>;
     scuole: ScuoleSelect<false> | ScuoleSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -672,6 +676,111 @@ export interface Calendario {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Bandi, procedure e comunicazioni dell’Albo online. Aggiungi i nuovi documenti (nomina, verbali, graduatoria) allo stesso atto.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "albo".
+ */
+export interface AttoAlbo {
+  id: number;
+  titolo: string;
+  sezione: 'bandi-di-concorso' | 'bandi-generici' | 'bandi-di-gara' | 'sindacale';
+  /**
+   * Usa una categoria già esistente, es. “Personale docente a contratto”, “Servizi”, “Scioperi”.
+   */
+  categoria: string;
+  pubblicatoIl: string;
+  /**
+   * Facoltativa: termine per presentare la domanda.
+   */
+  scadenza?: string | null;
+  annoAccademico?: string | null;
+  /**
+   * Facoltativa: due righe per spiegare l’atto, se il titolo non basta.
+   */
+  descrizione?: string | null;
+  documenti?:
+    | {
+        /**
+         * Es. “Bando di selezione – scadenza 18/12/2026” o “Graduatoria definitiva”.
+         */
+        nome: string;
+        file?: (number | null) | Media;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Sottosezioni dell’Amministrazione trasparente. Aggiorna i documenti qui: la data di aggiornamento sul sito cambia da sola.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trasparenza".
+ */
+export interface Trasparenza {
+  id: number;
+  titolo: string;
+  sezione:
+    | 'Disposizioni generali'
+    | 'Organizzazione'
+    | 'Consulenti e collaboratori'
+    | 'Personale'
+    | 'Bandi di concorso'
+    | 'Performance'
+    | 'Enti controllati'
+    | 'Attività e procedimenti'
+    | 'Provvedimenti'
+    | 'Controlli sulle imprese'
+    | 'Bandi di gara e contratti'
+    | 'Sovvenzioni, contributi, sussidi, vantaggi economici'
+    | 'Bilanci'
+    | 'Beni immobili e gestione patrimonio'
+    | 'Controlli e rilievi sull’amministrazione'
+    | 'Servizi erogati'
+    | 'Pagamenti dell’amministrazione'
+    | 'Opere pubbliche'
+    | 'Pianificazione e governo del territorio'
+    | 'Informazioni ambientali'
+    | 'Strutture sanitarie private accreditate'
+    | 'Interventi straordinari e di emergenza'
+    | 'Altri contenuti'
+    | 'Informative sito istituzionale';
+  /**
+   * Facoltativo. Un paragrafo per riga vuota; gli indirizzi web diventano link.
+   */
+  testo?: string | null;
+  documenti?:
+    | {
+        /**
+         * Es. “Bando di selezione – scadenza 18/12/2026” o “Graduatoria definitiva”.
+         */
+        nome: string;
+        file?: (number | null) | Media;
+        url?: string | null;
+        /**
+         * Facoltativa, mostrata sotto il documento.
+         */
+        nota?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  aggiornatoIl?: string | null;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -714,6 +823,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'calendari';
         value: number | Calendario;
+      } | null)
+    | ({
+        relationTo: 'albo';
+        value: number | AttoAlbo;
+      } | null)
+    | ({
+        relationTo: 'trasparenza';
+        value: number | Trasparenza;
       } | null)
     | ({
         relationTo: 'scuole';
@@ -994,6 +1111,54 @@ export interface CalendariSelect<T extends boolean = true> {
   sedi?: T;
   righe?: T;
   pdf?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "albo_select".
+ */
+export interface AlboSelect<T extends boolean = true> {
+  titolo?: T;
+  sezione?: T;
+  categoria?: T;
+  pubblicatoIl?: T;
+  scadenza?: T;
+  annoAccademico?: T;
+  descrizione?: T;
+  documenti?:
+    | T
+    | {
+        nome?: T;
+        file?: T;
+        url?: T;
+        id?: T;
+      };
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trasparenza_select".
+ */
+export interface TrasparenzaSelect<T extends boolean = true> {
+  titolo?: T;
+  sezione?: T;
+  testo?: T;
+  documenti?:
+    | T
+    | {
+        nome?: T;
+        file?: T;
+        url?: T;
+        nota?: T;
+        id?: T;
+      };
+  aggiornatoIl?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

@@ -5,8 +5,8 @@ import styles from './FiltriSchede.module.css'
 export type Scheda = { label: string; href: string; attiva?: boolean }
 
 /**
- * Filtri a schede: testo con sottolineatura rossa sulla scheda attiva, come la navigazione
- * della Vetrina tesi. Non sembrano pulsanti; su mobile scorrono in orizzontale.
+ * Filtri a schede: testo con sottolineatura scura sulla scheda attiva (niente rosso negli
+ * stati attivi). Non sembrano pulsanti; su mobile scorrono in orizzontale.
  */
 export function FiltriSchede({ schede, label }: { schede: Scheda[]; label: string }) {
   return (

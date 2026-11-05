@@ -14,6 +14,8 @@ const ICONE = {
   'nav-corsi': 'BookOpen',
   'nav-docenti': 'GraduationCap',
   'nav-calendari': 'CalendarDays',
+  'nav-albo': 'ClipboardList',
+  'nav-trasparenza': 'Scale',
   'nav-scuole': 'Landmark',
   'nav-users': 'Users',
   'nav-global-navigazione': 'PanelsTopLeft',
