@@ -2,32 +2,130 @@
   padding-block: var(--space-5) var(--section-pad);
 }
 
-.header {
-  margin-bottom: var(--space-5);
-  max-width: var(--measure);
+/* Corpo: testo a sinistra, contatti e menu della sezione a destra (da computer).
+   Da telefono: contatti subito sotto la testata, poi il contenuto, poi il menu della sezione. */
+.corpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
 }
 
-.header h1 {
-  margin-bottom: var(--space-3);
+.principale {
+  min-width: 0;
 }
 
-.sommario {
-  margin: 0;
-  font-size: var(--font-size-lg);
+@media (min-width: 64rem) {
+  .corpo[data-con-lato] {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+    grid-template-areas:
+      'principale contatti'
+      'principale sezione';
+    grid-template-rows: auto 1fr;
+    column-gap: var(--space-7);
+    row-gap: var(--space-5);
+    align-items: start;
+  }
+
+  .corpo[data-con-lato] .principale {
+    grid-area: principale;
+  }
+
+  .corpo[data-con-lato] .contatti {
+    grid-area: contatti;
+  }
+
+  .corpo[data-con-lato] .sezione {
+    grid-area: sezione;
+    position: sticky;
+    top: var(--space-5);
+  }
+}
+
+@media (max-width: 63.99rem) {
+  .contatti {
+    order: -1;
+  }
+}
+
+/* Menu della sezione: elenco a righe sottili, voce corrente segnata in rosso */
+.sezioneTitolo {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+}
+
+.sezioneTitolo a {
   color: var(--color-text-muted);
+  text-decoration: none;
 }
 
+.sezioneTitolo a:hover {
+  color: var(--color-heading);
+  text-decoration: underline;
+}
+
+.sezione ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.sezione li {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sezione li a {
+  display: flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid transparent;
+  text-decoration: none;
+}
+
+.sezione li a:hover {
+  background: var(--color-azzurro-50);
+}
+
+.sezione li a[aria-current='page'] {
+  font-weight: var(--font-weight-semibold);
+  border-left-color: var(--color-brand-strong);
+  background: var(--color-surface);
+}
+
+/* Sottopagine: griglia di schede come le card della Vetrina tesi */
 .figlie {
-  margin-top: var(--space-7);
+  margin-top: var(--section-pad);
 }
 
-.figlie h2 {
-  font-size: var(--font-size-xl);
+.figlieTesta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.figlieTesta h2 {
+  margin: 0;
+  font-size: var(--font-size-3xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.figlieTesta p {
+  margin: 0;
+  color: var(--color-text-muted);
 }
 
 .figlie ul {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
   gap: var(--gap);
   margin: 0;
   padding: 0;
@@ -39,31 +137,40 @@
   flex-direction: column;
   gap: var(--space-2);
   height: 100%;
-  min-height: var(--target-min);
-  padding: var(--space-4);
-  background: var(--color-surface);
+  min-height: 12rem;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-top: 3px solid var(--color-heading);
   text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
 }
 
 .figlie a:hover {
-  border-color: var(--color-border-control);
+  background: var(--color-azzurro-50);
 }
 
 .figlie a:hover .figliaTitolo {
   text-decoration: underline;
 }
 
+.figliaNumero {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  color: var(--color-brand-strong);
+  font-variant-numeric: tabular-nums;
+}
+
 .figliaTitolo {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
+  line-height: 1.2;
   color: var(--color-heading);
 }
 
 .figliaSommario {
   color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
 }
 
 /* Invito all'azione visibile anche da telefono, dove il passaggio del mouse non esiste. */
@@ -72,10 +179,11 @@
   gap: var(--space-1);
   align-items: center;
   margin-top: auto;
-  padding-top: var(--space-2);
+  padding-top: var(--space-3);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-heading);
+  border-top: 1px solid var(--color-border);
 }
 
 .figlie a:hover .figliaApri svg {
@@ -84,4 +192,11 @@
 
 .figliaApri svg {
   transition: transform var(--duration-fast) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figlie a,
+  .figliaApri svg {
+    transition: none;
+  }
 }

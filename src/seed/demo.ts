@@ -374,3 +374,25 @@ export async function seedDemo(payload: Payload) {
   })
   payload.logger.info('Contenuti demo caricati.')
 }
+
+/** La prima versione della foto demo conteneva una striscia dell'header del vecchio sito: la sostituisce. */
+export async function correggiFacciata(payload: Payload) {
+  const { docs } = await payload.find({
+    collection: 'media',
+    where: { filename: { like: 'facciata' }, height: { equals: 660 } },
+    depth: 0,
+    limit: 5,
+    overrideAccess: true,
+  })
+  for (const m of docs) {
+    await payload.update({
+      collection: 'media',
+      id: m.id,
+      data: {},
+      filePath: path.join(dirname, 'facciata.jpg'),
+      overwriteExistingFiles: true,
+      overrideAccess: true,
+    })
+    payload.logger.info('Foto demo della facciata sostituita.')
+  }
+}

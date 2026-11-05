@@ -68,7 +68,7 @@ export function SiteFooter({
           </ul>
         </div>
 
-        <section aria-labelledby="footer-contatti">
+        <section aria-label="Contatti dell’Accademia">
           <h2 id="footer-contatti" className={styles.title}>
             Contatti
           </h2>

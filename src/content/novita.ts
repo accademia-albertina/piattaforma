@@ -12,6 +12,18 @@ export type Novita = {
 export const NOVITA: Novita[] = [
   {
     data: '2026-11-05',
+    titolo: 'Pagine più curate',
+    punti: [
+      'Nuova testata delle pagine: occhiello rosso con la sezione, titolo grande e sommario, come nella Vetrina tesi.',
+      'Contatti e menu della sezione nella colonna di destra; da telefono i contatti vanno subito sotto il titolo.',
+      'Sottopagine in schede numerate con “Apri →”.',
+      'Scheda docente con ritratto nella testata, contatti in riga e corsi in tabella.',
+      'Tolto dai docenti un profilo cancellato dal sito attuale.',
+    ],
+    pr: [38],
+  },
+  {
+    data: '2026-11-05',
     titolo: 'Pannello da telefono e accesso',
     punti: [
       'Da telefono il menu del pannello si apre come cassetto sopra la pagina, più stretto e con più spazio tra le voci.',

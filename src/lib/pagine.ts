@@ -63,3 +63,20 @@ export async function sottopagine(pagina: Pagina) {
   })
   return res.docs
 }
+
+/** Pagine con lo stesso genitore (compresa questa), per il menu laterale della sezione. */
+export async function sorelle(pagina: Pagina) {
+  const genitore = typeof pagina.genitore === 'object' ? pagina.genitore?.id : pagina.genitore
+  if (!genitore) return []
+  const payload = await payloadClient()
+  const res = await payload.find({
+    collection: 'pagine',
+    where: { genitore: { equals: genitore } },
+    limit: 100,
+    depth: 0,
+    sort: 'titolo',
+    select: { titolo: true, percorso: true },
+    overrideAccess: false,
+  })
+  return res.docs
+}

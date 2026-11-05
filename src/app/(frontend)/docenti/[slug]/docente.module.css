@@ -2,72 +2,80 @@
   padding-block: var(--space-5) var(--section-pad);
 }
 
-.header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-4) var(--space-5);
-  margin-bottom: var(--space-6);
-}
-
-.header h1 {
-  margin: 0;
-}
-
+/* Ritratto nella testata, come l'immagine in evidenza della Vetrina tesi */
 .foto {
-  width: 10rem;
+  width: 100%;
+  max-width: 24rem;
   height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
+  background: var(--color-surface);
 }
 
-.ruolo {
-  margin: var(--space-2) 0 0;
-  font-size: var(--font-size-lg);
-  color: var(--color-text-muted);
-}
-
-.layout {
+/* Contatti nella testata, in riga da computer */
+.dati {
   display: grid;
-  gap: var(--space-6);
-}
-
-@media (min-width: 64rem) {
-  .layout {
-    grid-template-columns: minmax(0, 1fr) 22rem;
-    align-items: start;
-  }
-}
-
-.main {
-  max-width: var(--measure);
-}
-
-.main section + section {
-  margin-top: var(--space-6);
-}
-
-.main h2 {
-  font-size: var(--font-size-xl);
-}
-
-.corsi {
-  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-4) var(--space-5);
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding-top: var(--space-4);
   border-top: 1px solid var(--color-border);
 }
 
-/* Elenco a righe sottili, come la Vetrina tesi */
-.corsi li {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-1) var(--space-3);
-  padding-block: var(--space-3);
+.dati dt {
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.dati dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.corpo {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.sezioneTitolo {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* Corsi in tabella, come l'archivio della Vetrina tesi */
+.corsi {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.corsi th {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border-bottom: 2px solid var(--color-heading);
+}
+
+.corsi td {
+  padding: var(--space-3);
   border-bottom: 1px solid var(--color-border);
+  vertical-align: baseline;
+}
+
+.corsi tbody tr:nth-child(even) {
+  background: var(--color-surface);
+}
+
+.corsi tbody tr:hover {
+  background: var(--color-azzurro-50);
 }
 
 .corsi a {
@@ -80,10 +88,8 @@
 }
 
 .livello {
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: var(--letter-spacing-caps);
-  text-transform: uppercase;
+  width: 1%;
+  white-space: nowrap;
   color: var(--color-text-muted);
 }
 
@@ -91,68 +97,11 @@
   color: var(--color-text-muted);
 }
 
+.body {
+  max-width: var(--measure);
+}
+
 .body :where(ul, ol) {
   padding-left: var(--space-4);
   margin: 0 0 var(--space-3);
-}
-
-.scheda {
-  padding: var(--space-5);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: 4px solid var(--color-brand-strong);
-}
-
-.schedaTitolo {
-  margin-bottom: var(--space-4);
-  font-size: var(--font-size-lg);
-}
-
-.dati {
-  display: grid;
-  gap: var(--space-3);
-  margin: 0;
-}
-
-.dati dt {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-}
-
-.dati dd {
-  margin: 0;
-  overflow-wrap: anywhere;
-}
-
-.cv {
-  margin: var(--space-4) 0 0;
-  font-weight: var(--font-weight-semibold);
-}
-
-.formato {
-  font-weight: var(--font-weight-regular);
-  color: var(--color-text-muted);
-}
-
-/* Senza biografia: contatti sopra, in una riga di tre colonne; corsi a tutta larghezza */
-.layout[data-senza-bio] {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.layout[data-senza-bio] .scheda {
-  order: -1;
-  padding: var(--space-4) var(--space-5);
-  border-top-width: 1px;
-  border-left: 4px solid var(--color-brand-strong);
-}
-
-.layout[data-senza-bio] .main {
-  max-width: none;
-}
-
-@media (min-width: 48rem) {
-  .layout[data-senza-bio] .dati {
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: var(--space-4);
-  }
 }
