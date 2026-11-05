@@ -5,6 +5,7 @@ import { leggiPubblicati } from '@/access/corsi'
 import { documentiField } from '@/fields/documenti'
 import { slugField } from '@/fields/slug'
 import { SEZIONI_TRASPARENZA } from '@/lib/albo'
+import { validaTitolo } from '@/fields/titolo'
 
 /**
  * Amministrazione trasparente: una voce per ogni sottosezione prevista dal D.Lgs. 33/2013,
@@ -40,7 +41,14 @@ export const Trasparenza: CollectionConfig = {
     ],
   },
   fields: [
-    { name: 'titolo', label: 'Titolo', type: 'text', required: true, maxLength: 200 },
+    {
+      name: 'titolo',
+      label: 'Titolo',
+      type: 'text',
+      required: true,
+      maxLength: 200,
+      validate: validaTitolo,
+    },
     {
       name: 'sezione',
       label: 'Sezione',

@@ -55,6 +55,34 @@ export const CHANGELOG: Versione[] = [
     pr: [46],
   },
   {
+    versione: '0.15.0',
+    data: '2026-11-05',
+    titolo: 'Titoli senza maiuscolo e ritocchi al pannello',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'In tutte le sezioni non si possono più salvare titoli scritti tutti in maiuscolo; le sigle (AFAM, MUR, CFA…) restano maiuscole.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'I titoli in maiuscolo importati dal sito attuale (avvisi, albo, trasparenza, corsi) sono stati riscritti in minuscolo.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Nel pannello il tema chiaro/scuro si sceglie dal proprio account; in alto c’è l’icona per aprire il sito e nel percorso una casetta per tornare alla bacheca.',
+      },
+      {
+        tipo: 'corretto',
+        testo: 'L’intestazione del sito si riduce in modo fluido durante lo scorrimento.',
+      },
+      { tipo: 'corretto', testo: 'Nel menu del pannello su mobile non compaiono più due X.' },
+    ],
+    pr: [45],
+  },
+  {
     versione: '0.14.0',
     data: '2026-11-05',
     titolo: 'Pagine istituzionali dal sito attuale',

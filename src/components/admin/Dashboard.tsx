@@ -1,7 +1,7 @@
 import type { AdminViewServerProps, CollectionSlug, GlobalSlug, PayloadRequest } from 'payload'
 
 import { Gutter } from '@payloadcms/ui'
-import { ArrowUpRight, Plus } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import Link from 'next/link'
 
 import { ROLE_LABELS, type Role } from '@/access/roles'
@@ -142,10 +142,6 @@ export default async function Dashboard({
           <Link className={styles.sito} href={`${admin}/changelog`}>
             Changelog <span className={styles.versione}>v{CHANGELOG[0].versione}</span>
           </Link>
-          <a className={styles.sito} href="/" target="_blank" rel="noopener">
-            Apri il sito <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
-            <span className={styles.nascosto}> (si apre in una nuova scheda)</span>
-          </a>
         </div>
       </div>
 

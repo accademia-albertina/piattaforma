@@ -24,8 +24,13 @@ export function useMediaQuery(query: string, serverValue: boolean): boolean {
   )
 }
 
-/** Pixel da scorrere prima che la barra rossa diventi compatta. */
-const SOGLIA = 48
+/**
+ * Pixel da scorrere prima che la barra rossa diventi compatta, e sotto cui torna normale.
+ * Entrambe oltre la barra dei servizi (36px): la barra rossa è già attaccata in alto e
+ * spostarla in su non scopre spazio vuoto sotto.
+ */
+const SOGLIA = 72
+const RITORNO = 44
 
 /**
  * Vero quando la pagina è stata scorsa oltre la soglia: l'header si fa più basso
@@ -39,7 +44,7 @@ export function useCompatto(): boolean {
     const aggiorna = () => {
       inAttesa = false
       // Isteresi: evita lo sfarfallio quando ci si ferma proprio sulla soglia
-      setCompatto((prima) => (prima ? window.scrollY > SOGLIA / 2 : window.scrollY > SOGLIA))
+      setCompatto((prima) => (prima ? window.scrollY > RITORNO : window.scrollY > SOGLIA))
     }
     const onScroll = () => {
       if (inAttesa) return

@@ -12,6 +12,7 @@ import { gunzipSync } from 'node:zlib'
 import type { Payload } from 'payload'
 
 import type { Pagina } from '@/payload-types'
+import { inFrase } from '@/utilities/maiuscole'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -51,7 +52,7 @@ export async function importaPagineWp(payload: Payload) {
     const creata = await payload.create({
       collection: 'pagine',
       data: {
-        titolo: p.titolo,
+        titolo: inFrase(p.titolo),
         slug: p.slug,
         sommario: p.sommario,
         genitore,

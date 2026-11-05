@@ -1,6 +1,11 @@
-/* eslint-disable @next/next/no-img-element -- grafiche del pannello Payload, SVG statici */
+import { House } from 'lucide-react'
 
-/** Stemma nella barra di navigazione del pannello. */
+/** Primo elemento del percorso nel pannello: la casetta riporta alla bacheca. */
 export default function Icon() {
-  return <img src="/brand/stemma-albertina.svg" alt="Accademia Albertina" width={28} height={28} />
+  return (
+    <span className="icona-bacheca">
+      <House size={20} strokeWidth={1.5} aria-hidden />
+      <span className="sr-only-pannello">Bacheca</span>
+    </span>
+  )
 }

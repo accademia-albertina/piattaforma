@@ -15,9 +15,20 @@ import {
 import { ROLE_LABELS } from '@/access/roles'
 import { BLOCCHI } from '@/blocks'
 import { slugField } from '@/fields/slug'
+import { validaTitolo } from '@/fields/titolo'
 
 /** Indirizzi già usati da pagine fisse del sito: una pagina di primo livello non può prenderli. */
-export const SLUG_RISERVATI = ['admin', 'api', 'avvisi', 'cerca', 'corsi', 'docenti', 'next', 'brand', 'media']
+export const SLUG_RISERVATI = [
+  'admin',
+  'api',
+  'avvisi',
+  'cerca',
+  'corsi',
+  'docenti',
+  'next',
+  'brand',
+  'media',
+]
 
 const idDi = (v: unknown) =>
   (v && typeof v === 'object' ? (v as { id: number }).id : v) as number | null | undefined
@@ -99,7 +110,14 @@ export const Pagine: CollectionConfig = {
     afterChange: [aggiornaSottopagine],
   },
   fields: [
-    { name: 'titolo', label: 'Titolo', type: 'text', required: true, maxLength: 120 },
+    {
+      name: 'titolo',
+      label: 'Titolo',
+      type: 'text',
+      required: true,
+      maxLength: 120,
+      validate: validaTitolo,
+    },
     {
       name: 'sommario',
       label: 'Sommario',
