@@ -12,6 +12,17 @@ export type Novita = {
 export const NOVITA: Novita[] = [
   {
     data: '2026-11-05',
+    titolo: 'Pagine istituzionali dal sito attuale',
+    punti: [
+      'Importate 43 pagine del sito attuale: Accademia, Didattica, Studente, Dottorati con i profili dei dottorandi, Erasmus, Contatti, Open data, privacy e cookie.',
+      'Gli indirizzi restano quelli di albertina-academy.it; le pagine Erasmus stanno sotto /erasmus e i vecchi indirizzi rimandano lì.',
+      'I box “Scopri di più” verso le sottopagine sono diventati le schede automatiche delle sottopagine.',
+      'Menu e footer puntano alle pagine vere.',
+    ],
+    pr: [44],
+  },
+  {
+    data: '2026-11-05',
     titolo: 'Albo online e Amministrazione trasparente',
     punti: [
       'Albo online e Amministrazione trasparente sono nel pannello, nel gruppo “Uffici”: ufficio amministrativo, segreteria e vicedirezione pubblicano atti e documenti da soli.',

@@ -103,19 +103,18 @@
 
 .contatti {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr));
-  gap: var(--gap);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: var(--space-2) var(--space-6);
   max-width: none;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Nel corpo della pagina: schede leggere con filetto in alto, senza fondo */
 .contatto {
-  padding: var(--space-4);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  padding: var(--space-4) 0 var(--space-5);
+  border-top: 2px solid var(--color-heading);
 }
 
 .contattoNome {
@@ -127,7 +126,7 @@
 
 .contattoRuolo {
   margin: var(--space-1) 0 0;
-  color: var(--color-text-muted);
+  color: var(--color-ardesia-dark);
 }
 
 .contatto dl {

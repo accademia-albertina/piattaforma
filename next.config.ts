@@ -48,12 +48,25 @@ const nextConfig: NextConfig = {
   },
   // Indirizzi del sito attuale e dei vecchi menu che ora portano alla pagina dei calendari.
   async redirects() {
-    return [
-      '/didattica/orario-lezioni',
-      '/didattica/calendari',
-      '/orario-lezioni',
-      '/calendario',
-    ].map((source) => ({ source, destination: '/calendari', permanent: true }))
+    return ['/didattica/orario-lezioni', '/didattica/calendari', '/orario-lezioni', '/calendario']
+      .map((source) => ({ source, destination: '/calendari', permanent: true }))
+      .concat(
+        // Pagine del sito attuale spostate o con un indirizzo vecchio ancora linkato
+        Object.entries({
+          '/outgoing': '/erasmus/mobilita-studenti',
+          '/incoming': '/erasmus/incoming-students',
+          '/docenti-e-staff': '/erasmus/mobilita-docenti-staff',
+          '/bandi-erasmus': '/erasmus/bandi',
+          '/erasmus/bandi-erasmus': '/erasmus/bandi',
+          '/studente/trasferimenti': '/didattica/trasferimenti',
+          '/didattica/ammissioni-e-iscrizioni': '/didattica/ammissioni',
+          '/didattica/segreteria': '/studente/segreteria-didattica',
+          '/didattica/docenti': '/docenti',
+          '/privacy': '/privacy-policy',
+          '/cookie': '/cookie-policy',
+          '/note-legali': '/termini-e-condizioni',
+        }).map(([source, destination]) => ({ source, destination, permanent: true })),
+      )
   },
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]

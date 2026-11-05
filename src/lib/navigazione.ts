@@ -26,7 +26,7 @@ export const MENU_SERVIZI: { sinistra: VoceMenu[]; destra: VoceMenu[] } = {
 
 export const MENU_IN_EVIDENZA: VoceMenu[] = [
   { label: 'Open Days', href: '/open-days' },
-  { label: 'Segreteria didattica', href: '/studenti/segreteria' },
+  { label: 'Segreteria didattica', href: '/studente/segreteria-didattica' },
   { label: 'Albo online', href: '/albo' },
   { label: 'Troubleshooting', href: '/troubleshooting' },
   { label: 'Contatti', href: '/contatti' },
@@ -41,7 +41,7 @@ export const MENU_PRINCIPALE: GruppoMenu[][] = [
         { label: 'Storia e sedi', href: '/accademia/storia-e-sedi' },
         { label: 'Ordinamento', href: '/accademia/ordinamento' },
         { label: 'Organigramma', href: '/accademia/organigramma' },
-        { label: 'Il saluto del Direttore', href: '/accademia/saluto-del-direttore' },
+        { label: 'Il saluto del Direttore', href: '/accademia/il-saluto-del-direttore' },
         { label: 'Albertina Press', href: '/accademia/albertina-press' },
         { label: 'Biblioteca', href: '/accademia/biblioteca' },
         { label: 'Pinacoteca', href: 'https://www.pinacotecalbertina.it', esterno: true },
@@ -52,7 +52,7 @@ export const MENU_PRINCIPALE: GruppoMenu[][] = [
     {
       titolo: 'Didattica',
       voci: [
-        { label: 'Offerta formativa', href: '/didattica/offerta-formativa' },
+        { label: 'Piani di studio', href: '/didattica/piani-di-studio' },
         { label: 'Manifesto degli studi', href: '/didattica/manifesto-degli-studi' },
         { label: 'Corsi', href: '/corsi' },
         { label: 'Docenti', href: '/docenti' },
@@ -67,7 +67,7 @@ export const MENU_PRINCIPALE: GruppoMenu[][] = [
     {
       titolo: 'Dottorati',
       voci: [
-        { label: 'Dottorati Accademia Albertina', href: '/dottorati' },
+        { label: 'Dottorati Accademia Albertina', href: '/dottorati/albertina' },
         { label: 'Dottorati convenzionati', href: '/dottorati/convenzionati' },
       ],
     },
@@ -85,15 +85,15 @@ export const MENU_PRINCIPALE: GruppoMenu[][] = [
     {
       titolo: 'Studente',
       voci: [
-        { label: 'Modulistica', href: '/studenti/modulistica' },
-        { label: 'Tasse', href: '/studenti/tasse' },
-        { label: 'Consulta', href: '/studenti/consulta' },
-        { label: 'Tesi', href: '/studenti/tesi' },
-        { label: 'Borse di studio', href: '/studenti/borse-di-studio' },
-        { label: 'Segreteria', href: '/studenti/segreteria' },
-        { label: 'Stage e tirocinio', href: '/studenti/stage-e-tirocinio' },
-        { label: 'Sportelli', href: '/studenti/sportelli' },
-        { label: 'Tutoraggio interculturale', href: '/studenti/tutoraggio-interculturale' },
+        { label: 'Modulistica', href: '/studente/modulistica' },
+        { label: 'Tasse', href: '/studente/tasse' },
+        { label: 'Consulta', href: '/studente/consulta' },
+        { label: 'Tesi', href: '/studente/tesi' },
+        { label: 'Borse di studio', href: '/studente/borse-di-studio' },
+        { label: 'Segreteria', href: '/studente/segreteria-didattica' },
+        { label: 'Stage e tirocinio', href: '/studente/stage-tirocinio' },
+        { label: 'Sportelli', href: '/studente/sportelli' },
+        { label: 'Tutoraggio interculturale', href: '/studente/tutoraggio-interculturale' },
       ],
     },
   ],
@@ -158,9 +158,9 @@ export const SOCIAL: VoceMenu[] = [
 
 /** Link obbligatori per una PA (AGID, GDPR). */
 export const MENU_LEGALE: VoceMenu[] = [
-  { label: 'Privacy', href: '/privacy' },
-  { label: 'Cookie', href: '/cookie' },
-  { label: 'Note legali', href: '/note-legali' },
+  { label: 'Privacy', href: '/privacy-policy' },
+  { label: 'Cookie', href: '/cookie-policy' },
+  { label: 'Note legali', href: '/termini-e-condizioni' },
   { label: 'Dichiarazione di accessibilità', href: '/dichiarazione-accessibilita' },
-  { label: 'Segnalazioni di accessibilità', href: '/segnalazioni-accessibilita' },
+  { label: 'Segnalazioni di accessibilità', href: '/segnalazioni-di-accessibilita' },
 ]
