@@ -12,6 +12,18 @@ export type Novita = {
 export const NOVITA: Novita[] = [
   {
     data: '2026-11-05',
+    titolo: 'Header più fluido, titoli senza maiuscolo e ritocchi al pannello',
+    punti: [
+      'Scorrendo la pagina, la barra rossa e il logo si rimpiccioliscono senza scatti.',
+      'I titoli tutti in maiuscolo non si possono più salvare; quelli importati dal sito attuale sono stati riscritti in minuscolo con l’iniziale maiuscola, tenendo le sigle.',
+      'Nel pannello il percorso inizia con una casetta che porta alla bacheca, e in alto c’è il pulsante per aprire il sito.',
+      'Il tema chiaro o scuro si sceglie dal proprio account, non più dall’intestazione.',
+      'Corretti i due pulsanti di chiusura sovrapposti nel menu del pannello.',
+    ],
+    pr: [45],
+  },
+  {
+    data: '2026-11-05',
     titolo: 'Pagine istituzionali dal sito attuale',
     punti: [
       'Importate 43 pagine del sito attuale: Accademia, Didattica, Studente, Dottorati con i profili dei dottorandi, Erasmus, Contatti, Open data, privacy e cookie.',

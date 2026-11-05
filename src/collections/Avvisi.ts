@@ -10,6 +10,7 @@ import {
 import { canAccessBackend, isAdmin } from '@/access/roles'
 import { rowLabel } from '@/fields/rowLabel'
 import { slugField } from '@/fields/slug'
+import { validaTitolo } from '@/fields/titolo'
 
 /** Il pubblico vede solo gli avvisi pubblicati; chi lavora nel pannello vede anche le bozze. */
 const read: Access = ({ req }) => {
@@ -45,7 +46,14 @@ export const Avvisi: CollectionConfig = {
     delete: updateOrDelete,
   },
   fields: [
-    { name: 'titolo', label: 'Titolo', type: 'text', required: true, maxLength: 160 },
+    {
+      name: 'titolo',
+      label: 'Titolo',
+      type: 'text',
+      required: true,
+      maxLength: 160,
+      validate: validaTitolo,
+    },
     {
       name: 'sommario',
       label: 'Sommario',

@@ -125,11 +125,7 @@ export function SiteHeader({
         </nav>
       </div>
 
-      <header
-        ref={headerRef}
-        className={styles.header}
-        data-compatto={compatto || undefined}
-      >
+      <header ref={headerRef} className={styles.header} data-compatto={compatto || undefined}>
         <Disclosure isExpanded={open} onExpandedChange={setOpen} className={styles.main}>
           <div className={`container ${styles.mainInner}`}>
             <Link href="/" className={styles.brand}>
@@ -161,11 +157,6 @@ export function SiteHeader({
               </Button>
             </div>
           </div>
-
-          {open && (
-            // Il velo chiude il menu al clic; da tastiera si chiude con Esc o con il pulsante.
-            <div className={styles.velo} aria-hidden="true" onClick={() => setOpen(false)} />
-          )}
 
           <DisclosurePanel className={styles.panel}>
             <nav aria-label="Principale" className={`container ${styles.megaMenu}`}>
@@ -210,6 +201,11 @@ export function SiteHeader({
           </DisclosurePanel>
         </Disclosure>
       </header>
+
+      {open && (
+        // Il velo chiude il menu al clic; da tastiera si chiude con Esc o con il pulsante.
+        <div className={styles.velo} aria-hidden="true" onClick={() => setOpen(false)} />
+      )}
     </>
   )
 }

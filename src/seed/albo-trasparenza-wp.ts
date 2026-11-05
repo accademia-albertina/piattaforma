@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url'
 import type { Payload } from 'payload'
 
 import { SEZIONI_TRASPARENZA, type SezioneAlbo, type SezioneTrasparenza } from '@/lib/albo'
+import { inFrase } from '@/utilities/maiuscole'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 const leggi = <T>(nome: string): T => JSON.parse(readFileSync(path.join(dirname, nome), 'utf8'))
@@ -36,7 +37,7 @@ type VoceWp = {
 const pulito = (s: string) => s.replace(/\r\n?/g, '\n').trim()
 
 const chiaveAtto = (a: { sezione: string; titolo: string; pubblicatoIl?: string | null }) =>
-  `${a.sezione}|${a.titolo.slice(0, 300).trim().toLowerCase()}|${(a.pubblicatoIl ?? '').slice(0, 10)}`
+  `${a.sezione}|${inFrase(a.titolo).slice(0, 300).trim().toLowerCase()}|${(a.pubblicatoIl ?? '').slice(0, 10)}`
 
 export async function importaAlboWp(payload: Payload) {
   const atti = leggi<AttoWp[]>('albo-wp.json')
@@ -59,7 +60,7 @@ export async function importaAlboWp(payload: Payload) {
     await payload.create({
       collection: 'albo',
       data: {
-        titolo: a.titolo.slice(0, 300),
+        titolo: inFrase(a.titolo).slice(0, 300),
         sezione: a.sezione,
         categoria: a.categoria,
         annoAccademico: a.anno,
@@ -100,7 +101,7 @@ export async function importaTrasparenzaWp(payload: Payload) {
     await payload.create({
       collection: 'trasparenza',
       data: {
-        titolo: v.titolo,
+        titolo: inFrase(v.titolo),
         slug: v.slug,
         sezione: v.sezione as SezioneTrasparenza,
         testo: testo || null,
