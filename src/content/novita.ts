@@ -12,6 +12,15 @@ export type Novita = {
 export const NOVITA: Novita[] = [
   {
     data: '2026-11-05',
+    titolo: 'Presentazioni di scuole e corsi',
+    punti: [
+      'Importati dal PDF della segreteria i calendari delle presentazioni 2026/2027: scuole (11 righe) e corsi (201 righe).',
+      'Si filtrano per scuola o corso e si cercano per docente, aula o data.',
+    ],
+    pr: [40],
+  },
+  {
+    data: '2026-11-05',
     titolo: 'Orari e calendari a tabella',
     punti: [
       'Nuova sezione “Orari e calendari”: orario delle lezioni, esami e presentazioni si compilano a tabella nel pannello, anche incollando da Excel.',

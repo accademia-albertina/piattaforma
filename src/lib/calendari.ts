@@ -92,10 +92,16 @@ export const COLONNE: Record<TipoCalendario, Colonna[]> = {
     { chiave: 'aula', etichetta: 'Aula', larghezza: 8, esempio: 'C28' },
   ],
   presentazioni: [
-    { chiave: 'scuola', etichetta: 'Scuola', larghezza: 14, filtro: true, esempio: 'Pittura' },
+    {
+      chiave: 'scuola',
+      etichetta: 'Scuola o corso',
+      larghezza: 18,
+      filtro: true,
+      esempio: 'Pittura',
+    },
     {
       chiave: 'quando',
-      etichetta: 'Data e ora',
+      etichetta: 'Date e indicazioni',
       lunga: true,
       larghezza: 36,
       esempio: '19/10/2026 ore 9.30 1° Triennio A-G',

@@ -1,0 +1,63 @@
+{
+ "tipo": "presentazioni",
+ "titolo": "Presentazioni delle scuole",
+ "annoAccademico": "2026/2027",
+ "avvertenze": "Alcune date o aule potrebbero cambiare: seguite sempre gli aggiornamenti del calendario e gli avvisi sul sito.",
+ "righe": [
+  {
+   "scuola": "Pittura",
+   "quando": "1° Triennio e 1° Biennio:\nIn presenza ruotando nei quattro gruppi (sotto la suddivisione a seconda dell’iniziale del cognome) a partire dall’aula R01c (Rotonda) dove avverrà la presentazione della Scuola da parte del Coordinatore Prof.\nGarbolino, poi la Prof.ssa Barovero, e i Prof.\nLeonardi, Giamblanco e Barzagli.\n19/10/2026 ore 9.30 1° Triennio A-G\n19/10/2026 ore 10.30 1° Triennio H-P\n19/10/2026 ore 11.30 1° Triennio Q-Z\n19/10/2026 ore 12.30 1° Biennio (tutti)\nLe lezioni avranno inizio il 2 novembre 2026, secondo un programma che sarà comunicato dai singoli docenti.",
+   "dove": "Prof. Gabriele Garbolino\nProf.ssa Viola Barovero\nAula R01c (Rotonda)\nProf. Giuseppe Leonardi\nAula A41\nProf. Salvatore Giamblanco\nAula P33\nProf. Massimo Barzagli\nAula P32"
+  },
+  {
+   "scuola": "Scultura",
+   "quando": "1° Triennio:\n21/10/2026 ore 9-10.30\n1° Biennio:\n21/10/2026 ore 10.30-11.30\nLe lezioni avranno inizio il 2 novembre 2026, secondo un programma che sarà comunicato dai singoli docenti.",
+   "dove": "Prof.ssa Roberta Merlino\nProf. Franco Bosisio\nProf.ssa Daniela Novello\nAula C01"
+  },
+  {
+   "scuola": "Decorazione",
+   "quando": "1° anno Triennio e Biennio:\n19/10/2026 dalle ore 10\nIl coordinatore presenterà la Scuola.\nDalle 10.30 i docenti a turno presenteranno il programma del loro corso secondo il seguente ordine:\nDecorazione Triennio e Bienni 19/10/2026 ore 10.30 Prof. Galfione ore 11.00 Prof.ssa Saccomandi",
+   "dove": "Prof. Gaetano Centrone\nProf.ssa Monica Saccomandi\nProf. Carlo Galfione\nAule C41/C42"
+  },
+  {
+   "scuola": "Decorazione",
+   "quando": "Tecniche e tecnologie della decorazione\nOre 14.00 Prof.ssa Saccomandi (Biennio)\nOre 14.30 Prof.ssa Saccomandi (Triennio)\nLe lezioni avranno inizio il 2 novembre 2026, secondo un programma che sarà comunicato dai singoli docenti.",
+   "dove": ""
+  },
+  {
+   "scuola": "Grafica",
+   "quando": "Triennio - Grafica d’arte\nBiennio - Grafica d’arte ed editoria d’arte:\n20/10/2026 ore 10.00\nIl coordinatore presenterà la Scuola e a seguire i docenti di Grafica d’arte presenteranno il loro corso con il seguente ordine, seguito da un ulteriore confronto sul piano di studi con il prof. Muolo. ore 10.30-11.00 prof.ssa Maria Luisa Borra ore 11.00-11.30 prof.ssa Irene Podgornik.\nAl termine delle presentazioni delle prof.sse\nBorra e Podgornik gli studenti dovranno decidere con quale delle due docenti seguiranno il corso.",
+   "dove": "Prof. Carmine Maurizio Muolo\nAula G01 Stucchi\nProf.ssa Maria Luisa Borra (Aula G01)\nProf.ssa Irene Podgornik (Aula G01 Stucchi)"
+  },
+  {
+   "scuola": "Scenografia per il teatro e scenografia cinema TV",
+   "quando": "Scenografia Teatro e Scenografia Cinema\nTV:\n1° Triennio e 1° Biennio:\n19/10/2026 ore 9.30\nLe lezioni avranno inizio il 2 novembre 2026, secondo un programma che sarà comunicato dai singoli docenti.",
+   "dove": "Prof.ssa Elena Amadio\nAula C28"
+  },
+  {
+   "scuola": "Progettazione artistica per l’impresa",
+   "quando": "1° Triennio:\n20/10/2026 ore 10.00\n1° Biennio:\n20/10/2026 ore 11.30\nLe lezioni avranno inizio il 2 novembre 2026, secondo un programma che sarà comunicato dai singoli docenti.",
+   "dove": "Prof.ssa Chiara D’Aleo\nAula R13"
+  },
+  {
+   "scuola": "Nuove tecnologie dell’arte",
+   "quando": "1° Triennio:\n19/10/2026 ore 10.30\n1° Biennio:\n19/10/2026 ore 11.30\nLe lezioni avranno inizio il 2 novembre 2026, secondo un programma che sarà comunicato dai singoli docenti.",
+   "dove": "Prof. Roberto Mastroianni\nAula R13"
+  },
+  {
+   "scuola": "Comunicazione e valorizzazione del patrimonio artistico contemporaneo",
+   "quando": "1° Triennio:\n20/10/2026 ore 10.00\n1° Biennio Curatoriale:\n20/10/2026 ore 11.45\nLe lezioni avranno inizio il 2 novembre 2026, secondo un programma che sarà comunicato dai singoli docenti.",
+   "dove": "Prof.ssa Sara Liuzzi\nSalone d’Onore"
+  },
+  {
+   "scuola": "Didattica dell’arte",
+   "quando": "1° Triennio:\n20/10/2026 ore 12.30\n1° Biennio Didattica museale:\n20/10/2026 ore 12.30\nLe lezioni avranno inizio il 2 novembre 2026, secondo un programma che sarà comunicato dai singoli docenti.",
+   "dove": "Prof.ssa Simonetta Fadda\nAula S31"
+  },
+  {
+   "scuola": "Cinema, fotografia, audiovisivo",
+   "quando": "1° Triennio:\n22/10/2026 ore 10.30\nLe lezioni avranno inizio il 2 novembre 2026, secondo un programma che sarà comunicato dai singoli docenti.\nPer gli anni successivi ci sarà comunicazione diretta del prof. Amerio.\nNella prima settimana di lezioni sarà fissata una riunione di Scuola a cui tutti gli studenti, studentesse e docenti sono invitati a partecipare.",
+   "dove": "Prof. Fabio Amerio\nProf. Andrea Balzola\nAula A11"
+  }
+ ]
+}

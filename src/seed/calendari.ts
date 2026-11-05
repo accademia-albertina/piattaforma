@@ -8,8 +8,12 @@ import { normalizzaRighe, type TipoCalendario } from '@/lib/calendari'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
-/** Calendari estratti dai PDF della segreteria (scripts/wp/estrai-orario.py). */
-const FILE = ['orario-2025-2026.json']
+/** Calendari estratti dai PDF della segreteria (scripts/wp/estrai-*.py). */
+const FILE = [
+  'orario-2025-2026.json',
+  'presentazioni-scuole-2026-2027.json',
+  'presentazioni-corsi-2026-2027.json',
+]
 
 type Dati = {
   tipo: TipoCalendario
