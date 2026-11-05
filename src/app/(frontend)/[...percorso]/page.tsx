@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -60,6 +61,9 @@ export default async function PaginaIstituzionale({ params }: Props) {
                 <Link href={`/${f.percorso}`}>
                   <span className={styles.figliaTitolo}>{f.titolo}</span>
                   {f.sommario ? <span className={styles.figliaSommario}>{f.sommario}</span> : null}
+                  <span className={styles.figliaApri} aria-hidden="true">
+                    Apri <ArrowRight size={16} strokeWidth={1.5} />
+                  </span>
                 </Link>
               </li>
             ))}

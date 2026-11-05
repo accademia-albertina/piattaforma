@@ -22,15 +22,45 @@ html[data-theme='light'] .btn--style-primary:not(.btn--disabled) {
 }
 
 // Pagina di accesso: logo misurato, titolo e occhiello come nel sito.
+// Tutto allineato a sinistra sullo stesso asse del modulo (Payload centra solo il logo).
 .login__brand,
 .forgot-password__brand,
 .create-first-user__brand {
+  justify-content: flex-start;
+  width: 100%;
   margin-bottom: calc(var(--base) * 1.5);
 
   .logo-accesso {
     display: block;
     width: 176px;
     height: auto;
+  }
+}
+
+.accesso-testata {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(var(--base) * 1.25);
+
+  &__torna {
+    display: inline-flex;
+    gap: 0.4em;
+    align-items: center;
+    min-height: 44px;
+    color: var(--theme-text);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  &__logo {
+    display: block;
+
+    &:focus-visible {
+      outline: 2px solid var(--theme-text);
+      outline-offset: 4px;
+    }
   }
 }
 
@@ -130,8 +160,8 @@ html[data-theme='dark'] .logo-accesso {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   padding: 0;
   color: var(--theme-text);
   cursor: pointer;
@@ -204,5 +234,140 @@ body {
   .app-header__actions-wrapper,
   .app-header__account {
     flex: none;
+  }
+}
+
+// ——— Menu laterale su telefono e tablet: cassetto sopra la pagina ———
+// Payload di serie apre il menu a tutta larghezza e sposta la pagina di lato (che si "spacca"
+// durante l'animazione). Qui il menu scorre sopra la pagina, largo l'85%, con un velo dietro:
+// la pagina resta ferma e si vede che è ancora lì.
+@media (max-width: 1024px) {
+  // Con il menu fuori dal flusso (fixed) la griglia di Payload metteva la pagina nella colonna
+  // larga 0 del menu: testo a una parola per riga. Su telefono basta un blocco semplice.
+  .template-default,
+  .template-default--nav-hydrated,
+  .template-default--nav-hydrated.template-default--nav-open {
+    display: block;
+  }
+
+  .template-default .template-default__wrap {
+    min-width: 100%;
+  }
+
+  .template-default .nav {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 50; // sopra il velo (z-status 40), sotto i popup (60)
+    width: min(85vw, 22rem);
+    height: 100dvh;
+    background: var(--theme-bg);
+    border-right: 1px solid var(--theme-elevation-150);
+    box-shadow: 0 0 2.5rem rgb(0 0 0 / 25%);
+    opacity: 1;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition:
+      transform 0.22s cubic-bezier(0.2, 0, 0, 1),
+      visibility 0s linear 0.22s;
+  }
+
+  .template-default--nav-hydrated .nav--nav-open {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.22s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  // Velo sulla pagina: Payload lo prevede già (::before del contenitore), basta mostrarlo.
+  .template-default--nav-open .template-default__wrap::before {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgb(0 0 0 / 45%);
+  }
+
+  .nav__scroll {
+    --nav-padding-inline-start: 1.25rem;
+    --nav-padding-inline-end: 1.25rem;
+  }
+
+  // Più spazio tra le voci, testo un po' meno grande di quello di Payload (17,5px).
+  .nav__link {
+    min-height: 3rem;
+    font-size: 1.0625rem;
+    line-height: 1.4;
+  }
+
+  .nav-group {
+    margin-bottom: 1.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .template-default--nav-hydrated .nav,
+  .template-default--nav-hydrated .nav--nav-open {
+    transition: none;
+  }
+}
+
+// ——— Pulsanti dell'intestazione tutti della stessa misura ———
+// Menu, tema e account: 40px da computer, 44px (minimo per il dito) da telefono.
+.app-header {
+  --pulsante-header: 40px;
+
+  @media (max-width: 1024px) {
+    --pulsante-header: 44px;
+  }
+}
+
+.app-header .hamburger,
+.nav__header .hamburger,
+.app-header .cambia-tema {
+  width: var(--pulsante-header);
+  height: var(--pulsante-header);
+  border-radius: 0;
+}
+
+.nav__header {
+  width: 100%;
+}
+
+.app-header .hamburger,
+.nav__header .hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.app-header__mobile-nav-toggler {
+  width: var(--pulsante-header);
+  height: var(--pulsante-header);
+}
+
+.app-header__account {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--pulsante-header);
+  min-height: var(--pulsante-header);
+}
+
+// Pulsante di chiusura dentro il cassetto: stessa misura e stesso bordo di quello che lo apre.
+.nav__mobile-close {
+  display: flex;
+  align-items: center;
+  height: auto;
+  padding: 0;
+
+  .hamburger {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--theme-elevation-150);
+  }
+}
+
+@media (max-width: 1024px) {
+  // Aria tra il pulsante di chiusura e il primo gruppo del menu.
+  .nav__scroll {
+    padding-top: calc(44px + 1.75rem);
   }
 }

@@ -65,3 +65,23 @@
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
 }
+
+/* Invito all'azione visibile anche da telefono, dove il passaggio del mouse non esiste. */
+.figliaApri {
+  display: inline-flex;
+  gap: var(--space-1);
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+}
+
+.figlie a:hover .figliaApri svg {
+  transform: translateX(3px);
+}
+
+.figliaApri svg {
+  transition: transform var(--duration-fast) var(--ease-out);
+}

@@ -11,6 +11,18 @@ export type Novita = {
 
 export const NOVITA: Novita[] = [
   {
+    data: '2026-11-05',
+    titolo: 'Pannello da telefono e accesso',
+    punti: [
+      'Da telefono il menu del pannello si apre come cassetto sopra la pagina, più stretto e con più spazio tra le voci.',
+      'Pulsanti menu, tema e account della stessa misura, comodi da toccare.',
+      'Pagina di accesso allineata a sinistra, con “Torna al sito” e logo che porta alla home.',
+      'Card degli avvisi con “Leggi l’avviso →” e box delle sottopagine con “Apri →”.',
+      'Nell’anteprima online si vedono di nuovo le immagini delle scuole.',
+    ],
+    pr: [37],
+  },
+  {
     data: '2026-11-04',
     titolo: 'Immagini e pagina 404',
     punti: [
