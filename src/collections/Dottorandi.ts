@@ -102,12 +102,20 @@ export const Dottorandi: CollectionConfig = {
       admin: { position: 'sidebar' },
     },
     {
-      name: 'tutor',
-      label: 'Tutor',
+      name: 'supervisor',
+      label: 'Supervisor',
       type: 'text',
       maxLength: 200,
       access: { update: campoSoloDidattica },
-      admin: { position: 'sidebar', description: 'Nome e cognome, anche di più tutor.' },
+      admin: { position: 'sidebar', description: 'Es. “Prof.ssa Irene Biolchini (Accademia Albertina)”.' },
+    },
+    {
+      name: 'cosupervisor',
+      label: 'Co-supervisor',
+      type: 'text',
+      maxLength: 200,
+      access: { update: campoSoloDidattica },
+      admin: { position: 'sidebar' },
     },
     {
       name: 'foto',

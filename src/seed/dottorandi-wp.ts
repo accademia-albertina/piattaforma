@@ -24,6 +24,8 @@ type DottorandoWp = {
   cognome: string
   email: string | null
   titoloProgetto: string | null
+  supervisor: string | null
+  cosupervisor: string | null
   biografia: Dottorando['biografia']
   abstract: Dottorando['abstract']
 }
@@ -65,6 +67,8 @@ export async function importaDottorandiWp(payload: Payload) {
             slug: p.slugWp,
             email: p.email ?? undefined,
             titoloProgetto: p.titoloProgetto ?? undefined,
+            supervisor: p.supervisor ?? undefined,
+            cosupervisor: p.cosupervisor ?? undefined,
             biografia: p.biografia ?? undefined,
             abstract: p.abstract ?? undefined,
             foto: await caricaFoto(),
@@ -80,6 +84,8 @@ export async function importaDottorandiWp(payload: Payload) {
       }
       if (!doc.email && p.email) data.email = p.email
       if (!doc.titoloProgetto && p.titoloProgetto) data.titoloProgetto = p.titoloProgetto
+      if (!doc.supervisor && p.supervisor) data.supervisor = p.supervisor
+      if (!doc.cosupervisor && p.cosupervisor) data.cosupervisor = p.cosupervisor
       if (!doc.biografia && p.biografia) data.biografia = p.biografia
       if (!doc.abstract && p.abstract) data.abstract = p.abstract
       if (Object.keys(data).length === 0) continue

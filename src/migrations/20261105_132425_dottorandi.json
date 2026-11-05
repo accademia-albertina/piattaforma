@@ -6308,8 +6308,14 @@
           "primaryKey": false,
           "notNull": false
         },
-        "tutor": {
-          "name": "tutor",
+        "supervisor": {
+          "name": "supervisor",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cosupervisor": {
+          "name": "cosupervisor",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
@@ -11392,6 +11398,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "9bd5bf37-e034-48d9-83db-cfdb467c267b",
+  "id": "cdb29baf-c703-4fdc-9d9d-e8edfe02c146",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

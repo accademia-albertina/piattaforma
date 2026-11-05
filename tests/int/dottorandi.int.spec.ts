@@ -167,6 +167,10 @@ describe('Dottorandi', () => {
     const deval = docs.find((d) => d.slug === 'giulia-deval')
     expect(deval?.titoloProgetto).toMatch(/^Politiche della voce/)
     expect(deval?.abstract).toBeTruthy()
+    // Supervisor e co-supervisor erano righe in fondo all'abstract: ora sono campi a parte
+    expect(deval?.supervisor).toMatch(/^Prof\. Michele Bertolini/)
+    expect(deval?.cosupervisor).toMatch(/D’Alonzo/)
+    expect(JSON.stringify(deval?.abstract)).not.toMatch(/upervisor/)
     // Sul sito attuale due profili hanno l'email di Giulia Roversi: non si importa
     expect(docs.filter((d) => d.email === 'giulia.roversi@albertina.academy')).toHaveLength(1)
 

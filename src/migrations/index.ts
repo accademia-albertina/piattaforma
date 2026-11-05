@@ -6,7 +6,7 @@ import * as migration_20261022_170417_menu_e_etichette from './20261022_170417_m
 import * as migration_20261023_083849_corsi_docenti from './20261023_083849_corsi_docenti';
 import * as migration_20261105_071837_calendari from './20261105_071837_calendari';
 import * as migration_20261105_081212_albo_trasparenza from './20261105_081212_albo_trasparenza';
-import * as migration_20261105_130328_dottorandi from './20261105_130328_dottorandi';
+import * as migration_20261105_132425_dottorandi from './20261105_132425_dottorandi';
 
 export const migrations = [
   {
@@ -50,8 +50,8 @@ export const migrations = [
     name: '20261105_081212_albo_trasparenza',
   },
   {
-    up: migration_20261105_130328_dottorandi.up,
-    down: migration_20261105_130328_dottorandi.down,
-    name: '20261105_130328_dottorandi'
+    up: migration_20261105_132425_dottorandi.up,
+    down: migration_20261105_132425_dottorandi.down,
+    name: '20261105_132425_dottorandi'
   },
 ];

@@ -651,9 +651,10 @@ export interface Dottorando {
   ciclo?: string | null;
   curriculum?: ('new-media-art' | 'processi-espositivi') | null;
   /**
-   * Nome e cognome, anche di più tutor.
+   * Es. “Prof.ssa Irene Biolchini (Accademia Albertina)”.
    */
-  tutor?: string | null;
+  supervisor?: string | null;
+  cosupervisor?: string | null;
   /**
    * Facoltativa. Formato quadrato o verticale.
    */
@@ -1185,7 +1186,8 @@ export interface DottorandiSelect<T extends boolean = true> {
   email?: T;
   ciclo?: T;
   curriculum?: T;
-  tutor?: T;
+  supervisor?: T;
+  cosupervisor?: T;
   foto?: T;
   titoloProgetto?: T;
   abstract?: T;

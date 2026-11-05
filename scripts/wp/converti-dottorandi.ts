@@ -78,8 +78,32 @@ const dottorandi = grezze.map((g) => {
   const bio: string[] = []
   const abstract: string[] = []
   let titoloProgetto: string | null = null
+  let supervisor: string | null = null
+  let cosupervisor: string | null = null
   let parte: 'bio' | 'abstract' = 'bio'
   for (const el of Array.from(document.body.children)) {
+    // "Supervisor: …" e "Co-supervisor: …" sono righe in fondo all'abstract: vanno nei loro campi
+    el.innerHTML = el.innerHTML
+      .split(/<br\s*\/?>/)
+      .filter((riga) => {
+        const t = riga.replace(/<[^>]+>/g, '').trim()
+        const m = /^(co-?)?supervisor\s*:\s*(.+)$/i.exec(t)
+        if (!m) return true
+        if (m[1]) cosupervisor = m[2].trim()
+        else supervisor = m[2].trim()
+        return false
+      })
+      .join('<br>')
+    // Righe incollate senza a capo: "…culturale.Supervisor: Prof. X (…)Co-supervisor: …"
+    el.innerHTML = el.innerHTML.replace(
+      /(Co-?)?Supervisor:\s*([^<]*?)(?=(?:Co-?)?Supervisor:|<|$)/gi,
+      (_, co: string | undefined, nome: string) => {
+        if (co) cosupervisor = nome.trim()
+        else supervisor = nome.trim()
+        return ''
+      },
+    )
+    if (!el.textContent?.trim()) continue
     const testo = el.textContent?.trim() ?? ''
     if (/^biografia:?$/i.test(testo)) continue
     const t = /^titolo (del )?progetto:\s*/i.exec(testo)
@@ -104,6 +128,8 @@ const dottorandi = grezze.map((g) => {
     cognome,
     email: mail,
     titoloProgetto,
+    supervisor,
+    cosupervisor,
     biografia: lexical(bio.join('')),
     abstract: lexical(abstract.join('')),
   }

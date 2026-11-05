@@ -12,6 +12,17 @@ export type Novita = {
 export const NOVITA: Novita[] = [
   {
     data: '2026-11-05',
+    titolo: 'Dottorandi',
+    punti: [
+      'I dottorandi hanno una sezione propria nel pannello, come i docenti: foto, ciclo, curriculum, supervisor, progetto di ricerca e biografia.',
+      'La pagina Dottorandi mostra tutti i profili a schede, raggruppati per ciclo quando è indicato; ogni scheda porta al profilo completo.',
+      'Importati dal sito attuale i 13 profili, con progetto, abstract, supervisor e co-supervisor separati dal testo.',
+      'Ogni dottorando con un account può aggiornare il proprio profilo; ciclo, nome e supervisor li gestisce la vicedirezione.',
+    ],
+    pr: [46],
+  },
+  {
+    data: '2026-11-05',
     titolo: 'Pagine istituzionali dal sito attuale',
     punti: [
       'Importate 43 pagine del sito attuale: Accademia, Didattica, Studente, Dottorati con i profili dei dottorandi, Erasmus, Contatti, Open data, privacy e cookie.',

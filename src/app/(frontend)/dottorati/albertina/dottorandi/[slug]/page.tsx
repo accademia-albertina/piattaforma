@@ -95,10 +95,16 @@ export default async function DottorandoPage({ params }: Props) {
               <dd>{d.ciclo}</dd>
             </div>
           ) : null}
-          {d.tutor ? (
+          {d.supervisor ? (
             <div>
-              <dt>Tutor</dt>
-              <dd>{d.tutor}</dd>
+              <dt>Supervisor</dt>
+              <dd>{d.supervisor}</dd>
+            </div>
+          ) : null}
+          {d.cosupervisor ? (
+            <div>
+              <dt>Co-supervisor</dt>
+              <dd>{d.cosupervisor}</dd>
             </div>
           ) : null}
         </dl>
