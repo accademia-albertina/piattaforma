@@ -20,6 +20,26 @@ import styles from './calendario.module.css'
 
 export const dynamic = 'force-dynamic'
 
+/** I link (es. Google Meet) scritti nelle celle diventano cliccabili. */
+function ConLink({ testo }: { testo: string }) {
+  const parti = testo.split(/((?:https?:\/\/)?meet\.google\.com\/[\w-]+|https?:\/\/[^\s]+)/g)
+  return parti.map((p, i) =>
+    i % 2 === 1 ? (
+      <a
+        key={i}
+        href={p.startsWith('http') ? p : `https://${p}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {p.replace(/^https?:\/\//, '')}
+        <span className="visually-hidden"> (si apre in una nuova scheda)</span>
+      </a>
+    ) : (
+      p
+    ),
+  )
+}
+
 type Props = {
   params: Promise<{ slug: string }>
   searchParams: Promise<Record<string, string | string[] | undefined>>
@@ -224,7 +244,7 @@ export default async function CalendarioPage({ params, searchParams }: Props) {
                         </th>
                       ) : (
                         <td key={col.chiave} rowSpan={span[i][k]}>
-                          {r[col.chiave]}
+                          <ConLink testo={r[col.chiave]} />
                         </td>
                       ),
                     )}
@@ -246,7 +266,9 @@ export default async function CalendarioPage({ params, searchParams }: Props) {
                           r[col.chiave] ? (
                             <div key={col.chiave}>
                               <dt>{col.etichetta}</dt>
-                              <dd>{r[col.chiave]}</dd>
+                              <dd>
+                                <ConLink testo={r[col.chiave]} />
+                              </dd>
                             </div>
                           ) : null,
                         )}

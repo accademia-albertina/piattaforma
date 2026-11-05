@@ -268,3 +268,9 @@
     break-inside: avoid;
   }
 }
+
+/* Link lunghi (Meet) nelle celle: vanno a capo invece di allargare la tabella. */
+.tabella td a,
+.schede dd a {
+  overflow-wrap: anywhere;
+}
