@@ -12,6 +12,18 @@ export type Novita = {
 export const NOVITA: Novita[] = [
   {
     data: '2026-11-05',
+    titolo: 'Albo online e Amministrazione trasparente',
+    punti: [
+      'Albo online e Amministrazione trasparente sono nel pannello, nel gruppo “Uffici”: ufficio amministrativo, segreteria e vicedirezione pubblicano atti e documenti da soli.',
+      'Importati dal sito attuale 413 atti dell’Albo con 1.100 documenti e le 94 sottosezioni della trasparenza con 571 documenti.',
+      'Sul sito l’Albo si filtra per categoria e anno, si cerca per titolo e mostra in evidenza i bandi ancora aperti.',
+      'Ogni sottosezione della trasparenza mostra la data dell’ultimo aggiornamento, che cambia da sola a ogni modifica.',
+      'Le schede dei filtri degli avvisi hanno la sottolineatura scura invece che rossa.',
+    ],
+    pr: [43],
+  },
+  {
+    data: '2026-11-05',
     titolo: 'Link a Orari e calendari',
     punti: [
       'Nel menu Didattica e nel footer la voce “Orari e calendari” porta alla nuova pagina /calendari.',

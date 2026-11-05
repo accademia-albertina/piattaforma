@@ -9,8 +9,10 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Avvisi } from './collections/Avvisi'
+import { Trasparenza } from './collections/Trasparenza'
 import { Scuole } from './collections/Scuole'
 import { Pagine } from './collections/Pagine'
+import { Albo } from './collections/Albo'
 import { Calendari } from './collections/Calendari'
 import { Corsi } from './collections/Corsi'
 import { Docenti } from './collections/Docenti'
@@ -20,6 +22,7 @@ import { seedCorsi } from './seed/corsi'
 import { importaAvvisiWp } from './seed/avvisi-wp'
 import { rimuoviDocenti } from './seed/docenti-rimossi'
 import { importaDocentiWp } from './seed/docenti-wp'
+import { importaAlboWp, importaTrasparenzaWp } from './seed/albo-trasparenza-wp'
 import { aggiornaLinkCalendari } from './seed/link-calendari'
 import { importaCalendari } from './seed/calendari'
 import { correggiFacciata, seedDemo } from './seed/demo'
@@ -77,7 +80,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Pagine, Avvisi, Corsi, Docenti, Calendari, Scuole, Media, Users],
+  collections: [Pagine, Avvisi, Corsi, Docenti, Calendari, Albo, Trasparenza, Scuole, Media, Users],
   globals: [Navigazione],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -113,6 +116,13 @@ export default buildConfig({
     void importaAvvisiWp(payload).catch((e) =>
       payload.logger.error(`Importazione avvisi non riuscita: ${(e as Error).message}`),
     )
+    void importaTrasparenzaWp(payload)
+      .then(() => importaAlboWp(payload))
+      .catch((e) =>
+        payload.logger.error(
+          `Importazione albo e trasparenza non riuscita: ${(e as Error).message}`,
+        ),
+      )
     void importaDocentiWp(payload).catch((e) =>
       payload.logger.error(`Importazione profili docenti non riuscita: ${(e as Error).message}`),
     )

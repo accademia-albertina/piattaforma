@@ -39,7 +39,7 @@
 .scheda[aria-current='page'] {
   color: var(--color-ink);
   font-weight: var(--font-weight-semibold);
-  border-bottom-color: var(--color-brand-strong);
+  border-bottom-color: var(--color-heading);
 }
 
 .scheda:focus-visible {
