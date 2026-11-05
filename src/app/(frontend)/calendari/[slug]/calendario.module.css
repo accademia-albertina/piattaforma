@@ -1,0 +1,270 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  align-items: center;
+}
+
+.aggiornato {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.azioni :global(.btn) {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.sedi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-5);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.avvertenze {
+  max-width: var(--measure);
+  margin-bottom: var(--space-5);
+}
+
+.avvertenze p {
+  margin: 0;
+}
+
+.avvertenze p + p {
+  margin-top: var(--space-2);
+}
+
+/* Filtri: come l'elenco corsi */
+.filtri {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  align-items: end;
+  margin-bottom: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+@media (min-width: 48rem) {
+  .filtri {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .filtri {
+    grid-template-columns: 2fr repeat(var(--filtri, 3), minmax(0, 1fr)) auto;
+  }
+}
+
+.campo {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.campo label {
+  font-weight: var(--font-weight-semibold);
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-control);
+  border-radius: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.campo input:focus-visible,
+.campo select:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.conta {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.vuoto {
+  padding: var(--space-5);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+/* Tabella come il PDF: celle uguali unite, intestazioni maiuscole come la Vetrina tesi */
+.scorri {
+  overflow-x: auto;
+}
+
+.tabella {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.tabella th,
+.tabella td {
+  padding: var(--space-2) var(--space-3);
+  text-align: start;
+  vertical-align: top;
+  white-space: pre-line;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tabella thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding-block: var(--space-3);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border-bottom: 2px solid var(--color-heading);
+}
+
+.tabella tbody th {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-heading);
+}
+
+/* Filetto più marcato tra un corso e l'altro */
+.tabella tr[data-inizio-gruppo] > * {
+  border-top: 1px solid var(--color-border-control);
+}
+
+.tabella tbody tr:first-child > * {
+  border-top: 0;
+}
+
+.tabella td[rowspan],
+.tabella th[rowspan] {
+  background: var(--color-bg);
+}
+
+.schede {
+  display: none;
+}
+
+/* Da telefono una scheda per corso, con le fasce orarie sotto */
+@media (max-width: 47.99rem) {
+  .scorri {
+    display: none;
+  }
+
+  .schede {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .scheda {
+    padding: var(--space-4);
+    background: var(--color-surface);
+  }
+
+  .schedaTitolo {
+    margin: 0 0 var(--space-2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+    white-space: pre-line;
+  }
+
+  .scheda > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .scheda > ul > li {
+    padding-block: var(--space-2);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .scheda dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-1) var(--space-3);
+    margin: 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .scheda dl > div {
+    display: contents;
+  }
+
+  .scheda dt {
+    color: var(--color-text-muted);
+  }
+
+  .scheda dd {
+    margin: 0;
+    white-space: pre-line;
+  }
+}
+
+@media print {
+  .page {
+    padding: 0;
+  }
+
+  .scorri {
+    display: block !important;
+    overflow: visible;
+  }
+
+  .schede {
+    display: none !important;
+  }
+
+  .tabella {
+    font-size: 8.5pt;
+  }
+
+  .tabella th,
+  .tabella td {
+    padding: 3pt 5pt;
+    border-color: #999;
+  }
+
+  .tabella thead {
+    display: table-header-group;
+  }
+
+  .tabella thead th {
+    position: static;
+    color: #000;
+    border-bottom: 1.5pt solid #000;
+  }
+
+  .tabella tr {
+    break-inside: avoid;
+  }
+}

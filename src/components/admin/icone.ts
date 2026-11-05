@@ -1,5 +1,6 @@
 import {
   BookOpen,
+  CalendarDays,
   FileText,
   GraduationCap,
   Images,
@@ -20,6 +21,7 @@ export const ICONE_SEZIONI: Record<string, LucideIcon> = {
   media: Images,
   corsi: BookOpen,
   docenti: GraduationCap,
+  calendari: CalendarDays,
   scuole: Landmark,
   users: Users,
   navigazione: PanelsTopLeft,

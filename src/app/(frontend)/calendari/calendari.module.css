@@ -1,0 +1,90 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+.vuoto {
+  color: var(--color-text-muted);
+}
+
+.gruppo + .gruppo {
+  margin-top: var(--space-7);
+}
+
+.gruppo h2 {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.gruppo ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gruppo a {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  height: 100%;
+  padding: var(--space-5);
+  color: var(--color-heading);
+  background: var(--color-azzurro-200);
+  text-decoration: none;
+}
+
+.gruppo a:hover {
+  background: var(--color-azzurro-100);
+}
+
+.gruppo a:hover .titolo {
+  text-decoration: underline;
+}
+
+.anno {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  color: var(--color-ardesia-dark);
+}
+
+.titolo {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color: var(--color-heading);
+}
+
+.sottotitolo {
+  color: var(--color-heading);
+}
+
+.piede {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-ardesia-dark);
+}
+
+.apri {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+  border: 1px solid var(--color-heading);
+}
+
+.gruppo a:hover .apri {
+  color: var(--color-on-brand);
+  background: var(--color-heading);
+}

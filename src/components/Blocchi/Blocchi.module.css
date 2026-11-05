@@ -183,9 +183,15 @@
   gap: var(--space-3);
 }
 
+/* Pannello pieno senza bordi, come la Vetrina tesi */
 .scheda .contatto {
-  padding: var(--space-4) var(--space-4) var(--space-5);
-  border-top: 4px solid var(--color-brand-strong);
+  padding: var(--space-5);
+  background: var(--color-azzurro-200);
+  border: 0;
+}
+
+.scheda .contattoRuolo {
+  color: var(--color-ardesia-dark);
 }
 
 .scheda .contatto dl {
@@ -195,7 +201,9 @@
 
 .scheda .contatto dt {
   margin-top: var(--space-3);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-regular);
-  color: var(--color-text-muted);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-ardesia-dark);
 }

@@ -77,3 +77,24 @@
     max-width: 9rem;
   }
 }
+
+@media print {
+  .testata {
+    margin-bottom: 8pt;
+    padding-bottom: 8pt;
+    border-image: none;
+  }
+
+  .titolo {
+    font-size: 20pt;
+  }
+
+  .sommario {
+    margin-top: 4pt;
+    font-size: 12pt;
+  }
+
+  .extra {
+    margin-top: 6pt;
+  }
+}

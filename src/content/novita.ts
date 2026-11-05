@@ -12,6 +12,17 @@ export type Novita = {
 export const NOVITA: Novita[] = [
   {
     data: '2026-11-05',
+    titolo: 'Orari e calendari a tabella',
+    punti: [
+      'Nuova sezione “Orari e calendari”: orario delle lezioni, esami e presentazioni si compilano a tabella nel pannello, anche incollando da Excel.',
+      'Sul sito la tabella si filtra per livello, giorno e semestre, si legge a schede da telefono e si stampa con un clic.',
+      'Importato l’orario delle lezioni 2025/2026 dal PDF della segreteria (462 righe).',
+      'Box delle sottopagine e dei contatti a pannello pieno, senza bordi, come nella Vetrina tesi.',
+    ],
+    pr: [39],
+  },
+  {
+    data: '2026-11-05',
     titolo: 'Pagine più curate',
     punti: [
       'Nuova testata delle pagine: occhiello rosso con la sezione, titolo grande e sommario, come nella Vetrina tesi.',

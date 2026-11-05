@@ -107,12 +107,9 @@ export default async function PaginaIstituzionale({ params }: Props) {
             </p>
           </div>
           <ul>
-            {figlie.map((f, i) => (
+            {figlie.map((f) => (
               <li key={f.id}>
                 <Link href={`/${f.percorso}`}>
-                  <span className={styles.figliaNumero} aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
                   <span className={styles.figliaTitolo}>{f.titolo}</span>
                   {f.sommario ? <span className={styles.figliaSommario}>{f.sommario}</span> : null}
                   <span className={styles.figliaApri} aria-hidden="true">

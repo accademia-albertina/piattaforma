@@ -4,6 +4,7 @@ import * as migration_20261021_144732_avvisi_immagine from './20261021_144732_av
 import * as migration_20261022_164339_pagine from './20261022_164339_pagine';
 import * as migration_20261022_170417_menu_e_etichette from './20261022_170417_menu_e_etichette';
 import * as migration_20261023_083849_corsi_docenti from './20261023_083849_corsi_docenti';
+import * as migration_20261105_071837_calendari from './20261105_071837_calendari';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20261023_083849_corsi_docenti.up,
     down: migration_20261023_083849_corsi_docenti.down,
-    name: '20261023_083849_corsi_docenti'
+    name: '20261023_083849_corsi_docenti',
+  },
+  {
+    up: migration_20261105_071837_calendari.up,
+    down: migration_20261105_071837_calendari.down,
+    name: '20261105_071837_calendari'
   },
 ];

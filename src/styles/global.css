@@ -234,3 +234,30 @@ img {
     transition: none;
   }
 }
+
+/*
+ * Stampa: solo il contenuto della pagina, senza header, footer e comandi.
+ * Usata soprattutto per orari e calendari (pulsante “Stampa”).
+ */
+@media print {
+  body > :not(main),
+  .non-stampare {
+    display: none !important;
+  }
+
+  body {
+    color: #000;
+    background: #fff;
+    font-size: 10pt;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .container {
+    max-width: none;
+    padding-inline: 0;
+  }
+}
