@@ -112,10 +112,8 @@
 }
 
 .contatto {
-  padding: var(--space-4);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  padding: var(--space-5);
+  background: var(--color-azzurro-200);
 }
 
 .contattoNome {
@@ -127,7 +125,7 @@
 
 .contattoRuolo {
   margin: var(--space-1) 0 0;
-  color: var(--color-text-muted);
+  color: var(--color-ardesia-dark);
 }
 
 .contatto dl {

@@ -36,10 +36,13 @@ export default async function PaginaIstituzionale({ params }: Props) {
   ])
   const genitore = su.at(-1)
 
-  // I contatti vanno nella colonna laterale (da computer) o subito sotto la testata (da telefono).
+  // I contatti brevi vanno nella colonna laterale (da computer) o subito sotto la testata
+  // (da telefono); un elenco lungo o con un titolo proprio (es. pagina Contatti) resta nel testo.
   const blocchi = pagina.blocchi ?? []
-  const contatti = blocchi.filter((b) => b.blockType === 'contatti')
-  const corpo = blocchi.filter((b) => b.blockType !== 'contatti')
+  const laterale = (b: (typeof blocchi)[number]) =>
+    b.blockType === 'contatti' && !b.titolo && b.voci.length <= 3
+  const contatti = blocchi.filter(laterale)
+  const corpo = blocchi.filter((b) => !laterale(b))
   const conSezione = vicine.length > 1
   const conLato = contatti.length > 0 || conSezione
 

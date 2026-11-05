@@ -24,6 +24,8 @@ import { rimuoviDocenti } from './seed/docenti-rimossi'
 import { importaDocentiWp } from './seed/docenti-wp'
 import { importaAlboWp, importaTrasparenzaWp } from './seed/albo-trasparenza-wp'
 import { aggiornaLinkCalendari } from './seed/link-calendari'
+import { aggiornaLinkPagine } from './seed/link-pagine'
+import { importaPagineWp } from './seed/pagine-wp'
 import { importaCalendari } from './seed/calendari'
 import { correggiFacciata, seedDemo } from './seed/demo'
 
@@ -111,6 +113,10 @@ export default buildConfig({
     await correggiFacciata(payload)
     await importaCalendari(payload)
     await aggiornaLinkCalendari(payload)
+    await aggiornaLinkPagine(payload)
+    void importaPagineWp(payload).catch((e) =>
+      payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
+    )
     // Gli avvisi del sito attuale sono più di mille: si importano in background,
     // senza ritardare l'avvio (l'hosting controlla /salute dopo pochi secondi).
     void importaAvvisiWp(payload).catch((e) =>
