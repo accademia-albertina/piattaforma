@@ -70,6 +70,7 @@ export default buildConfig({
       },
       views: {
         dashboard: { Component: '/components/admin/Dashboard' },
+        changelog: { Component: '/components/admin/Changelog', path: '/changelog' },
       },
     },
   },

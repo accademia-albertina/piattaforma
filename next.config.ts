@@ -67,6 +67,8 @@ const nextConfig: NextConfig = {
           '/note-legali': '/termini-e-condizioni',
         }).map(([source, destination]) => ({ source, destination, permanent: true })),
       )
+      // Il registro delle versioni ora sta nel pannello (solo con accesso)
+      .concat([{ source: '/novita', destination: '/admin/changelog', permanent: false }])
   },
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]
