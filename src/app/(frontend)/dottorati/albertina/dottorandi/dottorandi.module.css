@@ -1,0 +1,44 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+.intro {
+  max-width: var(--measure);
+  margin-bottom: var(--space-7);
+}
+
+.gruppi {
+  display: grid;
+  gap: var(--section-pad);
+}
+
+.gruppoTesta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.gruppoTesta h2 {
+  margin: 0;
+  font-size: var(--font-size-3xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.gruppoTesta p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.schede {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

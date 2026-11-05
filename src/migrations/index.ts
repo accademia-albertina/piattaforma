@@ -1,11 +1,12 @@
-import * as migration_20261020_155718_iniziale from './20261020_155718_iniziale'
-import * as migration_20261021_140338_avvisi from './20261021_140338_avvisi'
-import * as migration_20261021_144732_avvisi_immagine from './20261021_144732_avvisi_immagine'
-import * as migration_20261022_164339_pagine from './20261022_164339_pagine'
-import * as migration_20261022_170417_menu_e_etichette from './20261022_170417_menu_e_etichette'
-import * as migration_20261023_083849_corsi_docenti from './20261023_083849_corsi_docenti'
-import * as migration_20261105_071837_calendari from './20261105_071837_calendari'
-import * as migration_20261105_081212_albo_trasparenza from './20261105_081212_albo_trasparenza'
+import * as migration_20261020_155718_iniziale from './20261020_155718_iniziale';
+import * as migration_20261021_140338_avvisi from './20261021_140338_avvisi';
+import * as migration_20261021_144732_avvisi_immagine from './20261021_144732_avvisi_immagine';
+import * as migration_20261022_164339_pagine from './20261022_164339_pagine';
+import * as migration_20261022_170417_menu_e_etichette from './20261022_170417_menu_e_etichette';
+import * as migration_20261023_083849_corsi_docenti from './20261023_083849_corsi_docenti';
+import * as migration_20261105_071837_calendari from './20261105_071837_calendari';
+import * as migration_20261105_081212_albo_trasparenza from './20261105_081212_albo_trasparenza';
+import * as migration_20261105_132425_dottorandi from './20261105_132425_dottorandi';
 
 export const migrations = [
   {
@@ -48,4 +49,9 @@ export const migrations = [
     down: migration_20261105_081212_albo_trasparenza.down,
     name: '20261105_081212_albo_trasparenza',
   },
-]
+  {
+    up: migration_20261105_132425_dottorandi.up,
+    down: migration_20261105_132425_dottorandi.down,
+    name: '20261105_132425_dottorandi'
+  },
+];

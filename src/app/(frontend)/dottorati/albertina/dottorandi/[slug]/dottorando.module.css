@@ -1,0 +1,81 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+/* Ritratto nella testata, come nel profilo dei docenti */
+.foto {
+  width: 100%;
+  max-width: 24rem;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--color-surface);
+}
+
+.dati {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-4) var(--space-5);
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.dati:empty {
+  display: none;
+}
+
+.dati dt {
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.dati dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.corpo {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.sezioneTitolo {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* Il titolo del progetto su pannello pieno, come i box della Vetrina tesi */
+.titoloProgetto {
+  max-width: var(--measure);
+  margin: 0 0 var(--space-5);
+  padding: var(--space-5);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.35;
+  color: var(--color-heading);
+  background: var(--color-azzurro-200);
+  text-wrap: pretty;
+}
+
+.body {
+  max-width: var(--measure);
+}
+
+.body :where(ul, ol) {
+  padding-left: var(--space-4);
+  margin: 0 0 var(--space-3);
+}
+
+.torna {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  min-height: var(--target-min);
+  font-weight: var(--font-weight-semibold);
+}

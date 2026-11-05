@@ -26,12 +26,14 @@ describe('Importazione delle pagine del sito attuale', () => {
       overrideAccess: false,
     })
     const per = new Map(docs.map((d) => [d.percorso, d]))
-    expect(per.size).toBeGreaterThanOrEqual(45)
+    expect(per.size).toBeGreaterThanOrEqual(35)
     const tesi = per.get('studente/tesi')
     expect(tesi?._status).toBe('published')
     expect(typeof tesi?.genitore === 'object' && tesi.genitore?.percorso).toBe('studente')
     expect(per.has('erasmus/mobilita-studenti')).toBe(true)
-    expect(per.has('dottorati/albertina/dottorandi/giulia-deval')).toBe(true)
+    expect(per.has('dottorati/albertina/dottorandi')).toBe(true)
+    // I profili dei dottorandi stanno nella collezione Dottorandi, non in Pagine
+    expect([...per.keys()].some((p) => p?.startsWith('dottorati/albertina/dottorandi/'))).toBe(false)
   })
 
   it('non crea doppioni e non tocca le pagine già presenti', async () => {

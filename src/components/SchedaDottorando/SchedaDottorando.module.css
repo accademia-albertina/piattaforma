@@ -1,0 +1,95 @@
+/* Pannello pieno senza bordi, come le schede delle sottopagine */
+.scheda {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--color-heading);
+  background: var(--color-azzurro-200);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.scheda:hover {
+  background: var(--color-azzurro-100);
+}
+
+.scheda:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.ritratto {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.ritratto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.iniziali {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+}
+
+.testo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+
+.dettaglio {
+  margin: 0;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-ardesia-dark);
+}
+
+.nome {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  line-height: 1.2;
+}
+
+/* Il titolo del progetto può essere lungo: tre righe al massimo nella scheda */
+.progetto {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.apri {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: var(--space-2);
+  align-items: center;
+  margin-top: auto;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border: 1px solid var(--color-heading);
+}
+
+.scheda:hover .apri {
+  color: var(--color-on-brand);
+  background: var(--color-heading);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scheda {
+    transition: none;
+  }
+}

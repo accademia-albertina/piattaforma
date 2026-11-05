@@ -37,6 +37,14 @@ export const modificaDocente: Access = ({ req }) => {
   return { account: { equals: req.user.id } } satisfies Where
 }
 
+/** Vicedirezione e admin modificano tutti i dottorandi; il dottorando solo il proprio profilo. */
+export const modificaDottorando: Access = ({ req }) => {
+  if (!req.user) return false
+  if (gestisceDidattica(req.user)) return true
+  if (!hasRole(req.user, 'dottorando')) return false
+  return { account: { equals: req.user.id } } satisfies Where
+}
+
 /** Anno accademico in corso: da settembre si passa al successivo (es. ottobre 2026 → 2026/2027). */
 export function annoAccademicoCorrente(oggi = new Date()): string {
   const anno = oggi.getFullYear()

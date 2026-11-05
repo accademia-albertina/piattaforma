@@ -16,12 +16,14 @@ import { Albo } from './collections/Albo'
 import { Calendari } from './collections/Calendari'
 import { Corsi } from './collections/Corsi'
 import { Docenti } from './collections/Docenti'
+import { Dottorandi } from './collections/Dottorandi'
 import { Navigazione } from './globals/Navigazione'
 import { migrations } from './migrations'
 import { seedCorsi } from './seed/corsi'
 import { importaAvvisiWp } from './seed/avvisi-wp'
 import { rimuoviDocenti } from './seed/docenti-rimossi'
 import { importaDocentiWp } from './seed/docenti-wp'
+import { importaDottorandiWp } from './seed/dottorandi-wp'
 import { importaAlboWp, importaTrasparenzaWp } from './seed/albo-trasparenza-wp'
 import { aggiornaLinkCalendari } from './seed/link-calendari'
 import { aggiornaLinkPagine } from './seed/link-pagine'
@@ -83,7 +85,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Pagine, Avvisi, Corsi, Docenti, Calendari, Albo, Trasparenza, Scuole, Media, Users],
+  collections: [Pagine, Avvisi, Corsi, Docenti, Dottorandi, Calendari, Albo, Trasparenza, Scuole, Media, Users],
   globals: [Navigazione],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -115,7 +117,10 @@ export default buildConfig({
     await importaCalendari(payload)
     await aggiornaLinkCalendari(payload)
     await aggiornaLinkPagine(payload)
-    void importaPagineWp(payload).catch((e) =>
+    // Dopo le pagine: toglie i vecchi profili dei dottorandi importati come sottopagine
+    void importaPagineWp(payload)
+      .then(() => importaDottorandiWp(payload))
+      .catch((e) =>
       payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
     )
     // Gli avvisi del sito attuale sono più di mille: si importano in background,

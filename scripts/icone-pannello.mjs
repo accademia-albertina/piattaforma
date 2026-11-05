@@ -13,6 +13,7 @@ const ICONE = {
   'nav-media': 'Images',
   'nav-corsi': 'BookOpen',
   'nav-docenti': 'GraduationCap',
+  'nav-dottorandi': 'Microscope',
   'nav-calendari': 'CalendarDays',
   'nav-albo': 'ClipboardList',
   'nav-trasparenza': 'Scale',
