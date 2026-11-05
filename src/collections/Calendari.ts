@@ -4,6 +4,7 @@ import { soloCalendari } from '@/access/calendari'
 import { leggiPubblicati } from '@/access/corsi'
 import { slugField } from '@/fields/slug'
 import { TIPI_CALENDARIO, TIPO_LABELS, normalizzaRighe, type TipoCalendario } from '@/lib/calendari'
+import { validaTitolo } from '@/fields/titolo'
 
 /**
  * Calendari compilati come tabelle dalla segreteria: sul sito diventano pagine HTML con filtri,
@@ -69,6 +70,7 @@ export const Calendari: CollectionConfig = {
       required: true,
       maxLength: 120,
       admin: { placeholder: 'Orario delle lezioni' },
+      validate: validaTitolo,
     },
     {
       name: 'sottotitolo',

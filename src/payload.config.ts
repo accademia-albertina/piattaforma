@@ -26,6 +26,7 @@ import { importaAlboWp, importaTrasparenzaWp } from './seed/albo-trasparenza-wp'
 import { aggiornaLinkCalendari } from './seed/link-calendari'
 import { aggiornaLinkPagine } from './seed/link-pagine'
 import { importaPagineWp } from './seed/pagine-wp'
+import { correggiTitoliMaiuscoli } from './seed/titoli-maiuscoli'
 import { importaCalendari } from './seed/calendari'
 import { correggiFacciata, seedDemo } from './seed/demo'
 
@@ -60,7 +61,7 @@ export default buildConfig({
     components: {
       providers: ['/components/admin/LinguaDate'],
       beforeLogin: ['/components/admin/PrimaDelLogin'],
-      actions: ['/components/admin/CambiaTema'],
+      actions: ['/components/admin/ApriSito'],
       graphics: {
         Logo: '/components/admin/Logo',
         Icon: '/components/admin/Icon',
@@ -124,6 +125,8 @@ export default buildConfig({
     )
     void importaTrasparenzaWp(payload)
       .then(() => importaAlboWp(payload))
+      // Dopo l'Albo (che ne ha molti): riscrive i titoli maiuscoli già salvati
+      .then(() => correggiTitoliMaiuscoli(payload))
       .catch((e) =>
         payload.logger.error(
           `Importazione albo e trasparenza non riuscita: ${(e as Error).message}`,

@@ -12,6 +12,7 @@ import {
 } from '@/access/corsi'
 import { rowLabel } from '@/fields/rowLabel'
 import { slugField } from '@/fields/slug'
+import { validaTitolo } from '@/fields/titolo'
 
 export const SEMESTRI = [
   { value: 'primo', label: 'Primo semestre' },
@@ -65,6 +66,7 @@ export const Corsi: CollectionConfig = {
       required: true,
       maxLength: 160,
       access: { update: campoSoloDidattica },
+      validate: validaTitolo,
       admin: {
         description: 'Solo il nome della materia, senza [T] o [B]: il livello si sceglie sotto.',
       },

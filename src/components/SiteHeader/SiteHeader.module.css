@@ -3,18 +3,33 @@
   top: 0;
   z-index: 20;
   color: var(--color-on-brand);
-  transition: box-shadow var(--duration-base) ease;
+  transition:
+    box-shadow var(--duration-base) ease,
+    transform var(--duration-base) var(--ease-out);
+}
+
+/* Barra compatta solo con trasformazioni: l'altezza nel flusso resta la stessa, così la pagina
+   sotto non si sposta e il browser non ricalcola il layout a ogni fotogramma (era scattosa).
+   La barra sale della riduzione, il contenuto scende di metà per restare centrato. */
+.header {
+  --logo: 52px;
+  --logo-compatto: 40px;
+  --scala-logo: 0.7692; /* 40 / 52 */
+  /* Altezza persa: differenza del logo + 2 × (16 − 8) di margine */
+  --riduzione: calc(var(--logo) - var(--logo-compatto) + 2 * (var(--space-3) - var(--space-2)));
 }
 
 .header[data-compatto] {
   box-shadow: var(--shadow-header);
+  transform: translateY(calc(-1 * var(--riduzione)));
 }
 
 /* Velo sopra la pagina quando il mega menu è aperto (sotto la barra rossa). */
+/* Fuori dall'header: dentro un elemento trasformato "fixed" non coprirebbe la pagina */
 .velo {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 19; /* subito sotto la barra rossa (20) */
   background: var(--color-overlay);
   animation: compari var(--duration-base) ease;
 }
@@ -89,11 +104,11 @@
   justify-content: space-between;
   gap: var(--space-3);
   padding-block: var(--space-3);
-  transition: padding var(--duration-base) var(--ease-out);
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
 .header[data-compatto] .mainInner {
-  padding-block: var(--space-2);
+  transform: translateY(calc(var(--riduzione) / 2));
 }
 
 .brand {
@@ -103,12 +118,13 @@
 
 .brand img {
   width: auto;
-  height: 52px;
-  transition: height var(--duration-base) var(--ease-out);
+  height: var(--logo);
+  transform-origin: left center;
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
 .header[data-compatto] .brand img {
-  height: 40px;
+  transform: scale(var(--scala-logo));
 }
 
 .actions {
@@ -351,12 +367,10 @@
 }
 
 @media (min-width: 64rem) {
-  .brand img {
-    height: 76px;
-  }
-
-  .header[data-compatto] .brand img {
-    height: 52px;
+  .header {
+    --logo: 76px;
+    --logo-compatto: 52px;
+    --scala-logo: 0.6842; /* 52 / 76 */
   }
 
   .actions {

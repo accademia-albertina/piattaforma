@@ -5,6 +5,7 @@ import { leggiPubblicati } from '@/access/corsi'
 import { documentiField } from '@/fields/documenti'
 import { slugField } from '@/fields/slug'
 import { SEZIONE_ALBO, SEZIONI_ALBO } from '@/lib/albo'
+import { validaTitolo } from '@/fields/titolo'
 
 /**
  * Atti dell'Albo online: un bando, una procedura o una comunicazione con i suoi documenti
@@ -26,7 +27,14 @@ export const Albo: CollectionConfig = {
   versions: { drafts: true, maxPerDoc: 30 },
   access: { read: leggiPubblicati, create: soloAlbo, update: soloAlbo, delete: soloAlbo },
   fields: [
-    { name: 'titolo', label: 'Titolo', type: 'text', required: true, maxLength: 300 },
+    {
+      name: 'titolo',
+      label: 'Titolo',
+      type: 'text',
+      required: true,
+      maxLength: 300,
+      validate: validaTitolo,
+    },
     {
       type: 'row',
       fields: [

@@ -142,10 +142,6 @@ export default async function Dashboard({
             Novità <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
             <span className={styles.nascosto}> (si apre in una nuova scheda)</span>
           </a>
-          <a className={styles.sito} href="/" target="_blank" rel="noopener">
-            Apri il sito <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
-            <span className={styles.nascosto}> (si apre in una nuova scheda)</span>
-          </a>
         </div>
       </div>
 
