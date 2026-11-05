@@ -27,6 +27,24 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.18.0',
+    data: '2026-11-05',
+    titolo: 'Le scuole con icona e dipartimento',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'In home ogni scuola ha la sua scheda: foto, icona ufficiale, dipartimento e il link ai corsi.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nel pannello, in Scuole, si sceglie il dipartimento e si può caricare una foto al posto di quella di repertorio. L’icona ufficiale si vede di lato e non si cambia.',
+      },
+    ],
+    pr: [49],
+  },
+  {
     versione: '0.17.0',
     data: '2026-11-05',
     titolo: 'Immagini ottimizzate, Vedi sul sito e ritocchi',

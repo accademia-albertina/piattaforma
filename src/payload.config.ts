@@ -28,6 +28,7 @@ import { importaAlboWp, importaTrasparenzaWp } from './seed/albo-trasparenza-wp'
 import { aggiornaLinkCalendari } from './seed/link-calendari'
 import { aggiornaLinkPagine } from './seed/link-pagine'
 import { importaPagineWp } from './seed/pagine-wp'
+import { completaDipartimentiScuole } from './seed/dipartimenti-scuole'
 import { completaSommariPagine } from './seed/sommari-pagine'
 import { correggiTitoliMaiuscoli } from './seed/titoli-maiuscoli'
 import { importaCalendari } from './seed/calendari'
@@ -123,6 +124,7 @@ export default buildConfig({
     void importaPagineWp(payload)
       .then(() => importaDottorandiWp(payload))
       .then(() => completaSommariPagine(payload))
+      .then(() => completaDipartimentiScuole(payload))
       .catch((e) =>
       payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
     )

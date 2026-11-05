@@ -600,3 +600,12 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+/* Anteprima dell'icona ufficiale nella scheda della scuola */
+.icona-scuola-pannello {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--base) / 2);
+  margin-bottom: var(--base);
+  color: var(--theme-text);
+}

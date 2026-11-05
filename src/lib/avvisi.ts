@@ -40,7 +40,7 @@ export async function trovaScuole(): Promise<Scuola[]> {
     limit: 50,
     sort: 'nome',
     overrideAccess: false,
-    depth: 0,
+    depth: 1,
   })
   return res.docs
 }

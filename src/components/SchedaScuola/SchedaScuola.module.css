@@ -1,0 +1,129 @@
+/* Pannello pieno senza bordi, come le schede dei dottorandi e delle sottopagine */
+.scheda {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--color-heading);
+  background: var(--color-azzurro-200);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.scheda:hover {
+  background: var(--color-azzurro-100);
+}
+
+.scheda:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.foto {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.contenuto {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+
+/* L'icona ufficiale della scuola, sempre presente: sale sopra la foto */
+.icona {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-top: calc(var(--space-4) * -1 - 1.625rem);
+  margin-bottom: var(--space-1);
+  color: var(--color-heading);
+  background: var(--color-azzurro-200);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.scheda:hover .icona {
+  background: var(--color-azzurro-100);
+}
+
+.dipartimento {
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-ardesia-dark);
+}
+
+.nome {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-tight);
+  text-wrap: balance;
+}
+
+.invito {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: var(--space-2);
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color var(--duration-fast);
+}
+
+.scheda:hover .invito,
+.scheda:focus-visible .invito {
+  text-decoration-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scheda,
+  .icona {
+    transition: none;
+  }
+}
+
+/* Sul telefono dieci foto a tutta larghezza sono troppe: elenco compatto con icona */
+@media (max-width: 29.99rem) {
+  .foto {
+    display: none;
+  }
+
+  .contenuto {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    align-items: center;
+    padding: var(--space-4);
+  }
+
+  .icona {
+    grid-row: span 3;
+    align-self: start;
+    margin: 0;
+    background: transparent;
+  }
+
+  .scheda:hover .icona {
+    background: transparent;
+  }
+
+  .nome {
+    font-size: var(--font-size-md);
+  }
+
+  .invito {
+    padding-top: var(--space-1);
+  }
+}
