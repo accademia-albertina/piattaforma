@@ -219,9 +219,9 @@ export interface BloccoImmagine {
 export interface Media {
   id: number;
   /**
-   * Descrivi cosa mostra l’immagine per chi usa uno screen reader.
+   * Si scrive da solo al caricamento: descrive l’immagine per chi usa uno screen reader. Correggilo se serve.
    */
-  alt: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;

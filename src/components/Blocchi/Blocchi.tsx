@@ -22,7 +22,7 @@ function Immagine({ m, didascalia }: { m: Media; didascalia?: string | null }) {
       {/* eslint-disable-next-line @next/next/no-img-element -- l'ottimizzazione arriva con lo storage su Drive */}
       <img
         src={m.url!}
-        alt={m.alt}
+        alt={m.alt ?? ''}
         width={m.width ?? undefined}
         height={m.height ?? undefined}
         loading="lazy"

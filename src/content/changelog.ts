@@ -29,8 +29,18 @@ export const CHANGELOG: Versione[] = [
   {
     versione: '0.17.0',
     data: '2026-11-05',
-    titolo: 'Vedi sul sito e ritocchi',
+    titolo: 'Immagini ottimizzate, Vedi sul sito e ritocchi',
     voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Le foto caricate diventano WebP e si riducono da sole a Full HD (1920 px sul lato lungo); i dati della fotocamera e la posizione GPS vengono tolti.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Il testo alternativo delle immagini si scrive da solo al caricamento; si può sempre correggere.',
+      },
       {
         tipo: 'nuovo',
         testo:
