@@ -1,0 +1,61 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+.catalogo {
+  scroll-margin-top: var(--sticky-top);
+}
+
+.catalogo > h2,
+.casaEditrice > h2 {
+  margin: 0 0 var(--space-5);
+  font-size: var(--font-size-2xl);
+}
+
+.filtri {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.cerca {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+.cerca label {
+  font-weight: var(--font-weight-semibold);
+}
+
+.cerca input {
+  flex: 1 1 16rem;
+  max-width: 28rem;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  font: inherit;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-control);
+}
+
+.conteggio {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.schede {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.casaEditrice {
+  max-width: var(--measure);
+  margin-top: var(--section-pad);
+}

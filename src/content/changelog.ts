@@ -27,6 +27,29 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.19.0',
+    data: '2026-11-06',
+    titolo: 'Albertina Press',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Il catalogo Albertina Press in /accademia/albertina-press: 99 volumi con copertina, filtri per collana e ricerca per titolo, autore o ISBN.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Ogni volume ha la sua scheda: dati bibliografici, descrizione e indice. Nel pannello si gestiscono in Contenuti › Albertina Press.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Sotto il catalogo, il testo sulla casa editrice con comitato scientifico e collane; i nomi portano ai profili dei docenti.',
+      },
+    ],
+    pr: [50],
+  },
+  {
     versione: '0.18.0',
     data: '2026-11-05',
     titolo: 'Le scuole con icona e dipartimento',

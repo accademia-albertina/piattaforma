@@ -1,0 +1,111 @@
+/* Pannello pieno senza bordi, come le schede dei dottorandi e delle scuole */
+.scheda {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--color-heading);
+  background: var(--color-azzurro-200);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.scheda:hover {
+  background: var(--color-azzurro-100);
+}
+
+.scheda:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* Le copertine hanno formati diversi: stanno intere in un riquadro da libro, con un po' d'aria */
+.copertina {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  padding: var(--space-5);
+  overflow: hidden;
+}
+
+.copertina img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  box-shadow: var(--shadow-libro);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.scheda:hover .copertina img {
+  transform: translateY(-4px);
+}
+
+.senza {
+  display: grid;
+  place-items: center;
+  width: 70%;
+  aspect-ratio: 2 / 3;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+}
+
+.testo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 0 var(--space-5) var(--space-5);
+}
+
+.dettaglio {
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-ardesia-dark);
+}
+
+/* Titoli anche molto lunghi: quattro righe al massimo nella scheda */
+.titolo {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-tight);
+  text-wrap: balance;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.invito {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: var(--space-2);
+  align-items: center;
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color var(--duration-fast);
+}
+
+.scheda:hover .invito,
+.scheda:focus-visible .invito {
+  text-decoration-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scheda,
+  .copertina img {
+    transition: none;
+  }
+
+  .scheda:hover .copertina img {
+    transform: none;
+  }
+}

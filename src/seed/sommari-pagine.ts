@@ -6,6 +6,7 @@
 import type { Payload } from 'payload'
 
 export const SOMMARI_PAGINE: Record<string, string> = {
+  'accademia/albertina-press': 'La casa editrice dell’Accademia: cataloghi, saggi e libri d’artista dal 2013.',
   'accademia/biblioteca': 'Orari, accesso e consultazione del patrimonio librario.',
   'accademia/il-saluto-del-direttore': 'Il messaggio del Direttore a studenti, docenti e visitatori.',
   'accademia/ordinamento': 'Il ruolo delle Accademie di Belle Arti nel sistema AFAM.',
