@@ -20,6 +20,9 @@ export const NOVITA: Novita[] = [
       'Ogni dottorando con un account può aggiornare il proprio profilo; ciclo, nome e supervisor li gestisce la vicedirezione.',
     ],
     pr: [46],
+  },
+  {
+    data: '2026-11-05',
     titolo: 'Header più fluido, titoli senza maiuscolo e ritocchi al pannello',
     punti: [
       'Scorrendo la pagina, la barra rossa e il logo si rimpiccioliscono senza scatti.',
