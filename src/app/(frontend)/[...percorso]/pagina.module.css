@@ -47,7 +47,7 @@
   }
 }
 
-/* Menu della sezione: elenco a righe sottili, voce corrente segnata in rosso */
+/* Menu della sezione: elenco a righe sottili, voce corrente su pannello azzurro, senza rosso */
 .sezioneTitolo {
   margin: 0 0 var(--space-2);
   font-size: var(--font-size-2xs);
@@ -92,8 +92,9 @@
 
 .sezione li a[aria-current='page'] {
   font-weight: var(--font-weight-semibold);
-  border-left-color: var(--color-brand-strong);
-  background: var(--color-surface);
+  color: var(--color-heading);
+  border-left-color: var(--color-heading);
+  background: var(--color-azzurro-200);
 }
 
 /* Sottopagine: griglia di schede come le card della Vetrina tesi */

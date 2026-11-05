@@ -12,6 +12,14 @@ export type Novita = {
 export const NOVITA: Novita[] = [
   {
     data: '2026-11-05',
+    titolo: 'Menu della sezione senza rosso',
+    punti: [
+      'Nel menu a destra delle pagine la voce corrente è su pannello azzurro chiaro con filetto scuro, al posto del rosso.',
+    ],
+    pr: [41],
+  },
+  {
+    data: '2026-11-05',
     titolo: 'Presentazioni di scuole e corsi',
     punti: [
       'Importati dal PDF della segreteria i calendari delle presentazioni 2026/2027: scuole (11 righe) e corsi (201 righe).',
