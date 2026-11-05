@@ -111,12 +111,20 @@
 }
 
 .title {
-  max-width: 20ch;
+  /* Titoli degli avvisi anche lunghi: corpo più contenuto e al massimo tre righe,
+     il titolo intero resta nell'avviso (e per i lettori di schermo) */
+  display: -webkit-box;
+  max-width: 24ch;
   margin: 0 0 var(--space-2);
+  overflow: hidden;
   color: inherit;
-  font-size: var(--font-size-display);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-size: var(--font-size-3xl);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 /* Comandi minimal: quadratini con filo sottile, linee al posto dei pallini */

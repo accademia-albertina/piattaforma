@@ -27,6 +27,51 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.17.0',
+    data: '2026-11-05',
+    titolo: 'Immagini ottimizzate, Vedi sul sito e ritocchi',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Le foto caricate diventano WebP e si riducono da sole a Full HD (1920 px sul lato lungo); i dati della fotocamera e la posizione GPS vengono tolti.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Il testo alternativo delle immagini si scrive da solo al caricamento, dal nome del file; si può sempre correggere.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nel pannello, pagine, avvisi, corsi, docenti, dottorandi, calendari e trasparenza hanno in alto a destra il pulsante “Vedi sul sito”.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Nello slider della home i titoli lunghi stanno su tre righe al massimo, con un corpo più contenuto.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Gli avvisi in evidenza senza foto mostrano un’immagine di repertorio: quella della scuola, o una delle sedi.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'I box “In questa sezione” delle pagine genitore hanno una breve descrizione, presa dal sommario della pagina.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Nel pannello le icone del sito e dell’account sono più leggere e senza riquadro; la casetta del percorso è allineata al testo.',
+      },
+      { tipo: 'corretto', testo: 'Il menu laterale delle pagine non finisce più sotto l’intestazione.' },
+      { tipo: 'corretto', testo: 'Nella pagina Docenti le linee delle lettere non sono più rosse.' },
+    ],
+    pr: [48],
+  },
+  {
     versione: '0.16.0',
     data: '2026-11-05',
     titolo: 'Dottorandi',

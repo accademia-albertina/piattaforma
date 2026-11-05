@@ -6,6 +6,7 @@ import { documentiField } from '@/fields/documenti'
 import { slugField } from '@/fields/slug'
 import { SEZIONI_TRASPARENZA } from '@/lib/albo'
 import { validaTitolo } from '@/fields/titolo'
+import { linkSulSito } from '@/fields/linkSulSito'
 
 /**
  * Amministrazione trasparente: una voce per ogni sottosezione prevista dal D.Lgs. 33/2013,
@@ -41,6 +42,7 @@ export const Trasparenza: CollectionConfig = {
     ],
   },
   fields: [
+    linkSulSito('/amministrazione-trasparente/'),
     {
       name: 'titolo',
       label: 'Titolo',

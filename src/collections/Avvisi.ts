@@ -11,6 +11,7 @@ import { canAccessBackend, isAdmin } from '@/access/roles'
 import { rowLabel } from '@/fields/rowLabel'
 import { slugField } from '@/fields/slug'
 import { validaTitolo } from '@/fields/titolo'
+import { linkSulSito } from '@/fields/linkSulSito'
 
 /** Il pubblico vede solo gli avvisi pubblicati; chi lavora nel pannello vede anche le bozze. */
 const read: Access = ({ req }) => {
@@ -46,6 +47,7 @@ export const Avvisi: CollectionConfig = {
     delete: updateOrDelete,
   },
   fields: [
+    linkSulSito('/avvisi/'),
     {
       name: 'titolo',
       label: 'Titolo',

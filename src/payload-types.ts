@@ -149,7 +149,7 @@ export interface Pagina {
   id: number;
   titolo: string;
   /**
-   * Una o due frasi sotto il titolo; si usano anche nei risultati di Google e nelle anteprime social.
+   * Una o due frasi sotto il titolo; compaiono anche nel box della pagina genitore, nei risultati di Google e nelle anteprime social.
    */
   sommario?: string | null;
   blocchi?:
@@ -219,9 +219,9 @@ export interface BloccoImmagine {
 export interface Media {
   id: number;
   /**
-   * Descrivi cosa mostra l’immagine per chi usa uno screen reader.
+   * Si scrive da solo al caricamento: descrive l’immagine per chi usa uno screen reader. Correggilo se serve.
    */
-  alt: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;

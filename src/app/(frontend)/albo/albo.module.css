@@ -121,7 +121,7 @@
 
   .lato {
     position: sticky;
-    top: var(--space-5);
+    top: var(--sticky-top);
   }
 }
 

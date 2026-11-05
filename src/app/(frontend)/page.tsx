@@ -10,6 +10,7 @@ import {
   ultimiAvvisi,
 } from '@/lib/avvisi'
 import { IMMAGINI_SCUOLE } from '@/lib/immagini-scuole'
+import { immagineDiRepertorio } from '@/lib/repertorio'
 
 import styles from './home.module.css'
 
@@ -33,7 +34,14 @@ export default async function HomePage() {
           immagine:
             typeof a.immagine === 'object' && a.immagine?.url
               ? { url: a.immagine.url, width: a.immagine.width, height: a.immagine.height }
-              : null,
+              : (() => {
+                  // Senza foto: repertorio della scuola o delle sedi, mai il fondo vuoto
+                  const r = immagineDiRepertorio(
+                    a.slug ?? a.titolo,
+                    (a.scuole ?? []).flatMap((s) => (typeof s === 'object' && s.slug ? [s.slug] : [])),
+                  )
+                  return { url: r.src, width: r.width, height: r.height }
+                })(),
         }))}
       />
 

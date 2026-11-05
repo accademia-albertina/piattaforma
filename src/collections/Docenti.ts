@@ -9,6 +9,7 @@ import {
 } from '@/access/corsi'
 import { canAccessBackend } from '@/access/roles'
 import { slugField } from '@/fields/slug'
+import { linkSulSito } from '@/fields/linkSulSito'
 
 /**
  * Profilo pubblico del docente. È separato dall'account (Utenti): il profilo esiste anche
@@ -43,6 +44,7 @@ export const Docenti: CollectionConfig = {
     ],
   },
   fields: [
+    linkSulSito('/docenti/'),
     {
       type: 'row',
       fields: [

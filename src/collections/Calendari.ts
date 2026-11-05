@@ -5,6 +5,7 @@ import { leggiPubblicati } from '@/access/corsi'
 import { slugField } from '@/fields/slug'
 import { TIPI_CALENDARIO, TIPO_LABELS, normalizzaRighe, type TipoCalendario } from '@/lib/calendari'
 import { validaTitolo } from '@/fields/titolo'
+import { linkSulSito } from '@/fields/linkSulSito'
 
 /**
  * Calendari compilati come tabelle dalla segreteria: sul sito diventano pagine HTML con filtri,
@@ -38,6 +39,7 @@ export const Calendari: CollectionConfig = {
     ],
   },
   fields: [
+    linkSulSito('/calendari/'),
     {
       type: 'row',
       fields: [

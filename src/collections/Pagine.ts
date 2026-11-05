@@ -16,6 +16,7 @@ import { ROLE_LABELS } from '@/access/roles'
 import { BLOCCHI } from '@/blocks'
 import { slugField } from '@/fields/slug'
 import { validaTitolo } from '@/fields/titolo'
+import { linkSulSito } from '@/fields/linkSulSito'
 
 /** Indirizzi già usati da pagine fisse del sito: una pagina di primo livello non può prenderli. */
 export const SLUG_RISERVATI = [
@@ -110,6 +111,7 @@ export const Pagine: CollectionConfig = {
     afterChange: [aggiornaSottopagine],
   },
   fields: [
+    linkSulSito('/', 'percorso'),
     {
       name: 'titolo',
       label: 'Titolo',
@@ -125,7 +127,7 @@ export const Pagine: CollectionConfig = {
       maxLength: 240,
       admin: {
         description:
-          'Una o due frasi sotto il titolo; si usano anche nei risultati di Google e nelle anteprime social.',
+          'Una o due frasi sotto il titolo; compaiono anche nel box della pagina genitore, nei risultati di Google e nelle anteprime social.',
       },
     },
     {
