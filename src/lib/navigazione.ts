@@ -56,8 +56,7 @@ export const MENU_PRINCIPALE: GruppoMenu[][] = [
         { label: 'Manifesto degli studi', href: '/didattica/manifesto-degli-studi' },
         { label: 'Corsi', href: '/corsi' },
         { label: 'Docenti', href: '/docenti' },
-        { label: 'Calendari', href: '/didattica/calendari' },
-        { label: 'Orario lezioni', href: '/didattica/orario-lezioni' },
+        { label: 'Orari e calendari', href: '/calendari' },
         { label: 'Ammissioni', href: '/didattica/ammissioni' },
         { label: 'Iscrizioni', href: '/didattica/iscrizioni' },
         { label: 'Trasferimenti', href: '/didattica/trasferimenti' },
@@ -129,7 +128,7 @@ export const CONTATTI = {
 export const MENU_FOOTER: VoceMenu[] = [
   { label: 'Avvisi', href: '/avvisi' },
   { label: 'Guide', href: '/guide' },
-  { label: 'Orario lezioni', href: '/didattica/orario-lezioni' },
+  { label: 'Orari e calendari', href: '/calendari' },
   {
     label: 'Isidata',
     href: 'https://servizi13.isidata.net/SSDidatticheAC/MainGeneraleRes.aspx',

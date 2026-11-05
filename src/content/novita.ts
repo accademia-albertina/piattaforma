@@ -12,6 +12,15 @@ export type Novita = {
 export const NOVITA: Novita[] = [
   {
     data: '2026-11-05',
+    titolo: 'Link a Orari e calendari',
+    punti: [
+      'Nel menu Didattica e nel footer la voce “Orari e calendari” porta alla nuova pagina /calendari.',
+      'I vecchi indirizzi dell’orario lezioni e dei calendari rimandano alla nuova pagina.',
+    ],
+    pr: [42],
+  },
+  {
+    data: '2026-11-05',
     titolo: 'Menu della sezione senza rosso',
     punti: [
       'Nel menu a destra delle pagine la voce corrente è su pannello azzurro chiaro con filetto scuro, al posto del rosso.',

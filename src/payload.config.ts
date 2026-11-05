@@ -20,6 +20,7 @@ import { seedCorsi } from './seed/corsi'
 import { importaAvvisiWp } from './seed/avvisi-wp'
 import { rimuoviDocenti } from './seed/docenti-rimossi'
 import { importaDocentiWp } from './seed/docenti-wp'
+import { aggiornaLinkCalendari } from './seed/link-calendari'
 import { importaCalendari } from './seed/calendari'
 import { correggiFacciata, seedDemo } from './seed/demo'
 
@@ -106,6 +107,7 @@ export default buildConfig({
     await rimuoviDocenti(payload)
     await correggiFacciata(payload)
     await importaCalendari(payload)
+    await aggiornaLinkCalendari(payload)
     // Gli avvisi del sito attuale sono più di mille: si importano in background,
     // senza ritardare l'avvio (l'hosting controlla /salute dopo pochi secondi).
     void importaAvvisiWp(payload).catch((e) =>

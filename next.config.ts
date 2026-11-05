@@ -30,7 +30,10 @@ const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'X-Frame-Options', value: 'DENY' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()' },
+  {
+    key: 'Permissions-Policy',
+    value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
+  },
   { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
 ]
 
@@ -42,6 +45,15 @@ const nextConfig: NextConfig = {
         pathname: '/api/media/file/**',
       },
     ],
+  },
+  // Indirizzi del sito attuale e dei vecchi menu che ora portano alla pagina dei calendari.
+  async redirects() {
+    return [
+      '/didattica/orario-lezioni',
+      '/didattica/calendari',
+      '/orario-lezioni',
+      '/calendario',
+    ].map((source) => ({ source, destination: '/calendari', permanent: true }))
   },
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]
