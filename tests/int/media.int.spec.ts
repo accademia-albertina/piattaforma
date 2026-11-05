@@ -34,7 +34,7 @@ describe('Caricamento immagini', () => {
     expect(media.width).toBe(1920)
     expect(media.height).toBe(1440)
     // Nei test non c'è la chiave dell'API: il testo viene dal nome del file
-    expect(media.alt).toBe(process.env.ANTHROPIC_API_KEY ? expect.any(String) : 'Foto mostra finale')
+    expect(media.alt).toBe('Foto mostra finale')
   })
 
   it('non ingrandisce le immagini piccole e lascia il testo scritto a mano', async () => {
