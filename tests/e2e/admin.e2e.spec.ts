@@ -24,6 +24,7 @@ test.describe('Admin Panel', () => {
     await expect(page.getByRole('heading', { level: 1, name: /^Ciao/ })).toBeVisible()
     const sezioni = page.getByRole('region', { name: 'Contenuti e impostazioni' })
     await expect(sezioni.getByRole('link', { name: 'Avvisi', exact: true })).toBeVisible()
+    // Il pulsante «Apri il sito» sta nell'intestazione, su tutte le pagine del pannello
     await expect(page.getByRole('link', { name: /Apri il sito/ })).toHaveAttribute('href', '/')
   })
 
