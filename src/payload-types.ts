@@ -71,6 +71,7 @@ export interface Config {
     avvisi: Avviso;
     corsi: Corso;
     docenti: Docente;
+    calendari: Calendario;
     scuole: Scuola;
     media: Media;
     users: User;
@@ -85,6 +86,7 @@ export interface Config {
     avvisi: AvvisiSelect<false> | AvvisiSelect<true>;
     corsi: CorsiSelect<false> | CorsiSelect<true>;
     docenti: DocentiSelect<false> | DocentiSelect<true>;
+    calendari: CalendariSelect<false> | CalendariSelect<true>;
     scuole: ScuoleSelect<false> | ScuoleSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -626,6 +628,50 @@ export interface Docente {
   createdAt: string;
 }
 /**
+ * Orario delle lezioni, esami e presentazioni: si compilano a tabella, il sito li mostra con filtri e li fa stampare.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "calendari".
+ */
+export interface Calendario {
+  id: number;
+  tipo: 'lezioni' | 'esami' | 'presentazioni';
+  annoAccademico: string;
+  titolo: string;
+  /**
+   * Facoltativo, es. “Sessione estiva” o “Secondo semestre”.
+   */
+  sottotitolo?: string | null;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  /**
+   * Mostrate in un riquadro sopra la tabella, es. “Le aule potrebbero cambiare”. Una per riga.
+   */
+  avvertenze?: string | null;
+  /**
+   * Una per riga, es. “Sede centrale: via Accademia Albertina 6, Torino”.
+   */
+  sedi?: string | null;
+  righe?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Facoltativo: il sito permette già di stampare la tabella.
+   */
+  pdf?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -664,6 +710,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'docenti';
         value: number | Docente;
+      } | null)
+    | ({
+        relationTo: 'calendari';
+        value: number | Calendario;
       } | null)
     | ({
         relationTo: 'scuole';
@@ -929,6 +979,24 @@ export interface DocentiSelect<T extends boolean = true> {
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "calendari_select".
+ */
+export interface CalendariSelect<T extends boolean = true> {
+  tipo?: T;
+  annoAccademico?: T;
+  titolo?: T;
+  sottotitolo?: T;
+  slug?: T;
+  avvertenze?: T;
+  sedi?: T;
+  righe?: T;
+  pdf?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

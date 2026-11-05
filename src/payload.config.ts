@@ -11,6 +11,7 @@ import { Media } from './collections/Media'
 import { Avvisi } from './collections/Avvisi'
 import { Scuole } from './collections/Scuole'
 import { Pagine } from './collections/Pagine'
+import { Calendari } from './collections/Calendari'
 import { Corsi } from './collections/Corsi'
 import { Docenti } from './collections/Docenti'
 import { Navigazione } from './globals/Navigazione'
@@ -19,6 +20,7 @@ import { seedCorsi } from './seed/corsi'
 import { importaAvvisiWp } from './seed/avvisi-wp'
 import { rimuoviDocenti } from './seed/docenti-rimossi'
 import { importaDocentiWp } from './seed/docenti-wp'
+import { importaCalendari } from './seed/calendari'
 import { correggiFacciata, seedDemo } from './seed/demo'
 
 const filename = fileURLToPath(import.meta.url)
@@ -74,7 +76,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Pagine, Avvisi, Corsi, Docenti, Scuole, Media, Users],
+  collections: [Pagine, Avvisi, Corsi, Docenti, Calendari, Scuole, Media, Users],
   globals: [Navigazione],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -103,6 +105,7 @@ export default buildConfig({
     await seedCorsi(payload)
     await rimuoviDocenti(payload)
     await correggiFacciata(payload)
+    await importaCalendari(payload)
     // Gli avvisi del sito attuale sono più di mille: si importano in background,
     // senza ritardare l'avvio (l'hosting controlla /salute dopo pochi secondi).
     void importaAvvisiWp(payload).catch((e) =>

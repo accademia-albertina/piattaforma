@@ -1,0 +1,4629 @@
+{
+ "tipo": "lezioni",
+ "titolo": "Orario delle lezioni",
+ "annoAccademico": "2025/2026",
+ "sedi": "Sede centrale: via Accademia Albertina 6, Torino\nEX INCET: via Francesco Cigna 96/17, Torino",
+ "avvertenze": "Non è ancora completata l’attribuzione delle aule: alcuni spazi potrebbero cambiare, anche in sedi esterne all’Accademia.\nPotrebbero esserci ancora variazioni di orario per sovrapposizioni e nomine di nuovi docenti: seguite gli aggiornamenti.\nGli orari sono indicativi: fanno fede i calendari dei singoli docenti.",
+ "righe": [
+  {
+   "corso": "Allestimenti degli spazi espositivi",
+   "livello": "Triennio",
+   "docenti": "Minelli",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "14:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Allestimenti degli spazi espositivi",
+   "livello": "Triennio",
+   "docenti": "Minelli",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Allestimenti degli spazi espositivi",
+   "livello": "Triennio",
+   "docenti": "Minelli",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "16:00",
+   "semestre": "1\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Allestimenti degli spazi espositivi",
+   "livello": "Biennio",
+   "docenti": "Origoni",
+   "giorno": "Venerdì\n(+ uscite didattica e lezioni di recupero)",
+   "inizio": "9:30",
+   "fine": "12:30",
+   "semestre": "1 e 2",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio",
+   "docenti": "Ribero\n(per Grafica e Decorazione)",
+   "giorno": "Giovedì",
+   "inizio": "9:30",
+   "fine": "13:30",
+   "semestre": "1 e 2",
+   "aula": "Aula A02\n(parte posteriore)"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio",
+   "docenti": "Ribero\n(per Grafica e Decorazione)",
+   "giorno": "Giovedì",
+   "inizio": "14:30",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula A02\n(parte posteriore)"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio",
+   "docenti": "Fanti\n(per Pittura)\nTriennio 2",
+   "giorno": "Giovedì\n(laboratorio)",
+   "inizio": "12:30",
+   "fine": "14:30",
+   "semestre": "1",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio",
+   "docenti": "Fanti\n(per Pittura)\nTriennio 2",
+   "giorno": "Giovedì\n(lezione teorica)",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio",
+   "docenti": "Fanti\n(per Pittura)\nTriennio 2",
+   "giorno": "Venerdì\n(laboratorio)",
+   "inizio": "13:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio",
+   "docenti": "Fanti\n(per Pittura)\nTriennio 2",
+   "giorno": "Venerdì\n(ricevimento)",
+   "inizio": "18:00",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno e 2°anno",
+   "docenti": "Merlino\n(per Scultura)",
+   "giorno": "Venerdì\n(+1 giorno di recupero)",
+   "inizio": "9:00\n(teoria)",
+   "fine": "10:00",
+   "semestre": "1",
+   "aula": "Aule A12+A13"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno e 2°anno",
+   "docenti": "Merlino\n(per Scultura)",
+   "giorno": "Venerdì\n(+1 giorno di recupero)",
+   "inizio": "10:00\n(laboratorio)",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aule A12+A13"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno e 2°anno",
+   "docenti": "Merlino\n(per Scultura)",
+   "giorno": "Venerdì\n(+1 giorno di recupero)",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1",
+   "aula": "Aule A12+A13"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno e 2°anno",
+   "docenti": "Racheli\n(per Pittura)",
+   "giorno": "Mercoledì\nVenerdì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula A02\n(parte verso cortile)"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno e 2°anno",
+   "docenti": "Racheli\n(per Pittura)",
+   "giorno": "Mercoledì\nVenerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula A02\n(parte verso cortile)"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno e 2°anno",
+   "docenti": "Racheli\n(per Pittura)",
+   "giorno": "Giovedì",
+   "inizio": "14.30",
+   "fine": "18.30",
+   "semestre": "2",
+   "aula": "Aula A02\n(parte verso cortile)"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno e 2°anno",
+   "docenti": "Garbolino\n(per Pittura)",
+   "giorno": "Mercoledì",
+   "inizio": "9:00\n(lezione teorica 9:00-10:00)",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula A12 e A13"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno e 2°anno",
+   "docenti": "Garbolino\n(per Pittura)",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A12 e A13"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno e 2°anno",
+   "docenti": "Garbolino\n(per Pittura)",
+   "giorno": "Mercoledì\n(recuperi e revisioni)",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula A12"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno e 2°anno",
+   "docenti": "Garbolino\n(per Pittura)",
+   "giorno": "Mercoledì\n(recuperi e revisioni)",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula A12"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno",
+   "docenti": "Mutinelli\n(per Pittura)",
+   "giorno": "Mercoledì",
+   "inizio": "10:00",
+   "fine": "13:30",
+   "semestre": "1",
+   "aula": "Aula A02\n(parte verso cortile)"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno",
+   "docenti": "Mutinelli\n(per Pittura)",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula A02\n(parte verso cortile)"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 2°anno",
+   "docenti": "Mutinelli\n(per Pittura)",
+   "giorno": "Giovedì\n(recuperi/ricevimenti)",
+   "inizio": "12:30",
+   "fine": "13:30",
+   "semestre": "1",
+   "aula": "Biblioteca"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 2°anno",
+   "docenti": "Mutinelli\n(per Pittura)",
+   "giorno": "Giovedì",
+   "inizio": "13:30",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula A02\n(parte verso cortile)"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno 2°anno\n(ulteriore giorno a disposizione)",
+   "docenti": "Mutinelli\n(per Pittura)",
+   "giorno": "Venerdì",
+   "inizio": "10:00",
+   "fine": "13:30",
+   "semestre": "1",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Anatomia artistica",
+   "livello": "Triennio 1°anno 2°anno\n(ulteriore giorno a disposizione)",
+   "docenti": "Mutinelli\n(per Pittura)",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula C28"
+  },
+  {
+   "corso": "Anatomia dell’immagine",
+   "livello": "Triennio",
+   "docenti": "Ribero",
+   "giorno": "Venerdì",
+   "inizio": "9:30",
+   "fine": "13:30",
+   "semestre": "1",
+   "aula": "Aula A02\n(parte posteriore)"
+  },
+  {
+   "corso": "Anatomia dell’immagine",
+   "livello": "Biennio",
+   "docenti": "Ribero",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A02\n(parte posteriore)"
+  },
+  {
+   "corso": "Antropologia culturale",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Glielmi",
+   "giorno": "Martedì",
+   "inizio": "9:45",
+   "fine": "13:15",
+   "semestre": "2",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Antropologia culturale",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Glielmi",
+   "giorno": "Giovedì\n(ricevimento)",
+   "inizio": "12:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Biblioteca"
+  },
+  {
+   "corso": "Antropologia culturale",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Glielmi",
+   "giorno": "Giovedì",
+   "inizio": "13:00",
+   "fine": "16:00",
+   "semestre": "2",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Antropologia culturale",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Mastroianni",
+   "giorno": "Lunedì\n(lezione)",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Antropologia culturale",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Mastroianni",
+   "giorno": "Lunedì\n(ricevimento)",
+   "inizio": "15:00",
+   "fine": "16:00",
+   "semestre": "1",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Antropologia culturale",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Mastroianni",
+   "giorno": "Mercoledì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Antropologia culturale",
+   "livello": "Seminario",
+   "docenti": "Mastroianni",
+   "giorno": "Lunedì",
+   "inizio": "16:30",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Antropologia culturale",
+   "livello": "Seminario",
+   "docenti": "Mastroianni",
+   "giorno": "Martedì",
+   "inizio": "16:30",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\nBiennio\n(solo Scuola di Scenografia)",
+   "docenti": "Ajani",
+   "giorno": "Mercoledì",
+   "inizio": "10:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula C28a"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\nBiennio\nGruppo 1\n(per Didattica, Decorazione)",
+   "docenti": "Anni",
+   "giorno": "Sabato",
+   "inizio": "9:30",
+   "fine": "12:30",
+   "semestre": "1",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\nBiennio\nGruppo 1\n(per Didattica, Decorazione)",
+   "docenti": "Anni",
+   "giorno": "Sabato",
+   "inizio": "13:00",
+   "fine": "17:00",
+   "semestre": "1",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\nBiennio\nGruppo 2\n(per PAI)",
+   "docenti": "Anni",
+   "giorno": "Sabato",
+   "inizio": "9:30",
+   "fine": "12:30",
+   "semestre": "2",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\nBiennio\nGruppo 2\n(per PAI)",
+   "docenti": "Anni",
+   "giorno": "Sabato",
+   "inizio": "13:00",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\n(per la Scuola di Cinema, Fotografia, Audiovisivo)",
+   "docenti": "De Pasquale",
+   "giorno": "Giovedì\n(ricevimento)",
+   "inizio": "10:30",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C33"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\n(per la Scuola di Cinema, Fotografia, Audiovisivo)",
+   "docenti": "De Pasquale",
+   "giorno": "Giovedì\n(lezione)",
+   "inizio": "13:00",
+   "fine": "16:30",
+   "semestre": "1 e 2",
+   "aula": "Aula C33"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\nNTA\n(2° triennio)\nApplicazioni digitali per l’arte",
+   "docenti": "Fumagalli",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\nNTA\n(2° triennio)\nApplicazioni digitali per l’arte",
+   "docenti": "Fumagalli",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Biennio\nNTA\n(Media Art)\nApplicazioni digitali per l’arte",
+   "docenti": "Fumagalli",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2\n(a settimane alterne B)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Biennio\nNTA\n(Media Art)\nApplicazioni digitali per l’arte",
+   "docenti": "Fumagalli",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2\n(a settimane alterne B)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\nNTA\n(3° triennio)\nApplicazioni digitali per l’arte 2",
+   "docenti": "Vozzo",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Applicazioni digitali per le arti visive",
+   "livello": "Triennio\nNTA\n(3° triennio)\nApplicazioni digitali per l’arte 2",
+   "docenti": "Vozzo",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Architettura virtuale",
+   "livello": "Biennio\n(Scenografia Cine-tv e teatro/ NTA Media art)",
+   "docenti": "Gagliarducci",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula S34"
+  },
+  {
+   "corso": "Art Direction",
+   "livello": "Biennio",
+   "docenti": "Gioia",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Art Direction",
+   "livello": "Biennio",
+   "docenti": "Gioia",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "2\n(a settimane alterne B)",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Arte del fumetto",
+   "livello": "Triennio",
+   "docenti": "Rovero",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Arte del fumetto",
+   "livello": "Triennio",
+   "docenti": "Rovero",
+   "giorno": "Giovedì",
+   "inizio": "13:30",
+   "fine": "17:30",
+   "semestre": "1",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Arte del fumetto",
+   "livello": "Biennio\n(Grafica Illustrazione e Fumetto)",
+   "docenti": "Rovero",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Arte del fumetto",
+   "livello": "Biennio\n(Grafica d’arte e altre Scuole)",
+   "docenti": "Rovero",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "12:00",
+   "semestre": "2",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Arte del fumetto",
+   "livello": "Biennio\n(Grafica d’arte e altre Scuole)",
+   "docenti": "Rovero",
+   "giorno": "Giovedì",
+   "inizio": "12:30",
+   "fine": "15:00",
+   "semestre": "2",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Audio e mixaggio",
+   "livello": "Biennio",
+   "docenti": "Sasso",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "14:00",
+   "semestre": "1",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Beni culturali e ambientali",
+   "livello": "Triennio",
+   "docenti": "Plaitano",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Beni culturali e ambientali",
+   "livello": "Biennio",
+   "docenti": "Plaitano",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Catalogazione e gestione degli archivi",
+   "livello": "Biennio",
+   "docenti": "Plaitano",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Computer Art",
+   "livello": "Triennio\n(NTA)",
+   "docenti": "Fumagalli",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Computer Art",
+   "livello": "Triennio\n(NTA)",
+   "docenti": "Fumagalli",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Computer Art",
+   "livello": "Triennio\n(Pittura)",
+   "docenti": "Fumagalli",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Computer Art",
+   "livello": "Triennio\n(Pittura)",
+   "docenti": "Fumagalli",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Computer Art",
+   "livello": "Biennio\n(NTA Media Art))",
+   "docenti": "Fumagalli",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Computer Art",
+   "livello": "Biennio\n(NTA Media Art))",
+   "docenti": "Fumagalli",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Computer\nGraphic",
+   "livello": "Triennio\n(Grafica)",
+   "docenti": "Corso non attivo",
+   "giorno": "",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Comunicazione espositiva",
+   "livello": "Triennio",
+   "docenti": "Comisso",
+   "giorno": "Lunedì",
+   "inizio": "10:00",
+   "fine": "13.00",
+   "semestre": "2",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Comunicazione e valorizzazione delle collezioni museali",
+   "livello": "Biennio",
+   "docenti": "Romano Pace",
+   "giorno": "Martedì",
+   "inizio": "15:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Coreografia digitale",
+   "livello": "Biennio",
+   "docenti": "Giomi\n+\nRoversi\n(dottoranda)",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula R12"
+  },
+  {
+   "corso": "Costume per lo spettacolo",
+   "livello": "Triennio",
+   "docenti": "Fiorentini",
+   "giorno": "Mercoledì",
+   "inizio": "8:30",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula Costume\nIncet"
+  },
+  {
+   "corso": "Costume per lo spettacolo",
+   "livello": "Biennio\n(per Fashion Design il Giovedì mattina 1° e 2° sem.)",
+   "docenti": "Fiorentini",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "1 e 2",
+   "aula": "Aula Costume\nIncet"
+  },
+  {
+   "corso": "Cromatologia",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Barovero",
+   "giorno": "Sabato",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Cromatologia",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Barovero",
+   "giorno": "Sabato",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Cultura dei materiali di moda",
+   "livello": "Biennio",
+   "docenti": "Vinci",
+   "giorno": "Giovedì",
+   "inizio": "09:30",
+   "fine": "17:30",
+   "semestre": "2",
+   "aula": "INCET"
+  },
+  {
+   "corso": "Cultura tessile",
+   "livello": "Biennio",
+   "docenti": "Zefferino",
+   "giorno": "Lunedì",
+   "inizio": "09:30",
+   "fine": "12:30",
+   "semestre": "2",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Culture digitali 1",
+   "livello": "Triennio",
+   "docenti": "Vozzo",
+   "giorno": "Lunedì",
+   "inizio": "09:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Culture digitali 2",
+   "livello": "Triennio",
+   "docenti": "Vozzo",
+   "giorno": "Mercoledì",
+   "inizio": "09:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Saccomandi",
+   "giorno": "Lunedì",
+   "inizio": "09:30",
+   "fine": "13:30",
+   "semestre": "1 e 2",
+   "aula": "Aule C42 e C41"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Saccomandi",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aule C42 e C41"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Saccomandi",
+   "giorno": "Martedì",
+   "inizio": "09:30",
+   "fine": "13:30",
+   "semestre": "1 e 2",
+   "aula": "Aule C42 e C41"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Saccomandi",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aule C42 e C41"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Galliano",
+   "giorno": "Lunedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C41"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Galliano",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C41"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Galfione",
+   "giorno": "Lunedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C41"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Galfione",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C41"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Galfione",
+   "giorno": "Martedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C41"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Galfione",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C41"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Galfione",
+   "giorno": "Lunedì\nMartedì\n(solo fino al 18/11)",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Decorazione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Galfione",
+   "giorno": "Lunedì\nMartedì\n(solo fino al 18/11)",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1",
+   "aula": "Aula S32"
+  },
+  {
+   "corso": "Design (Design degli ambienti)",
+   "livello": "Triennio\nDesign 1",
+   "docenti": "Minelli",
+   "giorno": "Martedì",
+   "inizio": "9:30",
+   "fine": "13:30",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Design (Design degli ambienti)",
+   "livello": "Triennio\nDesign 1",
+   "docenti": "Minelli",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Design (Design degli ambienti)",
+   "livello": "Triennio\nDesign 3",
+   "docenti": "Minelli",
+   "giorno": "Lunedì",
+   "inizio": "9:30",
+   "fine": "13:30",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Design (Design degli ambienti)",
+   "livello": "Triennio\nDesign 3",
+   "docenti": "Minelli",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Design\n(Decorazione)",
+   "livello": "Biennio",
+   "docenti": "Ben David",
+   "giorno": "Lunedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Design\n(Decorazione)",
+   "livello": "Biennio",
+   "docenti": "Ben David",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Design del gioiello",
+   "livello": "Biennio",
+   "docenti": "Ben David",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "12:30",
+   "semestre": "1\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Design del gioiello",
+   "livello": "Biennio",
+   "docenti": "Ben David",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Design del gioiello",
+   "livello": "Biennio",
+   "docenti": "Ben David",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Design dell’accessorio",
+   "livello": "Biennio",
+   "docenti": "Rotundo",
+   "giorno": "Martedì",
+   "inizio": "16:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Design dell’accessorio",
+   "livello": "Biennio",
+   "docenti": "Rotundo",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Didattica dei linguaggi artistici",
+   "livello": "Triennio",
+   "docenti": "Liuzzi",
+   "giorno": "Lunedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Didattica per il museo",
+   "livello": "Biennio",
+   "docenti": "Fadda",
+   "giorno": "Venerdì",
+   "inizio": "11:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Didattica per il museo",
+   "livello": "Biennio",
+   "docenti": "Fadda",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Diritto, legislazione ed economia dello spettacolo",
+   "livello": "",
+   "docenti": "Vedi\nLegislazione ed economia delle arti e dello spettacolo",
+   "giorno": "",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Disegno\n(comprende anche Disegno per la decorazione, Disegno per l’incisione)",
+   "livello": "Triennio",
+   "docenti": "Stoisa",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula A02"
+  },
+  {
+   "corso": "Disegno\n(comprende anche Disegno per la decorazione, Disegno per l’incisione)",
+   "livello": "Triennio",
+   "docenti": "Stoisa",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A02"
+  },
+  {
+   "corso": "Disegno architettonico, stile e arredo",
+   "livello": "Triennio",
+   "docenti": "Amadio",
+   "giorno": "Venerdì",
+   "inizio": "8:30",
+   "fine": "16:30",
+   "semestre": "1",
+   "aula": "Aula C43"
+  },
+  {
+   "corso": "Drammaturgia multimediale",
+   "livello": "Biennio",
+   "docenti": "Balzola",
+   "giorno": "Mercoledì",
+   "inizio": "10:40",
+   "fine": "13:40",
+   "semestre": "1",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Drammaturgia multimediale",
+   "livello": "Biennio",
+   "docenti": "Balzola",
+   "giorno": "Martedì\n(Laboratorio)",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Drammaturgia multimediale",
+   "livello": "Triennio",
+   "docenti": "Balzola",
+   "giorno": "Martedì",
+   "inizio": "14:30",
+   "fine": "17:30",
+   "semestre": "1",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Drammaturgia multimediale",
+   "livello": "Triennio",
+   "docenti": "Balzola",
+   "giorno": "Martedì\n(Laboratorio)",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Economia e mercato dell’arte",
+   "livello": "Triennio",
+   "docenti": "Netti",
+   "giorno": "Giovedì",
+   "inizio": "14.30",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Economia e mercato dell’arte",
+   "livello": "Biennio",
+   "docenti": "Netti",
+   "giorno": "Venerdì",
+   "inizio": "14.30",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Economia e mercato dell’arte",
+   "livello": "Biennio\n(approfondimento)",
+   "docenti": "Netti",
+   "giorno": "Martedì",
+   "inizio": "9.00",
+   "fine": "13.00",
+   "semestre": "2",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Editoria d’arte",
+   "livello": "Biennio",
+   "docenti": "Muolo",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula G01\nSTUCCHI"
+  },
+  {
+   "corso": "Elementi di architettura e urbanistica",
+   "livello": "Triennio",
+   "docenti": "Borella",
+   "giorno": "Giovedì",
+   "inizio": "10:30",
+   "fine": "13:30",
+   "semestre": "2",
+   "aula": "Sala Volte Le Rosine\n(ingresso via Plana 8/c)"
+  },
+  {
+   "corso": "Elementi di architettura e urbanistica",
+   "livello": "Triennio",
+   "docenti": "Borella",
+   "giorno": "Giovedì",
+   "inizio": "15:00",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Sala Volte Le Rosine\n(ingresso via Plana 8/c)"
+  },
+  {
+   "corso": "Elementi di architettura e urbanistica",
+   "livello": "Biennio",
+   "docenti": "Borella",
+   "giorno": "Mercoledì",
+   "inizio": "10:30",
+   "fine": "13:30",
+   "semestre": "2",
+   "aula": "Sala Volte Le Rosine\n(ingresso via Plana 8/c)"
+  },
+  {
+   "corso": "Elementi di architettura e urbanistica",
+   "livello": "Biennio",
+   "docenti": "Borella",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Sala Volte Le Rosine\n(ingresso via Plana 8/c)"
+  },
+  {
+   "corso": "Elementi di grafica editoriale",
+   "livello": "Triennio",
+   "docenti": "Traversa",
+   "giorno": "Venerdì",
+   "inizio": "9:30",
+   "fine": "13:30",
+   "semestre": "1",
+   "aula": "Aula C28"
+  },
+  {
+   "corso": "Elementi di grafica editoriale",
+   "livello": "Triennio",
+   "docenti": "Traversa",
+   "giorno": "Venerdì",
+   "inizio": "9:30",
+   "fine": "13:30",
+   "semestre": "2",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Elementi di grafica editoriale",
+   "livello": "Biennio",
+   "docenti": "Traversa",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Elementi di morfologia e dinamica della forma",
+   "livello": "Biennio",
+   "docenti": "Garbolino",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula A12"
+  },
+  {
+   "corso": "Elementi di morfologia e dinamica della forma",
+   "livello": "Biennio",
+   "docenti": "Garbolino",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A12"
+  },
+  {
+   "corso": "Elementi di morfologia e dinamica della forma",
+   "livello": "Biennio",
+   "docenti": "Garbolino",
+   "giorno": "Mercoledì\n(recuperi e revisioni)",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A12 e A13"
+  },
+  {
+   "corso": "Estetica",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Farinella",
+   "giorno": "Venerdì",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Estetica",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Farinella",
+   "giorno": "Martedì",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Etica della comunicazione",
+   "livello": "Biennio",
+   "docenti": "Senaldi",
+   "giorno": "Mercoledì",
+   "inizio": "9:45",
+   "fine": "13:45",
+   "semestre": "1",
+   "aula": "Aula S32"
+  },
+  {
+   "corso": "Fashion design",
+   "livello": "Fashion\nDesign\n(trienni PAI / 2° biennio Product design)",
+   "docenti": "Caruso",
+   "giorno": "Lunedì",
+   "inizio": "09:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Fashion design",
+   "livello": "Fashion\nDesign\n(trienni PAI / 2° biennio Product design)",
+   "docenti": "Caruso",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Fashion design",
+   "livello": "Fashion\nDesign 2\n(Biennio Fashion Design)",
+   "docenti": "Caruso",
+   "giorno": "Martedì",
+   "inizio": "09:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Fashion design",
+   "livello": "Fashion\nDesign 2\n(Biennio Fashion Design)",
+   "docenti": "Caruso",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "16:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Fashion design",
+   "livello": "Fashion\nDesign 2\n(Biennio Fashion Design)",
+   "docenti": "Caruso",
+   "giorno": "Mercoledì",
+   "inizio": "14.00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Fashion design",
+   "livello": "Fashion\nDesign1\n(Biennio Fashion Design)",
+   "docenti": "Caruso",
+   "giorno": "Mercoledì",
+   "inizio": "14.00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Fashion design",
+   "livello": "Fashion\nDesign1\n(Biennio Fashion Design)",
+   "docenti": "Caruso",
+   "giorno": "Venerdì",
+   "inizio": "09:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Fashion design",
+   "livello": "Fashion\nDesign1\n(Biennio Fashion Design)",
+   "docenti": "Caruso",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "16:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Fenomenologia degli stili",
+   "livello": "Biennio",
+   "docenti": "Romeo",
+   "giorno": "Giovedì",
+   "inizio": "15:00",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Fenomenologia del corpo",
+   "livello": "Biennio",
+   "docenti": "Fanti",
+   "giorno": "Giovedì\n(laboratorio)",
+   "inizio": "12:30",
+   "fine": "14:30",
+   "semestre": "2",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Fenomenologia del corpo",
+   "livello": "Biennio",
+   "docenti": "Fanti",
+   "giorno": "Giovedì\n(lezione teorica)",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Fenomenologia del corpo",
+   "livello": "Biennio",
+   "docenti": "Fanti",
+   "giorno": "Venerdì\n(laboratorio)",
+   "inizio": "13:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Fenomenologia del corpo",
+   "livello": "Biennio",
+   "docenti": "Fanti",
+   "giorno": "Venerdì\n(ricevimento)",
+   "inizio": "18:00",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Fenomenologia delle arti contemporanee",
+   "livello": "Triennio",
+   "docenti": "Comisso",
+   "giorno": "Giovedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Fenomenologia delle arti contemporanee",
+   "livello": "Biennio",
+   "docenti": "Romeo",
+   "giorno": "Venerdì",
+   "inizio": "10:30",
+   "fine": "13:30",
+   "semestre": "1\n(a settimane alterne A)",
+   "aula": "Aula C33"
+  },
+  {
+   "corso": "Fenomenologia delle arti contemporanee",
+   "livello": "Biennio",
+   "docenti": "Romeo",
+   "giorno": "Venerdì",
+   "inizio": "10:30",
+   "fine": "13:30",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula C33"
+  },
+  {
+   "corso": "Fenomenologia delle arti contemporanee",
+   "livello": "Biennio\n(solo NTA)",
+   "docenti": "Mastroianni\n+ Abbiatici\n(dottoranda)",
+   "giorno": "Martedì",
+   "inizio": "15:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Fondamenti di disegno informatico",
+   "livello": "Biennio\n(Tecniche e tecnologie del disegno per 1°B PAI)",
+   "docenti": "Azzari",
+   "giorno": "Martedì",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "1 e 2",
+   "aula": "Aula S34"
+  },
+  {
+   "corso": "Fondamenti di disegno informatico",
+   "livello": "Triennio 1° gruppo\n(1° triennio Scenografia Cine-Tv + 1° triennio PAI)",
+   "docenti": "Azzari",
+   "giorno": "Lunedì",
+   "inizio": "16:30",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula S34"
+  },
+  {
+   "corso": "Fondamenti di disegno informatico",
+   "livello": "Triennio 1° gruppo\n(1° triennio Scenografia Cine-Tv + 1° triennio PAI)",
+   "docenti": "Azzari",
+   "giorno": "Lunedì",
+   "inizio": "13:30",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula S34"
+  },
+  {
+   "corso": "Fondamenti di disegno informatico",
+   "livello": "Triennio 2° gruppo\n(Tecniche e tecnologie del disegno per 1°B PAI)",
+   "docenti": "Azzari",
+   "giorno": "Martedì",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "1 e 2",
+   "aula": "Aula S34"
+  },
+  {
+   "corso": "Fondamenti di disegno informatico",
+   "livello": "Triennio 3° gruppo\n(1°T Scenografia teatro)",
+   "docenti": "Azzari",
+   "giorno": "Martedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula C43"
+  },
+  {
+   "corso": "Fondamenti di disegno informatico",
+   "livello": "Revisione\n(su appuntamento)",
+   "docenti": "Azzari",
+   "giorno": "Lunedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula S34"
+  },
+  {
+   "corso": "Fondamenti di marketing per la moda",
+   "livello": "Biennio",
+   "docenti": "Netti",
+   "giorno": "Sabato",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Formatura, tecnologia e tipologia dei materiali",
+   "livello": "Triennio",
+   "docenti": "Ruggiero",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "18:30",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula S03"
+  },
+  {
+   "corso": "Formatura, tecnologia e tipologia dei materiali",
+   "livello": "Triennio",
+   "docenti": "Ruggiero",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "18:30",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula S03"
+  },
+  {
+   "corso": "Fotografia",
+   "livello": "Triennio\n(per tutte le Scuole tranne Cinema)",
+   "docenti": "Amerio",
+   "giorno": "Giovedì\n(teoria)",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Fotografia",
+   "livello": "Triennio\n(per tutte le Scuole tranne Cinema)",
+   "docenti": "Amerio",
+   "giorno": "Giovedì\n(laboratorio)",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A11"
+  },
+  {
+   "corso": "Fotografia",
+   "livello": "Triennio\n(Scuola di Cinema, Fotografia, Audiovisivo)",
+   "docenti": "Amerio",
+   "giorno": "Venerdì\n(teoria)",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula A11"
+  },
+  {
+   "corso": "Fotografia",
+   "livello": "Triennio\n(Scuola di Cinema, Fotografia, Audiovisivo)",
+   "docenti": "Amerio",
+   "giorno": "Venerdì\n(laboratorio)",
+   "inizio": "14:30",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A11"
+  },
+  {
+   "corso": "Fotografia",
+   "livello": "Biennio",
+   "docenti": "Amerio",
+   "giorno": "Giovedì\n(teoria)",
+   "inizio": "10:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula A11"
+  },
+  {
+   "corso": "Fotografia",
+   "livello": "Biennio",
+   "docenti": "Amerio",
+   "giorno": "Giovedì\n(laboratorio)",
+   "inizio": "14:30",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula A11"
+  },
+  {
+   "corso": "Grafica d’arte –\nTecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Fanelli",
+   "giorno": "Lunedì",
+   "inizio": "09:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Grafica d’arte –\nTecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Fanelli",
+   "giorno": "Martedì",
+   "inizio": "9:00\n(lezioni teoriche + disegno dal vero)",
+   "fine": "13:00\n(14::00 il biennio)",
+   "semestre": "1 e 2",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Grafica d’arte –\nTecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Gay",
+   "giorno": "Lunedì",
+   "inizio": "8:30",
+   "fine": "14:30",
+   "semestre": "1 e 2",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Grafica d’arte –\nTecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Gay",
+   "giorno": "Martedì",
+   "inizio": "8:30",
+   "fine": "14:30",
+   "semestre": "1 e 2",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Graphic design",
+   "livello": "Biennio",
+   "docenti": "Traversa",
+   "giorno": "Mercoledì",
+   "inizio": "9:30",
+   "fine": "13:30",
+   "semestre": "1 e 2",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Graphic design",
+   "livello": "Biennio",
+   "docenti": "Traversa",
+   "giorno": "Venerdì\n(ricevimento)",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula S32"
+  },
+  {
+   "corso": "Graphic design",
+   "livello": "Triennio\n(NTA)",
+   "docenti": "Gioia",
+   "giorno": "Mercoledì\n+ recuperi",
+   "inizio": "9:00",
+   "fine": "14.00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Graphic design",
+   "livello": "Triennio\n(PAI)",
+   "docenti": "Gioia",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "18.00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Illuminotecnica",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Calafiore",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Illustrazione",
+   "livello": "Biennio\n(Illustrazione Fumetto)",
+   "docenti": "Quarello",
+   "giorno": "Lunedì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Illustrazione",
+   "livello": "Biennio\n(Illustrazione Fumetto)",
+   "docenti": "Quarello",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Illustrazione",
+   "livello": "Biennio\n(Grafica)",
+   "docenti": "Quarello",
+   "giorno": "Mercoledì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Illustrazione",
+   "livello": "Biennio\n(Grafica)",
+   "docenti": "Quarello",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Illustrazione",
+   "livello": "Triennio\n(Didattica)",
+   "docenti": "Quarello",
+   "giorno": "Lunedì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Illustrazione",
+   "livello": "Triennio\n(Didattica)",
+   "docenti": "Quarello",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Illustrazione scientifica",
+   "livello": "Triennio",
+   "docenti": "Merlino",
+   "giorno": "Giovedì",
+   "inizio": "09:00\nTeoria",
+   "fine": "10:00",
+   "semestre": "2",
+   "aula": "Aula A12+A13"
+  },
+  {
+   "corso": "Illustrazione scientifica",
+   "livello": "Triennio",
+   "docenti": "Merlino",
+   "giorno": "Giovedì",
+   "inizio": "10:00\nLaboratorio",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula A12+A13"
+  },
+  {
+   "corso": "Illustrazione scientifica",
+   "livello": "Triennio",
+   "docenti": "Merlino",
+   "giorno": "Giovedì",
+   "inizio": "14:00\nLaboratorio",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Aula A12+A13"
+  },
+  {
+   "corso": "Illustrazione scientifica",
+   "livello": "Biennio",
+   "docenti": "Merlino",
+   "giorno": "Venerdì",
+   "inizio": "09:00\nTeoria",
+   "fine": "10:00",
+   "semestre": "2",
+   "aula": "Aula A12+A13"
+  },
+  {
+   "corso": "Illustrazione scientifica",
+   "livello": "Biennio",
+   "docenti": "Merlino",
+   "giorno": "Venerdì",
+   "inizio": "10:00\nLaboratorio",
+   "fine": "13:30",
+   "semestre": "2",
+   "aula": "Aula A12+A13"
+  },
+  {
+   "corso": "Illustrazione scientifica",
+   "livello": "Biennio",
+   "docenti": "Merlino",
+   "giorno": "Venerdì",
+   "inizio": "14:00\nLaboratorio",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Aula A12+A13"
+  },
+  {
+   "corso": "Inglese",
+   "livello": "Triennio",
+   "docenti": "Pistoia",
+   "giorno": "Venerdì",
+   "inizio": "13:30",
+   "fine": "16:30",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Inglese",
+   "livello": "Triennio",
+   "docenti": "Pistoia",
+   "giorno": "Sabato",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Inglese",
+   "livello": "Biennio",
+   "docenti": "Pistoia",
+   "giorno": "Venerdì",
+   "inizio": "16:30",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Installazioni multimediali",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Moio",
+   "giorno": "Venerdì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula C43"
+  },
+  {
+   "corso": "Installazioni multimediali",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Moio",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula C43"
+  },
+  {
+   "corso": "Installazioni multimediali",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Moio",
+   "giorno": "Mercoledì",
+   "inizio": "10:00",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Aula C43"
+  },
+  {
+   "corso": "Legislazione ed economia delle arti e dello spettacolo\n(Diritto, legislazione ed economia dello spettacolo, Legislazione dei beni culturali, Legislazione del mercato dell’arte)",
+   "livello": "Triennio",
+   "docenti": "Netti",
+   "giorno": "Sabato",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Legislazione ed economia delle arti e dello spettacolo\n(Diritto, legislazione ed economia dello spettacolo, Legislazione dei beni culturali, Legislazione del mercato dell’arte)",
+   "livello": "Ricevimento",
+   "docenti": "Netti",
+   "giorno": "Venerdì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula S32"
+  },
+  {
+   "corso": "Letteratura e illustrazione per l’infanzia",
+   "livello": "Triennio",
+   "docenti": "Romeo",
+   "giorno": "Venerdì",
+   "inizio": "15:30",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula C33"
+  },
+  {
+   "corso": "Linguaggi multimediali",
+   "livello": "Triennio\nLinguaggi multimediali 1",
+   "docenti": "Chiari",
+   "giorno": "Martedì\nMercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1\n(a settimane alterne A)",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Linguaggi multimediali",
+   "livello": "Triennio\nLinguaggi multimediali 2",
+   "docenti": "Chiari",
+   "giorno": "Martedì\nMercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Litografia",
+   "livello": "Triennio",
+   "docenti": "Badelita",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "17:30",
+   "semestre": "1",
+   "aula": "Aula S01"
+  },
+  {
+   "corso": "Litografia",
+   "livello": "Biennio",
+   "docenti": "Badelita",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "17:30",
+   "semestre": "1",
+   "aula": "Aula S01"
+  },
+  {
+   "corso": "Metodi e tecniche della pittura sacra contemporanea",
+   "livello": "Biennio",
+   "docenti": "Valle",
+   "giorno": "Mercoledì\n(lezione teorica)",
+   "inizio": "12:30",
+   "fine": "13:30",
+   "semestre": "2",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Metodi e tecniche della pittura sacra contemporanea",
+   "livello": "Biennio",
+   "docenti": "Valle",
+   "giorno": "Mercoledì\n(laboratorio / ricevimento)",
+   "inizio": "10:30",
+   "fine": "12:30",
+   "semestre": "2",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Metodi e tecniche della pittura sacra contemporanea",
+   "livello": "Biennio",
+   "docenti": "Valle",
+   "giorno": "Mercoledì\n(laboratorio / ricevimento)",
+   "inizio": "14:30",
+   "fine": "16:30",
+   "semestre": "2",
+   "aula": "Aula S32"
+  },
+  {
+   "corso": "Metodi e tecniche della pittura sacra contemporanea",
+   "livello": "Biennio",
+   "docenti": "Valle",
+   "giorno": "Venerdì\n(laboratorio / ricevimento)",
+   "inizio": "10:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Metodologia della progettazione",
+   "livello": "Triennio",
+   "docenti": "De Pasquale",
+   "giorno": "Mercoledì",
+   "inizio": "10:30",
+   "fine": "14:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C33"
+  },
+  {
+   "corso": "Metodologia della progettazione",
+   "livello": "Biennio",
+   "docenti": "De Pasquale",
+   "giorno": "Mercoledì",
+   "inizio": "15:00",
+   "fine": "18:30",
+   "semestre": "1 e 2",
+   "aula": "Aula C33"
+  },
+  {
+   "corso": "Metodologia progettuale della comunicazione visiva",
+   "livello": "Biennio\n(1°NTA Media Art)",
+   "docenti": "D’Aleo",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "14:00",
+   "semestre": "2",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Metodologia progettuale della comunicazione visiva",
+   "livello": "Triennio\n(NTA / Comunicazio ne / Didattica)",
+   "docenti": "D’Aleo",
+   "giorno": "Giovedì",
+   "inizio": "10:30",
+   "fine": "15:00",
+   "semestre": "1",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Metodologia progettuale della comunicazione visiva",
+   "livello": "Biennio\n(PAI Fashion design + PAI Designdel prodotto)",
+   "docenti": "D’Aleo",
+   "giorno": "Martedì",
+   "inizio": "10:00",
+   "fine": "14:00",
+   "semestre": "1 e 2",
+   "aula": "Aula S34"
+  },
+  {
+   "corso": "Metodologia progettuale della comunicazione visiva",
+   "livello": "Triennio\n(PAI)",
+   "docenti": "D’Aleo",
+   "giorno": "Venerdì",
+   "inizio": "10:00",
+   "fine": "14:00",
+   "semestre": "1 e 2",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Metodologia progettuale della comunicazione visiva",
+   "livello": "Biennio\n(2°NTA Media Art)",
+   "docenti": "Torelli",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Metodologie e tecniche del contemporaneo",
+   "livello": "Triennio",
+   "docenti": "Comisso",
+   "giorno": "Mercoledì",
+   "inizio": "14:30",
+   "fine": "17:30",
+   "semestre": "2",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Modellistica",
+   "livello": "Triennio",
+   "docenti": "Tovini",
+   "giorno": "Giovedì",
+   "inizio": "10:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Modellistica",
+   "livello": "Biennio",
+   "docenti": "Tovini",
+   "giorno": "Sabato",
+   "inizio": "8:30",
+   "fine": "13:00",
+   "semestre": "1\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Modellistica",
+   "livello": "Biennio",
+   "docenti": "Tovini",
+   "giorno": "Sabato",
+   "inizio": "8:30",
+   "fine": "13:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Modellistica",
+   "livello": "Modellisti ca per la moda\n(solo Biennio Fashion Design)",
+   "docenti": "Tovini",
+   "giorno": "Venerdì",
+   "inizio": "8:30",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Modellistica",
+   "livello": "Modellisti ca per la moda\n(solo Biennio Fashion Design)",
+   "docenti": "Tovini",
+   "giorno": "Sabato",
+   "inizio": "8:30",
+   "fine": "13:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R02"
+  },
+  {
+   "corso": "Museografia",
+   "livello": "Triennio",
+   "docenti": "Origoni",
+   "giorno": "Venerdì\n(+ uscite didattica e lezioni di recupero)",
+   "inizio": "12:30",
+   "fine": "15:30",
+   "semestre": "1",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Museografia",
+   "livello": "Triennio",
+   "docenti": "Origoni",
+   "giorno": "Venerdì\n(+ uscite didattica e lezioni di recupero)",
+   "inizio": "12:30",
+   "fine": "15:30",
+   "semestre": "2",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Museografia",
+   "livello": "Biennio",
+   "docenti": "Origoni",
+   "giorno": "Venerdì\n(+ uscite didattica e lezioni di recupero)",
+   "inizio": "15:30",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Museografia",
+   "livello": "Biennio",
+   "docenti": "Origoni",
+   "giorno": "Venerdì\n(+ uscite didattica e lezioni di recupero)",
+   "inizio": "15:30",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula C31"
+  },
+  {
+   "corso": "Museologia del contemporaneo",
+   "livello": "Triennio",
+   "docenti": "Brombin",
+   "giorno": "Lunedì",
+   "inizio": "15:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Museologia del contemporaneo",
+   "livello": "Biennio",
+   "docenti": "Brombin",
+   "giorno": "Martedì",
+   "inizio": "15:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Museologia e gestione dei sistemi espositivi",
+   "livello": "",
+   "docenti": "Corso non attivo",
+   "giorno": "",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Museologia e storia del collezionismo",
+   "livello": "Biennio",
+   "docenti": "Romano Pace",
+   "giorno": "Mercoledì",
+   "inizio": "15:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Net art",
+   "livello": "Triennio",
+   "docenti": "Giomi\n+\nDellavalle e Mengozzi\n(dottorande)",
+   "giorno": "Vedi\nSistemi interattivi",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Pedagogia e didattica dell’arte",
+   "livello": "Triennio",
+   "docenti": "Fadda",
+   "giorno": "Mercoledì",
+   "inizio": "15:00",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Pedagogia e didattica dell’arte",
+   "livello": "Biennio",
+   "docenti": "Fadda",
+   "giorno": "Sabato\n(progetto Turandot)",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Pedagogia e didattica dell’arte",
+   "livello": "Biennio",
+   "docenti": "Fadda",
+   "giorno": "Sabato",
+   "inizio": "13:30",
+   "fine": "17:30",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Pittura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Leonardi",
+   "giorno": "Lunedì\nMartedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula P41 / A41"
+  },
+  {
+   "corso": "Pittura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Leonardi",
+   "giorno": "Lunedì\nMartedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1 e 2",
+   "aula": "Aula P41 / A41"
+  },
+  {
+   "corso": "Pittura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Giamblanco",
+   "giorno": "Lunedì\nMartedì",
+   "inizio": "9:30",
+   "fine": "16:30",
+   "semestre": "1 e 2",
+   "aula": "Aula P33"
+  },
+  {
+   "corso": "Pittura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Barzagli",
+   "giorno": "Lunedì\nMartedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula P31 e P32\n(in R12 il lunedì 1°sem e il martedì 2° sem.)"
+  },
+  {
+   "corso": "Pittura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Barzagli",
+   "giorno": "Lunedì\nMartedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1 e 2",
+   "aula": "Aula P31 e P32\n(in R12 il lunedì 1°sem e il martedì 2° sem.)"
+  },
+  {
+   "corso": "Pittura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Barovero",
+   "giorno": "Lunedì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula R01\nRotonda"
+  },
+  {
+   "corso": "Pittura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Barovero",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "17:30",
+   "semestre": "1 e 2",
+   "aula": "Aula R01\nRotonda"
+  },
+  {
+   "corso": "Plastica ornamentale",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Grassino",
+   "giorno": "Giovedì\nVenerdì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula A01"
+  },
+  {
+   "corso": "Plastica ornamentale",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Borrelli",
+   "giorno": "Giovedì\nVenerdì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula A01"
+  },
+  {
+   "corso": "Pratica e cultura dello spettacolo",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Mazzarotto",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Pratica e cultura dello spettacolo",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Mazzarotto",
+   "giorno": "Sabato",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Pratica e cultura dello spettacolo",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Mazzarotto",
+   "giorno": "Sabato",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Principi e tecniche della terapeutica artistica",
+   "livello": "Triennio",
+   "docenti": "Conterno",
+   "giorno": "Giovedì",
+   "inizio": "10:00",
+   "fine": "13.00",
+   "semestre": "2",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Principi e tecniche della terapeutica artistica",
+   "livello": "Biennio",
+   "docenti": "Conterno",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Product design",
+   "livello": "Biennio\n(Product Design 1 per PAI e Design per Decorazione )",
+   "docenti": "Ben David",
+   "giorno": "Lunedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Product design",
+   "livello": "Biennio\n(Product Design 1 per PAI e Design per Decorazione )",
+   "docenti": "Ben David",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Product design",
+   "livello": "Biennio\n(Product Design 2)",
+   "docenti": "Ben David",
+   "giorno": "Martedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Product design",
+   "livello": "Biennio\n(Product Design 2)",
+   "docenti": "Ben David",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Progettazione di interventi urbani e territoriali",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Maspoli",
+   "giorno": "Venerdì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula C42"
+  },
+  {
+   "corso": "Progettazione di interventi urbani e territoriali",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Maspoli",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula C42"
+  },
+  {
+   "corso": "Progettazione grafica",
+   "livello": "Biennio",
+   "docenti": "corso non attivo",
+   "giorno": "",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Progettazione\nMultimediale",
+   "livello": "Biennio\nNTA\nMedia art\n+ eventuali studenti di altre Scuole",
+   "docenti": "Chiari",
+   "giorno": "Martedì\nMercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Progettazione\nMultimediale",
+   "livello": "Biennio\nNTA\nMultimedia\nExhitib e\nDigital\nPerformance\n+ eventuali studenti di altre Scuole",
+   "docenti": "Chiari",
+   "giorno": "Giovedì\n+ alcuni pomeriggi",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Progettazione spazi sonori",
+   "livello": "Biennio",
+   "docenti": "Sasso",
+   "giorno": "Giovedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula A32"
+  },
+  {
+   "corso": "Progettazione spazi sonori",
+   "livello": "Biennio",
+   "docenti": "Sasso",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1",
+   "aula": "Aula A32"
+  },
+  {
+   "corso": "Realtà virtuali e paradigmi della complessità",
+   "livello": "Biennio",
+   "docenti": "Vozzo",
+   "giorno": "Giovedì",
+   "inizio": "09:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Regia",
+   "livello": "Triennio\nRegia 1\n(Scuola Cinema)",
+   "docenti": "Martinotti",
+   "giorno": "Lunedì",
+   "inizio": "11:00",
+   "fine": "13:30",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Regia",
+   "livello": "Triennio\nRegia 1\n(Scuola Cinema)",
+   "docenti": "Martinotti",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Regia",
+   "livello": "Triennio\nRegia 2\n(Scuola Cinema)",
+   "docenti": "Martinotti",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R12"
+  },
+  {
+   "corso": "Regia",
+   "livello": "Triennio\nRegia 2\n(Scuola Cinema)",
+   "docenti": "Martinotti",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R12"
+  },
+  {
+   "corso": "Regia",
+   "livello": "Triennio\n(NTA)",
+   "docenti": "Martinotti",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Regia",
+   "livello": "Triennio\n(NTA)",
+   "docenti": "Martinotti",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Regia",
+   "livello": "Biennio\n(Scenografia / NTA Multimedia Exhibit and Digital Performance )",
+   "docenti": "Martinotti",
+   "giorno": "Giovedì",
+   "inizio": "8:30",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Regia",
+   "livello": "Biennio\n(Scenografia / NTA Multimedia Exhibit and Digital Performance )",
+   "docenti": "Martinotti",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Rendering 3D",
+   "livello": "",
+   "docenti": "Vedi Tecniche della\nModellazione digitale – computer 3D",
+   "giorno": "",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Restauro dei materiali cartacei",
+   "livello": "",
+   "docenti": "Corso non attivo",
+   "giorno": "",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Triennio 1\n+\nScenografia",
+   "docenti": "Ajani\nL’orario sarà completato con progetti, stage, visite professionali, master class, workshop, sopralluoghi, rilievi architettonici, progetti speciali con partner esterni, progetti di\nIstituto, laboratorio in Incet",
+   "giorno": "Martedì\n(anche Scuola Cinema)",
+   "inizio": "10:00",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula C28a"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Triennio 1\n+\nScenografia",
+   "docenti": "Ajani\nL’orario sarà completato con progetti, stage, visite professionali, master class, workshop, sopralluoghi, rilievi architettonici, progetti speciali con partner esterni, progetti di\nIstituto, laboratorio in Incet",
+   "giorno": "Mercoledì",
+   "inizio": "10:00",
+   "fine": "13:30",
+   "semestre": "1",
+   "aula": "Aula C28a"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Triennio 1\n+\nScenografia",
+   "docenti": "Ajani\nL’orario sarà completato con progetti, stage, visite professionali, master class, workshop, sopralluoghi, rilievi architettonici, progetti speciali con partner esterni, progetti di\nIstituto, laboratorio in Incet",
+   "giorno": "Martedì",
+   "inizio": "10:00",
+   "fine": "13:30",
+   "semestre": "2",
+   "aula": "INCET"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Triennio 2",
+   "docenti": "Ajani\nL’orario sarà completato con progetti, stage, visite professionali, master class, workshop, sopralluoghi, rilievi architettonici, progetti speciali con partner esterni, progetti di\nIstituto, laboratorio in Incet",
+   "giorno": "Martedì",
+   "inizio": "10:00",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula C28a"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Triennio 2",
+   "docenti": "Ajani\nL’orario sarà completato con progetti, stage, visite professionali, master class, workshop, sopralluoghi, rilievi architettonici, progetti speciali con partner esterni, progetti di\nIstituto, laboratorio in Incet",
+   "giorno": "Mercoledì",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula C28a"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Triennio 2",
+   "docenti": "Ajani\nL’orario sarà completato con progetti, stage, visite professionali, master class, workshop, sopralluoghi, rilievi architettonici, progetti speciali con partner esterni, progetti di\nIstituto, laboratorio in Incet",
+   "giorno": "Martedì",
+   "inizio": "10:00",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "INCET"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Biennio 1",
+   "docenti": "Ajani\nL’orario sarà completato con progetti, stage, visite professionali, master class, workshop, sopralluoghi, rilievi architettonici, progetti speciali con partner esterni, progetti di\nIstituto, laboratorio in Incet",
+   "giorno": "Martedì",
+   "inizio": "10:00",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula C28a"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Biennio 1",
+   "docenti": "Ajani\nL’orario sarà completato con progetti, stage, visite professionali, master class, workshop, sopralluoghi, rilievi architettonici, progetti speciali con partner esterni, progetti di\nIstituto, laboratorio in Incet",
+   "giorno": "Martedì",
+   "inizio": "10:00",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "INCET"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Triennio 3",
+   "docenti": "Schirinzi",
+   "giorno": "Lunedì\n(come da calendario del docente)",
+   "inizio": "10:30",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C28b"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Triennio 3",
+   "docenti": "Schirinzi",
+   "giorno": "Martedì",
+   "inizio": "10:30",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C28b"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Triennio 3",
+   "docenti": "Schirinzi",
+   "giorno": "Mercoledì",
+   "inizio": "10:30",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C28b"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Biennio 2",
+   "docenti": "Schirinzi",
+   "giorno": "Lunedì\n(come da calendario del docente)",
+   "inizio": "10:30",
+   "fine": "14:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula C28b"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Biennio 2",
+   "docenti": "Schirinzi",
+   "giorno": "Lunedì\n(come da calendario del docente)",
+   "inizio": "10:30",
+   "fine": "18:30",
+   "semestre": "2\n(a settimane alterne B)",
+   "aula": "Aula C28b"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Biennio 2",
+   "docenti": "Schirinzi",
+   "giorno": "Martedì",
+   "inizio": "10:30",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C28b"
+  },
+  {
+   "corso": "Scenografia per il cinema e la TV",
+   "livello": "Biennio 2",
+   "docenti": "Schirinzi",
+   "giorno": "Mercoledì",
+   "inizio": "10:00",
+   "fine": "16:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula C28b"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Triennio 1\nTriennio 2\nTriennio 3",
+   "docenti": "Aldinio",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Triennio 1\nTriennio 2\nTriennio 3",
+   "docenti": "Aldinio",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Triennio 1\nTriennio 2\nTriennio 3",
+   "docenti": "Aldinio",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "12:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Triennio 1\nTriennio 2\nTriennio 3",
+   "docenti": "Aldinio",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Triennio 1\nTriennio 2\nTriennio 3",
+   "docenti": "Aldinio",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Biennio 1",
+   "docenti": "Voghera",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Biennio 1",
+   "docenti": "Voghera",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Biennio 1",
+   "docenti": "Voghera",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Biennio 1",
+   "docenti": "Voghera",
+   "giorno": "Lunedì",
+   "inizio": "13:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Biennio 2",
+   "docenti": "Voghera",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Biennio 2",
+   "docenti": "Voghera",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Biennio 2",
+   "docenti": "Voghera",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenografia per il teatro",
+   "livello": "Biennio 2",
+   "docenti": "Voghera",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula I4\nPiano mezzanino\nIncet"
+  },
+  {
+   "corso": "Scenotecnica\n(per il cinema e la TV)",
+   "livello": "Scenotec nica 1\nTriennio 1",
+   "docenti": "Amadio",
+   "giorno": "Lunedì",
+   "inizio": "8:30",
+   "fine": "16:30",
+   "semestre": "1",
+   "aula": "Aula C43"
+  },
+  {
+   "corso": "Scenotecnica\n(per il cinema e la TV)",
+   "livello": "Scenotec nica 2\nTriennio 2",
+   "docenti": "Amadio",
+   "giorno": "Lunedì",
+   "inizio": "8:30",
+   "fine": "16:30",
+   "semestre": "2",
+   "aula": "Aula C28"
+  },
+  {
+   "corso": "Scenotecnica\n(per il cinema e la TV)",
+   "livello": "Scenotec nica 1\nBiennio 1",
+   "docenti": "Amadio",
+   "giorno": "Giovedì",
+   "inizio": "8:30",
+   "fine": "16:30",
+   "semestre": "1",
+   "aula": "Aula C43"
+  },
+  {
+   "corso": "Scenotecnica\n(per il teatro)",
+   "livello": "Triennio\nScenotecnica\nI",
+   "docenti": "Esposito",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula I7\nIncet"
+  },
+  {
+   "corso": "Scenotecnica\n(per il teatro)",
+   "livello": "Triennio\nScenotecnica 2",
+   "docenti": "Esposito",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula I7\nIncet"
+  },
+  {
+   "corso": "Scenotecnica\n(per il teatro)",
+   "livello": "Biennio 1\nBiennio 2",
+   "docenti": "Esposito",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula I7\nIncet"
+  },
+  {
+   "corso": "Scrittura creativa",
+   "livello": "Triennio\nBiennio",
+   "docenti": "De Francesco",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula C33"
+  },
+  {
+   "corso": "Scrittura creativa",
+   "livello": "Triennio\nBiennio",
+   "docenti": "De Francesco",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula C33"
+  },
+  {
+   "corso": "Scrittura creativa",
+   "livello": "Triennio\nBiennio",
+   "docenti": "De Francesco",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula C33"
+  },
+  {
+   "corso": "Scrittura creativa",
+   "livello": "Triennio\nBiennio",
+   "docenti": "De Francesco",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Salone d’Onore"
+  },
+  {
+   "corso": "Scultura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Bosisio\n(vedi calendario del docente)",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C01"
+  },
+  {
+   "corso": "Scultura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Bosisio\n(vedi calendario del docente)",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C01"
+  },
+  {
+   "corso": "Scultura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Bosisio\n(vedi calendario del docente)",
+   "giorno": "Martedì",
+   "inizio": "15:30\n(lezione teorica)",
+   "fine": "18:30",
+   "semestre": "1 e 2",
+   "aula": "Aula R03"
+  },
+  {
+   "corso": "Scultura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Bosisio\n(vedi calendario del docente)",
+   "giorno": "Giovedì\n(solo ricevimento, il laboratorio non è aperto)",
+   "inizio": "9:00",
+   "fine": "15:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C01"
+  },
+  {
+   "corso": "Scultura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Novello\n(per 2 settimane al mese consecutive, alternato al Prof. Bosisio)",
+   "giorno": "Lunedì\nMartedì\nMercoledì",
+   "inizio": "9:00",
+   "fine": "17:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C01"
+  },
+  {
+   "corso": "Semiologia del corpo",
+   "livello": "Biennio",
+   "docenti": "Merlino",
+   "giorno": "Giovedì\n(teoria)",
+   "inizio": "09:00",
+   "fine": "10:00",
+   "semestre": "1",
+   "aula": "Aula A12"
+  },
+  {
+   "corso": "Semiologia del corpo",
+   "livello": "Biennio",
+   "docenti": "Merlino",
+   "giorno": "Giovedì\n(laboratorio)",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula A12"
+  },
+  {
+   "corso": "Semiologia del corpo",
+   "livello": "Biennio",
+   "docenti": "Merlino",
+   "giorno": "Giovedì\n(laboratorio)",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1",
+   "aula": "Aula A12"
+  },
+  {
+   "corso": "Semiotica dell’arte",
+   "livello": "Triennio",
+   "docenti": "Mastroianni\n+ Dottoranda",
+   "giorno": "Martedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Serigrafia",
+   "livello": "Triennio",
+   "docenti": "Podgornik",
+   "giorno": "Venerdì",
+   "inizio": "9:30",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula S01"
+  },
+  {
+   "corso": "Serigrafia",
+   "livello": "Biennio",
+   "docenti": "Podgornik",
+   "giorno": "Mercoledì",
+   "inizio": "9:30",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula S01"
+  },
+  {
+   "corso": "Sistemi interattivi",
+   "livello": "Triennio",
+   "docenti": "Giomi\n+\nGentilini\n(dottorando)",
+   "giorno": "Venerdì",
+   "inizio": "11:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Sistemi interattivi\n+net",
+   "livello": "Biennio",
+   "docenti": "Giomi\n+\nDellavalle e Mengozzi\n(dottorande)",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Sistemi interattivi\n+net",
+   "livello": "Biennio",
+   "docenti": "Giomi\n+\nDellavalle e Mengozzi\n(dottorande)",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Sociologia dell’arte",
+   "livello": "Biennio",
+   "docenti": "Corso non attivo",
+   "giorno": "",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Sound design",
+   "livello": "Triennio\n(triennio NTA + Didattica)",
+   "docenti": "Sasso",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "13:30",
+   "semestre": "2",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Sound design",
+   "livello": "Triennio\n(Scuola Cinema + Scultura)",
+   "docenti": "Sasso",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Sound design",
+   "livello": "Triennio\n(Scuola Cinema + Scultura + Didattica)",
+   "docenti": "Sasso",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Sound design",
+   "livello": "Triennio\n(Recupero Scuola Cinema)",
+   "docenti": "Sasso",
+   "giorno": "Martedì",
+   "inizio": "15:00",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Sound design",
+   "livello": "Biennio\n(NTA Media Art)",
+   "docenti": "Sasso",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "14:00",
+   "semestre": "1",
+   "aula": "Aula A32"
+  },
+  {
+   "corso": "Stampa d’arte",
+   "livello": "Biennio",
+   "docenti": "Gavazza",
+   "giorno": "Sabato",
+   "inizio": "9:00",
+   "fine": "17:30",
+   "semestre": "1",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Stile e storia dell’arte e del costume",
+   "livello": "",
+   "docenti": "Vedi\nStoria dell’arte antica,\nStoria dell’arte medievale,\nStoria dell’arte moderna,\nStoria dell’arte contemporanea\nNON SI PUO’ SCEGLIERE\nSTORIA DEL COSTUME, MA\nSOLO LE STORIE DELL’ARTE",
+   "giorno": "",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Storia del cinema e del video",
+   "livello": "Triennio",
+   "docenti": "Bernardelli",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Salone d’Onore"
+  },
+  {
+   "corso": "Storia del cinema e del video",
+   "livello": "Biennio",
+   "docenti": "Bernardelli",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Storia del costume\n(DA NON CONFONDERE CON STILE E STORIA DELL’ARTE E DEL COSTUME)",
+   "livello": "Biennio",
+   "docenti": "Liuzzi",
+   "giorno": "Giovedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula C28"
+  },
+  {
+   "corso": "Storia del design",
+   "livello": "Triennio",
+   "docenti": "Centrone",
+   "giorno": "Giovedì",
+   "inizio": "10.00",
+   "fine": "13:30",
+   "semestre": "1\n(a settimane alterne A)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Storia del design",
+   "livello": "Triennio",
+   "docenti": "Centrone",
+   "giorno": "Giovedì",
+   "inizio": "11:00",
+   "fine": "14:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Storia del design",
+   "livello": "Biennio\n(affido condiviso)",
+   "docenti": "Ben David",
+   "giorno": "Mercoledì",
+   "inizio": "13:30",
+   "fine": "17:00",
+   "semestre": "1\n(a settimane alterne A)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Storia del design",
+   "livello": "Biennio\n(affido condiviso)",
+   "docenti": "Minelli",
+   "giorno": "Mercoledì",
+   "inizio": "13:30",
+   "fine": "17:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Storia del disegno e della grafica d’arte",
+   "livello": "Triennio",
+   "docenti": "Musiari",
+   "giorno": "Sabato",
+   "inizio": "11:00",
+   "fine": "14:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Storia del disegno e della grafica d’arte",
+   "livello": "Biennio",
+   "docenti": "Musiari",
+   "giorno": "Venerdì\nSabato",
+   "inizio": "14:30",
+   "fine": "18:00",
+   "semestre": "2\n(a settimane alterne B)",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Storia della fotografia",
+   "livello": "Triennio",
+   "docenti": "Liuzzi",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Storia della moda",
+   "livello": "Biennio",
+   "docenti": "Rotundo",
+   "giorno": "Lunedì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula S32"
+  },
+  {
+   "corso": "Storia della musica e del teatro musicale",
+   "livello": "Triennio",
+   "docenti": "Ausoni",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "12:30",
+   "semestre": "1",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Storia della musica e del teatro musicale",
+   "livello": "Biennio",
+   "docenti": "Ausoni",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "17:30",
+   "semestre": "1",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Storia dell’architettura e dell’urbanistica",
+   "livello": "Triennio",
+   "docenti": "Borella",
+   "giorno": "Mercoledì",
+   "inizio": "9:30",
+   "fine": "10:30",
+   "semestre": "2",
+   "aula": "Sala Volte Le Rosine\n(ingresso via Plana 8/c)"
+  },
+  {
+   "corso": "Storia dell’architettura e dell’urbanistica",
+   "livello": "Triennio",
+   "docenti": "Borella",
+   "giorno": "Giovedì",
+   "inizio": "9:30",
+   "fine": "10:30",
+   "semestre": "2",
+   "aula": "Sala Volte Le Rosine\n(ingresso via Plana 8/c)"
+  },
+  {
+   "corso": "Storia dell’arte antica",
+   "livello": "Triennio",
+   "docenti": "Musiari",
+   "giorno": "Venerdì\nSabato",
+   "inizio": "14:30",
+   "fine": "18:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Triennio",
+   "docenti": "Giudice",
+   "giorno": "Giovedì",
+   "inizio": "10:00",
+   "fine": "13:30",
+   "semestre": "1",
+   "aula": "Fondazione Giubileo\n(poi più avanti eventualmente S33 in base al numero studenti)"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Triennio",
+   "docenti": "Centrone",
+   "giorno": "Mercoledì\n(lezione)",
+   "inizio": "11:00",
+   "fine": "13:30",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Triennio",
+   "docenti": "Centrone",
+   "giorno": "Mercoledì\n(ricevimento)",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R12"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Triennio",
+   "docenti": "Liuzzi",
+   "giorno": "Venerdì",
+   "inizio": "9:30",
+   "fine": "12:30",
+   "semestre": "1",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Triennio",
+   "docenti": "Botta",
+   "giorno": "Venerdì",
+   "inizio": "15:30",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Triennio",
+   "docenti": "Bernardelli",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Triennio",
+   "docenti": "Romano Pace",
+   "giorno": "Mercoledì",
+   "inizio": "10.00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Biennio",
+   "docenti": "Giudice",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "17:30",
+   "semestre": "1",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Biennio",
+   "docenti": "Giudice",
+   "giorno": "Lunedì\nSeminario\n(per date precise vedi calendario della docente)",
+   "inizio": "16.30",
+   "fine": "18.30",
+   "semestre": "1 e 2",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Biennio",
+   "docenti": "Centrone",
+   "giorno": "Venerdì",
+   "inizio": "11:00",
+   "fine": "13:30",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula R15\nRotonda"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Biennio",
+   "docenti": "Botta",
+   "giorno": "Mercoledì",
+   "inizio": "15:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Biennio",
+   "docenti": "Bernardelli",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Storia dell’arte contemporanea",
+   "livello": "Biennio",
+   "docenti": "Romano Pace",
+   "giorno": "Giovedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Storia dell’arte medievale",
+   "livello": "Triennio",
+   "docenti": "Cottino",
+   "giorno": "Venerdì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula C34"
+  },
+  {
+   "corso": "Storia dell’arte moderna",
+   "livello": "Triennio",
+   "docenti": "Cottino",
+   "giorno": "Venerdì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Salone d’onore\n(o Aula C34)"
+  },
+  {
+   "corso": "Storia dell’arte moderna",
+   "livello": "Biennio",
+   "docenti": "Cottino",
+   "giorno": "Mercoledì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula S32"
+  },
+  {
+   "corso": "Storia della televisione e dello spettacolo televisivo",
+   "livello": "Biennio",
+   "docenti": "Senaldi",
+   "giorno": "Mercoledì",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Storia delle arti applicate",
+   "livello": "Triennio",
+   "docenti": "Biolchini",
+   "giorno": "Giovedì",
+   "inizio": "15:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Storia dell’illustrazione e della pubblicità",
+   "livello": "Biennio\nIllustrazione e\nFumetto",
+   "docenti": "Balzaretti",
+   "giorno": "Lunedì\nMartedì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Storia dell’illustrazione e della pubblicità",
+   "livello": "Biennio\nAltre Scuole",
+   "docenti": "Balzaretti",
+   "giorno": "Giovedì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Storia dello spettacolo",
+   "livello": "Triennio",
+   "docenti": "Ausoni",
+   "giorno": "Mercoledì",
+   "inizio": "14:30",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Storia dello spettacolo",
+   "livello": "Biennio",
+   "docenti": "Ausoni",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "12:30",
+   "semestre": "1",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Storia e metodologia della critica d’arte",
+   "livello": "Triennio",
+   "docenti": "Bernardelli",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Aula S33"
+  },
+  {
+   "corso": "Storia e metodologia della critica d’arte",
+   "livello": "Biennio",
+   "docenti": "Romeo",
+   "giorno": "Mercoledì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula S04"
+  },
+  {
+   "corso": "Storia e metodologia della critica d’arte",
+   "livello": "Biennio",
+   "docenti": "Romeo",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Storia e teoria dei nuovi media",
+   "livello": "Triennio",
+   "docenti": "Senaldi",
+   "giorno": "Mercoledì\n+ recuperi",
+   "inizio": "16.00",
+   "fine": "18.30",
+   "semestre": "2",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Storia e teoria della scenografia",
+   "livello": "Triennio",
+   "docenti": "Voghera",
+   "giorno": "Lunedì",
+   "inizio": "8:30",
+   "fine": "12:00",
+   "semestre": "1",
+   "aula": "Aula I6\nIncet"
+  },
+  {
+   "corso": "Storia e teoria della scenografia",
+   "livello": "Biennio",
+   "docenti": "Voghera",
+   "giorno": "Lunedì",
+   "inizio": "8:30",
+   "fine": "12:00",
+   "semestre": "1",
+   "aula": "Aula I6\nIncet"
+  },
+  {
+   "corso": "Teatro di figura",
+   "livello": "Triennio",
+   "docenti": "Di Matteo",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula I1\nIncet"
+  },
+  {
+   "corso": "Teatro di figura",
+   "livello": "Triennio",
+   "docenti": "Di Matteo",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula I1\nIncet"
+  },
+  {
+   "corso": "Tecniche calcografiche sperimentali",
+   "livello": "Biennio",
+   "docenti": "Borra",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Tecniche calcografiche sperimentali",
+   "livello": "Biennio",
+   "docenti": "Borra",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Tecniche calcografiche sperimentali",
+   "livello": "Biennio",
+   "docenti": "Muolo",
+   "giorno": "Sabato",
+   "inizio": "8:30",
+   "fine": "17:30",
+   "semestre": "2",
+   "aula": "Aula G01 STUCCHI"
+  },
+  {
+   "corso": "Tecniche dei materiali",
+   "livello": "Triennio",
+   "docenti": "Grassino",
+   "giorno": "Giovedì\nVenerdì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula A01"
+  },
+  {
+   "corso": "Tecniche dei nuovi media integrati 1\n(NTA + Cinema)",
+   "livello": "Biennio",
+   "docenti": "Bordin",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "14:00",
+   "semestre": "2",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Tecniche dei nuovi media integrati 2",
+   "livello": "Biennio",
+   "docenti": "Bordin",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "14:00",
+   "semestre": "1",
+   "aula": "Aula A32"
+  },
+  {
+   "corso": "Tecniche della ceramica",
+   "livello": "Triennio",
+   "docenti": "Chaudry",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula S03"
+  },
+  {
+   "corso": "Tecniche della ceramica",
+   "livello": "Triennio",
+   "docenti": "Chaudry",
+   "giorno": "Sabato",
+   "inizio": "9:00",
+   "fine": "17:45",
+   "semestre": "2",
+   "aula": "Aula S03"
+  },
+  {
+   "corso": "Tecniche della ceramica",
+   "livello": "Biennio",
+   "docenti": "Ruggiero",
+   "giorno": "Sabato",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula S03"
+  },
+  {
+   "corso": "Tecniche della ceramica",
+   "livello": "Biennio",
+   "docenti": "Ruggiero",
+   "giorno": "Sabato",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula S03"
+  },
+  {
+   "corso": "Tecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Borra",
+   "giorno": "Mercoledì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Tecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Borra",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Tecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Borra",
+   "giorno": "Giovedì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Tecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "De Stefano",
+   "giorno": "Mercoledì\nGiovedì\nVenerdì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula G01\nSTUCCHI"
+  },
+  {
+   "corso": "Tecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "De Stefano",
+   "giorno": "Mercoledì\nGiovedì\nVenerdì",
+   "inizio": "14:00",
+   "fine": "17:45",
+   "semestre": "2",
+   "aula": "Aula G01\nSTUCCHI"
+  },
+  {
+   "corso": "Tecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Muolo",
+   "giorno": "Mercoledì",
+   "inizio": "09:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula G01\nSTUCCHI"
+  },
+  {
+   "corso": "Tecniche dell’incisione",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Muolo",
+   "giorno": "Giovedì",
+   "inizio": "09:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula G01\nSTUCCHI"
+  },
+  {
+   "corso": "Tecniche dell’incisione",
+   "livello": "Triennio",
+   "docenti": "Podgornik",
+   "giorno": "Mercoledì",
+   "inizio": "09:30",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Tecniche dell’incisione",
+   "livello": "Biennio",
+   "docenti": "Podgornik",
+   "giorno": "Giovedì",
+   "inizio": "09:30",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Tecniche del marmo e delle pietre dure",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Farina",
+   "giorno": "Lunedì\nMartedì\nGiovedì",
+   "inizio": "9:20",
+   "fine": "18:00",
+   "semestre": "1\n(a settimane alterne A)",
+   "aula": "Aula G04"
+  },
+  {
+   "corso": "Tecniche del marmo e delle pietre dure",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Farina",
+   "giorno": "Lunedì\nMartedì\nGiovedì",
+   "inizio": "9:20",
+   "fine": "18:00",
+   "semestre": "2\n(a settimane alterne B)",
+   "aula": "Aula G04"
+  },
+  {
+   "corso": "Tecniche del mosaico",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Farina",
+   "giorno": "Mercoledì",
+   "inizio": "9:20",
+   "fine": "18:00",
+   "semestre": "1\n(a settimane alterne A)",
+   "aula": "Aula G04"
+  },
+  {
+   "corso": "Tecniche del mosaico",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Farina",
+   "giorno": "Mercoledì",
+   "inizio": "9:20",
+   "fine": "18:00",
+   "semestre": "2\n(a settimane alterne B)",
+   "aula": "Aula G04"
+  },
+  {
+   "corso": "Tecniche di animazione digitale",
+   "livello": "Biennio\nIllustrazione e\nFumetto",
+   "docenti": "Rovazzani",
+   "giorno": "Venerdì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula S34"
+  },
+  {
+   "corso": "Tecniche di animazione digitale",
+   "livello": "Triennio\nBiennio 1° gruppo",
+   "docenti": "Rovazzani",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Tecniche di animazione digitale",
+   "livello": "Triennio\nBiennio 2° gruppo",
+   "docenti": "Rovazzani",
+   "giorno": "Sabato",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Tecniche di animazione digitale",
+   "livello": "Triennio\nBiennio 2° gruppo",
+   "docenti": "Rovazzani",
+   "giorno": "Sabato",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Tecniche di fonderia",
+   "livello": "2°\nTriennio",
+   "docenti": "Ruggiero",
+   "giorno": "Mercoledì",
+   "inizio": "11:00",
+   "fine": "18:30",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula S03"
+  },
+  {
+   "corso": "Tecniche di fonderia",
+   "livello": "2°\nTriennio",
+   "docenti": "Ruggiero",
+   "giorno": "Mercoledì",
+   "inizio": "11:00",
+   "fine": "18:30",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula S03"
+  },
+  {
+   "corso": "Tecniche di fonderia",
+   "livello": "1°\nBiennio",
+   "docenti": "Ruggiero",
+   "giorno": "Venerdì",
+   "inizio": "09:00",
+   "fine": "18:30",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula S03"
+  },
+  {
+   "corso": "Tecniche di fonderia",
+   "livello": "1°\nBiennio",
+   "docenti": "Ruggiero",
+   "giorno": "Venerdì",
+   "inizio": "09:00",
+   "fine": "18:30",
+   "semestre": "2\n(a settimane alterne A)",
+   "aula": "Aula S03"
+  },
+  {
+   "corso": "Tecniche di modellazione digitale - computer 3D",
+   "livello": "Triennio\n(PAI)",
+   "docenti": "Gagliarducci",
+   "giorno": "Giovedì\n(vedi calendario del docente)",
+   "inizio": "9:00",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Sala Volte Le Rosine"
+  },
+  {
+   "corso": "Tecniche di modellazione digitale - computer 3D",
+   "livello": "Triennio\n(Altre Scuole)",
+   "docenti": "Gagliarducci",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Tecniche di modellazione digitale - computer 3D",
+   "livello": "Biennio\n+ Rendering 3D)",
+   "docenti": "Gagliarducci",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Tecniche di montaggio",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Cravero",
+   "giorno": "Giovedì\n(per le date precise e possibili variazioni di orario fare riferimento al calendario del docente)",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1 e 2",
+   "aula": "Aula C28a"
+  },
+  {
+   "corso": "Tecniche di montaggio",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Cravero",
+   "giorno": "Giovedì\n(per le date precise e possibili variazioni di orario fare riferimento al calendario del docente)",
+   "inizio": "14:00",
+   "fine": "17:30",
+   "semestre": "1 e 2",
+   "aula": "Aula C28a"
+  },
+  {
+   "corso": "Tecniche di ripresa",
+   "livello": "Triennio",
+   "docenti": "Amerio",
+   "giorno": "Venerdì",
+   "inizio": "10:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula A11"
+  },
+  {
+   "corso": "Tecniche di ripresa",
+   "livello": "Triennio",
+   "docenti": "Amerio",
+   "giorno": "Venerdì",
+   "inizio": "14:30",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Aula A11"
+  },
+  {
+   "corso": "Tecniche e tecnologie del disegno",
+   "livello": "Biennio",
+   "docenti": "Vedi\nFondamenti di disegno informatico",
+   "giorno": "",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Tecniche e tecnologie della decorazione",
+   "livello": "Triennio",
+   "docenti": "Saccomandi",
+   "giorno": "Mercoledì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula C42"
+  },
+  {
+   "corso": "Tecniche e tecnologie della decorazione",
+   "livello": "Triennio",
+   "docenti": "Saccomandi",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula C42"
+  },
+  {
+   "corso": "Tecniche e tecnologie della decorazione",
+   "livello": "Biennio",
+   "docenti": "Saccomandi",
+   "giorno": "Mercoledì",
+   "inizio": "9:30",
+   "fine": "13:30",
+   "semestre": "1",
+   "aula": "Aula C42"
+  },
+  {
+   "corso": "Tecniche e tecnologie della decorazione",
+   "livello": "Biennio",
+   "docenti": "Saccomandi",
+   "giorno": "Mercoledì",
+   "inizio": "14:30",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula C42"
+  },
+  {
+   "corso": "Tecniche e tecnologie della stampa digitale",
+   "livello": "",
+   "docenti": "Corso non attivo",
+   "giorno": "",
+   "inizio": "",
+   "fine": "",
+   "semestre": "",
+   "aula": ""
+  },
+  {
+   "corso": "Tecniche e tecnologie per la\nPittura",
+   "livello": "Biennio",
+   "docenti": "Barzagli",
+   "giorno": "Mercoledì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula P31 e P32"
+  },
+  {
+   "corso": "Tecniche e tecnologie per la\nPittura",
+   "livello": "Biennio",
+   "docenti": "Barzagli",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "17:00",
+   "semestre": "1",
+   "aula": "Aula P31 e P32"
+  },
+  {
+   "corso": "Tecniche grafiche speciali",
+   "livello": "Biennio\n(Grafica Illustrazione e Fumetto)",
+   "docenti": "Torelli",
+   "giorno": "Mercoledì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Tecniche grafiche speciali",
+   "livello": "Biennio\n(Grafica Illustrazione e Fumetto)",
+   "docenti": "Torelli",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula S34"
+  },
+  {
+   "corso": "Tecniche grafiche speciali",
+   "livello": "Triennio\n(Grafica ed editoria d’arte) e\nBiennio\n(Pittura)",
+   "docenti": "Torelli",
+   "giorno": "Martedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula C43"
+  },
+  {
+   "corso": "Tecniche grafiche speciali",
+   "livello": "Triennio\n(Grafica ed editoria d’arte) e\nBiennio\n(Pittura)",
+   "docenti": "Torelli",
+   "giorno": "Mercoledì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne A)",
+   "aula": "Aula S34"
+  },
+  {
+   "corso": "Tecniche performative per le arti visive",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Moio",
+   "giorno": "Giovedì",
+   "inizio": "10:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula C43"
+  },
+  {
+   "corso": "Tecniche performative per le arti visive",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Moio",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula C43"
+  },
+  {
+   "corso": "Tecniche per la\nScultura",
+   "livello": "Triennio",
+   "docenti": "Rovera\n(per date precise vedi calendario della docente)",
+   "giorno": "Mercoledì",
+   "inizio": "8:30",
+   "fine": "12:30",
+   "semestre": "1",
+   "aula": "Aula P02"
+  },
+  {
+   "corso": "Tecniche per la\nScultura",
+   "livello": "Triennio",
+   "docenti": "Rovera\n(per date precise vedi calendario della docente)",
+   "giorno": "Mercoledì",
+   "inizio": "13:30",
+   "fine": "16:30",
+   "semestre": "1",
+   "aula": "Aula P02"
+  },
+  {
+   "corso": "Tecniche per la\nScultura",
+   "livello": "Triennio",
+   "docenti": "Rovera\n(per date precise vedi calendario della docente)",
+   "giorno": "Giovedì",
+   "inizio": "8:30",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula P02"
+  },
+  {
+   "corso": "Tecniche per la\nScultura",
+   "livello": "Triennio",
+   "docenti": "Rovera\n(per date precise vedi calendario della docente)",
+   "giorno": "Sabato\n(4 lezioni teoriche + recuperi secondo il calendario della docente)",
+   "inizio": "8:30",
+   "fine": "12:00",
+   "semestre": "1",
+   "aula": "Aula P02"
+  },
+  {
+   "corso": "Tecniche per la\nScultura",
+   "livello": "Biennio",
+   "docenti": "Rovera\n(per date precise vedi calendario della docente)",
+   "giorno": "Mercoledì",
+   "inizio": "8:30",
+   "fine": "12:30",
+   "semestre": "2",
+   "aula": "Aula P02"
+  },
+  {
+   "corso": "Tecniche per la\nScultura",
+   "livello": "Biennio",
+   "docenti": "Rovera\n(per date precise vedi calendario della docente)",
+   "giorno": "Mercoledì",
+   "inizio": "13:30",
+   "fine": "16:30",
+   "semestre": "2",
+   "aula": "Aula P02"
+  },
+  {
+   "corso": "Tecniche per la\nScultura",
+   "livello": "Biennio",
+   "docenti": "Rovera\n(per date precise vedi calendario della docente)",
+   "giorno": "Giovedì",
+   "inizio": "8:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula P02"
+  },
+  {
+   "corso": "Tecniche plastiche contemporanee",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Grassino",
+   "giorno": "Giovedì\nVenerdì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "1 e 2",
+   "aula": "Aula A01"
+  },
+  {
+   "corso": "Tecniche sartoriali per il costume",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Vinci",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "17:00",
+   "semestre": "2",
+   "aula": "Aula Sartoria\nIncet"
+  },
+  {
+   "corso": "Tecnologia dell’educazione",
+   "livello": "Biennio",
+   "docenti": "Carbotti",
+   "giorno": "Lunedì",
+   "inizio": "9:00",
+   "fine": "14:00",
+   "semestre": "1",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Tecnologia dell’educazione",
+   "livello": "Biennio",
+   "docenti": "Carbotti",
+   "giorno": "Martedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1\n(a settimane alterne B)",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Tecnologia dell’educazione",
+   "livello": "Triennio",
+   "docenti": "Carbotti",
+   "giorno": "Lunedì\nMartedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Tecnologia e materiali applicati alla scenografia",
+   "livello": "Triennio",
+   "docenti": "Voghera",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula I1\nPiano terra\nLaboratorio Incet"
+  },
+  {
+   "corso": "Tecnologia e materiali applicati alla scenografia",
+   "livello": "Biennio",
+   "docenti": "Voghera",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula I1\nPiano terra\nLaboratorio Incet"
+  },
+  {
+   "corso": "Teoria della percezione e psicologia della forma",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Farinella",
+   "giorno": "Martedì",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "1",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Teoria della percezione e psicologia della forma",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Farinella",
+   "giorno": "Venerdì",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula S31"
+  },
+  {
+   "corso": "Teoria e analisi del cinema e dell’audiovisivo",
+   "livello": "Triennio",
+   "docenti": "Fadda",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 e 2\n(a settimane alterne B)",
+   "aula": "Aula R15"
+  },
+  {
+   "corso": "Teoria e metodo dei mass media",
+   "livello": "Triennio\n(Scuola di Cinema, Fotografia, Audiovisivo)",
+   "docenti": "Balzola",
+   "giorno": "Martedì",
+   "inizio": "10:40",
+   "fine": "13:40",
+   "semestre": "1",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Teoria e metodo dei mass media",
+   "livello": "Triennio\n(Scuola di Cinema, Fotografia, Audiovisivo)",
+   "docenti": "Balzola",
+   "giorno": "Martedì\n(a settimane alterne A)",
+   "inizio": "10:40",
+   "fine": "13:40",
+   "semestre": "2",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Teoria e metodo dei mass media",
+   "livello": "Triennio\n(Scuola di Cinema, Fotografia, Audiovisivo)",
+   "docenti": "Balzola",
+   "giorno": "Mercoledì\n(a settimane alterne B)\n+ Ricevimento",
+   "inizio": "10:40",
+   "fine": "13:40",
+   "semestre": "2",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Teoria e metodo dei mass media",
+   "livello": "Biennio",
+   "docenti": "Vozzo",
+   "giorno": "Giovedì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula C28"
+  },
+  {
+   "corso": "Teoria e metodo dei mass media",
+   "livello": "Teoria e metodo dei mass media 1\n(triennio NTA + altre Scuole)",
+   "docenti": "Senaldi",
+   "giorno": "Mercoledì\n+ recuperi",
+   "inizio": "10:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Teoria e metodo dei mass media",
+   "livello": "Teoria e metodo dei mass media 2\n(triennio NTA)",
+   "docenti": "Senaldi",
+   "giorno": "Mercoledì\n+ recuperi",
+   "inizio": "13:30",
+   "fine": "16:00",
+   "semestre": "2",
+   "aula": "Salone d’onore"
+  },
+  {
+   "corso": "Teorie e tecniche dell’interazione",
+   "livello": "Biennio",
+   "docenti": "Giomi",
+   "giorno": "Lunedì",
+   "inizio": "11:00",
+   "fine": "13:00",
+   "semestre": "1",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Teorie e tecniche dell’interazione",
+   "livello": "Biennio",
+   "docenti": "Giomi",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Teorie e tecniche dell’interazione",
+   "livello": "Biennio",
+   "docenti": "Giomi",
+   "giorno": "Lunedì",
+   "inizio": "11:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula R12"
+  },
+  {
+   "corso": "Teorie e tecniche dell’interazione",
+   "livello": "Biennio",
+   "docenti": "Giomi",
+   "giorno": "Lunedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula R12"
+  },
+  {
+   "corso": "Tipologia dei materiali",
+   "livello": "Biennio",
+   "docenti": "Maccarrone",
+   "giorno": "Giovedì",
+   "inizio": "8:30",
+   "fine": "12:30",
+   "semestre": "2",
+   "aula": "Aula R11"
+  },
+  {
+   "corso": "Tipologia dei materiali",
+   "livello": "Biennio",
+   "docenti": "Maccarrone",
+   "giorno": "Giovedì",
+   "inizio": "8:30",
+   "fine": "12:30",
+   "semestre": "1",
+   "aula": "Aula R14"
+  },
+  {
+   "corso": "Tipologia dei materiali",
+   "livello": "Triennio",
+   "docenti": "Maccarrone",
+   "giorno": "Mercoledì",
+   "inizio": "14:30",
+   "fine": "18:30",
+   "semestre": "1 e 2",
+   "aula": "Aula R13"
+  },
+  {
+   "corso": "Trucco e maschera teatrale",
+   "livello": "Biennio",
+   "docenti": "Falcione",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula C28"
+  },
+  {
+   "corso": "Valorizzazione dei beni architettonici e paesaggistici",
+   "livello": "Triennio",
+   "docenti": "Botta",
+   "giorno": "Lunedì",
+   "inizio": "15:00",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula S32"
+  },
+  {
+   "corso": "Video editing",
+   "livello": "Triennio",
+   "docenti": "Bordin",
+   "giorno": "Giovedì\n(con eventuali integrazioni il martedì ad esaurimento ore TNMI 1 e settimana recuperi)",
+   "inizio": "10:30",
+   "fine": "18:30",
+   "semestre": "2",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Video editing",
+   "livello": "Video editing 1\n(2° triennio NTA + Cinema)",
+   "docenti": "Bordin",
+   "giorno": "Giovedì\n(con integrazioni per Cinema in TNMI 1 il martedì 2° semestre)",
+   "inizio": "10:30",
+   "fine": "17:30",
+   "semestre": "1",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Video scultura",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Bosisio",
+   "giorno": "Mercoledì",
+   "inizio": "09:00",
+   "fine": "18:30",
+   "semestre": "1 e 2\n(due settimane al mese; vedi calendario preciso del docente)",
+   "aula": "Aula R03\nRotonda"
+  },
+  {
+   "corso": "Web design",
+   "livello": "Triennio\n(1° anno NTA)",
+   "docenti": "De Pasquale",
+   "giorno": "Giovedì",
+   "inizio": "8:30",
+   "fine": "10:30",
+   "semestre": "1 e 2",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Web design",
+   "livello": "Triennio\n(PAI, Pittura, Grafica)",
+   "docenti": "Rosa",
+   "giorno": "Sabato",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "1 (5 recuperi nel 2° sem.)",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Web design",
+   "livello": "Triennio\n(PAI, Pittura, Grafica)",
+   "docenti": "Rosa",
+   "giorno": "Sabato",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "1 (5 recuperi nel 2° sem.)",
+   "aula": "Aula A33"
+  },
+  {
+   "corso": "Web design",
+   "livello": "Web design 2\nTriennio 3° anno NTA\nWeb design\nBiennio 2°\nNTA Mediaart",
+   "docenti": "Porru",
+   "giorno": "Venerdì",
+   "inizio": "9:00",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Web design",
+   "livello": "Web design 2\nTriennio 3° anno NTA\nWeb design\nBiennio 2°\nNTA Mediaart",
+   "docenti": "Porru",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula A31"
+  },
+  {
+   "corso": "Xilografia\n(per Grafica)",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Borra",
+   "giorno": "Giovedì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Xilografia\n(per Grafica)",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Borra",
+   "giorno": "Venerdì",
+   "inizio": "9:30",
+   "fine": "13:00",
+   "semestre": "2",
+   "aula": "Aula G01"
+  },
+  {
+   "corso": "Xilografia\n(per Grafica)",
+   "livello": "Triennio\nBiennio",
+   "docenti": "Borra",
+   "giorno": "Venerdì",
+   "inizio": "14:00",
+   "fine": "18:00",
+   "semestre": "2",
+   "aula": "Aula G01"
+  }
+ ]
+}

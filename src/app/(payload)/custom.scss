@@ -371,3 +371,139 @@ body {
     padding-top: calc(44px + 1.75rem);
   }
 }
+
+// ——— Editor a tabella dei calendari ———
+.tabella-calendario {
+  &__aiuto {
+    max-width: 75ch;
+    margin-bottom: calc(var(--base) * 0.75);
+  }
+
+  &__scorri {
+    overflow-x: auto;
+    border: 1px solid var(--theme-elevation-150);
+  }
+
+  table {
+    width: max-content;
+    min-width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 0.5rem;
+    background: var(--theme-elevation-50);
+    border-bottom: 1px solid var(--theme-elevation-400);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-align: left;
+    text-transform: uppercase;
+    color: var(--theme-elevation-800);
+  }
+
+  td {
+    padding: 0;
+    vertical-align: top;
+    border-bottom: 1px solid var(--theme-elevation-100);
+    border-right: 1px solid var(--theme-elevation-100);
+  }
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0.55rem 0.5rem;
+    color: var(--theme-text);
+    font: inherit;
+    line-height: 1.35;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    resize: vertical;
+    field-sizing: content;
+
+    &:focus {
+      outline: 2px solid var(--theme-text);
+      outline-offset: -2px;
+      background: var(--theme-elevation-50);
+    }
+
+    &::placeholder {
+      color: var(--theme-elevation-500);
+    }
+  }
+
+  &__n {
+    width: 3rem;
+    padding: 0.6rem 0.25rem !important;
+    color: var(--theme-elevation-600);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  &__azioni {
+    white-space: nowrap;
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.5rem;
+      padding: 0;
+      color: var(--theme-elevation-800);
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+
+      &:hover:not(:disabled) {
+        background: var(--theme-elevation-100);
+      }
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--theme-text);
+        outline-offset: -2px;
+      }
+    }
+  }
+
+  &__piede {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.75rem;
+  }
+
+  &__aggiungi {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+    margin: 0;
+  }
+
+  &__conta {
+    color: var(--theme-elevation-650);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__nascosto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
