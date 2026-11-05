@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 import { Tag } from '../Tag/Tag'
@@ -35,17 +36,23 @@ export function AvvisoCard({
         </Link>
       </Heading>
       {sommario ? <p className={styles.summary}>{sommario}</p> : null}
-      {categorie.length > 0 ? (
-        <ul className={styles.tags} aria-label="Categorie">
-          {categorie.map((c) => (
-            <li key={c.label}>
-              <Tag href={c.href} tone={c.evidenza ? 'brand' : 'neutral'}>
-                {c.label}
-              </Tag>
-            </li>
-          ))}
-        </ul>
-      ) : null}
+      <div className={styles.piede}>
+        {categorie.length > 0 ? (
+          <ul className={styles.tags} aria-label="Categorie">
+            {categorie.map((c) => (
+              <li key={c.label}>
+                <Tag href={c.href} tone={c.evidenza ? 'brand' : 'neutral'}>
+                  {c.label}
+                </Tag>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        {/* Segnale visivo: il link vero è il titolo, esteso a tutta la card. */}
+        <span className={styles.leggi} aria-hidden="true">
+          Leggi l’avviso <ArrowRight size={16} strokeWidth={1.5} />
+        </span>
+      </div>
     </article>
   )
 }

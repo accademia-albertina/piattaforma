@@ -41,8 +41,10 @@ export function proxy(req: NextRequest) {
 export const config = {
   // Tutto tranne il controllo di salute usato dall'hosting e le icone/manifest: iPhone e
   // browser li scaricano senza password, e senza questa eccezione l'icona della schermata
-  // Home diventa una lettera su fondo colorato. Sono file pubblici, nessun dato riservato.
+  // Home diventa una lettera su fondo colorato. Escluse anche le immagini (_next/image,
+  // _next/static, file media): l'ottimizzatore di Next le scarica dal server stesso senza
+  // password, e con il 401 le immagini non comparivano. Sono file pubblici, nessun dato riservato.
   matcher: [
-    '/((?!salute$|pannello/|brand/|icon\\.png|apple-icon\\.png|apple-touch-icon|favicon\\.ico|opengraph-image).*)',
+    '/((?!salute$|_next/static/|_next/image|api/media/file/|pannello/|brand/|icon\\.png|apple-icon\\.png|apple-touch-icon|favicon\\.ico|opengraph-image).*)',
   ],
 }

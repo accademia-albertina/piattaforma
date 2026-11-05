@@ -37,3 +37,22 @@ describe('anteprima protetta da password', () => {
     expect(res.headers.get('x-robots-tag')).toContain('noindex')
   })
 })
+
+describe('percorsi esclusi dalla password', () => {
+  it('lascia fuori immagini, icone e file media, ma protegge pagine e pannello', async () => {
+    const { config } = await import('@/proxy')
+    const re = new RegExp(`^${config.matcher[0]}$`)
+    for (const libero of [
+      '/_next/image',
+      '/_next/static/media/pittura.webp',
+      '/api/media/file/ritratto.webp',
+      '/apple-touch-icon.png',
+      '/salute',
+    ]) {
+      expect(re.test(libero), libero).toBe(false)
+    }
+    for (const protetto of ['/', '/avvisi', '/admin', '/api/users/me']) {
+      expect(re.test(protetto), protetto).toBe(true)
+    }
+  })
+})
