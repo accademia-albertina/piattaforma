@@ -30,6 +30,7 @@ import { default as default_e666b063fc61d1fd5893bd24b494b70a } from '../../../co
 import { default as default_dc33bb259e89928a16a86a5731c2d2e0 } from '../../../components/admin/PrimaDelLogin'
 import { default as default_1d1560386b77fb163758726eb0ecea0b } from '../../../components/admin/LinguaDate'
 import { default as default_16b88e9b8c48e393fa86591406efd08f } from '../../../components/admin/Dashboard'
+import { default as default_c721497151ded15259fac3f312f8e79c } from '../../../components/admin/Changelog'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -66,5 +67,6 @@ export const importMap = {
   "/components/admin/PrimaDelLogin#default": default_dc33bb259e89928a16a86a5731c2d2e0,
   "/components/admin/LinguaDate#default": default_1d1560386b77fb163758726eb0ecea0b,
   "/components/admin/Dashboard#default": default_16b88e9b8c48e393fa86591406efd08f,
+  "/components/admin/Changelog#default": default_c721497151ded15259fac3f312f8e79c,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

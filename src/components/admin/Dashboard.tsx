@@ -5,6 +5,7 @@ import { ArrowUpRight, Plus } from 'lucide-react'
 import Link from 'next/link'
 
 import { ROLE_LABELS, type Role } from '@/access/roles'
+import { CHANGELOG } from '@/content/changelog'
 
 import { ICONE_SEZIONI } from './icone'
 
@@ -138,10 +139,9 @@ export default async function Dashboard({
           {ruoli.length > 0 && <p className={styles.ruoli}>{ruoli.join(' · ')}</p>}
         </div>
         <div className={styles.collegamenti}>
-          <a className={styles.sito} href="/novita" target="_blank" rel="noopener">
-            Novità <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
-            <span className={styles.nascosto}> (si apre in una nuova scheda)</span>
-          </a>
+          <Link className={styles.sito} href={`${admin}/changelog`}>
+            Changelog <span className={styles.versione}>v{CHANGELOG[0].versione}</span>
+          </Link>
           <a className={styles.sito} href="/" target="_blank" rel="noopener">
             Apri il sito <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden />
             <span className={styles.nascosto}> (si apre in una nuova scheda)</span>

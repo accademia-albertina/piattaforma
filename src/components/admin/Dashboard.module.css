@@ -236,3 +236,8 @@
     font-size: 0.875rem;
   }
 }
+
+.versione {
+  font-weight: 400;
+  color: var(--theme-elevation-600);
+}
