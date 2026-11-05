@@ -20,6 +20,15 @@ export const NOVITA: Novita[] = [
       'Ogni dottorando con un account può aggiornare il proprio profilo; ciclo, nome e supervisor li gestisce la vicedirezione.',
     ],
     pr: [46],
+    titolo: 'Header più fluido, titoli senza maiuscolo e ritocchi al pannello',
+    punti: [
+      'Scorrendo la pagina, la barra rossa e il logo si rimpiccioliscono senza scatti.',
+      'I titoli tutti in maiuscolo non si possono più salvare; quelli importati dal sito attuale sono stati riscritti in minuscolo con l’iniziale maiuscola, tenendo le sigle.',
+      'Nel pannello il percorso inizia con una casetta che porta alla bacheca, e in alto c’è il pulsante per aprire il sito.',
+      'Il tema chiaro o scuro si sceglie dal proprio account, non più dall’intestazione.',
+      'Corretti i due pulsanti di chiusura sovrapposti nel menu del pannello.',
+    ],
+    pr: [45],
   },
   {
     data: '2026-11-05',

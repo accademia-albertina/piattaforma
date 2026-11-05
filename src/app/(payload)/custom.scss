@@ -155,8 +155,8 @@ html[data-theme='dark'] .logo-accesso {
   text-transform: uppercase;
 }
 
-// ——— Cambio tema nell'intestazione ———
-.cambia-tema {
+// ——— Pulsante «Apri il sito» nell'intestazione ———
+.azione-header {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -241,7 +241,8 @@ body {
 // Payload di serie apre il menu a tutta larghezza e sposta la pagina di lato (che si "spacca"
 // durante l'animazione). Qui il menu scorre sopra la pagina, largo l'85%, con un velo dietro:
 // la pagina resta ferma e si vede che è ancora lì.
-@media (max-width: 1024px) {
+// Stessa soglia di Payload (768px): sopra, il menu è quello da computer con il suo pulsante.
+@media (max-width: 768px) {
   // Con il menu fuori dal flusso (fixed) la griglia di Payload metteva la pagina nella colonna
   // larga 0 del menu: testo a una parola per riga. Su telefono basta un blocco semplice.
   .template-default,
@@ -320,7 +321,7 @@ body {
 
 .app-header .hamburger,
 .nav__header .hamburger,
-.app-header .cambia-tema {
+.app-header .azione-header {
   width: var(--pulsante-header);
   height: var(--pulsante-header);
   border-radius: 0;
@@ -352,20 +353,22 @@ body {
 }
 
 // Pulsante di chiusura dentro il cassetto: stessa misura e stesso bordo di quello che lo apre.
-.nav__mobile-close {
-  display: flex;
-  align-items: center;
-  height: auto;
-  padding: 0;
+// Solo da telefono: da computer Payload lo nasconde e c'è già il suo pulsante (prima si
+// vedevano due pulsanti sovrapposti).
+@media (max-width: 768px) {
+  .nav__mobile-close {
+    display: flex;
+    align-items: center;
+    height: auto;
+    padding: 0;
 
-  .hamburger {
-    width: 44px;
-    height: 44px;
-    border: 1px solid var(--theme-elevation-150);
+    .hamburger {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--theme-elevation-150);
+    }
   }
-}
 
-@media (max-width: 1024px) {
   // Aria tra il pulsante di chiusura e il primo gruppo del menu.
   .nav__scroll {
     padding-top: calc(44px + 1.75rem);
@@ -506,4 +509,20 @@ body {
     clip: rect(0 0 0 0);
     white-space: nowrap;
   }
+}
+
+// ——— Casetta all'inizio del percorso (bacheca) ———
+.icona-bacheca {
+  display: inline-flex;
+  align-items: center;
+  color: var(--theme-text);
+}
+
+.sr-only-pannello {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }

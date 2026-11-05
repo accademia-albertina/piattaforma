@@ -9,6 +9,7 @@ import { annoAccademicoCorrente } from '@/access/corsi'
 import type { Corso, Docente } from '@/payload-types'
 
 import dati from './corsi-demo.json'
+import { inFrase } from '@/utilities/maiuscole'
 
 /** Chiavi delle scuole nei campi ACF del sito attuale → nome della scuola. */
 const SCUOLE: Record<string, string> = {
@@ -63,7 +64,7 @@ export async function seedCorsi(payload: Payload) {
       draft: false,
       data: {
         _status: 'published',
-        titolo: c.titolo,
+        titolo: inFrase(c.titolo),
         livelli: c.livelli as Corso['livelli'],
         annoAccademico: anno,
         docenti: [docente],

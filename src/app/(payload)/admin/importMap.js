@@ -26,7 +26,7 @@ import { RowLabel as RowLabel_a22f15833f5c099d83eec5874403c04c } from '../../../
 import { TabellaCalendario as TabellaCalendario_9699e8f890a1160d8c1a1320656d19f9 } from '../../../components/admin/TabellaCalendario'
 import { default as default_dfe4008080d895d460898c3a6155e9ba } from '../../../components/admin/Icon'
 import { default as default_91a09b539d3c86b0aebf520e7564ce08 } from '../../../components/admin/Logo'
-import { default as default_e666b063fc61d1fd5893bd24b494b70a } from '../../../components/admin/CambiaTema'
+import { default as default_97d3eba8ada3517fe02663f49ec8ede2 } from '../../../components/admin/ApriSito'
 import { default as default_dc33bb259e89928a16a86a5731c2d2e0 } from '../../../components/admin/PrimaDelLogin'
 import { default as default_1d1560386b77fb163758726eb0ecea0b } from '../../../components/admin/LinguaDate'
 import { default as default_16b88e9b8c48e393fa86591406efd08f } from '../../../components/admin/Dashboard'
@@ -62,7 +62,7 @@ export const importMap = {
   "/components/admin/TabellaCalendario#TabellaCalendario": TabellaCalendario_9699e8f890a1160d8c1a1320656d19f9,
   "/components/admin/Icon#default": default_dfe4008080d895d460898c3a6155e9ba,
   "/components/admin/Logo#default": default_91a09b539d3c86b0aebf520e7564ce08,
-  "/components/admin/CambiaTema#default": default_e666b063fc61d1fd5893bd24b494b70a,
+  "/components/admin/ApriSito#default": default_97d3eba8ada3517fe02663f49ec8ede2,
   "/components/admin/PrimaDelLogin#default": default_dc33bb259e89928a16a86a5731c2d2e0,
   "/components/admin/LinguaDate#default": default_1d1560386b77fb163758726eb0ecea0b,
   "/components/admin/Dashboard#default": default_16b88e9b8c48e393fa86591406efd08f,
