@@ -31,6 +31,7 @@ export default function Changelog({ initPageResult, params, searchParams }: Admi
       req={req}
       searchParams={searchParams}
       user={req.user ?? undefined}
+      viewActions={req.payload.config.admin?.components?.actions}
       visibleEntities={visibleEntities}
     >
       <Gutter className={styles.changelog}>
