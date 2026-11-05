@@ -53,13 +53,16 @@ PAGINE = {
     4971: 'termini-e-condizioni',
 }
 
-# Profili dei dottorandi: sottopagine di Dottorandi
-for _r in subprocess.run(
-    ['mysql', '-N', 'wp', '-e', "select ID, post_name from wpey_posts where post_type='page' and post_status='publish' and post_parent=24397 order by post_title"],
-    capture_output=True, check=True,
-).stdout.decode().splitlines():
-    _i, _s = _r.split('\t')
-    PAGINE[int(_i)] = f'dottorati/albertina/dottorandi/{_s}'
+# Profili dei dottorandi (sottopagine di Dottorandi): vanno nella collezione Dottorandi, non in
+# Pagine. Con --dottorandi lo script estrae solo quelli, per scripts/wp/converti-dottorandi.ts.
+if '--dottorandi' in sys.argv:
+    PAGINE = {}
+    for _r in subprocess.run(
+        ['mysql', '-N', 'wp', '-e', "select ID, post_name from wpey_posts where post_type='page' and post_status='publish' and post_parent=24397 order by post_title"],
+        capture_output=True, check=True,
+    ).stdout.decode().splitlines():
+        _i, _s = _r.split('\t')
+        PAGINE[int(_i)] = f'dottorati/albertina/dottorandi/{_s}'
 
 SITO = 'https://albertina-academy.it'
 # Etichette dei box che rimandano alle sottopagine: la piattaforma le mostra già da sola

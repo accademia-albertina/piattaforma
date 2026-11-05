@@ -71,6 +71,7 @@ export interface Config {
     avvisi: Avviso;
     corsi: Corso;
     docenti: Docente;
+    dottorandi: Dottorando;
     calendari: Calendario;
     albo: AttoAlbo;
     trasparenza: Trasparenza;
@@ -88,6 +89,7 @@ export interface Config {
     avvisi: AvvisiSelect<false> | AvvisiSelect<true>;
     corsi: CorsiSelect<false> | CorsiSelect<true>;
     docenti: DocentiSelect<false> | DocentiSelect<true>;
+    dottorandi: DottorandiSelect<false> | DottorandiSelect<true>;
     calendari: CalendariSelect<false> | CalendariSelect<true>;
     albo: AlboSelect<false> | AlboSelect<true>;
     trasparenza: TrasparenzaSelect<false> | TrasparenzaSelect<true>;
@@ -632,6 +634,77 @@ export interface Docente {
   createdAt: string;
 }
 /**
+ * Profili dei dottorandi, in /dottorati/albertina/dottorandi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dottorandi".
+ */
+export interface Dottorando {
+  id: number;
+  nome: string;
+  cognome: string;
+  nomeCompleto?: string | null;
+  email?: string | null;
+  /**
+   * In numeri romani, es. XLI.
+   */
+  ciclo?: string | null;
+  curriculum?: ('new-media-art' | 'processi-espositivi') | null;
+  /**
+   * Nome e cognome, anche di più tutor.
+   */
+  tutor?: string | null;
+  /**
+   * Facoltativa. Formato quadrato o verticale.
+   */
+  foto?: (number | null) | Media;
+  titoloProgetto?: string | null;
+  abstract?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  biografia?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Togli la spunta a dottorato concluso: il profilo esce dall’elenco.
+   */
+  attivo?: boolean | null;
+  /**
+   * L’utente con ruolo Dottorando che può modificare questo profilo.
+   */
+  account?: (number | null) | User;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Orario delle lezioni, esami e presentazioni: si compilano a tabella, il sito li mostra con filtri e li fa stampare.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -819,6 +892,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'docenti';
         value: number | Docente;
+      } | null)
+    | ({
+        relationTo: 'dottorandi';
+        value: number | Dottorando;
       } | null)
     | ({
         relationTo: 'calendari';
@@ -1091,6 +1168,28 @@ export interface DocentiSelect<T extends boolean = true> {
   ricevimento?: T;
   biografia?: T;
   cv?: T;
+  attivo?: T;
+  account?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dottorandi_select".
+ */
+export interface DottorandiSelect<T extends boolean = true> {
+  nome?: T;
+  cognome?: T;
+  nomeCompleto?: T;
+  email?: T;
+  ciclo?: T;
+  curriculum?: T;
+  tutor?: T;
+  foto?: T;
+  titoloProgetto?: T;
+  abstract?: T;
+  biografia?: T;
   attivo?: T;
   account?: T;
   slug?: T;
