@@ -153,3 +153,49 @@
 .esterno {
   vertical-align: -0.1em;
 }
+
+/* Titoli di sezione più presenti, con filetto sopra (come la Vetrina tesi) */
+.blocchi > section > .titolo {
+  padding-top: var(--space-4);
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+  border-top: 1px solid var(--color-border);
+}
+
+.blocchi > section:first-child > .titolo {
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* Variante scheda: colonna laterale stretta */
+.scheda {
+  gap: var(--space-4);
+}
+
+.scheda > section > .titolo {
+  padding-top: 0;
+  font-size: var(--font-size-lg);
+  border-top: 0;
+}
+
+.scheda .contatti {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+}
+
+.scheda .contatto {
+  padding: var(--space-4) var(--space-4) var(--space-5);
+  border-top: 4px solid var(--color-brand-strong);
+}
+
+.scheda .contatto dl {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.scheda .contatto dt {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-muted);
+}

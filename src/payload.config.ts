@@ -17,8 +17,9 @@ import { Navigazione } from './globals/Navigazione'
 import { migrations } from './migrations'
 import { seedCorsi } from './seed/corsi'
 import { importaAvvisiWp } from './seed/avvisi-wp'
+import { rimuoviDocenti } from './seed/docenti-rimossi'
 import { importaDocentiWp } from './seed/docenti-wp'
-import { seedDemo } from './seed/demo'
+import { correggiFacciata, seedDemo } from './seed/demo'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -100,6 +101,8 @@ export default buildConfig({
     if (process.env.SEED_DEMO !== 'true') return
     await seedDemo(payload)
     await seedCorsi(payload)
+    await rimuoviDocenti(payload)
+    await correggiFacciata(payload)
     // Gli avvisi del sito attuale sono più di mille: si importano in background,
     // senza ritardare l'avvio (l'hosting controlla /salute dopo pochi secondi).
     void importaAvvisiWp(payload).catch((e) =>

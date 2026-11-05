@@ -220,10 +220,17 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
 }
 
 /** Contenuto di una pagina composta a blocchi dal pannello. */
-export function Blocchi({ blocchi }: { blocchi: Blocco[] | null | undefined }) {
+export function Blocchi({
+  blocchi,
+  variante,
+}: {
+  blocchi: Blocco[] | null | undefined
+  /** "scheda": blocchi stretti in colonna laterale (es. contatti), con filetto rosso. */
+  variante?: 'scheda'
+}) {
   if (!blocchi?.length) return null
   return (
-    <div className={styles.blocchi}>
+    <div className={`${styles.blocchi} ${variante === 'scheda' ? styles.scheda : ''}`}>
       {blocchi.map((b, i) => (
         <RenderBlocco key={b.id ?? i} b={b} i={i} />
       ))}
