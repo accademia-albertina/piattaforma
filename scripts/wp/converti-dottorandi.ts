@@ -86,7 +86,10 @@ const dottorandi = grezze.map((g) => {
     el.innerHTML = el.innerHTML
       .split(/<br\s*\/?>/)
       .filter((riga) => {
-        const t = riga.replace(/<[^>]+>/g, '').trim()
+        // Testo della riga letto dal DOM, non togliendo i tag con una regex
+        const contenitore = document.createElement('div')
+        contenitore.innerHTML = riga
+        const t = contenitore.textContent?.trim() ?? ''
         const m = /^(co-?)?supervisor\s*:\s*(.+)$/i.exec(t)
         if (!m) return true
         if (m[1]) cosupervisor = m[2].trim()
