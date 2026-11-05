@@ -37,17 +37,18 @@ const grezze: Grezza[] = JSON.parse(readFileSync(file, 'utf8'))
 const editorConfig = await editorConfigFactory.default({ config: await config })
 
 // I link alle pagine del sito restano relativi: correggiLink li renderebbe assoluti.
-const INTERNO = 'https://interno.invalid'
+// Il prefisso finisce con "/": nessun altro host può corrispondere.
+const INTERNO = 'https://interno.invalid/'
 
 function relativi(n: Nodo) {
   n.children?.forEach(relativi)
   if (n.type === 'link' && n.fields?.url?.startsWith(INTERNO))
-    n.fields.url = n.fields.url.slice(INTERNO.length) || '/'
+    n.fields.url = `/${n.fields.url.slice(INTERNO.length)}`
 }
 
 function lexical(html: string) {
   const pulito = pulisci(html)
-    .replace(/href="\/(?!\/)/g, `href="${INTERNO}/`)
+    .replace(/href="\/(?!\/)/g, `href="${INTERNO}`)
     .replace(/<a href="#[^"]*"[^>]*>([\s\S]*?)<\/a>/g, '$1') // ancore interne della vecchia pagina
   const valore = convertHTMLToLexical({ editorConfig, html: pulito, JSDOM })
   correggiLink(valore.root as unknown as Nodo)
