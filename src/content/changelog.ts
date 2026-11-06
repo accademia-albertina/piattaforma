@@ -52,7 +52,7 @@ export const CHANGELOG: Versione[] = [
           '“Le mie iscrizioni” per gli studenti; “Area riservata” porta ognuno dove gli serve (pannello, iscrizioni o attesa).',
       },
     ],
-    pr: [],
+    pr: [56],
   },
   {
     versione: '0.24.0',
