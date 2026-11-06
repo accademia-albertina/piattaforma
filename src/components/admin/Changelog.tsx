@@ -4,6 +4,7 @@ import { DefaultTemplate } from '@payloadcms/next/templates'
 import { Gutter } from '@payloadcms/ui'
 import { redirect } from 'next/navigation'
 
+import { vedeSezione } from '@/access/pannello'
 import { canAccessBackend } from '@/access/roles'
 import { CHANGELOG, ETICHETTE_TIPO, TIPI_VOCE } from '@/content/changelog'
 
@@ -16,10 +17,12 @@ const formatoData = new Intl.DateTimeFormat('it-IT', {
   timeZone: 'Europe/Rome',
 })
 
-/** Registro delle versioni nel pannello (/admin/changelog): solo per chi lavora nel pannello. */
+/** Registro delle versioni nel pannello (/admin/changelog): per chi gestisce il sito (non i docenti). */
 export default function Changelog({ initPageResult, params, searchParams }: AdminViewServerProps) {
   const { req, permissions, visibleEntities, locale } = initPageResult
   if (!canAccessBackend(req.user)) redirect(`${req.payload.config.routes.admin}/login`)
+  // Il registro delle versioni serve a chi gestisce il sito, non ai docenti
+  if (!vedeSezione(req.user, 'changelog')) redirect(req.payload.config.routes.admin)
 
   return (
     <DefaultTemplate

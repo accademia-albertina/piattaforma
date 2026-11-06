@@ -1,3 +1,4 @@
+import { nascostaA } from '@/access/pannello'
 import type { CollectionConfig } from 'payload'
 
 import { rowLabel } from '@/fields/rowLabel'
@@ -32,6 +33,7 @@ export const Pubblicazioni: CollectionConfig = {
   labels: { singular: 'Pubblicazione', plural: 'Albertina Press' },
   typescript: { interface: 'Pubblicazione' },
   admin: {
+    hidden: nascostaA('pubblicazioni'),
     useAsTitle: 'titolo',
     description: 'Il catalogo della casa editrice Albertina Press, in /accademia/albertina-press.',
     defaultColumns: ['numero', 'titolo', 'collana', 'anno'],
@@ -87,8 +89,20 @@ export const Pubblicazioni: CollectionConfig = {
         {
           type: 'row',
           fields: [
-            { name: 'pagina', label: 'Pagina', type: 'text', maxLength: 10, admin: { width: '15%' } },
-            { name: 'titolo', label: 'Titolo', type: 'text', required: true, admin: { width: '50%' } },
+            {
+              name: 'pagina',
+              label: 'Pagina',
+              type: 'text',
+              maxLength: 10,
+              admin: { width: '15%' },
+            },
+            {
+              name: 'titolo',
+              label: 'Titolo',
+              type: 'text',
+              required: true,
+              admin: { width: '50%' },
+            },
             { name: 'autori', label: 'Autori', type: 'text', admin: { width: '35%' } },
           ],
         },
@@ -124,7 +138,10 @@ export const Pubblicazioni: CollectionConfig = {
       label: 'Luogo, editore e anno',
       type: 'text',
       maxLength: 200,
-      admin: { position: 'sidebar', description: 'Es. “Torino, Milano (Silvana Editoriale), 2017”.' },
+      admin: {
+        position: 'sidebar',
+        description: 'Es. “Torino, Milano (Silvana Editoriale), 2017”.',
+      },
     },
     {
       name: 'pagine',

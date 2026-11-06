@@ -1,3 +1,4 @@
+import { filtroElenco, filtroPannello, nascostaA } from '@/access/pannello'
 import type { Access, CollectionConfig, Where } from 'payload'
 
 import {
@@ -24,7 +25,10 @@ const updateOrDelete: Access = ({ req }) => {
   if (!req.user) return false
   if (isAdmin(req.user)) return true
   if (!puoScrivereAvvisi(req.user)) return false
-  return { categorie: { not_in: categorieNonConsentite(req.user) } } satisfies Where
+  const categorie: Where = { categorie: { not_in: categorieNonConsentite(req.user) } }
+  // Il docente modifica solo gli avvisi che ha scritto lui
+  const suoi = filtroPannello(req.user, 'avvisi')
+  return suoi ? { and: [categorie, suoi] } : categorie
 }
 
 export const Avvisi: CollectionConfig = {
@@ -32,6 +36,8 @@ export const Avvisi: CollectionConfig = {
   labels: { singular: 'Avviso', plural: 'Avvisi' },
   typescript: { interface: 'Avviso' },
   admin: {
+    hidden: nascostaA('avvisi'),
+    baseFilter: filtroElenco('avvisi'),
     useAsTitle: 'titolo',
     description: 'Comunicazioni per studenti e docenti, in /avvisi e in homepage.',
     defaultColumns: ['titolo', 'categorie', 'pubblicatoIl', '_status'],

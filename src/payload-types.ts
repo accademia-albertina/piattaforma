@@ -220,6 +220,7 @@ export interface BloccoImmagine {
  */
 export interface Media {
   id: number;
+  creatoDa?: (number | null) | User;
   /**
    * Si scrive da solo al caricamento: descrive l’immagine per chi usa uno screen reader. Correggilo se serve.
    */
@@ -235,6 +236,53 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * Chi entra nel pannello e con quali ruoli.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  nome?: string | null;
+  cognome?: string | null;
+  /**
+   * Solo un amministratore può assegnare o togliere ruoli.
+   */
+  roles?:
+    | (
+        | 'admin'
+        | 'vicedirezione'
+        | 'redazione'
+        | 'segreteria'
+        | 'amministrativo'
+        | 'erasmus'
+        | 'biblioteca'
+        | 'docente'
+        | 'dottorando'
+        | 'studente'
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  resetPasswordRequestedAt?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -599,53 +647,6 @@ export interface Docente {
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * Chi entra nel pannello e con quali ruoli.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  nome?: string | null;
-  cognome?: string | null;
-  /**
-   * Solo un amministratore può assegnare o togliere ruoli.
-   */
-  roles?:
-    | (
-        | 'admin'
-        | 'vicedirezione'
-        | 'redazione'
-        | 'segreteria'
-        | 'amministrativo'
-        | 'erasmus'
-        | 'biblioteca'
-        | 'docente'
-        | 'dottorando'
-        | 'studente'
-      )[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  resetPasswordRequestedAt?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-  collection: 'users';
 }
 /**
  * Il catalogo della casa editrice Albertina Press, in /accademia/albertina-press.
@@ -1515,6 +1516,7 @@ export interface ScuoleSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
+  creatoDa?: T;
   alt?: T;
   updatedAt?: T;
   createdAt?: T;

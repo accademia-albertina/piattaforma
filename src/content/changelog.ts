@@ -27,6 +27,29 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.23.0',
+    data: '2026-11-06',
+    titolo: 'Pannello su misura per ogni ruolo',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nel menu e in dashboard ognuno vede solo ciò che può modificare. Il docente trova il suo profilo, i suoi corsi, i suoi avvisi e i suoi file; gli uffici le pagine a loro affidate.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Per i docenti, in dashboard: “Il mio profilo” e “I miei corsi”. I file caricati ricordano chi li ha caricati.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Permessi allineati alla tabella dei ruoli: menu del sito solo agli admin; Scuole a vicedirezione e admin; Albertina Press a redazione e biblioteca; Albo online ad amministrativo e vicedirezione. Il changelog non compare ai docenti.',
+      },
+    ],
+    pr: [54],
+  },
+  {
     versione: '0.22.0',
     data: '2026-11-06',
     titolo: 'Pagine delle scuole',

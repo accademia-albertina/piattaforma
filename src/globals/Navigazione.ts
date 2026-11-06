@@ -1,7 +1,8 @@
+import { nascostaA } from '@/access/pannello'
 import { revalidatePath } from 'next/cache'
 import type { ArrayField, GlobalConfig } from 'payload'
 
-import { isRedattorePagine } from '@/access/pagine'
+import { isAdmin } from '@/access/roles'
 import { linkFields } from '@/fields/link'
 import { rowLabel } from '@/fields/rowLabel'
 
@@ -28,6 +29,7 @@ export const Navigazione: GlobalConfig = {
   slug: 'navigazione',
   label: 'Menu del sito',
   admin: {
+    hidden: nascostaA('navigazione'),
     group: 'Impostazioni',
     description:
       'Mega menu, barra in alto e link del footer. Le modifiche sono visibili sul sito appena salvi.',
@@ -46,7 +48,7 @@ export const Navigazione: GlobalConfig = {
   },
   access: {
     read: () => true,
-    update: ({ req }) => isRedattorePagine(req.user),
+    update: ({ req }) => isAdmin(req.user),
   },
   fields: [
     {

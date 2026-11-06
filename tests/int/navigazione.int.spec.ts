@@ -10,12 +10,17 @@ let payload: Payload
 const PASSWORD = 'Password-di-prova-1!'
 
 describe('Menu del sito: chi può modificarlo', () => {
+  let admin: User
   let redazione: User
   let segreteria: User
 
   beforeAll(async () => {
     payload = await getPayload({ config: await config })
     await payload.delete({ collection: 'users', where: { email: { like: '.menu@' } } })
+    admin = await payload.create({
+      collection: 'users',
+      data: { email: 'admin.menu@albertina.academy', password: PASSWORD, roles: ['admin'] },
+    })
     redazione = await payload.create({
       collection: 'users',
       data: { email: 'redazione.menu@albertina.academy', password: PASSWORD, roles: ['redazione'] },
@@ -35,26 +40,28 @@ describe('Menu del sito: chi può modificarlo', () => {
     await payload.delete({ collection: 'users', where: { email: { like: '.menu@' } } })
   })
 
-  it('la redazione modifica il menu e il pubblico lo legge', async () => {
+  it('l’admin modifica il menu e il pubblico lo legge', async () => {
     await payload.updateGlobal({
       slug: 'navigazione',
       data: { inEvidenza: [{ etichetta: 'Open Days', tipo: 'percorso', url: '/open-days' }] },
-      user: redazione,
+      user: admin,
       overrideAccess: false,
     })
     const pubblico = await payload.findGlobal({ slug: 'navigazione', overrideAccess: false })
     expect(pubblico.inEvidenza?.map((v) => v.etichetta)).toEqual(['Open Days'])
   })
 
-  it('la segreteria non modifica il menu', async () => {
-    await expect(
-      payload.updateGlobal({
-        slug: 'navigazione',
-        data: { inEvidenza: [] },
-        user: segreteria,
-        overrideAccess: false,
-      }),
-    ).rejects.toThrow()
+  it('redazione e segreteria non modificano il menu', async () => {
+    for (const user of [redazione, segreteria]) {
+      await expect(
+        payload.updateGlobal({
+          slug: 'navigazione',
+          data: { inEvidenza: [] },
+          user,
+          overrideAccess: false,
+        }),
+      ).rejects.toThrow()
+    }
   })
 
   it('un indirizzo del sito deve iniziare con /', async () => {
@@ -62,7 +69,7 @@ describe('Menu del sito: chi può modificarlo', () => {
       payload.updateGlobal({
         slug: 'navigazione',
         data: { inEvidenza: [{ etichetta: 'Esterno', tipo: 'percorso', url: '//evil.example' }] },
-        user: redazione,
+        user: admin,
         overrideAccess: false,
       }),
     ).rejects.toThrow()

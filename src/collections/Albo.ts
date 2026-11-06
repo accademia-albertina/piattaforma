@@ -1,3 +1,4 @@
+import { nascostaA } from '@/access/pannello'
 import type { CollectionConfig } from 'payload'
 
 import { soloAlbo } from '@/access/albo'
@@ -16,6 +17,7 @@ export const Albo: CollectionConfig = {
   labels: { singular: 'Atto dell’Albo', plural: 'Albo online' },
   typescript: { interface: 'AttoAlbo' },
   admin: {
+    hidden: nascostaA('albo'),
     useAsTitle: 'titolo',
     description:
       'Bandi, procedure e comunicazioni dell’Albo online. Aggiungi i nuovi documenti (nomina, verbali, graduatoria) allo stesso atto.',

@@ -1,3 +1,4 @@
+import { nascostaA } from '@/access/pannello'
 import { APIError, type Access, type CollectionConfig, type FieldAccess } from 'payload'
 
 import { endpointsGoogle } from '@/auth/endpoints'
@@ -19,6 +20,7 @@ export const Users: CollectionConfig = {
   slug: 'users',
   labels: { singular: 'Utente', plural: 'Utenti' },
   admin: {
+    hidden: nascostaA('users'),
     useAsTitle: 'email',
     description: 'Chi entra nel pannello e con quali ruoli.',
     defaultColumns: ['email', 'nome', 'cognome', 'roles'],

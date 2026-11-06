@@ -1,3 +1,4 @@
+import { nascostaA } from '@/access/pannello'
 import type { CollectionConfig } from 'payload'
 
 import { campoSoloDidattica, modificaDottorando, soloDidattica } from '@/access/corsi'
@@ -25,6 +26,7 @@ export const Dottorandi: CollectionConfig = {
   labels: { singular: 'Dottorando', plural: 'Dottorandi' },
   typescript: { interface: 'Dottorando' },
   admin: {
+    hidden: nascostaA('dottorandi'),
     useAsTitle: 'nomeCompleto',
     description: 'Profili dei dottorandi, in /dottorati/albertina/dottorandi.',
     defaultColumns: ['nomeCompleto', 'ciclo', 'curriculum', 'attivo'],
@@ -109,7 +111,10 @@ export const Dottorandi: CollectionConfig = {
       type: 'text',
       maxLength: 200,
       access: { update: campoSoloDidattica },
-      admin: { position: 'sidebar', description: 'Es. “Prof.ssa Irene Biolchini (Accademia Albertina)”.' },
+      admin: {
+        position: 'sidebar',
+        description: 'Es. “Prof.ssa Irene Biolchini (Accademia Albertina)”.',
+      },
     },
     {
       name: 'cosupervisor',

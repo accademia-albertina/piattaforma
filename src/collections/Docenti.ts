@@ -1,3 +1,4 @@
+import { filtroElenco, nascostaA } from '@/access/pannello'
 import type { CollectionConfig } from 'payload'
 
 import {
@@ -20,6 +21,8 @@ export const Docenti: CollectionConfig = {
   labels: { singular: 'Docente', plural: 'Docenti' },
   typescript: { interface: 'Docente' },
   admin: {
+    hidden: nascostaA('docenti'),
+    baseFilter: filtroElenco('docenti'),
     useAsTitle: 'nomeCompleto',
     description: 'Profili pubblici dei docenti, in /docenti e nelle schede dei corsi.',
     defaultColumns: ['nomeCompleto', 'ruolo', 'scuole', 'attivo'],

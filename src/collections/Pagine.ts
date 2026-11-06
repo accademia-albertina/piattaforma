@@ -1,3 +1,4 @@
+import { filtroElenco, nascostaA } from '@/access/pannello'
 import type {
   CollectionAfterChangeHook,
   CollectionBeforeChangeHook,
@@ -94,6 +95,8 @@ export const Pagine: CollectionConfig = {
   labels: { singular: 'Pagina', plural: 'Pagine' },
   typescript: { interface: 'Pagina' },
   admin: {
+    hidden: nascostaA('pagine'),
+    baseFilter: filtroElenco('pagine'),
     useAsTitle: 'titolo',
     description: 'Pagine istituzionali composte a blocchi, come Didattica o Ammissioni.',
     defaultColumns: ['titolo', 'percorso', 'updatedAt', '_status'],
