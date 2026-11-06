@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { IscrizioneCorso, MenuUtente } from '@/components'
+import { IscrizioneCorso, MenuUtente, SchedaAppello } from '@/components'
 
 import { axeViolations } from './axe'
 
@@ -19,7 +19,7 @@ afterEach(() => {
 })
 
 const base = {
-  corsoId: 7,
+  idRiferimento: 7,
   stato: 'aperta' as const,
   apertura: '1 ottobre 2026, 09:00',
   chiusura: '31 ottobre 2026, 23:59',
@@ -74,6 +74,32 @@ describe('IscrizioneCorso', () => {
       '/api/iscrizioni-corsi/42',
       expect.objectContaining({ method: 'DELETE' }),
     )
+  })
+
+  it('per gli esami usa l’endpoint degli appelli', async () => {
+    const fetchMock = vi
+      .spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce(new Response(JSON.stringify({ doc: { id: 5 } }), { status: 201 }))
+    render(<IscrizioneCorso {...base} tipo="esame" utente="studente" />)
+    fireEvent.click(screen.getByRole('button', { name: 'Iscriviti all’appello' }))
+    await screen.findByRole('button', { name: 'Annulla l’iscrizione' })
+    expect(fetchMock).toHaveBeenCalledWith(
+      '/api/iscrizioni-esami',
+      expect.objectContaining({ body: JSON.stringify({ appello: 7 }) }),
+    )
+  })
+
+  it('SchedaAppello non ha violazioni axe', async () => {
+    const { container } = render(
+      <SchedaAppello
+        titolo="Pittura"
+        giorno="martedì 22 settembre 2026"
+        ora="10:00"
+        aula="C28"
+        commissione="Rossi, Bianchi"
+      />,
+    )
+    expect(await axeViolations(container)).toEqual([])
   })
 
   it('mostra il messaggio d’errore del server', async () => {

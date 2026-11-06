@@ -93,3 +93,32 @@ export const annullaIscrizione: Access = ({ req }) => {
   if (!hasRole(req.user, 'studente')) return false
   return { studente: { equals: req.user.id } } satisfies Where
 }
+
+/** Docente o co-docente del corso dell'appello. */
+const docenteDelCorso = (userId: number | string): Where => ({
+  'corso.docenti.account': { equals: userId },
+})
+
+/** Appelli: uffici tutti; il docente quelli dei propri corsi (anche per aggiungere turni). */
+export const modificaAppello: Access = ({ req }) => {
+  if (!req.user) return false
+  if (gestisceIscrizioni(req.user)) return true
+  if (!hasRole(req.user, 'docente')) return false
+  return docenteDelCorso(req.user.id)
+}
+
+export const creaAppello: Access = ({ req }) =>
+  gestisceIscrizioni(req.user) || hasRole(req.user, 'docente')
+
+/** Iscrizioni agli esami: studente le proprie, docente quelle dei suoi appelli, uffici tutte. */
+export const leggiIscrizioniEsami: Access = ({ req }) => {
+  const user = req.user
+  if (!user) return false
+  if (gestisceIscrizioni(user)) return true
+  const condizioni: Where[] = []
+  if (hasRole(user, 'studente')) condizioni.push({ studente: { equals: user.id } })
+  if (hasRole(user, 'docente'))
+    condizioni.push({ 'appello.corso.docenti.account': { equals: user.id } })
+  if (!condizioni.length) return false
+  return condizioni.length === 1 ? condizioni[0] : { or: condizioni }
+}

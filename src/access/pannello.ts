@@ -22,6 +22,8 @@ export const SEZIONI_PANNELLO = [
   'calendari',
   'finestre-iscrizione',
   'iscrizioni-corsi',
+  'appelli',
+  'iscrizioni-esami',
   'scuole',
   'albo',
   'trasparenza',
@@ -45,6 +47,8 @@ export const VISIBILITA: Record<SezionePannello, Role[]> = {
   calendari: ['vicedirezione', 'segreteria'],
   'finestre-iscrizione': ['vicedirezione', 'segreteria'],
   'iscrizioni-corsi': ['vicedirezione', 'segreteria', 'docente'],
+  appelli: ['vicedirezione', 'segreteria', 'docente'],
+  'iscrizioni-esami': ['vicedirezione', 'segreteria', 'docente'],
   scuole: ['vicedirezione'],
   albo: ['vicedirezione', 'amministrativo'],
   trasparenza: ['vicedirezione', 'amministrativo'],
@@ -70,6 +74,8 @@ const VEDE_TUTTO: Partial<Record<SezionePannello, Role[]>> = {
   corsi: ['vicedirezione'],
   docenti: ['vicedirezione'],
   'iscrizioni-corsi': ['vicedirezione', 'segreteria'],
+  appelli: ['vicedirezione', 'segreteria'],
+  'iscrizioni-esami': ['vicedirezione', 'segreteria'],
 }
 
 /**
@@ -92,7 +98,10 @@ export function filtroPannello(user: MaybeUser, sezione: SezionePannello): Where
     case 'corsi':
       return hasRole(user, 'docente') ? { 'docenti.account': { equals: user.id } } : null
     case 'iscrizioni-corsi':
+    case 'appelli':
       return { 'corso.docenti.account': { equals: user.id } }
+    case 'iscrizioni-esami':
+      return { 'appello.corso.docenti.account': { equals: user.id } }
     case 'docenti':
       return { account: { equals: user.id } }
     default:

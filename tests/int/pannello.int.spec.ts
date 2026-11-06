@@ -50,6 +50,8 @@ describe('Pannello: cosa vede ogni ruolo', () => {
       'corsi',
       'docenti',
       'iscrizioni-corsi',
+      'appelli',
+      'iscrizioni-esami',
     ])
     expect(visibili(['segreteria'])).toEqual([
       'pagine',
@@ -58,6 +60,8 @@ describe('Pannello: cosa vede ogni ruolo', () => {
       'calendari',
       'finestre-iscrizione',
       'iscrizioni-corsi',
+      'appelli',
+      'iscrizioni-esami',
       'changelog',
     ])
     expect(visibili(['vicedirezione'])).not.toContain('users')

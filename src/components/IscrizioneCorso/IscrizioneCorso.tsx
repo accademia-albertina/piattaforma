@@ -10,7 +10,10 @@ import styles from './IscrizioneCorso.module.css'
 export type StatoIscrizioni = 'nessuna' | 'prima' | 'aperta' | 'chiusa'
 
 export type IscrizioneCorsoProps = {
-  corsoId: number
+  /** Corso o appello a cui ci si iscrive. */
+  tipo?: 'corso' | 'esame'
+  /** Id del corso o dell'appello. */
+  idRiferimento: number
   stato: StatoIscrizioni
   /** Date già formattate (“12 febbraio 2027, 23:59”). */
   apertura?: string
@@ -40,8 +43,26 @@ async function messaggioErrore(r: Response) {
  * Iscrizione a un corso dal sito: stato della finestra e pulsante “Iscriviti” o
  * “Annulla l’iscrizione”. Le regole (finestra, livello, doppioni) le controlla il server.
  */
+const TESTI = {
+  corso: {
+    endpoint: '/api/iscrizioni-corsi',
+    campo: 'corso',
+    titolo: 'Iscrizione al corso',
+    iscriviti: 'Iscriviti al corso',
+    livello: 'Questo corso non è del tuo livello (triennio o biennio): non puoi iscriverti.',
+  },
+  esame: {
+    endpoint: '/api/iscrizioni-esami',
+    campo: 'appello',
+    titolo: 'Iscrizione all’esame',
+    iscriviti: 'Iscriviti all’appello',
+    livello: 'Questo appello non è per il tuo livello (triennio o biennio).',
+  },
+} as const
+
 export function IscrizioneCorso({
-  corsoId,
+  tipo = 'corso',
+  idRiferimento,
   stato,
   apertura,
   chiusura,
@@ -57,6 +78,7 @@ export function IscrizioneCorso({
   const [conferma, setConferma] = useState(false)
   const [errore, setErrore] = useState<string | null>(null)
   const [esito, setEsito] = useState<string | null>(null)
+  const t = TESTI[tipo]
   const Titolo = `h${livelloTitolo}` as const
   const aperta = stato === 'aperta'
 
@@ -65,11 +87,11 @@ export function IscrizioneCorso({
     setErrore(null)
     setEsito(null)
     try {
-      const r = await fetch('/api/iscrizioni-corsi', {
+      const r = await fetch(t.endpoint, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ corso: corsoId }),
+        body: JSON.stringify({ [t.campo]: idRiferimento }),
       })
       if (!r.ok) throw new Error(await messaggioErrore(r))
       const { doc } = (await r.json()) as { doc: { id: number } }
@@ -88,7 +110,7 @@ export function IscrizioneCorso({
     setErrore(null)
     setEsito(null)
     try {
-      const r = await fetch(`/api/iscrizioni-corsi/${iscrizioneId}`, {
+      const r = await fetch(`${t.endpoint}/${iscrizioneId}`, {
         method: 'DELETE',
         credentials: 'include',
       })
@@ -115,7 +137,7 @@ export function IscrizioneCorso({
   } else if (stato === 'chiusa') {
     testo = `Le iscrizioni si sono chiuse il ${chiusura}.`
   } else if (utente === 'studente' && !livelloAmmesso) {
-    testo = 'Questo corso non è del tuo livello (triennio o biennio): non puoi iscriverti.'
+    testo = t.livello
   } else if (utente === 'altro') {
     testo = `Iscrizioni aperte fino al ${chiusura}. Si iscrivono gli studenti con l’account istituzionale.`
   } else {
@@ -126,11 +148,11 @@ export function IscrizioneCorso({
     <section
       className={compatto ? styles.compatto : styles.riquadro}
       aria-label={compatto ? 'Iscrizione' : undefined}
-      aria-labelledby={compatto ? undefined : `iscrizione-${corsoId}`}
+      aria-labelledby={compatto ? undefined : `iscrizione-${tipo}-${idRiferimento}`}
     >
       {compatto ? null : (
-        <Titolo id={`iscrizione-${corsoId}`} className={styles.titolo}>
-          Iscrizione al corso
+        <Titolo id={`iscrizione-${tipo}-${idRiferimento}`} className={styles.titolo}>
+          {t.titolo}
         </Titolo>
       )}
       <p className={styles.testo}>{testo}</p>
@@ -143,7 +165,7 @@ export function IscrizioneCorso({
 
       {aperta && !iscrizioneId && utente === 'studente' && livelloAmmesso ? (
         <Button onPress={iscriviti} isPending={inCorso}>
-          {inCorso ? 'Iscrizione in corso…' : 'Iscriviti al corso'}
+          {inCorso ? 'Iscrizione in corso…' : t.iscriviti}
         </Button>
       ) : null}
 

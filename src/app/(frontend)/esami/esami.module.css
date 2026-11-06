@@ -1,0 +1,76 @@
+.pagina {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+.filtri {
+  display: grid;
+  gap: var(--space-3);
+  margin: var(--space-5) 0;
+  max-width: 56rem;
+}
+
+.livelli {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.livelli a {
+  padding-block: var(--space-2);
+  color: var(--color-heading);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.livelli a[aria-current] {
+  box-shadow: inset 0 -3px 0 var(--color-heading);
+}
+
+.cerca {
+  display: grid;
+  gap: var(--space-1);
+  font-weight: 600;
+}
+
+.campo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.campo input {
+  flex: 1 1 14rem;
+  min-width: 0;
+  min-height: var(--target-min);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-control);
+  border-radius: 0;
+  font: inherit;
+}
+
+.giorno {
+  max-width: 56rem;
+  margin-top: var(--space-5);
+}
+
+.giorno h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-3);
+}
+
+.giorno h2::first-letter {
+  text-transform: uppercase;
+}
+
+.elenco {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vuoto {
+  margin-top: var(--space-5);
+}

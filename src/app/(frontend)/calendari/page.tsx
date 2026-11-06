@@ -40,6 +40,27 @@ export default async function CalendariPage() {
         sommario="Orario delle lezioni, esami e presentazioni: si consultano qui, con i filtri, e si stampano."
       />
 
+      <section aria-labelledby="esami-iscrizioni" className={styles.gruppo}>
+        <h2 id="esami-iscrizioni">Esami e iscrizioni</h2>
+        <ul>
+          <li>
+            <Link href="/esami">
+              <span className={styles.anno}>Sessione in corso</span>
+              <span className={styles.titolo}>Appelli d’esame</span>
+              <span className={styles.sottotitolo}>
+                Data, ora, aula e commissione; gli studenti si iscrivono da qui.
+              </span>
+              <span className={styles.piede}>
+                <span>Sempre aggiornato</span>
+                <span className={styles.apri} aria-hidden="true">
+                  Apri <ArrowRight size={16} strokeWidth={1.5} />
+                </span>
+              </span>
+            </Link>
+          </li>
+        </ul>
+      </section>
+
       {gruppi.length === 0 ? (
         <p className={styles.vuoto}>Non ci sono ancora calendari pubblicati.</p>
       ) : (

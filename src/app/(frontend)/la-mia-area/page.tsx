@@ -7,7 +7,15 @@ import { LIVELLO_LABELS } from '@/access/corsi'
 import { datiStudente } from '@/access/iscrizioni'
 import { hasRole } from '@/access/roles'
 import { urlAccesso } from '@/auth/google'
-import { Breadcrumbs, Fisarmonica, IscrizioneCorso, TestataPagina } from '@/components'
+import {
+  Breadcrumbs,
+  Fisarmonica,
+  IscrizioneCorso,
+  SchedaAppello,
+  TestataPagina,
+} from '@/components'
+import { appelliConStato, giornoAppello } from '@/lib/appelli'
+import type { Corso } from '@/payload-types'
 import { GUIDA_STUDENTI, LINK_ISIDATA } from '@/content/guida-studenti'
 import { docentiDi, etichettaLivelli } from '@/lib/corsi'
 import { dataIscrizioni, iscrizioniDelCorso } from '@/lib/iscrizioni'
@@ -52,6 +60,29 @@ export default async function LaMiaArea() {
       })
       .map(async (i) => ({ iscrizione: i, finestra: await iscrizioniDelCorso(payload, i.corso) })),
   )
+
+  // Esami: appelli futuri a cui lo studente è iscritto
+  const { docs: iscrizioniEsami } = studente
+    ? await payload.find({
+        collection: 'iscrizioni-esami',
+        where: { studente: { equals: user.id } },
+        depth: 0,
+        pagination: false,
+      })
+    : { docs: [] }
+  const esami = iscrizioniEsami.length
+    ? await appelliConStato(
+        payload,
+        {
+          id: {
+            in: iscrizioniEsami.map((i) =>
+              typeof i.appello === 'object' ? i.appello.id : i.appello,
+            ),
+          },
+        },
+        user,
+      )
+    : []
 
   return (
     <div className={`container ${styles.pagina}`}>
@@ -100,12 +131,55 @@ export default async function LaMiaArea() {
                     </div>
                     <IscrizioneCorso
                       compatto
-                      corsoId={corso.id}
+                      idRiferimento={corso.id}
                       stato={finestra.stato}
                       chiusura={finestra.chiusura ? dataIscrizioni(finestra.chiusura) : undefined}
                       utente="studente"
                       iscrizioneId={iscrizione.id}
                     />
+                  </li>
+                )
+              })}
+            </ul>
+          )}
+        </section>
+      ) : null}
+
+      {studente ? (
+        <section id="esami" aria-labelledby="esami-titolo" className={styles.sezione}>
+          <h2 id="esami-titolo">I tuoi esami</h2>
+          {esami.length === 0 ? (
+            <div className={styles.vuoto}>
+              <p>Non risultano iscrizioni ad appelli in programma.</p>
+              <p>
+                Gli appelli sono in <Link href="/esami">Esami e iscrizioni</Link> e nella pagina di
+                ogni corso.
+              </p>
+            </div>
+          ) : (
+            <ul className={styles.elenco}>
+              {esami.map((a) => {
+                const corso = a.appello.corso as Corso
+                return (
+                  <li key={a.appello.id}>
+                    <SchedaAppello
+                      titolo={<Link href={`/corsi/${corso.slug}`}>{corso.titolo}</Link>}
+                      giorno={giornoAppello(a.appello.data)}
+                      ora={a.appello.ora}
+                      aula={a.appello.aula}
+                      commissione={a.appello.commissione}
+                      note={a.appello.note}
+                    >
+                      <IscrizioneCorso
+                        compatto
+                        tipo="esame"
+                        idRiferimento={a.appello.id}
+                        stato={a.stato}
+                        chiusura={a.chiusura}
+                        utente="studente"
+                        iscrizioneId={a.iscrizioneId}
+                      />
+                    </SchedaAppello>
                   </li>
                 )
               })}
