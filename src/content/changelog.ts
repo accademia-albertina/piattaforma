@@ -27,6 +27,23 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.24.0',
+    data: '2026-11-06',
+    titolo: 'Guida del pannello per ruolo',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Guida d’uso nel pannello (/admin/guida, dal punto di domanda in alto a destra): passi brevi per ogni sezione, solo quelle del proprio ruolo. Negli avvisi mostra anche le categorie che si possono usare.',
+      },
+      {
+        tipo: 'nuovo',
+        testo: 'Gli amministratori possono vedere la guida “come” ogni altro ruolo.',
+      },
+    ],
+    pr: [55],
+  },
+  {
     versione: '0.23.0',
     data: '2026-11-06',
     titolo: 'Pannello su misura per ogni ruolo',
