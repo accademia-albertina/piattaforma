@@ -954,7 +954,7 @@ export interface Calendario {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Quando gli studenti possono iscriversi ai corsi di un semestre (e, in seguito, agli esami di una sessione).
+ * Quando gli studenti possono iscriversi ai corsi di un semestre e agli esami di una sessione.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "finestre-iscrizione".
