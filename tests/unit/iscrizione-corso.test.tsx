@@ -1,9 +1,17 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { IscrizioneCorso } from '@/components'
+import { IscrizioneCorso, MenuUtente } from '@/components'
 
 import { axeViolations } from './axe'
+
+// jsdom non ha CSS.escape, che il menu di React Aria usa
+if (!globalThis.CSS?.escape) {
+  globalThis.CSS = {
+    ...globalThis.CSS,
+    escape: (s: string) => s.replace(/[^\w-]/g, '\\$&'),
+  } as typeof CSS
+}
 
 afterEach(() => {
   cleanup()
@@ -80,5 +88,41 @@ describe('IscrizioneCorso', () => {
     render(<IscrizioneCorso {...base} utente="studente" />)
     fireEvent.click(screen.getByRole('button', { name: 'Iscriviti al corso' }))
     await waitFor(() => expect(screen.getByRole('alert').textContent).toContain('sono chiuse'))
+  })
+})
+
+describe('MenuUtente', () => {
+  it('senza accesso è il link “Accedi”', async () => {
+    const { container } = render(<MenuUtente utente={null} />)
+    expect(screen.getByRole('link', { name: 'Accedi' }).getAttribute('href')).toBe(
+      '/area-riservata',
+    )
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('lo studente vede iniziali e il menu con le iscrizioni', async () => {
+    const { container } = render(
+      <MenuUtente
+        utente={{
+          nome: 'Giulia',
+          cognome: 'Bassi',
+          email: '23456t@albertina.academy',
+          roles: ['studente'],
+        }}
+      />,
+    )
+    expect(screen.getByText('GB')).toBeTruthy()
+    expect(await axeViolations(container)).toEqual([])
+    fireEvent.click(screen.getByRole('button', { name: 'La mia area, Giulia Bassi' }))
+    const menu = await screen.findByRole('menu')
+    expect(menu.textContent).toContain('Le mie iscrizioni')
+    expect(menu.textContent).not.toContain('Pannello')
+    expect(menu.textContent).toContain('Esci')
+  })
+
+  it('il personale ha il link al pannello', async () => {
+    render(<MenuUtente utente={{ email: 'paola.verdi@albertina.academy', roles: ['docente'] }} />)
+    fireEvent.click(screen.getByRole('button', { name: /La mia area/ }))
+    expect((await screen.findByRole('menu')).textContent).toContain('Pannello')
   })
 })

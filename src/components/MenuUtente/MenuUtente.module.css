@@ -1,0 +1,79 @@
+/* Iniziali nel cerchio, al posto dell'icona: dice subito che l'accesso è fatto. */
+.iniziali {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--color-on-brand);
+  color: var(--color-brand-strong);
+  font-size: var(--font-size-2xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* Pannello piatto, senza raggi né bordi, come i box del sito. */
+.popover {
+  min-width: 16rem;
+  max-width: calc(100vw - 2 * var(--space-3));
+  background: var(--color-bg);
+  color: var(--color-heading);
+  box-shadow: 0 8px 24px rgb(18 25 29 / 0.18);
+}
+
+.chi {
+  padding: var(--space-3);
+  background: var(--color-azzurro-100);
+}
+
+.nome {
+  margin: 0;
+  font-weight: 700;
+}
+
+.email {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  overflow-wrap: anywhere;
+}
+
+.menu {
+  padding: var(--space-1) 0;
+  outline: none;
+}
+
+/* Il focus si vede sulla voce, non sull'intero elenco */
+.menu:focus-visible,
+.menu[data-focus-visible] {
+  outline: none;
+  box-shadow: none;
+}
+
+.voce {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  min-height: var(--target-min);
+  padding: 0 var(--space-3);
+  color: var(--color-heading);
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.voce[data-focused],
+.voce[data-hovered] {
+  background: var(--color-azzurro-50);
+}
+
+.voce[data-focus-visible] {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+.separatore {
+  height: 1px;
+  margin: var(--space-1) 0;
+  background: var(--color-border);
+}

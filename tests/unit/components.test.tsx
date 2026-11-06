@@ -80,7 +80,7 @@ describe('componenti accessibili', () => {
   })
 
   it('SiteHeader: mega menu apribile e chiudibile con Esc', async () => {
-    const { container } = render(<SiteHeader currentHref="/avvisi" />)
+    const { container } = render(<SiteHeader currentHref="/avvisi" utente={null} />)
     const toggle = screen.getByRole('button', { name: 'Menu' })
     expect(toggle.getAttribute('aria-expanded')).toBe('false')
     fireEvent.click(toggle)
@@ -97,8 +97,10 @@ describe('componenti accessibili', () => {
   })
 
   it('SiteHeader: etichette delle icone, una sola ricerca, chiusura con clic fuori', async () => {
-    const { container } = render(<SiteHeader currentHref="/" />)
-    expect(screen.getByRole('link', { name: 'Area riservata' }).getAttribute('href')).toBe('/area-riservata')
+    const { container } = render(<SiteHeader currentHref="/" utente={null} />)
+    expect(screen.getByRole('link', { name: 'Accedi' }).getAttribute('href')).toBe(
+      '/area-riservata',
+    )
     expect(screen.getByRole('link', { name: 'Cerca' }).getAttribute('href')).toBe('/cerca')
     const toggle = screen.getByRole('button', { name: 'Menu' })
     fireEvent.click(toggle)

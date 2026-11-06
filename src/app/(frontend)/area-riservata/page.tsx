@@ -9,7 +9,7 @@ import { payloadClient } from '@/lib/payload'
 export const dynamic = 'force-dynamic'
 
 /**
- * “Area riservata” dell'header: porta ognuno dove gli serve. Personale al pannello,
+ * “Accedi” dell'header: porta ognuno dove gli serve. Personale al pannello,
  * studenti alle proprie iscrizioni, chi non ha ancora un ruolo alla pagina di attesa.
  */
 export default async function AreaRiservata() {
