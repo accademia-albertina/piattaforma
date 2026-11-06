@@ -424,7 +424,7 @@ export interface Avviso {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Le scuole dell’Accademia, usate per filtrare avvisi e corsi.
+ * Le scuole dell’Accademia: pagina pubblica in /scuole, filtri di avvisi e corsi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "scuole".
@@ -438,11 +438,161 @@ export interface Scuola {
   sigla?: string | null;
   dipartimento?:
     ('arti-visive' | 'arti-della-progettazione' | 'arti-tecnologiche' | 'comunicazione-e-didattica') | null;
+  /**
+   * Due o tre frasi in apertura della pagina della scuola.
+   */
   descrizione?: string | null;
   /**
-   * Facoltativa: sostituisce la foto di repertorio nella scheda della scuola in home.
+   * Facoltativa: sostituisce la foto di repertorio nella scheda in home e nella pagina.
    */
   immagine?: (number | null) | Media;
+  video?: string | null;
+  triennio?: {
+    /**
+     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza biennio).
+     */
+    attivo?: boolean | null;
+    /**
+     * Es. Obiettivi formativi, Prospettive occupazionali, Requisiti di accesso, Prova di accesso, Prova finale.
+     */
+    sezioni?:
+      | {
+          titolo: string;
+          testo?: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Uno per coorte, es. “Immatricolati dall’A.A. 2025/2026”.
+     */
+    piani?:
+      | {
+          /**
+           * Es. “Bando di selezione – scadenza 18/12/2026” o “Graduatoria definitiva”.
+           */
+          nome: string;
+          file?: (number | null) | Media;
+          url?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  biennio?: {
+    /**
+     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza biennio).
+     */
+    attivo?: boolean | null;
+    /**
+     * Es. Obiettivi formativi, Prospettive occupazionali, Requisiti di accesso, Prova di accesso, Prova finale.
+     */
+    sezioni?:
+      | {
+          titolo: string;
+          testo?: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          } | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Uno per coorte, es. “Immatricolati dall’A.A. 2025/2026”.
+     */
+    piani?:
+      | {
+          /**
+           * Es. “Bando di selezione – scadenza 18/12/2026” o “Graduatoria definitiva”.
+           */
+          nome: string;
+          file?: (number | null) | Media;
+          url?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  coordinatoreDipartimento?: (number | null) | Docente;
+  /**
+   * Gli altri docenti si prendono dai loro profili (Docenti → Scuole): non serve elencarli qui.
+   */
+  coordinatoreScuola?: (number | null) | Docente;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Profili pubblici dei docenti, in /docenti e nelle schede dei corsi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "docenti".
+ */
+export interface Docente {
+  id: number;
+  nome: string;
+  cognome: string;
+  nomeCompleto?: string | null;
+  email?: string | null;
+  ruolo?: ('tempo-indeterminato' | 'tempo-determinato' | 'contratto') | null;
+  scuole?: (number | Scuola)[] | null;
+  /**
+   * Facoltativa. Formato quadrato o verticale.
+   */
+  foto?: (number | null) | Media;
+  /**
+   * Es. “Mercoledì 16–17, su appuntamento via email”. Se vuoto: su appuntamento.
+   */
+  ricevimento?: string | null;
+  biografia?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  cv?: (number | null) | Media;
+  /**
+   * Togli la spunta per chi non insegna più: il profilo resta per i corsi passati.
+   */
+  attivo?: boolean | null;
+  /**
+   * L’utente che può modificare questo profilo e il programma dei suoi corsi.
+   */
+  account?: (number | null) | User;
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
@@ -637,59 +787,6 @@ export interface Corso {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * Profili pubblici dei docenti, in /docenti e nelle schede dei corsi.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "docenti".
- */
-export interface Docente {
-  id: number;
-  nome: string;
-  cognome: string;
-  nomeCompleto?: string | null;
-  email?: string | null;
-  ruolo?: ('tempo-indeterminato' | 'tempo-determinato' | 'contratto') | null;
-  scuole?: (number | Scuola)[] | null;
-  /**
-   * Facoltativa. Formato quadrato o verticale.
-   */
-  foto?: (number | null) | Media;
-  /**
-   * Es. “Mercoledì 16–17, su appuntamento via email”. Se vuoto: su appuntamento.
-   */
-  ricevimento?: string | null;
-  biografia?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  cv?: (number | null) | Media;
-  /**
-   * Togli la spunta per chi non insegna più: il profilo resta per i corsi passati.
-   */
-  attivo?: boolean | null;
-  /**
-   * L’utente che può modificare questo profilo e il programma dei suoi corsi.
-   */
-  account?: (number | null) | User;
-  /**
-   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
-   */
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * Profili dei dottorandi, in /dottorati/albertina/dottorandi.
@@ -1366,6 +1463,49 @@ export interface ScuoleSelect<T extends boolean = true> {
   dipartimento?: T;
   descrizione?: T;
   immagine?: T;
+  video?: T;
+  triennio?:
+    | T
+    | {
+        attivo?: T;
+        sezioni?:
+          | T
+          | {
+              titolo?: T;
+              testo?: T;
+              id?: T;
+            };
+        piani?:
+          | T
+          | {
+              nome?: T;
+              file?: T;
+              url?: T;
+              id?: T;
+            };
+      };
+  biennio?:
+    | T
+    | {
+        attivo?: T;
+        sezioni?:
+          | T
+          | {
+              titolo?: T;
+              testo?: T;
+              id?: T;
+            };
+        piani?:
+          | T
+          | {
+              nome?: T;
+              file?: T;
+              url?: T;
+              id?: T;
+            };
+      };
+  coordinatoreDipartimento?: T;
+  coordinatoreScuola?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;

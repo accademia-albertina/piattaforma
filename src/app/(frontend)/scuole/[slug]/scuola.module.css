@@ -1,0 +1,193 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+/* Foto della scuola con l'icona ufficiale nell'angolo */
+.media {
+  position: relative;
+}
+
+.media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.icona {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  color: var(--color-heading);
+  background: var(--color-azzurro-200);
+}
+
+.dati {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-4) var(--space-5);
+  margin: 0 0 var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.dati dt,
+.persone dt {
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.dati dd,
+.persone dd {
+  margin: 0;
+}
+
+.azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.corpo {
+  display: grid;
+  gap: var(--space-7);
+  margin-top: var(--space-7);
+}
+
+@media (min-width: 64rem) {
+  .corpo {
+    grid-template-columns: minmax(0, 1fr) 18rem;
+    gap: var(--space-8, 4rem);
+  }
+}
+
+.principale {
+  min-width: 0;
+}
+
+.titoloSezione {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.livello {
+  margin: 0 0 var(--space-5);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.percorso {
+  max-width: 48rem;
+}
+
+.sezione + .sezione {
+  margin-top: var(--space-6);
+}
+
+.sezione h3 {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-xl);
+}
+
+/* Persone: pannello pieno a lato, come nella Vetrina tesi */
+.laterale {
+  align-self: start;
+  padding: var(--space-5);
+  background: var(--color-azzurro-200);
+}
+
+@media (min-width: 64rem) {
+  .laterale {
+    position: sticky;
+    top: var(--sticky-top);
+  }
+}
+
+.titoloLaterale {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-lg);
+}
+
+.persone {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.docenti {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.blocco {
+  margin-top: var(--space-7);
+}
+
+/* Invito all'iscrizione: pannello scuro, pulsante chiaro sopra */
+.invito {
+  display: grid;
+  gap: var(--space-4);
+  align-items: center;
+  margin-top: var(--space-7);
+  padding: var(--space-6);
+  color: var(--color-on-brand);
+  background: var(--color-ardesia-dark);
+}
+
+@media (min-width: 64rem) {
+  .invito {
+    grid-template-columns: 1fr 1fr auto;
+    gap: var(--space-6);
+  }
+}
+
+.invito h2 {
+  margin: 0;
+  color: inherit;
+  font-size: var(--font-size-2xl);
+}
+
+.invito p {
+  margin: 0;
+}
+
+.occhiello {
+  margin-bottom: var(--space-1) !important;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+}
+
+.testaSezione {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.avvisi {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

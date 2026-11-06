@@ -31,6 +31,7 @@ import { aggiornaLinkPagine } from './seed/link-pagine'
 import { importaPagineWp } from './seed/pagine-wp'
 import { importaAlbertinaPress } from './seed/albertina-press'
 import { completaDipartimentiScuole } from './seed/dipartimenti-scuole'
+import { importaContenutiScuole } from './seed/scuole-contenuti'
 import { affidaBiblioteca } from './seed/biblioteca'
 import { completaSommariPagine } from './seed/sommari-pagine'
 import { correggiTitoliMaiuscoli } from './seed/titoli-maiuscoli'
@@ -144,8 +145,8 @@ export default buildConfig({
       .then(() => importaAlbertinaPress(payload))
       .then(() => affidaBiblioteca(payload))
       .catch((e) =>
-      payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
-    )
+        payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
+      )
     // Gli avvisi del sito attuale sono più di mille: si importano in background,
     // senza ritardare l'avvio (l'hosting controlla /salute dopo pochi secondi).
     void importaAvvisiWp(payload).catch((e) =>
@@ -160,9 +161,12 @@ export default buildConfig({
           `Importazione albo e trasparenza non riuscita: ${(e as Error).message}`,
         ),
       )
-    void importaDocentiWp(payload).catch((e) =>
-      payload.logger.error(`Importazione profili docenti non riuscita: ${(e as Error).message}`),
-    )
+    // Dopo i profili docenti: i coordinatori delle scuole si collegano per email
+    void importaDocentiWp(payload)
+      .then(() => importaContenutiScuole(payload))
+      .catch((e) =>
+        payload.logger.error(`Importazione profili docenti non riuscita: ${(e as Error).message}`),
+      )
   },
   plugins: [],
 })

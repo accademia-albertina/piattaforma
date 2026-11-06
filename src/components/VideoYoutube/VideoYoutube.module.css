@@ -1,0 +1,67 @@
+.video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--color-footer);
+}
+
+.video :is(img, iframe) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+
+.play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: var(--color-on-brand);
+  font: inherit;
+  background: linear-gradient(rgb(18 25 29 / 0.25), rgb(18 25 29 / 0.55));
+  border: 0;
+  cursor: pointer;
+}
+
+.icona {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.play:hover .icona {
+  transform: scale(1.06);
+}
+
+.play:focus-visible {
+  outline: none;
+  box-shadow: inset var(--focus-ring);
+}
+
+.testo {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.5);
+}
+
+.nota {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-2);
+  margin: 0;
+  color: var(--color-on-brand);
+  font-size: var(--font-size-2xs);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.6);
+}

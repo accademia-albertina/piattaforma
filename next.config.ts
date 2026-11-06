@@ -15,6 +15,8 @@ const contentSecurityPolicy = [
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
+  // Video delle scuole: solo YouTube senza cookie, caricato al clic (VideoYoutube)
+  'frame-src https://www.youtube-nocookie.com',
   "font-src 'self'",
   "connect-src 'self'",
   "object-src 'none'",

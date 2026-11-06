@@ -1,0 +1,67 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+.azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.sezione {
+  margin-top: var(--space-7);
+}
+
+.titoloSezione {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* Le tappe del percorso: pannelli pieni affiancati, senza numeri decorativi */
+.percorso {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.percorso > li {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  background: var(--color-azzurro-200);
+}
+
+.termine {
+  margin: 0 0 var(--space-2);
+  color: var(--color-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.spiegazione {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .griglia {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 64rem) {
+  .griglia {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
