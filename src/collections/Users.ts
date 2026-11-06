@@ -1,6 +1,7 @@
-import type { Access, CollectionConfig, FieldAccess } from 'payload'
+import { APIError, type Access, type CollectionConfig, type FieldAccess } from 'payload'
 
 import { endpointsGoogle } from '@/auth/endpoints'
+import { ssoAttivo } from '@/auth/google'
 import { ROLES, ROLE_LABELS, canAccessBackend, defaultRolesForEmail, isAdmin } from '@/access/roles'
 
 const adminOnly: Access = ({ req }) => isAdmin(req.user)
@@ -40,6 +41,21 @@ export const Users: CollectionConfig = {
     delete: adminOnly,
   },
   hooks: {
+    // Con Google configurato, la password vale solo per gli admin (accesso di emergenza).
+    // L'accesso con Google non passa da qui: apre la sessione direttamente (src/auth/sessione.ts).
+    beforeLogin: [
+      ({ user }) => {
+        if (ssoAttivo() && !isAdmin(user)) {
+          throw new APIError(
+            'Usa “Accedi con Google” con il tuo account @albertina.academy.',
+            403,
+            { motivo: 'solo-google' }, // con data il messaggio arriva al modulo di accesso
+            true,
+          )
+        }
+        return user
+      },
+    ],
     beforeChange: [
       async ({ data, operation, req }) => {
         if (operation !== 'create') return data

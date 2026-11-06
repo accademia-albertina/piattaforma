@@ -138,6 +138,18 @@ html[data-theme='dark'] .logo-accesso {
     font-size: 0.875rem;
     border-top: 1px solid var(--theme-elevation-150);
   }
+
+  &__emergenza {
+    display: inline-block;
+    margin-top: calc(var(--base) * 1.5);
+    color: var(--theme-elevation-650);
+    font-size: 0.875rem;
+  }
+}
+
+// Solo Google: il modulo di Payload con la password non si mostra (vedi PrimaDelLogin)
+body:has(.prima-del-login--solo-google) form.login__form {
+  display: none;
 }
 
 // Intestazione dei blocchi delle pagine (componente BlockLabel).

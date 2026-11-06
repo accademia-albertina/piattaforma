@@ -2,7 +2,7 @@
 import { getPayload, Payload } from 'payload'
 import config from '@/payload.config'
 
-import { afterAll, beforeAll, describe, expect, it } from 'vitest'
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest'
 
 import { abbinaDocente, inAttesa, trovaOCreaUtente } from '@/auth/endpoints'
 import { apriSessione } from '@/auth/sessione'
@@ -122,5 +122,35 @@ describe('Accesso con Google: account e ruoli', () => {
     const { user } = await payload.auth({ headers: new Headers({ cookie: coppia }) })
     expect(user?.email).toBe(DOCENTE)
     expect((user as User).roles).toEqual(['docente'])
+  })
+
+  it('con Google attivo la password vale solo per gli amministratori', async () => {
+    const redazione = await payload.create({
+      collection: 'users',
+      data: { email: 'pw.sso-prova@albertina.academy', password: PASSWORD, roles: ['redazione'] },
+    })
+    vi.stubEnv('GOOGLE_CLIENT_ID', 'id')
+    vi.stubEnv('GOOGLE_CLIENT_SECRET', 'segreto')
+    try {
+      await expect(
+        payload.login({
+          collection: 'users',
+          data: { email: redazione.email, password: PASSWORD },
+        }),
+      ).rejects.toThrow(/Accedi con Google/)
+      const ok = await payload.login({
+        collection: 'users',
+        data: { email: admin.email, password: PASSWORD },
+      })
+      expect(ok.token).toBeTruthy()
+    } finally {
+      vi.unstubAllEnvs()
+    }
+    // Senza Google configurato (sviluppo, anteprima di oggi) la password funziona per tutti
+    const senza = await payload.login({
+      collection: 'users',
+      data: { email: redazione.email, password: PASSWORD },
+    })
+    expect(senza.token).toBeTruthy()
   })
 })

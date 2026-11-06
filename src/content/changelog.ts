@@ -34,7 +34,7 @@ export const CHANGELOG: Versione[] = [
       {
         tipo: 'nuovo',
         testo:
-          'Pulsante “Accedi con Google” per i soli account @albertina.academy. Si attiva quando ci sono le credenziali Google; fino ad allora resta l’accesso con email e password.',
+          'Pulsante “Accedi con Google” per i soli account @albertina.academy. Con Google attivo il modulo con la password sparisce: resta solo come accesso di emergenza per gli amministratori.',
       },
       {
         tipo: 'nuovo',

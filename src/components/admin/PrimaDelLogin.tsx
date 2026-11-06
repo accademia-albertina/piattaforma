@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { ssoAttivo } from '@/auth/google'
 
 /** Messaggi per gli errori dell'accesso con Google (?errore=… sulla pagina di accesso). */
@@ -21,8 +23,10 @@ export default function PrimaDelLogin({ searchParams }: Props) {
       ? ERRORI_ACCESSO[codice]
       : undefined
   const google = ssoAttivo()
+  // Con Google attivo il modulo con la password è nascosto: resta solo per gli admin, in emergenza
+  const conPassword = !google || searchParams?.password === '1'
   return (
-    <div className="prima-del-login">
+    <div className={`prima-del-login${conPassword ? '' : ' prima-del-login--solo-google'}`}>
       <p className="prima-del-login__occhiello">Area riservata</p>
       <h1 className="prima-del-login__titolo">Accedi</h1>
       <p className="prima-del-login__testo">
@@ -59,9 +63,15 @@ export default function PrimaDelLogin({ searchParams }: Props) {
             </svg>
             Accedi con Google
           </a>
-          <p className="prima-del-login__oppure">
-            Oppure con email e password (account di servizio)
-          </p>
+          {conPassword ? (
+            <p className="prima-del-login__oppure">
+              Accesso di emergenza con email e password, solo per gli amministratori.
+            </p>
+          ) : (
+            <Link className="prima-del-login__emergenza" href="/admin/login?password=1">
+              Accesso di emergenza (solo amministratori)
+            </Link>
+          )}
         </>
       ) : null}
     </div>

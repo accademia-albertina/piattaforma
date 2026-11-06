@@ -68,7 +68,7 @@ Si entra solo con un account Google Workspace `@albertina.academy` (flusso OAuth
 - **docenti**: se l’email coincide con un profilo attivo in *Docenti* non ancora collegato, ruolo Docente automatico e profilo collegato;
 - **tutti gli altri** (personale, caselle d’ufficio): nessun ruolo, pagina `/accesso-in-attesa`; gli amministratori li trovano in *Da abilitare* sulla dashboard e assegnano il ruolo.
 
-Email e password restano per gli account di servizio e finché Google non è configurato.
+Con Google configurato il modulo con la password è nascosto (link “Accesso di emergenza”, `/admin/login?password=1`) e il server accetta la password solo dagli amministratori (`beforeLogin` in `Users`). Senza le variabili Google la password funziona per tutti, come in sviluppo.
 
 Configurazione (una volta, da un account dell’organizzazione `albertina.academy` in [Google Cloud Console](https://console.cloud.google.com)):
 
