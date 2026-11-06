@@ -1,3 +1,4 @@
+import { nascostaA } from '@/access/pannello'
 import type { CollectionConfig } from 'payload'
 
 import { soloCalendari } from '@/access/calendari'
@@ -16,6 +17,7 @@ export const Calendari: CollectionConfig = {
   labels: { singular: 'Calendario', plural: 'Calendari' },
   typescript: { interface: 'Calendario' },
   admin: {
+    hidden: nascostaA('calendari'),
     useAsTitle: 'titolo',
     description:
       'Orario delle lezioni, esami e presentazioni: si compilano a tabella, il sito li mostra con filtri e li fa stampare.',

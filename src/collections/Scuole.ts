@@ -1,3 +1,4 @@
+import { nascostaA } from '@/access/pannello'
 import type { Access, CollectionConfig, GroupField } from 'payload'
 
 import { hasRole } from '@/access/roles'
@@ -78,13 +79,14 @@ const percorso = (name: 'triennio' | 'biennio', label: string, titolo: string): 
   ],
 })
 
-const redazione: Access = ({ req }) => hasRole(req.user, 'admin', 'vicedirezione', 'redazione')
+const gestisceScuole: Access = ({ req }) => hasRole(req.user, 'admin', 'vicedirezione')
 
 export const Scuole: CollectionConfig = {
   slug: 'scuole',
   labels: { singular: 'Scuola', plural: 'Scuole' },
   typescript: { interface: 'Scuola' },
   admin: {
+    hidden: nascostaA('scuole'),
     useAsTitle: 'nome',
     description: 'Le scuole dell’Accademia: pagina pubblica in /scuole, filtri di avvisi e corsi.',
     defaultColumns: ['nome', 'sigla', 'dipartimento'],
@@ -93,8 +95,8 @@ export const Scuole: CollectionConfig = {
   defaultSort: 'nome',
   access: {
     read: () => true,
-    create: redazione,
-    update: redazione,
+    create: gestisceScuole,
+    update: gestisceScuole,
     delete: ({ req }) => hasRole(req.user, 'admin'),
   },
   fields: [

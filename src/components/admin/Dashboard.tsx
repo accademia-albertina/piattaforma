@@ -1,10 +1,22 @@
-import type { AdminViewServerProps, CollectionSlug, GlobalSlug, PayloadRequest } from 'payload'
+import type {
+  AdminViewServerProps,
+  CollectionSlug,
+  GlobalSlug,
+  PayloadRequest,
+  Where,
+} from 'payload'
 
 import { Gutter } from '@payloadcms/ui'
-import { Plus } from 'lucide-react'
+import { BookOpen, Plus, UserRound } from 'lucide-react'
 import Link from 'next/link'
 
-import { ROLE_LABELS, isAdmin, type Role } from '@/access/roles'
+import {
+  filtroPannello,
+  vedeSezione,
+  vedeTutteLeModifiche,
+  type SezionePannello,
+} from '@/access/pannello'
+import { ROLE_LABELS, hasRole, isAdmin, type Role } from '@/access/roles'
 import { CHANGELOG } from '@/content/changelog'
 
 import { ICONE_SEZIONI } from './icone'
@@ -12,7 +24,7 @@ import { ICONE_SEZIONI } from './icone'
 import styles from './Dashboard.module.css'
 
 type Sezione = {
-  slug: string
+  slug: SezionePannello
   tipo: 'collezione' | 'globale'
   /** Permesso che serve per vedere la scheda (il menu e gli utenti si leggono anche senza gestirli). */
   serve: 'read' | 'update' | 'create'
@@ -28,7 +40,11 @@ const SEZIONI: Sezione[] = [
   { slug: 'corsi', tipo: 'collezione', serve: 'update' },
   { slug: 'docenti', tipo: 'collezione', serve: 'update' },
   { slug: 'media', tipo: 'collezione', serve: 'read', nuovo: 'Carica un file' },
+  { slug: 'dottorandi', tipo: 'collezione', serve: 'update' },
+  { slug: 'calendari', tipo: 'collezione', serve: 'update' },
   { slug: 'scuole', tipo: 'collezione', serve: 'update' },
+  { slug: 'albo', tipo: 'collezione', serve: 'update', nuovo: 'Nuovo atto all’Albo' },
+  { slug: 'trasparenza', tipo: 'collezione', serve: 'update' },
   { slug: 'navigazione', tipo: 'globale', serve: 'update' },
   { slug: 'users', tipo: 'collezione', serve: 'create' },
 ]
@@ -63,10 +79,13 @@ export default async function Dashboard({
   const permessiCollezioni = permissions?.collections ?? {}
   const permessiGlobali = permissions?.globals ?? {}
 
+  // Si vede solo ciò che si può modificare (tabella in src/access/pannello.ts)
   const visibili = SEZIONI.filter((s) =>
-    s.tipo === 'collezione'
-      ? permessiCollezioni[s.slug]?.[s.serve]
-      : s.serve !== 'create' && permessiGlobali[s.slug]?.[s.serve],
+    !vedeSezione(user, s.slug)
+      ? false
+      : s.tipo === 'collezione'
+        ? permessiCollezioni[s.slug]?.[s.serve]
+        : s.serve !== 'create' && permessiGlobali[s.slug]?.[s.serve],
   ).map((s) => {
     const config =
       s.tipo === 'collezione'
@@ -88,7 +107,14 @@ export default async function Dashboard({
     visibili.map(async (s) => {
       if (s.tipo !== 'collezione') return { totale: null, bozze: null }
       const collection = s.slug as CollectionSlug
-      const { totalDocs: totale } = await payload.count({ collection, req, overrideAccess: false })
+      // Docente e uffici contano solo i propri elementi o le pagine affidate
+      const filtro = filtroPannello(user, s.slug)
+      const { totalDocs: totale } = await payload.count({
+        collection,
+        req,
+        overrideAccess: false,
+        ...(filtro ? { where: filtro } : {}),
+      })
       const conBozze = CON_BOZZE.some((c) => c.slug === s.slug)
       const bozze = conBozze
         ? (
@@ -96,7 +122,9 @@ export default async function Dashboard({
               collection,
               req,
               overrideAccess: false,
-              where: { _status: { equals: 'draft' } },
+              where: filtro
+                ? { and: [filtro, { _status: { equals: 'draft' } }] }
+                : { _status: { equals: 'draft' } },
             })
           ).totalDocs
         : null
@@ -106,8 +134,15 @@ export default async function Dashboard({
 
   const recenti = (
     await Promise.all(
-      CON_BOZZE.filter((c) => permessiCollezioni[c.slug]?.read).map(async ({ slug, tipo }) => {
+      CON_BOZZE.filter((c) => vedeSezione(user, c.slug)).map(async ({ slug, tipo }) => {
+        // Admin, vicedirezione e redazione vedono tutte le modifiche; gli altri solo le proprie
+        const proprie: Record<(typeof CON_BOZZE)[number]['slug'], Where> = {
+          avvisi: { autore: { equals: user?.id } },
+          pagine: filtroPannello(user, 'pagine') ?? {},
+          corsi: filtroPannello(user, 'corsi') ?? {},
+        }
         const { docs } = await payload.find({
+          ...(vedeTutteLeModifiche(user) ? {} : { where: proprie[slug] }),
           collection: slug,
           req,
           overrideAccess: false,
@@ -142,6 +177,21 @@ export default async function Dashboard({
   const nome = (user as { nome?: string } | null)?.nome || user?.email
   const ruoli = ((user as { roles?: Role[] } | null)?.roles ?? []).map((r) => ROLE_LABELS[r])
   const azioni = visibili.filter((s) => s.nuovo && permessiCollezioni[s.slug]?.create)
+
+  // Il docente arriva subito al suo profilo e ai suoi corsi
+  const docente = hasRole(user, 'docente') && !vedeTutteLeModifiche(user)
+  const profilo = docente
+    ? (
+        await payload.find({
+          collection: 'docenti',
+          where: { account: { equals: user?.id } },
+          depth: 0,
+          limit: 1,
+          select: { nomeCompleto: true },
+          overrideAccess: true,
+        })
+      ).docs[0]
+    : null
   const urlSezione = (s: Sezione) =>
     s.tipo === 'collezione'
       ? `${admin}/collections/${s.slug}`
@@ -155,9 +205,11 @@ export default async function Dashboard({
           {ruoli.length > 0 && <p className={styles.ruoli}>{ruoli.join(' · ')}</p>}
         </div>
         <div className={styles.collegamenti}>
-          <Link className={styles.sito} href={`${admin}/changelog`}>
-            Changelog <span className={styles.versione}>v{CHANGELOG[0].versione}</span>
-          </Link>
+          {vedeSezione(user, 'changelog') && (
+            <Link className={styles.sito} href={`${admin}/changelog`}>
+              Changelog <span className={styles.versione}>v{CHANGELOG[0].versione}</span>
+            </Link>
+          )}
         </div>
       </div>
 
@@ -186,12 +238,26 @@ export default async function Dashboard({
         </section>
       )}
 
-      {azioni.length > 0 && (
+      {(azioni.length > 0 || docente) && (
         <section aria-labelledby="azioni-rapide" className={styles.sezione}>
           <h2 id="azioni-rapide" className={styles.titoloSezione}>
             Azioni rapide
           </h2>
           <ul className={styles.azioni}>
+            {profilo && (
+              <li>
+                <Link className={styles.azione} href={`${admin}/collections/docenti/${profilo.id}`}>
+                  <UserRound size={18} strokeWidth={1.75} aria-hidden /> Il mio profilo
+                </Link>
+              </li>
+            )}
+            {docente && (
+              <li>
+                <Link className={styles.azione} href={`${admin}/collections/corsi`}>
+                  <BookOpen size={18} strokeWidth={1.75} aria-hidden /> I miei corsi
+                </Link>
+              </li>
+            )}
             {azioni.map((s) => (
               <li key={s.slug}>
                 <Link className={styles.azione} href={`${urlSezione(s)}/create`}>

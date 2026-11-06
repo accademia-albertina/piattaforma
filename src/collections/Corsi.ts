@@ -1,3 +1,4 @@
+import { filtroElenco, nascostaA } from '@/access/pannello'
 import type { CollectionConfig } from 'payload'
 
 import {
@@ -44,6 +45,8 @@ export const Corsi: CollectionConfig = {
   labels: { singular: 'Corso', plural: 'Corsi' },
   typescript: { interface: 'Corso' },
   admin: {
+    hidden: nascostaA('corsi'),
+    baseFilter: filtroElenco('corsi'),
     useAsTitle: 'titolo',
     description:
       'Corsi e programmi per anno accademico. Vicedirezione e admin creano i corsi e assegnano i docenti; il docente aggiorna il programma.',

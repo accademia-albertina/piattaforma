@@ -1,3 +1,4 @@
+import { nascostaA } from '@/access/pannello'
 import type { CollectionConfig } from 'payload'
 
 import { soloTrasparenza } from '@/access/albo'
@@ -17,6 +18,7 @@ export const Trasparenza: CollectionConfig = {
   labels: { singular: 'Sottosezione', plural: 'Amministrazione trasparente' },
   typescript: { interface: 'Trasparenza' },
   admin: {
+    hidden: nascostaA('trasparenza'),
     useAsTitle: 'titolo',
     description:
       'Sottosezioni dell’Amministrazione trasparente. Aggiorna i documenti qui: la data di aggiornamento sul sito cambia da sola.',

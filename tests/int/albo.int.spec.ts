@@ -60,14 +60,14 @@ describe('Albo online e trasparenza: permessi', () => {
       overrideAccess: false,
     })
 
-  it('amministrativo, segreteria e vicedirezione pubblicano nell’Albo', async () => {
+  it('amministrativo e vicedirezione pubblicano nell’Albo', async () => {
     expect(await rifiutato(atto(utenti.amministrativo, 'Bando amministrativo'))).toBe(false)
-    expect(await rifiutato(atto(utenti.segreteria, 'Bando segreteria'))).toBe(false)
     expect(await rifiutato(atto(utenti.vicedirezione, 'Bando vicedirezione'))).toBe(false)
   })
 
-  it('redazione e docenti non toccano l’Albo', async () => {
+  it('redazione, segreteria e docenti non toccano l’Albo', async () => {
     expect(await rifiutato(atto(utenti.redazione, 'No'))).toBe(true)
+    expect(await rifiutato(atto(utenti.segreteria, 'No'))).toBe(true)
     expect(await rifiutato(atto(utenti.docente, 'No'))).toBe(true)
     const { docs } = await payload.find({ collection: 'albo', limit: 1 })
     expect(
