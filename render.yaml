@@ -34,6 +34,11 @@ services:
         sync: false
       - key: ANTEPRIMA_PASSWORD
         sync: false
+      # Accesso con Google (vedi README): senza, resta solo email e password.
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
 
 databases:
   - name: albertina-anteprima-db

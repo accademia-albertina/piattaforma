@@ -10,7 +10,7 @@ import { generatePayloadCookie } from 'payload/shared'
 
 import type { User } from '@/payload-types'
 
-export async function apriSessione(payload: Payload, utente: User, req: PayloadRequest) {
+export async function apriSessione(payload: Payload, utente: User, req?: PayloadRequest) {
   const collectionConfig = payload.collections.users.config
   const { auth } = collectionConfig
   const fieldsToSignArgs: Parameters<typeof getFieldsToSign>[0] = {

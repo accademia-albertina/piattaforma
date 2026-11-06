@@ -24,6 +24,7 @@ import {
 import { apriSessione } from './sessione'
 
 const DIECI_MINUTI = 10 * 60
+export const PAGINA_ATTESA = '/accesso-in-attesa'
 
 function origine(req: PayloadRequest) {
   return process.env.NEXT_PUBLIC_SERVER_URL || new URL(req.url ?? 'http://localhost').origin
@@ -42,8 +43,58 @@ const errore = (req: PayloadRequest, motivo: string) =>
     `${COOKIE_STATO}=; Path=/api/users/google; HttpOnly; SameSite=Lax; Max-Age=0${sicuro()}`,
   ])
 
+/**
+ * Chi non ha ancora un ruolo ed è nell'elenco Docenti (stessa email, profilo libero) diventa
+ * Docente e viene collegato al proprio profilo. Il resto del personale resta in attesa:
+ * il ruolo lo assegna un amministratore.
+ */
+export async function abbinaDocente(payload: Payload, utente: User, req?: PayloadRequest) {
+  if (utente.roles?.length) return utente
+  const { docs } = await payload.find({
+    collection: 'docenti',
+    where: {
+      and: [
+        { email: { equals: utente.email.toLowerCase() } },
+        { attivo: { equals: true } },
+        { account: { exists: false } },
+      ],
+    },
+    limit: 1,
+    depth: 0,
+    overrideAccess: true,
+    req,
+  })
+  const docente = docs[0]
+  if (!docente) return utente
+  await payload.update({
+    collection: 'docenti',
+    id: docente.id,
+    data: { account: utente.id },
+    overrideAccess: true,
+    req,
+  })
+  return (await payload.update({
+    collection: 'users',
+    id: utente.id,
+    data: { roles: ['docente'] },
+    overrideAccess: true,
+    req,
+  })) as User
+}
+
+/** Senza ruoli: account creato ma non ancora abilitato da un amministratore. */
+export const inAttesa = (utente: Pick<User, 'roles'>) => !utente.roles?.length
+
 /** Trova l'utente con quell'email o lo crea; i ruoli iniziali vengono dall'email (vedi Users). */
-export async function trovaOCreaUtente(payload: Payload, profilo: ProfiloGoogle, req?: PayloadRequest) {
+export async function trovaOCreaUtente(
+  payload: Payload,
+  profilo: ProfiloGoogle,
+  req?: PayloadRequest,
+) {
+  return abbinaDocente(payload, await trovaOCreaSemplice(payload, profilo, req), req)
+}
+
+async function trovaOCreaSemplice(payload: Payload, profilo: ProfiloGoogle, req?: PayloadRequest) {
   const { docs } = await payload.find({
     collection: 'users',
     where: { email: { equals: profilo.email } },
@@ -59,7 +110,10 @@ export async function trovaOCreaUtente(payload: Payload, profilo: ProfiloGoogle,
       return (await payload.update({
         collection: 'users',
         id: esistente.id,
-        data: { nome: esistente.nome || profilo.nome, cognome: esistente.cognome || profilo.cognome },
+        data: {
+          nome: esistente.nome || profilo.nome,
+          cognome: esistente.cognome || profilo.cognome,
+        },
         overrideAccess: true,
         req,
       })) as User
@@ -89,12 +143,9 @@ export const endpointsGoogle: Endpoint[] = [
       const dopo = destinazioneSicura(new URL(req.url ?? '', 'http://x').searchParams.get('dopo'))
       const s = nuovoStato(dopo)
       const valore = Buffer.from(JSON.stringify(s)).toString('base64url')
-      return vai(
-        urlAutorizzazione({ ...s, redirectUri: origine(req) + PERCORSO_CALLBACK }),
-        [
-          `${COOKIE_STATO}=${valore}; Path=/api/users/google; HttpOnly; SameSite=Lax; Max-Age=${DIECI_MINUTI}${sicuro()}`,
-        ],
-      )
+      return vai(urlAutorizzazione({ ...s, redirectUri: origine(req) + PERCORSO_CALLBACK }), [
+        `${COOKIE_STATO}=${valore}; Path=/api/users/google; HttpOnly; SameSite=Lax; Max-Age=${DIECI_MINUTI}${sicuro()}`,
+      ])
     },
   },
   {
@@ -131,8 +182,9 @@ export const endpointsGoogle: Endpoint[] = [
         const utente = await trovaOCreaUtente(req.payload, profilo, req)
         const cookie = await apriSessione(req.payload, utente, req)
         let dopo = destinazioneSicura(salvato.dopo)
-        // Chi non ha accesso al pannello (es. studenti) torna al sito
-        if (dopo.startsWith('/admin') && !canAccessBackend(utente)) dopo = '/'
+        // Personale non ancora abilitato: pagina di attesa. Chi non ha il pannello (studenti) torna al sito.
+        if (inAttesa(utente)) dopo = PAGINA_ATTESA
+        else if (dopo.startsWith('/admin') && !canAccessBackend(utente)) dopo = '/'
         return vai(origine(req) + dopo, [
           cookie,
           `${COOKIE_STATO}=; Path=/api/users/google; HttpOnly; SameSite=Lax; Max-Age=0${sicuro()}`,

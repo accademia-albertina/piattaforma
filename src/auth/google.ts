@@ -9,7 +9,7 @@ import { createHash, randomBytes } from 'node:crypto'
 
 import { createRemoteJWKSet, jwtVerify } from 'jose'
 
-import { ALLOWED_DOMAIN, classifyEmail } from '@/access/roles'
+import { ALLOWED_DOMAIN } from '@/access/roles'
 
 const AUTORIZZA = 'https://accounts.google.com/o/oauth2/v2/auth'
 const TOKEN = 'https://oauth2.googleapis.com/token'
@@ -82,7 +82,8 @@ export function profiloDaClaims(claims: Record<string, unknown>): ProfiloGoogle 
   if (claims.hd !== ALLOWED_DOMAIN || !email.endsWith(`@${ALLOWED_DOMAIN}`)) {
     throw new AccessoNegato('dominio')
   }
-  if (claims.email_verified !== true || !classifyEmail(email)) throw new AccessoNegato('email')
+  // Anche caselle d'ufficio (biblioteca@, segreteria@…): senza ruolo restano in attesa di un admin
+  if (claims.email_verified !== true) throw new AccessoNegato('email')
   return {
     email,
     nome: typeof claims.given_name === 'string' ? claims.given_name : undefined,
@@ -91,7 +92,11 @@ export function profiloDaClaims(claims: Record<string, unknown>): ProfiloGoogle 
 }
 
 /** Scambia il codice di Google con i token e restituisce il profilo verificato. */
-export async function scambiaCodice(o: { codice: string; verificatore: string; redirectUri: string }) {
+export async function scambiaCodice(o: {
+  codice: string
+  verificatore: string
+  redirectUri: string
+}) {
   const r = await fetch(TOKEN, {
     method: 'POST',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
