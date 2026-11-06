@@ -205,7 +205,7 @@ export const Appelli: CollectionConfig = {
           timeIntervals: 30,
         },
         description:
-          'Facoltativo. Vale solo se è dopo la chiusura fissata dalla segreteria; le iscrizioni chiudono comunque il giorno prima dell’esame.',
+          'Facoltativo. Vale solo se è dopo la chiusura fissata dalla segreteria; le iscrizioni chiudono comunque una settimana prima dell’esame.',
       },
     },
     {

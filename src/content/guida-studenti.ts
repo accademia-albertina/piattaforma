@@ -38,7 +38,7 @@ export const GUIDA_STUDENTI: VoceGuidaStudenti[] = [
     titolo: 'Iscriversi a un esame',
     passi: [
       'Apri “Esami e iscrizioni” (da “Orari e calendari”) o la pagina del corso: trovi gli appelli con data, ora, aula e commissione.',
-      'Premi “Iscriviti all’appello” mentre le iscrizioni della sessione sono aperte; chiudono comunque alle 23:59 del giorno prima dell’esame.',
+      'Premi “Iscriviti all’appello” mentre le iscrizioni della sessione sono aperte; chiudono comunque una settimana prima dell’esame.',
       'Per ogni corso puoi essere iscritto a un solo appello per sessione: per cambiarlo annulla prima l’iscrizione.',
       'Gli esami a cui sei iscritto compaiono qui, in “I tuoi esami”.',
     ],

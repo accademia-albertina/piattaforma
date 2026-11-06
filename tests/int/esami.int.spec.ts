@@ -229,18 +229,32 @@ describe('Appelli e iscrizioni agli esami', () => {
     })
   })
 
-  it('le iscrizioni chiudono il giorno dell’esame anche con la finestra aperta', async () => {
-    const ieri = await payload.create({
+  it('le iscrizioni chiudono una settimana prima dell’esame anche con la finestra aperta', async () => {
+    const vicino = await payload.create({
       collection: 'appelli',
       data: {
         corso: corsoAltro.id,
         annoAccademico: '2026/2027',
         sessione: 'invernale',
-        data: fra(-0.5),
+        data: fra(5),
         ora: '9:00',
       } as Appello,
     })
-    expect(await rifiutato(iscrivi(studenteT, ieri))).toBe(true)
+    expect(await rifiutato(iscrivi(studenteT, vicino))).toBe(true)
+  })
+})
+
+describe('limiteIscrizioniAppello', () => {
+  it('chiude alle 23:59 di Roma una settimana prima del giorno d’esame', async () => {
+    const { limiteIscrizioniAppello } = await import('@/lib/iscrizioni')
+    // Esame mercoledì 17 febbraio 2027 → chiusura martedì 9 alle 23:59 (UTC+1)
+    expect(limiteIscrizioniAppello('2027-02-17T11:00:00.000Z').toISOString()).toBe(
+      '2027-02-09T22:59:00.000Z',
+    )
+    // Esame il 2 aprile 2027 (ora legale dal 28 marzo): chiusura 25 marzo alle 23:59 (UTC+1)
+    expect(limiteIscrizioniAppello('2027-04-02T10:00:00.000Z').toISOString()).toBe(
+      '2027-03-25T22:59:00.000Z',
+    )
   })
 })
 

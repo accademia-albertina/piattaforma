@@ -63,6 +63,15 @@ export async function finestraDellaSessione(
   return docs[0] ?? null
 }
 
+/** Giorni pieni tra la chiusura delle iscrizioni e l'esame (decisione di Fede, 2026-11-06). */
+export const GIORNI_CHIUSURA_ESAMI = 7
+
+/** Ultimo minuto utile (ora di Roma) per iscriversi a un esame che si tiene nel giorno `data`. */
+export function limiteIscrizioniAppello(data: string | Date): Date {
+  const settimanaPrima = new Date(new Date(data).getTime() - GIORNI_CHIUSURA_ESAMI * 86_400_000)
+  return new Date(inizioGiornoRoma(settimanaPrima).getTime() - 60_000)
+}
+
 type AppelloPerFinestra = Pick<
   Appello,
   'annoAccademico' | 'sessione' | 'prorogaIscrizioni' | 'data'
@@ -70,7 +79,8 @@ type AppelloPerFinestra = Pick<
 
 /**
  * Stato delle iscrizioni a un appello adesso. Oltre alla finestra della sessione (e alla proroga
- * del docente), le iscrizioni chiudono comunque alle 23:59 del giorno prima dell'esame.
+ * del docente), le iscrizioni chiudono comunque una settimana prima dell'esame: alle 23:59
+ * dell'ottavo giorno precedente (esame mercoledì 17 → chiusura martedì 9 alle 23:59).
  */
 export async function iscrizioniDellAppello(
   payload: Payload,
@@ -80,8 +90,7 @@ export async function iscrizioniDellAppello(
 ) {
   const finestra = await finestraDellaSessione(payload, appello, req)
   const stato = statoFinestra(finestra, appello.prorogaIscrizioni, ora)
-  // Ultimo minuto del giorno prima dell'esame, ora di Roma
-  const limite = new Date(inizioGiornoRoma(appello.data).getTime() - 60_000)
+  const limite = limiteIscrizioniAppello(appello.data)
   if (stato.chiusura && limite < stato.chiusura) {
     stato.chiusura = limite
     if (ora > limite) stato.stato = 'chiusa'

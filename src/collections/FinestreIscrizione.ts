@@ -146,7 +146,7 @@ export const FinestreIscrizione: CollectionConfig = {
             width: '50%',
             date: DATA_E_ORA,
             description:
-              'Da qui gli studenti non si iscrivono e non annullano più. Il docente può prolungarla sul suo corso o appello; per gli esami chiude comunque il giorno prima dell’appello.',
+              'Da qui gli studenti non si iscrivono e non annullano più. Il docente può prolungarla sul suo corso o appello; per gli esami chiude comunque una settimana prima di ogni appello.',
           },
         },
       ],

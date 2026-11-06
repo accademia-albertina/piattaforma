@@ -141,7 +141,7 @@ export const GUIDE: Guida[] = [
     passi: [
       'In “Appelli d’esame” trovi gli appelli dei tuoi corsi: aprine uno e scorri fino a “Studenti iscritti”.',
       'Per un turno in più premi “Nuovo appello”, scegli il corso e indica sessione, data, ora, aula e commissione.',
-      'Per tenere aperte le iscrizioni più a lungo compila “Prolunga le iscrizioni fino al”: chiudono comunque il giorno prima dell’esame.',
+      'Per tenere aperte le iscrizioni più a lungo compila “Prolunga le iscrizioni fino al”: chiudono comunque una settimana prima dell’esame.',
       'In “Iscrizioni agli esami” trovi tutti i tuoi iscritti in un solo elenco.',
     ],
     consigli: [
