@@ -27,6 +27,24 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.20.0',
+    data: '2026-11-06',
+    titolo: 'Design System',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nuova pagina /design-system, linkata nel footer: logo, logo in negativo e stemma, le icone delle dieci scuole (anche con sfondo) da scaricare una per una o tutte insieme in un file ZIP.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nella stessa pagina i colori con il loro uso e il contrasto del testo, la scala dei caratteri in Albert Sans e le regole per pulsanti e link. I valori sono gli stessi usati dal sito.',
+      },
+    ],
+    pr: [51],
+  },
+  {
     versione: '0.19.0',
     data: '2026-11-06',
     titolo: 'Albertina Press e ruolo Biblioteca',

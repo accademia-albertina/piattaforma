@@ -163,4 +163,5 @@ export const MENU_LEGALE: VoceMenu[] = [
   { label: 'Note legali', href: '/termini-e-condizioni' },
   { label: 'Dichiarazione di accessibilità', href: '/dichiarazione-accessibilita' },
   { label: 'Segnalazioni di accessibilità', href: '/segnalazioni-di-accessibilita' },
+  { label: 'Design System', href: '/design-system' },
 ]

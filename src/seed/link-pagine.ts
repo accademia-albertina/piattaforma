@@ -73,6 +73,15 @@ export async function aggiornaLinkPagine(payload: Payload) {
     cambiato ||= r.cambiato
     data[k] = r.voci
   }
+  // Il Design System sta tra i link in fondo al footer, come sul sito attuale
+  const legale = data.footerLegale as Voce[]
+  if (!legale.some((v) => v.url === '/design-system')) {
+    data.footerLegale = [
+      ...legale,
+      { etichetta: 'Design System', tipo: 'percorso', url: '/design-system' },
+    ]
+    cambiato = true
+  }
   if (!cambiato) return
   await payload.updateGlobal({ slug: 'navigazione', data, overrideAccess: true })
   payload.logger.info('Menu: link alle pagine istituzionali aggiornati.')
