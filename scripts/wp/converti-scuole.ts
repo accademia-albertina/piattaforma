@@ -44,11 +44,9 @@ const lexical = (html: string) => {
   return c
 }
 
+// Testo semplice dall'HTML: lo estrae il parser, non una regex sui tag
 const testo = (s: string) =>
-  s
-    .replace(/<[^>]+>/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
+  (JSDOM.fragment(s).textContent ?? '').replace(/\s+/g, ' ').trim()
 
 /** Titoli vuoti o generati da Breakdance nel sito attuale. */
 const titoloSezione = (t: string | null) => {
