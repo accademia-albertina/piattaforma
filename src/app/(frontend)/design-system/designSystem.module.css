@@ -1,0 +1,272 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+/* Indice della pagina: schede sottolineate come i filtri, senza riquadri */
+.indice ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: 0 0 var(--space-6);
+  padding: 0 0 var(--space-3);
+  list-style: none;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.indice a {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+}
+
+.sezione {
+  scroll-margin-top: var(--sticky-top);
+  margin-bottom: var(--section-pad);
+}
+
+.sezione > h2 {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-2xl);
+}
+
+.intro {
+  max-width: var(--measure);
+  margin: 0 0 var(--space-5);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+}
+
+.sezione h3 {
+  margin: 0;
+  font-size: var(--font-size-md);
+}
+
+/* Link di download: piccoli, con icona, uno accanto all'altro */
+.scarica {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+}
+
+.scarica a {
+  display: inline-flex;
+  gap: var(--space-1);
+  align-items: center;
+  min-height: var(--target-min);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+}
+
+/* Loghi */
+.loghi {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-azzurro-200);
+}
+
+.anteprimaLogo {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  padding: var(--space-5);
+  background: var(--color-bg);
+}
+
+.anteprimaLogo[data-sfondo='scuro'] {
+  background: var(--color-footer);
+}
+
+.anteprimaLogo img {
+  width: auto;
+  max-width: 100%;
+  height: 8rem;
+  object-fit: contain;
+}
+
+.datiLogo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.datiLogo p {
+  margin: 0;
+}
+
+/* Icone delle scuole */
+.icone {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.icona {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  color: var(--color-heading);
+  background: var(--color-azzurro-200);
+}
+
+.icona h3 {
+  flex: 1;
+  text-wrap: balance;
+}
+
+.coppia {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+/* Colori */
+.gruppo + .gruppo {
+  margin-top: var(--space-6);
+}
+
+.gruppo > h3 {
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-ardesia-dark);
+}
+
+.colori {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.colore {
+  display: flex;
+  flex-direction: column;
+}
+
+.campione {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 8.5rem;
+  padding: var(--space-3);
+}
+
+/* Il bianco su bianco non si vedrebbe: un filo lo stacca dalla pagina */
+.campione[data-chiaro] {
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.campione > span:first-child {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+.rapporto {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.datiColore {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-3);
+}
+
+.datiColore p {
+  margin: 0;
+}
+
+.nomeColore {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+}
+
+.codici {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.codici code {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  user-select: all;
+}
+
+/* Scala tipografica */
+.scala {
+  display: grid;
+  gap: 0;
+  margin: var(--space-5) 0 0;
+}
+
+.voceScala {
+  display: grid;
+  grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+  gap: var(--space-2) var(--space-5);
+  align-items: baseline;
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.voceScala dt {
+  display: flex;
+  flex-direction: column;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+}
+
+.voceScala dt span {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-muted);
+}
+
+.voceScala dd {
+  margin: 0;
+  min-width: 0;
+  line-height: var(--line-height-tight);
+  color: var(--color-heading);
+  overflow-wrap: anywhere;
+}
+
+.voceScala dd[data-etichetta] {
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+}
+
+@media (max-width: 40rem) {
+  .voceScala {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Pulsanti */
+.esempi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+}

@@ -29,6 +29,7 @@ export const SLUG_RISERVATI = [
   'next',
   'brand',
   'media',
+  'design-system',
 ]
 
 const idDi = (v: unknown) =>
