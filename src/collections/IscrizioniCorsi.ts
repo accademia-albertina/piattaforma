@@ -1,5 +1,8 @@
 import { filtroElenco, nascostaA } from '@/access/pannello'
-import { APIError, type CollectionConfig } from 'payload'
+import { erroreUtente } from '@/lib/errori'
+import { endpointExport } from '@/lib/export-iscritti'
+import { avvisaCorso } from '@/lib/email-iscrizioni'
+import type { CollectionConfig } from 'payload'
 
 import {
   annullaIscrizione,
@@ -14,7 +17,7 @@ import { iscrizioniDelCorso } from '@/lib/iscrizioni'
 import type { Corso, User } from '@/payload-types'
 
 const rifiuta = (messaggio: string, status = 400) => {
-  throw new APIError(messaggio, status, null, true)
+  throw erroreUtente(messaggio, status)
 }
 
 const MESSAGGI_FINESTRA = {
@@ -43,6 +46,7 @@ export const IscrizioniCorsi: CollectionConfig = {
     listSearchableFields: ['nominativo', 'email', 'matricola'],
   },
   defaultSort: 'nominativo',
+  endpoints: [endpointExport('iscrizioni-corsi', 'corso')],
   access: {
     read: leggiIscrizioni,
     create: creaIscrizione,
@@ -100,6 +104,18 @@ export const IscrizioniCorsi: CollectionConfig = {
         data.nominativo =
           [studente.cognome, studente.nome].filter(Boolean).join(' ') || studente.email
         return data
+      },
+    ],
+    afterChange: [
+      async ({ doc, operation, req }) => {
+        if (operation === 'create') await avvisaCorso(req, doc, 'iscrizione')
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc, req }) => {
+        await avvisaCorso(req, doc, 'annullamento')
+        return doc
       },
     ],
     beforeDelete: [

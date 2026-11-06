@@ -27,6 +27,29 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.27.0',
+    data: '2026-11-06',
+    titolo: 'Email di conferma ed elenchi in Excel',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Lo studente riceve un’email quando si iscrive o annulla l’iscrizione a un corso o a un esame, con le date e il link a “La mia area”. Parte solo quando sarà configurato TurboSMTP.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          '“Scarica l’elenco” sopra gli iscritti di ogni corso e appello: un file CSV che si apre con Excel. Dalla finestra di iscrizione gli uffici scaricano tutte le iscrizioni dell’anno accademico.',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          'Quando un’iscrizione non è possibile (finestra chiusa, livello sbagliato, doppione) lo studente legge il motivo invece di “An unknown error occurred”.',
+      },
+    ],
+    pr: [58],
+  },
+  {
     versione: '0.26.0',
     data: '2026-11-06',
     titolo: 'Appelli e iscrizioni agli esami',

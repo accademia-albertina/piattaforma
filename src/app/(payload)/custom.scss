@@ -636,7 +636,8 @@ body {
 }
 
 // ——— «Vedi sul sito» in cima alla colonna laterale del documento ———
-.link-sul-sito {
+.link-sul-sito,
+.scarica-iscritti {
   display: grid;
   gap: 0.25rem;
   margin-bottom: var(--base);
@@ -661,6 +662,14 @@ body {
       outline: 2px solid var(--theme-text);
       outline-offset: 2px;
     }
+  }
+}
+
+.scarica-iscritti {
+  justify-content: start;
+
+  a {
+    padding-block: 0.5rem;
   }
 }
 

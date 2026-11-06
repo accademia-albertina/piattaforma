@@ -285,6 +285,18 @@ export const Corsi: CollectionConfig = {
               ],
             },
             {
+              name: 'scaricaIscritti',
+              type: 'ui',
+              admin: {
+                components: {
+                  Field: {
+                    path: '@/components/admin/ScaricaIscritti',
+                    clientProps: { collezione: 'iscrizioni-corsi', riferimento: 'corso' },
+                  },
+                },
+              },
+            },
+            {
               name: 'iscritti',
               label: 'Studenti iscritti',
               type: 'join',

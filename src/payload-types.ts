@@ -970,7 +970,7 @@ export interface FinestraIscrizione {
   periodo: 'primo' | 'secondo' | 'invernale' | 'estiva' | 'autunnale';
   apertura: string;
   /**
-   * Da qui gli studenti non si iscrivono e non annullano più. Il docente può prolungarla sul suo corso o appello; per gli esami chiude comunque il giorno prima dell’appello.
+   * Da qui gli studenti non si iscrivono e non annullano più. Il docente può prolungarla sul suo corso o appello; per gli esami chiude comunque una settimana prima di ogni appello.
    */
   chiusura: string;
   /**
@@ -1008,7 +1008,7 @@ export interface Appello {
   commissione?: string | null;
   note?: string | null;
   /**
-   * Facoltativo. Vale solo se è dopo la chiusura fissata dalla segreteria; le iscrizioni chiudono comunque il giorno prima dell’esame.
+   * Facoltativo. Vale solo se è dopo la chiusura fissata dalla segreteria; le iscrizioni chiudono comunque una settimana prima dell’esame.
    */
   prorogaIscrizioni?: string | null;
   iscritti?: {

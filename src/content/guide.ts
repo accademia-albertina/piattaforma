@@ -125,6 +125,7 @@ export const GUIDE: Guida[] = [
     passi: [
       'Apri il corso da “I miei corsi” e vai nella scheda “Iscritti”: trovi nome, matricola, livello ed email di ogni studente.',
       'Per tenere aperte le iscrizioni più a lungo, compila “Prolunga le iscrizioni fino al” e premi “Pubblica modifiche”.',
+      'Per l’elenco in Excel premi “Scarica l’elenco” sopra gli iscritti.',
       'In “Iscrizioni ai corsi” trovi gli iscritti di tutti i tuoi corsi in un solo elenco.',
     ],
     consigli: [
@@ -142,6 +143,7 @@ export const GUIDE: Guida[] = [
       'In “Appelli d’esame” trovi gli appelli dei tuoi corsi: aprine uno e scorri fino a “Studenti iscritti”.',
       'Per un turno in più premi “Nuovo appello”, scegli il corso e indica sessione, data, ora, aula e commissione.',
       'Per tenere aperte le iscrizioni più a lungo compila “Prolunga le iscrizioni fino al”: chiudono comunque una settimana prima dell’esame.',
+      'Per il verbale in Excel premi “Scarica l’elenco” sopra gli iscritti dell’appello.',
       'In “Iscrizioni agli esami” trovi tutti i tuoi iscritti in un solo elenco.',
     ],
     consigli: [
@@ -202,6 +204,7 @@ export const GUIDE: Guida[] = [
       'Scegli tipo, anno accademico e periodo: semestre per i corsi (gli annuali seguono il primo), sessione per gli esami.',
       'Indica giorno e ora di apertura e di chiusura e premi “Salva”: la pagina di ogni corso mostra subito le date.',
       'In “Iscrizioni ai corsi” vedi tutti gli iscritti; puoi aggiungere a mano uno studente anche a finestra chiusa.',
+      'Nella colonna laterale di una finestra già salvata scarichi in CSV tutte le iscrizioni di quell’anno accademico.',
     ],
     consigli: ['Ogni docente può prolungare la chiusura solo sul proprio corso.'],
   },

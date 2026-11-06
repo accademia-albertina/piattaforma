@@ -1,5 +1,6 @@
 import { nascostaA } from '@/access/pannello'
-import { APIError, type CollectionConfig } from 'payload'
+import { erroreUtente } from '@/lib/errori'
+import type { CollectionConfig } from 'payload'
 
 import { annoAccademicoCorrente, isAnnoAccademico } from '@/access/corsi'
 import {
@@ -30,7 +31,7 @@ export const FinestreIscrizione: CollectionConfig = {
     hidden: nascostaA('finestre-iscrizione'),
     useAsTitle: 'titolo',
     description:
-      'Quando gli studenti possono iscriversi ai corsi di un semestre (e, in seguito, agli esami di una sessione).',
+      'Quando gli studenti possono iscriversi ai corsi di un semestre e agli esami di una sessione.',
     defaultColumns: ['titolo', 'apertura', 'chiusura'],
     group: 'Didattica',
   },
@@ -57,7 +58,7 @@ export const FinestreIscrizione: CollectionConfig = {
       async ({ data, originalDoc, req }) => {
         const d = { ...originalDoc, ...data }
         if (d.apertura && d.chiusura && new Date(d.chiusura) <= new Date(d.apertura)) {
-          throw new APIError('La chiusura deve venire dopo l’apertura.', 400, null, true)
+          throw erroreUtente('La chiusura deve venire dopo l’apertura.', 400)
         }
         // Una sola finestra per tipo, anno e periodo
         const { totalDocs } = await req.payload.count({
@@ -71,12 +72,7 @@ export const FinestreIscrizione: CollectionConfig = {
           },
         })
         if (totalDocs > 0) {
-          throw new APIError(
-            'Esiste già una finestra per questo periodo: modifica quella.',
-            400,
-            null,
-            true,
-          )
+          throw erroreUtente('Esiste già una finestra per questo periodo: modifica quella.', 400)
         }
         data.titolo = `${TIPO_FINESTRA_LABELS[d.tipo as TipoFinestra]}, ${etichettaPeriodo(d.periodo).toLowerCase()} ${d.annoAccademico}`
         return data
@@ -150,6 +146,16 @@ export const FinestreIscrizione: CollectionConfig = {
           },
         },
       ],
+    },
+    {
+      name: 'scaricaIscrizioni',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: { path: '@/components/admin/ScaricaIscritti', clientProps: { perAnno: true } },
+        },
+      },
     },
     {
       name: 'soloIscrittiAlCorso',
