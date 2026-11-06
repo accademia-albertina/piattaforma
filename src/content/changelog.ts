@@ -37,7 +37,7 @@ export const CHANGELOG: Versione[] = [
           'Nella finestra di un anno accademico concluso gli uffici trovano “Elimina le iscrizioni”: dopo aver scaricato il file, cancellano in un colpo le iscrizioni di quell’anno. Doppia conferma, nessuna email agli studenti.',
       },
     ],
-    pr: [],
+    pr: [59],
   },
   {
     versione: '0.27.0',
