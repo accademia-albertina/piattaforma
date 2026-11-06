@@ -2,6 +2,12 @@
   padding-block: var(--space-5) var(--section-pad);
 }
 
+/* Il marchio della casa editrice, accanto al titolo */
+.logo {
+  max-width: 20rem;
+  margin-block: var(--space-4);
+}
+
 .catalogo {
   scroll-margin-top: var(--sticky-top);
 }
@@ -53,6 +59,14 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/* Sul telefono due copertine per riga, come in una libreria */
+@media (max-width: 40rem) {
+  .schede {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
 }
 
 .casaEditrice {

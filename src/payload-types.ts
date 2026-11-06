@@ -171,7 +171,7 @@ export interface Pagina {
   /**
    * Oltre a redazione e vicedirezione. Es. la pagina Iscrizioni alla Segreteria didattica.
    */
-  ufficiEditori?: ('segreteria' | 'amministrativo' | 'erasmus')[] | null;
+  ufficiEditori?: ('segreteria' | 'amministrativo' | 'erasmus' | 'biblioteca')[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -378,6 +378,7 @@ export interface Avviso {
     | 'iscrizioni'
     | 'coordinatori'
     | 'tasse'
+    | 'biblioteca'
   )[];
   /**
    * Lascia vuoto se l’avviso riguarda tutta l’Accademia.
@@ -470,6 +471,7 @@ export interface User {
         | 'segreteria'
         | 'amministrativo'
         | 'erasmus'
+        | 'biblioteca'
         | 'docente'
         | 'dottorando'
         | 'studente'

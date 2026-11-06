@@ -99,6 +99,21 @@
   text-decoration-color: currentColor;
 }
 
+/* Sul telefono stanno due schede per riga: meno aria intorno alla copertina */
+@media (max-width: 40rem) {
+  .copertina {
+    padding: var(--space-3);
+  }
+
+  .testo {
+    padding: 0 var(--space-3) var(--space-3);
+  }
+
+  .titolo {
+    font-size: var(--font-size-sm);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scheda,
   .copertina img {

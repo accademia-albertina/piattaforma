@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+import { rowLabel } from '@/fields/rowLabel'
+
 import { curaCatalogo, eliminaPubblicazione } from '@/access/pubblicazioni'
 import { linkSulSito } from '@/fields/linkSulSito'
 import { slugField } from '@/fields/slug'
@@ -79,6 +81,7 @@ export const Pubblicazioni: CollectionConfig = {
       admin: {
         initCollapsed: true,
         description: 'Facoltativo. Una voce per capitolo o saggio.',
+        ...rowLabel('titolo', 'Voce'),
       },
       fields: [
         {

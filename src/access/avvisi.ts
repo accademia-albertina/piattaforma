@@ -15,6 +15,7 @@ export const CATEGORIE_AVVISI = [
   'iscrizioni',
   'coordinatori',
   'tasse',
+  'biblioteca',
 ] as const
 
 export type CategoriaAvviso = (typeof CATEGORIE_AVVISI)[number]
@@ -29,15 +30,18 @@ export const CATEGORIA_LABELS: Record<CategoriaAvviso, string> = {
   iscrizioni: 'Iscrizioni A.A.',
   coordinatori: 'Coordinatori',
   tasse: 'Tasse',
+  biblioteca: 'Biblioteca',
 }
 
 /** Categorie che ogni ruolo può usare. L'admin le ha tutte. */
 export const CATEGORIE_PER_RUOLO: Partial<Record<Role, CategoriaAvviso[]>> = {
   vicedirezione: ['in-evidenza', 'generali', 'lezioni', 'esami', 'coordinatori'],
-  redazione: ['in-evidenza', 'generali', 'eventi'],
+  redazione: ['in-evidenza', 'generali', 'eventi', 'biblioteca'],
   segreteria: ['lezioni', 'esami', 'tasse', 'iscrizioni'],
   amministrativo: ['tasse', 'bandi-e-concorsi'],
   erasmus: ['bandi-e-concorsi'],
+  // Orari, chiusure e novità della biblioteca
+  biblioteca: ['biblioteca'],
   // Più avanti: solo per i corsi di cui il docente è titolare.
   docente: ['lezioni', 'esami'],
 }

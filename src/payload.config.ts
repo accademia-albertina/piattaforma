@@ -31,6 +31,7 @@ import { aggiornaLinkPagine } from './seed/link-pagine'
 import { importaPagineWp } from './seed/pagine-wp'
 import { importaAlbertinaPress } from './seed/albertina-press'
 import { completaDipartimentiScuole } from './seed/dipartimenti-scuole'
+import { affidaBiblioteca } from './seed/biblioteca'
 import { completaSommariPagine } from './seed/sommari-pagine'
 import { correggiTitoliMaiuscoli } from './seed/titoli-maiuscoli'
 import { importaCalendari } from './seed/calendari'
@@ -141,6 +142,7 @@ export default buildConfig({
       .then(() => completaSommariPagine(payload))
       .then(() => completaDipartimentiScuole(payload))
       .then(() => importaAlbertinaPress(payload))
+      .then(() => affidaBiblioteca(payload))
       .catch((e) =>
       payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
     )

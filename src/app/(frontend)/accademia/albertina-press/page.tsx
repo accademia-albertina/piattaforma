@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -62,6 +63,17 @@ export default async function AlbertinaPressPage({ searchParams }: Props) {
         occhiello={su.at(-1)?.titolo}
         titolo={titolo}
         sommario={pagina?.sommario ?? SOMMARIO}
+        media={
+          <Image
+            src="/brand/albertina-press.svg"
+            alt="Albertina Press"
+            width={359}
+            height={82}
+            className={styles.logo}
+            unoptimized
+            priority
+          />
+        }
       />
 
       <section id="catalogo" aria-labelledby="catalogo-titolo" className={styles.catalogo}>

@@ -29,7 +29,7 @@ export const CHANGELOG: Versione[] = [
   {
     versione: '0.19.0',
     data: '2026-11-06',
-    titolo: 'Albertina Press',
+    titolo: 'Albertina Press e ruolo Biblioteca',
     voci: [
       {
         tipo: 'nuovo',
@@ -45,6 +45,11 @@ export const CHANGELOG: Versione[] = [
         tipo: 'nuovo',
         testo:
           'Sotto il catalogo, il testo sulla casa editrice con comitato scientifico e collane; i nomi portano ai profili dei docenti.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nuovo ruolo Biblioteca: cura il catalogo Albertina Press, modifica le pagine Biblioteca e Albertina Press e pubblica gli avvisi della nuova categoria Biblioteca (orari, chiusure, acquisizioni).',
       },
     ],
     pr: [50],

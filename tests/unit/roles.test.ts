@@ -84,6 +84,8 @@ describe('categorie degli avvisi', () => {
       'generali',
       'eventi',
       'bandi-e-concorsi',
+      'biblioteca',
     ])
+    expect(categorieConsentite({ roles: ['biblioteca'] })).toEqual(['biblioteca'])
   })
 })
