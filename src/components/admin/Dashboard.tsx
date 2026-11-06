@@ -21,12 +21,14 @@ type Sezione = {
 
 /** Sezioni del pannello nell'ordine in cui le vedono i redattori; titoli e descrizioni dalla config. */
 const SEZIONI: Sezione[] = [
-  { slug: 'avvisi', tipo: 'collezione', serve: 'read', nuovo: 'Nuovo avviso' },
-  { slug: 'pagine', tipo: 'collezione', serve: 'read', nuovo: 'Nuova pagina' },
-  { slug: 'corsi', tipo: 'collezione', serve: 'read' },
-  { slug: 'docenti', tipo: 'collezione', serve: 'read' },
+  // Ognuno vede le sezioni in cui può modificare qualcosa, non tutte quelle che può leggere
+  { slug: 'avvisi', tipo: 'collezione', serve: 'update', nuovo: 'Nuovo avviso' },
+  { slug: 'pagine', tipo: 'collezione', serve: 'update', nuovo: 'Nuova pagina' },
+  { slug: 'pubblicazioni', tipo: 'collezione', serve: 'update', nuovo: 'Nuovo volume' },
+  { slug: 'corsi', tipo: 'collezione', serve: 'update' },
+  { slug: 'docenti', tipo: 'collezione', serve: 'update' },
   { slug: 'media', tipo: 'collezione', serve: 'read', nuovo: 'Carica un file' },
-  { slug: 'scuole', tipo: 'collezione', serve: 'read' },
+  { slug: 'scuole', tipo: 'collezione', serve: 'update' },
   { slug: 'navigazione', tipo: 'globale', serve: 'update' },
   { slug: 'users', tipo: 'collezione', serve: 'create' },
 ]

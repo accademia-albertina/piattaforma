@@ -51,6 +51,11 @@ export const CHANGELOG: Versione[] = [
         testo:
           'Nuovo ruolo Biblioteca: cura il catalogo Albertina Press, modifica le pagine Biblioteca e Albertina Press e pubblica gli avvisi della nuova categoria Biblioteca (orari, chiusure, acquisizioni).',
       },
+      {
+        tipo: 'migliorato',
+        testo:
+          'La bacheca del pannello mostra a ognuno solo le sezioni in cui può modificare qualcosa; c’è anche Albertina Press, con “Nuovo volume” tra le azioni rapide.',
+      },
     ],
     pr: [50],
   },

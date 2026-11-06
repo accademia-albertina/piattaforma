@@ -18,6 +18,7 @@ const ICONE = {
   'nav-albo': 'ClipboardList',
   'nav-trasparenza': 'Scale',
   'nav-scuole': 'Landmark',
+  'nav-pubblicazioni': 'LibraryBig',
   'nav-users': 'Users',
   'nav-global-navigazione': 'PanelsTopLeft',
 }
