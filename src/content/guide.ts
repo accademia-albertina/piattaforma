@@ -133,6 +133,22 @@ export const GUIDE: Guida[] = [
     ],
   },
   {
+    id: 'esami-docente',
+    titolo: 'I tuoi appelli d’esame',
+    ruoli: ['docente'],
+    intro:
+      'Gli appelli li inserisce la segreteria; tu vedi gli iscritti e puoi aggiungere turni ai tuoi corsi.',
+    passi: [
+      'In “Appelli d’esame” trovi gli appelli dei tuoi corsi: aprine uno e scorri fino a “Studenti iscritti”.',
+      'Per un turno in più premi “Nuovo appello”, scegli il corso e indica sessione, data, ora, aula e commissione.',
+      'Per tenere aperte le iscrizioni più a lungo compila “Prolunga le iscrizioni fino al”: chiudono comunque una settimana prima dell’esame.',
+      'In “Iscrizioni agli esami” trovi tutti i tuoi iscritti in un solo elenco.',
+    ],
+    consigli: [
+      'Data, aula e commissione degli appelli inseriti dalla segreteria li cambia la segreteria: scrivile se serve.',
+    ],
+  },
+  {
     id: 'corsi-docenti',
     titolo: 'Corsi e docenti',
     ruoli: ['admin', 'vicedirezione'],
@@ -180,14 +196,31 @@ export const GUIDE: Guida[] = [
     titolo: 'Finestre di iscrizione',
     sezione: 'finestre-iscrizione',
     intro:
-      'Decidono quando gli studenti possono iscriversi ai corsi di un semestre. Dopo la chiusura non ci si iscrive né si annulla più.',
+      'Decidono quando gli studenti possono iscriversi ai corsi di un semestre e agli esami di una sessione. Dopo la chiusura non ci si iscrive né si annulla più.',
     passi: [
       'Dalla dashboard scegli “Nuova finestra di iscrizione”.',
-      'Scegli tipo, anno accademico e semestre (i corsi annuali seguono il primo).',
+      'Scegli tipo, anno accademico e periodo: semestre per i corsi (gli annuali seguono il primo), sessione per gli esami.',
       'Indica giorno e ora di apertura e di chiusura e premi “Salva”: la pagina di ogni corso mostra subito le date.',
       'In “Iscrizioni ai corsi” vedi tutti gli iscritti; puoi aggiungere a mano uno studente anche a finestra chiusa.',
     ],
     consigli: ['Ogni docente può prolungare la chiusura solo sul proprio corso.'],
+  },
+  {
+    id: 'appelli',
+    titolo: 'Appelli d’esame',
+    ruoli: ['admin', 'vicedirezione', 'segreteria'],
+    intro:
+      'Ogni appello è una riga del calendario esami: il sito li mostra in /esami e nella pagina del corso, con l’iscrizione.',
+    passi: [
+      'Prima apri la finestra della sessione in “Finestre di iscrizione” (tipo “Iscrizioni agli esami”).',
+      'In “Appelli d’esame” premi “Nuovo appello”: corso, anno accademico, sessione, data, ora, aula e commissione.',
+      'Se triennio e biennio hanno date diverse, crea un appello per livello scegliendo “Livello”.',
+      'Gli iscritti sono in fondo a ogni appello e, tutti insieme, in “Iscrizioni agli esami”.',
+    ],
+    consigli: [
+      'Il docente può aggiungere turni ai propri corsi e prolungare le iscrizioni ai propri appelli.',
+      '“Solo chi è iscritto al corso” nella finestra blocca l’iscrizione a chi non segue il corso: per ora lascialo spento.',
+    ],
   },
   {
     id: 'albo',

@@ -1,0 +1,63 @@
+.scheda {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-azzurro-50);
+  color: var(--color-heading);
+}
+
+@media (min-width: 48rem) {
+  .scheda {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 18rem);
+    align-items: start;
+  }
+}
+
+.dati {
+  min-width: 0;
+}
+
+.titolo {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-lg);
+}
+
+.elenco {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: var(--font-size-xs);
+}
+
+.elenco div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-2);
+}
+
+.elenco dt {
+  font-weight: 700;
+}
+
+.elenco dt::after {
+  content: ':';
+}
+
+.elenco dd {
+  margin: 0;
+}
+
+.note {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-xs);
+  font-style: italic;
+}
+
+.azione {
+  min-width: 0;
+}
+
+/* “domenica 15 novembre…” → “Domenica 15 novembre…” */
+.titolo::first-letter {
+  text-transform: uppercase;
+}

@@ -27,6 +27,29 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.26.0',
+    data: '2026-11-06',
+    titolo: 'Appelli e iscrizioni agli esami',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Appelli d’esame nel pannello: corso, sessione, livello, data, ora, aula e commissione. Li inseriscono segreteria, vicedirezione e admin; il docente può aggiungere turni ai propri corsi e prolungare le iscrizioni.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Pagina /esami con gli appelli in programma, filtri per livello e ricerca; nella pagina di ogni corso la sezione “Esami”. Gli studenti si iscrivono da lì, un appello per corso e sessione, fino a una settimana prima dell’esame.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Finestre di iscrizione per sessione d’esami, con l’opzione “Solo chi è iscritto al corso” (per ora spenta). In “La mia area” la sezione “I tuoi esami”.',
+      },
+    ],
+    pr: [57],
+  },
+  {
     versione: '0.25.0',
     data: '2026-11-06',
     titolo: 'Iscrizioni ai corsi',

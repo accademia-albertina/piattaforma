@@ -49,6 +49,8 @@ const SEZIONI: Sezione[] = [
     nuovo: 'Nuova finestra di iscrizione',
   },
   { slug: 'iscrizioni-corsi', tipo: 'collezione', serve: 'read' },
+  { slug: 'appelli', tipo: 'collezione', serve: 'create', nuovo: 'Nuovo appello' },
+  { slug: 'iscrizioni-esami', tipo: 'collezione', serve: 'read' },
   { slug: 'scuole', tipo: 'collezione', serve: 'update' },
   { slug: 'albo', tipo: 'collezione', serve: 'update', nuovo: 'Nuovo atto all’Albo' },
   { slug: 'trasparenza', tipo: 'collezione', serve: 'update' },

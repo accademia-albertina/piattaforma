@@ -17,6 +17,8 @@ const ICONE = {
   'nav-calendari': 'CalendarDays',
   'nav-finestre-iscrizione': 'CalendarClock',
   'nav-iscrizioni-corsi': 'ClipboardCheck',
+  'nav-appelli': 'NotebookPen',
+  'nav-iscrizioni-esami': 'ClipboardPen',
   'nav-albo': 'ClipboardList',
   'nav-trasparenza': 'Scale',
   'nav-scuole': 'Landmark',

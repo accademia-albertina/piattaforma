@@ -6,7 +6,7 @@ const meta = {
   title: 'Componenti/IscrizioneCorso',
   component: IscrizioneCorso,
   args: {
-    corsoId: 1,
+    idRiferimento: 1,
     stato: 'aperta',
     apertura: '1 ottobre 2026, 09:00',
     chiusura: '31 ottobre 2026, 23:59',

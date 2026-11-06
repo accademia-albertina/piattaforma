@@ -14,6 +14,7 @@ describe('Guide del pannello per ruolo', () => {
       'profilo',
       'corsi-docente',
       'iscritti',
+      'esami-docente',
     ])
   })
 
@@ -22,6 +23,7 @@ describe('Guide del pannello per ruolo', () => {
     expect(s).toContain('pagine')
     expect(s).toContain('calendari')
     expect(s).toContain('finestre')
+    expect(s).toContain('appelli')
     expect(s).not.toContain('albo')
     expect(s).not.toContain('utenti')
     expect(s).not.toContain('corsi-docente')

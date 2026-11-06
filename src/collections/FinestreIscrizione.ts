@@ -146,10 +146,21 @@ export const FinestreIscrizione: CollectionConfig = {
             width: '50%',
             date: DATA_E_ORA,
             description:
-              'Da qui gli studenti non si iscrivono e non annullano più. Il docente può prolungarla sul suo corso.',
+              'Da qui gli studenti non si iscrivono e non annullano più. Il docente può prolungarla sul suo corso o appello; per gli esami chiude comunque una settimana prima di ogni appello.',
           },
         },
       ],
+    },
+    {
+      name: 'soloIscrittiAlCorso',
+      label: 'Solo chi è iscritto al corso',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        condition: (data) => data?.tipo === 'esami',
+        description:
+          'Se attivo, all’appello si iscrive solo chi risulta iscritto al corso. Per ora lascialo spento: le iscrizioni ai corsi partono con questa piattaforma.',
+      },
     },
   ],
 }

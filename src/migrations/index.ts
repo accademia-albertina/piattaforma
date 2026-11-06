@@ -1,19 +1,20 @@
-import * as migration_20261020_155718_iniziale from './20261020_155718_iniziale'
-import * as migration_20261021_140338_avvisi from './20261021_140338_avvisi'
-import * as migration_20261021_144732_avvisi_immagine from './20261021_144732_avvisi_immagine'
-import * as migration_20261022_164339_pagine from './20261022_164339_pagine'
-import * as migration_20261022_170417_menu_e_etichette from './20261022_170417_menu_e_etichette'
-import * as migration_20261023_083849_corsi_docenti from './20261023_083849_corsi_docenti'
-import * as migration_20261105_071837_calendari from './20261105_071837_calendari'
-import * as migration_20261105_081212_albo_trasparenza from './20261105_081212_albo_trasparenza'
-import * as migration_20261105_132425_dottorandi from './20261105_132425_dottorandi'
-import * as migration_20261105_165306_media_alt_facoltativo from './20261105_165306_media_alt_facoltativo'
-import * as migration_20261105_170559_scuole_dipartimento_immagine from './20261105_170559_scuole_dipartimento_immagine'
-import * as migration_20261105_234342_albertina_press from './20261105_234342_albertina_press'
-import * as migration_20261106_000151_ruolo_biblioteca from './20261106_000151_ruolo_biblioteca'
-import * as migration_20261106_082749_pagine_scuole from './20261106_082749_pagine_scuole'
-import * as migration_20261106_115509_ruoli_pannello from './20261106_115509_ruoli_pannello'
-import * as migration_20261106_144426_iscrizioni_corsi from './20261106_144426_iscrizioni_corsi'
+import * as migration_20261020_155718_iniziale from './20261020_155718_iniziale';
+import * as migration_20261021_140338_avvisi from './20261021_140338_avvisi';
+import * as migration_20261021_144732_avvisi_immagine from './20261021_144732_avvisi_immagine';
+import * as migration_20261022_164339_pagine from './20261022_164339_pagine';
+import * as migration_20261022_170417_menu_e_etichette from './20261022_170417_menu_e_etichette';
+import * as migration_20261023_083849_corsi_docenti from './20261023_083849_corsi_docenti';
+import * as migration_20261105_071837_calendari from './20261105_071837_calendari';
+import * as migration_20261105_081212_albo_trasparenza from './20261105_081212_albo_trasparenza';
+import * as migration_20261105_132425_dottorandi from './20261105_132425_dottorandi';
+import * as migration_20261105_165306_media_alt_facoltativo from './20261105_165306_media_alt_facoltativo';
+import * as migration_20261105_170559_scuole_dipartimento_immagine from './20261105_170559_scuole_dipartimento_immagine';
+import * as migration_20261105_234342_albertina_press from './20261105_234342_albertina_press';
+import * as migration_20261106_000151_ruolo_biblioteca from './20261106_000151_ruolo_biblioteca';
+import * as migration_20261106_082749_pagine_scuole from './20261106_082749_pagine_scuole';
+import * as migration_20261106_115509_ruoli_pannello from './20261106_115509_ruoli_pannello';
+import * as migration_20261106_144426_iscrizioni_corsi from './20261106_144426_iscrizioni_corsi';
+import * as migration_20261106_154742_appelli_esami from './20261106_154742_appelli_esami';
 
 export const migrations = [
   {
@@ -96,4 +97,9 @@ export const migrations = [
     down: migration_20261106_144426_iscrizioni_corsi.down,
     name: '20261106_144426_iscrizioni_corsi',
   },
-]
+  {
+    up: migration_20261106_154742_appelli_esami.up,
+    down: migration_20261106_154742_appelli_esami.down,
+    name: '20261106_154742_appelli_esami'
+  },
+];

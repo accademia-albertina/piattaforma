@@ -76,6 +76,8 @@ export interface Config {
     calendari: Calendario;
     'finestre-iscrizione': FinestraIscrizione;
     'iscrizioni-corsi': IscrizioneCorso;
+    appelli: Appello;
+    'iscrizioni-esami': IscrizioneEsame;
     albo: AttoAlbo;
     trasparenza: Trasparenza;
     scuole: Scuola;
@@ -90,6 +92,9 @@ export interface Config {
     corsi: {
       iscritti: 'iscrizioni-corsi';
     };
+    appelli: {
+      iscritti: 'iscrizioni-esami';
+    };
   };
   collectionsSelect: {
     pagine: PagineSelect<false> | PagineSelect<true>;
@@ -101,6 +106,8 @@ export interface Config {
     calendari: CalendariSelect<false> | CalendariSelect<true>;
     'finestre-iscrizione': FinestreIscrizioneSelect<false> | FinestreIscrizioneSelect<true>;
     'iscrizioni-corsi': IscrizioniCorsiSelect<false> | IscrizioniCorsiSelect<true>;
+    appelli: AppelliSelect<false> | AppelliSelect<true>;
+    'iscrizioni-esami': IscrizioniEsamiSelect<false> | IscrizioniEsamiSelect<true>;
     albo: AlboSelect<false> | AlboSelect<true>;
     trasparenza: TrasparenzaSelect<false> | TrasparenzaSelect<true>;
     scuole: ScuoleSelect<false> | ScuoleSelect<true>;
@@ -963,9 +970,76 @@ export interface FinestraIscrizione {
   periodo: 'primo' | 'secondo' | 'invernale' | 'estiva' | 'autunnale';
   apertura: string;
   /**
-   * Da qui gli studenti non si iscrivono e non annullano più. Il docente può prolungarla sul suo corso.
+   * Da qui gli studenti non si iscrivono e non annullano più. Il docente può prolungarla sul suo corso o appello; per gli esami chiude comunque il giorno prima dell’appello.
    */
   chiusura: string;
+  /**
+   * Se attivo, all’appello si iscrive solo chi risulta iscritto al corso. Per ora lascialo spento: le iscrizioni ai corsi partono con questa piattaforma.
+   */
+  soloIscrittiAlCorso?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Le date d’esame di ogni corso, sessione per sessione. Gli studenti si iscrivono dal sito; il docente vede gli iscritti nella scheda “Iscritti”.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appelli".
+ */
+export interface Appello {
+  id: number;
+  titolo?: string | null;
+  /**
+   * Il docente viene dal corso.
+   */
+  corso: number | Corso;
+  annoAccademico: string;
+  sessione: 'invernale' | 'estiva' | 'autunnale';
+  /**
+   * Vuoto = quelli del corso. Usalo per dividere triennio e biennio in date diverse.
+   */
+  livelli?: ('triennio' | 'biennio')[] | null;
+  data: string;
+  ora: string;
+  aula?: string | null;
+  /**
+   * Cognomi separati da virgole. La vedono anche gli studenti.
+   */
+  commissione?: string | null;
+  note?: string | null;
+  /**
+   * Facoltativo. Vale solo se è dopo la chiusura fissata dalla segreteria; le iscrizioni chiudono comunque il giorno prima dell’esame.
+   */
+  prorogaIscrizioni?: string | null;
+  iscritti?: {
+    docs?: (number | IscrizioneEsame)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  creatoDa?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Chi si è iscritto a quale appello. Gli studenti si iscrivono dal sito.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "iscrizioni-esami".
+ */
+export interface IscrizioneEsame {
+  id: number;
+  appello: number | Appello;
+  /**
+   * Lo sceglie la segreteria solo per un’iscrizione aggiunta a mano.
+   */
+  studente: number | User;
+  nominativo?: string | null;
+  matricola?: string | null;
+  livello?: ('triennio' | 'biennio') | null;
+  email?: string | null;
+  corso?: (number | null) | Corso;
+  annoAccademico?: string | null;
+  sessione?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1133,6 +1207,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'iscrizioni-corsi';
         value: number | IscrizioneCorso;
+      } | null)
+    | ({
+        relationTo: 'appelli';
+        value: number | Appello;
+      } | null)
+    | ({
+        relationTo: 'iscrizioni-esami';
+        value: number | IscrizioneEsame;
       } | null)
     | ({
         relationTo: 'albo';
@@ -1492,6 +1574,7 @@ export interface FinestreIscrizioneSelect<T extends boolean = true> {
   periodo?: T;
   apertura?: T;
   chiusura?: T;
+  soloIscrittiAlCorso?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1506,6 +1589,44 @@ export interface IscrizioniCorsiSelect<T extends boolean = true> {
   matricola?: T;
   livello?: T;
   email?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appelli_select".
+ */
+export interface AppelliSelect<T extends boolean = true> {
+  titolo?: T;
+  corso?: T;
+  annoAccademico?: T;
+  sessione?: T;
+  livelli?: T;
+  data?: T;
+  ora?: T;
+  aula?: T;
+  commissione?: T;
+  note?: T;
+  prorogaIscrizioni?: T;
+  iscritti?: T;
+  creatoDa?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "iscrizioni-esami_select".
+ */
+export interface IscrizioniEsamiSelect<T extends boolean = true> {
+  appello?: T;
+  studente?: T;
+  nominativo?: T;
+  matricola?: T;
+  livello?: T;
+  email?: T;
+  corso?: T;
+  annoAccademico?: T;
+  sessione?: T;
   updatedAt?: T;
   createdAt?: T;
 }

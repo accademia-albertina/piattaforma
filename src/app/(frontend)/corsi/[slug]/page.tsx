@@ -10,7 +10,8 @@ import { annoAccademicoCorrente } from '@/access/corsi'
 import { datiStudente } from '@/access/iscrizioni'
 import { hasRole } from '@/access/roles'
 import { urlAccesso } from '@/auth/google'
-import { Alert, Breadcrumbs, IscrizioneCorso, Tag } from '@/components'
+import { Alert, Breadcrumbs, IscrizioneCorso, SchedaAppello, Tag } from '@/components'
+import { appelliConStato, giornoAppello } from '@/lib/appelli'
 import { dataIscrizioni, iscrizioniDelCorso } from '@/lib/iscrizioni'
 import { payloadClient } from '@/lib/payload'
 import { docentiDi, etichettaLivelli, orariPerPeriodo, trovaCorso } from '@/lib/corsi'
@@ -62,6 +63,10 @@ export default async function CorsoPage({ params }: Props) {
         })
       ).docs[0]
     : undefined
+  const appelli = archivio
+    ? []
+    : await appelliConStato(payload, { corso: { equals: corso.id } }, user)
+  const chiGuarda = !user ? 'anonimo' : studente ? 'studente' : 'altro'
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -143,6 +148,37 @@ export default async function CorsoPage({ params }: Props) {
               <Testo data={corso.bibliografia} className={styles.body} />
             </section>
           ) : null}
+          {appelli.length > 0 ? (
+            <section aria-labelledby="esami">
+              <h2 id="esami">Esami</h2>
+              <ul className={styles.appelli}>
+                {appelli.map((a) => (
+                  <li key={a.appello.id}>
+                    <SchedaAppello
+                      titolo={`${giornoAppello(a.appello.data)}, ore ${a.appello.ora}`}
+                      aula={a.appello.aula}
+                      livelli={etichettaLivelli(a.appello.livelli ?? [])}
+                      commissione={a.appello.commissione}
+                      note={a.appello.note}
+                    >
+                      <IscrizioneCorso
+                        compatto
+                        tipo="esame"
+                        idRiferimento={a.appello.id}
+                        stato={a.stato}
+                        apertura={a.apertura}
+                        chiusura={a.chiusura}
+                        utente={chiGuarda}
+                        livelloAmmesso={a.livelloAmmesso}
+                        iscrizioneId={a.iscrizioneId}
+                        accessoHref={urlAccesso(`/corsi/${corso.slug}#esami`)}
+                      />
+                    </SchedaAppello>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
           {corso.altreInformazioni ? (
             <section aria-labelledby="altre-informazioni">
               <h2 id="altre-informazioni">Altre informazioni</h2>
@@ -154,11 +190,11 @@ export default async function CorsoPage({ params }: Props) {
         <div className={styles.colonna}>
           {iscrizioni ? (
             <IscrizioneCorso
-              corsoId={corso.id}
+              idRiferimento={corso.id}
               stato={iscrizioni.stato}
               apertura={iscrizioni.apertura ? dataIscrizioni(iscrizioni.apertura) : undefined}
               chiusura={iscrizioni.chiusura ? dataIscrizioni(iscrizioni.chiusura) : undefined}
-              utente={!user ? 'anonimo' : studente ? 'studente' : 'altro'}
+              utente={chiGuarda}
               livelloAmmesso={!studente || (corso.livelli ?? []).includes(studente.livello)}
               iscrizioneId={iscrizione?.id ?? null}
               accessoHref={urlAccesso(`/corsi/${corso.slug}`)}

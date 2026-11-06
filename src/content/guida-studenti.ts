@@ -34,11 +34,21 @@ export const GUIDA_STUDENTI: VoceGuidaStudenti[] = [
     ],
   },
   {
+    id: 'esami',
+    titolo: 'Iscriversi a un esame',
+    passi: [
+      'Apri “Esami e iscrizioni” (da “Orari e calendari”) o la pagina del corso: trovi gli appelli con data, ora, aula e commissione.',
+      'Premi “Iscriviti all’appello” mentre le iscrizioni della sessione sono aperte; chiudono comunque una settimana prima dell’esame.',
+      'Per ogni corso puoi essere iscritto a un solo appello per sessione: per cambiarlo annulla prima l’iscrizione.',
+      'Gli esami a cui sei iscritto compaiono qui, in “I tuoi esami”.',
+    ],
+  },
+  {
     id: 'date',
     titolo: 'Quando ci si iscrive',
     passi: [
-      'La segreteria apre le iscrizioni ai corsi una volta per semestre; i corsi annuali seguono il primo semestre.',
-      'Il docente può tenere aperte più a lungo le iscrizioni al proprio corso: fa fede la data mostrata nella pagina del corso.',
+      'La segreteria apre le iscrizioni ai corsi una volta per semestre (i corsi annuali seguono il primo) e quelle agli esami per ogni sessione: invernale (febbraio), estiva (giugno) e autunnale (settembre).',
+      'Il docente può tenere aperte più a lungo le iscrizioni al proprio corso o appello: fa fede la data mostrata sul sito.',
     ],
   },
   {
