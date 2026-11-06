@@ -60,6 +60,25 @@ Serve a far provare il sito agli admin prima della messa in produzione. Contiene
 
 Ogni push su `main` aggiorna l’anteprima (con il disco collegato il sito resta offline per qualche secondo durante l’aggiornamento). Per azzerare i contenuti demo svuota il database: al riavvio vengono ricaricati.
 
+## Accesso con Google
+
+Si entra solo con un account Google Workspace `@albertina.academy` (flusso OAuth 2.0 / OpenID Connect con PKCE, codice in `src/auth/`). L’account viene creato al primo accesso:
+
+- **studenti** (`12345t@`, `12345b@`): ruolo Studente automatico;
+- **docenti**: se l’email coincide con un profilo attivo in *Docenti* non ancora collegato, ruolo Docente automatico e profilo collegato;
+- **tutti gli altri** (personale, caselle d’ufficio): nessun ruolo, pagina `/accesso-in-attesa`; gli amministratori li trovano in *Da abilitare* sulla dashboard e assegnano il ruolo.
+
+Con Google configurato il modulo con la password è nascosto (link “Accesso di emergenza”, `/admin/login?password=1`) e il server accetta la password solo dagli amministratori (`beforeLogin` in `Users`). Senza le variabili Google la password funziona per tutti, come in sviluppo.
+
+Configurazione (una volta, da un account dell’organizzazione `albertina.academy` in [Google Cloud Console](https://console.cloud.google.com)):
+
+1. Nuovo progetto “Sito Albertina” nell’organizzazione `albertina.academy`.
+2. **Google Auth Platform** → nome app “Accademia Albertina”, pubblico **Interno** (solo account dell’Accademia).
+3. **Client** → *Applicazione web*, URI di reindirizzamento autorizzati:
+   - `https://albertina-anteprima.onrender.com/api/users/google/callback` (e quello di produzione quando ci sarà);
+   - `http://localhost:3000/api/users/google/callback` per lo sviluppo.
+4. Su Render (*Environment*) e nel `.env` locale: `GOOGLE_CLIENT_ID` e `GOOGLE_CLIENT_SECRET`. `NEXT_PUBLIC_SERVER_URL` deve essere l’indirizzo pubblico, perché da lì si calcola l’URI di ritorno.
+
 ## Regole del progetto
 
 - **Accessibilità:** WCAG 2.1 AA è un requisito, non un’opzione. Ogni colore di testo deve avere contrasto ≥ 4,5:1; i controlli devono essere usabili da tastiera e avere area ≥ 44px. La CI fallisce se axe trova violazioni.

@@ -24,6 +24,7 @@ export const SLUG_RISERVATI = [
   'api',
   'avvisi',
   'cerca',
+  'accesso-in-attesa',
   'corsi',
   'docenti',
   'next',

@@ -27,6 +27,34 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.21.0',
+    data: '2026-11-06',
+    titolo: 'Accesso con Google',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Pulsante “Accedi con Google” per i soli account @albertina.academy. Con Google attivo il modulo con la password sparisce: resta solo come accesso di emergenza per gli amministratori.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Al primo accesso gli studenti ricevono il ruolo Studente e i docenti in elenco il ruolo Docente, collegato al loro profilo. Il resto del personale vede una pagina di attesa finché un amministratore non assegna il ruolo.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nella dashboard gli amministratori trovano il riquadro “Da abilitare” con chi è entrato con Google ma non ha ancora un ruolo.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Messaggi chiari sulla pagina di accesso quando l’account non è dell’Accademia o la richiesta è scaduta.',
+      },
+    ],
+    pr: [52],
+  },
+  {
     versione: '0.20.0',
     data: '2026-11-06',
     titolo: 'Design System',
@@ -135,8 +163,14 @@ export const CHANGELOG: Versione[] = [
         testo:
           'Nel pannello le icone del sito e dell’account sono più leggere e senza riquadro; la casetta del percorso è allineata al testo.',
       },
-      { tipo: 'corretto', testo: 'Il menu laterale delle pagine non finisce più sotto l’intestazione.' },
-      { tipo: 'corretto', testo: 'Nella pagina Docenti le linee delle lettere non sono più rosse.' },
+      {
+        tipo: 'corretto',
+        testo: 'Il menu laterale delle pagine non finisce più sotto l’intestazione.',
+      },
+      {
+        tipo: 'corretto',
+        testo: 'Nella pagina Docenti le linee delle lettere non sono più rosse.',
+      },
     ],
     pr: [48],
   },
@@ -259,11 +293,13 @@ export const CHANGELOG: Versione[] = [
     voci: [
       {
         tipo: 'migliorato',
-        testo: 'Nel menu Didattica e nel footer la voce “Orari e calendari” porta alla pagina /calendari.',
+        testo:
+          'Nel menu Didattica e nel footer la voce “Orari e calendari” porta alla pagina /calendari.',
       },
       {
         tipo: 'migliorato',
-        testo: 'I vecchi indirizzi dell’orario lezioni e dei calendari rimandano alla nuova pagina.',
+        testo:
+          'I vecchi indirizzi dell’orario lezioni e dei calendari rimandano alla nuova pagina.',
       },
     ],
     pr: [42],
@@ -291,7 +327,10 @@ export const CHANGELOG: Versione[] = [
         testo:
           'Importati dal PDF della segreteria i calendari delle presentazioni 2026/2027: scuole (11 righe) e corsi (201 righe).',
       },
-      { tipo: 'nuovo', testo: 'Si filtrano per scuola o corso e si cercano per docente, aula o data.' },
+      {
+        tipo: 'nuovo',
+        testo: 'Si filtrano per scuola o corso e si cercano per docente, aula o data.',
+      },
     ],
     pr: [40],
   },
@@ -356,7 +395,10 @@ export const CHANGELOG: Versione[] = [
         testo:
           'Da telefono il menu del pannello si apre come cassetto sopra la pagina, più stretto e con più spazio tra le voci.',
       },
-      { tipo: 'migliorato', testo: 'Pulsanti dell’intestazione della stessa misura, comodi da toccare.' },
+      {
+        tipo: 'migliorato',
+        testo: 'Pulsanti dell’intestazione della stessa misura, comodi da toccare.',
+      },
       {
         tipo: 'migliorato',
         testo:
@@ -465,7 +507,10 @@ export const CHANGELOG: Versione[] = [
         testo:
           'Catalogo corsi con scheda del corso e profili pubblici dei docenti; caricati i 267 corsi e 102 docenti attuali.',
       },
-      { tipo: 'migliorato', testo: 'Pannello rinnovato: bacheca con azioni rapide e stile Albertina.' },
+      {
+        tipo: 'migliorato',
+        testo: 'Pannello rinnovato: bacheca con azioni rapide e stile Albertina.',
+      },
       {
         tipo: 'migliorato',
         testo: 'Header con etichette sotto le icone e menu a fisarmonica su telefono.',
@@ -486,8 +531,7 @@ export const CHANGELOG: Versione[] = [
       { tipo: 'nuovo', testo: 'Footer istituzionale con contatti e loghi MUR e AFAM.' },
       {
         tipo: 'nuovo',
-        testo:
-          'Pagine istituzionali composte a blocchi e menu del sito modificabile dal pannello.',
+        testo: 'Pagine istituzionali composte a blocchi e menu del sito modificabile dal pannello.',
       },
     ],
     pr: [8, 9, 10, 11, 12],
@@ -497,7 +541,10 @@ export const CHANGELOG: Versione[] = [
     data: '2026-10-21',
     titolo: 'Avvisi',
     voci: [
-      { tipo: 'nuovo', testo: 'Avvisi con categorie per ruolo: ognuno pubblica solo nelle proprie.' },
+      {
+        tipo: 'nuovo',
+        testo: 'Avvisi con categorie per ruolo: ognuno pubblica solo nelle proprie.',
+      },
       {
         tipo: 'nuovo',
         testo: 'Pagina avvisi con filtri, pagina del singolo avviso e ultimi avvisi in homepage.',

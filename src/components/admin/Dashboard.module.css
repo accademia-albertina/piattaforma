@@ -241,3 +241,22 @@
   font-weight: 400;
   color: var(--theme-elevation-600);
 }
+
+/* Personale in attesa di ruolo: pannello pieno, niente bordi (regola dei box) */
+.attesa {
+  padding: var(--base);
+  background: var(--theme-elevation-100);
+}
+
+.elencoAttesa {
+  display: grid;
+  gap: calc(var(--base) / 2);
+  margin: var(--base) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.data {
+  color: var(--theme-elevation-700);
+  font-size: 0.875rem;
+}

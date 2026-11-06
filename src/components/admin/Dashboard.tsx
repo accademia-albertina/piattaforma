@@ -4,7 +4,7 @@ import { Gutter } from '@payloadcms/ui'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
 
-import { ROLE_LABELS, type Role } from '@/access/roles'
+import { ROLE_LABELS, isAdmin, type Role } from '@/access/roles'
 import { CHANGELOG } from '@/content/changelog'
 
 import { ICONE_SEZIONI } from './icone'
@@ -125,6 +125,20 @@ export default async function Dashboard({
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
     .slice(0, 8)
 
+  // Personale entrato con Google ma senza ruolo: lo abilita un amministratore
+  const daAbilitare = isAdmin(user)
+    ? await payload.find({
+        collection: 'users',
+        req,
+        overrideAccess: false,
+        where: { roles: { exists: false } },
+        depth: 0,
+        limit: 10,
+        sort: '-createdAt',
+        select: { email: true, nome: true, cognome: true, createdAt: true },
+      })
+    : null
+
   const nome = (user as { nome?: string } | null)?.nome || user?.email
   const ruoli = ((user as { roles?: Role[] } | null)?.roles ?? []).map((r) => ROLE_LABELS[r])
   const azioni = visibili.filter((s) => s.nuovo && permessiCollezioni[s.slug]?.create)
@@ -146,6 +160,31 @@ export default async function Dashboard({
           </Link>
         </div>
       </div>
+
+      {daAbilitare && daAbilitare.totalDocs > 0 && (
+        <section aria-labelledby="da-abilitare" className={`${styles.sezione} ${styles.attesa}`}>
+          <h2 id="da-abilitare" className={styles.titoloSezione}>
+            Da abilitare ({daAbilitare.totalDocs})
+          </h2>
+          <p className={styles.descrizione}>
+            Hanno fatto l’accesso con Google ma non hanno ancora un ruolo. Apri l’account e scegli
+            il ruolo.
+          </p>
+          <ul className={styles.elencoAttesa}>
+            {daAbilitare.docs.map((u) => (
+              <li key={u.id}>
+                <Link href={`${admin}/collections/users/${u.id}`}>
+                  {[u.nome, u.cognome].filter(Boolean).join(' ') || u.email}
+                </Link>{' '}
+                <span className={styles.data}>
+                  {u.nome || u.cognome ? `${u.email} · ` : ''}
+                  {data.format(new Date(u.createdAt))}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {azioni.length > 0 && (
         <section aria-labelledby="azioni-rapide" className={styles.sezione}>

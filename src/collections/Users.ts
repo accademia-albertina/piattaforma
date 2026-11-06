@@ -1,5 +1,7 @@
-import type { Access, CollectionConfig, FieldAccess } from 'payload'
+import { APIError, type Access, type CollectionConfig, type FieldAccess } from 'payload'
 
+import { endpointsGoogle } from '@/auth/endpoints'
+import { ssoAttivo } from '@/auth/google'
 import { ROLES, ROLE_LABELS, canAccessBackend, defaultRolesForEmail, isAdmin } from '@/access/roles'
 
 const adminOnly: Access = ({ req }) => isAdmin(req.user)
@@ -22,14 +24,15 @@ export const Users: CollectionConfig = {
     defaultColumns: ['email', 'nome', 'cognome', 'roles'],
     group: 'Sistema',
   },
-  // Il login con Google Workspace arriva in una PR successiva; per ora email e password,
-  // con blocco dopo tentativi falliti.
+  // Accesso con Google Workspace (src/auth): /api/users/google. Email e password restano per
+  // gli account di servizio e finché le credenziali Google non sono configurate.
   auth: {
     maxLoginAttempts: 5,
     lockTime: 15 * 60 * 1000,
     tokenExpiration: 8 * 60 * 60,
     cookies: { sameSite: 'Lax', secure: process.env.NODE_ENV === 'production' },
   },
+  endpoints: endpointsGoogle,
   access: {
     admin: ({ req }) => canAccessBackend(req.user),
     create: adminOnly,
@@ -38,6 +41,21 @@ export const Users: CollectionConfig = {
     delete: adminOnly,
   },
   hooks: {
+    // Con Google configurato, la password vale solo per gli admin (accesso di emergenza).
+    // L'accesso con Google non passa da qui: apre la sessione direttamente (src/auth/sessione.ts).
+    beforeLogin: [
+      ({ user }) => {
+        if (ssoAttivo() && !isAdmin(user)) {
+          throw new APIError(
+            'Usa “Accedi con Google” con il tuo account @albertina.academy.',
+            403,
+            { motivo: 'solo-google' }, // con data il messaggio arriva al modulo di accesso
+            true,
+          )
+        }
+        return user
+      },
+    ],
     beforeChange: [
       async ({ data, operation, req }) => {
         if (operation !== 'create') return data
