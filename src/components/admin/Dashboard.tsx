@@ -42,6 +42,13 @@ const SEZIONI: Sezione[] = [
   { slug: 'media', tipo: 'collezione', serve: 'read', nuovo: 'Carica un file' },
   { slug: 'dottorandi', tipo: 'collezione', serve: 'update' },
   { slug: 'calendari', tipo: 'collezione', serve: 'update' },
+  {
+    slug: 'finestre-iscrizione',
+    tipo: 'collezione',
+    serve: 'update',
+    nuovo: 'Nuova finestra di iscrizione',
+  },
+  { slug: 'iscrizioni-corsi', tipo: 'collezione', serve: 'read' },
   { slug: 'scuole', tipo: 'collezione', serve: 'update' },
   { slug: 'albo', tipo: 'collezione', serve: 'update', nuovo: 'Nuovo atto all’Albo' },
   { slug: 'trasparenza', tipo: 'collezione', serve: 'update' },

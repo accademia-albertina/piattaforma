@@ -84,12 +84,8 @@
           "name": "avvisi_categorie_parent_fk",
           "tableFrom": "avvisi_categorie",
           "tableTo": "avvisi",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -187,12 +183,8 @@
           "name": "avvisi_allegati_file_id_media_id_fk",
           "tableFrom": "avvisi_allegati",
           "tableTo": "media",
-          "columnsFrom": [
-            "file_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["file_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -200,12 +192,8 @@
           "name": "avvisi_allegati_parent_id_fk",
           "tableFrom": "avvisi_allegati",
           "tableTo": "avvisi",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -403,12 +391,8 @@
           "name": "avvisi_immagine_id_media_id_fk",
           "tableFrom": "avvisi",
           "tableTo": "media",
-          "columnsFrom": [
-            "immagine_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["immagine_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -416,12 +400,8 @@
           "name": "avvisi_autore_id_users_id_fk",
           "tableFrom": "avvisi",
           "tableTo": "users",
-          "columnsFrom": [
-            "autore_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["autore_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -534,12 +514,8 @@
           "name": "avvisi_rels_parent_fk",
           "tableFrom": "avvisi_rels",
           "tableTo": "avvisi",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -547,12 +523,8 @@
           "name": "avvisi_rels_scuole_fk",
           "tableFrom": "avvisi_rels",
           "tableTo": "scuole",
-          "columnsFrom": [
-            "scuole_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["scuole_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -645,12 +617,8 @@
           "name": "_avvisi_v_version_categorie_parent_fk",
           "tableFrom": "_avvisi_v_version_categorie",
           "tableTo": "_avvisi_v",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -754,12 +722,8 @@
           "name": "_avvisi_v_version_allegati_file_id_media_id_fk",
           "tableFrom": "_avvisi_v_version_allegati",
           "tableTo": "media",
-          "columnsFrom": [
-            "file_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["file_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -767,12 +731,8 @@
           "name": "_avvisi_v_version_allegati_parent_id_fk",
           "tableFrom": "_avvisi_v_version_allegati",
           "tableTo": "_avvisi_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1054,12 +1014,8 @@
           "name": "_avvisi_v_parent_id_avvisi_id_fk",
           "tableFrom": "_avvisi_v",
           "tableTo": "avvisi",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -1067,12 +1023,8 @@
           "name": "_avvisi_v_version_immagine_id_media_id_fk",
           "tableFrom": "_avvisi_v",
           "tableTo": "media",
-          "columnsFrom": [
-            "version_immagine_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["version_immagine_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -1080,12 +1032,8 @@
           "name": "_avvisi_v_version_autore_id_users_id_fk",
           "tableFrom": "_avvisi_v",
           "tableTo": "users",
-          "columnsFrom": [
-            "version_autore_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["version_autore_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -1198,12 +1146,8 @@
           "name": "_avvisi_v_rels_parent_fk",
           "tableFrom": "_avvisi_v_rels",
           "tableTo": "_avvisi_v",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -1211,12 +1155,8 @@
           "name": "_avvisi_v_rels_scuole_fk",
           "tableFrom": "_avvisi_v_rels",
           "tableTo": "scuole",
-          "columnsFrom": [
-            "scuole_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["scuole_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1536,12 +1476,8 @@
           "name": "users_roles_parent_fk",
           "tableFrom": "users_roles",
           "tableTo": "users",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1624,12 +1560,8 @@
           "name": "users_sessions_parent_id_fk",
           "tableFrom": "users_sessions",
           "tableTo": "users",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2077,12 +2009,8 @@
           "name": "payload_locked_documents_rels_parent_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "payload_locked_documents",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -2090,12 +2018,8 @@
           "name": "payload_locked_documents_rels_avvisi_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "avvisi",
-          "columnsFrom": [
-            "avvisi_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["avvisi_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -2103,12 +2027,8 @@
           "name": "payload_locked_documents_rels_scuole_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "scuole",
-          "columnsFrom": [
-            "scuole_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["scuole_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -2116,12 +2036,8 @@
           "name": "payload_locked_documents_rels_media_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "media",
-          "columnsFrom": [
-            "media_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["media_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -2129,12 +2045,8 @@
           "name": "payload_locked_documents_rels_users_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "users",
-          "columnsFrom": [
-            "users_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["users_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2338,12 +2250,8 @@
           "name": "payload_preferences_rels_parent_fk",
           "tableFrom": "payload_preferences_rels",
           "tableTo": "payload_preferences",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -2351,12 +2259,8 @@
           "name": "payload_preferences_rels_users_fk",
           "tableFrom": "payload_preferences_rels",
           "tableTo": "users",
-          "columnsFrom": [
-            "users_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["users_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2463,10 +2367,7 @@
     "public.enum_avvisi_status": {
       "name": "enum_avvisi_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum__avvisi_v_version_categorie": {
       "name": "enum__avvisi_v_version_categorie",
@@ -2486,10 +2387,7 @@
     "public.enum__avvisi_v_version_status": {
       "name": "enum__avvisi_v_version_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum_users_roles": {
       "name": "enum_users_roles",

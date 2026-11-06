@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { ChevronDown, Search, UserRound } from 'lucide-react'
+import { ChevronDown, Search } from 'lucide-react'
 import { Button, Disclosure, DisclosurePanel, Heading } from 'react-aria-components'
 
 import {
@@ -15,6 +15,7 @@ import {
 } from '@/lib/navigazione'
 
 import { MenuLink } from '../MenuLink/MenuLink'
+import { MenuUtente, type UtenteCollegato } from '../MenuUtente/MenuUtente'
 
 import { useCompatto, useMediaQuery } from './hooks'
 
@@ -26,6 +27,8 @@ export type SiteHeaderProps = {
   servizi?: typeof MENU_SERVIZI
   inEvidenza?: VoceMenu[]
   colonne?: GruppoMenu[][]
+  /** Utente collegato (storie e test); se assente lo chiede al server. */
+  utente?: UtenteCollegato | null
 }
 
 const ICONA = { size: 24, strokeWidth: 1.5, 'aria-hidden': true } as const
@@ -35,6 +38,7 @@ export function SiteHeader({
   servizi = MENU_SERVIZI,
   inEvidenza = MENU_IN_EVIDENZA,
   colonne = MENU_PRINCIPALE,
+  utente,
 }: SiteHeaderProps) {
   const [open, setOpen] = useState(false)
   const triggerRef = useRef<HTMLButtonElement>(null)
@@ -139,10 +143,11 @@ export function SiteHeader({
             </Link>
 
             <div className={styles.actions}>
-              <Link href="/admin" className={styles.iconButton}>
-                <UserRound {...ICONA} />
-                <span className={styles.iconLabel}>Area riservata</span>
-              </Link>
+              <MenuUtente
+                classePulsante={styles.iconButton}
+                classeEtichetta={styles.iconLabel}
+                utente={utente}
+              />
               <Link href="/cerca" className={styles.iconButton} aria-current={current('/cerca')}>
                 <Search {...ICONA} />
                 <span className={styles.iconLabel}>Cerca</span>

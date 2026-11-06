@@ -114,3 +114,8 @@ export async function scambiaCodice(o: {
   if (!id_token) throw new AccessoNegato('token')
   return verificaIdToken(id_token)
 }
+
+/** Link “Accedi” che riporta alla pagina indicata (senza Google configurato: accesso con password). */
+export function urlAccesso(dopo: string) {
+  return ssoAttivo() ? `/api/users/google?dopo=${encodeURIComponent(dopo)}` : '/admin/login'
+}

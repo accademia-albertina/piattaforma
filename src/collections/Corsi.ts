@@ -11,6 +11,7 @@ import {
   modificaCorso,
   soloDidattica,
 } from '@/access/corsi'
+import { PERIODI_CORSI } from '@/access/iscrizioni'
 import { rowLabel } from '@/fields/rowLabel'
 import { slugField } from '@/fields/slug'
 import { validaTitolo } from '@/fields/titolo'
@@ -242,6 +243,59 @@ export const Corsi: CollectionConfig = {
                   ],
                 },
               ],
+            },
+          ],
+        },
+        {
+          label: 'Iscritti',
+          description:
+            'Gli studenti si iscrivono dalla pagina del corso sul sito, nella finestra aperta dalla segreteria.',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'periodoIscrizione',
+                  label: 'Finestra di iscrizione',
+                  type: 'select',
+                  defaultValue: 'primo',
+                  options: PERIODI_CORSI.map((p) => ({ ...p })),
+                  access: { update: campoSoloDidattica },
+                  admin: {
+                    width: '50%',
+                    description:
+                      'Semestre in cui si aprono le iscrizioni. I corsi annuali seguono il primo.',
+                  },
+                },
+                {
+                  name: 'prorogaIscrizioni',
+                  label: 'Prolunga le iscrizioni fino al',
+                  type: 'date',
+                  admin: {
+                    width: '50%',
+                    date: {
+                      pickerAppearance: 'dayAndTime',
+                      displayFormat: 'd MMM yyyy, HH:mm',
+                      timeIntervals: 30,
+                    },
+                    description:
+                      'Facoltativo. Vale solo se è dopo la chiusura fissata dalla segreteria; poi premi “Pubblica modifiche”.',
+                  },
+                },
+              ],
+            },
+            {
+              name: 'iscritti',
+              label: 'Studenti iscritti',
+              type: 'join',
+              collection: 'iscrizioni-corsi',
+              on: 'corso',
+              defaultSort: 'nominativo',
+              defaultLimit: 100,
+              admin: {
+                allowCreate: false,
+                defaultColumns: ['nominativo', 'matricola', 'livello', 'email', 'createdAt'],
+              },
             },
           ],
         },

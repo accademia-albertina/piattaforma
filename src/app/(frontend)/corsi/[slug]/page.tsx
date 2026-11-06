@@ -4,8 +4,15 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { headers } from 'next/headers'
+
 import { annoAccademicoCorrente } from '@/access/corsi'
-import { Alert, Breadcrumbs, Tag } from '@/components'
+import { datiStudente } from '@/access/iscrizioni'
+import { hasRole } from '@/access/roles'
+import { urlAccesso } from '@/auth/google'
+import { Alert, Breadcrumbs, IscrizioneCorso, Tag } from '@/components'
+import { dataIscrizioni, iscrizioniDelCorso } from '@/lib/iscrizioni'
+import { payloadClient } from '@/lib/payload'
 import { docentiDi, etichettaLivelli, orariPerPeriodo, trovaCorso } from '@/lib/corsi'
 import type { Scuola } from '@/payload-types'
 import { lexicalToText } from '@/utilities/lexicalText'
@@ -39,6 +46,22 @@ export default async function CorsoPage({ params }: Props) {
   const orari = orariPerPeriodo(corso.orari)
   const archivio = corso.annoAccademico !== annoAccademicoCorrente()
   const siNo = (v: boolean | null | undefined) => (v ? 'Sì' : 'No')
+
+  // Iscrizioni: solo per i corsi dell'anno in corso
+  const payload = await payloadClient()
+  const { user } = await payload.auth({ headers: await headers() })
+  const iscrizioni = archivio ? null : await iscrizioniDelCorso(payload, corso)
+  const studente = hasRole(user, 'studente') ? datiStudente(user?.email) : null
+  const iscrizione = studente
+    ? (
+        await payload.find({
+          collection: 'iscrizioni-corsi',
+          where: { studente: { equals: user!.id }, corso: { equals: corso.id } },
+          limit: 1,
+          depth: 0,
+        })
+      ).docs[0]
+    : undefined
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -128,84 +151,98 @@ export default async function CorsoPage({ params }: Props) {
           ) : null}
         </div>
 
-        <aside className={styles.scheda} aria-labelledby="scheda-titolo">
-          <h2 id="scheda-titolo" className={styles.schedaTitolo}>
-            Scheda del corso
-          </h2>
-          <dl className={styles.dati}>
-            {corso.crediti ? (
-              <div>
-                <dt>Crediti</dt>
-                <dd>{corso.crediti} CFA</dd>
-              </div>
-            ) : null}
-            {corso.settore ? (
-              <div>
-                <dt>Settore artistico-disciplinare</dt>
-                <dd>{corso.settore}</dd>
-              </div>
-            ) : null}
-            {corso.areaDisciplinare ? (
-              <div>
-                <dt>Area disciplinare</dt>
-                <dd>{corso.areaDisciplinare}</dd>
-              </div>
-            ) : null}
-            {scuole.length > 0 ? (
-              <div>
-                <dt>Piano di studio</dt>
-                <dd>{scuole.map((s) => s.nome).join(', ')}</dd>
-              </div>
-            ) : null}
-            <div>
-              <dt>Esoneri</dt>
-              <dd>{siNo(corso.esoneri)}</dd>
-            </div>
-            <div>
-              <dt>Revisioni</dt>
-              <dd>{siNo(corso.revisioni)}</dd>
-            </div>
-          </dl>
-
-          {orari.length > 0 ? (
-            <>
-              <h3 className={styles.sottotitolo}>Orari delle lezioni</h3>
-              {orari.map((g) => (
-                <div key={g.periodo} className={styles.periodo}>
-                  <p className={styles.periodoNome}>{g.periodo}</p>
-                  <ul className={styles.orari}>
-                    {g.righe.map((r) => (
-                      <li key={r.id}>
-                        {r.giorno}, {r.dalle}–{r.alle}
-                        {r.aula ? ` · ${r.aula}` : ''}
-                      </li>
-                    ))}
-                  </ul>
+        <div className={styles.colonna}>
+          {iscrizioni ? (
+            <IscrizioneCorso
+              corsoId={corso.id}
+              stato={iscrizioni.stato}
+              apertura={iscrizioni.apertura ? dataIscrizioni(iscrizioni.apertura) : undefined}
+              chiusura={iscrizioni.chiusura ? dataIscrizioni(iscrizioni.chiusura) : undefined}
+              utente={!user ? 'anonimo' : studente ? 'studente' : 'altro'}
+              livelloAmmesso={!studente || (corso.livelli ?? []).includes(studente.livello)}
+              iscrizioneId={iscrizione?.id ?? null}
+              accessoHref={urlAccesso(`/corsi/${corso.slug}`)}
+            />
+          ) : null}
+          <aside className={styles.scheda} aria-labelledby="scheda-titolo">
+            <h2 id="scheda-titolo" className={styles.schedaTitolo}>
+              Scheda del corso
+            </h2>
+            <dl className={styles.dati}>
+              {corso.crediti ? (
+                <div>
+                  <dt>Crediti</dt>
+                  <dd>{corso.crediti} CFA</dd>
                 </div>
-              ))}
-            </>
-          ) : null}
+              ) : null}
+              {corso.settore ? (
+                <div>
+                  <dt>Settore artistico-disciplinare</dt>
+                  <dd>{corso.settore}</dd>
+                </div>
+              ) : null}
+              {corso.areaDisciplinare ? (
+                <div>
+                  <dt>Area disciplinare</dt>
+                  <dd>{corso.areaDisciplinare}</dd>
+                </div>
+              ) : null}
+              {scuole.length > 0 ? (
+                <div>
+                  <dt>Piano di studio</dt>
+                  <dd>{scuole.map((s) => s.nome).join(', ')}</dd>
+                </div>
+              ) : null}
+              <div>
+                <dt>Esoneri</dt>
+                <dd>{siNo(corso.esoneri)}</dd>
+              </div>
+              <div>
+                <dt>Revisioni</dt>
+                <dd>{siNo(corso.revisioni)}</dd>
+              </div>
+            </dl>
 
-          {docenti.length > 0 ? (
-            <>
-              <h3 className={styles.sottotitolo}>Ricevimento</h3>
-              <ul className={styles.ricevimento}>
-                {docenti.map((d) => (
-                  <li key={d.id}>
-                    {docenti.length > 1 ? <strong>{d.nomeCompleto}: </strong> : null}
-                    {d.ricevimento || 'Su appuntamento, scrivendo al docente.'}
-                    {d.email ? (
-                      <>
-                        {' '}
-                        <a href={`mailto:${d.email}`}>{emailSpezzabile(d.email)}</a>
-                      </>
-                    ) : null}
-                  </li>
+            {orari.length > 0 ? (
+              <>
+                <h3 className={styles.sottotitolo}>Orari delle lezioni</h3>
+                {orari.map((g) => (
+                  <div key={g.periodo} className={styles.periodo}>
+                    <p className={styles.periodoNome}>{g.periodo}</p>
+                    <ul className={styles.orari}>
+                      {g.righe.map((r) => (
+                        <li key={r.id}>
+                          {r.giorno}, {r.dalle}–{r.alle}
+                          {r.aula ? ` · ${r.aula}` : ''}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
-            </>
-          ) : null}
-        </aside>
+              </>
+            ) : null}
+
+            {docenti.length > 0 ? (
+              <>
+                <h3 className={styles.sottotitolo}>Ricevimento</h3>
+                <ul className={styles.ricevimento}>
+                  {docenti.map((d) => (
+                    <li key={d.id}>
+                      {docenti.length > 1 ? <strong>{d.nomeCompleto}: </strong> : null}
+                      {d.ricevimento || 'Su appuntamento, scrivendo al docente.'}
+                      {d.email ? (
+                        <>
+                          {' '}
+                          <a href={`mailto:${d.email}`}>{emailSpezzabile(d.email)}</a>
+                        </>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
+          </aside>
+        </div>
       </div>
 
       <script

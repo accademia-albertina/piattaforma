@@ -13,6 +13,8 @@ import { Trasparenza } from './collections/Trasparenza'
 import { Scuole } from './collections/Scuole'
 import { Pagine } from './collections/Pagine'
 import { Albo } from './collections/Albo'
+import { FinestreIscrizione } from './collections/FinestreIscrizione'
+import { IscrizioniCorsi } from './collections/IscrizioniCorsi'
 import { Calendari } from './collections/Calendari'
 import { Corsi } from './collections/Corsi'
 import { Docenti } from './collections/Docenti'
@@ -101,6 +103,8 @@ export default buildConfig({
     Docenti,
     Dottorandi,
     Calendari,
+    FinestreIscrizione,
+    IscrizioniCorsi,
     Albo,
     Trasparenza,
     Scuole,

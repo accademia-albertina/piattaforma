@@ -15,6 +15,8 @@ const ICONE = {
   'nav-docenti': 'GraduationCap',
   'nav-dottorandi': 'Microscope',
   'nav-calendari': 'CalendarDays',
+  'nav-finestre-iscrizione': 'CalendarClock',
+  'nav-iscrizioni-corsi': 'ClipboardCheck',
   'nav-albo': 'ClipboardList',
   'nav-trasparenza': 'Scale',
   'nav-scuole': 'Landmark',

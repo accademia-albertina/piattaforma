@@ -95,12 +95,8 @@
           "name": "pagine_blocks_testo_parent_id_fk",
           "tableFrom": "pagine_blocks_testo",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -233,12 +229,8 @@
           "name": "pagine_blocks_immagine_immagine_id_media_id_fk",
           "tableFrom": "pagine_blocks_immagine",
           "tableTo": "media",
-          "columnsFrom": [
-            "immagine_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["immagine_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -246,12 +238,8 @@
           "name": "pagine_blocks_immagine_parent_id_fk",
           "tableFrom": "pagine_blocks_immagine",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -349,12 +337,8 @@
           "name": "pagine_blocks_galleria_immagini_immagine_id_media_id_fk",
           "tableFrom": "pagine_blocks_galleria_immagini",
           "tableTo": "media",
-          "columnsFrom": [
-            "immagine_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["immagine_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -362,12 +346,8 @@
           "name": "pagine_blocks_galleria_immagini_parent_id_fk",
           "tableFrom": "pagine_blocks_galleria_immagini",
           "tableTo": "pagine_blocks_galleria",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -471,12 +451,8 @@
           "name": "pagine_blocks_galleria_parent_id_fk",
           "tableFrom": "pagine_blocks_galleria",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -594,12 +570,8 @@
           "name": "pagine_blocks_link_voci_pagina_id_pagine_id_fk",
           "tableFrom": "pagine_blocks_link_voci",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "pagina_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pagina_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -607,12 +579,8 @@
           "name": "pagine_blocks_link_voci_parent_id_fk",
           "tableFrom": "pagine_blocks_link_voci",
           "tableTo": "pagine_blocks_link",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -716,12 +684,8 @@
           "name": "pagine_blocks_link_parent_id_fk",
           "tableFrom": "pagine_blocks_link",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -804,12 +768,8 @@
           "name": "pagine_blocks_fisarmonica_voci_parent_id_fk",
           "tableFrom": "pagine_blocks_fisarmonica_voci",
           "tableTo": "pagine_blocks_fisarmonica",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -913,12 +873,8 @@
           "name": "pagine_blocks_fisarmonica_parent_id_fk",
           "tableFrom": "pagine_blocks_fisarmonica",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1019,12 +975,8 @@
           "name": "pagine_blocks_contatti_voci_parent_id_fk",
           "tableFrom": "pagine_blocks_contatti_voci",
           "tableTo": "pagine_blocks_contatti",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1128,12 +1080,8 @@
           "name": "pagine_blocks_contatti_parent_id_fk",
           "tableFrom": "pagine_blocks_contatti",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1231,12 +1179,8 @@
           "name": "pagine_blocks_allegati_documenti_file_id_media_id_fk",
           "tableFrom": "pagine_blocks_allegati_documenti",
           "tableTo": "media",
-          "columnsFrom": [
-            "file_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["file_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -1244,12 +1188,8 @@
           "name": "pagine_blocks_allegati_documenti_parent_id_fk",
           "tableFrom": "pagine_blocks_allegati_documenti",
           "tableTo": "pagine_blocks_allegati",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1354,12 +1294,8 @@
           "name": "pagine_blocks_allegati_parent_id_fk",
           "tableFrom": "pagine_blocks_allegati",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1437,12 +1373,8 @@
           "name": "pagine_uffici_editori_parent_fk",
           "tableFrom": "pagine_uffici_editori",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1613,12 +1545,8 @@
           "name": "pagine_genitore_id_pagine_id_fk",
           "tableFrom": "pagine",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "genitore_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["genitore_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -1728,12 +1656,8 @@
           "name": "_pagine_v_blocks_testo_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_testo",
           "tableTo": "_pagine_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1872,12 +1796,8 @@
           "name": "_pagine_v_blocks_immagine_immagine_id_media_id_fk",
           "tableFrom": "_pagine_v_blocks_immagine",
           "tableTo": "media",
-          "columnsFrom": [
-            "immagine_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["immagine_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -1885,12 +1805,8 @@
           "name": "_pagine_v_blocks_immagine_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_immagine",
           "tableTo": "_pagine_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -1994,12 +1910,8 @@
           "name": "_pagine_v_blocks_galleria_immagini_immagine_id_media_id_fk",
           "tableFrom": "_pagine_v_blocks_galleria_immagini",
           "tableTo": "media",
-          "columnsFrom": [
-            "immagine_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["immagine_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -2007,12 +1919,8 @@
           "name": "_pagine_v_blocks_galleria_immagini_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_galleria_immagini",
           "tableTo": "_pagine_v_blocks_galleria",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2122,12 +2030,8 @@
           "name": "_pagine_v_blocks_galleria_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_galleria",
           "tableTo": "_pagine_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2251,12 +2155,8 @@
           "name": "_pagine_v_blocks_link_voci_pagina_id_pagine_id_fk",
           "tableFrom": "_pagine_v_blocks_link_voci",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "pagina_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pagina_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -2264,12 +2164,8 @@
           "name": "_pagine_v_blocks_link_voci_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_link_voci",
           "tableTo": "_pagine_v_blocks_link",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2379,12 +2275,8 @@
           "name": "_pagine_v_blocks_link_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_link",
           "tableTo": "_pagine_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2473,12 +2365,8 @@
           "name": "_pagine_v_blocks_fisarmonica_voci_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_fisarmonica_voci",
           "tableTo": "_pagine_v_blocks_fisarmonica",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2588,12 +2476,8 @@
           "name": "_pagine_v_blocks_fisarmonica_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_fisarmonica",
           "tableTo": "_pagine_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2700,12 +2584,8 @@
           "name": "_pagine_v_blocks_contatti_voci_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_contatti_voci",
           "tableTo": "_pagine_v_blocks_contatti",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2815,12 +2695,8 @@
           "name": "_pagine_v_blocks_contatti_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_contatti",
           "tableTo": "_pagine_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2924,12 +2800,8 @@
           "name": "_pagine_v_blocks_allegati_documenti_file_id_media_id_fk",
           "tableFrom": "_pagine_v_blocks_allegati_documenti",
           "tableTo": "media",
-          "columnsFrom": [
-            "file_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["file_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -2937,12 +2809,8 @@
           "name": "_pagine_v_blocks_allegati_documenti_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_allegati_documenti",
           "tableTo": "_pagine_v_blocks_allegati",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -3053,12 +2921,8 @@
           "name": "_pagine_v_blocks_allegati_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_allegati",
           "tableTo": "_pagine_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -3136,12 +3000,8 @@
           "name": "_pagine_v_version_uffici_editori_parent_fk",
           "tableFrom": "_pagine_v_version_uffici_editori",
           "tableTo": "_pagine_v",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -3396,12 +3256,8 @@
           "name": "_pagine_v_parent_id_pagine_id_fk",
           "tableFrom": "_pagine_v",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -3409,12 +3265,8 @@
           "name": "_pagine_v_version_genitore_id_pagine_id_fk",
           "tableFrom": "_pagine_v",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "version_genitore_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["version_genitore_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -3507,12 +3359,8 @@
           "name": "avvisi_categorie_parent_fk",
           "tableFrom": "avvisi_categorie",
           "tableTo": "avvisi",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -3610,12 +3458,8 @@
           "name": "avvisi_allegati_file_id_media_id_fk",
           "tableFrom": "avvisi_allegati",
           "tableTo": "media",
-          "columnsFrom": [
-            "file_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["file_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -3623,12 +3467,8 @@
           "name": "avvisi_allegati_parent_id_fk",
           "tableFrom": "avvisi_allegati",
           "tableTo": "avvisi",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -3826,12 +3666,8 @@
           "name": "avvisi_immagine_id_media_id_fk",
           "tableFrom": "avvisi",
           "tableTo": "media",
-          "columnsFrom": [
-            "immagine_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["immagine_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -3839,12 +3675,8 @@
           "name": "avvisi_autore_id_users_id_fk",
           "tableFrom": "avvisi",
           "tableTo": "users",
-          "columnsFrom": [
-            "autore_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["autore_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -3957,12 +3789,8 @@
           "name": "avvisi_rels_parent_fk",
           "tableFrom": "avvisi_rels",
           "tableTo": "avvisi",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -3970,12 +3798,8 @@
           "name": "avvisi_rels_scuole_fk",
           "tableFrom": "avvisi_rels",
           "tableTo": "scuole",
-          "columnsFrom": [
-            "scuole_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["scuole_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -4068,12 +3892,8 @@
           "name": "_avvisi_v_version_categorie_parent_fk",
           "tableFrom": "_avvisi_v_version_categorie",
           "tableTo": "_avvisi_v",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -4177,12 +3997,8 @@
           "name": "_avvisi_v_version_allegati_file_id_media_id_fk",
           "tableFrom": "_avvisi_v_version_allegati",
           "tableTo": "media",
-          "columnsFrom": [
-            "file_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["file_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -4190,12 +4006,8 @@
           "name": "_avvisi_v_version_allegati_parent_id_fk",
           "tableFrom": "_avvisi_v_version_allegati",
           "tableTo": "_avvisi_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -4477,12 +4289,8 @@
           "name": "_avvisi_v_parent_id_avvisi_id_fk",
           "tableFrom": "_avvisi_v",
           "tableTo": "avvisi",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -4490,12 +4298,8 @@
           "name": "_avvisi_v_version_immagine_id_media_id_fk",
           "tableFrom": "_avvisi_v",
           "tableTo": "media",
-          "columnsFrom": [
-            "version_immagine_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["version_immagine_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -4503,12 +4307,8 @@
           "name": "_avvisi_v_version_autore_id_users_id_fk",
           "tableFrom": "_avvisi_v",
           "tableTo": "users",
-          "columnsFrom": [
-            "version_autore_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["version_autore_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -4621,12 +4421,8 @@
           "name": "_avvisi_v_rels_parent_fk",
           "tableFrom": "_avvisi_v_rels",
           "tableTo": "_avvisi_v",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -4634,12 +4430,8 @@
           "name": "_avvisi_v_rels_scuole_fk",
           "tableFrom": "_avvisi_v_rels",
           "tableTo": "scuole",
-          "columnsFrom": [
-            "scuole_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["scuole_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -4732,12 +4524,8 @@
           "name": "corsi_livelli_parent_fk",
           "tableFrom": "corsi_livelli",
           "tableTo": "corsi",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -4840,12 +4628,8 @@
           "name": "corsi_orari_parent_id_fk",
           "tableFrom": "corsi_orari",
           "tableTo": "corsi",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -5162,12 +4946,8 @@
           "name": "corsi_rels_parent_fk",
           "tableFrom": "corsi_rels",
           "tableTo": "corsi",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -5175,12 +4955,8 @@
           "name": "corsi_rels_docenti_fk",
           "tableFrom": "corsi_rels",
           "tableTo": "docenti",
-          "columnsFrom": [
-            "docenti_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["docenti_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -5188,12 +4964,8 @@
           "name": "corsi_rels_scuole_fk",
           "tableFrom": "corsi_rels",
           "tableTo": "scuole",
-          "columnsFrom": [
-            "scuole_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["scuole_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -5286,12 +5058,8 @@
           "name": "_corsi_v_version_livelli_parent_fk",
           "tableFrom": "_corsi_v_version_livelli",
           "tableTo": "_corsi_v",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -5400,12 +5168,8 @@
           "name": "_corsi_v_version_orari_parent_id_fk",
           "tableFrom": "_corsi_v_version_orari",
           "tableTo": "_corsi_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -5681,12 +5445,8 @@
           "name": "_corsi_v_parent_id_corsi_id_fk",
           "tableFrom": "_corsi_v",
           "tableTo": "corsi",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -5820,12 +5580,8 @@
           "name": "_corsi_v_rels_parent_fk",
           "tableFrom": "_corsi_v_rels",
           "tableTo": "_corsi_v",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -5833,12 +5589,8 @@
           "name": "_corsi_v_rels_docenti_fk",
           "tableFrom": "_corsi_v_rels",
           "tableTo": "docenti",
-          "columnsFrom": [
-            "docenti_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["docenti_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -5846,12 +5598,8 @@
           "name": "_corsi_v_rels_scuole_fk",
           "tableFrom": "_corsi_v_rels",
           "tableTo": "scuole",
-          "columnsFrom": [
-            "scuole_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["scuole_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -6088,12 +5836,8 @@
           "name": "docenti_foto_id_media_id_fk",
           "tableFrom": "docenti",
           "tableTo": "media",
-          "columnsFrom": [
-            "foto_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["foto_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -6101,12 +5845,8 @@
           "name": "docenti_cv_id_media_id_fk",
           "tableFrom": "docenti",
           "tableTo": "media",
-          "columnsFrom": [
-            "cv_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["cv_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -6114,12 +5854,8 @@
           "name": "docenti_account_id_users_id_fk",
           "tableFrom": "docenti",
           "tableTo": "users",
-          "columnsFrom": [
-            "account_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -6232,12 +5968,8 @@
           "name": "docenti_rels_parent_fk",
           "tableFrom": "docenti_rels",
           "tableTo": "docenti",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -6245,12 +5977,8 @@
           "name": "docenti_rels_scuole_fk",
           "tableFrom": "docenti_rels",
           "tableTo": "scuole",
-          "columnsFrom": [
-            "scuole_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["scuole_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -6505,12 +6233,8 @@
           "name": "dottorandi_foto_id_media_id_fk",
           "tableFrom": "dottorandi",
           "tableTo": "media",
-          "columnsFrom": [
-            "foto_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["foto_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -6518,12 +6242,8 @@
           "name": "dottorandi_account_id_users_id_fk",
           "tableFrom": "dottorandi",
           "tableTo": "users",
-          "columnsFrom": [
-            "account_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -6706,12 +6426,8 @@
           "name": "calendari_pdf_id_media_id_fk",
           "tableFrom": "calendari",
           "tableTo": "media",
-          "columnsFrom": [
-            "pdf_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pdf_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -6978,12 +6694,8 @@
           "name": "_calendari_v_parent_id_calendari_id_fk",
           "tableFrom": "_calendari_v",
           "tableTo": "calendari",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -6991,12 +6703,8 @@
           "name": "_calendari_v_version_pdf_id_media_id_fk",
           "tableFrom": "_calendari_v",
           "tableTo": "media",
-          "columnsFrom": [
-            "version_pdf_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["version_pdf_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -7100,12 +6808,8 @@
           "name": "albo_documenti_file_id_media_id_fk",
           "tableFrom": "albo_documenti",
           "tableTo": "media",
-          "columnsFrom": [
-            "file_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["file_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -7113,12 +6817,8 @@
           "name": "albo_documenti_parent_id_fk",
           "tableFrom": "albo_documenti",
           "tableTo": "albo",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -7424,12 +7124,8 @@
           "name": "_albo_v_version_documenti_file_id_media_id_fk",
           "tableFrom": "_albo_v_version_documenti",
           "tableTo": "media",
-          "columnsFrom": [
-            "file_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["file_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -7437,12 +7133,8 @@
           "name": "_albo_v_version_documenti_parent_id_fk",
           "tableFrom": "_albo_v_version_documenti",
           "tableTo": "_albo_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -7731,12 +7423,8 @@
           "name": "_albo_v_parent_id_albo_id_fk",
           "tableFrom": "_albo_v",
           "tableTo": "albo",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -7846,12 +7534,8 @@
           "name": "trasparenza_documenti_file_id_media_id_fk",
           "tableFrom": "trasparenza_documenti",
           "tableTo": "media",
-          "columnsFrom": [
-            "file_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["file_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -7859,12 +7543,8 @@
           "name": "trasparenza_documenti_parent_id_fk",
           "tableFrom": "trasparenza_documenti",
           "tableTo": "trasparenza",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -8128,12 +7808,8 @@
           "name": "_trasparenza_v_version_documenti_file_id_media_id_fk",
           "tableFrom": "_trasparenza_v_version_documenti",
           "tableTo": "media",
-          "columnsFrom": [
-            "file_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["file_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -8141,12 +7817,8 @@
           "name": "_trasparenza_v_version_documenti_parent_id_fk",
           "tableFrom": "_trasparenza_v_version_documenti",
           "tableTo": "_trasparenza_v",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -8387,12 +8059,8 @@
           "name": "_trasparenza_v_parent_id_trasparenza_id_fk",
           "tableFrom": "_trasparenza_v",
           "tableTo": "trasparenza",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -8532,12 +8200,8 @@
           "name": "scuole_immagine_id_media_id_fk",
           "tableFrom": "scuole",
           "tableTo": "media",
-          "columnsFrom": [
-            "immagine_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["immagine_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -8754,12 +8418,8 @@
           "name": "users_roles_parent_fk",
           "tableFrom": "users_roles",
           "tableTo": "users",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -8842,12 +8502,8 @@
           "name": "users_sessions_parent_id_fk",
           "tableFrom": "users_sessions",
           "tableTo": "users",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -9442,12 +9098,8 @@
           "name": "payload_locked_documents_rels_parent_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "payload_locked_documents",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9455,12 +9107,8 @@
           "name": "payload_locked_documents_rels_pagine_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "pagine_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pagine_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9468,12 +9116,8 @@
           "name": "payload_locked_documents_rels_avvisi_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "avvisi",
-          "columnsFrom": [
-            "avvisi_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["avvisi_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9481,12 +9125,8 @@
           "name": "payload_locked_documents_rels_corsi_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "corsi",
-          "columnsFrom": [
-            "corsi_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["corsi_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9494,12 +9134,8 @@
           "name": "payload_locked_documents_rels_docenti_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "docenti",
-          "columnsFrom": [
-            "docenti_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["docenti_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9507,12 +9143,8 @@
           "name": "payload_locked_documents_rels_dottorandi_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "dottorandi",
-          "columnsFrom": [
-            "dottorandi_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["dottorandi_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9520,12 +9152,8 @@
           "name": "payload_locked_documents_rels_calendari_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "calendari",
-          "columnsFrom": [
-            "calendari_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["calendari_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9533,12 +9161,8 @@
           "name": "payload_locked_documents_rels_albo_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "albo",
-          "columnsFrom": [
-            "albo_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["albo_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9546,12 +9170,8 @@
           "name": "payload_locked_documents_rels_trasparenza_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "trasparenza",
-          "columnsFrom": [
-            "trasparenza_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["trasparenza_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9559,12 +9179,8 @@
           "name": "payload_locked_documents_rels_scuole_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "scuole",
-          "columnsFrom": [
-            "scuole_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["scuole_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9572,12 +9188,8 @@
           "name": "payload_locked_documents_rels_media_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "media",
-          "columnsFrom": [
-            "media_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["media_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9585,12 +9197,8 @@
           "name": "payload_locked_documents_rels_users_fk",
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "users",
-          "columnsFrom": [
-            "users_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["users_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -9794,12 +9402,8 @@
           "name": "payload_preferences_rels_parent_fk",
           "tableFrom": "payload_preferences_rels",
           "tableTo": "payload_preferences",
-          "columnsFrom": [
-            "parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -9807,12 +9411,8 @@
           "name": "payload_preferences_rels_users_fk",
           "tableFrom": "payload_preferences_rels",
           "tableTo": "users",
-          "columnsFrom": [
-            "users_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["users_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -10000,12 +9600,8 @@
           "name": "navigazione_in_evidenza_pagina_id_pagine_id_fk",
           "tableFrom": "navigazione_in_evidenza",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "pagina_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pagina_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -10013,12 +9609,8 @@
           "name": "navigazione_in_evidenza_parent_id_fk",
           "tableFrom": "navigazione_in_evidenza",
           "tableTo": "navigazione",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -10130,12 +9722,8 @@
           "name": "navigazione_colonne_gruppi_voci_pagina_id_pagine_id_fk",
           "tableFrom": "navigazione_colonne_gruppi_voci",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "pagina_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pagina_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -10143,12 +9731,8 @@
           "name": "navigazione_colonne_gruppi_voci_parent_id_fk",
           "tableFrom": "navigazione_colonne_gruppi_voci",
           "tableTo": "navigazione_colonne_gruppi",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -10225,12 +9809,8 @@
           "name": "navigazione_colonne_gruppi_parent_id_fk",
           "tableFrom": "navigazione_colonne_gruppi",
           "tableTo": "navigazione_colonne",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -10301,12 +9881,8 @@
           "name": "navigazione_colonne_parent_id_fk",
           "tableFrom": "navigazione_colonne",
           "tableTo": "navigazione",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -10418,12 +9994,8 @@
           "name": "navigazione_servizi_sinistra_pagina_id_pagine_id_fk",
           "tableFrom": "navigazione_servizi_sinistra",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "pagina_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pagina_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -10431,12 +10003,8 @@
           "name": "navigazione_servizi_sinistra_parent_id_fk",
           "tableFrom": "navigazione_servizi_sinistra",
           "tableTo": "navigazione",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -10548,12 +10116,8 @@
           "name": "navigazione_servizi_destra_pagina_id_pagine_id_fk",
           "tableFrom": "navigazione_servizi_destra",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "pagina_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pagina_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -10561,12 +10125,8 @@
           "name": "navigazione_servizi_destra_parent_id_fk",
           "tableFrom": "navigazione_servizi_destra",
           "tableTo": "navigazione",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -10678,12 +10238,8 @@
           "name": "navigazione_footer_link_pagina_id_pagine_id_fk",
           "tableFrom": "navigazione_footer_link",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "pagina_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pagina_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -10691,12 +10247,8 @@
           "name": "navigazione_footer_link_parent_id_fk",
           "tableFrom": "navigazione_footer_link",
           "tableTo": "navigazione",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -10808,12 +10360,8 @@
           "name": "navigazione_footer_social_pagina_id_pagine_id_fk",
           "tableFrom": "navigazione_footer_social",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "pagina_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pagina_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -10821,12 +10369,8 @@
           "name": "navigazione_footer_social_parent_id_fk",
           "tableFrom": "navigazione_footer_social",
           "tableTo": "navigazione",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -10938,12 +10482,8 @@
           "name": "navigazione_footer_legale_pagina_id_pagine_id_fk",
           "tableFrom": "navigazione_footer_legale",
           "tableTo": "pagine",
-          "columnsFrom": [
-            "pagina_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pagina_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -10951,12 +10491,8 @@
           "name": "navigazione_footer_legale_parent_id_fk",
           "tableFrom": "navigazione_footer_legale",
           "tableTo": "navigazione",
-          "columnsFrom": [
-            "_parent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["_parent_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -11003,70 +10539,42 @@
     "public.enum_pagine_blocks_immagine_larghezza": {
       "name": "enum_pagine_blocks_immagine_larghezza",
       "schema": "public",
-      "values": [
-        "testo",
-        "piena"
-      ]
+      "values": ["testo", "piena"]
     },
     "public.enum_pagine_blocks_link_voci_tipo": {
       "name": "enum_pagine_blocks_link_voci_tipo",
       "schema": "public",
-      "values": [
-        "interno",
-        "percorso",
-        "esterno"
-      ]
+      "values": ["interno", "percorso", "esterno"]
     },
     "public.enum_pagine_uffici_editori": {
       "name": "enum_pagine_uffici_editori",
       "schema": "public",
-      "values": [
-        "segreteria",
-        "amministrativo",
-        "erasmus"
-      ]
+      "values": ["segreteria", "amministrativo", "erasmus"]
     },
     "public.enum_pagine_status": {
       "name": "enum_pagine_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum__pagine_v_blocks_immagine_larghezza": {
       "name": "enum__pagine_v_blocks_immagine_larghezza",
       "schema": "public",
-      "values": [
-        "testo",
-        "piena"
-      ]
+      "values": ["testo", "piena"]
     },
     "public.enum__pagine_v_blocks_link_voci_tipo": {
       "name": "enum__pagine_v_blocks_link_voci_tipo",
       "schema": "public",
-      "values": [
-        "interno",
-        "percorso",
-        "esterno"
-      ]
+      "values": ["interno", "percorso", "esterno"]
     },
     "public.enum__pagine_v_version_uffici_editori": {
       "name": "enum__pagine_v_version_uffici_editori",
       "schema": "public",
-      "values": [
-        "segreteria",
-        "amministrativo",
-        "erasmus"
-      ]
+      "values": ["segreteria", "amministrativo", "erasmus"]
     },
     "public.enum__pagine_v_version_status": {
       "name": "enum__pagine_v_version_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum_avvisi_categorie": {
       "name": "enum_avvisi_categorie",
@@ -11086,10 +10594,7 @@
     "public.enum_avvisi_status": {
       "name": "enum_avvisi_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum__avvisi_v_version_categorie": {
       "name": "enum__avvisi_v_version_categorie",
@@ -11109,171 +10614,97 @@
     "public.enum__avvisi_v_version_status": {
       "name": "enum__avvisi_v_version_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum_corsi_livelli": {
       "name": "enum_corsi_livelli",
       "schema": "public",
-      "values": [
-        "triennio",
-        "biennio"
-      ]
+      "values": ["triennio", "biennio"]
     },
     "public.enum_corsi_orari_semestre": {
       "name": "enum_corsi_orari_semestre",
       "schema": "public",
-      "values": [
-        "primo",
-        "secondo",
-        "annuale"
-      ]
+      "values": ["primo", "secondo", "annuale"]
     },
     "public.enum_corsi_orari_giorno": {
       "name": "enum_corsi_orari_giorno",
       "schema": "public",
-      "values": [
-        "lunedi",
-        "martedi",
-        "mercoledi",
-        "giovedi",
-        "venerdi",
-        "sabato"
-      ]
+      "values": ["lunedi", "martedi", "mercoledi", "giovedi", "venerdi", "sabato"]
     },
     "public.enum_corsi_status": {
       "name": "enum_corsi_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum__corsi_v_version_livelli": {
       "name": "enum__corsi_v_version_livelli",
       "schema": "public",
-      "values": [
-        "triennio",
-        "biennio"
-      ]
+      "values": ["triennio", "biennio"]
     },
     "public.enum__corsi_v_version_orari_semestre": {
       "name": "enum__corsi_v_version_orari_semestre",
       "schema": "public",
-      "values": [
-        "primo",
-        "secondo",
-        "annuale"
-      ]
+      "values": ["primo", "secondo", "annuale"]
     },
     "public.enum__corsi_v_version_orari_giorno": {
       "name": "enum__corsi_v_version_orari_giorno",
       "schema": "public",
-      "values": [
-        "lunedi",
-        "martedi",
-        "mercoledi",
-        "giovedi",
-        "venerdi",
-        "sabato"
-      ]
+      "values": ["lunedi", "martedi", "mercoledi", "giovedi", "venerdi", "sabato"]
     },
     "public.enum__corsi_v_version_status": {
       "name": "enum__corsi_v_version_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum_docenti_ruolo": {
       "name": "enum_docenti_ruolo",
       "schema": "public",
-      "values": [
-        "tempo-indeterminato",
-        "tempo-determinato",
-        "contratto"
-      ]
+      "values": ["tempo-indeterminato", "tempo-determinato", "contratto"]
     },
     "public.enum_dottorandi_curriculum": {
       "name": "enum_dottorandi_curriculum",
       "schema": "public",
-      "values": [
-        "new-media-art",
-        "processi-espositivi"
-      ]
+      "values": ["new-media-art", "processi-espositivi"]
     },
     "public.enum_calendari_tipo": {
       "name": "enum_calendari_tipo",
       "schema": "public",
-      "values": [
-        "lezioni",
-        "esami",
-        "presentazioni"
-      ]
+      "values": ["lezioni", "esami", "presentazioni"]
     },
     "public.enum_calendari_status": {
       "name": "enum_calendari_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum__calendari_v_version_tipo": {
       "name": "enum__calendari_v_version_tipo",
       "schema": "public",
-      "values": [
-        "lezioni",
-        "esami",
-        "presentazioni"
-      ]
+      "values": ["lezioni", "esami", "presentazioni"]
     },
     "public.enum__calendari_v_version_status": {
       "name": "enum__calendari_v_version_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum_albo_sezione": {
       "name": "enum_albo_sezione",
       "schema": "public",
-      "values": [
-        "bandi-di-concorso",
-        "bandi-generici",
-        "bandi-di-gara",
-        "sindacale"
-      ]
+      "values": ["bandi-di-concorso", "bandi-generici", "bandi-di-gara", "sindacale"]
     },
     "public.enum_albo_status": {
       "name": "enum_albo_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum__albo_v_version_sezione": {
       "name": "enum__albo_v_version_sezione",
       "schema": "public",
-      "values": [
-        "bandi-di-concorso",
-        "bandi-generici",
-        "bandi-di-gara",
-        "sindacale"
-      ]
+      "values": ["bandi-di-concorso", "bandi-generici", "bandi-di-gara", "sindacale"]
     },
     "public.enum__albo_v_version_status": {
       "name": "enum__albo_v_version_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum_trasparenza_sezione": {
       "name": "enum_trasparenza_sezione",
@@ -11308,10 +10739,7 @@
     "public.enum_trasparenza_status": {
       "name": "enum_trasparenza_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum__trasparenza_v_version_sezione": {
       "name": "enum__trasparenza_v_version_sezione",
@@ -11346,10 +10774,7 @@
     "public.enum__trasparenza_v_version_status": {
       "name": "enum__trasparenza_v_version_status",
       "schema": "public",
-      "values": [
-        "draft",
-        "published"
-      ]
+      "values": ["draft", "published"]
     },
     "public.enum_scuole_dipartimento": {
       "name": "enum_scuole_dipartimento",
@@ -11379,65 +10804,37 @@
     "public.enum_navigazione_in_evidenza_tipo": {
       "name": "enum_navigazione_in_evidenza_tipo",
       "schema": "public",
-      "values": [
-        "interno",
-        "percorso",
-        "esterno"
-      ]
+      "values": ["interno", "percorso", "esterno"]
     },
     "public.enum_navigazione_colonne_gruppi_voci_tipo": {
       "name": "enum_navigazione_colonne_gruppi_voci_tipo",
       "schema": "public",
-      "values": [
-        "interno",
-        "percorso",
-        "esterno"
-      ]
+      "values": ["interno", "percorso", "esterno"]
     },
     "public.enum_navigazione_servizi_sinistra_tipo": {
       "name": "enum_navigazione_servizi_sinistra_tipo",
       "schema": "public",
-      "values": [
-        "interno",
-        "percorso",
-        "esterno"
-      ]
+      "values": ["interno", "percorso", "esterno"]
     },
     "public.enum_navigazione_servizi_destra_tipo": {
       "name": "enum_navigazione_servizi_destra_tipo",
       "schema": "public",
-      "values": [
-        "interno",
-        "percorso",
-        "esterno"
-      ]
+      "values": ["interno", "percorso", "esterno"]
     },
     "public.enum_navigazione_footer_link_tipo": {
       "name": "enum_navigazione_footer_link_tipo",
       "schema": "public",
-      "values": [
-        "interno",
-        "percorso",
-        "esterno"
-      ]
+      "values": ["interno", "percorso", "esterno"]
     },
     "public.enum_navigazione_footer_social_tipo": {
       "name": "enum_navigazione_footer_social_tipo",
       "schema": "public",
-      "values": [
-        "interno",
-        "percorso",
-        "esterno"
-      ]
+      "values": ["interno", "percorso", "esterno"]
     },
     "public.enum_navigazione_footer_legale_tipo": {
       "name": "enum_navigazione_footer_legale_tipo",
       "schema": "public",
-      "values": [
-        "interno",
-        "percorso",
-        "esterno"
-      ]
+      "values": ["interno", "percorso", "esterno"]
     }
   },
   "schemas": {},

@@ -74,6 +74,8 @@ export interface Config {
     docenti: Docente;
     dottorandi: Dottorando;
     calendari: Calendario;
+    'finestre-iscrizione': FinestraIscrizione;
+    'iscrizioni-corsi': IscrizioneCorso;
     albo: AttoAlbo;
     trasparenza: Trasparenza;
     scuole: Scuola;
@@ -84,7 +86,11 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    corsi: {
+      iscritti: 'iscrizioni-corsi';
+    };
+  };
   collectionsSelect: {
     pagine: PagineSelect<false> | PagineSelect<true>;
     avvisi: AvvisiSelect<false> | AvvisiSelect<true>;
@@ -93,6 +99,8 @@ export interface Config {
     docenti: DocentiSelect<false> | DocentiSelect<true>;
     dottorandi: DottorandiSelect<false> | DottorandiSelect<true>;
     calendari: CalendariSelect<false> | CalendariSelect<true>;
+    'finestre-iscrizione': FinestreIscrizioneSelect<false> | FinestreIscrizioneSelect<true>;
+    'iscrizioni-corsi': IscrizioniCorsiSelect<false> | IscrizioniCorsiSelect<true>;
     albo: AlboSelect<false> | AlboSelect<true>;
     trasparenza: TrasparenzaSelect<false> | TrasparenzaSelect<true>;
     scuole: ScuoleSelect<false> | ScuoleSelect<true>;
@@ -782,12 +790,45 @@ export interface Corso {
       }[]
     | null;
   /**
+   * Semestre in cui si aprono le iscrizioni. I corsi annuali seguono il primo.
+   */
+  periodoIscrizione?: ('primo' | 'secondo') | null;
+  /**
+   * Facoltativo. Vale solo se è dopo la chiusura fissata dalla segreteria; poi premi “Pubblica modifiche”.
+   */
+  prorogaIscrizioni?: string | null;
+  iscritti?: {
+    docs?: (number | IscrizioneCorso)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * Chi si è iscritto a quale corso. Gli studenti si iscrivono dalla pagina del corso.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "iscrizioni-corsi".
+ */
+export interface IscrizioneCorso {
+  id: number;
+  corso: number | Corso;
+  /**
+   * Lo sceglie la segreteria solo per un’iscrizione aggiunta a mano.
+   */
+  studente: number | User;
+  nominativo?: string | null;
+  matricola?: string | null;
+  livello?: ('triennio' | 'biennio') | null;
+  email?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * Profili dei dottorandi, in /dottorati/albertina/dottorandi.
@@ -904,6 +945,29 @@ export interface Calendario {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * Quando gli studenti possono iscriversi ai corsi di un semestre (e, in seguito, agli esami di una sessione).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "finestre-iscrizione".
+ */
+export interface FinestraIscrizione {
+  id: number;
+  titolo?: string | null;
+  tipo: 'corsi' | 'esami';
+  annoAccademico: string;
+  /**
+   * Semestre per i corsi, sessione per gli esami. I corsi annuali seguono il primo semestre.
+   */
+  periodo: 'primo' | 'secondo' | 'invernale' | 'estiva' | 'autunnale';
+  apertura: string;
+  /**
+   * Da qui gli studenti non si iscrivono e non annullano più. Il docente può prolungarla sul suo corso.
+   */
+  chiusura: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * Bandi, procedure e comunicazioni dell’Albo online. Aggiungi i nuovi documenti (nomina, verbali, graduatoria) allo stesso atto.
@@ -1061,6 +1125,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'calendari';
         value: number | Calendario;
+      } | null)
+    | ({
+        relationTo: 'finestre-iscrizione';
+        value: number | FinestraIscrizione;
+      } | null)
+    | ({
+        relationTo: 'iscrizioni-corsi';
+        value: number | IscrizioneCorso;
       } | null)
     | ({
         relationTo: 'albo';
@@ -1339,6 +1411,9 @@ export interface CorsiSelect<T extends boolean = true> {
         aula?: T;
         id?: T;
       };
+  periodoIscrizione?: T;
+  prorogaIscrizioni?: T;
+  iscritti?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1405,6 +1480,34 @@ export interface CalendariSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "finestre-iscrizione_select".
+ */
+export interface FinestreIscrizioneSelect<T extends boolean = true> {
+  titolo?: T;
+  tipo?: T;
+  annoAccademico?: T;
+  periodo?: T;
+  apertura?: T;
+  chiusura?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "iscrizioni-corsi_select".
+ */
+export interface IscrizioniCorsiSelect<T extends boolean = true> {
+  corso?: T;
+  studente?: T;
+  nominativo?: T;
+  matricola?: T;
+  livello?: T;
+  email?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
