@@ -1,5 +1,6 @@
 import type { Access, CollectionConfig, FieldAccess } from 'payload'
 
+import { endpointsGoogle } from '@/auth/endpoints'
 import { ROLES, ROLE_LABELS, canAccessBackend, defaultRolesForEmail, isAdmin } from '@/access/roles'
 
 const adminOnly: Access = ({ req }) => isAdmin(req.user)
@@ -22,14 +23,15 @@ export const Users: CollectionConfig = {
     defaultColumns: ['email', 'nome', 'cognome', 'roles'],
     group: 'Sistema',
   },
-  // Il login con Google Workspace arriva in una PR successiva; per ora email e password,
-  // con blocco dopo tentativi falliti.
+  // Accesso con Google Workspace (src/auth): /api/users/google. Email e password restano per
+  // gli account di servizio e finché le credenziali Google non sono configurate.
   auth: {
     maxLoginAttempts: 5,
     lockTime: 15 * 60 * 1000,
     tokenExpiration: 8 * 60 * 60,
     cookies: { sameSite: 'Lax', secure: process.env.NODE_ENV === 'production' },
   },
+  endpoints: endpointsGoogle,
   access: {
     admin: ({ req }) => canAccessBackend(req.user),
     create: adminOnly,
