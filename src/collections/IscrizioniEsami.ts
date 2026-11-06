@@ -1,5 +1,8 @@
 import { filtroElenco, nascostaA } from '@/access/pannello'
-import { APIError, type CollectionConfig } from 'payload'
+import { erroreUtente } from '@/lib/errori'
+import { endpointExport } from '@/lib/export-iscritti'
+import { avvisaEsame } from '@/lib/email-iscrizioni'
+import type { CollectionConfig } from 'payload'
 
 import { LIVELLI, LIVELLO_LABELS } from '@/access/corsi'
 import {
@@ -14,7 +17,7 @@ import { iscrizioniDellAppello } from '@/lib/iscrizioni'
 import type { Appello, User } from '@/payload-types'
 
 const rifiuta = (messaggio: string, status = 400): never => {
-  throw new APIError(messaggio, status, null, true)
+  throw erroreUtente(messaggio, status)
 }
 
 const MESSAGGI_FINESTRA = {
@@ -28,7 +31,7 @@ const idDi = (v: unknown) =>
 
 /**
  * Iscrizione di uno studente a un appello. Stesse regole dei corsi: si iscrive dal sito nella
- * finestra della sessione (che chiude comunque il giorno dell'esame), annulla finché è aperta,
+ * finestra della sessione (che chiude comunque una settimana prima dell'esame), annulla finché è aperta,
  * il docente vede sempre gli iscritti. Un solo appello per corso nella stessa sessione.
  */
 export const IscrizioniEsami: CollectionConfig = {
@@ -45,6 +48,7 @@ export const IscrizioniEsami: CollectionConfig = {
     listSearchableFields: ['nominativo', 'email', 'matricola'],
   },
   defaultSort: 'nominativo',
+  endpoints: [endpointExport('iscrizioni-esami', 'appello')],
   access: {
     read: leggiIscrizioniEsami,
     create: creaIscrizione,
@@ -124,6 +128,18 @@ export const IscrizioniEsami: CollectionConfig = {
         data.nominativo =
           [studente.cognome, studente.nome].filter(Boolean).join(' ') || studente.email
         return data
+      },
+    ],
+    afterChange: [
+      async ({ doc, operation, req }) => {
+        if (operation === 'create') await avvisaEsame(req, doc, 'iscrizione')
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc, req }) => {
+        await avvisaEsame(req, doc, 'annullamento')
+        return doc
       },
     ],
     beforeDelete: [

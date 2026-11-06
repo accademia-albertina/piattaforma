@@ -1,5 +1,6 @@
 import { filtroElenco, nascostaA } from '@/access/pannello'
-import { APIError, type CollectionConfig, type Field, type FieldAccess } from 'payload'
+import { erroreUtente } from '@/lib/errori'
+import { type CollectionConfig, type Field, type FieldAccess } from 'payload'
 
 import { LIVELLI, LIVELLO_LABELS, annoAccademicoCorrente, isAnnoAccademico } from '@/access/corsi'
 import {
@@ -53,7 +54,7 @@ export const Appelli: CollectionConfig = {
       async ({ data, originalDoc, operation, req }) => {
         const d = { ...originalDoc, ...data }
         const corsoId = typeof d.corso === 'object' && d.corso ? d.corso.id : d.corso
-        if (!corsoId) throw new APIError('Indica il corso.', 400, null, true)
+        if (!corsoId) throw erroreUtente('Indica il corso.', 400)
         const corso = (await req.payload.findByID({
           collection: 'corsi',
           id: corsoId,
@@ -73,7 +74,7 @@ export const Appelli: CollectionConfig = {
               (typeof doc.account === 'object' ? doc.account?.id : doc.account) === req.user?.id,
           )
           if (!suo) {
-            throw new APIError('Puoi aggiungere appelli solo ai tuoi corsi.', 403, null, true)
+            throw erroreUtente('Puoi aggiungere appelli solo ai tuoi corsi.', 403)
           }
         }
 
@@ -206,6 +207,18 @@ export const Appelli: CollectionConfig = {
         },
         description:
           'Facoltativo. Vale solo se è dopo la chiusura fissata dalla segreteria; le iscrizioni chiudono comunque una settimana prima dell’esame.',
+      },
+    },
+    {
+      name: 'scaricaIscritti',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: {
+            path: '@/components/admin/ScaricaIscritti',
+            clientProps: { collezione: 'iscrizioni-esami', riferimento: 'appello' },
+          },
+        },
       },
     },
     {

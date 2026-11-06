@@ -24,6 +24,7 @@ import { Dottorandi } from './collections/Dottorandi'
 import { Pubblicazioni } from './collections/Pubblicazioni'
 import { Navigazione } from './globals/Navigazione'
 import { migrations } from './migrations'
+import { adattatoreEmail } from './lib/email'
 import { seedCorsi } from './seed/corsi'
 import { importaAvvisiWp } from './seed/avvisi-wp'
 import { rimuoviDocenti } from './seed/docenti-rimossi'
@@ -119,6 +120,7 @@ export default buildConfig({
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
+  email: adattatoreEmail(),
   cors: process.env.NEXT_PUBLIC_SERVER_URL ? [process.env.NEXT_PUBLIC_SERVER_URL] : [],
   csrf: process.env.NEXT_PUBLIC_SERVER_URL ? [process.env.NEXT_PUBLIC_SERVER_URL] : [],
   graphQL: { disable: true },

@@ -79,6 +79,12 @@ Configurazione (una volta, da un account dell’organizzazione `albertina.academ
    - `http://localhost:3000/api/users/google/callback` per lo sviluppo.
 4. Su Render (*Environment*) e nel `.env` locale: `GOOGLE_CLIENT_ID` e `GOOGLE_CLIENT_SECRET`. `NEXT_PUBLIC_SERVER_URL` deve essere l’indirizzo pubblico, perché da lì si calcola l’URI di ritorno.
 
+## Email (TurboSMTP)
+
+Le email di conferma delle iscrizioni partono solo se `SMTP_HOST` è impostata; altrimenti Payload le scrive nel log.
+Su Render imposta `SMTP_HOST=pro.turbo-smtp.com`, `SMTP_PORT=587` (oppure 465), `SMTP_USER`, `SMTP_PASS` ed eventualmente `EMAIL_MITTENTE`.
+Per provare in anteprima senza scrivere agli studenti imposta anche `EMAIL_SOLO_A` con il tuo indirizzo: tutte le email arrivano solo lì.
+
 ## Regole del progetto
 
 - **Accessibilità:** WCAG 2.1 AA è un requisito, non un’opzione. Ogni colore di testo deve avere contrasto ≥ 4,5:1; i controlli devono essere usabili da tastiera e avere area ≥ 44px. La CI fallisce se axe trova violazioni.

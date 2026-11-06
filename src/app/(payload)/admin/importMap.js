@@ -24,6 +24,7 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BlockLabel as BlockLabel_7f903c36ea5c3172f18dd02ca379f31e } from '../../../components/admin/BlockLabel'
 import { RowLabel as RowLabel_a22f15833f5c099d83eec5874403c04c } from '../../../components/admin/RowLabel'
+import { default as default_f67065a247c29f83b8b80ef6d4133254 } from '@/components/admin/ScaricaIscritti'
 import { TabellaCalendario as TabellaCalendario_9699e8f890a1160d8c1a1320656d19f9 } from '../../../components/admin/TabellaCalendario'
 import { default as default_82731de1591b2148716cbd75875b1236 } from '../../../components/admin/IconaScuolaPannello'
 import { default as default_ff2b3aef4ce7bf470d100ee3d53f4ed9 } from '../../../components/admin/Avatar'
@@ -66,6 +67,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "/components/admin/BlockLabel#BlockLabel": BlockLabel_7f903c36ea5c3172f18dd02ca379f31e,
   "/components/admin/RowLabel#RowLabel": RowLabel_a22f15833f5c099d83eec5874403c04c,
+  "@/components/admin/ScaricaIscritti#default": default_f67065a247c29f83b8b80ef6d4133254,
   "/components/admin/TabellaCalendario#TabellaCalendario": TabellaCalendario_9699e8f890a1160d8c1a1320656d19f9,
   "/components/admin/IconaScuolaPannello#default": default_82731de1591b2148716cbd75875b1236,
   "/components/admin/Avatar#default": default_ff2b3aef4ce7bf470d100ee3d53f4ed9,
