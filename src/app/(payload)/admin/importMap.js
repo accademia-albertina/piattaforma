@@ -29,11 +29,13 @@ import { default as default_82731de1591b2148716cbd75875b1236 } from '../../../co
 import { default as default_ff2b3aef4ce7bf470d100ee3d53f4ed9 } from '../../../components/admin/Avatar'
 import { default as default_dfe4008080d895d460898c3a6155e9ba } from '../../../components/admin/Icon'
 import { default as default_91a09b539d3c86b0aebf520e7564ce08 } from '../../../components/admin/Logo'
+import { default as default_10bac0750517cc563923d45d50c2ddf0 } from '../../../components/admin/ApriGuida'
 import { default as default_97d3eba8ada3517fe02663f49ec8ede2 } from '../../../components/admin/ApriSito'
 import { default as default_dc33bb259e89928a16a86a5731c2d2e0 } from '../../../components/admin/PrimaDelLogin'
 import { default as default_1d1560386b77fb163758726eb0ecea0b } from '../../../components/admin/LinguaDate'
 import { default as default_16b88e9b8c48e393fa86591406efd08f } from '../../../components/admin/Dashboard'
 import { default as default_c721497151ded15259fac3f312f8e79c } from '../../../components/admin/Changelog'
+import { default as default_8bb67104bfe82c2f1e13622cccef0477 } from '../../../components/admin/Guida'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -69,10 +71,12 @@ export const importMap = {
   "/components/admin/Avatar#default": default_ff2b3aef4ce7bf470d100ee3d53f4ed9,
   "/components/admin/Icon#default": default_dfe4008080d895d460898c3a6155e9ba,
   "/components/admin/Logo#default": default_91a09b539d3c86b0aebf520e7564ce08,
+  "/components/admin/ApriGuida#default": default_10bac0750517cc563923d45d50c2ddf0,
   "/components/admin/ApriSito#default": default_97d3eba8ada3517fe02663f49ec8ede2,
   "/components/admin/PrimaDelLogin#default": default_dc33bb259e89928a16a86a5731c2d2e0,
   "/components/admin/LinguaDate#default": default_1d1560386b77fb163758726eb0ecea0b,
   "/components/admin/Dashboard#default": default_16b88e9b8c48e393fa86591406efd08f,
   "/components/admin/Changelog#default": default_c721497151ded15259fac3f312f8e79c,
+  "/components/admin/Guida#default": default_8bb67104bfe82c2f1e13622cccef0477,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

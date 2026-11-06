@@ -69,7 +69,7 @@ export default buildConfig({
     components: {
       providers: ['/components/admin/LinguaDate'],
       beforeLogin: ['/components/admin/PrimaDelLogin'],
-      actions: ['/components/admin/ApriSito'],
+      actions: ['/components/admin/ApriGuida', '/components/admin/ApriSito'],
       graphics: {
         Logo: '/components/admin/Logo',
         Icon: '/components/admin/Icon',
@@ -77,6 +77,7 @@ export default buildConfig({
       views: {
         dashboard: { Component: '/components/admin/Dashboard' },
         changelog: { Component: '/components/admin/Changelog', path: '/changelog' },
+        guida: { Component: '/components/admin/Guida', path: '/guida' },
       },
     },
   },

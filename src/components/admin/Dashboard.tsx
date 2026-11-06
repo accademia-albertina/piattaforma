@@ -205,6 +205,9 @@ export default async function Dashboard({
           {ruoli.length > 0 && <p className={styles.ruoli}>{ruoli.join(' · ')}</p>}
         </div>
         <div className={styles.collegamenti}>
+          <Link className={styles.sito} href={`${admin}/guida`}>
+            Guida
+          </Link>
           {vedeSezione(user, 'changelog') && (
             <Link className={styles.sito} href={`${admin}/changelog`}>
               Changelog <span className={styles.versione}>v{CHANGELOG[0].versione}</span>
