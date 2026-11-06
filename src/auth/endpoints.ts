@@ -7,7 +7,7 @@ import { randomBytes } from 'node:crypto'
 
 import type { Endpoint, Payload, PayloadRequest } from 'payload'
 
-import { canAccessBackend } from '@/access/roles'
+import { canAccessBackend, hasRole } from '@/access/roles'
 import type { User } from '@/payload-types'
 
 import {
@@ -25,6 +25,7 @@ import { apriSessione } from './sessione'
 
 const DIECI_MINUTI = 10 * 60
 export const PAGINA_ATTESA = '/accesso-in-attesa'
+export const PAGINA_STUDENTE = '/le-mie-iscrizioni'
 
 function origine(req: PayloadRequest) {
   return process.env.NEXT_PUBLIC_SERVER_URL || new URL(req.url ?? 'http://localhost').origin
@@ -182,9 +183,11 @@ export const endpointsGoogle: Endpoint[] = [
         const utente = await trovaOCreaUtente(req.payload, profilo, req)
         const cookie = await apriSessione(req.payload, utente, req)
         let dopo = destinazioneSicura(salvato.dopo)
-        // Personale non ancora abilitato: pagina di attesa. Chi non ha il pannello (studenti) torna al sito.
+        // Personale non ancora abilitato: pagina di attesa. Gli studenti vanno alle loro iscrizioni.
         if (inAttesa(utente)) dopo = PAGINA_ATTESA
-        else if (dopo.startsWith('/admin') && !canAccessBackend(utente)) dopo = '/'
+        else if (dopo.startsWith('/admin') && !canAccessBackend(utente)) {
+          dopo = hasRole(utente, 'studente') ? PAGINA_STUDENTE : '/'
+        }
         return vai(origine(req) + dopo, [
           cookie,
           `${COOKIE_STATO}=; Path=/api/users/google; HttpOnly; SameSite=Lax; Max-Age=0${sicuro()}`,

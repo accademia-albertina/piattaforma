@@ -27,6 +27,34 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.25.0',
+    data: '2026-11-06',
+    titolo: 'Iscrizioni ai corsi',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Finestre di iscrizione: segreteria, vicedirezione e admin fissano apertura e chiusura per semestre. Il docente può prolungarle sul proprio corso.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Gli studenti si iscrivono dalla pagina del corso e annullano finché la finestra è aperta. Si iscrivono solo ai corsi del proprio livello.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Il docente vede gli iscritti nella scheda “Iscritti” del corso, sempre, anche dopo la chiusura.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          '“Le mie iscrizioni” per gli studenti; “Area riservata” porta ognuno dove gli serve (pannello, iscrizioni o attesa).',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.24.0',
     data: '2026-11-06',
     titolo: 'Guida del pannello per ruolo',

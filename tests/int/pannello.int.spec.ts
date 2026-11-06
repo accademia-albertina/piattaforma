@@ -44,12 +44,20 @@ describe('Pannello: cosa vede ogni ruolo', () => {
   })
 
   it('ogni ruolo vede solo le sezioni della tabella approvata', () => {
-    expect(visibili(['docente'])).toEqual(['avvisi', 'media', 'corsi', 'docenti'])
+    expect(visibili(['docente'])).toEqual([
+      'avvisi',
+      'media',
+      'corsi',
+      'docenti',
+      'iscrizioni-corsi',
+    ])
     expect(visibili(['segreteria'])).toEqual([
       'pagine',
       'avvisi',
       'media',
       'calendari',
+      'finestre-iscrizione',
+      'iscrizioni-corsi',
       'changelog',
     ])
     expect(visibili(['vicedirezione'])).not.toContain('users')
@@ -67,6 +75,11 @@ describe('Pannello: cosa vede ogni ruolo', () => {
     expect(filtroPannello(segreteria, 'pagine')).toEqual({ ufficiEditori: { in: ['segreteria'] } })
     expect(filtroPannello(segreteria, 'avvisi')).toBeNull()
     expect(filtroPannello(vicedirezione, 'corsi')).toBeNull()
+    expect(filtroPannello(docente, 'iscrizioni-corsi')).toEqual({
+      'corso.docenti.account': { equals: docente.id },
+    })
+    expect(filtroPannello(segreteria, 'iscrizioni-corsi')).toBeNull()
+    expect(filtroPannello(segreteria, 'corsi')).toBeNull()
   })
 
   it('il docente modifica solo gli avvisi che ha scritto lui', async () => {

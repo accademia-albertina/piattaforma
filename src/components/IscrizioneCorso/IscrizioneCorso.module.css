@@ -1,0 +1,39 @@
+/* Pannello pieno azzurro chiaro, senza bordi né accenti rossi (regola dei box). */
+.riquadro {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+  padding: var(--space-4);
+  background: var(--color-azzurro-100);
+  color: var(--color-heading);
+}
+
+.compatto {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+}
+
+.titolo {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+
+.testo {
+  margin: 0;
+}
+
+.conferma {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.esito:empty {
+  display: none;
+}

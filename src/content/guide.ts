@@ -98,9 +98,7 @@ export const GUIDE: Guida[] = [
       'Se vuoi, carica il curriculum in PDF.',
       'Premi “Salva”.',
     ],
-    consigli: [
-      'Nome, scuole e ruolo li aggiorna la vicedirezione: scrivile se c’è un errore.',
-    ],
+    consigli: ['Nome, scuole e ruolo li aggiorna la vicedirezione: scrivile se c’è un errore.'],
   },
   {
     id: 'corsi-docente',
@@ -116,6 +114,22 @@ export const GUIDE: Guida[] = [
     ],
     consigli: [
       'Se un corso che insegni non compare, o compare un corso non tuo, scrivi alla vicedirezione.',
+    ],
+  },
+  {
+    id: 'iscritti',
+    titolo: 'Gli iscritti ai tuoi corsi',
+    ruoli: ['docente'],
+    intro:
+      'Gli studenti si iscrivono dalla pagina del corso sul sito, nella finestra aperta dalla segreteria. L’elenco lo vedi sempre, anche dopo la chiusura.',
+    passi: [
+      'Apri il corso da “I miei corsi” e vai nella scheda “Iscritti”: trovi nome, matricola, livello ed email di ogni studente.',
+      'Per tenere aperte le iscrizioni più a lungo, compila “Prolunga le iscrizioni fino al” e premi “Pubblica modifiche”.',
+      'In “Iscrizioni ai corsi” trovi gli iscritti di tutti i tuoi corsi in un solo elenco.',
+    ],
+    consigli: [
+      'La proroga può solo allungare la chiusura, non anticiparla.',
+      'Per togliere o aggiungere uno studente a iscrizioni chiuse scrivi alla segreteria.',
     ],
   },
   {
@@ -160,6 +174,20 @@ export const GUIDE: Guida[] = [
       'Indica sedi e avvertenze; se esiste, allega anche il PDF ufficiale.',
       'Premi “Pubblica modifiche”.',
     ],
+  },
+  {
+    id: 'finestre',
+    titolo: 'Finestre di iscrizione',
+    sezione: 'finestre-iscrizione',
+    intro:
+      'Decidono quando gli studenti possono iscriversi ai corsi di un semestre. Dopo la chiusura non ci si iscrive né si annulla più.',
+    passi: [
+      'Dalla dashboard scegli “Nuova finestra di iscrizione”.',
+      'Scegli tipo, anno accademico e semestre (i corsi annuali seguono il primo).',
+      'Indica giorno e ora di apertura e di chiusura e premi “Salva”: la pagina di ogni corso mostra subito le date.',
+      'In “Iscrizioni ai corsi” vedi tutti gli iscritti; puoi aggiungere a mano uno studente anche a finestra chiusa.',
+    ],
+    consigli: ['Ogni docente può prolungare la chiusura solo sul proprio corso.'],
   },
   {
     id: 'albo',
@@ -228,9 +256,7 @@ export const GUIDE: Guida[] = [
       'Apri l’account, scegli il ruolo (uno o più) e salva.',
       'Per togliere l’accesso al pannello basta togliere i ruoli.',
     ],
-    consigli: [
-      'Assegna il ruolo minimo che serve: ognuno vede solo le sezioni del suo ruolo.',
-    ],
+    consigli: ['Assegna il ruolo minimo che serve: ognuno vede solo le sezioni del suo ruolo.'],
   },
   {
     id: 'menu',

@@ -1,6 +1,8 @@
 import {
   BookOpen,
+  CalendarClock,
   CalendarDays,
+  ClipboardCheck,
   ClipboardList,
   FileText,
   GraduationCap,
@@ -27,6 +29,8 @@ export const ICONE_SEZIONI: Record<string, LucideIcon> = {
   docenti: GraduationCap,
   dottorandi: Microscope,
   calendari: CalendarDays,
+  'finestre-iscrizione': CalendarClock,
+  'iscrizioni-corsi': ClipboardCheck,
   albo: ClipboardList,
   trasparenza: Scale,
   scuole: Landmark,

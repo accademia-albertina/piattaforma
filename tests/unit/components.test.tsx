@@ -98,7 +98,7 @@ describe('componenti accessibili', () => {
 
   it('SiteHeader: etichette delle icone, una sola ricerca, chiusura con clic fuori', async () => {
     const { container } = render(<SiteHeader currentHref="/" />)
-    expect(screen.getByRole('link', { name: 'Area riservata' }).getAttribute('href')).toBe('/admin')
+    expect(screen.getByRole('link', { name: 'Area riservata' }).getAttribute('href')).toBe('/area-riservata')
     expect(screen.getByRole('link', { name: 'Cerca' }).getAttribute('href')).toBe('/cerca')
     const toggle = screen.getByRole('button', { name: 'Menu' })
     fireEvent.click(toggle)

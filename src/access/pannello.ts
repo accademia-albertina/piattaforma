@@ -8,7 +8,8 @@ import type { Where } from 'payload'
 import { UFFICI_PAGINE } from './pagine'
 import { hasRole, isAdmin, type Role } from './roles'
 
-type MaybeUser = ({ roles?: (Role | string)[] | null; id?: number | string } & object) | null | undefined
+type MaybeUser =
+  ({ roles?: (Role | string)[] | null; id?: number | string } & object) | null | undefined
 
 export const SEZIONI_PANNELLO = [
   'pagine',
@@ -19,6 +20,8 @@ export const SEZIONI_PANNELLO = [
   'docenti',
   'dottorandi',
   'calendari',
+  'finestre-iscrizione',
+  'iscrizioni-corsi',
   'scuole',
   'albo',
   'trasparenza',
@@ -40,6 +43,8 @@ export const VISIBILITA: Record<SezionePannello, Role[]> = {
   docenti: ['vicedirezione', 'docente'],
   dottorandi: ['vicedirezione'],
   calendari: ['vicedirezione', 'segreteria'],
+  'finestre-iscrizione': ['vicedirezione', 'segreteria'],
+  'iscrizioni-corsi': ['vicedirezione', 'segreteria', 'docente'],
   scuole: ['vicedirezione'],
   albo: ['vicedirezione', 'amministrativo'],
   trasparenza: ['vicedirezione', 'amministrativo'],
@@ -64,6 +69,7 @@ const VEDE_TUTTO: Partial<Record<SezionePannello, Role[]>> = {
   media: ['vicedirezione', 'redazione', ...UFFICI],
   corsi: ['vicedirezione'],
   docenti: ['vicedirezione'],
+  'iscrizioni-corsi': ['vicedirezione', 'segreteria'],
 }
 
 /**
@@ -84,7 +90,9 @@ export function filtroPannello(user: MaybeUser, sezione: SezionePannello): Where
     case 'media':
       return { creatoDa: { equals: user.id } }
     case 'corsi':
-      return { 'docenti.account': { equals: user.id } }
+      return hasRole(user, 'docente') ? { 'docenti.account': { equals: user.id } } : null
+    case 'iscrizioni-corsi':
+      return { 'corso.docenti.account': { equals: user.id } }
     case 'docenti':
       return { account: { equals: user.id } }
     default:

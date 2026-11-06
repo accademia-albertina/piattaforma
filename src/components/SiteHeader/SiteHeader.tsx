@@ -139,7 +139,7 @@ export function SiteHeader({
             </Link>
 
             <div className={styles.actions}>
-              <Link href="/admin" className={styles.iconButton}>
+              <Link href="/area-riservata" className={styles.iconButton}>
                 <UserRound {...ICONA} />
                 <span className={styles.iconLabel}>Area riservata</span>
               </Link>
