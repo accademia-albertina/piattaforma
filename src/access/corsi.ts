@@ -52,6 +52,11 @@ export function annoAccademicoCorrente(oggi = new Date()): string {
   return `${inizio}/${inizio + 1}`
 }
 
+/** Vero se l'anno accademico (“2025/2026”) è già finito rispetto a quello corrente. */
+export function annoConcluso(anno: string, oggi = new Date()) {
+  return Number(anno.slice(0, 4)) < Number(annoAccademicoCorrente(oggi).slice(0, 4))
+}
+
 export function isAnnoAccademico(valore: unknown): valore is string {
   if (typeof valore !== 'string') return false
   const m = /^(\d{4})\/(\d{4})$/.exec(valore)

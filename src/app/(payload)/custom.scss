@@ -673,6 +673,55 @@ body {
   }
 }
 
+// Pulizia delle iscrizioni di un anno concluso (finestra di iscrizione)
+.pulizia-iscrizioni {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: var(--base);
+
+  p {
+    margin: 0;
+  }
+
+  button {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    min-height: 40px;
+    padding: 0.5rem 1rem;
+    color: var(--theme-text);
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    background: var(--theme-elevation-100);
+    border: 0;
+
+    &:hover:not(:disabled) {
+      background: var(--theme-elevation-150);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--theme-text);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      cursor: progress;
+      opacity: 0.7;
+    }
+  }
+}
+
+.pulizia-iscrizioni__azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pulizia-iscrizioni__esito:empty {
+  display: none;
+}
+
 .link-sul-sito__indirizzo {
   overflow: hidden;
   font-size: 0.8125rem;

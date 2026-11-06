@@ -1,5 +1,6 @@
 import { nascostaA } from '@/access/pannello'
 import { erroreUtente } from '@/lib/errori'
+import { endpointPulizia } from '@/lib/pulizia-iscrizioni'
 import type { CollectionConfig } from 'payload'
 
 import { annoAccademicoCorrente, isAnnoAccademico } from '@/access/corsi'
@@ -36,6 +37,7 @@ export const FinestreIscrizione: CollectionConfig = {
     group: 'Didattica',
   },
   defaultSort: '-apertura',
+  endpoints: [endpointPulizia],
   access: {
     read: () => true,
     create: soloGestioneIscrizioni,
@@ -155,6 +157,14 @@ export const FinestreIscrizione: CollectionConfig = {
         components: {
           Field: { path: '@/components/admin/ScaricaIscritti', clientProps: { perAnno: true } },
         },
+      },
+    },
+    {
+      name: 'puliziaIscrizioni',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: { Field: '@/components/admin/PuliziaIscrizioni' },
       },
     },
     {
