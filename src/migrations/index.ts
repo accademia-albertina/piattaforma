@@ -9,6 +9,8 @@ import * as migration_20261105_081212_albo_trasparenza from './20261105_081212_a
 import * as migration_20261105_132425_dottorandi from './20261105_132425_dottorandi';
 import * as migration_20261105_165306_media_alt_facoltativo from './20261105_165306_media_alt_facoltativo';
 import * as migration_20261105_170559_scuole_dipartimento_immagine from './20261105_170559_scuole_dipartimento_immagine';
+import * as migration_20261105_234342_albertina_press from './20261105_234342_albertina_press';
+import * as migration_20261106_000151_ruolo_biblioteca from './20261106_000151_ruolo_biblioteca';
 
 export const migrations = [
   {
@@ -64,6 +66,16 @@ export const migrations = [
   {
     up: migration_20261105_170559_scuole_dipartimento_immagine.up,
     down: migration_20261105_170559_scuole_dipartimento_immagine.down,
-    name: '20261105_170559_scuole_dipartimento_immagine'
+    name: '20261105_170559_scuole_dipartimento_immagine',
+  },
+  {
+    up: migration_20261105_234342_albertina_press.up,
+    down: migration_20261105_234342_albertina_press.down,
+    name: '20261105_234342_albertina_press',
+  },
+  {
+    up: migration_20261106_000151_ruolo_biblioteca.up,
+    down: migration_20261106_000151_ruolo_biblioteca.down,
+    name: '20261106_000151_ruolo_biblioteca'
   },
 ];

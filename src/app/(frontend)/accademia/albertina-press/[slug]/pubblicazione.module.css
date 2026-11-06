@@ -1,0 +1,97 @@
+.page {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+/* Copertina intera nella testata, come un libro appoggiato sul pannello */
+.copertina {
+  display: block;
+  width: auto;
+  max-width: min(100%, 22rem);
+  height: auto;
+  max-height: 32rem;
+  box-shadow: var(--shadow-libro);
+}
+
+.dati {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: var(--space-4) var(--space-5);
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.dati dt {
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.dati dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.corpo {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.sezioneTitolo {
+  margin: 0 0 var(--space-4);
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.testo {
+  max-width: var(--measure);
+}
+
+/* Indice su pannello pieno: titolo, autori sotto, pagina allineata a destra */
+.indice {
+  display: grid;
+  max-width: var(--measure);
+  margin: 0;
+  padding: var(--space-2) var(--space-5);
+  list-style: none;
+  background: var(--color-azzurro-200);
+}
+
+.indice li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-border-control);
+}
+
+.indice li:last-child {
+  border-bottom: 0;
+}
+
+.voceTitolo {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+}
+
+.voceAutori {
+  grid-column: 1;
+  font-size: var(--font-size-xs);
+  color: var(--color-ardesia-dark);
+}
+
+.vocePagina {
+  grid-column: 2;
+  grid-row: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ardesia-dark);
+}
+
+.torna {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+}

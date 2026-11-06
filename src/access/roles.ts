@@ -10,6 +10,7 @@ export const ROLES = [
   'segreteria',
   'amministrativo',
   'erasmus',
+  'biblioteca',
   'docente',
   'dottorando',
   'studente',
@@ -24,6 +25,7 @@ export const ROLE_LABELS: Record<Role, string> = {
   segreteria: 'Segreteria didattica',
   amministrativo: 'Ufficio amministrativo',
   erasmus: 'Ufficio Erasmus',
+  biblioteca: 'Biblioteca',
   docente: 'Docente',
   dottorando: 'Dottorando',
   studente: 'Studente',
@@ -97,6 +99,7 @@ export const BACKEND_ROLES: Role[] = [
   'segreteria',
   'amministrativo',
   'erasmus',
+  'biblioteca',
   'docente',
 ]
 

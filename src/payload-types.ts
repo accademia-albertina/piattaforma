@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     pagine: Pagina;
     avvisi: Avviso;
+    pubblicazioni: Pubblicazione;
     corsi: Corso;
     docenti: Docente;
     dottorandi: Dottorando;
@@ -87,6 +88,7 @@ export interface Config {
   collectionsSelect: {
     pagine: PagineSelect<false> | PagineSelect<true>;
     avvisi: AvvisiSelect<false> | AvvisiSelect<true>;
+    pubblicazioni: PubblicazioniSelect<false> | PubblicazioniSelect<true>;
     corsi: CorsiSelect<false> | CorsiSelect<true>;
     docenti: DocentiSelect<false> | DocentiSelect<true>;
     dottorandi: DottorandiSelect<false> | DottorandiSelect<true>;
@@ -169,7 +171,7 @@ export interface Pagina {
   /**
    * Oltre a redazione e vicedirezione. Es. la pagina Iscrizioni alla Segreteria didattica.
    */
-  ufficiEditori?: ('segreteria' | 'amministrativo' | 'erasmus')[] | null;
+  ufficiEditori?: ('segreteria' | 'amministrativo' | 'erasmus' | 'biblioteca')[] | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -376,6 +378,7 @@ export interface Avviso {
     | 'iscrizioni'
     | 'coordinatori'
     | 'tasse'
+    | 'biblioteca'
   )[];
   /**
    * Lascia vuoto se l’avviso riguarda tutta l’Accademia.
@@ -468,6 +471,7 @@ export interface User {
         | 'segreteria'
         | 'amministrativo'
         | 'erasmus'
+        | 'biblioteca'
         | 'docente'
         | 'dottorando'
         | 'studente'
@@ -492,6 +496,54 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
+}
+/**
+ * Il catalogo della casa editrice Albertina Press, in /accademia/albertina-press.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pubblicazioni".
+ */
+export interface Pubblicazione {
+  id: number;
+  titolo: string;
+  /**
+   * Come sul frontespizio, es. “a cura di Alberto Cottino; testi di…”.
+   */
+  autori?: string | null;
+  copertina?: (number | null) | Media;
+  descrizione?: string | null;
+  /**
+   * Facoltativo. Una voce per capitolo o saggio.
+   */
+  indice?:
+    | {
+        pagina?: string | null;
+        titolo: string;
+        autori?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  numero?: number | null;
+  collana?: ('arcate' | 'galleria' | 'hbitat' | 'quaderni' | 'r-esistenze' | 'visioni') | null;
+  anno?: number | null;
+  /**
+   * Es. “Torino, Milano (Silvana Editoriale), 2017”.
+   */
+  luogoAnno?: string | null;
+  pagine?: number | null;
+  /**
+   * Es. “24 cm”.
+   */
+  dimensioni?: string | null;
+  lingua?: string | null;
+  isbn?: string | null;
+  prezzo?: number | null;
+  /**
+   * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
+   */
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * Corsi e programmi per anno accademico. Vicedirezione e admin creano i corsi e assegnano i docenti; il docente aggiorna il programma.
@@ -893,6 +945,10 @@ export interface PayloadLockedDocument {
         value: number | Avviso;
       } | null)
     | ({
+        relationTo: 'pubblicazioni';
+        value: number | Pubblicazione;
+      } | null)
+    | ({
         relationTo: 'corsi';
         value: number | Corso;
       } | null)
@@ -1126,6 +1182,36 @@ export interface AvvisiSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pubblicazioni_select".
+ */
+export interface PubblicazioniSelect<T extends boolean = true> {
+  titolo?: T;
+  autori?: T;
+  copertina?: T;
+  descrizione?: T;
+  indice?:
+    | T
+    | {
+        pagina?: T;
+        titolo?: T;
+        autori?: T;
+        id?: T;
+      };
+  numero?: T;
+  collana?: T;
+  anno?: T;
+  luogoAnno?: T;
+  pagine?: T;
+  dimensioni?: T;
+  lingua?: T;
+  isbn?: T;
+  prezzo?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

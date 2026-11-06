@@ -6,7 +6,7 @@ import { canAccessBackend, hasRole, isAdmin, type Role } from './roles'
 export const REDATTORI_PAGINE: Role[] = ['admin', 'vicedirezione', 'redazione']
 
 /** Uffici a cui si può affidare una singola pagina (es. Iscrizioni alla segreteria). */
-export const UFFICI_PAGINE = ['segreteria', 'amministrativo', 'erasmus'] as const satisfies Role[]
+export const UFFICI_PAGINE = ['segreteria', 'amministrativo', 'erasmus', 'biblioteca'] as const satisfies Role[]
 
 type MaybeUser = Parameters<typeof hasRole>[0]
 

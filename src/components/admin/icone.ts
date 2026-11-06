@@ -6,6 +6,7 @@ import {
   GraduationCap,
   Images,
   Landmark,
+  LibraryBig,
   type LucideIcon,
   Megaphone,
   Microscope,
@@ -29,6 +30,7 @@ export const ICONE_SEZIONI: Record<string, LucideIcon> = {
   albo: ClipboardList,
   trasparenza: Scale,
   scuole: Landmark,
+  pubblicazioni: LibraryBig,
   users: Users,
   navigazione: PanelsTopLeft,
 }

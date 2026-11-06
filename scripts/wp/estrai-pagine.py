@@ -19,6 +19,7 @@ PAGINE = {
     3498: 'accademia/organigramma',
     8789: 'accademia/il-saluto-del-direttore',
     3508: 'accademia/biblioteca',
+    13027: 'accademia/albertina-press',
     1973: 'didattica',
     3468: 'didattica/piani-di-studio',
     3569: 'didattica/manifesto-degli-studi',
@@ -117,10 +118,28 @@ VECCHI.update({
 })
 
 
+def _docenti():
+    """Slug WordPress del docente (a.balzola) → indirizzo del profilo nella piattaforma (andrea-balzola)."""
+    import gzip
+    import os
+    import unicodedata
+    file = os.path.join(os.path.dirname(__file__), '../../src/seed/docenti-wp.json.gz')
+    def slug(t):
+        t = unicodedata.normalize('NFKD', t).encode('ascii', 'ignore').decode().lower()
+        return re.sub(r'[^a-z0-9]+', '-', t).strip('-')
+    return {d['slugWp']: slug(f"{d['nome']} {d['cognome']}") for d in json.load(gzip.open(file))}
+
+
+DOCENTI = _docenti()
+
+
 def nuovo_percorso(p):
     p = p.strip('/')
     if p in VECCHI:
         return VECCHI[p]
+    if p.startswith('docente/'):
+        d = DOCENTI.get(p.split('/', 1)[1].replace('.', '-'))
+        return f'docenti/{d}' if d else None
     if p.startswith('calendario/'):
         return 'calendari'
     return None
@@ -135,7 +154,7 @@ def riscrivi_link(s):
 
     s = re.sub(r'https?://web\.archive\.org/web/\d+/', '', s)
 
-    s = re.sub(r'(href=")(?:https?://(?:www\.)?(?:albertina-academy\.it|newalbertina\.eu))?(/[\w\-/]*?)/?(#[\w-]*)?(?=")', sost, s)
+    s = re.sub(r'(href=")(?:https?://(?:www\.)?(?:albertina-academy\.it|newalbertina\.eu))?(/[\w\-/.]*?)/?(#[\w-]*)?(?=")', sost, s)
     return s
 
 

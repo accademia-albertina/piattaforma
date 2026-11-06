@@ -17,6 +17,7 @@ import { Calendari } from './collections/Calendari'
 import { Corsi } from './collections/Corsi'
 import { Docenti } from './collections/Docenti'
 import { Dottorandi } from './collections/Dottorandi'
+import { Pubblicazioni } from './collections/Pubblicazioni'
 import { Navigazione } from './globals/Navigazione'
 import { migrations } from './migrations'
 import { seedCorsi } from './seed/corsi'
@@ -28,7 +29,9 @@ import { importaAlboWp, importaTrasparenzaWp } from './seed/albo-trasparenza-wp'
 import { aggiornaLinkCalendari } from './seed/link-calendari'
 import { aggiornaLinkPagine } from './seed/link-pagine'
 import { importaPagineWp } from './seed/pagine-wp'
+import { importaAlbertinaPress } from './seed/albertina-press'
 import { completaDipartimentiScuole } from './seed/dipartimenti-scuole'
+import { affidaBiblioteca } from './seed/biblioteca'
 import { completaSommariPagine } from './seed/sommari-pagine'
 import { correggiTitoliMaiuscoli } from './seed/titoli-maiuscoli'
 import { importaCalendari } from './seed/calendari'
@@ -88,7 +91,20 @@ export default buildConfig({
       },
     },
   },
-  collections: [Pagine, Avvisi, Corsi, Docenti, Dottorandi, Calendari, Albo, Trasparenza, Scuole, Media, Users],
+  collections: [
+    Pagine,
+    Avvisi,
+    Pubblicazioni,
+    Corsi,
+    Docenti,
+    Dottorandi,
+    Calendari,
+    Albo,
+    Trasparenza,
+    Scuole,
+    Media,
+    Users,
+  ],
   globals: [Navigazione],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -125,6 +141,8 @@ export default buildConfig({
       .then(() => importaDottorandiWp(payload))
       .then(() => completaSommariPagine(payload))
       .then(() => completaDipartimentiScuole(payload))
+      .then(() => importaAlbertinaPress(payload))
+      .then(() => affidaBiblioteca(payload))
       .catch((e) =>
       payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
     )
