@@ -27,6 +27,34 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.22.0',
+    data: '2026-11-06',
+    titolo: 'Pagine delle scuole',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Ogni scuola ha la sua pagina (/scuole/nome-scuola): presentazione, schede Triennio e Biennio con indirizzi, regolamento e piani di studio, coordinatori, docenti, video e ultimi avvisi. Testi e piani importati dal sito attuale.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Pagina “Offerta formativa” (/scuole) con le scuole divise per dipartimento e il percorso dal dipartimento alla tesi.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'In homepage le scuole sono 3 per riga, con un riquadro introduttivo, e portano alla pagina della scuola invece che ai corsi.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nel pannello, scheda Scuole: percorsi Triennio e Biennio (si può disattivare il biennio), video YouTube e coordinatori scelti tra i docenti.',
+      },
+    ],
+    pr: [53],
+  },
+  {
     versione: '0.21.0',
     data: '2026-11-06',
     titolo: 'Accesso con Google',

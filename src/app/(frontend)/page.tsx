@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 import { Alert, AvvisoCard, HeroSlider, SchedaScuola } from '@/components'
 import { nomeDipartimento } from '@/collections/Scuole'
@@ -78,6 +79,29 @@ export default async function HomePage() {
               <Link href="/corsi">Tutti i corsi</Link>
             </div>
             <ul className={styles.scuole}>
+              <li className={styles.introScuole}>
+                <p className={styles.occhiello}>Offerta formativa</p>
+                <p className={styles.introTitolo}>
+                  {scuole.length} scuole, due livelli di diploma
+                </p>
+                <p>
+                  Diplomi accademici equiparati alle lauree universitarie: triennio di primo
+                  livello e biennio specialistico.
+                </p>
+                <dl className={styles.cifre}>
+                  <div>
+                    <dt>Triennio</dt>
+                    <dd>180 CFA</dd>
+                  </div>
+                  <div>
+                    <dt>Biennio</dt>
+                    <dd>120 CFA</dd>
+                  </div>
+                </dl>
+                <Link href="/scuole" className={styles.introLink}>
+                  Come si arriva al diploma <ArrowRight size={18} strokeWidth={1.5} aria-hidden />
+                </Link>
+              </li>
               {scuole.map((s) => {
                 const caricata = typeof s.immagine === 'object' && s.immagine?.url ? s.immagine : null
                 return (
@@ -85,14 +109,13 @@ export default async function HomePage() {
                     <SchedaScuola
                       nome={s.nome}
                       slug={s.slug ?? ''}
-                      href={`/corsi?scuola=${s.slug}`}
+                      href={`/scuole/${s.slug}`}
                       dipartimento={nomeDipartimento(s.dipartimento)}
                       immagine={
                         caricata
                           ? { url: caricata.url!, width: caricata.width, height: caricata.height }
                           : IMMAGINI_SCUOLE[s.slug ?? '']
                       }
-                      invito="Vedi i corsi"
                     />
                   </li>
                 )

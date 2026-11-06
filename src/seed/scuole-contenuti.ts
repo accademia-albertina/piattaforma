@@ -4,6 +4,8 @@
  * Si scrive solo nelle scuole ancora senza contenuti: quanto modificato nel pannello resta.
  */
 import { readFileSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { gunzipSync } from 'node:zlib'
 
 import type { Payload } from 'payload'
@@ -24,11 +26,11 @@ type Contenuti = {
   coordinatoreScuola: string | null
 }
 
+const dirname = path.dirname(fileURLToPath(import.meta.url))
+
 const leggi = (): Contenuti[] =>
   JSON.parse(
-    gunzipSync(readFileSync(new URL('./scuole-contenuti.json.gz', import.meta.url))).toString(
-      'utf8',
-    ),
+    gunzipSync(readFileSync(path.join(dirname, 'scuole-contenuti.json.gz'))).toString('utf8'),
   )
 
 const percorso = (p: Percorso) =>
