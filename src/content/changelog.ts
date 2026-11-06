@@ -47,7 +47,7 @@ export const CHANGELOG: Versione[] = [
           'Quando un’iscrizione non è possibile (finestra chiusa, livello sbagliato, doppione) lo studente legge il motivo invece di “An unknown error occurred”.',
       },
     ],
-    pr: [],
+    pr: [58],
   },
   {
     versione: '0.26.0',
