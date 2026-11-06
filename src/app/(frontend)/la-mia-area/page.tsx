@@ -7,7 +7,8 @@ import { LIVELLO_LABELS } from '@/access/corsi'
 import { datiStudente } from '@/access/iscrizioni'
 import { hasRole } from '@/access/roles'
 import { urlAccesso } from '@/auth/google'
-import { Breadcrumbs, IscrizioneCorso, TestataPagina } from '@/components'
+import { Breadcrumbs, Fisarmonica, IscrizioneCorso, TestataPagina } from '@/components'
+import { GUIDA_STUDENTI, LINK_ISIDATA } from '@/content/guida-studenti'
 import { docentiDi, etichettaLivelli } from '@/lib/corsi'
 import { dataIscrizioni, iscrizioniDelCorso } from '@/lib/iscrizioni'
 import { payloadClient } from '@/lib/payload'
@@ -17,15 +18,18 @@ import styles from './iscrizioni.module.css'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Le mie iscrizioni',
+  title: 'La mia area',
   robots: { index: false },
 }
 
-/** Area dello studente: i corsi a cui è iscritto, con la possibilità di annullare finché la finestra è aperta. */
-export default async function LeMieIscrizioni() {
+/**
+ * Area dello studente sul sito (gli studenti non entrano nel pannello): corsi a cui è iscritto,
+ * con la possibilità di annullare finché la finestra è aperta, e una guida breve.
+ */
+export default async function LaMiaArea() {
   const payload = await payloadClient()
   const { user } = await payload.auth({ headers: await headers() })
-  if (!user) redirect(urlAccesso('/le-mie-iscrizioni'))
+  if (!user) redirect(urlAccesso('/la-mia-area'))
 
   const studente = hasRole(user, 'studente') ? datiStudente(user.email) : null
   const nome = [user.nome, user.cognome].filter(Boolean).join(' ')
@@ -51,10 +55,10 @@ export default async function LeMieIscrizioni() {
 
   return (
     <div className={`container ${styles.pagina}`}>
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Le mie iscrizioni' }]} />
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'La mia area' }]} />
       <TestataPagina
         occhiello="Area riservata"
-        titolo="Le mie iscrizioni"
+        titolo="La mia area"
         sommario={
           studente
             ? `${nome || user.email}, matricola ${studente.matricola}, ${LIVELLO_LABELS[studente.livello].toLowerCase()}.`
@@ -63,8 +67,8 @@ export default async function LeMieIscrizioni() {
       />
 
       {studente ? (
-        <section aria-labelledby="corsi-iscritti" className={styles.sezione}>
-          <h2 id="corsi-iscritti">Corsi</h2>
+        <section id="corsi" aria-labelledby="corsi-iscritti" className={styles.sezione}>
+          <h2 id="corsi-iscritti">I tuoi corsi</h2>
           {righe.length === 0 ? (
             <div className={styles.vuoto}>
               <p>Non risultano iscrizioni ai corsi.</p>
@@ -107,6 +111,34 @@ export default async function LeMieIscrizioni() {
               })}
             </ul>
           )}
+        </section>
+      ) : null}
+
+      {studente ? (
+        <section id="guida" aria-labelledby="guida-titolo" className={styles.sezione}>
+          <h2 id="guida-titolo">Guida per gli studenti</h2>
+          <Fisarmonica
+            voci={GUIDA_STUDENTI.map((v) => ({
+              id: v.id,
+              titolo: v.titolo,
+              contenuto: (
+                <>
+                  <ol className={styles.passi}>
+                    {v.passi.map((p) => (
+                      <li key={p}>{p}</li>
+                    ))}
+                  </ol>
+                  {v.id === 'isidata' ? (
+                    <p>
+                      <a href={LINK_ISIDATA} target="_blank" rel="noreferrer">
+                        Vai a Isidata (si apre in una nuova scheda)
+                      </a>
+                    </p>
+                  ) : null}
+                </>
+              ),
+            }))}
+          />
         </section>
       ) : null}
     </div>

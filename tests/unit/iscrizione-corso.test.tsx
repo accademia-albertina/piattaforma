@@ -116,6 +116,7 @@ describe('MenuUtente', () => {
     fireEvent.click(screen.getByRole('button', { name: 'La mia area, Giulia Bassi' }))
     const menu = await screen.findByRole('menu')
     expect(menu.textContent).toContain('Le mie iscrizioni')
+    expect(menu.textContent).toContain('Guida per gli studenti')
     expect(menu.textContent).not.toContain('Pannello')
     expect(menu.textContent).toContain('Esci')
   })

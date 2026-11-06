@@ -105,9 +105,14 @@ export function MenuUtente({ classePulsante, classeEtichetta, utente: noto }: Me
         </div>
         <Menu className={styles.menu} aria-label="La mia area">
           {studente ? (
-            <MenuItem className={styles.voce} href="/le-mie-iscrizioni">
-              Le mie iscrizioni
-            </MenuItem>
+            <>
+              <MenuItem className={styles.voce} href="/la-mia-area">
+                Le mie iscrizioni
+              </MenuItem>
+              <MenuItem className={styles.voce} href="/la-mia-area#guida">
+                Guida per gli studenti
+              </MenuItem>
+            </>
           ) : null}
           {personale ? (
             <MenuItem className={styles.voce} href="/admin">

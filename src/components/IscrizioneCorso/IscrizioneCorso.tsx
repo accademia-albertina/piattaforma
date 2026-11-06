@@ -25,7 +25,7 @@ export type IscrizioneCorsoProps = {
   accessoHref?: string
   /** Livello del titolo del riquadro. */
   livelloTitolo?: 2 | 3
-  /** Senza titolo né descrizione: solo stato e pulsante (elenco “Le mie iscrizioni”). */
+  /** Senza titolo né descrizione: solo stato e pulsante (elenco di “La mia area”). */
   compatto?: boolean
 }
 

@@ -49,7 +49,7 @@ export const CHANGELOG: Versione[] = [
       {
         tipo: 'nuovo',
         testo:
-          'Nell’header del sito, dopo l’accesso, le iniziali e “La mia area”: un menu con “Le mie iscrizioni” per gli studenti, “Pannello” per il personale ed “Esci”.',
+          '“La mia area” per gli studenti (/la-mia-area): corsi a cui sono iscritti e una guida breve. Nell’header del sito, dopo l’accesso, le iniziali e “La mia area”: un menu con le iscrizioni e la guida per gli studenti, “Pannello” per il personale ed “Esci”.',
       },
     ],
     pr: [56],

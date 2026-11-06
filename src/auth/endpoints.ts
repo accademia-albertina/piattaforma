@@ -25,7 +25,7 @@ import { apriSessione } from './sessione'
 
 const DIECI_MINUTI = 10 * 60
 export const PAGINA_ATTESA = '/accesso-in-attesa'
-export const PAGINA_STUDENTE = '/le-mie-iscrizioni'
+export const PAGINA_STUDENTE = '/la-mia-area'
 
 function origine(req: PayloadRequest) {
   return process.env.NEXT_PUBLIC_SERVER_URL || new URL(req.url ?? 'http://localhost').origin
