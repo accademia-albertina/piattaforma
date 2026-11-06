@@ -27,6 +27,7 @@ export const SLUG_RISERVATI = [
   'accesso-in-attesa',
   'corsi',
   'docenti',
+  'scuole',
   'next',
   'brand',
   'media',

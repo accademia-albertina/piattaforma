@@ -50,14 +50,77 @@
   list-style: none;
 }
 
-@media (min-width: 30rem) {
+.scuole > li {
+  display: flex;
+}
+
+.scuole > li > * {
+  flex: 1;
+}
+
+@media (min-width: 40rem) {
   .scuole {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 75rem) {
+@media (min-width: 64rem) {
   .scuole {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/* Riquadro iniziale: pannello scuro pieno, introduce le schede */
+.scuole > li.introScuole {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  color: var(--color-on-brand);
+  background: var(--color-ardesia-dark);
+}
+
+.introScuole p {
+  margin: 0;
+}
+
+.occhiello {
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+}
+
+.introTitolo {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.cifre {
+  display: flex;
+  gap: var(--space-5);
+  margin: 0;
+}
+
+.cifre dt {
+  font-size: var(--font-size-2xs);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+}
+
+.cifre dd {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.introLink {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  margin-top: auto;
+  color: inherit;
+  font-weight: var(--font-weight-semibold);
 }

@@ -11,6 +11,7 @@ import * as migration_20261105_165306_media_alt_facoltativo from './20261105_165
 import * as migration_20261105_170559_scuole_dipartimento_immagine from './20261105_170559_scuole_dipartimento_immagine';
 import * as migration_20261105_234342_albertina_press from './20261105_234342_albertina_press';
 import * as migration_20261106_000151_ruolo_biblioteca from './20261106_000151_ruolo_biblioteca';
+import * as migration_20261106_082749_pagine_scuole from './20261106_082749_pagine_scuole';
 
 export const migrations = [
   {
@@ -76,6 +77,11 @@ export const migrations = [
   {
     up: migration_20261106_000151_ruolo_biblioteca.up,
     down: migration_20261106_000151_ruolo_biblioteca.down,
-    name: '20261106_000151_ruolo_biblioteca'
+    name: '20261106_000151_ruolo_biblioteca',
+  },
+  {
+    up: migration_20261106_082749_pagine_scuole.up,
+    down: migration_20261106_082749_pagine_scuole.down,
+    name: '20261106_082749_pagine_scuole'
   },
 ];
