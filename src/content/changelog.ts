@@ -47,7 +47,7 @@ export const CHANGELOG: Versione[] = [
           'Finestre di iscrizione per sessione d’esami, con l’opzione “Solo chi è iscritto al corso” (per ora spenta). In “La mia area” la sezione “I tuoi esami”.',
       },
     ],
-    pr: [],
+    pr: [57],
   },
   {
     versione: '0.25.0',
