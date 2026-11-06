@@ -27,6 +27,19 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.28.0',
+    data: '2026-11-06',
+    titolo: 'Pulizia delle iscrizioni degli anni passati',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nella finestra di un anno accademico concluso gli uffici trovano “Elimina le iscrizioni”: dopo aver scaricato il file, cancellano in un colpo le iscrizioni di quell’anno. Doppia conferma, nessuna email agli studenti.',
+      },
+    ],
+    pr: [59],
+  },
+  {
     versione: '0.27.0',
     data: '2026-11-06',
     titolo: 'Email di conferma ed elenchi in Excel',

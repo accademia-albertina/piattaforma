@@ -205,6 +205,7 @@ export const GUIDE: Guida[] = [
       'Indica giorno e ora di apertura e di chiusura e premi “Salva”: la pagina di ogni corso mostra subito le date.',
       'In “Iscrizioni ai corsi” vedi tutti gli iscritti; puoi aggiungere a mano uno studente anche a finestra chiusa.',
       'Nella colonna laterale di una finestra già salvata scarichi in CSV tutte le iscrizioni di quell’anno accademico.',
+      'A inizio anno accademico, nella finestra dell’anno precedente: prima scarica il file, poi “Elimina le iscrizioni” per alleggerire il database.',
     ],
     consigli: ['Ogni docente può prolungare la chiusura solo sul proprio corso.'],
   },
