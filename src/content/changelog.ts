@@ -37,7 +37,7 @@ export const CHANGELOG: Versione[] = [
           'Aggiornati i componenti su cui si basa la piattaforma (pannello, sito e strumenti di verifica) alle versioni più recenti, con le ultime correzioni di sicurezza. Nessun cambiamento visibile.',
       },
     ],
-    pr: [],
+    pr: [64],
   },
   {
     versione: '0.30.0',
