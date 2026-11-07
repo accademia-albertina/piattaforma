@@ -46,7 +46,7 @@ export const CHANGELOG: Versione[] = [
         testo: 'Per gli amministratori “Vedi come” è diventato una fila di schede, una per ruolo.',
       },
     ],
-    pr: [],
+    pr: [63],
   },
   {
     versione: '0.29.0',
