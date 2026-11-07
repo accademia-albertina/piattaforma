@@ -10,6 +10,8 @@
 :root {
   /* Tipografia */
   --font-family: 'Albert Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* Corsivo da libro antico, solo per il motto in home (Fede, 2026-11-07: niente script calligrafici) */
+  --font-family-motto: 'Cormorant Garamond', Garamond, 'Times New Roman', serif;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;

@@ -1,15 +1,27 @@
 /* Come i filtri a schede: sottolineatura scura sulla scheda attiva, niente rosso */
 .lista {
   display: flex;
-  gap: var(--space-5);
-  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-4);
+  /* Filetto come ombra interna: la sottolineatura della scheda attiva ci si sovrappone
+     anche con lo scorrimento orizzontale (che taglierebbe un margine negativo) */
+  box-shadow: inset 0 -1px 0 var(--color-border);
+  /* Su telefono le schede restano su una riga e scorrono in orizzontale */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+@media (min-width: 40rem) {
+  .lista {
+    gap: var(--space-5);
+  }
 }
 
 .scheda {
   display: inline-flex;
   align-items: center;
+  flex: none;
   min-height: var(--target-min);
-  margin-bottom: -1px;
+  white-space: nowrap;
   border-bottom: 2px solid transparent;
   color: var(--color-text-muted);
   font-size: var(--font-size-md);

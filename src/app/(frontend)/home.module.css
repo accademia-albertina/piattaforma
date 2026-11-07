@@ -124,3 +124,28 @@
   color: inherit;
   font-weight: var(--font-weight-semibold);
 }
+
+/* ——— Ultimi avvisi: un solo blocco con schede ——— */
+.pannelloAvvisi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.pannelloAvvisi > p {
+  margin: 0;
+}
+
+.altri {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+}
+
+.altri a {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  min-height: var(--target-min);
+  font-weight: var(--font-weight-semibold);
+}

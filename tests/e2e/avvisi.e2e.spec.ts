@@ -112,6 +112,14 @@ test.describe('Avvisi', () => {
     const sezione = page.getByRole('region', { name: 'Ultimi avvisi' })
     await expect(sezione.getByRole('heading', { level: 3 })).toHaveCount(6)
     await expect(sezione.getByRole('heading', { level: 3 }).first()).toHaveText('Avviso di prova 1')
+    // Un solo blocco con le schede: si parte da "Tutti"
+    await expect(sezione.getByRole('tab', { name: 'Tutti' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
+    await sezione.getByRole('tab', { name: 'Bandi e concorsi' }).click()
+    await expect(sezione.getByRole('tabpanel')).toBeVisible()
+    await expect(sezione.getByRole('link', { name: /Tutti i bandi e concorsi/ })).toBeVisible()
   })
 
   test('lo slider in homepage mostra gli avvisi in evidenza', async ({ page }) => {

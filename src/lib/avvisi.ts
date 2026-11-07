@@ -91,11 +91,12 @@ export function categorieAvviso(avviso: Pick<Avviso, 'categorie'>) {
   }))
 }
 
-/** Ultimi avvisi pubblicati, per la homepage. */
-export async function ultimiAvvisi(limit = 3) {
+/** Ultimi avvisi pubblicati, per la homepage; con `categorie`, solo quelli di almeno una. */
+export async function ultimiAvvisi(limit = 3, categorie?: CategoriaAvviso[]) {
   const payload = await payloadClient()
   const res = await payload.find({
     collection: 'avvisi',
+    ...(categorie?.length ? { where: { categorie: { in: categorie } } } : {}),
     sort: '-pubblicatoIl',
     limit,
     overrideAccess: false,
