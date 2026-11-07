@@ -27,6 +27,19 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.31.1',
+    data: '2026-11-07',
+    titolo: 'Librerie aggiornate',
+    voci: [
+      {
+        tipo: 'migliorato',
+        testo:
+          'Aggiornati i componenti su cui si basa la piattaforma (pannello, sito e strumenti di verifica) alle versioni più recenti, con le ultime correzioni di sicurezza. Nessun cambiamento visibile.',
+      },
+    ],
+    pr: [64],
+  },
+  {
     versione: '0.31.0',
     data: '2026-11-07',
     titolo: 'Nuova home: motto animato, avvisi in un solo blocco, virtual tour',
