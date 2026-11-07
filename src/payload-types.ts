@@ -74,13 +74,13 @@ export interface Config {
     docenti: Docente;
     dottorandi: Dottorando;
     calendari: Calendario;
+    scuole: Scuola;
     'finestre-iscrizione': FinestraIscrizione;
     'iscrizioni-corsi': IscrizioneCorso;
     appelli: Appello;
     'iscrizioni-esami': IscrizioneEsame;
     albo: AttoAlbo;
     trasparenza: Trasparenza;
-    scuole: Scuola;
     media: Media;
     users: User;
     'payload-kv': PayloadKv;
@@ -104,13 +104,13 @@ export interface Config {
     docenti: DocentiSelect<false> | DocentiSelect<true>;
     dottorandi: DottorandiSelect<false> | DottorandiSelect<true>;
     calendari: CalendariSelect<false> | CalendariSelect<true>;
+    scuole: ScuoleSelect<false> | ScuoleSelect<true>;
     'finestre-iscrizione': FinestreIscrizioneSelect<false> | FinestreIscrizioneSelect<true>;
     'iscrizioni-corsi': IscrizioniCorsiSelect<false> | IscrizioniCorsiSelect<true>;
     appelli: AppelliSelect<false> | AppelliSelect<true>;
     'iscrizioni-esami': IscrizioniEsamiSelect<false> | IscrizioniEsamiSelect<true>;
     albo: AlboSelect<false> | AlboSelect<true>;
     trasparenza: TrasparenzaSelect<false> | TrasparenzaSelect<true>;
-    scuole: ScuoleSelect<false> | ScuoleSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -1201,6 +1201,10 @@ export interface PayloadLockedDocument {
         value: number | Calendario;
       } | null)
     | ({
+        relationTo: 'scuole';
+        value: number | Scuola;
+      } | null)
+    | ({
         relationTo: 'finestre-iscrizione';
         value: number | FinestraIscrizione;
       } | null)
@@ -1223,10 +1227,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'trasparenza';
         value: number | Trasparenza;
-      } | null)
-    | ({
-        relationTo: 'scuole';
-        value: number | Scuola;
       } | null)
     | ({
         relationTo: 'media';
@@ -1565,6 +1565,63 @@ export interface CalendariSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scuole_select".
+ */
+export interface ScuoleSelect<T extends boolean = true> {
+  nome?: T;
+  sigla?: T;
+  dipartimento?: T;
+  descrizione?: T;
+  immagine?: T;
+  video?: T;
+  triennio?:
+    | T
+    | {
+        attivo?: T;
+        sezioni?:
+          | T
+          | {
+              titolo?: T;
+              testo?: T;
+              id?: T;
+            };
+        piani?:
+          | T
+          | {
+              nome?: T;
+              file?: T;
+              url?: T;
+              id?: T;
+            };
+      };
+  biennio?:
+    | T
+    | {
+        attivo?: T;
+        sezioni?:
+          | T
+          | {
+              titolo?: T;
+              testo?: T;
+              id?: T;
+            };
+        piani?:
+          | T
+          | {
+              nome?: T;
+              file?: T;
+              url?: T;
+              id?: T;
+            };
+      };
+  coordinatoreDipartimento?: T;
+  coordinatoreScuola?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "finestre-iscrizione_select".
  */
 export interface FinestreIscrizioneSelect<T extends boolean = true> {
@@ -1677,63 +1734,6 @@ export interface TrasparenzaSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "scuole_select".
- */
-export interface ScuoleSelect<T extends boolean = true> {
-  nome?: T;
-  sigla?: T;
-  dipartimento?: T;
-  descrizione?: T;
-  immagine?: T;
-  video?: T;
-  triennio?:
-    | T
-    | {
-        attivo?: T;
-        sezioni?:
-          | T
-          | {
-              titolo?: T;
-              testo?: T;
-              id?: T;
-            };
-        piani?:
-          | T
-          | {
-              nome?: T;
-              file?: T;
-              url?: T;
-              id?: T;
-            };
-      };
-  biennio?:
-    | T
-    | {
-        attivo?: T;
-        sezioni?:
-          | T
-          | {
-              titolo?: T;
-              testo?: T;
-              id?: T;
-            };
-        piani?:
-          | T
-          | {
-              nome?: T;
-              file?: T;
-              url?: T;
-              id?: T;
-            };
-      };
-  coordinatoreDipartimento?: T;
-  coordinatoreScuola?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
