@@ -115,7 +115,10 @@ export async function scambiaCodice(o: {
   return verificaIdToken(id_token)
 }
 
-/** Link “Accedi” che riporta alla pagina indicata (senza Google configurato: accesso con password). */
+/**
+ * Link “Accedi” che riporta alla pagina indicata. Passa sempre dalla pagina di accesso
+ * (“Accedi con Google” e, sotto, l'accesso di emergenza per gli admin), mai Google diretto.
+ */
 export function urlAccesso(dopo: string) {
-  return ssoAttivo() ? `/api/users/google?dopo=${encodeURIComponent(dopo)}` : '/admin/login'
+  return `/admin/login?redirect=${encodeURIComponent(dopo)}`
 }
