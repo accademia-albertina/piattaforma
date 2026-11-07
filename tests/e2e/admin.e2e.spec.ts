@@ -22,7 +22,7 @@ test.describe('Admin Panel', () => {
     await page.goto('http://localhost:3000/admin')
     await expect(page).toHaveURL('http://localhost:3000/admin')
     await expect(page.getByRole('heading', { level: 1, name: /^Ciao/ })).toBeVisible()
-    const sezioni = page.getByRole('region', { name: 'Contenuti e impostazioni' })
+    const sezioni = page.getByRole('region', { name: 'Contenuti', exact: true })
     await expect(sezioni.getByRole('link', { name: 'Avvisi', exact: true })).toBeVisible()
     // Il pulsante «Apri il sito» sta nell'intestazione, su tutte le pagine del pannello
     await expect(page.getByRole('link', { name: /Apri il sito/ })).toHaveAttribute('href', '/')
