@@ -52,6 +52,10 @@ export const CHANGELOG: Versione[] = [
           'Sito: “Le scuole” in home porta all’offerta formativa, comandi dello slider più compatti, titolo degli avvisi più piccolo, copertina delle scuole più grande da telefono.',
       },
       {
+        tipo: 'migliorato',
+        testo: 'Anche i docenti vedono il changelog, dalla pagina iniziale del pannello.',
+      },
+      {
         tipo: 'corretto',
         testo:
           '“Accedi” mostra di nuovo la pagina di accesso prima di Google e, dopo l’accesso, si torna al pannello. Nella Guida e nel Changelog la casetta del percorso è di nuovo cliccabile.',

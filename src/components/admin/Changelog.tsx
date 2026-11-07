@@ -19,7 +19,7 @@ const formatoData = new Intl.DateTimeFormat('it-IT', {
   timeZone: 'Europe/Rome',
 })
 
-/** Registro delle versioni nel pannello (/admin/changelog): per chi gestisce il sito (non i docenti). */
+/** Registro delle versioni nel pannello (/admin/changelog): per tutti i ruoli del pannello, docenti compresi. */
 export default function Changelog({ initPageResult, params, searchParams }: AdminViewServerProps) {
   const { req, permissions, visibleEntities, locale } = initPageResult
   if (!canAccessBackend(req.user)) redirect(`${req.payload.config.routes.admin}/login`)

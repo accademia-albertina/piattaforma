@@ -54,7 +54,7 @@ export const VISIBILITA: Record<SezionePannello, Role[]> = {
   trasparenza: ['vicedirezione', 'amministrativo'],
   users: [],
   navigazione: [],
-  changelog: ['vicedirezione', 'redazione', ...UFFICI],
+  changelog: ['vicedirezione', 'redazione', ...UFFICI, 'docente'],
 }
 
 export const vedeSezione = (user: MaybeUser, sezione: SezionePannello) =>
