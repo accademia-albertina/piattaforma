@@ -131,21 +131,29 @@
 .controls {
   position: absolute;
   inset-inline: 0;
-  bottom: var(--space-5);
+  bottom: var(--space-3);
   z-index: 2;
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+/* A destra, discreti: contatore, pausa, precedente e successivo */
+.comandi {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
 }
 
 .comando {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
-  border: 1px solid rgb(255 255 255 / 0.45);
+  border: 0;
   background: transparent;
   color: inherit;
   cursor: pointer;
@@ -156,12 +164,13 @@
 
 .comando[data-hovered] {
   background: rgb(255 255 255 / 0.12);
-  border-color: #fff;
 }
 
 .linee {
   display: flex;
-  margin: 0 var(--space-1);
+  flex: 1;
+  max-width: 24rem;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -169,12 +178,17 @@
 /* Area cliccabile 32×40, linea visibile di 2px */
 .linea {
   position: relative;
-  width: 36px;
-  height: 40px;
+  width: 100%;
+  min-width: 24px;
+  height: 44px;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
+}
+
+.linee li {
+  flex: 1;
 }
 
 .linea::before {
@@ -239,7 +253,7 @@
 }
 
 @media (max-width: 30rem) {
-  .linea {
-    width: 28px;
+  .linee {
+    max-width: none;
   }
 }

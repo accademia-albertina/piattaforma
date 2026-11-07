@@ -34,7 +34,7 @@ export const FinestreIscrizione: CollectionConfig = {
     description:
       'Quando gli studenti possono iscriversi ai corsi di un semestre e agli esami di una sessione.',
     defaultColumns: ['titolo', 'apertura', 'chiusura'],
-    group: 'Didattica',
+    group: 'Iscrizioni ed esami',
   },
   defaultSort: '-apertura',
   endpoints: [endpointPulizia],

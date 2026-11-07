@@ -27,6 +27,43 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.29.0',
+    data: '2026-11-07',
+    titolo: 'Menu del pannello più chiaro e ritocchi alla home',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'In fondo al menu del pannello ci sono “Guida” ed “Esci”, con testo e icona; il punto di domanda in alto è stato tolto.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Finestre di iscrizione, iscrizioni ai corsi, appelli e iscrizioni agli esami stanno insieme nel gruppo “Iscrizioni ed esami”.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Pagina iniziale del pannello: le sezioni sono divise come nel menu e ogni scheda ha “+ Nuovo …”; in alto restano solo le azioni più frequenti.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Sito: “Le scuole” in home porta all’offerta formativa, comandi dello slider più compatti, titolo degli avvisi più piccolo, copertina delle scuole più grande da telefono.',
+      },
+      {
+        tipo: 'migliorato',
+        testo: 'Anche i docenti vedono il changelog, dalla pagina iniziale del pannello.',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          '“Accedi” mostra di nuovo la pagina di accesso prima di Google e, dopo l’accesso, si torna al pannello. Nella Guida e nel Changelog la casetta del percorso è di nuovo cliccabile.',
+      },
+    ],
+    pr: [61],
+  },
+  {
     versione: '0.28.0',
     data: '2026-11-06',
     titolo: 'Pulizia delle iscrizioni degli anni passati',

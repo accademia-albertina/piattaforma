@@ -105,8 +105,10 @@ export default async function Dashboard({
         ? (config as { labels?: { plural?: unknown } })?.labels?.plural
         : (config as { label?: unknown })?.label
     const descrizione = config?.admin?.description
+    const gruppo = config?.admin?.group
     return {
       ...s,
+      gruppo: typeof gruppo === 'string' ? gruppo : 'Impostazioni',
       titolo: typeof titolo === 'string' ? titolo : s.slug,
       descrizione: typeof descrizione === 'string' ? descrizione : '',
     }
@@ -185,7 +187,6 @@ export default async function Dashboard({
 
   const nome = (user as { nome?: string } | null)?.nome || user?.email
   const ruoli = ((user as { roles?: Role[] } | null)?.roles ?? []).map((r) => ROLE_LABELS[r])
-  const azioni = visibili.filter((s) => s.nuovo && permessiCollezioni[s.slug]?.create)
 
   // Il docente arriva subito al suo profilo e ai suoi corsi
   const docente = hasRole(user, 'docente') && !vedeTutteLeModifiche(user)
@@ -201,6 +202,18 @@ export default async function Dashboard({
         })
       ).docs[0]
     : null
+  // Al massimo tre azioni rapide (le più frequenti per il ruolo): le altre sono nelle schede
+  const creabili = visibili.filter((s) => s.nuovo && permessiCollezioni[s.slug]?.create)
+  const azioni = creabili.slice(0, docente ? 1 : 3)
+  // Schede divise come il menu laterale (Contenuti, Didattica, Iscrizioni ed esami, Uffici…)
+  const gruppi = visibili.reduce<
+    { nome: string; sezioni: { s: (typeof visibili)[number]; i: number }[] }[]
+  >((acc, s, i) => {
+    const g =
+      acc.find((x) => x.nome === s.gruppo) ?? acc[acc.push({ nome: s.gruppo, sezioni: [] }) - 1]
+    g.sezioni.push({ s, i })
+    return acc
+  }, [])
   const urlSezione = (s: Sezione) =>
     s.tipo === 'collezione'
       ? `${admin}/collections/${s.slug}`
@@ -281,34 +294,51 @@ export default async function Dashboard({
         </section>
       )}
 
-      <section aria-labelledby="sezioni" className={styles.sezione}>
-        <h2 id="sezioni" className={styles.titoloSezione}>
-          Contenuti e impostazioni
-        </h2>
-        <ul className={styles.griglia}>
-          {visibili.map((s, i) => {
-            const { totale, bozze } = conteggi[i]
-            const Icona = ICONE_SEZIONI[s.slug]
-            return (
-              <li key={s.slug} className={styles.scheda}>
-                {Icona && (
-                  <Icona className={styles.icona} size={24} strokeWidth={1.5} aria-hidden />
-                )}
-                <h3 className={styles.titoloScheda}>
-                  <Link href={urlSezione(s)}>{s.titolo}</Link>
-                </h3>
-                {s.descrizione && <p className={styles.descrizione}>{s.descrizione}</p>}
-                {totale !== null && (
-                  <p className={styles.conteggio}>
-                    <strong>{totale}</strong> {totale === 1 ? 'elemento' : 'elementi'}
-                    {bozze ? ` · ${bozze} ${bozze === 1 ? 'bozza' : 'bozze'}` : ''}
-                  </p>
-                )}
-              </li>
-            )
-          })}
-        </ul>
-      </section>
+      {gruppi.map(({ nome, sezioni }) => {
+        const idTitolo = `gruppo-${nome.toLowerCase().replace(/[^a-z]+/g, '-')}`
+        return (
+          <section key={nome} aria-labelledby={idTitolo} className={styles.sezione}>
+            <h2 id={idTitolo} className={styles.titoloSezione}>
+              {nome}
+            </h2>
+            <ul className={styles.griglia}>
+              {sezioni.map(({ s, i }) => {
+                const { totale, bozze } = conteggi[i]
+                const Icona = ICONE_SEZIONI[s.slug]
+                const crea = s.nuovo && permessiCollezioni[s.slug]?.create
+                return (
+                  <li key={s.slug} className={styles.scheda}>
+                    {Icona && (
+                      <Icona className={styles.icona} size={24} strokeWidth={1.5} aria-hidden />
+                    )}
+                    <h3 className={styles.titoloScheda}>
+                      <Link href={urlSezione(s)}>{s.titolo}</Link>
+                    </h3>
+                    {s.descrizione && <p className={styles.descrizione}>{s.descrizione}</p>}
+                    {totale !== null && (
+                      <p className={styles.conteggio}>
+                        <strong>{totale}</strong> {totale === 1 ? 'elemento' : 'elementi'}
+                        {bozze ? ` · ${bozze} ${bozze === 1 ? 'bozza' : 'bozze'}` : ''}
+                      </p>
+                    )}
+                    <p className={styles.inviti}>
+                      {/* Solo visivo: tutta la scheda porta già alla sezione */}
+                      <span className={styles.apri} aria-hidden>
+                        Apri →
+                      </span>
+                      {crea && (
+                        <Link href={`${urlSezione(s)}/create`} className={styles.nuovo}>
+                          <Plus size={16} strokeWidth={1.75} aria-hidden /> {s.nuovo}
+                        </Link>
+                      )}
+                    </p>
+                  </li>
+                )
+              })}
+            </ul>
+          </section>
+        )
+      })}
 
       {recenti.length > 0 && (
         <section aria-labelledby="ultime-modifiche" className={styles.sezione}>

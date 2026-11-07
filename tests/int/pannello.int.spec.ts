@@ -52,6 +52,7 @@ describe('Pannello: cosa vede ogni ruolo', () => {
       'iscrizioni-corsi',
       'appelli',
       'iscrizioni-esami',
+      'changelog',
     ])
     expect(visibili(['segreteria'])).toEqual([
       'pagine',

@@ -39,7 +39,9 @@ export default async function HomePage() {
                   // Senza foto: repertorio della scuola o delle sedi, mai il fondo vuoto
                   const r = immagineDiRepertorio(
                     a.slug ?? a.titolo,
-                    (a.scuole ?? []).flatMap((s) => (typeof s === 'object' && s.slug ? [s.slug] : [])),
+                    (a.scuole ?? []).flatMap((s) =>
+                      typeof s === 'object' && s.slug ? [s.slug] : [],
+                    ),
                   )
                   return { url: r.src, width: r.width, height: r.height }
                 })(),
@@ -76,17 +78,15 @@ export default async function HomePage() {
           <section aria-labelledby="scuole" className={styles.section}>
             <div className={styles.sectionHead}>
               <h2 id="scuole">Le scuole</h2>
-              <Link href="/corsi">Tutti i corsi</Link>
+              <Link href="/scuole">Offerta formativa</Link>
             </div>
             <ul className={styles.scuole}>
               <li className={styles.introScuole}>
                 <p className={styles.occhiello}>Offerta formativa</p>
-                <p className={styles.introTitolo}>
-                  {scuole.length} scuole, due livelli di diploma
-                </p>
+                <p className={styles.introTitolo}>{scuole.length} scuole, due livelli di diploma</p>
                 <p>
-                  Diplomi accademici equiparati alle lauree universitarie: triennio di primo
-                  livello e biennio specialistico.
+                  Diplomi accademici equiparati alle lauree universitarie: triennio di primo livello
+                  e biennio specialistico.
                 </p>
                 <dl className={styles.cifre}>
                   <div>
@@ -103,7 +103,8 @@ export default async function HomePage() {
                 </Link>
               </li>
               {scuole.map((s) => {
-                const caricata = typeof s.immagine === 'object' && s.immagine?.url ? s.immagine : null
+                const caricata =
+                  typeof s.immagine === 'object' && s.immagine?.url ? s.immagine : null
                 return (
                   <li key={s.id}>
                     <SchedaScuola

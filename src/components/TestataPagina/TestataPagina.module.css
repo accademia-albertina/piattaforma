@@ -70,11 +70,16 @@
   height: auto;
 }
 
-/* Da telefono l'immagine va sopra il titolo, piccola: non deve spingere giù il contenuto */
+/* Da telefono l'immagine va sopra il titolo. Le copertine (scuole, volumi) a tutta larghezza;
+   i ritratti (docenti, dottorandi) restano piccoli per non spingere giù il contenuto. */
 @media (max-width: 63.99rem) {
   .media {
     order: -1;
     max-width: 9rem;
+  }
+
+  .testata[data-media='copertina'] .media {
+    max-width: none;
   }
 }
 

@@ -23,6 +23,12 @@ export default function PrimaDelLogin({ searchParams }: Props) {
       ? ERRORI_ACCESSO[codice]
       : undefined
   const google = ssoAttivo()
+  // Dove tornare dopo Google (?redirect=…, lo stesso parametro del modulo con la password);
+  // l'endpoint lo ripulisce con destinazioneSicura
+  const torna = typeof searchParams?.redirect === 'string' ? searchParams.redirect : undefined
+  const hrefGoogle = torna
+    ? `/api/users/google?dopo=${encodeURIComponent(torna)}`
+    : '/api/users/google'
   // Con Google attivo il modulo con la password è nascosto: resta solo per gli admin, in emergenza
   const conPassword = !google || searchParams?.password === '1'
   return (
@@ -41,8 +47,7 @@ export default function PrimaDelLogin({ searchParams }: Props) {
       ) : null}
       {google ? (
         <>
-          {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- endpoint API: serve una navigazione completa verso Google */}
-          <a className="prima-del-login__google" href="/api/users/google">
+          <a className="prima-del-login__google" href={hrefGoogle}>
             <svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true" focusable="false">
               <path
                 fill="#EA4335"
@@ -68,7 +73,10 @@ export default function PrimaDelLogin({ searchParams }: Props) {
               Accesso di emergenza con email e password, solo per gli amministratori.
             </p>
           ) : (
-            <Link className="prima-del-login__emergenza" href="/admin/login?password=1">
+            <Link
+              className="prima-del-login__emergenza"
+              href={`/admin/login?password=1${torna ? `&redirect=${encodeURIComponent(torna)}` : ''}`}
+            >
               Accesso di emergenza (solo amministratori)
             </Link>
           )}

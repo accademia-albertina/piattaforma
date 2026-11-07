@@ -29,7 +29,7 @@ export const GUIDE: Guida[] = [
       'Entra da “Accedi” in alto a destra sul sito con “Accedi con Google” e il tuo account @albertina.academy. Non serve una password diversa.',
       'La dashboard mostra le azioni rapide e le tue sezioni. Il menu a sinistra si apre con il pulsante in alto a sinistra.',
       'Dall’icona del profilo in alto a destra cambi nome, lingua e tema (chiaro o scuro) ed esci.',
-      'In alto a destra il punto di domanda apre questa guida e il globo apre il sito in una nuova scheda.',
+      'In fondo al menu a sinistra trovi “Guida” (questa pagina) ed “Esci”; in alto a destra il globo apre il sito in una nuova scheda.',
     ],
     consigli: [
       'Se una sezione che ti serve non compare, chiedi all’amministratore: dipende dal tuo ruolo.',
