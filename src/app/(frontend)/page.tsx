@@ -2,9 +2,9 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 import aulaPittura from '@/assets/repertorio/aula-pittura.webp'
+import pinacoteca from '@/assets/repertorio/pinacoteca.webp'
 import salaBlu from '@/assets/repertorio/sala-blu.webp'
 import scalone from '@/assets/repertorio/scalone.webp'
-import sotterranei from '@/assets/repertorio/sotterranei.webp'
 import {
   Alert,
   AvvisoCard,
@@ -113,8 +113,8 @@ export default async function HomePage() {
       />
 
       <IntroAccademia
-        foto={aulaPittura}
-        dettagli={[salaBlu, sotterranei]}
+        foto={salaBlu}
+        dettagli={[pinacoteca, aulaPittura]}
         testo={MANIFESTO}
         cifre={[
           { valore: 1678, etichetta: 'Anno di fondazione' },

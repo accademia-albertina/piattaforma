@@ -14,3 +14,12 @@ describe('immagine di repertorio', () => {
     expect(immagineDiRepertorio('bando-erasmus-2026')).toBe(a)
   })
 })
+
+describe('repertorio e home', () => {
+  it('sala blu e scalone non finiscono nello slider: fanno da sfondo alla home', async () => {
+    const salaBlu = (await import('@/assets/repertorio/sala-blu.webp')).default
+    const scalone = (await import('@/assets/repertorio/scalone.webp')).default
+    expect(REPERTORIO).not.toContain(salaBlu)
+    expect(REPERTORIO).not.toContain(scalone)
+  })
+})

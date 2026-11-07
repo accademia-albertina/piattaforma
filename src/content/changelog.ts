@@ -34,7 +34,7 @@ export const CHANGELOG: Versione[] = [
       {
         tipo: 'nuovo',
         testo:
-          'Sotto lo slider c’è una sezione animata: il motto “J’attends mon astre” entra lettera per lettera mentre la foto dell’aula si apre a tutto schermo, poi un breve testo si accende parola per parola e le cifre dell’Accademia contano fino al loro valore (tutto fermo per chi ha attivato “riduci movimento”).',
+          'Sotto lo slider c’è una sezione animata: il motto “J’attends mon astre” in corsivo si scrive da sinistra a destra sulla foto della Sala blu, poi un breve testo si accende parola per parola e le cifre dell’Accademia contano fino al loro valore. Da telefono gli effetti sono più leggeri; con “riduci movimento” è tutto fermo.',
       },
       {
         tipo: 'migliorato',

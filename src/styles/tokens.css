@@ -10,6 +10,8 @@
 :root {
   /* Tipografia */
   --font-family: 'Albert Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* Corsivo calligrafico, solo per il motto in home (richiesta di Fede, 2026-11-07) */
+  --font-family-motto: 'Italianno', 'Snell Roundhand', 'Apple Chancery', cursive;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;

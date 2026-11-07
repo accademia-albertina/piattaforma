@@ -58,24 +58,34 @@
 .motto {
   margin: 0;
   color: inherit;
-  font-size: clamp(3.25rem, 0.5rem + 13vw, 13.5rem);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: -0.045em;
-  line-height: 0.92;
+  /* Corsivo calligrafico: sottile, quindi molto grande per restare leggibile */
+  font-family: var(--font-family-motto);
+  font-size: clamp(5.5rem, 1.5rem + 12vw, 13rem);
+  /* Lo svolazzo della J esce a sinistra: un po' d'aria perché non tocchi il bordo */
+  padding-inline-start: 0.12em;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: 0;
+  line-height: 1;
+  text-wrap: balance;
 }
 
 .mottoVisibile {
-  display: flex;
-  flex-direction: column;
-}
-
-.riga {
   display: block;
 }
 
-/* La seconda riga rientra: il motto attraversa la pagina in diagonale */
-.rigaRientrata {
-  align-self: flex-end;
+/* Da telefono il motto va su due righe, la seconda rientrata */
+@media (max-width: 40rem) {
+  .parte {
+    display: block;
+  }
+
+  .motto {
+    line-height: 0.9;
+  }
+
+  .parte + .parte {
+    padding-inline-start: 0.6em;
+  }
 }
 
 .traduzione {
