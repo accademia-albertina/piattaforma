@@ -39,7 +39,7 @@ export const Appelli: CollectionConfig = {
     description:
       'Le date d’esame di ogni corso, sessione per sessione. Gli studenti si iscrivono dal sito; il docente vede gli iscritti nella scheda “Iscritti”.',
     defaultColumns: ['titolo', 'data', 'ora', 'aula', 'sessione'],
-    group: 'Didattica',
+    group: 'Iscrizioni ed esami',
     listSearchableFields: ['titolo', 'commissione', 'aula'],
   },
   defaultSort: 'data',

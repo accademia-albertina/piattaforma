@@ -3,7 +3,6 @@ import { redirect } from 'next/navigation'
 
 import { canAccessBackend, hasRole } from '@/access/roles'
 import { PAGINA_ATTESA, PAGINA_STUDENTE } from '@/auth/endpoints'
-import { urlAccesso } from '@/auth/google'
 import { payloadClient } from '@/lib/payload'
 
 export const dynamic = 'force-dynamic'
@@ -15,7 +14,8 @@ export const dynamic = 'force-dynamic'
 export default async function AreaRiservata() {
   const payload = await payloadClient()
   const { user } = await payload.auth({ headers: await headers() })
-  if (!user) redirect(urlAccesso('/area-riservata'))
+  // Prima la pagina di accesso (con “Accedi con Google” e “Torna al sito”), non Google diretto
+  if (!user) redirect('/admin/login')
   if (canAccessBackend(user)) redirect('/admin')
   if (hasRole(user, 'studente')) redirect(PAGINA_STUDENTE)
   redirect(PAGINA_ATTESA)

@@ -124,13 +124,6 @@ export function HeroSlider({
 
       {totale > 1 ? (
         <div className={`container ${styles.controls}`}>
-          <Button
-            className={styles.comando}
-            aria-label="Avviso precedente"
-            onPress={() => vai(attiva - 1)}
-          >
-            <ChevronLeft {...ICONA} />
-          </Button>
           <ul className={styles.linee}>
             {slides.map((s, i) => (
               <li key={s.href}>
@@ -152,23 +145,32 @@ export function HeroSlider({
               </li>
             ))}
           </ul>
-          <Button
-            className={styles.comando}
-            aria-label="Avviso successivo"
-            onPress={() => vai(attiva + 1)}
-          >
-            <ChevronRight {...ICONA} />
-          </Button>
-          <p className={styles.contatore} aria-hidden="true">
-            {attiva + 1} / {totale}
-          </p>
-          <Button
-            className={styles.comando}
-            aria-label={inPausa ? 'Avvia lo scorrimento' : 'Metti in pausa lo scorrimento'}
-            onPress={() => setPausaScelta(!inPausa)}
-          >
-            {inPausa ? <Play {...ICONA} /> : <Pause {...ICONA} />}
-          </Button>
+          <div className={styles.comandi}>
+            <p className={styles.contatore} aria-hidden="true">
+              {attiva + 1} / {totale}
+            </p>
+            <Button
+              className={styles.comando}
+              aria-label={inPausa ? 'Avvia lo scorrimento' : 'Metti in pausa lo scorrimento'}
+              onPress={() => setPausaScelta(!inPausa)}
+            >
+              {inPausa ? <Play {...ICONA} /> : <Pause {...ICONA} />}
+            </Button>
+            <Button
+              className={styles.comando}
+              aria-label="Avviso precedente"
+              onPress={() => vai(attiva - 1)}
+            >
+              <ChevronLeft {...ICONA} />
+            </Button>
+            <Button
+              className={styles.comando}
+              aria-label="Avviso successivo"
+              onPress={() => vai(attiva + 1)}
+            >
+              <ChevronRight {...ICONA} />
+            </Button>
+          </div>
         </div>
       ) : null}
     </section>

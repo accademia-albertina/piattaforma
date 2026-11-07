@@ -124,6 +124,7 @@ export default async function ScuolaPage({ params }: Props) {
         occhiello={dipartimento}
         titolo={scuola.nome}
         sommario={scuola.descrizione}
+        formatoMedia="copertina"
         media={
           foto ? (
             <div className={styles.media}>

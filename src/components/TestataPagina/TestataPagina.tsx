@@ -10,14 +10,27 @@ type Props = {
   sommario?: string | null
   /** Immagine o altro contenuto a destra del titolo (da computer). */
   media?: ReactNode
+  /** “copertina”: da telefono l'immagine va a tutta larghezza (scuole); di serie resta piccola. */
+  formatoMedia?: 'piccolo' | 'copertina'
   /** Contenuto sotto il sommario: dati essenziali, pulsanti. */
   children?: ReactNode
 }
 
 /** Testata delle pagine interne: occhiello, titolo grande, sommario e filetto a tutta larghezza. */
-export function TestataPagina({ occhiello, titolo, sommario, media, children }: Props) {
+export function TestataPagina({
+  occhiello,
+  titolo,
+  sommario,
+  media,
+  formatoMedia = 'piccolo',
+  children,
+}: Props) {
   return (
-    <header className={styles.testata} data-con-media={media ? true : undefined}>
+    <header
+      className={styles.testata}
+      data-con-media={media ? true : undefined}
+      data-media={media ? formatoMedia : undefined}
+    >
       <div className={styles.testo}>
         {occhiello ? <p className={styles.occhiello}>{occhiello}</p> : null}
         <h1 className={styles.titolo}>{titolo}</h1>

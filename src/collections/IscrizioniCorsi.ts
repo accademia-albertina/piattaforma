@@ -42,7 +42,7 @@ export const IscrizioniCorsi: CollectionConfig = {
     description:
       'Chi si è iscritto a quale corso. Gli studenti si iscrivono dalla pagina del corso.',
     defaultColumns: ['nominativo', 'matricola', 'livello', 'corso', 'createdAt'],
-    group: 'Didattica',
+    group: 'Iscrizioni ed esami',
     listSearchableFields: ['nominativo', 'email', 'matricola'],
   },
   defaultSort: 'nominativo',

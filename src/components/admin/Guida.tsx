@@ -5,6 +5,8 @@ import { Gutter } from '@payloadcms/ui'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
+import PassoPannello from './PassoPannello'
+
 import { CATEGORIA_LABELS, categorieConsentite } from '@/access/avvisi'
 import { BACKEND_ROLES, ROLE_LABELS, canAccessBackend, isAdmin, type Role } from '@/access/roles'
 import { guideDi } from '@/content/guide'
@@ -42,6 +44,7 @@ export default function Guida({ initPageResult, params, searchParams }: AdminVie
       viewActions={req.payload.config.admin?.components?.actions}
       visibleEntities={visibleEntities}
     >
+      <PassoPannello etichetta="Guida" />
       <Gutter className={styles.guida}>
         <header className={styles.intestazione}>
           <h1>Guida</h1>

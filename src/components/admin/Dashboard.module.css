@@ -105,6 +105,8 @@
 
 .scheda {
   position: relative;
+  display: flex;
+  flex-direction: column;
   padding: var(--base);
   background: var(--theme-elevation-50);
   border: 1px solid var(--theme-elevation-150);
@@ -154,6 +156,44 @@
 .conteggio {
   margin: calc(var(--base) / 2) 0 0;
   color: var(--theme-elevation-700);
+}
+
+/* Inviti all'azione in fondo alla scheda: “Apri →” e, se si può creare, “+ Nuovo …” */
+.inviti {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--base) / 2) var(--base);
+  align-items: center;
+  justify-content: space-between;
+  margin: auto 0 0;
+  padding-block-start: calc(var(--base) * 0.75);
+  font-weight: 500;
+}
+
+.apri {
+  color: var(--theme-text);
+}
+
+/* Sopra il link che copre la scheda, per essere cliccabile da solo */
+.nuovo {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+  min-height: 44px;
+  color: var(--theme-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.nuovo:hover {
+  color: var(--theme-elevation-700);
+}
+
+.nuovo:focus-visible {
+  outline: 2px solid var(--theme-text);
+  outline-offset: 2px;
 }
 
 .tabella {
@@ -206,7 +246,8 @@
   }
 
   .descrizione,
-  .soloLargo {
+  .soloLargo,
+  .apri {
     display: none;
   }
 

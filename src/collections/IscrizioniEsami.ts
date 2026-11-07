@@ -44,7 +44,7 @@ export const IscrizioniEsami: CollectionConfig = {
     useAsTitle: 'nominativo',
     description: 'Chi si è iscritto a quale appello. Gli studenti si iscrivono dal sito.',
     defaultColumns: ['nominativo', 'matricola', 'livello', 'appello', 'createdAt'],
-    group: 'Didattica',
+    group: 'Iscrizioni ed esami',
     listSearchableFields: ['nominativo', 'email', 'matricola'],
   },
   defaultSort: 'nominativo',

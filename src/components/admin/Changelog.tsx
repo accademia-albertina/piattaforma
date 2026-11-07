@@ -4,6 +4,8 @@ import { DefaultTemplate } from '@payloadcms/next/templates'
 import { Gutter } from '@payloadcms/ui'
 import { redirect } from 'next/navigation'
 
+import PassoPannello from './PassoPannello'
+
 import { vedeSezione } from '@/access/pannello'
 import { canAccessBackend } from '@/access/roles'
 import { CHANGELOG, ETICHETTE_TIPO, TIPI_VOCE } from '@/content/changelog'
@@ -37,6 +39,7 @@ export default function Changelog({ initPageResult, params, searchParams }: Admi
       viewActions={req.payload.config.admin?.components?.actions}
       visibleEntities={visibleEntities}
     >
+      <PassoPannello etichetta="Changelog" />
       <Gutter className={styles.changelog}>
         <header className={styles.intestazione}>
           <h1>Changelog</h1>
