@@ -1,11 +1,25 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
-import { Alert, AvvisoCard, HeroSlider, SchedaScuola } from '@/components'
+import aulaPittura from '@/assets/repertorio/aula-pittura.webp'
+import salaBlu from '@/assets/repertorio/sala-blu.webp'
+import scalone from '@/assets/repertorio/scalone.webp'
+import sotterranei from '@/assets/repertorio/sotterranei.webp'
+import {
+  Alert,
+  AvvisoCard,
+  HeroSlider,
+  IntroAccademia,
+  InvitoTour,
+  SchedaScuola,
+  SchedePercorso,
+} from '@/components'
 import { nomeDipartimento } from '@/collections/Scuole'
+import type { Avviso } from '@/payload-types'
 import {
   avvisiInEvidenza,
   categorieAvviso,
+  hrefAvvisi,
   sommarioAvviso,
   trovaScuole,
   ultimiAvvisi,
@@ -17,10 +31,60 @@ import styles from './home.module.css'
 
 export const dynamic = 'force-dynamic'
 
+const TOUR = 'https://tour.albertina-academy.it/'
+
+const MANIFESTO =
+  'Dal 1678 Torino ha la sua scuola d’arte. Dieci scuole, dalla pittura al cinema, dalla scultura alle nuove tecnologie. Un palazzo nel centro della città, una pinacoteca, i laboratori. Qui si impara un mestiere antico e si cerca la propria stella.'
+
+/** Griglia di avvisi di una scheda, con un collegamento all'elenco completo. */
+function GrigliaAvvisi({
+  avvisi,
+  vuoto,
+  altri,
+}: {
+  avvisi: Avviso[]
+  vuoto: string
+  altri?: { label: string; href: string }[]
+}) {
+  return (
+    <div className={styles.pannelloAvvisi}>
+      {avvisi.length > 0 ? (
+        <ul className={styles.grid}>
+          {avvisi.map((a) => (
+            <li key={a.id}>
+              <AvvisoCard
+                titolo={a.titolo}
+                href={`/avvisi/${a.slug}`}
+                data={a.pubblicatoIl}
+                sommario={sommarioAvviso(a)}
+                categorie={categorieAvviso(a)}
+                headingLevel={3}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>{vuoto}</p>
+      )}
+      {altri && (
+        <p className={styles.altri}>
+          {altri.map((l) => (
+            <Link key={l.href} href={l.href}>
+              {l.label} <ArrowRight size={18} strokeWidth={1.5} aria-hidden />
+            </Link>
+          ))}
+        </p>
+      )}
+    </div>
+  )
+}
+
 export default async function HomePage() {
-  const [evidenza, avvisi, scuole] = await Promise.all([
+  const [evidenza, avvisi, didattica, bandi, scuole] = await Promise.all([
     avvisiInEvidenza(5),
     ultimiAvvisi(6),
+    ultimiAvvisi(6, ['lezioni', 'esami']),
+    ultimiAvvisi(6, ['bandi-e-concorsi']),
     trovaScuole(),
   ])
 
@@ -48,30 +112,63 @@ export default async function HomePage() {
         }))}
       />
 
+      <IntroAccademia
+        foto={aulaPittura}
+        dettagli={[salaBlu, sotterranei]}
+        testo={MANIFESTO}
+        cifre={[
+          { valore: 1678, etichetta: 'Anno di fondazione' },
+          { valore: 10, etichetta: 'Scuole' },
+          { valore: 2, etichetta: 'Livelli di diploma, triennio e biennio' },
+        ]}
+      />
+
       <div className={`container ${styles.page}`}>
         <section aria-labelledby="ultimi-avvisi" className={styles.section}>
           <div className={styles.sectionHead}>
             <h2 id="ultimi-avvisi">Ultimi avvisi</h2>
             <Link href="/avvisi">Tutti gli avvisi</Link>
           </div>
-          {avvisi.length > 0 ? (
-            <ul className={styles.grid}>
-              {avvisi.map((a) => (
-                <li key={a.id}>
-                  <AvvisoCard
-                    titolo={a.titolo}
-                    href={`/avvisi/${a.slug}`}
-                    data={a.pubblicatoIl}
-                    sommario={sommarioAvviso(a)}
-                    categorie={categorieAvviso(a)}
-                    headingLevel={3}
+          <SchedePercorso
+            label="Filtra gli avvisi"
+            percorsi={[
+              {
+                id: 'tutti',
+                label: 'Tutti',
+                contenuto: <GrigliaAvvisi avvisi={avvisi} vuoto="Non ci sono avvisi pubblicati." />,
+              },
+              {
+                id: 'didattica',
+                label: 'Lezioni ed esami',
+                contenuto: (
+                  <GrigliaAvvisi
+                    avvisi={didattica}
+                    vuoto="Non ci sono avvisi su lezioni ed esami."
+                    altri={[
+                      { label: 'Avvisi sulle lezioni', href: hrefAvvisi({ categoria: 'lezioni' }) },
+                      { label: 'Avvisi sugli esami', href: hrefAvvisi({ categoria: 'esami' }) },
+                    ]}
                   />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>Non ci sono avvisi pubblicati.</p>
-          )}
+                ),
+              },
+              {
+                id: 'bandi',
+                label: 'Bandi e concorsi',
+                contenuto: (
+                  <GrigliaAvvisi
+                    avvisi={bandi}
+                    vuoto="Non ci sono bandi aperti."
+                    altri={[
+                      {
+                        label: 'Tutti i bandi e concorsi',
+                        href: hrefAvvisi({ categoria: 'bandi-e-concorsi' }),
+                      },
+                    ]}
+                  />
+                ),
+              },
+            ]}
+          />
         </section>
 
         {scuole.length > 0 && (
@@ -132,6 +229,8 @@ export default async function HomePage() {
           </p>
         </Alert>
       </div>
+
+      <InvitoTour href={TOUR} immagine={scalone} />
     </>
   )
 }

@@ -27,6 +27,29 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.31.0',
+    data: '2026-11-07',
+    titolo: 'Nuova home: motto animato, avvisi in un solo blocco, virtual tour',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Sotto lo slider c’è una sezione animata: il motto “J’attends mon astre” entra lettera per lettera mentre la foto dell’aula si apre a tutto schermo, poi un breve testo si accende parola per parola e le cifre dell’Accademia contano fino al loro valore (tutto fermo per chi ha attivato “riduci movimento”).',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Gli ultimi avvisi in home stanno in un solo blocco con le schede Tutti, Lezioni ed esami, Bandi e concorsi.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'La home si chiude con “Esplora l’Accademia”, l’invito al virtual tour a tutta larghezza.',
+      },
+    ],
+    pr: [62],
+  },
+  {
     versione: '0.30.0',
     data: '2026-11-07',
     titolo: 'Guida del pannello con le schermate',

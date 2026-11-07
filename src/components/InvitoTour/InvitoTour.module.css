@@ -1,0 +1,64 @@
+.tour {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: clamp(26rem, 60vh, 38rem);
+  color: var(--color-on-brand);
+  /* Fondo di riserva se la foto non carica: bianco sopra 7,4 */
+  background: var(--color-ardesia-dark);
+  isolation: isolate;
+}
+
+.foto {
+  z-index: -2;
+  object-fit: cover;
+}
+
+/* Velo scuro dal basso: il testo bianco poggia su almeno il 70% di #12191d */
+.tour::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to top,
+    rgb(18 25 29 / 0.88) 0%,
+    rgb(18 25 29 / 0.7) 45%,
+    rgb(18 25 29 / 0.15) 100%
+  );
+  content: '';
+}
+
+.contenuto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding-block: var(--section-pad);
+}
+
+.occhiello {
+  margin: 0;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+}
+
+.titolo {
+  margin: 0;
+  color: inherit;
+  font-size: var(--font-size-display);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: 1.05;
+}
+
+.testo {
+  max-width: 46ch;
+  margin: 0;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-snug);
+}
+
+.pulsante {
+  margin-top: var(--space-3);
+}
