@@ -23,7 +23,7 @@ export type IntroAccademiaProps = {
 
 /**
  * Sezione emozionale della homepage (GSAP + ScrollTrigger + SplitText):
- * 1. scena: il motto in corsivo si scrive da sinistra a destra; da computer la scena resta
+ * 1. scena: il motto in corsivo sale lettera per lettera; da computer la scena resta
  *    fissata e la foto si apre fino a riempire lo schermo, da telefono la foto si muove appena;
  * 2. manifesto: le parole si accendono allo scorrimento, due foto scorrono a velocità diverse;
  * 3. cifre che contano fino al valore.
@@ -96,25 +96,20 @@ export function IntroAccademia({ testo, foto, dettagli, cifre = [] }: IntroAccad
             })
           }
 
-          // Il motto si scrive da sinistra a destra, una riga dopo l'altra, come a penna.
-          // Si divide solo in righe: le lettere del corsivo restano legate tra loro.
+          // Il motto sale lettera per lettera da dietro una maschera, riga per riga
           SplitText.create(q('[data-motto]'), {
-            type: 'lines',
+            type: 'lines,chars',
+            mask: 'lines',
             aria: 'none',
             autoSplit: true,
             onSplit: (self) =>
-              gsap.fromTo(
-                self.lines,
-                // Margini negativi in alto e in basso per non tagliare gli svolazzi
-                { clipPath: 'inset(-40% 100% -40% -5%)' },
-                {
-                  clipPath: 'inset(-40% -5% -40% -5%)',
-                  duration: 2.2,
-                  ease: 'power2.inOut',
-                  stagger: 0.9,
-                  scrollTrigger: { trigger: scenaEl, start: 'top 65%' },
-                },
-              ),
+              gsap.from(self.chars, {
+                yPercent: 110,
+                duration: 1.2,
+                ease: 'expo.out',
+                stagger: 0.03,
+                scrollTrigger: { trigger: scenaEl, start: 'top 65%' },
+              }),
           })
 
           // 2. Manifesto: ogni parola passa da spenta ad accesa seguendo lo scorrimento

@@ -113,8 +113,8 @@ export default async function HomePage() {
       />
 
       <IntroAccademia
-        foto={salaBlu}
-        dettagli={[pinacoteca, aulaPittura]}
+        foto={scalone}
+        dettagli={[salaBlu, aulaPittura]}
         testo={MANIFESTO}
         cifre={[
           { valore: 1678, etichetta: 'Anno di fondazione' },
@@ -230,7 +230,7 @@ export default async function HomePage() {
         </Alert>
       </div>
 
-      <InvitoTour href={TOUR} immagine={scalone} />
+      <InvitoTour href={TOUR} immagine={pinacoteca} />
     </>
   )
 }

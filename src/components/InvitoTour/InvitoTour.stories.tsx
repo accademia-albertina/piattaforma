@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import scalone from '@/assets/repertorio/scalone.webp'
+import pinacoteca from '@/assets/repertorio/pinacoteca.webp'
 
 import { InvitoTour } from './InvitoTour'
 
@@ -8,7 +8,7 @@ const meta = {
   title: 'Componenti/InvitoTour',
   component: InvitoTour,
   parameters: { layout: 'fullscreen' },
-  args: { href: 'https://tour.albertina-academy.it/', immagine: scalone },
+  args: { href: 'https://tour.albertina-academy.it/', immagine: pinacoteca },
 } satisfies Meta<typeof InvitoTour>
 
 export default meta

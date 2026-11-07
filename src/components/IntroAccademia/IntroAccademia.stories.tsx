@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import aulaPittura from '@/assets/repertorio/aula-pittura.webp'
+import scalone from '@/assets/repertorio/scalone.webp'
 import salaBlu from '@/assets/repertorio/sala-blu.webp'
-import sotterranei from '@/assets/repertorio/sotterranei.webp'
 
 import { IntroAccademia } from './IntroAccademia'
 
@@ -11,8 +11,8 @@ const meta = {
   component: IntroAccademia,
   parameters: { layout: 'fullscreen' },
   args: {
-    foto: aulaPittura,
-    dettagli: [salaBlu, sotterranei],
+    foto: scalone,
+    dettagli: [salaBlu, aulaPittura],
     testo:
       'Dal 1678 Torino ha la sua scuola d’arte. Dieci scuole, dalla pittura al cinema, dalla scultura alle nuove tecnologie. Un palazzo nel centro della città, una pinacoteca, i laboratori. Qui si impara un mestiere antico e si cerca la propria stella.',
     cifre: [

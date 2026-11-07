@@ -34,7 +34,7 @@ export const CHANGELOG: Versione[] = [
       {
         tipo: 'nuovo',
         testo:
-          'Sotto lo slider c’è una sezione animata: il motto “J’attends mon astre” in corsivo si scrive da sinistra a destra sulla foto della Sala blu, poi un breve testo si accende parola per parola e le cifre dell’Accademia contano fino al loro valore. Da telefono gli effetti sono più leggeri; con “riduci movimento” è tutto fermo.',
+          'Sotto lo slider c’è una sezione animata: il motto “J’attends mon astre” in corsivo sale lettera per lettera sulla foto dello scalone d’onore, poi un breve testo si accende parola per parola e le cifre dell’Accademia contano fino al loro valore. Da telefono gli effetti sono più leggeri; con “riduci movimento” è tutto fermo.',
       },
       {
         tipo: 'migliorato',
@@ -44,7 +44,7 @@ export const CHANGELOG: Versione[] = [
       {
         tipo: 'nuovo',
         testo:
-          'La home si chiude con “Esplora l’Accademia”, l’invito al virtual tour a tutta larghezza.',
+          'La home si chiude con “Esplora l’Accademia”, l’invito al virtual tour a tutta larghezza sulla foto della pinacoteca.',
       },
     ],
     pr: [62],
