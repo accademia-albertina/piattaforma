@@ -27,6 +27,19 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.30.1',
+    data: '2026-11-07',
+    titolo: 'Librerie aggiornate',
+    voci: [
+      {
+        tipo: 'migliorato',
+        testo:
+          'Aggiornati i componenti su cui si basa la piattaforma (pannello, sito e strumenti di verifica) alle versioni più recenti, con le ultime correzioni di sicurezza. Nessun cambiamento visibile.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.30.0',
     data: '2026-11-07',
     titolo: 'Guida del pannello con le schermate',
