@@ -17,9 +17,9 @@ import {
   type VoceMenu,
 } from '@/lib/navigazione'
 import type { Avviso } from '@/payload-types'
+import { inFrase } from '@/utilities/maiuscole'
 
 import avvisiDemo from './avvisi-demo.json'
-import { inFrase } from '@/utilities/maiuscole'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
