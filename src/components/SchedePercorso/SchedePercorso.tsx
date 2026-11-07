@@ -8,7 +8,8 @@ import styles from './SchedePercorso.module.css'
 export type Percorso = { id: string; label: string; contenuto: ReactNode }
 
 /**
- * Schede (pattern WAI-ARIA Tabs) per i percorsi di una scuola, es. Triennio e Biennio.
+ * Schede (pattern WAI-ARIA Tabs): i percorsi di una scuola (Triennio e Biennio) o i filtri
+ * degli avvisi in homepage.
  * Con un solo percorso non servono schede: si mostra direttamente il contenuto.
  */
 export function SchedePercorso({ percorsi, label }: { percorsi: Percorso[]; label: string }) {

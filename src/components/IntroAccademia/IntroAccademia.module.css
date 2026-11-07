@@ -1,0 +1,193 @@
+/*
+ * Sezione emozionale: fondo scuro dell'inchiostro (#202f37), testo bianco (13,79:1).
+ * Niente rosso, niente angoli arrotondati. Lo stato di partenza (senza JS o con
+ * "riduci movimento") è quello finale: foto aperta, velo scuro, tutto leggibile.
+ */
+.intro {
+  color: var(--color-on-brand);
+  background: var(--color-ink);
+  overflow: hidden;
+}
+
+/* ——— 1. Scena fissata ——— */
+.scena {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: 100svh;
+  isolation: isolate;
+}
+
+.finestra {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  will-change: clip-path;
+}
+
+.foto {
+  object-fit: cover;
+  transform-origin: 50% 50%;
+}
+
+/* Velo per la leggibilità del testo bianco sopra la foto (finale: 62% di #12191d) */
+.velo {
+  position: absolute;
+  inset: 0;
+  background: var(--color-text);
+  opacity: 0.62;
+}
+
+.scenaContenuto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  /* In alto c'è l'header compatto mentre la scena è fissata */
+  padding-block: calc(var(--altezza-header-compatto) + var(--space-6)) var(--space-7);
+}
+
+.occhiello {
+  margin: 0;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+}
+
+.motto {
+  margin: 0;
+  color: inherit;
+  /* Corsivo da libro antico (Garamond), grande ma sobrio */
+  font-family: var(--font-family-motto);
+  font-size: clamp(4rem, 1rem + 10vw, 11rem);
+  font-style: italic;
+  /* Lo svolazzo della J esce a sinistra: un po' d'aria perché non tocchi il bordo */
+  padding-inline-start: 0.12em;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.mottoVisibile {
+  display: block;
+}
+
+/* Da telefono il motto va su due righe, la seconda rientrata */
+@media (max-width: 40rem) {
+  .parte {
+    display: block;
+  }
+
+  .motto {
+    line-height: 0.9;
+  }
+
+  .parte + .parte {
+    padding-inline-start: 0.6em;
+  }
+}
+
+.traduzione {
+  max-width: 34ch;
+  margin: var(--space-3) 0 0;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-snug);
+}
+
+/* ——— 2. Manifesto ——— */
+.manifestoGriglia {
+  display: grid;
+  gap: var(--space-6);
+  align-items: center;
+  padding-block: var(--section-pad);
+}
+
+.manifesto {
+  max-width: 24ch;
+  margin: 0;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: 1.12;
+  text-wrap: pretty;
+}
+
+.dettagli {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .manifestoGriglia {
+    grid-template-columns: 7fr 5fr;
+    min-height: 90svh;
+  }
+
+  .dettagli {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    height: 100%;
+    min-height: 34rem;
+  }
+
+  .dettaglio {
+    overflow: hidden;
+  }
+
+  .dettaglio img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .dettaglio:first-child {
+    grid-column: 1 / 5;
+    align-self: start;
+    aspect-ratio: 4 / 5;
+  }
+
+  .dettaglio:last-child {
+    grid-column: 3 / 7;
+    align-self: end;
+    aspect-ratio: 4 / 3;
+    margin-top: -6rem;
+  }
+}
+
+/* ——— 3. Cifre ——— */
+.cifre {
+  display: grid;
+  gap: var(--space-5);
+  margin: 0;
+  padding-block: 0 var(--section-pad);
+}
+
+@media (min-width: 40rem) {
+  .cifre {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cifre > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgb(255 255 255 / 0.35);
+}
+
+.cifre dt {
+  font-size: var(--font-size-sm);
+}
+
+.cifre dd {
+  margin: 0;
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
