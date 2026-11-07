@@ -15,8 +15,14 @@ export type Guida = {
   /** In alternativa (o in più), i soli ruoli a cui serve. */
   ruoli?: Role[]
   intro: string
+  /** I numeri dei passi sono gli stessi dei riquadri nelle schermate. */
   passi: string[]
   consigli?: string[]
+  /**
+   * Schermate del pannello con i riquadri numerati, in ordine. L'id rimanda a
+   * scripts/guida/scene.mjs: immagini in public/guida/, riquadri in guida-schermate.json.
+   */
+  schermate?: { id: string; didascalia: string }[]
 }
 
 export const GUIDE: Guida[] = [
@@ -27,12 +33,16 @@ export const GUIDE: Guida[] = [
       'Il pannello è il retro del sito: qui si scrivono avvisi, pagine e programmi. Vedi solo le sezioni che puoi modificare.',
     passi: [
       'Entra da “Accedi” in alto a destra sul sito con “Accedi con Google” e il tuo account @albertina.academy. Non serve una password diversa.',
-      'La dashboard mostra le azioni rapide e le tue sezioni. Il menu a sinistra si apre con il pulsante in alto a sinistra.',
-      'Dall’icona del profilo in alto a destra cambi nome, lingua e tema (chiaro o scuro) ed esci.',
-      'In fondo al menu a sinistra trovi “Guida” (questa pagina) ed “Esci”; in alto a destra il globo apre il sito in una nuova scheda.',
+      'Il menu a sinistra elenca le sezioni del tuo ruolo. Da telefono si apre con il pulsante ☰ in alto a sinistra.',
+      'La pagina iniziale ha le azioni rapide e una scheda per sezione, con “Apri →” e “+ Nuovo…”.',
+      'In fondo al menu trovi “Guida” (questa pagina) ed “Esci”.',
+      'In alto a destra il globo apre il sito in una nuova scheda; l’icona del profilo cambia nome, lingua e tema (chiaro o scuro).',
     ],
     consigli: [
       'Se una sezione che ti serve non compare, chiedi all’amministratore: dipende dal tuo ruolo.',
+    ],
+    schermate: [
+      { id: 'primi-passi', didascalia: 'La pagina iniziale del pannello con il menu aperto.' },
     ],
   },
   {
@@ -52,8 +62,14 @@ export const GUIDE: Guida[] = [
     passi: [
       '“Salva bozza” conserva il lavoro senza mostrarlo sul sito.',
       '“Pubblica modifiche” lo rende visibile subito a tutti.',
-      'Nelle pagine, il pulsante “Anteprima” mostra come apparirà la pagina prima di pubblicarla.',
       'Nella scheda “Versioni” trovi le versioni precedenti e puoi ripristinarne una.',
+      'Nelle pagine, il pulsante “Anteprima” mostra come apparirà la pagina prima di pubblicarla.',
+    ],
+    schermate: [
+      {
+        id: 'bozze',
+        didascalia: 'Un avviso aperto: i pulsanti in alto valgono per tutte le sezioni.',
+      },
     ],
   },
   {
@@ -73,6 +89,7 @@ export const GUIDE: Guida[] = [
       'Il titolo va scritto normalmente, non tutto in maiuscolo.',
       'I docenti vedono e modificano solo gli avvisi che hanno scritto loro.',
     ],
+    schermate: [{ id: 'avvisi', didascalia: 'Il modulo di un nuovo avviso.' }],
   },
   {
     id: 'file',
@@ -85,6 +102,7 @@ export const GUIDE: Guida[] = [
       'Le foto vengono ridotte e convertite da sole per caricarsi in fretta: puoi caricare l’originale.',
     ],
     consigli: ['I docenti vedono solo i file che hanno caricato loro.'],
+    schermate: [{ id: 'file', didascalia: 'Il caricamento di un file.' }],
   },
   {
     id: 'profilo',
@@ -99,6 +117,7 @@ export const GUIDE: Guida[] = [
       'Premi “Salva”.',
     ],
     consigli: ['Nome, scuole e ruolo li aggiorna la vicedirezione: scrivile se c’è un errore.'],
+    schermate: [{ id: 'profilo', didascalia: 'Il profilo di un docente.' }],
   },
   {
     id: 'corsi-docente',
@@ -114,6 +133,9 @@ export const GUIDE: Guida[] = [
     ],
     consigli: [
       'Se un corso che insegni non compare, o compare un corso non tuo, scrivi alla vicedirezione.',
+    ],
+    schermate: [
+      { id: 'corsi-docente', didascalia: 'Un corso aperto dal docente, scheda “Programma”.' },
     ],
   },
   {
@@ -132,6 +154,7 @@ export const GUIDE: Guida[] = [
       'La proroga può solo allungare la chiusura, non anticiparla.',
       'Per togliere o aggiungere uno studente a iscrizioni chiuse scrivi alla segreteria.',
     ],
+    schermate: [{ id: 'iscritti', didascalia: 'La scheda “Iscritti” di un corso.' }],
   },
   {
     id: 'esami-docente',
@@ -162,6 +185,7 @@ export const GUIDE: Guida[] = [
       'In “Docenti” tieni aggiornati nome, scuole, ruolo e “In servizio”. Chi non è più in servizio sparisce dal sito ma resta nello storico.',
       'L’account del docente si collega da solo al primo accesso con Google, se l’email è la stessa del profilo.',
     ],
+    schermate: [{ id: 'corsi-docenti', didascalia: 'Un corso aperto dalla vicedirezione.' }],
   },
   {
     id: 'pagine',
@@ -179,6 +203,7 @@ export const GUIDE: Guida[] = [
       'Gli uffici vedono solo le pagine a loro affidate: la redazione le affida dal campo “Uffici che possono modificarla”.',
       'Eliminare una pagina rompe link e menu: lo fa solo l’amministratore.',
     ],
+    schermate: [{ id: 'pagine', didascalia: 'Una pagina istituzionale con i suoi blocchi.' }],
   },
   {
     id: 'calendari',
@@ -189,8 +214,11 @@ export const GUIDE: Guida[] = [
     passi: [
       'Apri il calendario dell’anno accademico o creane uno scegliendo il tipo.',
       'Aggiungi le righe della tabella: ogni riga è una lezione, un appello o una presentazione.',
-      'Indica sedi e avvertenze; se esiste, allega anche il PDF ufficiale.',
+      'Scrivi avvertenze e sedi; se esiste, allega anche il PDF ufficiale.',
       'Premi “Pubblica modifiche”.',
+    ],
+    schermate: [
+      { id: 'calendari', didascalia: 'Un calendario aperto: la tabella si compila riga per riga.' },
     ],
   },
   {
@@ -208,6 +236,7 @@ export const GUIDE: Guida[] = [
       'A inizio anno accademico, nella finestra dell’anno precedente: prima scarica il file, poi “Elimina le iscrizioni” per alleggerire il database.',
     ],
     consigli: ['Ogni docente può prolungare la chiusura solo sul proprio corso.'],
+    schermate: [{ id: 'finestre', didascalia: 'Una nuova finestra di iscrizione.' }],
   },
   {
     id: 'appelli',
@@ -225,6 +254,7 @@ export const GUIDE: Guida[] = [
       'Il docente può aggiungere turni ai propri corsi e prolungare le iscrizioni ai propri appelli.',
       '“Solo chi è iscritto al corso” nella finestra blocca l’iscrizione a chi non segue il corso: per ora lascialo spento.',
     ],
+    schermate: [{ id: 'appelli', didascalia: 'Un nuovo appello d’esame.' }],
   },
   {
     id: 'albo',
@@ -237,6 +267,7 @@ export const GUIDE: Guida[] = [
       'Quando arrivano nomina, verbali o graduatoria, aggiungili allo stesso atto: non crearne uno nuovo.',
       'Premi “Pubblica modifiche”.',
     ],
+    schermate: [{ id: 'albo', didascalia: 'Un nuovo atto dell’Albo.' }],
   },
   {
     id: 'trasparenza',
@@ -260,6 +291,7 @@ export const GUIDE: Guida[] = [
       'Premi “Salva”.',
     ],
     consigli: ['Eliminare un volume dal catalogo spetta solo all’amministratore.'],
+    schermate: [{ id: 'press', didascalia: 'Un nuovo volume del catalogo.' }],
   },
   {
     id: 'scuole',
@@ -271,6 +303,7 @@ export const GUIDE: Guida[] = [
       'Nelle schede “Triennio” e “Biennio” aggiorni sezioni e piani di studio; togli la spunta al biennio se la scuola non lo prevede.',
       'In “Persone” scegli i coordinatori tra i docenti. L’elenco dei docenti della scuola viene dai loro profili.',
     ],
+    schermate: [{ id: 'scuole', didascalia: 'Una scuola aperta, con le sue schede.' }],
   },
   {
     id: 'dottorandi',
@@ -294,6 +327,10 @@ export const GUIDE: Guida[] = [
       'Per togliere l’accesso al pannello basta togliere i ruoli.',
     ],
     consigli: ['Assegna il ruolo minimo che serve: ognuno vede solo le sezioni del suo ruolo.'],
+    schermate: [
+      { id: 'utenti', didascalia: 'Il riquadro “Da abilitare” nella pagina iniziale.' },
+      { id: 'utenti-2', didascalia: 'L’account di una persona: il ruolo si sceglie in “Ruoli”.' },
+    ],
   },
   {
     id: 'menu',
@@ -302,9 +339,11 @@ export const GUIDE: Guida[] = [
     intro: 'Mega menu, barra in alto e link del footer.',
     passi: [
       'Apri “Menu del sito” dalle impostazioni.',
+      'Scegli la parte da cambiare: “Mega menu”, “Barra in alto” o “Footer”.',
       'Aggiungi o sposta le voci; per le pagine interne l’indirizzo inizia con “/”.',
       'Premi “Salva”: il sito si aggiorna subito.',
     ],
+    schermate: [{ id: 'menu', didascalia: 'Il menu del sito, scheda “Mega menu”.' }],
   },
 ]
 

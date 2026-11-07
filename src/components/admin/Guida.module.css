@@ -1,14 +1,13 @@
 /* Guida del pannello. Usa le variabili del tema Payload (chiaro e scuro). */
 
 .guida {
-  max-width: 72rem;
+  max-width: 84rem;
   padding-block: var(--base) calc(var(--base) * 3);
 }
 
 .intestazione {
   display: grid;
   gap: calc(var(--base) / 2);
-  padding-block-end: var(--base);
   border-block-end: 1px solid var(--theme-elevation-150);
 }
 
@@ -24,22 +23,34 @@
 .ruoli {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.375rem 0.75rem;
-  align-items: baseline;
+  gap: 0 var(--base);
+  align-items: end;
   font-size: 0.875rem;
 }
 
 .ruoli span {
+  padding-block: calc(var(--base) / 2);
   color: var(--theme-elevation-600);
 }
 
+/* Schede sottolineate, come i filtri del sito: niente aspetto da pulsante */
 .ruoli a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border-block-end: 2px solid transparent;
   color: var(--theme-elevation-800);
+  text-decoration: none;
+}
+
+.ruoli a:hover {
+  border-block-end-color: var(--theme-elevation-400);
+  color: var(--theme-text);
 }
 
 .ruoli a[aria-current='page'] {
+  border-block-end-color: var(--theme-text);
   font-weight: 600;
-  text-decoration: none;
   color: var(--theme-text);
 }
 
@@ -100,10 +111,132 @@
 
 .passi {
   display: grid;
-  gap: 0.375rem;
+  gap: calc(var(--base) / 2);
   margin: 0;
-  padding-inline-start: 1.5rem;
+  padding: 0;
+  list-style: none;
   max-width: 65ch;
+}
+
+.passi li {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: calc(var(--base) * 0.75);
+  align-items: baseline;
+}
+
+/* Numero del passo: lo stesso quadrato dei riquadri sulla schermata */
+.numero {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--theme-elevation-400);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--theme-elevation-800);
+}
+
+.segnato .numero {
+  border-color: var(--guida-segno);
+  background: var(--guida-segno);
+  color: var(--guida-segno-testo);
+}
+
+/* ---------- Schermate ---------- */
+
+/*
+ * Colore dei riquadri: blu informativo del Design System, mai rosso (in UX = errore).
+ * Bianco su #2b5a80: 5,92:1. Nel tema scuro si inverte: #2b5a80 su #d8eaf6.
+ */
+.guida {
+  --guida-segno: var(--color-info-text);
+  --guida-segno-testo: #fff;
+}
+
+:global(html[data-theme='dark']) .guida {
+  --guida-segno: var(--color-info-bg);
+  --guida-segno-testo: var(--color-info-text);
+}
+
+.schermata {
+  display: grid;
+  gap: calc(var(--base) / 2);
+  margin: calc(var(--base) * 0.75) 0 0;
+}
+
+.cornice {
+  position: relative;
+  border: 1px solid var(--theme-elevation-150);
+  background: var(--theme-bg);
+}
+
+.cornice a,
+.cornice img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.scuro,
+:global(html[data-theme='dark']) .chiaro {
+  display: none !important;
+}
+
+:global(html[data-theme='dark']) .scuro {
+  display: block !important;
+}
+
+.segno {
+  position: absolute;
+  border: 2px solid var(--guida-segno);
+  box-shadow: 0 0 0 2px var(--theme-bg);
+  pointer-events: none;
+  transition: background-color 140ms ease;
+}
+
+.numeroSegno {
+  position: absolute;
+  /* Sopra l'angolo del riquadro, fuori, per non coprire ciò che indica */
+  bottom: 100%;
+  left: -2px;
+  display: grid;
+  place-items: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  background: var(--guida-segno);
+  box-shadow: 0 0 0 2px var(--theme-bg);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--guida-segno-testo);
+}
+
+/* Riquadro attaccato al bordo alto: il numero va a sinistra, sempre fuori */
+.segnoInAlto .numeroSegno {
+  top: -2px;
+  right: 100%;
+  bottom: auto;
+  left: auto;
+}
+
+/* Passando sopra un passo si evidenzia il suo riquadro */
+.voce:has(li[data-n='1']:hover) .segno[data-n='1'],
+.voce:has(li[data-n='2']:hover) .segno[data-n='2'],
+.voce:has(li[data-n='3']:hover) .segno[data-n='3'],
+.voce:has(li[data-n='4']:hover) .segno[data-n='4'],
+.voce:has(li[data-n='5']:hover) .segno[data-n='5'],
+.voce:has(li[data-n='6']:hover) .segno[data-n='6'],
+.voce:has(li[data-n='7']:hover) .segno[data-n='7'],
+.voce:has(li[data-n='8']:hover) .segno[data-n='8'] {
+  background: color-mix(in srgb, var(--guida-segno) 18%, transparent);
+}
+
+.didascalia {
+  font-size: 0.8125rem;
+  color: var(--theme-elevation-700);
 }
 
 .nota {

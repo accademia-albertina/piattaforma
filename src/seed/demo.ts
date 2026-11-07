@@ -17,6 +17,7 @@ import {
   type VoceMenu,
 } from '@/lib/navigazione'
 import type { Avviso } from '@/payload-types'
+import { inFrase } from '@/utilities/maiuscole'
 
 import avvisiDemo from './avvisi-demo.json'
 
@@ -100,7 +101,7 @@ export async function seedDemo(payload: Payload) {
       collection: 'avvisi',
       draft: false,
       data: {
-        titolo: a.titolo,
+        titolo: inFrase(a.titolo),
         categorie: a.categorie as Avviso['categorie'],
         scuole: a.scuole.map((s) => scuole[s]).filter(Boolean),
         pubblicatoIl: new Date(a.data).toISOString(),
