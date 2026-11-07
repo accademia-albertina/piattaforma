@@ -57,7 +57,7 @@ export const CHANGELOG: Versione[] = [
           '“Accedi” mostra di nuovo la pagina di accesso prima di Google e, dopo l’accesso, si torna al pannello. Nella Guida e nel Changelog la casetta del percorso è di nuovo cliccabile.',
       },
     ],
-    pr: [],
+    pr: [61],
   },
   {
     versione: '0.28.0',
