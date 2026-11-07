@@ -27,6 +27,28 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.30.0',
+    data: '2026-11-07',
+    titolo: 'Guida del pannello con le schermate',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Ogni voce della Guida ha una schermata vera del pannello, con riquadri numerati sugli stessi punti dei passi; si vede chiara o scura come il tema scelto.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Passando sopra un passo si evidenzia il suo riquadro; un clic sulla schermata la apre a grandezza piena.',
+      },
+      {
+        tipo: 'migliorato',
+        testo: 'Per gli amministratori “Vedi come” è diventato una fila di schede, una per ruolo.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.29.0',
     data: '2026-11-07',
     titolo: 'Menu del pannello più chiaro e ritocchi alla home',

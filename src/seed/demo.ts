@@ -19,6 +19,7 @@ import {
 import type { Avviso } from '@/payload-types'
 
 import avvisiDemo from './avvisi-demo.json'
+import { inFrase } from '@/utilities/maiuscole'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -100,7 +101,7 @@ export async function seedDemo(payload: Payload) {
       collection: 'avvisi',
       draft: false,
       data: {
-        titolo: a.titolo,
+        titolo: inFrase(a.titolo),
         categorie: a.categorie as Avviso['categorie'],
         scuole: a.scuole.map((s) => scuole[s]).filter(Boolean),
         pubblicatoIl: new Date(a.data).toISOString(),

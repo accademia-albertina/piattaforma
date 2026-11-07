@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import PassoPannello from './PassoPannello'
+import SchermataGuida, { haSchermata, haSegno } from './SchermataGuida'
 
 import { CATEGORIA_LABELS, categorieConsentite } from '@/access/avvisi'
 import { BACKEND_ROLES, ROLE_LABELS, canAccessBackend, isAdmin, type Role } from '@/access/roles'
@@ -89,10 +90,24 @@ export default function Guida({ initPageResult, params, searchParams }: AdminVie
                 <h2 id={g.id}>{g.titolo}</h2>
                 <p className={styles.intro}>{g.intro}</p>
                 <ol className={styles.passi}>
-                  {g.passi.map((p) => (
-                    <li key={p}>{p}</li>
-                  ))}
+                  {g.passi.map((p, i) => {
+                    const n = i + 1
+                    const segnato = g.schermate?.some((s) => haSegno(s.id, n))
+                    return (
+                      <li key={p} data-n={n} className={segnato ? styles.segnato : undefined}>
+                        <span className={styles.numero} aria-hidden>
+                          {n}
+                        </span>
+                        <span>{p}</span>
+                      </li>
+                    )
+                  })}
                 </ol>
+                {g.schermate
+                  ?.filter((s) => haSchermata(s.id))
+                  .map((s) => (
+                    <SchermataGuida key={s.id} {...s} />
+                  ))}
                 {g.id === 'avvisi' && !isAdmin(utente) && categorie.length > 0 && (
                   <p className={styles.nota}>
                     <strong>Le tue categorie:</strong> {categorie.join(', ')}.

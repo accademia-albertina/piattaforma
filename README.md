@@ -29,6 +29,7 @@ Il primo utente creato dal pannello diventa automaticamente amministratore.
 | `pnpm payload migrate:create <nome>` | Crea una migrazione dopo aver cambiato le collezioni |
 | `pnpm migrate` | Applica le migrazioni |
 | `pnpm generate:types` | Rigenera `src/payload-types.ts` |
+| `pnpm guida:schermate` | Rifà le schermate della Guida del pannello (sito in locale avviato, vedi `scripts/guida/`) |
 
 ## Struttura
 

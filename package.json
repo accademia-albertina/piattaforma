@@ -20,7 +20,8 @@
     "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit",
     "test:unit": "vitest run --config ./vitest.config.mts tests/unit",
-    "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate"
+    "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
+    "guida:schermate": "node scripts/guida/schermate.mjs"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.91.0",
