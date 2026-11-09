@@ -1,9 +1,9 @@
 name: CodeQL
 
+# Analisi pesante: una volta a settimana (e a mano quando serve), non a ogni PR,
+# per restare nei 2.000 minuti di Actions inclusi ogni mese.
 on:
-  pull_request:
-  push:
-    branches: [main]
+  workflow_dispatch:
   schedule:
     - cron: '30 4 * * 1'
 
