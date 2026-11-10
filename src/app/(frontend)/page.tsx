@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 import aulaPittura from '@/assets/repertorio/aula-pittura.webp'
-import rotonda from '@/assets/repertorio/rotonda.webp'
+import facciata from '@/assets/repertorio/facciata.webp'
 import salaBlu from '@/assets/repertorio/sala-blu.webp'
 import scalone from '@/assets/repertorio/scalone.webp'
 import {
@@ -234,7 +234,7 @@ export default async function HomePage() {
         </Alert>
       </div>
 
-      <InvitoTour href={TOUR} immagine={rotonda} />
+      <InvitoTour href={TOUR} immagine={facciata} />
     </>
   )
 }
