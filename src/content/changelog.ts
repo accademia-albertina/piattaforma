@@ -37,7 +37,7 @@ export const CHANGELOG: Versione[] = [
           'L’invito al virtual tour in fondo alla home ha come sfondo la facciata di via Accademia Albertina, una foto più nitida a tutto schermo.',
       },
     ],
-    pr: [],
+    pr: [78],
   },
   {
     versione: '0.32.0',
