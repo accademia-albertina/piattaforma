@@ -42,7 +42,7 @@ export const CHANGELOG: Versione[] = [
           'Il motto “J’attends mon astre” compare appena la sezione entra nello schermo. L’invito al virtual tour ha come sfondo la Rotonda del Talucchi; la foto della pinacoteca torna tra quelle usate per gli avvisi senza immagine.',
       },
     ],
-    pr: [],
+    pr: [77],
   },
   {
     versione: '0.31.2',
