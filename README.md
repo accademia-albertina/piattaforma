@@ -98,3 +98,11 @@ Per provare in anteprima senza scrivere agli studenti imposta anche `EMAIL_SOLO_
 `pnpm audit` ignora solo avvisi senza correzione disponibile e non sfruttabili nel nostro uso, elencati in `package.json` → `pnpm.auditConfig.ignoreGhsas`:
 
 - `GHSA-vfj7-8cjw-p6xm` (braces, via sass → chokidar): nessuna versione corretta esiste; il pacchetto serve solo a osservare file durante la compilazione degli stili e non riceve input dagli utenti.
+
+## Licenza e riuso
+
+Il codice è rilasciato con licenza [EUPL 1.2](LICENSE), la licenza consigliata da AgID per il software della pubblica amministrazione (CAD, art. 69). Puoi usarlo, modificarlo e ridistribuirlo: le versioni modificate che distribuisci devono restare con licenza compatibile.
+
+Logo, stemma, icone delle scuole, fotografie e contenuti dell’Accademia Albertina **non** sono coperti dalla licenza del codice: restano dell’Accademia e degli autori. Chi riusa la piattaforma deve sostituirli con i propri.
+
+Per segnalare una vulnerabilità leggi [SECURITY.md](SECURITY.md).

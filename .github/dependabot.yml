@@ -2,9 +2,9 @@ version: 2
 updates:
   - package-ecosystem: npm
     directory: /
+    # Mensile: ogni PR di Dependabot consuma minuti di Actions.
     schedule:
-      interval: weekly
-      day: monday
+      interval: monthly
     open-pull-requests-limit: 10
     groups:
       payload:
@@ -16,4 +16,4 @@ updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly

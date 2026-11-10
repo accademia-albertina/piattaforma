@@ -2,7 +2,7 @@
   "name": "piattaforma",
   "version": "1.0.0",
   "description": "Piattaforma web dell’Accademia Albertina di Belle Arti di Torino",
-  "license": "UNLICENSED",
+  "license": "EUPL-1.2",
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
