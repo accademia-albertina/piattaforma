@@ -27,6 +27,19 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.32.1',
+    data: '2026-11-10',
+    titolo: 'Virtual tour con la facciata',
+    voci: [
+      {
+        tipo: 'migliorato',
+        testo:
+          'L’invito al virtual tour in fondo alla home ha come sfondo la facciata di via Accademia Albertina, una foto più nitida a tutto schermo.',
+      },
+    ],
+    pr: [78],
+  },
+  {
     versione: '0.32.0',
     data: '2026-11-10',
     titolo: 'Home: da dove vuoi iniziare',

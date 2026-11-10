@@ -10,7 +10,7 @@ import { IMMAGINI_SCUOLE } from './immagini-scuole'
 
 /**
  * Foto di repertorio delle sedi (scelte da Fede), usate quando un contenuto non ha un'immagine.
- * Scalone e Rotonda sono escluse: fanno da sfondo alla home (motto e virtual tour) e non devono
+ * Scalone e facciata sono escluse: fanno da sfondo alla home (motto e virtual tour) e non devono
  * ricomparire nello slider degli avvisi in evidenza.
  */
 export const REPERTORIO: StaticImageData[] = [

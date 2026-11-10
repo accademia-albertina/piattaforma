@@ -12,11 +12,11 @@
 .foto {
   z-index: -2;
   object-fit: cover;
-  /* La Rotonda sta un po' a sinistra e in alto nella foto */
-  object-position: 40% 35%;
+  /* Facciata di via Accademia Albertina: si vedono i piani alti e il frontone */
+  object-position: 50% 40%;
 }
 
-/* Velo scuro dal basso: anche sulla facciata chiara della Rotonda il testo bianco resta leggibile */
+/* Velo scuro dal basso: anche sulla facciata chiara il testo bianco resta leggibile */
 .tour::after {
   position: absolute;
   inset: 0;
@@ -63,28 +63,4 @@
 
 .pulsante {
   margin-top: var(--space-3);
-}
-
-/*
- * Da computer il testo sta a destra, sopra gli alberi, e la Rotonda resta libera a sinistra.
- * Il velo scuro viene da destra: sotto il testo c'è almeno il 72% di #12191d.
- */
-@media (min-width: 64rem) {
-  .tour {
-    align-items: center;
-  }
-
-  .tour::after {
-    background: linear-gradient(
-      to left,
-      rgb(18 25 29 / 0.88) 0%,
-      rgb(18 25 29 / 0.75) 50%,
-      rgb(18 25 29 / 0.2) 80%,
-      rgb(18 25 29 / 0.1) 100%
-    );
-  }
-
-  .contenuto > * {
-    margin-inline-start: 48%;
-  }
 }
