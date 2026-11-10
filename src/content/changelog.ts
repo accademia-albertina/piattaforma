@@ -27,6 +27,19 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.31.2',
+    data: '2026-11-10',
+    titolo: 'Codice aperto con licenza EUPL 1.2',
+    voci: [
+      {
+        tipo: 'migliorato',
+        testo:
+          'Il codice della piattaforma diventa open source con licenza EUPL 1.2, come chiede il CAD alla pubblica amministrazione. Loghi, foto e contenuti dell’Accademia restano esclusi. Nessun cambiamento visibile.',
+      },
+    ],
+    pr: [65],
+  },
+  {
     versione: '0.31.1',
     data: '2026-11-07',
     titolo: 'Librerie aggiornate',
