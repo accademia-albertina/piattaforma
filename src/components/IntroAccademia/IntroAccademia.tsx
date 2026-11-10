@@ -65,7 +65,7 @@ export function IntroAccademia({ testo, foto, dettagli, cifre = [] }: IntroAccad
               })
               .fromTo(
                 q('[data-finestra]'),
-                { clipPath: 'inset(24% 32% 24% 32%)' },
+                { clipPath: 'inset(14% 22% 14% 22%)' },
                 { clipPath: 'inset(0% 0% 0% 0%)' },
               )
               .fromTo(q('[data-finestra] img'), { scale: 1.35 }, { scale: 1 }, 0)
@@ -90,13 +90,14 @@ export function IntroAccademia({ testo, foto, dettagli, cifre = [] }: IntroAccad
               autoAlpha: 0,
               y: 16,
               duration: 1,
-              delay: 1.2,
+              delay: 0.8,
               ease: 'power2.out',
-              scrollTrigger: { trigger: scenaEl, start: 'top 60%' },
+              scrollTrigger: { trigger: scenaEl, start: 'top 75%' },
             })
           }
 
-          // Il motto sale lettera per lettera da dietro una maschera, riga per riga
+          // Il motto sale lettera per lettera da dietro una maschera, riga per riga.
+          // Parte appena la scena entra nello schermo: il fondo scuro non resta mai vuoto.
           SplitText.create(q('[data-motto]'), {
             type: 'lines,chars',
             mask: 'lines',
@@ -108,7 +109,7 @@ export function IntroAccademia({ testo, foto, dettagli, cifre = [] }: IntroAccad
                 duration: 1.2,
                 ease: 'expo.out',
                 stagger: 0.03,
-                scrollTrigger: { trigger: scenaEl, start: 'top 65%' },
+                scrollTrigger: { trigger: scenaEl, start: 'top 85%' },
               }),
           })
 

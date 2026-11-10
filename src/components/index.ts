@@ -1,3 +1,4 @@
+export { AccessiRapidi } from './AccessiRapidi/AccessiRapidi'
 export { Alert } from './Alert/Alert'
 export { Attachments } from './Attachments/Attachments'
 export { AvvisoCard } from './AvvisoCard/AvvisoCard'

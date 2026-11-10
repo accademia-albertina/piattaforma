@@ -16,10 +16,10 @@ describe('immagine di repertorio', () => {
 })
 
 describe('repertorio e home', () => {
-  it('scalone e pinacoteca non finiscono nello slider: fanno da sfondo alla home', async () => {
-    const pinacoteca = (await import('@/assets/repertorio/pinacoteca.webp')).default
+  it('scalone e Rotonda non finiscono nello slider: fanno da sfondo alla home', async () => {
+    const rotonda = (await import('@/assets/repertorio/rotonda.webp')).default
     const scalone = (await import('@/assets/repertorio/scalone.webp')).default
-    expect(REPERTORIO).not.toContain(pinacoteca)
+    expect(REPERTORIO).not.toContain(rotonda)
     expect(REPERTORIO).not.toContain(scalone)
   })
 })
