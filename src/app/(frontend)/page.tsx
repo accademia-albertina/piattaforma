@@ -2,10 +2,11 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 import aulaPittura from '@/assets/repertorio/aula-pittura.webp'
-import pinacoteca from '@/assets/repertorio/pinacoteca.webp'
+import rotonda from '@/assets/repertorio/rotonda.webp'
 import salaBlu from '@/assets/repertorio/sala-blu.webp'
 import scalone from '@/assets/repertorio/scalone.webp'
 import {
+  AccessiRapidi,
   Alert,
   AvvisoCard,
   HeroSlider,
@@ -24,6 +25,7 @@ import {
   trovaScuole,
   ultimiAvvisi,
 } from '@/lib/avvisi'
+import { ACCESSI_HOME } from '@/lib/accessi-home'
 import { IMMAGINI_SCUOLE } from '@/lib/immagini-scuole'
 import { immagineDiRepertorio } from '@/lib/repertorio'
 
@@ -111,6 +113,8 @@ export default async function HomePage() {
                 })(),
         }))}
       />
+
+      <AccessiRapidi voci={ACCESSI_HOME} />
 
       <IntroAccademia
         foto={scalone}
@@ -230,7 +234,7 @@ export default async function HomePage() {
         </Alert>
       </div>
 
-      <InvitoTour href={TOUR} immagine={pinacoteca} />
+      <InvitoTour href={TOUR} immagine={rotonda} />
     </>
   )
 }

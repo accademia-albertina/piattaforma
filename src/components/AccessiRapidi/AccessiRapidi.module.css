@@ -1,0 +1,137 @@
+/* Fascia bianca tra lo slider e la sezione scura del motto: orienta prima di emozionare */
+.fascia {
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.griglia {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-6);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.titolo {
+  margin: 0;
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: 1.1;
+}
+
+.testo {
+  max-width: 52ch;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.voci {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.voci > li {
+  display: flex;
+}
+
+/* Pannello pieno senza bordi né angoli, come le schede delle scuole */
+.voce {
+  display: grid;
+  flex: 1;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    'icona nome freccia'
+    'icona descrizione freccia';
+  gap: var(--space-1) var(--space-3);
+  align-items: center;
+  min-height: var(--target-min);
+  padding: var(--space-4);
+  color: var(--color-heading);
+  background: var(--color-azzurro-50);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.voce:hover {
+  background: var(--color-azzurro-100);
+}
+
+.voce:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.icona {
+  grid-area: icona;
+}
+
+.nome {
+  grid-area: nome;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+}
+
+/* #46585f su #f1f5f7 = 6,6:1 */
+.descrizione {
+  grid-area: descrizione;
+  color: var(--color-ardesia-dark);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-snug);
+}
+
+.freccia {
+  grid-area: freccia;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.voce:hover .freccia {
+  transform: translateX(4px);
+}
+
+@media (min-width: 40rem) {
+  .voci {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Da computer: testo a sinistra, quattro schede in colonna con icona in alto */
+@media (min-width: 64rem) {
+  .griglia {
+    grid-template-columns: 4fr 8fr;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .voci {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+  }
+
+  .voce {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      'icona freccia'
+      'nome nome'
+      'descrizione descrizione';
+    align-items: start;
+    gap: var(--space-2);
+    padding: var(--space-4);
+  }
+
+  .icona {
+    margin-bottom: var(--space-4);
+  }
+
+  .freccia {
+    align-self: start;
+  }
+}

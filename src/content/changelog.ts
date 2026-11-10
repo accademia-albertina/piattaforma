@@ -27,6 +27,24 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.32.0',
+    data: '2026-11-10',
+    titolo: 'Home: da dove vuoi iniziare',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Sotto lo slider della home c’è una fascia “Da dove vuoi iniziare?” con quattro accessi diretti: Ammissioni, Offerta formativa, Orari e calendari, Segreteria didattica.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Il motto “J’attends mon astre” compare appena la sezione entra nello schermo. L’invito al virtual tour ha come sfondo la Rotonda del Talucchi; la foto della pinacoteca torna tra quelle usate per gli avvisi senza immagine.',
+      },
+    ],
+    pr: [77],
+  },
+  {
     versione: '0.31.2',
     data: '2026-11-10',
     titolo: 'Codice aperto con licenza EUPL 1.2',
