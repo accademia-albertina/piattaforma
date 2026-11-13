@@ -39,6 +39,42 @@ export const Media: CollectionConfig = {
           'Si scrive da solo al caricamento: descrive l’immagine per chi usa uno screen reader. Correggilo se serve.',
       },
     },
+    {
+      // Provenienza dal sito WordPress: serve alla sincronizzazione (src/lib/wp-import/) per
+      // riconoscere i file già importati e prendere solo quelli nuovi o modificati.
+      type: 'collapsible',
+      label: 'Importato dal sito attuale',
+      admin: {
+        position: 'sidebar',
+        initCollapsed: true,
+        condition: (data) => Boolean(data?.wpId),
+      },
+      fields: [
+        {
+          name: 'wpId',
+          label: 'ID WordPress',
+          type: 'number',
+          unique: true,
+          index: true,
+          access: { update: () => false },
+          admin: { readOnly: true, disableBulkEdit: true },
+        },
+        {
+          name: 'wpUrl',
+          label: 'Indirizzo su WordPress',
+          type: 'text',
+          access: { update: () => false },
+          admin: { readOnly: true, disableBulkEdit: true },
+        },
+        {
+          name: 'wpModificato',
+          label: 'Ultima modifica su WordPress',
+          type: 'text',
+          access: { update: () => false },
+          admin: { readOnly: true, disableBulkEdit: true },
+        },
+      ],
+    },
   ],
   hooks: {
     beforeOperation: [controllaDimensione],

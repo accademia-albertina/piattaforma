@@ -19,6 +19,7 @@ import * as migration_20261113_105519_drive_file from './20261113_105519_drive_f
 import * as migration_20261113_141554_terminologia_lauree from './20261113_141554_terminologia_lauree';
 import * as migration_20261113_151332_registro_email from './20261113_151332_registro_email';
 import * as migration_20261113_153457_registro_attivita from './20261113_153457_registro_attivita';
+import * as migration_20261113_162527_media_wordpress from './20261113_162527_media_wordpress';
 
 export const migrations = [
   {
@@ -124,6 +125,11 @@ export const migrations = [
   {
     up: migration_20261113_153457_registro_attivita.up,
     down: migration_20261113_153457_registro_attivita.down,
-    name: '20261113_153457_registro_attivita'
+    name: '20261113_153457_registro_attivita',
+  },
+  {
+    up: migration_20261113_162527_media_wordpress.up,
+    down: migration_20261113_162527_media_wordpress.down,
+    name: '20261113_162527_media_wordpress'
   },
 ];

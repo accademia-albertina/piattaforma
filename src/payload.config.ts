@@ -30,6 +30,7 @@ import { DriveConnessione } from './globals/DriveConnessione'
 import { adattatoreDrive } from './lib/drive/adattatore'
 import { driveConfigurato } from './lib/drive/api'
 import { endpointsDrive } from './lib/drive/endpoints'
+import { endpointsWp } from './lib/wp-import/endpoints'
 import { migrations } from './migrations'
 import { adattatoreEmail } from './lib/email'
 import { LIMITE_ASSOLUTO_BYTE } from './lib/limiti-upload'
@@ -131,7 +132,7 @@ export default buildConfig({
     RegistroAttivita,
   ],
   globals: [Navigazione, DriveConnessione],
-  endpoints: endpointsDrive,
+  endpoints: [...endpointsDrive, ...endpointsWp],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',

@@ -246,6 +246,9 @@ export interface Media {
    * Si scrive da solo al caricamento: descrive l’immagine per chi usa uno screen reader. Correggilo se serve.
    */
   alt?: string | null;
+  wpId?: number | null;
+  wpUrl?: string | null;
+  wpModificato?: string | null;
   driveFileId?: string | null;
   prefix?: string | null;
   _objectKey?: string | null;
@@ -1811,6 +1814,9 @@ export interface TrasparenzaSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   creatoDa?: T;
   alt?: T;
+  wpId?: T;
+  wpUrl?: T;
+  wpModificato?: T;
   driveFileId?: T;
   prefix?: T;
   _objectKey?: T;
