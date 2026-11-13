@@ -25,7 +25,8 @@ const PERCORSO = [
   },
   {
     termine: 'Scuola',
-    testo: 'È il tuo indirizzo di studio, per esempio Pittura o Scultura: equivale al corso di laurea.',
+    testo:
+      'È il tuo indirizzo di studio, per esempio Pittura o Scultura: equivale al corso di laurea.',
   },
   {
     termine: 'Triennio e biennio',
@@ -33,7 +34,8 @@ const PERCORSO = [
   },
   {
     termine: 'Corsi e tesi',
-    testo: 'Segui i corsi del piano di studi, anche di altre scuole, e discuti la tesi per diplomarti.',
+    testo:
+      'Segui i corsi del piano di studi, anche di altre scuole, e discuti la tesi per diplomarti.',
   },
 ]
 
@@ -86,9 +88,7 @@ export default async function ScuolePage() {
                   slug={s.slug ?? ''}
                   href={`/scuole/${s.slug}`}
                   immagine={immagineScuola(s)}
-                  invito={
-                    s.biennio?.attivo === false ? 'Triennio' : 'Triennio e biennio'
-                  }
+                  invito={s.biennio?.attivo === false ? 'Triennio' : 'Triennio e biennio'}
                 />
               </li>
             ))}
