@@ -27,6 +27,23 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.35.1',
+    data: '2026-11-13',
+    titolo: 'Piede delle email e spazi in home',
+    voci: [
+      {
+        tipo: 'corretto',
+        testo:
+          'Nelle email l’indirizzo dell’Accademia resta un link sottolineato nei colori del piede, non più blu.',
+      },
+      {
+        tipo: 'migliorato',
+        testo: 'In home più spazio tra “Ultimi avvisi” e “Le scuole”.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.35.0',
     data: '2026-11-13',
     titolo: 'Email del sito e registro degli invii',
