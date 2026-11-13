@@ -1,0 +1,163 @@
+/* Pagina Google Drive del pannello. Usa le variabili del tema Payload (chiaro e scuro). */
+
+.drive {
+  max-width: 52rem;
+  padding-block: var(--base) calc(var(--base) * 3);
+}
+
+.intestazione {
+  display: grid;
+  gap: calc(var(--base) / 2);
+  padding-block-end: var(--base);
+  border-block-end: 1px solid var(--theme-elevation-150);
+}
+
+.intestazione h1,
+.intestazione p {
+  margin: 0;
+}
+
+.intestazione p {
+  max-width: 44rem;
+  color: var(--theme-elevation-700);
+}
+
+.scheda {
+  margin-block-start: calc(var(--base) * 1.5);
+  padding: var(--base) calc(var(--base) * 1.25);
+  background: var(--theme-elevation-50);
+}
+
+.scheda h2 {
+  margin: 0 0 var(--base);
+  font-size: 1.25rem;
+}
+
+.scheda p {
+  margin: 0 0 calc(var(--base) / 2);
+}
+
+.dati {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: calc(var(--base) / 2) calc(var(--base) * 1.5);
+  margin: 0 0 var(--base);
+}
+
+.dati dt {
+  color: var(--theme-elevation-600);
+}
+
+.dati dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.25em;
+  align-items: center;
+  margin: 0;
+  font-weight: 600;
+}
+
+.pallino {
+  inline-size: 0.625rem;
+  block-size: 0.625rem;
+  margin-inline-end: 0.375em;
+  border-radius: 50%;
+}
+
+.verde {
+  background: var(--theme-success-500);
+}
+
+.grigio {
+  background: var(--theme-elevation-400);
+}
+
+.nota {
+  font-weight: 400;
+  color: var(--theme-elevation-600);
+}
+
+.avviso {
+  margin-block: var(--base) 0;
+  padding: calc(var(--base) / 2) var(--base);
+  border-inline-start: 4px solid;
+}
+
+.ok {
+  background: var(--theme-success-100);
+  border-color: var(--theme-success-500);
+}
+
+.ko {
+  background: var(--theme-error-100);
+  border-color: var(--theme-error-500);
+}
+
+.azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--base) / 2);
+  margin-block-start: var(--base);
+}
+
+.azioni form {
+  margin: 0;
+}
+
+/* Pulsanti come le azioni rapide della dashboard: niente angoli arrotondati */
+.primario,
+.secondario {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--base);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--theme-elevation-900);
+  border-radius: 0;
+}
+
+.primario {
+  color: var(--theme-bg);
+  background: var(--theme-elevation-900);
+}
+
+.primario:hover {
+  background: var(--theme-elevation-1000);
+}
+
+.secondario {
+  color: var(--theme-text);
+  background: transparent;
+}
+
+.secondario:hover {
+  background: var(--theme-elevation-100);
+}
+
+.primario:focus-visible,
+.secondario:focus-visible {
+  outline: 2px solid var(--theme-elevation-1000);
+  outline-offset: 2px;
+}
+
+.passi {
+  margin: var(--base) 0 0;
+  padding-inline-start: 1.25em;
+  color: var(--theme-elevation-700);
+}
+
+.passi li + li {
+  margin-block-start: 0.25em;
+}
+
+.nascosto {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

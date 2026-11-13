@@ -80,6 +80,15 @@ Configurazione (una volta, da un account dell’organizzazione `albertina.academ
    - `http://localhost:3000/api/users/google/callback` per lo sviluppo.
 4. Su Render (*Environment*) e nel `.env` locale: `GOOGLE_CLIENT_ID` e `GOOGLE_CLIENT_SECRET`. `NEXT_PUBLIC_SERVER_URL` deve essere l’indirizzo pubblico, perché da lì si calcola l’URI di ritorno.
 
+## File su Google Drive
+
+Immagini e PDF caricati nel pannello vanno in una cartella Drive dell’account `noreply@albertina.academy` (codice in `src/lib/drive/`, adattatore per `@payloadcms/plugin-cloud-storage`). Il sito li serve da `/api/media/file/<nome>` passando da una cache su disco (`DRIVE_CACHE_DIR`, `DRIVE_CACHE_MB`), senza link pubblici a Drive.
+
+- Accesso con un client OAuth **Interno** separato da quello del login (`GOOGLE_DRIVE_CLIENT_ID`/`SECRET`, scope `auth/drive`, URI di reindirizzamento `…/api/drive/oauth/callback`). Niente account di servizio né delega a livello di dominio.
+- `DRIVE_ID` è l’ID della cartella padre: una cartella del Mio Drive di noreply@ o un Drive condiviso (tutte le chiamate usano `supportsAllDrives`). Per passare al Drive condiviso basta cambiare l’ID e premere “Ricollega”: i file nuovi vanno nella sottocartella `media` del nuovo ID.
+- Un amministratore apre **/admin/drive** (link “Google Drive” nella dashboard), preme “Collega Google Drive” ed entra come noreply@. Il refresh token è salvato nel database cifrato con AES-256-GCM (chiave da `PAYLOAD_SECRET`: se cambia, si ricollega).
+- Senza collegamento, o se Drive non risponde, i file restano sul disco (`MEDIA_DIR`) come prima; “Sposta su Drive” li trasferisce dopo. I file eliminati finiscono nel cestino di Drive (30 giorni).
+
 ## Email (TurboSMTP)
 
 Le email di conferma delle iscrizioni partono solo se `SMTP_HOST` è impostata; altrimenti Payload le scrive nel log.

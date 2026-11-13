@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { it } from '@payloadcms/translations/languages/it'
 import path from 'path'
@@ -23,6 +24,10 @@ import { Docenti } from './collections/Docenti'
 import { Dottorandi } from './collections/Dottorandi'
 import { Pubblicazioni } from './collections/Pubblicazioni'
 import { Navigazione } from './globals/Navigazione'
+import { DriveConnessione } from './globals/DriveConnessione'
+import { adattatoreDrive } from './lib/drive/adattatore'
+import { driveConfigurato } from './lib/drive/api'
+import { endpointsDrive } from './lib/drive/endpoints'
 import { migrations } from './migrations'
 import { adattatoreEmail } from './lib/email'
 import { seedCorsi } from './seed/corsi'
@@ -84,6 +89,7 @@ export default buildConfig({
         dashboard: { Component: '/components/admin/Dashboard' },
         changelog: { Component: '/components/admin/Changelog', path: '/changelog' },
         guida: { Component: '/components/admin/Guida', path: '/guida' },
+        drive: { Component: '/components/admin/Drive', path: '/drive' },
       },
     },
   },
@@ -117,7 +123,8 @@ export default buildConfig({
     Media,
     Users,
   ],
-  globals: [Navigazione],
+  globals: [Navigazione, DriveConnessione],
+  endpoints: endpointsDrive,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
@@ -180,5 +187,13 @@ export default buildConfig({
         payload.logger.error(`Importazione profili docenti non riuscita: ${(e as Error).message}`),
       )
   },
-  plugins: [],
+  plugins: [
+    // File caricati su Google Drive (vedi src/lib/drive/). Senza le variabili di Drive il plugin
+    // è spento ma il campo driveFileId resta, così il database è uguale ovunque.
+    cloudStoragePlugin({
+      enabled: driveConfigurato(),
+      alwaysInsertFields: true,
+      collections: { media: { adapter: adattatoreDrive } },
+    }),
+  ],
 })
