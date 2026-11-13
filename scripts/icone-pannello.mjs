@@ -25,6 +25,7 @@ const ICONE = {
   'nav-pubblicazioni': 'LibraryBig',
   'nav-users': 'Users',
   'nav-email-inviate': 'Mail',
+  'nav-registro-attivita': 'History',
   'nav-global-navigazione': 'PanelsTopLeft',
 }
 

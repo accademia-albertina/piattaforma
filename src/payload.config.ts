@@ -24,6 +24,7 @@ import { Corsi } from './collections/Corsi'
 import { Docenti } from './collections/Docenti'
 import { Dottorandi } from './collections/Dottorandi'
 import { Pubblicazioni } from './collections/Pubblicazioni'
+import { RegistroAttivita } from './collections/RegistroAttivita'
 import { Navigazione } from './globals/Navigazione'
 import { DriveConnessione } from './globals/DriveConnessione'
 import { adattatoreDrive } from './lib/drive/adattatore'
@@ -33,6 +34,7 @@ import { migrations } from './migrations'
 import { adattatoreEmail } from './lib/email'
 import { LIMITE_ASSOLUTO_BYTE } from './lib/limiti-upload'
 import { puliziaRegistroEmail } from './lib/registro-email'
+import { registroAttivita } from './lib/registro'
 import { seedCorsi } from './seed/corsi'
 import { importaAvvisiWp } from './seed/avvisi-wp'
 import { rimuoviDocenti } from './seed/docenti-rimossi'
@@ -126,6 +128,7 @@ export default buildConfig({
     Media,
     Users,
     EmailInviate,
+    RegistroAttivita,
   ],
   globals: [Navigazione, DriveConnessione],
   endpoints: endpointsDrive,
@@ -199,6 +202,8 @@ export default buildConfig({
       )
   },
   plugins: [
+    // Chi ha creato, modificato o eliminato cosa nel pannello (src/lib/registro)
+    registroAttivita(),
     // File caricati su Google Drive (vedi src/lib/drive/). Senza le variabili di Drive il plugin
     // è spento ma il campo driveFileId resta, così il database è uguale ovunque.
     cloudStoragePlugin({

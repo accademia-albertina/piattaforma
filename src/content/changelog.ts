@@ -27,7 +27,7 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
-    versione: '0.35.1',
+    versione: '0.36.1',
     data: '2026-11-13',
     titolo: 'Coordinatori senza preposizione',
     voci: [
@@ -35,6 +35,46 @@ export const CHANGELOG: Versione[] = [
         tipo: 'corretto',
         testo:
           'Nella pagina della scuola si legge “Coordinatore dipartimento” e “Coordinatore scuola”.',
+      },
+    ],
+    pr: [86],
+  },
+  {
+    versione: '0.36.0',
+    data: '2026-11-13',
+    titolo: 'Registro attività del pannello',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Registro attività (solo amministratori): chi ha creato, modificato, pubblicato o eliminato cosa, quando e quali campi ha cambiato. Su telefono ogni voce è una scheda leggibile, senza tabella da scorrere.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Le voci non si possono modificare né cancellare dal pannello e si eliminano da sole dopo un anno.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Dashboard: Registro attività, Email inviate e Google Drive sono schede nella sezione Sistema; in alto restano solo Guida e Changelog, così su telefono non si accavallano.',
+      },
+    ],
+    pr: [84],
+  },
+  {
+    versione: '0.35.1',
+    data: '2026-11-13',
+    titolo: 'Piede delle email e spazi in home',
+    voci: [
+      {
+        tipo: 'corretto',
+        testo:
+          'Nelle email l’indirizzo dell’Accademia resta un link sottolineato nei colori del piede, non più blu.',
+      },
+      {
+        tipo: 'migliorato',
+        testo: 'In home più spazio tra “Ultimi avvisi” e “Le scuole”.',
       },
     ],
     pr: [],

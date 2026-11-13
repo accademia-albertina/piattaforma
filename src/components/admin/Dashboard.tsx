@@ -25,10 +25,14 @@ import styles from './Dashboard.module.css'
 
 type Sezione = {
   slug: SezionePannello
-  tipo: 'collezione' | 'globale'
+  tipo: 'collezione' | 'globale' | 'vista'
   /** Permesso che serve per vedere la scheda (il menu e gli utenti si leggono anche senza gestirli). */
   serve: 'read' | 'update' | 'create'
   nuovo?: string
+  /** Solo per le viste del pannello (non hanno una config da cui leggerli). */
+  titolo?: string
+  descrizione?: string
+  gruppo?: string
 }
 
 /** Sezioni del pannello nell'ordine in cui le vedono i redattori; titoli e descrizioni dalla config. */
@@ -56,7 +60,17 @@ const SEZIONI: Sezione[] = [
   { slug: 'trasparenza', tipo: 'collezione', serve: 'update' },
   { slug: 'navigazione', tipo: 'globale', serve: 'update' },
   { slug: 'users', tipo: 'collezione', serve: 'create' },
+  // Strumenti degli admin: qui e non tra i link in alto, così su telefono restano ordinati
+  { slug: 'registro-attivita', tipo: 'collezione', serve: 'read' },
   { slug: 'email-inviate', tipo: 'collezione', serve: 'read' },
+  {
+    slug: 'drive',
+    tipo: 'vista',
+    serve: 'read',
+    titolo: 'Google Drive',
+    descrizione: 'Collegamento alla cartella Drive dove si salvano immagini e PDF.',
+    gruppo: 'Sistema',
+  },
 ]
 
 /** Collezioni con bozze che compaiono in “Ultime modifiche”. */
@@ -93,10 +107,20 @@ export default async function Dashboard({
   const visibili = SEZIONI.filter((s) =>
     !vedeSezione(user, s.slug)
       ? false
-      : s.tipo === 'collezione'
-        ? permessiCollezioni[s.slug]?.[s.serve]
-        : s.serve !== 'create' && permessiGlobali[s.slug]?.[s.serve],
+      : s.tipo === 'vista'
+        ? true
+        : s.tipo === 'collezione'
+          ? permessiCollezioni[s.slug]?.[s.serve]
+          : s.serve !== 'create' && permessiGlobali[s.slug]?.[s.serve],
   ).map((s) => {
+    if (s.tipo === 'vista') {
+      return {
+        ...s,
+        gruppo: s.gruppo ?? 'Impostazioni',
+        titolo: s.titolo ?? s.slug,
+        descrizione: s.descrizione ?? '',
+      }
+    }
     const config =
       s.tipo === 'collezione'
         ? payload.collections[s.slug as CollectionSlug]?.config
@@ -216,9 +240,11 @@ export default async function Dashboard({
     return acc
   }, [])
   const urlSezione = (s: Sezione) =>
-    s.tipo === 'collezione'
-      ? `${admin}/collections/${s.slug}`
-      : `${admin}/globals/${s.slug as GlobalSlug}`
+    s.tipo === 'vista'
+      ? `${admin}/${s.slug}`
+      : s.tipo === 'collezione'
+        ? `${admin}/collections/${s.slug}`
+        : `${admin}/globals/${s.slug as GlobalSlug}`
 
   return (
     <Gutter className={styles.dashboard}>
@@ -231,11 +257,6 @@ export default async function Dashboard({
           <Link className={styles.sito} href={`${admin}/guida`}>
             Guida
           </Link>
-          {isAdmin(user) && (
-            <Link className={styles.sito} href={`${admin}/drive`}>
-              Google Drive
-            </Link>
-          )}
           {vedeSezione(user, 'changelog') && (
             <Link className={styles.sito} href={`${admin}/changelog`}>
               Changelog <span className={styles.versione}>v{CHANGELOG[0].versione}</span>
