@@ -27,6 +27,19 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.35.1',
+    data: '2026-11-13',
+    titolo: 'Piede delle email',
+    voci: [
+      {
+        tipo: 'corretto',
+        testo:
+          'Nelle email l’indirizzo dell’Accademia resta nei colori del piede: Gmail non lo mostra più come link blu.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.35.0',
     data: '2026-11-13',
     titolo: 'Email del sito e registro degli invii',
