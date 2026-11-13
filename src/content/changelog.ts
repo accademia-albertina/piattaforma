@@ -27,6 +27,29 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.36.0',
+    data: '2026-11-13',
+    titolo: 'Registro attività del pannello',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Registro attività (solo amministratori): chi ha creato, modificato, pubblicato o eliminato cosa, quando e quali campi ha cambiato. Su telefono ogni voce è una scheda leggibile, senza tabella da scorrere.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Le voci non si possono modificare né cancellare dal pannello e si eliminano da sole dopo un anno.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Dashboard: Registro attività, Email inviate e Google Drive sono schede nella sezione Sistema; in alto restano solo Guida e Changelog, così su telefono non si accavallano.',
+      },
+    ],
+    pr: [84],
+  },
+  {
     versione: '0.35.1',
     data: '2026-11-13',
     titolo: 'Piede delle email e spazi in home',
