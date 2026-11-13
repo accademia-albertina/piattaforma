@@ -91,10 +91,10 @@ describe('Limite dei caricamenti', () => {
 })
 
 describe('Piede delle email', () => {
-  it('l’indirizzo è un link nei colori del piede, non blu', () => {
+  it('l’indirizzo è un link sottolineato nei colori del piede, non blu', () => {
     const html = htmlEmail({ occhiello: 'X', titolo: 'Y', saluto: 'Z', paragrafi: [] })
     expect(html).toMatch(
-      /<a href="https:\/\/www\.google\.com\/maps[^"]+" style="color:#d6e0e6;text-decoration:none">Via Accademia Albertina 6, 10123 Torino<\/a>/,
+      /<a href="https:\/\/www\.google\.com\/maps[^"]+" style="color:#d6e0e6;text-decoration:underline">Via Accademia Albertina 6, 10123 Torino<\/a>/,
     )
   })
 })

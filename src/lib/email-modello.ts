@@ -47,13 +47,13 @@ const conLink = (s: string) =>
 
 /**
  * Gmail e Apple Mail trasformano da soli gli indirizzi in link blu. Un link nostro, con colore
- * esplicito e senza sottolineatura, li tiene nei colori del piede.
+ * esplicito e sottolineato, li tiene nei colori del piede.
  */
 const INDIRIZZO = 'Via Accademia Albertina 6, 10123 Torino'
 const senzaLinkAutomatici = (html: string) =>
   html.replace(
     INDIRIZZO,
-    `<a href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(`Accademia Albertina, ${INDIRIZZO}`)}" style="color:${COLORI.footerTesto};text-decoration:none">${INDIRIZZO}</a>`,
+    `<a href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(`Accademia Albertina, ${INDIRIZZO}`)}" style="color:${COLORI.footerTesto};text-decoration:underline">${INDIRIZZO}</a>`,
   )
 
 const PIEDE_TESTO = [

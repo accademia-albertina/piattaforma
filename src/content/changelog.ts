@@ -34,7 +34,7 @@ export const CHANGELOG: Versione[] = [
       {
         tipo: 'corretto',
         testo:
-          'Nelle email l’indirizzo dell’Accademia resta nei colori del piede: Gmail non lo mostra più come link blu.',
+          'Nelle email l’indirizzo dell’Accademia resta un link sottolineato nei colori del piede, non più blu.',
       },
     ],
     pr: [],
