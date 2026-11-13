@@ -42,7 +42,7 @@ export const CHANGELOG: Versione[] = [
           'Si può rilanciare quando serve: prende solo i file nuovi o modificati su WordPress e mostra quanti ne mancano.',
       },
     ],
-    pr: [84],
+    pr: [87],
   },
   {
     versione: '0.35.0',
