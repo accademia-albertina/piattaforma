@@ -68,10 +68,15 @@ export function SiteHeader({
   useEffect(() => {
     if (!open) return
     const html = document.documentElement
-    const prima = html.style.overflow
+    // Larghezza della barra di scorrimento: la si compensa, altrimenti la pagina "salta"
+    // di lato quando la barra sparisce (Chrome e Windows con barre sempre visibili).
+    const barra = window.innerWidth - html.clientWidth
+    const prima = { overflow: html.style.overflow, padding: html.style.paddingRight }
     html.style.overflow = 'hidden'
+    if (barra > 0) html.style.paddingRight = `${barra}px`
     return () => {
-      html.style.overflow = prima
+      html.style.overflow = prima.overflow
+      html.style.paddingRight = prima.padding
     }
   }, [open])
 

@@ -97,7 +97,11 @@ export const Docenti: CollectionConfig = {
       relationTo: 'scuole',
       hasMany: true,
       access: { update: campoSoloDidattica },
-      admin: { position: 'sidebar' },
+      admin: {
+        position: 'sidebar',
+        description:
+          'La prima scuola è l’afferenza principale; le altre sono pro-afferenze. Trascina per cambiare l’ordine.',
+      },
     },
     {
       name: 'foto',

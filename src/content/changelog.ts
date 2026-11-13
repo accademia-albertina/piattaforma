@@ -27,6 +27,50 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.34.0',
+    data: '2026-11-13',
+    titolo: 'Rifiniture dopo la revisione del 13 novembre',
+    voci: [
+      { tipo: 'nuovo', testo: 'Pulsante “Torna su” in tutte le pagine del sito.' },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Orari nel pannello: nella colonna docenti compaiono i nomi mentre scrivi; inizio e fine si scelgono con il selettore dell’ora.',
+      },
+      {
+        tipo: 'nuovo',
+        testo: 'In stampa (es. orari) compare l’intestazione con il logo dell’Accademia.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          '“Diploma accademico di primo/secondo livello” diventa “Laurea” e “Laurea magistrale” in tutto il sito.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Docenti: afferenza principale e pro-afferenze spiegate e distinte; nella scheda l’intera riga del corso è cliccabile.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Testo base a 16 px, titoli più contenuti, pagine più larghe (1320 px) e header con filetto al passaggio.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Scuole: fino a 6 avvisi collegati con schede di uguale altezza; “Coordinatore” senza articolo. Home: 4 dipartimenti, 10 scuole, 2 livelli.',
+      },
+      { tipo: 'migliorato', testo: 'Albertina Press: presentazione prima del catalogo.' },
+      { tipo: 'corretto', testo: 'I PDF si aprono in una nuova scheda.' },
+      {
+        tipo: 'corretto',
+        testo: 'Aprendo il menu su Chrome la pagina non salta più di lato.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.33.1',
     data: '2026-11-13',
     titolo: 'Spostamento su Drive senza interruzioni',

@@ -149,13 +149,13 @@
   background: transparent;
   color: inherit;
   cursor: pointer;
-  transition: background-color var(--duration-fast) ease;
+  transition: opacity var(--duration-fast) ease;
 }
 
-/* Hover discreto: velo bianco trasparente, il testo resta bianco */
+/* Hover: niente riquadro (Fede 2026-11-13). Su desktop compare un filetto sotto l'etichetta. */
 .iconButton:hover,
+.iconButton[data-hovered],
 .menuToggle[data-hovered] {
-  background: rgb(255 255 255 / 0.12);
   color: var(--color-on-brand);
   text-decoration: none;
 }
@@ -355,6 +355,7 @@
   .velo,
   .panel,
   .burger span,
+  .iconLabel,
   .groupToggle svg {
     transition: none;
   }
@@ -392,6 +393,22 @@
     font-size: 0.8125rem;
     letter-spacing: 0.01em;
     line-height: 1;
+    padding-bottom: 0.3125rem;
+    background: linear-gradient(currentColor, currentColor) 50% 100% / 0 2px no-repeat;
+    transition: background-size var(--duration-fast) ease;
+  }
+
+  /* Filetto bianco sotto l'etichetta: al passaggio, sulla pagina attiva e a menu aperto */
+  .iconButton:hover .iconLabel,
+  .iconButton[data-hovered] .iconLabel,
+  .iconButton[aria-current] .iconLabel,
+  .menuToggle[data-hovered] .iconLabel,
+  .menuToggle[aria-expanded='true'] .iconLabel {
+    background-size: 100% 2px;
+  }
+
+  .iconButton[aria-current] {
+    box-shadow: none;
   }
 
   .megaMenu {

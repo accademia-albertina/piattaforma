@@ -78,7 +78,7 @@ export default async function ScuolaPage({ params }: Props) {
 
   const [docenti, avvisi] = await Promise.all([
     docentiDellaScuola(scuola.id),
-    avvisiDellaScuola(scuola.id),
+    avvisiDellaScuola(scuola.id, 6),
   ])
   const dipartimento = nomeDipartimento(scuola.dipartimento)
   const immagine = immagineScuola(scuola)
@@ -143,7 +143,7 @@ export default async function ScuolaPage({ params }: Props) {
           </div>
           {coordinatore ? (
             <div>
-              <dt>Coordinatore della scuola</dt>
+              <dt>Coordinatore scuola</dt>
               <dd>{persona(coordinatore)}</dd>
             </div>
           ) : null}
@@ -177,13 +177,13 @@ export default async function ScuolaPage({ params }: Props) {
           <dl className={styles.persone}>
             {coordinatoreDip ? (
               <div>
-                <dt>Coordinatore del dipartimento</dt>
+                <dt>Coordinatore dipartimento</dt>
                 <dd>{persona(coordinatoreDip)}</dd>
               </div>
             ) : null}
             {coordinatore ? (
               <div>
-                <dt>Coordinatore della scuola</dt>
+                <dt>Coordinatore scuola</dt>
                 <dd>{persona(coordinatore)}</dd>
               </div>
             ) : null}

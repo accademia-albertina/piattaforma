@@ -23,6 +23,10 @@ export type Colonna = {
   /** Colonna offerta come filtro nel sito. */
   filtro?: boolean
   esempio?: string
+  /** Nel pannello propone i nomi dei docenti mentre si scrive (Fede 2026-11-13). */
+  suggerimenti?: 'docenti'
+  /** Nel pannello si sceglie l'ora con il selettore orario. */
+  orario?: boolean
 }
 
 export const COLONNE: Record<TipoCalendario, Colonna[]> = {
@@ -42,7 +46,14 @@ export const COLONNE: Record<TipoCalendario, Colonna[]> = {
       filtro: true,
       esempio: 'Triennio',
     },
-    { chiave: 'docenti', etichetta: 'Docenti', lunga: true, larghezza: 16, esempio: 'Ribero' },
+    {
+      chiave: 'docenti',
+      etichetta: 'Docenti',
+      lunga: true,
+      larghezza: 16,
+      esempio: 'Ribero',
+      suggerimenti: 'docenti',
+    },
     {
       chiave: 'giorno',
       etichetta: 'Giorno',
@@ -51,8 +62,8 @@ export const COLONNE: Record<TipoCalendario, Colonna[]> = {
       filtro: true,
       esempio: 'Giovedì',
     },
-    { chiave: 'inizio', etichetta: 'Inizio', larghezza: 6, esempio: '9:30' },
-    { chiave: 'fine', etichetta: 'Fine', larghezza: 6, esempio: '13:30' },
+    { chiave: 'inizio', etichetta: 'Inizio', larghezza: 8, esempio: '9:30', orario: true },
+    { chiave: 'fine', etichetta: 'Fine', larghezza: 8, esempio: '13:30', orario: true },
     {
       chiave: 'semestre',
       etichetta: 'Semestre',
@@ -64,7 +75,13 @@ export const COLONNE: Record<TipoCalendario, Colonna[]> = {
     { chiave: 'aula', etichetta: 'Aula', lunga: true, larghezza: 12, esempio: 'Aula A02' },
   ],
   esami: [
-    { chiave: 'docente', etichetta: 'Docente', larghezza: 16, esempio: 'Ajani Elisabetta' },
+    {
+      chiave: 'docente',
+      etichetta: 'Docente',
+      larghezza: 16,
+      esempio: 'Ajani Elisabetta',
+      suggerimenti: 'docenti',
+    },
     {
       chiave: 'corso',
       etichetta: 'Corso',
@@ -81,7 +98,7 @@ export const COLONNE: Record<TipoCalendario, Colonna[]> = {
       esempio: 'Triennio',
     },
     { chiave: 'data', etichetta: 'Data', larghezza: 10, filtro: true, esempio: '23/06/2026' },
-    { chiave: 'ora', etichetta: 'Ora', larghezza: 6, esempio: '10:00' },
+    { chiave: 'ora', etichetta: 'Ora', larghezza: 8, esempio: '10:00', orario: true },
     {
       chiave: 'commissione',
       etichetta: 'Commissione',
@@ -238,4 +255,41 @@ export function righeDaIncolla(testo: string, colonne: Colonna[]): Riga[] {
   return righe
     .filter((r) => r.some((c) => c.trim() !== ''))
     .map((r) => Object.fromEntries(colonne.map((c, i) => [c.chiave, (r[i] ?? '').trim()])))
+}
+
+/** "9:30", "09.30" → "09:30" per il selettore orario; null se non è un orario. */
+export function orarioPerSelettore(v: string): string | null {
+  const m = /^(\d{1,2})[:.](\d{2})$/.exec(v.trim())
+  if (!m) return null
+  const [h, min] = [Number(m[1]), Number(m[2])]
+  if (h > 23 || min > 59) return null
+  return `${String(h).padStart(2, '0')}:${m[2]}`
+}
+
+/** Dal selettore ("09:30") al formato dell'orario ufficiale ("9:30"). */
+export const orarioDaSelettore = (v: string) => v.replace(/^0(\d):/, '$1:')
+
+/**
+ * Il nome che si sta scrivendo in una cella docenti: il testo dopo l'ultima virgola o l'ultimo
+ * a capo. Serve per proporre i docenti mentre si scrive senza toccare il resto della cella.
+ */
+export function nomeInScrittura(valore: string): { prima: string; parziale: string } {
+  const i = Math.max(valore.lastIndexOf(','), valore.lastIndexOf('\n'))
+  const prima = valore.slice(0, i + 1) + (valore[i] === ',' ? ' ' : '')
+  return { prima, parziale: valore.slice(i + 1).trim() }
+}
+
+const senzaAccenti = (t: string) =>
+  t
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+
+/** Fino a `quanti` docenti il cui cognome o nome comincia con quanto scritto. */
+export function filtraDocenti(parziale: string, nomi: string[], quanti = 8): string[] {
+  const q = senzaAccenti(parziale)
+  if (q.length < 2) return []
+  return nomi
+    .filter((n) => senzaAccenti(n).split(/\s+/).some((p) => p.startsWith(q)) || senzaAccenti(n).startsWith(q))
+    .slice(0, quanti)
 }

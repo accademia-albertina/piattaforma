@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { Fragment } from 'react'
 
 import { RUOLO_DOCENTE_LABELS, annoAccademicoCorrente } from '@/access/corsi'
 import { Breadcrumbs, Fisarmonica, TestataPagina } from '@/components'
@@ -97,7 +98,7 @@ export default async function DocentePage({ params }: Props) {
             : 'Non più in servizio'
         }
         titolo={docente.nomeCompleto ?? ''}
-        sommario={scuole.map((s) => s.nome).join(' · ') || null}
+        sommario={scuole[0]?.nome ?? null}
         media={
           foto?.url ? (
             <Image
@@ -112,7 +113,28 @@ export default async function DocentePage({ params }: Props) {
           ) : undefined
         }
       >
-        <dl className={styles.dati} aria-label="Contatti">
+        <dl className={styles.dati} aria-label="Scuole e contatti">
+          {scuole.length > 0 ? (
+            <div>
+              <dt>Scuola di afferenza</dt>
+              <dd>
+                <Link href={`/scuole/${scuole[0].slug}`}>{scuole[0].nome}</Link>
+              </dd>
+            </div>
+          ) : null}
+          {scuole.length > 1 ? (
+            <div>
+              <dt>Pro-afferente a</dt>
+              <dd>
+                {scuole.slice(1).map((s, i) => (
+                  <Fragment key={s.id}>
+                    {i > 0 ? ', ' : null}
+                    <Link href={`/scuole/${s.slug}`}>{s.nome}</Link>
+                  </Fragment>
+                ))}
+              </dd>
+            </div>
+          ) : null}
           {docente.email ? (
             <div>
               <dt>Email</dt>

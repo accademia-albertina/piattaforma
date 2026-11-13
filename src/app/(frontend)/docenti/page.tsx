@@ -36,6 +36,11 @@ export default async function DocentiPage() {
           {docenti.length} docenti in servizio. Nella pagina di ognuno trovi corsi, ricevimento e
           contatti.
         </p>
+        <p className={styles.legenda}>
+          <strong>Afferenza e pro-afferenza.</strong> Ogni docente afferisce a una scuola
+          principale, indicata per prima. Può essere anche <em>pro-afferente</em> ad altre scuole,
+          in cui insegna: sono elencate dopo «pro-afferente».
+        </p>
       </header>
 
       {gruppi.size > 0 ? (
@@ -68,7 +73,13 @@ export default async function DocentiPage() {
                         </Link>
                         {scuole.length > 0 ? (
                           <span className={styles.scuole}>
-                            {scuole.map((s) => s.nome).join(', ')}
+                            {scuole[0].nome}
+                            {scuole.length > 1
+                              ? ` · pro-afferente: ${scuole
+                                  .slice(1)
+                                  .map((s) => s.nome)
+                                  .join(', ')}`
+                              : null}
                           </span>
                         ) : null}
                       </li>

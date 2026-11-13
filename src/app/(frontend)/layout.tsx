@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import React from 'react'
 
-import { SiteFooter, SiteHeader, SkipLink } from '@/components'
+import { LinkPdf, SiteFooter, SiteHeader, SkipLink, TornaSu } from '@/components'
 import { menuSito } from '@/lib/menu'
 import '@/styles/global.css'
 
@@ -33,11 +33,23 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <SkipLink />
+        {/* Intestazione istituzionale: si vede solo in stampa (es. orario delle lezioni) */}
+        <div className="intestazione-stampa" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/logo-albertina.svg" alt="" width={166} height={76} />
+          <p>
+            Accademia Albertina di Belle Arti di Torino
+            <br />
+            Via Accademia Albertina 6, 10123 Torino · albertina.academy
+          </p>
+        </div>
         <SiteHeader servizi={menu.servizi} inEvidenza={menu.inEvidenza} colonne={menu.colonne} />
         <main id="contenuto" tabIndex={-1}>
           {children}
         </main>
         <SiteFooter {...menu.footer} />
+        <TornaSu />
+        <LinkPdf />
       </body>
     </html>
   )

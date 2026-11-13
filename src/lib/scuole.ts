@@ -61,10 +61,10 @@ export function perDipartimento(scuole: Scuola[]) {
 
 /** Durata e crediti dei due livelli (60 CFA per anno accademico). */
 export const LIVELLI = {
-  triennio: { titolo: 'Triennio', livello: 'Diploma accademico di primo livello', anni: 3, cfa: 180 },
+  triennio: { titolo: 'Triennio', livello: 'Laurea', anni: 3, cfa: 180 },
   biennio: {
     titolo: 'Biennio specialistico',
-    livello: 'Diploma accademico di secondo livello',
+    livello: 'Laurea magistrale',
     anni: 2,
     cfa: 120,
   },

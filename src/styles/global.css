@@ -239,10 +239,37 @@ img {
  * Stampa: solo il contenuto della pagina, senza header, footer e comandi.
  * Usata soprattutto per orari e calendari (pulsante “Stampa”).
  */
+.intestazione-stampa {
+  display: none;
+}
+
 @media print {
-  body > :not(main),
+  body > :not(main, .intestazione-stampa),
   .non-stampare {
     display: none !important;
+  }
+
+  /* Intestazione istituzionale in cima alla stampa (Fede 2026-11-13) */
+  .intestazione-stampa {
+    display: flex;
+    gap: 12pt;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14pt;
+    padding-bottom: 8pt;
+    border-bottom: 1pt solid #a23130;
+  }
+
+  .intestazione-stampa img {
+    width: auto;
+    height: 44pt;
+  }
+
+  .intestazione-stampa p {
+    margin: 0;
+    font-size: 8pt;
+    line-height: 1.4;
+    text-align: right;
   }
 
   body {

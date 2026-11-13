@@ -16,6 +16,7 @@ import * as migration_20261106_115509_ruoli_pannello from './20261106_115509_ruo
 import * as migration_20261106_144426_iscrizioni_corsi from './20261106_144426_iscrizioni_corsi';
 import * as migration_20261106_154742_appelli_esami from './20261106_154742_appelli_esami';
 import * as migration_20261113_105519_drive_file from './20261113_105519_drive_file';
+import * as migration_20261113_150000_lauree from './20261113_150000_lauree';
 
 export const migrations = [
   {
@@ -107,5 +108,10 @@ export const migrations = [
     up: migration_20261113_105519_drive_file.up,
     down: migration_20261113_105519_drive_file.down,
     name: '20261113_105519_drive_file'
+  },
+  {
+    up: migration_20261113_150000_lauree.up,
+    down: migration_20261113_150000_lauree.down,
+    name: '20261113_150000_lauree',
   },
 ];

@@ -87,6 +87,32 @@
   text-decoration: underline;
 }
 
+/* Tutta la riga è cliccabile (Fede 2026-11-13): il link del corso si estende sulla riga. */
+.corsi tbody tr {
+  position: relative;
+  cursor: pointer;
+}
+
+.corsi tbody a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.corsi tbody tr:hover a {
+  text-decoration: underline;
+}
+
+.corsi tbody tr:has(a:focus-visible) {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+.corsi tbody a:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
 .livello {
   width: 1%;
   white-space: nowrap;

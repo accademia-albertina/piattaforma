@@ -4,7 +4,16 @@ import { FieldLabel, useField, useFormFields } from '@payloadcms/ui'
 import { ArrowDown, ArrowUp, Copy, Plus, Trash2 } from 'lucide-react'
 import { useCallback, useMemo } from 'react'
 
-import { COLONNE, righeDaIncolla, type Riga, type TipoCalendario } from '@/lib/calendari'
+import {
+  COLONNE,
+  orarioDaSelettore,
+  orarioPerSelettore,
+  righeDaIncolla,
+  type Riga,
+  type TipoCalendario,
+} from '@/lib/calendari'
+
+import { CellaDocenti } from './CellaDocenti'
 
 /**
  * Editor a tabella dei calendari: una riga per fascia oraria (o per esame), come nel PDF.
@@ -86,9 +95,27 @@ export function TabellaCalendario({ path = 'righe' }: { path?: string }) {
                     placeholder: r === 0 ? c.esempio : undefined,
                     onPaste: incolla(r, k),
                   }
+                  const valore = riga[c.chiave] ?? ''
+                  const ora = c.orario ? orarioPerSelettore(valore) : null
                   return (
                     <td key={c.chiave}>
-                      {c.lunga ? (
+                      {c.suggerimenti === 'docenti' ? (
+                        <CellaDocenti
+                          {...props}
+                          lunga={c.lunga}
+                          onChange={(v) => cambia(r, c.chiave, v)}
+                        />
+                      ) : c.orario && (ora || !valore) ? (
+                        // Selettore orario (a passi di 5 minuti); un testo libero già scritto
+                        // (es. "da definire") resta modificabile come testo.
+                        <input
+                          {...props}
+                          type="time"
+                          step={300}
+                          value={ora ?? ''}
+                          onChange={(e) => cambia(r, c.chiave, orarioDaSelettore(e.target.value))}
+                        />
+                      ) : c.lunga ? (
                         <textarea
                           {...props}
                           rows={Math.max(1, (riga[c.chiave] ?? '').split('\n').length)}

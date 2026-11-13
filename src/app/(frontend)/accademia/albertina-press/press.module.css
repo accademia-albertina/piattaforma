@@ -73,3 +73,7 @@
   max-width: var(--measure);
   margin-top: var(--section-pad);
 }
+
+.casaEditrice + .catalogo {
+  margin-top: var(--section-pad);
+}

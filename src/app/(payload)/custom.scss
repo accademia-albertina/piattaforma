@@ -447,6 +447,33 @@ body {
 
 // ——— Editor a tabella dei calendari ———
 .tabella-calendario {
+  /* Docenti proposti mentre si scrive: lista sotto la cella (dentro la tabella che scorre) */
+  .cella-docenti__lista {
+    margin: 0;
+    padding: 0.25rem 0;
+    list-style: none;
+    background: var(--theme-elevation-0);
+    border-top: 1px solid var(--theme-elevation-150);
+
+    &[hidden] {
+      display: none;
+    }
+
+    li {
+      padding: 0.4rem 0.5rem;
+      cursor: pointer;
+
+      &[aria-selected='true'],
+      &:hover {
+        background: var(--theme-elevation-100);
+      }
+    }
+  }
+
+  input[type='time'] {
+    font-variant-numeric: tabular-nums;
+  }
+
   &__aiuto {
     max-width: 75ch;
     margin-bottom: calc(var(--base) * 0.75);

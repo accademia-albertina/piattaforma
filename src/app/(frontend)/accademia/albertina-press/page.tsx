@@ -76,6 +76,14 @@ export default async function AlbertinaPressPage({ searchParams }: Props) {
         }
       />
 
+      {/* Prima la presentazione della casa editrice, poi il catalogo (Fede 2026-11-13) */}
+      {pagina?.blocchi?.length ? (
+        <section aria-labelledby="casa-editrice" className={styles.casaEditrice}>
+          <h2 id="casa-editrice">La casa editrice</h2>
+          <Blocchi blocchi={pagina.blocchi} />
+        </section>
+      ) : null}
+
       <section id="catalogo" aria-labelledby="catalogo-titolo" className={styles.catalogo}>
         <h2 id="catalogo-titolo">Il catalogo</h2>
         <div className={styles.filtri}>
@@ -144,12 +152,6 @@ export default async function AlbertinaPressPage({ searchParams }: Props) {
         />
       </section>
 
-      {pagina?.blocchi?.length ? (
-        <section aria-labelledby="casa-editrice" className={styles.casaEditrice}>
-          <h2 id="casa-editrice">La casa editrice</h2>
-          <Blocchi blocchi={pagina.blocchi} />
-        </section>
-      ) : null}
     </div>
   )
 }
