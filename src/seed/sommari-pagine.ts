@@ -34,7 +34,7 @@ export const SOMMARI_PAGINE: Record<string, string> = {
   'studente/sportelli': 'Supporto accademico e personale, anche per studenti con disabilità o DSA.',
   'studente/stage-tirocinio': 'Stage e tirocini presso enti convenzionati, con i relativi crediti.',
   'studente/tasse': 'Importi, scadenze ed esoneri dei contributi di iscrizione.',
-  'studente/tesi': 'Domanda di tesi, scadenze e sessioni di diploma.',
+  'studente/tesi': 'Domanda di tesi, scadenze e sessioni di laurea.',
   'studente/tutoraggio-interculturale':
     'Supporto, ascolto e integrazione per studenti internazionali.',
   'termini-e-condizioni': 'Le condizioni d’uso del sito dell’Accademia.',

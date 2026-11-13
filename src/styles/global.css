@@ -9,6 +9,9 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Spazio della barra di scorrimento sempre riservato: aprendo il menu (overflow hidden)
+     la pagina non salta di lato su Chrome e Windows */
+  scrollbar-gutter: stable;
 }
 
 body {

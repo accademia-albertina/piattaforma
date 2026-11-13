@@ -27,6 +27,43 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.34.0',
+    data: '2026-11-13',
+    titolo: 'Rifiniture dopo i feedback: lauree, docenti, stampa e orario',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Pulsante “Torna su” in tutte le pagine e intestazione dell’Accademia (stemma e contatti) quando si stampa una pagina, come l’orario.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Orario a tabella: nella colonna dei docenti compaiono i nomi mentre scrivi, e le ore si scelgono con il selettore.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Nuovi nomi dei titoli: Laurea e Laurea magistrale al posto dei diplomi accademici di primo e secondo livello, anche nelle schede delle scuole.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Docenti: legenda tra scuola di afferenza principale e pro-afferenze (la prima scuola del profilo è la principale); nella pagina del docente si clicca tutta la riga del corso.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Testo base a 16 px, titoli più contenuti, pagine più larghe, nuovo effetto sui pulsanti dell’header; fino a 6 avvisi nella pagina della scuola; Albertina Press con la presentazione prima del catalogo; i PDF si aprono in una nuova scheda.',
+      },
+      {
+        tipo: 'corretto',
+        testo: 'La pagina non salta più di lato quando si apre il menu su Chrome.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.33.1',
     data: '2026-11-13',
     titolo: 'Spostamento su Drive senza interruzioni',

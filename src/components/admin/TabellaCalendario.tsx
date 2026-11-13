@@ -4,14 +4,32 @@ import { FieldLabel, useField, useFormFields } from '@payloadcms/ui'
 import { ArrowDown, ArrowUp, Copy, Plus, Trash2 } from 'lucide-react'
 import { useCallback, useMemo } from 'react'
 
-import { COLONNE, righeDaIncolla, type Riga, type TipoCalendario } from '@/lib/calendari'
+import {
+  COLONNE,
+  type DocenteSuggerito,
+  oraDaSelettore,
+  oraPerSelettore,
+  righeDaIncolla,
+  type Riga,
+  type TipoCalendario,
+} from '@/lib/calendari'
+
+import { CampoDocenti, useDocenti } from './CampoDocenti'
 
 /**
  * Editor a tabella dei calendari: una riga per fascia oraria (o per esame), come nel PDF.
  * Si può incollare un blocco di celle da Excel o Word: le righe vengono aggiunte da lì in giù.
  */
-export function TabellaCalendario({ path = 'righe' }: { path?: string }) {
+export function TabellaCalendario({
+  path = 'righe',
+  docenti: docentiIniziali,
+}: {
+  path?: string
+  /** Solo per storie e test: altrimenti l'elenco arriva dall'API. */
+  docenti?: DocenteSuggerito[]
+}) {
   const { value, setValue } = useField<Riga[]>({ path })
+  const docenti = useDocenti(docentiIniziali)
   const tipo = (useFormFields(([fields]) => fields.tipo?.value) as TipoCalendario) || 'lezioni'
   const colonne = COLONNE[tipo] ?? COLONNE.lezioni
   const righe = useMemo(() => (Array.isArray(value) ? value : []), [value])
@@ -56,7 +74,8 @@ export function TabellaCalendario({ path = 'righe' }: { path?: string }) {
         Una riga per ogni fascia oraria, come nel PDF: se un corso ha più giorni o orari, duplica la
         riga e cambia solo quello che serve. Puoi copiare celle da Excel o Word e incollarle in una
         cella qui: le righe si compilano da lì in giù. Nel sito le celle uguali una sotto l’altra si
-        uniscono da sole.
+        uniscono da sole. Nella colonna dei docenti inizia a scrivere il cognome e scegli
+        dall’elenco (frecce e Invio); per gli orari usa il selettore dell’ora.
       </p>
       <div className="tabella-calendario__scorri">
         <table>
@@ -88,7 +107,29 @@ export function TabellaCalendario({ path = 'righe' }: { path?: string }) {
                   }
                   return (
                     <td key={c.chiave}>
-                      {c.lunga ? (
+                      {c.campo === 'ora' ? (
+                        // Selettore dell'ora (24 ore, passi di 5 minuti): niente punti al posto dei due punti
+                        <input
+                          {...props}
+                          type="time"
+                          step={300}
+                          value={oraPerSelettore(riga[c.chiave])}
+                          title={
+                            riga[c.chiave] && !oraPerSelettore(riga[c.chiave])
+                              ? `Valore attuale: ${riga[c.chiave]}`
+                              : undefined
+                          }
+                          onChange={(e) => cambia(r, c.chiave, oraDaSelettore(e.target.value))}
+                        />
+                      ) : c.campo === 'docenti-cognome' || c.campo === 'docenti-completo' ? (
+                        <CampoDocenti
+                          {...props}
+                          value={riga[c.chiave] ?? ''}
+                          formato={c.campo === 'docenti-completo' ? 'completo' : 'cognome'}
+                          docenti={docenti}
+                          onChange={(v) => cambia(r, c.chiave, v)}
+                        />
+                      ) : c.lunga ? (
                         <textarea
                           {...props}
                           rows={Math.max(1, (riga[c.chiave] ?? '').split('\n').length)}

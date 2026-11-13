@@ -18,7 +18,7 @@ const meta = {
     cifre: [
       { valore: 1678, etichetta: 'Anno di fondazione' },
       { valore: 10, etichetta: 'Scuole' },
-      { valore: 2, etichetta: 'Livelli di diploma, triennio e biennio' },
+      { valore: 2, etichetta: 'Livelli: laurea e laurea magistrale' },
     ],
   },
 } satisfies Meta<typeof IntroAccademia>

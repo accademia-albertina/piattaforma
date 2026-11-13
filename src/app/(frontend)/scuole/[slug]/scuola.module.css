@@ -191,3 +191,27 @@
   padding: 0;
   list-style: none;
 }
+
+/* Fino a 6 avvisi (2 righe da 3), schede alte uguali: titolo e sommario tagliati a 3 righe */
+@media (min-width: 64rem) {
+  .avvisi {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.avvisi > li {
+  display: grid;
+  height: 19rem;
+}
+
+.avvisi > li > * {
+  overflow: hidden;
+}
+
+.avvisi h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}

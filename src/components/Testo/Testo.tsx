@@ -1,16 +1,35 @@
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
-import {
-  type JSXConvertersFunction,
-  RichText,
-} from '@payloadcms/richtext-lexical/react'
+import { type JSXConvertersFunction, RichText } from '@payloadcms/richtext-lexical/react'
 import { Fragment } from 'react'
 
 import { dividiLink } from '@/utilities/autolink'
+import { isPdf } from '@/utilities/pdf'
 
 // Gli avvisi importati da WordPress hanno gli indirizzi scritti come testo:
 // qui diventano link, a meno che non siano già dentro un link.
+// I link ai PDF si aprono in una nuova scheda (impostazione “nuova scheda” forzata).
 const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
   ...defaultConverters,
+  link: (args) => {
+    const base = defaultConverters.link
+    if (typeof base !== 'function') return null
+    const pdf = isPdf(args.node.fields?.url)
+    return base(
+      pdf
+        ? { ...args, node: { ...args.node, fields: { ...args.node.fields, newTab: true } } }
+        : args,
+    )
+  },
+  autolink: (args) => {
+    const base = defaultConverters.autolink
+    if (typeof base !== 'function') return null
+    const pdf = isPdf(args.node.fields?.url)
+    return base(
+      pdf
+        ? { ...args, node: { ...args.node, fields: { ...args.node.fields, newTab: true } } }
+        : args,
+    )
+  },
   text: (args) => {
     const base = defaultConverters.text
     const render = (testo: string) =>
@@ -23,7 +42,12 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
       <>
         {pezzi.map((p, i) =>
           p.tipo === 'link' ? (
-            <a key={i} href={p.href} rel={p.href.startsWith('http') ? 'noopener' : undefined}>
+            <a
+              key={i}
+              href={p.href}
+              rel={p.href.startsWith('http') || isPdf(p.href) ? 'noopener' : undefined}
+              target={isPdf(p.href) ? '_blank' : undefined}
+            >
               {render(p.testo)}
             </a>
           ) : (
@@ -39,5 +63,7 @@ type Props = { data: SerializedEditorState | Record<string, unknown>; className?
 
 /** Testo ricco del sito: come RichText di Payload, con gli indirizzi resi cliccabili. */
 export function Testo({ data, className }: Props) {
-  return <RichText data={data as SerializedEditorState} className={className} converters={converters} />
+  return (
+    <RichText data={data as SerializedEditorState} className={className} converters={converters} />
+  )
 }

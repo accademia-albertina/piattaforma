@@ -20,12 +20,12 @@
   --font-size-2xs: 0.75rem; /* 12: etichette maiuscole */
   --font-size-xs: 0.875rem; /* 14 */
   --font-size-sm: 1rem; /* 16 */
-  --font-size-md: 1.0625rem; /* 17: testo base */
+  --font-size-md: 1rem; /* 16: testo base (Fede 2026-11-13) */
   --font-size-lg: 1.25rem; /* 20 */
   --font-size-xl: 1.5rem; /* 24 */
   --font-size-2xl: clamp(1.625rem, 1.3rem + 1.3vw, 2.25rem); /* 26→36 */
-  --font-size-3xl: clamp(2.125rem, 1.4rem + 2.8vw, 3.5rem); /* 34→56 */
-  --font-size-display: clamp(2.375rem, 1.4rem + 3.8vw, 4rem); /* 38→64: titoli di pagina e hero */
+  --font-size-3xl: clamp(2rem, 1.5rem + 1.6vw, 2.75rem); /* 32→44 */
+  --font-size-display: clamp(2.25rem, 1.6rem + 2.2vw, 3.25rem); /* 36→52: titoli di pagina e hero */
 
   --letter-spacing-tight: -0.015em; /* titoli grandi */
   --letter-spacing-caps: 0.08em; /* etichette maiuscole */
@@ -46,7 +46,7 @@
   --space-8: 6rem; /* 96 */
 
   /* Layout */
-  --container-max: 1240px;
+  --container-max: 1320px; /* il testo lungo resta entro --measure */
   --container-pad: clamp(1rem, 3vw, 2rem);
   /* Altezza dell’header ridotto (desktop): i box laterali sticky stanno sotto, con aria */
   --altezza-header-compatto: 68px;

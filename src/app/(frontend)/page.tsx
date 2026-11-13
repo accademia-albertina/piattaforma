@@ -121,9 +121,9 @@ export default async function HomePage() {
         dettagli={[salaBlu, aulaPittura]}
         testo={MANIFESTO}
         cifre={[
-          { valore: 1678, etichetta: 'Anno di fondazione' },
+          { valore: 4, etichetta: 'Dipartimenti' },
           { valore: 10, etichetta: 'Scuole' },
-          { valore: 2, etichetta: 'Livelli di diploma, triennio e biennio' },
+          { valore: 2, etichetta: 'Livelli: laurea e laurea magistrale' },
         ]}
       />
 
@@ -184,10 +184,12 @@ export default async function HomePage() {
             <ul className={styles.scuole}>
               <li className={styles.introScuole}>
                 <p className={styles.occhiello}>Offerta formativa</p>
-                <p className={styles.introTitolo}>{scuole.length} scuole, due livelli di diploma</p>
+                <p className={styles.introTitolo}>
+                  {scuole.length} scuole, laurea e laurea magistrale
+                </p>
                 <p>
-                  Diplomi accademici equiparati alle lauree universitarie: triennio di primo livello
-                  e biennio specialistico.
+                  Lauree e lauree magistrali con lo stesso valore di quelle universitarie: triennio
+                  e biennio.
                 </p>
                 <dl className={styles.cifre}>
                   <div>
