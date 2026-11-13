@@ -74,8 +74,32 @@
   background: var(--color-surface);
 }
 
+.corsi tbody tr {
+  position: relative; /* contiene il link allargato a tutta la riga */
+}
+
 .corsi tbody tr:hover {
   background: var(--color-azzurro-50);
+  cursor: pointer;
+}
+
+.corsi tbody tr:hover .livello {
+  color: var(--color-heading); /* il grigio sull'azzurro non arriva a 4,5:1 */
+}
+
+/* Il link del corso copre tutta la riga: si clicca ovunque */
+.corsi a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.corsi tbody tr:focus-within {
+  box-shadow: var(--focus-ring);
+}
+
+.corsi a:focus-visible {
+  box-shadow: none;
 }
 
 .corsi a {

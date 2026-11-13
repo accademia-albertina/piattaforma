@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import React from 'react'
 
-import { SiteFooter, SiteHeader, SkipLink } from '@/components'
+import { IntestazioneStampa, SiteFooter, SiteHeader, SkipLink, TornaSu } from '@/components'
 import { menuSito } from '@/lib/menu'
 import '@/styles/global.css'
 
@@ -35,9 +35,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <SkipLink />
         <SiteHeader servizi={menu.servizi} inEvidenza={menu.inEvidenza} colonne={menu.colonne} />
         <main id="contenuto" tabIndex={-1}>
+          <IntestazioneStampa />
           {children}
         </main>
         <SiteFooter {...menu.footer} />
+        <TornaSu />
       </body>
     </html>
   )

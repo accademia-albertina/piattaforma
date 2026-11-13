@@ -1,0 +1,42 @@
+/* Solo in stampa: a schermo non occupa spazio (tranne nella storia di Storybook) */
+.intestazione {
+  display: none;
+}
+
+.intestazione[data-schermo] {
+  display: flex;
+}
+
+@media print {
+  .intestazione {
+    display: flex;
+  }
+}
+
+.intestazione {
+  align-items: center;
+  gap: 12pt;
+  margin-bottom: 14pt;
+  padding-bottom: 8pt;
+  border-bottom: 1px solid #000;
+  color: #000;
+}
+
+.intestazione img {
+  width: auto;
+  height: 40pt;
+}
+
+.intestazione p {
+  margin: 0;
+  max-width: none;
+}
+
+.nome {
+  font-weight: var(--font-weight-bold);
+  font-size: 12pt;
+}
+
+.indirizzo {
+  font-size: 8.5pt;
+}

@@ -1,4 +1,5 @@
 import { formatDimensione, formatTipoFile } from '@/utilities/format'
+import { NUOVA_SCHEDA, attributiFile, isPdf } from '@/utilities/pdf'
 
 import styles from './Attachments.module.css'
 
@@ -35,8 +36,15 @@ export function Attachments({
           ].filter(Boolean)
           return (
             <li key={a.url}>
-              <a href={a.url} className={styles.link} download>
+              <a
+                href={a.url}
+                className={styles.link}
+                {...attributiFile(a.url, { mimeType: a.mimeType, scarica: true })}
+              >
                 <span className={styles.name}>{a.nome}</span>
+                {isPdf(a.url, a.mimeType) ? (
+                  <span className="visually-hidden">{NUOVA_SCHEDA}</span>
+                ) : null}
                 {info.length > 0 ? <span className={styles.info}>{info.join(' · ')}</span> : null}
               </a>
             </li>

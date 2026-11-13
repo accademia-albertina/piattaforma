@@ -10,6 +10,7 @@ import { gunzipSync } from 'node:zlib'
 
 import type { Payload } from 'payload'
 
+import { aggiornaTerminologia, aggiornaTerminologiaLexical } from '@/lib/terminologia'
 import type { Scuola } from '@/payload-types'
 
 type Percorso = {
@@ -33,10 +34,14 @@ const leggi = (): Contenuti[] =>
     gunzipSync(readFileSync(path.join(dirname, 'scuole-contenuti.json.gz'))).toString('utf8'),
   )
 
-const percorso = (p: Percorso) =>
+// I testi del sito attuale parlano di «diploma accademico»: qui diventano Laurea / Laurea magistrale.
+const percorso = (p: Percorso, livello: 'triennio' | 'biennio') =>
   ({
     attivo: p.attivo,
-    sezioni: (p.sezioni ?? []).map((s) => ({ titolo: s.titolo, testo: s.testo })),
+    sezioni: (p.sezioni ?? []).map((s) => ({
+      titolo: aggiornaTerminologia(s.titolo, livello),
+      testo: aggiornaTerminologiaLexical(s.testo, livello),
+    })),
     piani: (p.piani ?? []).map((d) => ({ nome: d.nome, url: d.url })),
   }) as Scuola['triennio']
 
@@ -67,8 +72,8 @@ export async function importaContenutiScuole(payload: Payload) {
       collection: 'scuole',
       id: scuola.id,
       data: {
-        triennio: percorso(c.triennio),
-        biennio: percorso(c.biennio),
+        triennio: percorso(c.triennio, 'triennio'),
+        biennio: percorso(c.biennio, 'biennio'),
         video: scuola.video || c.video,
         coordinatoreDipartimento:
           scuola.coordinatoreDipartimento ?? docente(c.coordinatoreDipartimento),

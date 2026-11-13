@@ -628,6 +628,9 @@ export interface Docente {
   nomeCompleto?: string | null;
   email?: string | null;
   ruolo?: ('tempo-indeterminato' | 'tempo-determinato' | 'contratto') | null;
+  /**
+   * La prima è la scuola di afferenza principale, le altre sono pro-afferenze. Trascina per cambiare l’ordine.
+   */
   scuole?: (number | Scuola)[] | null;
   /**
    * Facoltativa. Formato quadrato o verticale.

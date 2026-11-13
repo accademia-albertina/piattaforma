@@ -38,6 +38,22 @@ export default async function DocentiPage() {
         </p>
       </header>
 
+      <div className={styles.legenda}>
+        <p className={styles.legendaTitolo} id="legenda-scuole">
+          Legenda
+        </p>
+        <dl aria-labelledby="legenda-scuole">
+          <div>
+            <dt className={styles.principale}>Pittura</dt>
+            <dd>scuola di afferenza principale</dd>
+          </div>
+          <div>
+            <dt className={styles.pro}>+ Scultura</dt>
+            <dd>pro-afferenza: il docente insegna anche in altre scuole</dd>
+          </div>
+        </dl>
+      </div>
+
       {gruppi.size > 0 ? (
         <>
           <nav aria-label="Iniziale del cognome" className={styles.lettere}>
@@ -68,7 +84,21 @@ export default async function DocentiPage() {
                         </Link>
                         {scuole.length > 0 ? (
                           <span className={styles.scuole}>
-                            {scuole.map((s) => s.nome).join(', ')}
+                            <span className={styles.principale}>
+                              <span className="visually-hidden">Afferenza: </span>
+                              {scuole[0].nome}
+                            </span>
+                            {scuole.length > 1 ? (
+                              <span className={styles.pro}>
+                                {' '}
+                                <span className="visually-hidden">Pro-afferenza: </span>
+                                <span aria-hidden="true">+ </span>
+                                {scuole
+                                  .slice(1)
+                                  .map((s) => s.nome)
+                                  .join(', ')}
+                              </span>
+                            ) : null}
                           </span>
                         ) : null}
                       </li>

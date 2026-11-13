@@ -2,6 +2,7 @@ import { FileText, Link2 } from 'lucide-react'
 
 import { type Documento, formatoDocumento, hrefDocumento } from '@/lib/albo'
 import { formatDimensione } from '@/utilities/format'
+import { NUOVA_SCHEDA, attributiFile, isPdf } from '@/utilities/pdf'
 
 import styles from './ElencoDocumenti.module.css'
 
@@ -30,9 +31,12 @@ export function ElencoDocumenti({
         const Icona = formato ? FileText : Link2
         return (
           <li key={`${href}-${i}`}>
-            <a href={href} className={styles.link}>
+            <a href={href} className={styles.link} {...attributiFile(href)}>
               <Icona size={18} strokeWidth={1.5} aria-hidden="true" className={styles.icona} />
-              <span className={styles.nome}>{d.nome}</span>
+              <span className={styles.nome}>
+                {d.nome}
+                {isPdf(href) ? <span className="visually-hidden">{NUOVA_SCHEDA}</span> : null}
+              </span>
               {info ? <span className={styles.info}>{info}</span> : null}
             </a>
             {d.nota ? <p className={styles.nota}>{d.nota}</p> : null}

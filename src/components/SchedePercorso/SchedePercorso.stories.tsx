@@ -8,11 +8,11 @@ const meta = {
   args: {
     label: 'Percorsi della scuola',
     percorsi: [
-      { id: 'triennio', label: 'Triennio', contenuto: <p>Diploma accademico di primo livello.</p> },
+      { id: 'triennio', label: 'Triennio', contenuto: <p>Laurea.</p> },
       {
         id: 'biennio',
         label: 'Biennio specialistico',
-        contenuto: <p>Diploma accademico di secondo livello.</p>,
+        contenuto: <p>Laurea magistrale.</p>,
       },
     ],
   },

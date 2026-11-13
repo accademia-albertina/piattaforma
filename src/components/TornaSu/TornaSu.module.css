@@ -1,0 +1,50 @@
+.contenitore {
+  position: fixed;
+  right: var(--container-pad);
+  bottom: var(--space-4);
+  z-index: 15; /* sotto header (20) e velo del menu (19) */
+}
+
+.pulsante {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.24);
+  background: var(--color-ink); /* bianco sopra 13,79 */
+  color: #fff;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition:
+    opacity var(--duration-base) ease,
+    transform var(--duration-base) var(--ease-out),
+    background-color var(--duration-fast) ease;
+}
+
+.pulsante[data-visibile] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.pulsante[data-hovered] {
+  background: var(--color-ink-hover);
+}
+
+.pulsante[data-hovered] svg {
+  transform: translateY(-2px);
+}
+
+.pulsante svg {
+  transition: transform var(--duration-fast) ease;
+}
+
+.pulsante[data-focus-visible] {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}

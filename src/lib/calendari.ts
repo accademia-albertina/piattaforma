@@ -23,6 +23,9 @@ export type Colonna = {
   /** Colonna offerta come filtro nel sito. */
   filtro?: boolean
   esempio?: string
+  /** Nel pannello: «ora» = selettore dell’ora; «docenti» = suggerimenti dall’elenco docenti
+   *  (cognome come negli orari, oppure cognome e nome). */
+  campo?: 'ora' | 'docenti-cognome' | 'docenti-completo'
 }
 
 export const COLONNE: Record<TipoCalendario, Colonna[]> = {
@@ -42,7 +45,14 @@ export const COLONNE: Record<TipoCalendario, Colonna[]> = {
       filtro: true,
       esempio: 'Triennio',
     },
-    { chiave: 'docenti', etichetta: 'Docenti', lunga: true, larghezza: 16, esempio: 'Ribero' },
+    {
+      chiave: 'docenti',
+      etichetta: 'Docenti',
+      lunga: true,
+      larghezza: 16,
+      esempio: 'Ribero',
+      campo: 'docenti-cognome',
+    },
     {
       chiave: 'giorno',
       etichetta: 'Giorno',
@@ -51,8 +61,8 @@ export const COLONNE: Record<TipoCalendario, Colonna[]> = {
       filtro: true,
       esempio: 'Giovedì',
     },
-    { chiave: 'inizio', etichetta: 'Inizio', larghezza: 6, esempio: '9:30' },
-    { chiave: 'fine', etichetta: 'Fine', larghezza: 6, esempio: '13:30' },
+    { chiave: 'inizio', etichetta: 'Inizio', larghezza: 8, esempio: '9:30', campo: 'ora' },
+    { chiave: 'fine', etichetta: 'Fine', larghezza: 8, esempio: '13:30', campo: 'ora' },
     {
       chiave: 'semestre',
       etichetta: 'Semestre',
@@ -64,7 +74,13 @@ export const COLONNE: Record<TipoCalendario, Colonna[]> = {
     { chiave: 'aula', etichetta: 'Aula', lunga: true, larghezza: 12, esempio: 'Aula A02' },
   ],
   esami: [
-    { chiave: 'docente', etichetta: 'Docente', larghezza: 16, esempio: 'Ajani Elisabetta' },
+    {
+      chiave: 'docente',
+      etichetta: 'Docente',
+      larghezza: 18,
+      esempio: 'Ajani Elisabetta',
+      campo: 'docenti-completo',
+    },
     {
       chiave: 'corso',
       etichetta: 'Corso',
@@ -81,13 +97,14 @@ export const COLONNE: Record<TipoCalendario, Colonna[]> = {
       esempio: 'Triennio',
     },
     { chiave: 'data', etichetta: 'Data', larghezza: 10, filtro: true, esempio: '23/06/2026' },
-    { chiave: 'ora', etichetta: 'Ora', larghezza: 6, esempio: '10:00' },
+    { chiave: 'ora', etichetta: 'Ora', larghezza: 8, esempio: '10:00', campo: 'ora' },
     {
       chiave: 'commissione',
       etichetta: 'Commissione',
       lunga: true,
       larghezza: 18,
       esempio: 'Ajani, Amadio, Voghera',
+      campo: 'docenti-cognome',
     },
     { chiave: 'aula', etichetta: 'Aula', larghezza: 8, esempio: 'C28' },
   ],
@@ -238,4 +255,53 @@ export function righeDaIncolla(testo: string, colonne: Colonna[]): Riga[] {
   return righe
     .filter((r) => r.some((c) => c.trim() !== ''))
     .map((r) => Object.fromEntries(colonne.map((c, i) => [c.chiave, (r[i] ?? '').trim()])))
+}
+
+/* ---------- Aiuti per il pannello: orari e nomi dei docenti ---------- */
+
+/** «9:30», «09.30», «9» → «09:30» per il selettore dell’ora; vuoto se non si capisce. */
+export function oraPerSelettore(v: string | null | undefined): string {
+  const m = /^\s*(\d{1,2})(?:[:.](\d{2}))?\s*$/.exec(v ?? '')
+  if (!m) return ''
+  const h = Number(m[1])
+  const min = Number(m[2] ?? 0)
+  if (h > 23 || min > 59) return ''
+  return `${String(h).padStart(2, '0')}:${String(min).padStart(2, '0')}`
+}
+
+/** «09:30» dal selettore → «9:30», come negli orari già pubblicati. */
+export function oraDaSelettore(v: string): string {
+  const m = /^(\d{2}):(\d{2})/.exec(v)
+  return m ? `${Number(m[1])}:${m[2]}` : ''
+}
+
+/** Separatori tra più docenti nella stessa cella: virgola, «e», a capo, barra. */
+const SEPARATORE = /(,\s*|\s+e\s+|\n|\s*\/\s*)/
+
+/** Il nome che si sta scrivendo: l’ultimo dopo un separatore. */
+export function nomeInScrittura(testo: string): string {
+  const pezzi = testo.split(SEPARATORE)
+  return (pezzi.at(-1) ?? '').trimStart()
+}
+
+/** Sostituisce il nome in scrittura con quello scelto, lasciando gli altri docenti. */
+export function sostituisciNome(testo: string, nome: string): string {
+  const pezzi = testo.split(SEPARATORE)
+  pezzi[pezzi.length - 1] = nome
+  return pezzi.join('')
+}
+
+export type DocenteSuggerito = { id: number | string; nome: string; cognome: string }
+
+/** Docenti che iniziano (cognome o nome) con quello che si scrive, senza badare agli accenti. */
+export function filtraDocenti(docenti: DocenteSuggerito[], cerca: string, max = 8) {
+  const piano = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+  const q = piano(cerca.trim())
+  if (!q) return []
+  return docenti
+    .filter((d) => {
+      const completo = piano(`${d.cognome} ${d.nome}`)
+      return completo.startsWith(q) || piano(d.nome).startsWith(q) || completo.includes(` ${q}`)
+    })
+    .slice(0, max)
 }

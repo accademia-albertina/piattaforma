@@ -16,6 +16,8 @@ import {
 import { trovaCalendario } from '@/lib/calendari-dati'
 import type { Media } from '@/payload-types'
 
+import { NUOVA_SCHEDA } from '@/utilities/pdf'
+
 import styles from './calendario.module.css'
 
 export const dynamic = 'force-dynamic'
@@ -137,8 +139,9 @@ export default async function CalendarioPage({ params, searchParams }: Props) {
           <div className={`${styles.azioni} non-stampare`}>
             <StampaPagina />
             {pdf?.url ? (
-              <a href={pdf.url} className="btn btn-secondario" download>
-                <Download size={18} strokeWidth={1.75} aria-hidden /> Scarica il PDF
+              <a href={pdf.url} className="btn btn-secondario" target="_blank" rel="noopener">
+                <Download size={18} strokeWidth={1.75} aria-hidden /> Apri il PDF
+                <span className="visually-hidden">{NUOVA_SCHEDA}</span>
               </a>
             ) : null}
           </div>

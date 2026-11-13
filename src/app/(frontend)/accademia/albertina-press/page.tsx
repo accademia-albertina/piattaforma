@@ -76,6 +76,14 @@ export default async function AlbertinaPressPage({ searchParams }: Props) {
         }
       />
 
+      {/* Prima la casa editrice, poi il catalogo (Fede 2026-11-13) */}
+      {pagina?.blocchi?.length ? (
+        <section aria-labelledby="casa-editrice" className={styles.casaEditrice}>
+          <h2 id="casa-editrice">La casa editrice</h2>
+          <Blocchi blocchi={pagina.blocchi} />
+        </section>
+      ) : null}
+
       <section id="catalogo" aria-labelledby="catalogo-titolo" className={styles.catalogo}>
         <h2 id="catalogo-titolo">Il catalogo</h2>
         <div className={styles.filtri}>
@@ -90,7 +98,12 @@ export default async function AlbertinaPressPage({ searchParams }: Props) {
               })),
             ]}
           />
-          <form method="get" action={`${PERCORSO_PRESS}#catalogo`} className={styles.cerca} role="search">
+          <form
+            method="get"
+            action={`${PERCORSO_PRESS}#catalogo`}
+            className={styles.cerca}
+            role="search"
+          >
             {filtri.collana ? <input type="hidden" name="collana" value={filtri.collana} /> : null}
             <label htmlFor="cerca-catalogo">Cerca nel catalogo</label>
             <input
@@ -133,7 +146,8 @@ export default async function AlbertinaPressPage({ searchParams }: Props) {
           </ul>
         ) : (
           <p>
-            Nessuna pubblicazione trovata. <Link href={hrefCatalogo({})}>Mostra tutto il catalogo</Link>.
+            Nessuna pubblicazione trovata.{' '}
+            <Link href={hrefCatalogo({})}>Mostra tutto il catalogo</Link>.
           </p>
         )}
 
@@ -143,13 +157,6 @@ export default async function AlbertinaPressPage({ searchParams }: Props) {
           hrefFor={(p) => hrefCatalogo({ ...filtri, pagina: p })}
         />
       </section>
-
-      {pagina?.blocchi?.length ? (
-        <section aria-labelledby="casa-editrice" className={styles.casaEditrice}>
-          <h2 id="casa-editrice">La casa editrice</h2>
-          <Blocchi blocchi={pagina.blocchi} />
-        </section>
-      ) : null}
     </div>
   )
 }

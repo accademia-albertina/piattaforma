@@ -10,6 +10,7 @@ import { Breadcrumbs, Fisarmonica, TestataPagina } from '@/components'
 import { corsiDelDocente, etichettaLivelli, trovaDocente } from '@/lib/corsi'
 import type { Media, Scuola } from '@/payload-types'
 import { lexicalToText } from '@/utilities/lexicalText'
+import { NUOVA_SCHEDA, attributiFile, isPdf } from '@/utilities/pdf'
 
 import styles from './docente.module.css'
 
@@ -55,6 +56,7 @@ export default async function DocentePage({ params }: Props) {
       </thead>
       <tbody>
         {lista.map((c) => (
+          // Tutta la riga è cliccabile: il link si allarga sulla riga (vedi .corsi a::after)
           <tr key={c.id}>
             <td>
               <Link href={`/corsi/${c.slug}`}>{c.titolo}</Link>
@@ -97,7 +99,21 @@ export default async function DocentePage({ params }: Props) {
             : 'Non più in servizio'
         }
         titolo={docente.nomeCompleto ?? ''}
-        sommario={scuole.map((s) => s.nome).join(' · ') || null}
+        sommario={
+          scuole.length > 0
+            ? [
+                `Afferenza: ${scuole[0].nome}`,
+                scuole.length > 1
+                  ? `Pro-afferenza: ${scuole
+                      .slice(1)
+                      .map((s) => s.nome)
+                      .join(', ')}`
+                  : null,
+              ]
+                .filter(Boolean)
+                .join(' · ')
+            : null
+        }
         media={
           foto?.url ? (
             <Image
@@ -129,8 +145,14 @@ export default async function DocentePage({ params }: Props) {
             <div>
               <dt>Curriculum</dt>
               <dd>
-                <a href={cv.url} download>
-                  Scarica il PDF
+                <a
+                  href={cv.url}
+                  {...attributiFile(cv.url, { mimeType: cv.mimeType, scarica: true })}
+                >
+                  Apri il PDF
+                  {isPdf(cv.url, cv.mimeType) ? (
+                    <span className="visually-hidden">{NUOVA_SCHEDA}</span>
+                  ) : null}
                 </a>
               </dd>
             </div>
