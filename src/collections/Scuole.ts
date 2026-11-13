@@ -167,14 +167,14 @@ export const Scuole: CollectionConfig = {
               fields: [
                 {
                   name: 'coordinatoreDipartimento',
-                  label: 'Coordinatore di dipartimento',
+                  label: 'Coordinatore dipartimento',
                   type: 'relationship',
                   relationTo: 'docenti',
                   admin: { width: '50%' },
                 },
                 {
                   name: 'coordinatoreScuola',
-                  label: 'Coordinatore di scuola',
+                  label: 'Coordinatore scuola',
                   type: 'relationship',
                   relationTo: 'docenti',
                   admin: {

@@ -27,6 +27,19 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.35.1',
+    data: '2026-11-13',
+    titolo: 'Coordinatori senza preposizione',
+    voci: [
+      {
+        tipo: 'corretto',
+        testo:
+          'Nella pagina della scuola si legge “Coordinatore dipartimento” e “Coordinatore scuola”.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.35.0',
     data: '2026-11-13',
     titolo: 'Email del sito e registro degli invii',
