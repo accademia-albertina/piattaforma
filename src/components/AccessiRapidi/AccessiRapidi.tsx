@@ -22,7 +22,7 @@ export type AccessiRapidiProps = {
  */
 export function AccessiRapidi({
   titolo = 'Da dove vuoi iniziare?',
-  testo = 'Accademia Albertina di Belle Arti di Torino: lauree e lauree magistrali in arti visive, progettazione e nuove tecnologie.',
+  testo = 'Accademia Albertina di Belle Arti di Torino: Lauree e Lauree magistrali in arti visive, progettazione e nuove tecnologie.',
   voci,
 }: AccessiRapidiProps) {
   return (

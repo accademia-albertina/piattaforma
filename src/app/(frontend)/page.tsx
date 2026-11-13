@@ -123,7 +123,7 @@ export default async function HomePage() {
         cifre={[
           { valore: 4, etichetta: 'Dipartimenti' },
           { valore: 10, etichetta: 'Scuole' },
-          { valore: 2, etichetta: 'Livelli: laurea e laurea magistrale' },
+          { valore: 2, etichetta: 'Livelli: Laurea e Laurea magistrale' },
         ]}
       />
 
@@ -185,10 +185,10 @@ export default async function HomePage() {
               <li className={styles.introScuole}>
                 <p className={styles.occhiello}>Offerta formativa</p>
                 <p className={styles.introTitolo}>
-                  {scuole.length} scuole, laurea e laurea magistrale
+                  {scuole.length} scuole, Laurea e Laurea magistrale
                 </p>
                 <p>
-                  Lauree e lauree magistrali con lo stesso valore di quelle universitarie: triennio
+                  Lauree e Lauree magistrali con lo stesso valore di quelle universitarie: triennio
                   e biennio.
                 </p>
                 <dl className={styles.cifre}>

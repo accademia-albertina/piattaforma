@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic'
 export const metadata: Metadata = {
   title: 'Offerta formativa',
   description:
-    'Le scuole dell’Accademia Albertina: lauree e lauree magistrali con lo stesso valore di quelle universitarie.',
+    'Le scuole dell’Accademia Albertina: Lauree e Lauree magistrali con lo stesso valore di quelle universitarie.',
   alternates: { canonical: '/scuole' },
 }
 
@@ -47,7 +47,7 @@ export default async function ScuolePage() {
       <TestataPagina
         occhiello="Didattica"
         titolo="Offerta formativa"
-        sommario="Lauree e lauree magistrali con lo stesso valore di quelle universitarie: dieci scuole in quattro dipartimenti."
+        sommario="Lauree e Lauree magistrali con lo stesso valore di quelle universitarie: dieci scuole in quattro dipartimenti."
       >
         <div className={styles.azioni}>
           <Link href="/didattica/ammissioni" className="btn btn-primario">
