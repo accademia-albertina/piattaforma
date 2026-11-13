@@ -29,6 +29,7 @@ export const SEZIONI_PANNELLO = [
   'trasparenza',
   'users',
   'navigazione',
+  'email-inviate',
   'changelog',
 ] as const
 export type SezionePannello = (typeof SEZIONI_PANNELLO)[number]
@@ -54,6 +55,7 @@ export const VISIBILITA: Record<SezionePannello, Role[]> = {
   trasparenza: ['vicedirezione', 'amministrativo'],
   users: [],
   navigazione: [],
+  'email-inviate': [],
   changelog: ['vicedirezione', 'redazione', ...UFFICI, 'docente'],
 }
 

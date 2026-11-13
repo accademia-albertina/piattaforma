@@ -24,6 +24,7 @@ const ICONE = {
   'nav-scuole': 'Landmark',
   'nav-pubblicazioni': 'LibraryBig',
   'nav-users': 'Users',
+  'nav-email-inviate': 'Mail',
   'nav-global-navigazione': 'PanelsTopLeft',
 }
 

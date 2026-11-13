@@ -83,6 +83,7 @@ export interface Config {
     trasparenza: Trasparenza;
     media: Media;
     users: User;
+    'email-inviate': EmailInviate;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -113,6 +114,7 @@ export interface Config {
     trasparenza: TrasparenzaSelect<false> | TrasparenzaSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'email-inviate': EmailInviateSelect<false> | EmailInviateSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -230,7 +232,7 @@ export interface BloccoImmagine {
   blockType: 'immagine';
 }
 /**
- * Immagini e documenti usati in avvisi e pagine.
+ * Immagini e documenti usati in avvisi e pagine. Massimo 20 MB per le immagini e 10 MB per i PDF.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
@@ -1157,6 +1159,28 @@ export interface Trasparenza {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Le email spedite dal sito negli ultimi 30 giorni, con l’esito. Le più vecchie si cancellano da sole.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "email-inviate".
+ */
+export interface EmailInviate {
+  id: number;
+  destinatario?: string | null;
+  /**
+   * Indirizzo a cui è partita davvero. In anteprima tutte le email vanno a un solo indirizzo di prova.
+   */
+  consegnataA?: string | null;
+  oggetto?: string | null;
+  esito: 'inviata' | 'errore' | 'non-spedita';
+  errore?: string | null;
+  testo?: string | null;
+  idMessaggio?: string | null;
+  risposta?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -1243,6 +1267,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'email-inviate';
+        value: number | EmailInviate;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1790,6 +1818,22 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "email-inviate_select".
+ */
+export interface EmailInviateSelect<T extends boolean = true> {
+  destinatario?: T;
+  consegnataA?: T;
+  oggetto?: T;
+  esito?: T;
+  errore?: T;
+  testo?: T;
+  idMessaggio?: T;
+  risposta?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

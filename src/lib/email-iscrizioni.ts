@@ -17,12 +17,7 @@ const saluto = (nominativo?: string | null) => {
   return nome ? `Gentile ${nome},` : 'Buongiorno,'
 }
 
-const firma = () =>
-  [
-    `Trovi le tue iscrizioni in La mia area: ${sito()}/la-mia-area`,
-    'Questa email è automatica: per domande scrivi alla segreteria didattica.',
-    'Accademia Albertina di Belle Arti di Torino',
-  ].join('\n\n')
+const laMiaArea = () => ({ testo: 'Vai a La mia area', url: `${sito()}/la-mia-area` })
 
 const fraseChiusura = (chiusura?: Date) =>
   chiusura
@@ -37,31 +32,41 @@ export function messaggioCorso(
   chiusura?: Date,
 ): Messaggio | null {
   if (!iscrizione.email) return null
-  const periodo = etichettaPeriodo(corso.periodoIscrizione ?? 'primo').toLowerCase()
-  const riga = `${corso.titolo}, ${periodo} ${corso.annoAccademico}`
+  const periodo = etichettaPeriodo(corso.periodoIscrizione ?? 'primo')
   const link = `${sito()}/corsi/${corso.slug}`
+  const dettagli = [
+    { etichetta: 'Corso', valore: corso.titolo },
+    { etichetta: 'Periodo', valore: `${periodo} ${corso.annoAccademico}` },
+  ]
   if (azione === 'iscrizione') {
     return {
       to: iscrizione.email,
       subject: `Iscrizione al corso ${corso.titolo}`,
-      text: [
-        saluto(iscrizione.nominativo),
-        `la tua iscrizione al corso ${riga} è registrata.`,
-        `Pagina del corso: ${link}`,
-        fraseChiusura(chiusura),
-        firma(),
-      ].join('\n\n'),
+      contenuto: {
+        occhiello: 'Iscrizione ai corsi',
+        titolo: 'Iscrizione registrata',
+        saluto: saluto(iscrizione.nominativo),
+        paragrafi: [`la tua iscrizione al corso ${corso.titolo} è registrata.`],
+        dettagli,
+        pulsante: laMiaArea(),
+        note: [fraseChiusura(chiusura), `Pagina del corso: ${link}`],
+      },
     }
   }
   return {
     to: iscrizione.email,
     subject: `Iscrizione annullata: ${corso.titolo}`,
-    text: [
-      saluto(iscrizione.nominativo),
-      `la tua iscrizione al corso ${riga} è stata annullata.`,
-      `Se non l’hai annullata tu, iscriviti di nuovo dalla pagina del corso finché le iscrizioni sono aperte: ${link}`,
-      firma(),
-    ].join('\n\n'),
+    contenuto: {
+      occhiello: 'Iscrizione ai corsi',
+      titolo: 'Iscrizione annullata',
+      saluto: saluto(iscrizione.nominativo),
+      paragrafi: [
+        `la tua iscrizione al corso ${corso.titolo} è stata annullata.`,
+        `Se non l’hai annullata tu, iscriviti di nuovo dalla pagina del corso finché le iscrizioni sono aperte.`,
+      ],
+      dettagli,
+      pulsante: { testo: 'Apri la pagina del corso', url: link },
+    },
   }
 }
 
@@ -82,32 +87,43 @@ export function messaggioEsame(
   const quando = [giornoAppello(appello.data), appello.ora && `ore ${appello.ora}`]
     .filter(Boolean)
     .join(', ')
-  const dettagli = [`Quando: ${quando}`, appello.aula && `Aula: ${appello.aula}`]
-    .filter(Boolean)
-    .join('\n')
+  const dettagli = [
+    { etichetta: 'Esame', valore: nome },
+    { etichetta: 'Quando', valore: quando },
+    ...(appello.aula ? [{ etichetta: 'Aula', valore: appello.aula }] : []),
+  ]
   if (azione === 'iscrizione') {
     return {
       to: iscrizione.email,
       subject: `Iscrizione all’esame di ${nome}`,
-      text: [
-        saluto(iscrizione.nominativo),
-        `la tua iscrizione all’esame di ${nome} è registrata.`,
+      contenuto: {
+        occhiello: 'Iscrizione agli esami',
+        titolo: 'Iscrizione registrata',
+        saluto: saluto(iscrizione.nominativo),
+        paragrafi: [
+          `la tua iscrizione all’esame di ${nome} è registrata.`,
+          'Controlla data, ora e aula sul sito prima dell’esame: eventuali cambi li trovi in La mia area.',
+        ],
         dettagli,
-        'Controlla data, ora e aula sul sito prima dell’esame: eventuali cambi li trovi in La mia area.',
-        fraseChiusura(chiusura),
-        firma(),
-      ].join('\n\n'),
+        pulsante: laMiaArea(),
+        note: [fraseChiusura(chiusura)],
+      },
     }
   }
   return {
     to: iscrizione.email,
     subject: `Iscrizione annullata: esame di ${nome}`,
-    text: [
-      saluto(iscrizione.nominativo),
-      `la tua iscrizione all’esame di ${nome} (${quando}) è stata annullata.`,
-      `Se non l’hai annullata tu, iscriviti di nuovo da ${sito()}/esami finché le iscrizioni sono aperte.`,
-      firma(),
-    ].join('\n\n'),
+    contenuto: {
+      occhiello: 'Iscrizione agli esami',
+      titolo: 'Iscrizione annullata',
+      saluto: saluto(iscrizione.nominativo),
+      paragrafi: [
+        `la tua iscrizione all’esame di ${nome} è stata annullata.`,
+        'Se non l’hai annullata tu, iscriviti di nuovo dalla pagina degli esami finché le iscrizioni sono aperte.',
+      ],
+      dettagli,
+      pulsante: { testo: 'Apri la pagina degli esami', url: `${sito()}/esami` },
+    },
   }
 }
 

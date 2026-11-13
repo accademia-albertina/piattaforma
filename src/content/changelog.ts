@@ -27,6 +27,34 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.35.0',
+    data: '2026-11-13',
+    titolo: 'Email del sito e registro degli invii',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Le conferme di iscrizione a corsi ed esami partono davvero, con una grafica nei colori dell’Accademia: logo, riquadro con i dati e pulsante per La mia area.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Sezione “Email inviate” (solo amministratori): ogni email spedita dal sito con destinatario, oggetto ed esito. Le voci si cancellano da sole dopo 30 giorni.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Limite di dimensione dei file caricati: 20 MB per le immagini e 10 MB per i PDF. Gli amministratori possono caricare fino a 50 MB.',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          'I file più grandi di 10 MB non davano più “Something went wrong” al salvataggio: ora entrano (entro il limite) o compare un messaggio chiaro.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.34.0',
     data: '2026-11-13',
     titolo: 'Rifiniture dopo i feedback: lauree, docenti, stampa e orario',
