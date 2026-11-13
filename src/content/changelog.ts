@@ -68,7 +68,7 @@ export const CHANGELOG: Versione[] = [
         testo: 'Aprendo il menu su Chrome la pagina non salta più di lato.',
       },
     ],
-    pr: [],
+    pr: [81],
   },
   {
     versione: '0.33.1',
