@@ -59,9 +59,9 @@ async function sposta(payload: Payload) {
     if (!doc.filename) continue
     const p = path.resolve(dir, doc.filename)
     if (!p.startsWith(dir + path.sep)) continue
-    let dati: Buffer
+    // Si passa il percorso, non il contenuto: il file si legge a blocchi (memoria limitata)
     try {
-      dati = await fs.readFile(p)
+      await fs.access(p)
     } catch {
       avanzamento.mancanti.push(doc.filename)
       continue
@@ -69,7 +69,7 @@ async function sposta(payload: Payload) {
     const id = await caricaSuDrive(payload, {
       filename: doc.filename,
       mimeType: doc.mimeType || 'application/octet-stream',
-      dati,
+      dati: p,
     })
     if (!id) {
       avanzamento.errori.push(doc.filename)

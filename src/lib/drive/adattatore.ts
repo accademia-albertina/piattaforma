@@ -42,7 +42,7 @@ async function contenuto(file: File) {
 /** Carica su Drive; restituisce l'ID o null (Drive non collegato o in errore). */
 export async function caricaSuDrive(
   payload: Payload,
-  o: { filename: string; mimeType: string; dati: Buffer },
+  o: { filename: string; mimeType: string; dati: Buffer | string },
 ): Promise<string | null> {
   try {
     const drive = await driveCollegato(payload)

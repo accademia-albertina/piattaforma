@@ -27,6 +27,19 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.33.1',
+    data: '2026-11-13',
+    titolo: 'Spostamento su Drive senza interruzioni',
+    voci: [
+      {
+        tipo: 'corretto',
+        testo:
+          '“Sposta su Drive” non blocca più il sito con i file grandi: ogni file viene inviato a pezzi da 8 MB.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.33.0',
     data: '2026-11-13',
     titolo: 'File su Google Drive',
