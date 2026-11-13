@@ -18,6 +18,7 @@ import * as migration_20261106_154742_appelli_esami from './20261106_154742_appe
 import * as migration_20261113_105519_drive_file from './20261113_105519_drive_file';
 import * as migration_20261113_141554_terminologia_lauree from './20261113_141554_terminologia_lauree';
 import * as migration_20261113_151332_registro_email from './20261113_151332_registro_email';
+import * as migration_20261113_153457_registro_attivita from './20261113_153457_registro_attivita';
 
 export const migrations = [
   {
@@ -118,6 +119,11 @@ export const migrations = [
   {
     up: migration_20261113_151332_registro_email.up,
     down: migration_20261113_151332_registro_email.down,
-    name: '20261113_151332_registro_email'
+    name: '20261113_151332_registro_email',
+  },
+  {
+    up: migration_20261113_153457_registro_attivita.up,
+    down: migration_20261113_153457_registro_attivita.down,
+    name: '20261113_153457_registro_attivita'
   },
 ];
