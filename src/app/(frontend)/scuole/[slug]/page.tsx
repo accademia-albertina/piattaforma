@@ -143,7 +143,7 @@ export default async function ScuolaPage({ params }: Props) {
           </div>
           {coordinatore ? (
             <div>
-              <dt>Coordinatore di scuola</dt>
+              <dt>Coordinatore scuola</dt>
               <dd>{persona(coordinatore)}</dd>
             </div>
           ) : null}
@@ -177,13 +177,13 @@ export default async function ScuolaPage({ params }: Props) {
           <dl className={styles.persone}>
             {coordinatoreDip ? (
               <div>
-                <dt>Coordinatore di dipartimento</dt>
+                <dt>Coordinatore dipartimento</dt>
                 <dd>{persona(coordinatoreDip)}</dd>
               </div>
             ) : null}
             {coordinatore ? (
               <div>
-                <dt>Coordinatore di scuola</dt>
+                <dt>Coordinatore scuola</dt>
                 <dd>{persona(coordinatore)}</dd>
               </div>
             ) : null}
