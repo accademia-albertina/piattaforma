@@ -17,6 +17,7 @@ import * as migration_20261106_144426_iscrizioni_corsi from './20261106_144426_i
 import * as migration_20261106_154742_appelli_esami from './20261106_154742_appelli_esami';
 import * as migration_20261113_105519_drive_file from './20261113_105519_drive_file';
 import * as migration_20261113_141554_terminologia_lauree from './20261113_141554_terminologia_lauree';
+import * as migration_20261113_151332_registro_email from './20261113_151332_registro_email';
 
 export const migrations = [
   {
@@ -112,6 +113,11 @@ export const migrations = [
   {
     up: migration_20261113_141554_terminologia_lauree.up,
     down: migration_20261113_141554_terminologia_lauree.down,
-    name: '20261113_141554_terminologia_lauree'
+    name: '20261113_141554_terminologia_lauree',
+  },
+  {
+    up: migration_20261113_151332_registro_email.up,
+    down: migration_20261113_151332_registro_email.down,
+    name: '20261113_151332_registro_email'
   },
 ];

@@ -3,6 +3,7 @@ import { creatoDaField } from '@/fields/creatoDa'
 import type { Access, CollectionConfig } from 'payload'
 
 import { canAccessBackend } from '@/access/roles'
+import { controllaDimensione, LIMITE_MB } from '@/lib/limiti-upload'
 import { altDaNomeFile } from '@/utilities/testoAlternativo'
 
 const backendUser: Access = ({ req }) => canAccessBackend(req.user)
@@ -18,7 +19,7 @@ export const Media: CollectionConfig = {
     hidden: nascostaA('media'),
     baseFilter: filtroElenco('media'),
     group: 'Contenuti',
-    description: 'Immagini e documenti usati in avvisi e pagine.',
+    description: `Immagini e documenti usati in avvisi e pagine. Massimo ${LIMITE_MB.immagine} MB per le immagini e ${LIMITE_MB.pdf} MB per i PDF.`,
   },
   access: {
     read: () => true,
@@ -40,6 +41,7 @@ export const Media: CollectionConfig = {
     },
   ],
   hooks: {
+    beforeOperation: [controllaDimensione],
     beforeChange: [
       // Testo alternativo automatico, ricavato dal nome del file (sempre correggibile)
       ({ data, req, operation }) => {

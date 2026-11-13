@@ -91,9 +91,16 @@ Immagini e PDF caricati nel pannello vanno in una cartella Drive dell’account 
 
 ## Email (TurboSMTP)
 
-Le email di conferma delle iscrizioni partono solo se `SMTP_HOST` è impostata; altrimenti Payload le scrive nel log.
-Su Render imposta `SMTP_HOST=pro.turbo-smtp.com`, `SMTP_PORT=587` (oppure 465), `SMTP_USER`, `SMTP_PASS` ed eventualmente `EMAIL_MITTENTE`.
-Per provare in anteprima senza scrivere agli studenti imposta anche `EMAIL_SOLO_A` con il tuo indirizzo: tutte le email arrivano solo lì.
+Le email (conferme e annullamenti delle iscrizioni, recupero password) partono solo se `SMTP_HOST` è impostata.
+Su Render: `SMTP_HOST=pro.eu.turbo-smtp.com`, `SMTP_PORT=465` (oppure 587), `SMTP_USER`, `SMTP_PASS` (chiave API dedicata alla piattaforma) e `EMAIL_MITTENTE` (anche nella forma `Accademia Albertina <noreply@albertina.academy>`).
+Per provare in anteprima senza scrivere agli studenti imposta `EMAIL_SOLO_A`: tutte le email arrivano solo a quell'indirizzo.
+
+- **Modello grafico:** `src/lib/email-modello.ts` (HTML a tabelle con stili in linea, colori del design system, logo allegato come immagine incorporata) più la versione solo testo.
+- **Registro:** ogni invio, riuscito, fallito o non spedito perché SMTP è spento, finisce in *Email inviate* (gruppo Sistema, solo admin, in sola lettura). Le voci più vecchie di 30 giorni si cancellano da sole (al riavvio e al massimo una volta l'ora durante gli invii). I link con codici di accesso vengono oscurati.
+
+## Limiti dei caricamenti
+
+Chi non è admin carica al massimo 20 MB per le immagini e 10 MB per i PDF (`src/lib/limiti-upload.ts`); gli admin fino a 50 MB, tetto per tutti perché il file passa dalla memoria del server (512 MB su Render). `proxyClientMaxBodySize` in `next.config.ts` deve restare sopra questo tetto.
 
 ## Regole del progetto
 

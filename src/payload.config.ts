@@ -9,6 +9,7 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { EmailInviate } from './collections/EmailInviate'
 import { Avvisi } from './collections/Avvisi'
 import { Trasparenza } from './collections/Trasparenza'
 import { Scuole } from './collections/Scuole'
@@ -30,6 +31,8 @@ import { driveConfigurato } from './lib/drive/api'
 import { endpointsDrive } from './lib/drive/endpoints'
 import { migrations } from './migrations'
 import { adattatoreEmail } from './lib/email'
+import { LIMITE_ASSOLUTO_BYTE } from './lib/limiti-upload'
+import { puliziaRegistroEmail } from './lib/registro-email'
 import { seedCorsi } from './seed/corsi'
 import { importaAvvisiWp } from './seed/avvisi-wp'
 import { rimuoviDocenti } from './seed/docenti-rimossi'
@@ -122,6 +125,7 @@ export default buildConfig({
     Trasparenza,
     Media,
     Users,
+    EmailInviate,
   ],
   globals: [Navigazione, DriveConnessione],
   endpoints: endpointsDrive,
@@ -129,6 +133,9 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
   email: adattatoreEmail(),
+  // Tetto per tutti, admin compresi: i file arrivano in memoria e il server ha 512 MB.
+  // Il limite più basso per chi non è admin è in Media (src/lib/limiti-upload.ts).
+  upload: { limits: { fileSize: LIMITE_ASSOLUTO_BYTE }, abortOnLimit: true },
   cors: process.env.NEXT_PUBLIC_SERVER_URL ? [process.env.NEXT_PUBLIC_SERVER_URL] : [],
   csrf: process.env.NEXT_PUBLIC_SERVER_URL ? [process.env.NEXT_PUBLIC_SERVER_URL] : [],
   graphQL: { disable: true },
@@ -148,6 +155,10 @@ export default buildConfig({
   sharp,
   // Anteprima online: al primo avvio carica i contenuti demo se il database è vuoto.
   onInit: async (payload) => {
+    // Registro email: a ogni avvio via le voci più vecchie di 30 giorni
+    void puliziaRegistroEmail(payload).catch((e) =>
+      payload.logger.error(`Pulizia registro email non riuscita: ${(e as Error).message}`),
+    )
     if (process.env.SEED_DEMO !== 'true') return
     await seedDemo(payload)
     await seedCorsi(payload)

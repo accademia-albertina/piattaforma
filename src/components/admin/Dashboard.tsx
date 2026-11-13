@@ -56,6 +56,7 @@ const SEZIONI: Sezione[] = [
   { slug: 'trasparenza', tipo: 'collezione', serve: 'update' },
   { slug: 'navigazione', tipo: 'globale', serve: 'update' },
   { slug: 'users', tipo: 'collezione', serve: 'create' },
+  { slug: 'email-inviate', tipo: 'collezione', serve: 'read' },
 ]
 
 /** Collezioni con bozze che compaiono in “Ultime modifiche”. */

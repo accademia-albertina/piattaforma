@@ -12,6 +12,7 @@ import {
   Landmark,
   LibraryBig,
   type LucideIcon,
+  Mail,
   Megaphone,
   Microscope,
   PanelsTopLeft,
@@ -41,4 +42,5 @@ export const ICONE_SEZIONI: Record<string, LucideIcon> = {
   pubblicazioni: LibraryBig,
   users: Users,
   navigazione: PanelsTopLeft,
+  'email-inviate': Mail,
 }

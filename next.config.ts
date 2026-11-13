@@ -41,6 +41,12 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  experimental: {
+    // Con proxy.ts attivo Next taglia i corpi delle richieste a 10 MB e i caricamenti più grandi
+    // finivano in errore. Il tetto vero è in Payload (src/lib/limiti-upload.ts, 50 MB per gli
+    // admin): qui un po' di margine per l'intestazione multipart.
+    proxyClientMaxBodySize: '52mb',
+  },
   images: {
     localPatterns: [
       {
