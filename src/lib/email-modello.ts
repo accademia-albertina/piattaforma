@@ -45,9 +45,20 @@ const conLink = (s: string) =>
     `<a href="$1" style="color:${COLORI.titolo};text-decoration:underline">$1</a>`,
   )
 
+/**
+ * Gmail e Apple Mail trasformano da soli gli indirizzi in link blu. Un link nostro, con colore
+ * esplicito e sottolineato, li tiene nei colori del piede.
+ */
+const INDIRIZZO = 'Via Accademia Albertina 6, 10123 Torino'
+const senzaLinkAutomatici = (html: string) =>
+  html.replace(
+    INDIRIZZO,
+    `<a href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(`Accademia Albertina, ${INDIRIZZO}`)}" style="color:${COLORI.footerTesto};text-decoration:underline">${INDIRIZZO}</a>`,
+  )
+
 const PIEDE_TESTO = [
   'Questa email è automatica: non rispondere. Per domande scrivi alla segreteria didattica.',
-  'Accademia Albertina di Belle Arti di Torino · Via Accademia Albertina 6, 10123 Torino',
+  `Accademia Albertina di Belle Arti di Torino · ${INDIRIZZO}`,
 ]
 
 /** Versione solo testo, per i programmi che non mostrano l'HTML e per il registro. */
@@ -123,7 +134,7 @@ export function htmlEmail(c: ContenutoEmail): string {
       <tr><td style="background:${COLORI.footer};padding:20px 32px">
         ${PIEDE_TESTO.map(
           (t) =>
-            `<p style="margin:0 0 6px;font-family:${FONT};font-size:13px;line-height:1.5;color:${COLORI.footerTesto}">${escape(t)}</p>`,
+            `<p style="margin:0 0 6px;font-family:${FONT};font-size:13px;line-height:1.5;color:${COLORI.footerTesto}">${senzaLinkAutomatici(escape(t))}</p>`,
         ).join('\n')}
       </td></tr>
     </table>

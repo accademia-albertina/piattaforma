@@ -10914,6 +10914,205 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.registro_attivita": {
+      "name": "registro_attivita",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "azione": {
+          "name": "azione",
+          "type": "enum_registro_attivita_azione",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "utente_id": {
+          "name": "utente_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "utente_nome": {
+          "name": "utente_nome",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "utente_email": {
+          "name": "utente_email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "collezione": {
+          "name": "collezione",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sezione": {
+          "name": "sezione",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "documento_id": {
+          "name": "documento_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "titolo": {
+          "name": "titolo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "campi": {
+          "name": "campi",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "riepilogo": {
+          "name": "riepilogo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "registro_attivita_created_at_idx": {
+          "name": "registro_attivita_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "registro_attivita_azione_idx": {
+          "name": "registro_attivita_azione_idx",
+          "columns": [
+            {
+              "expression": "azione",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "registro_attivita_utente_idx": {
+          "name": "registro_attivita_utente_idx",
+          "columns": [
+            {
+              "expression": "utente_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "registro_attivita_collezione_idx": {
+          "name": "registro_attivita_collezione_idx",
+          "columns": [
+            {
+              "expression": "collezione",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "registro_attivita_documento_id_idx": {
+          "name": "registro_attivita_documento_id_idx",
+          "columns": [
+            {
+              "expression": "documento_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "registro_attivita_updated_at_idx": {
+          "name": "registro_attivita_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "registro_attivita_utente_id_users_id_fk": {
+          "name": "registro_attivita_utente_id_users_id_fk",
+          "tableFrom": "registro_attivita",
+          "tableTo": "users",
+          "columnsFrom": [
+            "utente_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.payload_kv": {
       "name": "payload_kv",
       "schema": "",
@@ -11172,6 +11371,12 @@
         },
         "email_inviate_id": {
           "name": "email_inviate_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "registro_attivita_id": {
+          "name": "registro_attivita_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -11477,6 +11682,21 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "payload_locked_documents_rels_registro_attivita_id_idx": {
+          "name": "payload_locked_documents_rels_registro_attivita_id_idx",
+          "columns": [
+            {
+              "expression": "registro_attivita_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
@@ -11707,6 +11927,19 @@
           "tableTo": "email_inviate",
           "columnsFrom": [
             "email_inviate_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_registro_attivita_fk": {
+          "name": "payload_locked_documents_rels_registro_attivita_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "registro_attivita",
+          "columnsFrom": [
+            "registro_attivita_id"
           ],
           "columnsTo": [
             "id"
@@ -13663,6 +13896,17 @@
         "non-spedita"
       ]
     },
+    "public.enum_registro_attivita_azione": {
+      "name": "enum_registro_attivita_azione",
+      "schema": "public",
+      "values": [
+        "creato",
+        "modificato",
+        "pubblicato",
+        "ritirato",
+        "eliminato"
+      ]
+    },
     "public.enum_navigazione_in_evidenza_tipo": {
       "name": "enum_navigazione_in_evidenza_tipo",
       "schema": "public",
@@ -13737,6 +13981,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "89839e8b-fea9-4508-97c1-6bb16d531eb7",
+  "id": "997c40aa-f5e2-4b87-ab3f-59b8d5e7e16d",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

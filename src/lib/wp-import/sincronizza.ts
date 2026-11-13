@@ -90,6 +90,7 @@ const ESCLUSE = new Set([
   'iscrizioni-corsi',
   'iscrizioni-esami',
   'finestre-iscrizione',
+  'registro-attivita',
 ])
 const GLOBALI_ESCLUSI = new Set(['drive-connessione'])
 

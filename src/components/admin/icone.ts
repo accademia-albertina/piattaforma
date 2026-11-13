@@ -7,7 +7,9 @@ import {
   NotebookPen,
   ClipboardList,
   FileText,
+  History,
   GraduationCap,
+  HardDrive,
   Images,
   Landmark,
   LibraryBig,
@@ -41,6 +43,8 @@ export const ICONE_SEZIONI: Record<string, LucideIcon> = {
   scuole: Landmark,
   pubblicazioni: LibraryBig,
   users: Users,
+  'registro-attivita': History,
+  drive: HardDrive,
   navigazione: PanelsTopLeft,
   'email-inviate': Mail,
 }

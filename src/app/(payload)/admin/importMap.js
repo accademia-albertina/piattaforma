@@ -28,6 +28,7 @@ import { default as default_f67065a247c29f83b8b80ef6d4133254 } from '@/component
 import { TabellaCalendario as TabellaCalendario_9699e8f890a1160d8c1a1320656d19f9 } from '../../../components/admin/TabellaCalendario'
 import { default as default_82731de1591b2148716cbd75875b1236 } from '../../../components/admin/IconaScuolaPannello'
 import { default as default_77f2bc3e7bebc101d9ad750066bcad6f } from '@/components/admin/PuliziaIscrizioni'
+import { default as default_b1dbfc573c348c3ec517346e4881ddb8 } from '../../../components/admin/ApriElementoRegistro'
 import { default as default_ff2b3aef4ce7bf470d100ee3d53f4ed9 } from '../../../components/admin/Avatar'
 import { default as default_2ebdce80c249808f25895cbe083599fa } from '../../../components/admin/PiedeMenu'
 import { default as default_dfe4008080d895d460898c3a6155e9ba } from '../../../components/admin/Icon'
@@ -73,6 +74,7 @@ export const importMap = {
   "/components/admin/TabellaCalendario#TabellaCalendario": TabellaCalendario_9699e8f890a1160d8c1a1320656d19f9,
   "/components/admin/IconaScuolaPannello#default": default_82731de1591b2148716cbd75875b1236,
   "@/components/admin/PuliziaIscrizioni#default": default_77f2bc3e7bebc101d9ad750066bcad6f,
+  "/components/admin/ApriElementoRegistro#default": default_b1dbfc573c348c3ec517346e4881ddb8,
   "/components/admin/Avatar#default": default_ff2b3aef4ce7bf470d100ee3d53f4ed9,
   "/components/admin/PiedeMenu#default": default_2ebdce80c249808f25895cbe083599fa,
   "/components/admin/Icon#default": default_dfe4008080d895d460898c3a6155e9ba,

@@ -817,3 +817,93 @@ body {
     font-weight: 600;
   }
 }
+
+// ——— Registro attività su telefono: ogni voce è una scheda, niente tabella da scorrere ———
+@media (max-width: 768px) {
+  .collection-list--registro-attivita {
+    .table-wrap,
+    .table {
+      overflow: visible;
+    }
+
+    table,
+    tbody {
+      display: block;
+      width: 100%;
+    }
+
+    thead {
+      display: none;
+    }
+
+    tbody tr {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        'elemento elemento'
+        'azione chi'
+        'quando quando'
+        'campi campi';
+      gap: 0.125rem 0.3em;
+      padding: 0.875rem 0;
+      line-height: 1.4;
+      border-bottom: 1px solid var(--theme-elevation-150);
+      background: none !important;
+    }
+
+    td {
+      display: block;
+      min-width: 0;
+      padding: 0 !important;
+      overflow-wrap: anywhere;
+    }
+
+    .cell-_select,
+    .cell-sezione {
+      display: none;
+    }
+
+    .cell-titolo {
+      grid-area: elemento;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+
+    .cell-azione {
+      grid-area: azione;
+    }
+
+    // Le celle di Payload hanno uno span a blocco: in riga, col segno davanti
+    .cell-utenteNome,
+    .cell-campi {
+      display: flex;
+      gap: 0.3em;
+    }
+
+    .cell-utenteNome {
+      grid-area: chi;
+
+      &::before {
+        content: '·';
+      }
+    }
+
+    .cell-createdAt,
+    .cell-campi {
+      font-size: 0.8125rem;
+      color: var(--theme-elevation-650);
+    }
+
+    .cell-createdAt {
+      grid-area: quando;
+    }
+
+    .cell-campi {
+      grid-area: campi;
+
+      &::before {
+        content: 'Campi:';
+      }
+    }
+  }
+}

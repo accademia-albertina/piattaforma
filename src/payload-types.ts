@@ -84,6 +84,7 @@ export interface Config {
     media: Media;
     users: User;
     'email-inviate': EmailInviate;
+    'registro-attivita': VoceRegistro;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -115,6 +116,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'email-inviate': EmailInviateSelect<false> | EmailInviateSelect<true>;
+    'registro-attivita': RegistroAttivitaSelect<false> | RegistroAttivitaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -1184,6 +1186,33 @@ export interface EmailInviate {
   createdAt: string;
 }
 /**
+ * Chi ha creato, modificato, pubblicato o eliminato cosa nel pannello. Le voci si cancellano da sole dopo un anno.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "registro-attivita".
+ */
+export interface VoceRegistro {
+  id: number;
+  createdAt: string;
+  azione: 'creato' | 'modificato' | 'pubblicato' | 'ritirato' | 'eliminato';
+  utente?: (number | null) | User;
+  utenteNome?: string | null;
+  utenteEmail?: string | null;
+  /**
+   * Nome tecnico (es. avvisi).
+   */
+  collezione: string;
+  sezione?: string | null;
+  documentoId?: string | null;
+  titolo?: string | null;
+  /**
+   * Solo i nomi dei campi, non i valori. “—” per creazioni ed eliminazioni.
+   */
+  campi?: string | null;
+  riepilogo?: string | null;
+  updatedAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -1274,6 +1303,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'email-inviate';
         value: number | EmailInviate;
+      } | null)
+    | ({
+        relationTo: 'registro-attivita';
+        value: number | VoceRegistro;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1840,6 +1873,24 @@ export interface EmailInviateSelect<T extends boolean = true> {
   risposta?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "registro-attivita_select".
+ */
+export interface RegistroAttivitaSelect<T extends boolean = true> {
+  createdAt?: T;
+  azione?: T;
+  utente?: T;
+  utenteNome?: T;
+  utenteEmail?: T;
+  collezione?: T;
+  sezione?: T;
+  documentoId?: T;
+  titolo?: T;
+  campi?: T;
+  riepilogo?: T;
+  updatedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
