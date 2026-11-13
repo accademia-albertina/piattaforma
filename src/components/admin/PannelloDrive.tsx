@@ -3,6 +3,8 @@
  * Solo presentazione: i dati li legge la vista Drive.tsx. Pulsanti come semplici link e moduli
  * (POST verso /api/drive/...): funzionano anche senza JavaScript.
  */
+import type { StatoSincronizzazione } from '@/lib/wp-import/sincronizza'
+
 import styles from './Drive.module.css'
 
 export type PropsPannelloDrive = {
@@ -25,6 +27,12 @@ export type PropsPannelloDrive = {
     errori: string[]
     finitoIl?: string
   }
+  /** File dal sito WordPress: stato della sincronizzazione e conteggi per il confronto. */
+  wordpress?: {
+    stato: StatoSincronizzazione
+    importati: number
+    suWordPress: number | null
+  }
   esito?: string
   errore?: string
 }
@@ -34,6 +42,10 @@ const ESITI: Record<string, string> = {
     'Google Drive collegato. Da ora i file caricati nel pannello vanno nella cartella Drive.',
   scollegato: 'Google Drive scollegato. I nuovi file restano sul server finché non lo ricolleghi.',
   sposta: 'Spostamento avviato: ricarica la pagina per vedere a che punto è.',
+  'wp-avviata': 'Importazione da WordPress avviata: ricarica la pagina per vedere a che punto è.',
+  'wp-gia-in-corso': 'C’è già un’importazione in corso.',
+  'wp-fermata':
+    'L’importazione si ferma dopo il file in corso. Rilanciala quando vuoi: riparte da lì.',
 }
 
 const erroriPer = (account: string): Record<string, string> => ({
@@ -50,6 +62,149 @@ const erroriPer = (account: string): Record<string, string> => ({
   configurazione: 'Mancano le impostazioni di Drive sul server (vedi sotto).',
   'non-collegato': 'Prima collega Google Drive.',
 })
+
+// Separatore delle migliaia anche a 4 cifre (3.278), più leggibile nei conteggi
+const numero = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+
+const FASI: Record<StatoSincronizzazione['fase'], string> = {
+  elenco: 'Lettura dell’elenco dei file da WordPress…',
+  file: 'Importazione dei file',
+  link: 'Aggiornamento dei link nei contenuti…',
+  finito: '',
+}
+
+function SezioneWordPress({
+  wp,
+  attivo,
+}: {
+  wp: NonNullable<PropsPannelloDrive['wordpress']>
+  attivo: boolean
+}) {
+  const s = wp.stato
+  const mancano = wp.suWordPress === null ? null : Math.max(wp.suWordPress - wp.importati, 0)
+  return (
+    <section aria-labelledby="wordpress" className={styles.scheda}>
+      <h2 id="wordpress">File dal sito WordPress</h2>
+      <p>
+        Importa i PDF e le immagini di albertina-academy.it e aggiorna i link nei contenuti (avvisi,
+        pagine, Albo, Amministrazione trasparente…). Puoi rilanciarla quando vuoi: prende solo i
+        file nuovi o modificati su WordPress.
+      </p>
+      <dl className={styles.dati}>
+        <dt>Su WordPress</dt>
+        <dd>{wp.suWordPress === null ? 'non raggiungibile' : `${numero(wp.suWordPress)} file`}</dd>
+        <dt>Importati</dt>
+        <dd>
+          {numero(wp.importati)} file
+          {mancano !== null && (
+            <span className={styles.nota}>
+              {mancano === 0 ? ' · tutti' : ` · ne mancano ${numero(mancano)}`}
+            </span>
+          )}
+        </dd>
+      </dl>
+
+      {s.inCorso ? (
+        <>
+          <p role="status">
+            {s.fase === 'file'
+              ? `${FASI.file}: ${numero(s.fatti)} di ${numero(s.daFare)}.`
+              : FASI[s.fase]}{' '}
+            Ricarica la pagina per aggiornare.
+          </p>
+          {s.daFare > 0 && (
+            <progress
+              className={styles.barra}
+              max={s.daFare}
+              value={s.fatti}
+              aria-label="File importati"
+            />
+          )}
+          <form method="post" action="/api/wp-import/ferma" className={styles.azioni}>
+            <button type="submit" className={styles.secondario}>
+              Ferma
+            </button>
+          </form>
+        </>
+      ) : (
+        attivo && (
+          <div className={styles.azioni}>
+            <form method="post" action="/api/wp-import/avvia">
+              <button type="submit" className={styles.primario}>
+                {wp.importati ? 'Importa i file nuovi e modificati' : 'Importa tutti i file'}
+              </button>
+            </form>
+            <form method="post" action="/api/wp-import/avvia">
+              <input type="hidden" name="limite" value="20" />
+              <button type="submit" className={styles.secondario}>
+                Prova con 20 file
+              </button>
+            </form>
+          </div>
+        )
+      )}
+
+      {s.finitoIl && !s.inCorso && (
+        <div className={styles.esitoWp}>
+          <h3>Ultima importazione · {data.format(new Date(s.finitoIl))}</h3>
+          <ul>
+            <li>
+              {numero(s.nuovi)} file nuovi, {numero(s.aggiornati)} aggiornati, {numero(s.invariati)}{' '}
+              già presenti
+              {s.limite ? ` (prova limitata a ${s.limite} file)` : ''}.
+            </li>
+            <li>
+              {numero(s.linkRiscritti)} link aggiornati in {numero(s.contenutiAggiornati)}{' '}
+              contenuti.
+            </li>
+            {s.toltiDaWp > 0 && (
+              <li>
+                {numero(s.toltiDaWp)} file importati non ci sono più su WordPress (restano qui).
+              </li>
+            )}
+          </ul>
+          {s.errori.length > 0 && (
+            <details>
+              <summary>
+                {numero(s.errori.length)} file non importati (rilancia per riprovare)
+              </summary>
+              <ul className={styles.elenco}>
+                {s.errori.map((e) => (
+                  <li key={e}>{e}</li>
+                ))}
+              </ul>
+            </details>
+          )}
+          {s.linkNonTrovatiTotale > 0 && (
+            <details>
+              <summary>
+                {numero(s.linkNonTrovatiTotale)} link a WordPress senza file corrispondente
+              </summary>
+              <p className={styles.nota}>
+                Restano come sono. Spesso sono link già rotti sul sito attuale.
+              </p>
+              <ul className={styles.elenco}>
+                {s.linkNonTrovati.map((l) => (
+                  <li key={l}>{l}</li>
+                ))}
+              </ul>
+            </details>
+          )}
+          {s.contenutiNonSalvati.length > 0 && (
+            <details>
+              <summary>{numero(s.contenutiNonSalvati.length)} contenuti non aggiornati</summary>
+              <ul className={styles.elenco}>
+                {s.contenutiNonSalvati.map((l) => (
+                  <li key={l}>{l}</li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </div>
+      )}
+    </section>
+  )
+}
 
 const data = new Intl.DateTimeFormat('it-IT', {
   dateStyle: 'long',
@@ -213,6 +368,8 @@ export default function PannelloDrive(p: PropsPannelloDrive) {
           </form>
         )}
       </section>
+
+      {p.wordpress && <SezioneWordPress wp={p.wordpress} attivo={funziona || !configurato} />}
     </div>
   )
 }

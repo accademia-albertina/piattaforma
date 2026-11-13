@@ -8,6 +8,8 @@ import { isAdmin } from '@/access/roles'
 import { accountDrive, driveConfigurato, idCartellaRadice } from '@/lib/drive/api'
 import { driveCollegato, leggiStato } from '@/lib/drive/connessione'
 import { fileSulDisco, statoSpostamento } from '@/lib/drive/sposta'
+import { statoSincronizzazione } from '@/lib/wp-import/sincronizza'
+import { contaMediaWp } from '@/lib/wp-import/wordpress'
 
 import PannelloDrive from './PannelloDrive'
 import PassoPannello from './PassoPannello'
@@ -42,6 +44,10 @@ export default async function Drive({
     }
   }
   const suDisco = await fileSulDisco(req.payload)
+  const [{ totalDocs: importati }, suWordPress] = await Promise.all([
+    req.payload.count({ collection: 'media', where: { wpId: { exists: true } }, overrideAccess: true }),
+    contaMediaWp(),
+  ])
 
   return (
     <DefaultTemplate
@@ -71,6 +77,7 @@ export default async function Drive({
           cartella={cartella}
           suDisco={suDisco}
           spostamento={statoSpostamento()}
+          wordpress={{ stato: statoSincronizzazione(), importati, suWordPress }}
           esito={typeof searchParams?.esito === 'string' ? searchParams.esito : undefined}
           errore={typeof searchParams?.errore === 'string' ? searchParams.errore : undefined}
         />

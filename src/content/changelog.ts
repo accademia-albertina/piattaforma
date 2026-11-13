@@ -27,6 +27,24 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.36.0',
+    data: '2026-11-13',
+    titolo: 'File dal sito WordPress',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'In Google Drive, sezione “File dal sito WordPress”: importa PDF e immagini del sito attuale nella cartella Drive e aggiorna i link di avvisi, pagine, Albo e Amministrazione trasparente.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Si può rilanciare quando serve: prende solo i file nuovi o modificati su WordPress e mostra quanti ne mancano.',
+      },
+    ],
+    pr: [84],
+  },
+  {
     versione: '0.35.0',
     data: '2026-11-13',
     titolo: 'Email del sito e registro degli invii',
