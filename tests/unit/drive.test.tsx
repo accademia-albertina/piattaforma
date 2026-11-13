@@ -3,10 +3,10 @@ import os from 'node:os'
 import path from 'node:path'
 
 import { render, screen } from '@testing-library/react'
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import PannelloDrive, { type PropsPannelloDrive } from '@/components/admin/PannelloDrive'
-import { urlAutorizzazioneDrive } from '@/lib/drive/api'
+import { clientDrive, urlAutorizzazioneDrive } from '@/lib/drive/api'
 import { fileInCache, pulisciCache } from '@/lib/drive/cache'
 import { cifra, decifra } from '@/lib/drive/cifratura'
 
@@ -53,6 +53,48 @@ describe('Autorizzazione Google Drive', () => {
     expect(q.get('login_hint')).toBe('noreply@albertina.academy')
     expect(q.get('code_challenge_method')).toBe('S256')
     expect(q.get('code_challenge')).not.toBe('v'.repeat(64))
+  })
+})
+
+describe('Caricamento su Drive a blocchi', () => {
+  afterEach(() => vi.unstubAllGlobals())
+
+  it('legge dal disco 8 MB alla volta e manda i blocchi in ordine', async () => {
+    const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'carica-drive-'))
+    const p = path.join(dir, 'grande.pdf')
+    const MB = 1024 * 1024
+    await fs.writeFile(p, Buffer.alloc(20 * MB, 1))
+    const intervalli: (string | null)[] = []
+    const dimensioni: number[] = []
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (url: string, init: RequestInit) => {
+        if (url.includes('uploadType=resumable')) {
+          return new Response(null, { headers: { location: 'https://upload.prova/s' } })
+        }
+        const h = new Headers(init.headers)
+        intervalli.push(h.get('content-range'))
+        dimensioni.push((init.body as Uint8Array).byteLength)
+        return intervalli.length < 3
+          ? new Response(null, { status: 308 })
+          : Response.json({ id: 'file-grande' })
+      }),
+    )
+    const drive = clientDrive(async () => 'token')
+    const id = await drive.carica({
+      nome: 'grande.pdf',
+      mimeType: 'application/pdf',
+      dati: p,
+      padre: 'c',
+    })
+    expect(id).toBe('file-grande')
+    expect(intervalli).toEqual([
+      `bytes 0-${8 * MB - 1}/${20 * MB}`,
+      `bytes ${8 * MB}-${16 * MB - 1}/${20 * MB}`,
+      `bytes ${16 * MB}-${20 * MB - 1}/${20 * MB}`,
+    ])
+    expect(dimensioni).toEqual([8 * MB, 8 * MB, 4 * MB])
+    await fs.rm(dir, { recursive: true, force: true })
   })
 })
 

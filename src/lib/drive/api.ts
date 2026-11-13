@@ -7,6 +7,7 @@
  * supportsAllDrives=true, così per passare al Drive condiviso basta cambiare l'ID.
  */
 import { createHash, randomBytes } from 'node:crypto'
+import fs from 'node:fs/promises'
 
 import { createRemoteJWKSet, jwtVerify } from 'jose'
 
@@ -22,6 +23,9 @@ const CHIAVI = createRemoteJWKSet(new URL('https://www.googleapis.com/oauth2/v3/
 export const SCOPE_DRIVE = 'https://www.googleapis.com/auth/drive'
 export const PERCORSO_CALLBACK_DRIVE = '/api/drive/oauth/callback'
 export const COOKIE_STATO_DRIVE = 'albertina-drive'
+/** Multiplo di 256 KB, come chiede l'API per i caricamenti a blocchi. */
+const BLOCCO = 8 * 1024 * 1024
+
 export const TIPO_CARTELLA = 'application/vnd.google-apps.folder'
 
 /** L'unico account che può collegare Drive: la casella di servizio dell'Accademia. */
@@ -204,30 +208,61 @@ export function clientDrive(token: () => Promise<string>) {
     },
 
     /** Caricamento "resumable": funziona anche per PDF grandi. Restituisce l'ID del file. */
+    /**
+     * Caricamento "resumable" a blocchi da 8 MB: in memoria c'è al massimo un blocco alla volta,
+     * anche per PDF molto grandi (il server dell'anteprima ha 512 MB). `dati` è il contenuto già
+     * in memoria oppure il percorso del file sul disco. Restituisce l'ID del file.
+     */
     async carica(o: {
       nome: string
       mimeType: string
-      dati: Buffer
+      dati: Buffer | string
       padre: string
     }): Promise<string> {
-      const avvio = await chiama(`${CARICA}?uploadType=resumable&${tutti}&fields=id`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json; charset=UTF-8',
-          'x-upload-content-type': o.mimeType,
-          'x-upload-content-length': String(o.dati.length),
-        },
-        body: JSON.stringify({ name: o.nome, mimeType: o.mimeType, parents: [o.padre] }),
-      })
-      const sessione = avvio.headers.get('location')
-      if (!sessione) throw new ErroreDrive('Drive: manca l’indirizzo di caricamento')
-      const r = await fetch(sessione, {
-        method: 'PUT',
-        headers: { 'content-type': o.mimeType, 'content-length': String(o.dati.length) },
-        body: new Uint8Array(o.dati),
-      })
-      if (!r.ok) throw new ErroreDrive(`Drive caricamento ${r.status}`, r.status)
-      return ((await r.json()) as { id: string }).id
+      const file = typeof o.dati === 'string' ? await fs.open(o.dati, 'r') : null
+      try {
+        const totale = file ? (await file.stat()).size : (o.dati as Buffer).length
+        const avvio = await chiama(`${CARICA}?uploadType=resumable&${tutti}&fields=id`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json; charset=UTF-8',
+            'x-upload-content-type': o.mimeType,
+            'x-upload-content-length': String(totale),
+          },
+          body: JSON.stringify({ name: o.nome, mimeType: o.mimeType, parents: [o.padre] }),
+        })
+        const sessione = avvio.headers.get('location')
+        if (!sessione) throw new ErroreDrive('Drive: manca l’indirizzo di caricamento')
+
+        const blocco = file ? Buffer.allocUnsafe(Math.min(BLOCCO, Math.max(totale, 1))) : null
+        let inizio = 0
+        do {
+          const fine = Math.min(inizio + BLOCCO, totale)
+          let parte: Uint8Array
+          if (file && blocco) {
+            const { bytesRead } = await file.read(blocco, 0, fine - inizio, inizio)
+            parte = blocco.subarray(0, bytesRead)
+          } else {
+            parte = (o.dati as Buffer).subarray(inizio, fine)
+          }
+          const r = await fetch(sessione, {
+            method: 'PUT',
+            headers: {
+              'content-length': String(fine - inizio),
+              ...(totale > 0 ? { 'content-range': `bytes ${inizio}-${fine - 1}/${totale}` } : {}),
+            },
+            body: parte as BodyInit,
+          })
+          if (r.ok) return ((await r.json()) as { id: string }).id
+          // 308 = blocco ricevuto, manda il successivo
+          if (r.status !== 308) throw new ErroreDrive(`Drive caricamento ${r.status}`, r.status)
+          await r.body?.cancel()
+          inizio = fine
+        } while (inizio < totale)
+        throw new ErroreDrive('Drive: caricamento incompleto')
+      } finally {
+        await file?.close()
+      }
     },
 
     /** Contenuto del file (risposta da leggere in streaming). */
