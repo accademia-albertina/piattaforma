@@ -15,6 +15,7 @@ import * as migration_20261106_082749_pagine_scuole from './20261106_082749_pagi
 import * as migration_20261106_115509_ruoli_pannello from './20261106_115509_ruoli_pannello';
 import * as migration_20261106_144426_iscrizioni_corsi from './20261106_144426_iscrizioni_corsi';
 import * as migration_20261106_154742_appelli_esami from './20261106_154742_appelli_esami';
+import * as migration_20261113_105519_drive_file from './20261113_105519_drive_file';
 
 export const migrations = [
   {
@@ -100,6 +101,11 @@ export const migrations = [
   {
     up: migration_20261106_154742_appelli_esami.up,
     down: migration_20261106_154742_appelli_esami.down,
-    name: '20261106_154742_appelli_esami'
+    name: '20261106_154742_appelli_esami',
+  },
+  {
+    up: migration_20261113_105519_drive_file.up,
+    down: migration_20261113_105519_drive_file.down,
+    name: '20261113_105519_drive_file'
   },
 ];

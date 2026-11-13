@@ -230,6 +230,11 @@ export default async function Dashboard({
           <Link className={styles.sito} href={`${admin}/guida`}>
             Guida
           </Link>
+          {isAdmin(user) && (
+            <Link className={styles.sito} href={`${admin}/drive`}>
+              Google Drive
+            </Link>
+          )}
           {vedeSezione(user, 'changelog') && (
             <Link className={styles.sito} href={`${admin}/changelog`}>
               Changelog <span className={styles.versione}>v{CHANGELOG[0].versione}</span>

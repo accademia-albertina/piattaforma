@@ -39,6 +39,15 @@ services:
         sync: false
       - key: GOOGLE_CLIENT_SECRET
         sync: false
+      # File su Google Drive (vedi README, "File su Google Drive"): senza, restano sul disco.
+      - key: GOOGLE_DRIVE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_DRIVE_CLIENT_SECRET
+        sync: false
+      - key: DRIVE_ID
+        sync: false
+      - key: DRIVE_CACHE_DIR
+        value: /var/data/cache-drive
 
 databases:
   - name: albertina-anteprima-db

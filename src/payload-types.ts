@@ -124,9 +124,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     navigazione: Navigazione;
+    'drive-connessione': DriveConnessione;
   };
   globalsSelect: {
     navigazione: NavigazioneSelect<false> | NavigazioneSelect<true>;
+    'drive-connessione': DriveConnessioneSelect<false> | DriveConnessioneSelect<true>;
   };
   locale: null;
   widgets: {
@@ -240,6 +242,9 @@ export interface Media {
    * Si scrive da solo al caricamento: descrive l’immagine per chi usa uno screen reader. Correggilo se serve.
    */
   alt?: string | null;
+  driveFileId?: string | null;
+  prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -1742,6 +1747,9 @@ export interface TrasparenzaSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   creatoDa?: T;
   alt?: T;
+  driveFileId?: T;
+  prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1940,6 +1948,22 @@ export interface Navigazione {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "drive-connessione".
+ */
+export interface DriveConnessione {
+  id: number;
+  email?: string | null;
+  tokenCifrato?: string | null;
+  collegatoIl?: string | null;
+  collegatoDa?: string | null;
+  cartellaMedia?: string | null;
+  cartellaRadice?: string | null;
+  errore?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navigazione_select".
  */
 export interface NavigazioneSelect<T extends boolean = true> {
@@ -2017,6 +2041,22 @@ export interface NavigazioneSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "drive-connessione_select".
+ */
+export interface DriveConnessioneSelect<T extends boolean = true> {
+  email?: T;
+  tokenCifrato?: T;
+  collegatoIl?: T;
+  collegatoDa?: T;
+  cartellaMedia?: T;
+  cartellaRadice?: T;
+  errore?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

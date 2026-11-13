@@ -27,6 +27,28 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.33.0',
+    data: '2026-11-13',
+    titolo: 'File su Google Drive',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Le immagini e i PDF caricati nel pannello si salvano nella cartella Google Drive dell’Accademia. Gli amministratori collegano Drive una volta da “Google Drive” nella dashboard.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Il sito tiene una copia veloce dei file di Drive: le pagine si aprono rapide anche con molti visitatori.',
+      },
+      {
+        tipo: 'nuovo',
+        testo: 'Pulsante “Sposta su Drive” per trasferire i file caricati prima del collegamento.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.32.1',
     data: '2026-11-10',
     titolo: 'Virtual tour con la facciata',

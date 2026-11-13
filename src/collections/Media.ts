@@ -42,8 +42,10 @@ export const Media: CollectionConfig = {
   hooks: {
     beforeChange: [
       // Testo alternativo automatico, ricavato dal nome del file (sempre correggibile)
-      ({ data, req }) => {
+      ({ data, req, operation }) => {
         if (data.alt?.trim()) return data
+        // Aggiornamenti senza file nuovo (es. l'ID Drive salvato dopo il caricamento): alt invariato
+        if (operation === 'update' && !req.file && data.alt === undefined) return data
         data.alt = altDaNomeFile(req.file?.name ?? data.filename ?? '')
         return data
       },
@@ -52,7 +54,7 @@ export const Media: CollectionConfig = {
   upload: {
     // Sull'hosting i file vanno su un volume persistente (es. MEDIA_DIR=/data/media).
     ...(process.env.MEDIA_DIR ? { staticDir: process.env.MEDIA_DIR } : {}),
-    // Solo immagini e PDF; il controllo antivirus arriva con l'integrazione Drive.
+    // Solo immagini e PDF. Con Drive collegato i file vanno nella cartella Drive (src/lib/drive/).
     mimeTypes: [
       'image/jpeg',
       'image/png',
