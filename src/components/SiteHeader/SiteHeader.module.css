@@ -152,14 +152,15 @@
   cursor: pointer;
 }
 
-/* Hover: filetto bianco di 2px che si allarga sotto l'etichetta (niente riquadro pieno) */
+/* Hover: filetto bianco sottile che si allarga sotto l'etichetta (niente riquadro pieno) */
 .iconButton::after,
 .menuToggle::after {
   content: '';
   position: absolute;
-  inset-inline: var(--space-2);
-  bottom: 0;
-  height: 2px;
+  left: calc(50% - 1.25rem);
+  width: 2.5rem; /* centrato, uguale per tutti i pulsanti */
+  bottom: -2px;
+  height: 1px;
   background: currentColor;
   transform: scaleX(0);
   transition: transform var(--duration-base) var(--ease-out);
