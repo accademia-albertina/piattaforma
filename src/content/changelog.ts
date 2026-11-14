@@ -47,7 +47,7 @@ export const CHANGELOG: Versione[] = [
           'Niente cancellazioni automatiche: gli atti tolti da WordPress restano e vengono segnalati. Elenco delle pagine cambiate su WordPress dopo l’importazione, da riportare a mano.',
       },
     ],
-    pr: [],
+    pr: [88],
   },
   {
     versione: '0.37.0',
