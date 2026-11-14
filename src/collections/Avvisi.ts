@@ -11,6 +11,7 @@ import {
 import { canAccessBackend, isAdmin } from '@/access/roles'
 import { rowLabel } from '@/fields/rowLabel'
 import { slugField } from '@/fields/slug'
+import { campiProvenienzaWp, segnaModificaNelPannello } from '@/fields/provenienzaWp'
 import { validaTitolo } from '@/fields/titolo'
 import { linkSulSito } from '@/fields/linkSulSito'
 
@@ -52,6 +53,7 @@ export const Avvisi: CollectionConfig = {
     update: updateOrDelete,
     delete: updateOrDelete,
   },
+  hooks: { beforeChange: [segnaModificaNelPannello] },
   fields: [
     linkSulSito('/avvisi/'),
     {
@@ -171,5 +173,6 @@ export const Avvisi: CollectionConfig = {
         ],
       },
     },
+    campiProvenienzaWp,
   ],
 }

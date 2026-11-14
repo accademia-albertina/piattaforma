@@ -59,108 +59,109 @@ export type SupportedTimezones =
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
-  | 'Pacific/Fiji';
+  | 'Pacific/Fiji'
 
 export interface Config {
   auth: {
-    users: UserAuthOperations;
-  };
-  blocks: {};
+    users: UserAuthOperations
+  }
+  blocks: {}
   collections: {
-    pagine: Pagina;
-    avvisi: Avviso;
-    pubblicazioni: Pubblicazione;
-    corsi: Corso;
-    docenti: Docente;
-    dottorandi: Dottorando;
-    calendari: Calendario;
-    scuole: Scuola;
-    'finestre-iscrizione': FinestraIscrizione;
-    'iscrizioni-corsi': IscrizioneCorso;
-    appelli: Appello;
-    'iscrizioni-esami': IscrizioneEsame;
-    albo: AttoAlbo;
-    trasparenza: Trasparenza;
-    media: Media;
-    users: User;
-    'email-inviate': EmailInviate;
-    'registro-attivita': VoceRegistro;
-    'payload-kv': PayloadKv;
-    'payload-locked-documents': PayloadLockedDocument;
-    'payload-preferences': PayloadPreference;
-    'payload-migrations': PayloadMigration;
-  };
+    pagine: Pagina
+    avvisi: Avviso
+    pubblicazioni: Pubblicazione
+    corsi: Corso
+    docenti: Docente
+    dottorandi: Dottorando
+    calendari: Calendario
+    scuole: Scuola
+    'finestre-iscrizione': FinestraIscrizione
+    'iscrizioni-corsi': IscrizioneCorso
+    appelli: Appello
+    'iscrizioni-esami': IscrizioneEsame
+    albo: AttoAlbo
+    trasparenza: Trasparenza
+    media: Media
+    users: User
+    'email-inviate': EmailInviate
+    'registro-attivita': VoceRegistro
+    'payload-kv': PayloadKv
+    'payload-locked-documents': PayloadLockedDocument
+    'payload-preferences': PayloadPreference
+    'payload-migrations': PayloadMigration
+  }
   collectionsJoins: {
     corsi: {
-      iscritti: 'iscrizioni-corsi';
-    };
+      iscritti: 'iscrizioni-corsi'
+    }
     appelli: {
-      iscritti: 'iscrizioni-esami';
-    };
-  };
+      iscritti: 'iscrizioni-esami'
+    }
+  }
   collectionsSelect: {
-    pagine: PagineSelect<false> | PagineSelect<true>;
-    avvisi: AvvisiSelect<false> | AvvisiSelect<true>;
-    pubblicazioni: PubblicazioniSelect<false> | PubblicazioniSelect<true>;
-    corsi: CorsiSelect<false> | CorsiSelect<true>;
-    docenti: DocentiSelect<false> | DocentiSelect<true>;
-    dottorandi: DottorandiSelect<false> | DottorandiSelect<true>;
-    calendari: CalendariSelect<false> | CalendariSelect<true>;
-    scuole: ScuoleSelect<false> | ScuoleSelect<true>;
-    'finestre-iscrizione': FinestreIscrizioneSelect<false> | FinestreIscrizioneSelect<true>;
-    'iscrizioni-corsi': IscrizioniCorsiSelect<false> | IscrizioniCorsiSelect<true>;
-    appelli: AppelliSelect<false> | AppelliSelect<true>;
-    'iscrizioni-esami': IscrizioniEsamiSelect<false> | IscrizioniEsamiSelect<true>;
-    albo: AlboSelect<false> | AlboSelect<true>;
-    trasparenza: TrasparenzaSelect<false> | TrasparenzaSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
-    users: UsersSelect<false> | UsersSelect<true>;
-    'email-inviate': EmailInviateSelect<false> | EmailInviateSelect<true>;
-    'registro-attivita': RegistroAttivitaSelect<false> | RegistroAttivitaSelect<true>;
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
-    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
-  };
+    pagine: PagineSelect<false> | PagineSelect<true>
+    avvisi: AvvisiSelect<false> | AvvisiSelect<true>
+    pubblicazioni: PubblicazioniSelect<false> | PubblicazioniSelect<true>
+    corsi: CorsiSelect<false> | CorsiSelect<true>
+    docenti: DocentiSelect<false> | DocentiSelect<true>
+    dottorandi: DottorandiSelect<false> | DottorandiSelect<true>
+    calendari: CalendariSelect<false> | CalendariSelect<true>
+    scuole: ScuoleSelect<false> | ScuoleSelect<true>
+    'finestre-iscrizione': FinestreIscrizioneSelect<false> | FinestreIscrizioneSelect<true>
+    'iscrizioni-corsi': IscrizioniCorsiSelect<false> | IscrizioniCorsiSelect<true>
+    appelli: AppelliSelect<false> | AppelliSelect<true>
+    'iscrizioni-esami': IscrizioniEsamiSelect<false> | IscrizioniEsamiSelect<true>
+    albo: AlboSelect<false> | AlboSelect<true>
+    trasparenza: TrasparenzaSelect<false> | TrasparenzaSelect<true>
+    media: MediaSelect<false> | MediaSelect<true>
+    users: UsersSelect<false> | UsersSelect<true>
+    'email-inviate': EmailInviateSelect<false> | EmailInviateSelect<true>
+    'registro-attivita': RegistroAttivitaSelect<false> | RegistroAttivitaSelect<true>
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
+    'payload-locked-documents':
+      PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>
+  }
   db: {
-    defaultIDType: number;
-  };
-  fallbackLocale: null;
+    defaultIDType: number
+  }
+  fallbackLocale: null
   globals: {
-    navigazione: Navigazione;
-    'drive-connessione': DriveConnessione;
-  };
+    navigazione: Navigazione
+    'drive-connessione': DriveConnessione
+  }
   globalsSelect: {
-    navigazione: NavigazioneSelect<false> | NavigazioneSelect<true>;
-    'drive-connessione': DriveConnessioneSelect<false> | DriveConnessioneSelect<true>;
-  };
-  locale: null;
+    navigazione: NavigazioneSelect<false> | NavigazioneSelect<true>
+    'drive-connessione': DriveConnessioneSelect<false> | DriveConnessioneSelect<true>
+  }
+  locale: null
   widgets: {
-    collections: CollectionsWidget;
-  };
-  user: User;
+    collections: CollectionsWidget
+  }
+  user: User
   jobs: {
-    tasks: unknown;
-    workflows: unknown;
-  };
+    tasks: unknown
+    workflows: unknown
+  }
 }
 export interface UserAuthOperations {
   forgotPassword: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   login: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   registerFirstUser: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   unlock: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
 }
 /**
  * Pagine istituzionali composte a blocchi, come Didattica o Ammissioni.
@@ -169,33 +170,39 @@ export interface UserAuthOperations {
  * via the `definition` "pagine".
  */
 export interface Pagina {
-  id: number;
-  titolo: string;
+  id: number
+  titolo: string
   /**
    * Una o due frasi sotto il titolo; compaiono anche nel box della pagina genitore, nei risultati di Google e nelle anteprime social.
    */
-  sommario?: string | null;
+  sommario?: string | null
   blocchi?:
     | (
-        BloccoTesto | BloccoImmagine | BloccoGalleria | BloccoLink | BloccoFisarmonica | BloccoContatti | BloccoAllegati
+        | BloccoTesto
+        | BloccoImmagine
+        | BloccoGalleria
+        | BloccoLink
+        | BloccoFisarmonica
+        | BloccoContatti
+        | BloccoAllegati
       )[]
-    | null;
+    | null
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
-  slug?: string | null;
+  slug?: string | null
   /**
    * Determina indirizzo e briciole di pane, es. Accademia › Storia.
    */
-  genitore?: (number | null) | Pagina;
-  percorso?: string | null;
+  genitore?: (number | null) | Pagina
+  percorso?: string | null
   /**
    * Oltre a redazione e vicedirezione. Es. la pagina Iscrizioni alla Segreteria didattica.
    */
-  ufficiEditori?: ('segreteria' | 'amministrativo' | 'erasmus' | 'biblioteca')[] | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  ufficiEditori?: ('segreteria' | 'amministrativo' | 'erasmus' | 'biblioteca')[] | null
+  updatedAt: string
+  createdAt: string
+  _status?: ('draft' | 'published') | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -204,34 +211,34 @@ export interface Pagina {
 export interface BloccoTesto {
   testo: {
     root: {
-      type: string;
+      type: string
       children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'testo';
+        type: any
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  }
+  id?: string | null
+  blockName?: string | null
+  blockType: 'testo'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BloccoImmagine".
  */
 export interface BloccoImmagine {
-  immagine: number | Media;
-  didascalia?: string | null;
-  larghezza?: ('testo' | 'piena') | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'immagine';
+  immagine: number | Media
+  didascalia?: string | null
+  larghezza?: ('testo' | 'piena') | null
+  id?: string | null
+  blockName?: string | null
+  blockType: 'immagine'
 }
 /**
  * Immagini e documenti usati in avvisi e pagine. Massimo 20 MB per le immagini e 10 MB per i PDF.
@@ -240,29 +247,29 @@ export interface BloccoImmagine {
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
-  creatoDa?: (number | null) | User;
+  id: number
+  creatoDa?: (number | null) | User
   /**
    * Si scrive da solo al caricamento: descrive l’immagine per chi usa uno screen reader. Correggilo se serve.
    */
-  alt?: string | null;
-  wpId?: number | null;
-  wpUrl?: string | null;
-  wpModificato?: string | null;
-  driveFileId?: string | null;
-  prefix?: string | null;
-  _objectKey?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
+  alt?: string | null
+  wpId?: number | null
+  wpUrl?: string | null
+  wpModificato?: string | null
+  driveFileId?: string | null
+  prefix?: string | null
+  _objectKey?: string | null
+  updatedAt: string
+  createdAt: string
+  url?: string | null
+  thumbnailURL?: string | null
+  filename?: string | null
+  mimeType?: string | null
+  filesize?: number | null
+  width?: number | null
+  height?: number | null
+  focalX?: number | null
+  focalY?: number | null
 }
 /**
  * Chi entra nel pannello e con quali ruoli.
@@ -271,9 +278,9 @@ export interface Media {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
-  nome?: string | null;
-  cognome?: string | null;
+  id: number
+  nome?: string | null
+  cognome?: string | null
   /**
    * Solo un amministratore può assegnare o togliere ruoli.
    */
@@ -290,26 +297,26 @@ export interface User {
         | 'dottorando'
         | 'studente'
       )[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  resetPasswordRequestedAt?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
+    | null
+  updatedAt: string
+  createdAt: string
+  email: string
+  resetPasswordToken?: string | null
+  resetPasswordExpiration?: string | null
+  salt?: string | null
+  hash?: string | null
+  resetPasswordRequestedAt?: string | null
+  loginAttempts?: number | null
+  lockUntil?: string | null
   sessions?:
     | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
+        id: string
+        createdAt?: string | null
+        expiresAt: string
       }[]
-    | null;
-  password?: string | null;
-  collection: 'users';
+    | null
+  password?: string | null
+  collection: 'users'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -319,15 +326,15 @@ export interface BloccoGalleria {
   /**
    * Facoltativo. Diventa un titolo di livello 2 nella pagina.
    */
-  titolo?: string | null;
+  titolo?: string | null
   immagini: {
-    immagine: number | Media;
-    didascalia?: string | null;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'galleria';
+    immagine: number | Media
+    didascalia?: string | null
+    id?: string | null
+  }[]
+  id?: string | null
+  blockName?: string | null
+  blockType: 'galleria'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -337,21 +344,21 @@ export interface BloccoLink {
   /**
    * Facoltativo. Diventa un titolo di livello 2 nella pagina.
    */
-  titolo?: string | null;
+  titolo?: string | null
   voci: {
-    etichetta: string;
-    tipo?: ('interno' | 'percorso' | 'esterno') | null;
-    pagina?: (number | null) | Pagina;
+    etichetta: string
+    tipo?: ('interno' | 'percorso' | 'esterno') | null
+    pagina?: (number | null) | Pagina
     /**
      * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
      */
-    url?: string | null;
-    descrizione?: string | null;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'link';
+    url?: string | null
+    descrizione?: string | null
+    id?: string | null
+  }[]
+  id?: string | null
+  blockName?: string | null
+  blockType: 'link'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -361,29 +368,29 @@ export interface BloccoFisarmonica {
   /**
    * Facoltativo. Diventa un titolo di livello 2 nella pagina.
    */
-  titolo?: string | null;
+  titolo?: string | null
   voci: {
-    titolo: string;
+    titolo: string
     testo: {
       root: {
-        type: string;
+        type: string
         children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'fisarmonica';
+          type: any
+          version: number
+          [k: string]: unknown
+        }[]
+        direction: ('ltr' | 'rtl') | null
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+        indent: number
+        version: number
+      }
+      [k: string]: unknown
+    }
+    id?: string | null
+  }[]
+  id?: string | null
+  blockName?: string | null
+  blockType: 'fisarmonica'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -393,21 +400,21 @@ export interface BloccoContatti {
   /**
    * Facoltativo. Diventa un titolo di livello 2 nella pagina.
    */
-  titolo?: string | null;
+  titolo?: string | null
   voci: {
-    nome: string;
-    ruolo?: string | null;
-    email?: string | null;
-    telefono?: string | null;
+    nome: string
+    ruolo?: string | null
+    email?: string | null
+    telefono?: string | null
     /**
      * Una riga per fascia, es. “Lunedì 9–12”.
      */
-    orari?: string | null;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'contatti';
+    orari?: string | null
+    id?: string | null
+  }[]
+  id?: string | null
+  blockName?: string | null
+  blockType: 'contatti'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -417,18 +424,18 @@ export interface BloccoAllegati {
   /**
    * Facoltativo. Diventa un titolo di livello 2 nella pagina.
    */
-  titolo?: string | null;
+  titolo?: string | null
   documenti: {
     /**
      * Descrivi il documento, es. “Regolamento didattico 2026”.
      */
-    nome: string;
-    file: number | Media;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'allegati';
+    nome: string
+    file: number | Media
+    id?: string | null
+  }[]
+  id?: string | null
+  blockName?: string | null
+  blockType: 'allegati'
 }
 /**
  * Comunicazioni per studenti e docenti, in /avvisi e in homepage.
@@ -437,12 +444,12 @@ export interface BloccoAllegati {
  * via the `definition` "avvisi".
  */
 export interface Avviso {
-  id: number;
-  titolo: string;
+  id: number
+  titolo: string
   /**
    * Una o due frasi mostrate negli elenchi e nei risultati di Google. Se vuoto si usa l’inizio del testo.
    */
-  sommario?: string | null;
+  sommario?: string | null
   categorie: (
     | 'in-evidenza'
     | 'generali'
@@ -454,49 +461,56 @@ export interface Avviso {
     | 'coordinatori'
     | 'tasse'
     | 'biblioteca'
-  )[];
+  )[]
   /**
    * Lascia vuoto se l’avviso riguarda tutta l’Accademia.
    */
-  scuole?: (number | Scuola)[] | null;
-  pubblicatoIl: string;
+  scuole?: (number | Scuola)[] | null
+  pubblicatoIl: string
   /**
    * Facoltativa. Per gli avvisi In evidenza è lo sfondo dello slider in homepage (formato orizzontale, almeno 1920 px).
    */
-  immagine?: (number | null) | Media;
+  immagine?: (number | null) | Media
   contenuto?: {
     root: {
-      type: string;
+      type: string
       children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+        type: any
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  } | null
   allegati?:
     | {
         /**
          * Descrivi il documento, es. “Calendario esami sessione invernale”.
          */
-        nome: string;
-        file: number | Media;
-        id?: string | null;
+        nome: string
+        file: number | Media
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
-  slug?: string | null;
-  autore?: (number | null) | User;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  slug?: string | null
+  autore?: (number | null) | User
+  wpId?: string | null
+  wpModificato?: string | null
+  wpImpronta?: string | null
+  /**
+   * La sincronizzazione da WordPress non sovrascrive questo contenuto. Togli la spunta e salva per riallinearlo alla versione di WordPress.
+   */
+  modificatoNelPannello?: boolean | null
+  updatedAt: string
+  createdAt: string
+  _status?: ('draft' | 'published') | null
 }
 /**
  * Le scuole dell’Accademia: pagina pubblica in /scuole, filtri di avvisi e corsi.
@@ -505,52 +519,58 @@ export interface Avviso {
  * via the `definition` "scuole".
  */
 export interface Scuola {
-  id: number;
-  nome: string;
+  id: number
+  nome: string
   /**
    * Forma breve usata nei filtri, es. PAI, NTA.
    */
-  sigla?: string | null;
+  sigla?: string | null
   dipartimento?:
-    ('arti-visive' | 'arti-della-progettazione' | 'arti-tecnologiche' | 'comunicazione-e-didattica') | null;
+    | (
+        | 'arti-visive'
+        | 'arti-della-progettazione'
+        | 'arti-tecnologiche'
+        | 'comunicazione-e-didattica'
+      )
+    | null
   /**
    * Due o tre frasi in apertura della pagina della scuola.
    */
-  descrizione?: string | null;
+  descrizione?: string | null
   /**
    * Facoltativa: sostituisce la foto di repertorio nella scheda in home e nella pagina.
    */
-  immagine?: (number | null) | Media;
-  video?: string | null;
+  immagine?: (number | null) | Media
+  video?: string | null
   triennio?: {
     /**
      * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza biennio).
      */
-    attivo?: boolean | null;
+    attivo?: boolean | null
     /**
      * Es. Obiettivi formativi, Prospettive occupazionali, Requisiti di accesso, Prova di accesso, Prova finale.
      */
     sezioni?:
       | {
-          titolo: string;
+          titolo: string
           testo?: {
             root: {
-              type: string;
+              type: string
               children: {
-                type: any;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          id?: string | null;
+                type: any
+                version: number
+                [k: string]: unknown
+              }[]
+              direction: ('ltr' | 'rtl') | null
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+              indent: number
+              version: number
+            }
+            [k: string]: unknown
+          } | null
+          id?: string | null
         }[]
-      | null;
+      | null
     /**
      * Uno per coorte, es. “Immatricolati dall’A.A. 2025/2026”.
      */
@@ -559,42 +579,42 @@ export interface Scuola {
           /**
            * Es. “Bando di selezione – scadenza 18/12/2026” o “Graduatoria definitiva”.
            */
-          nome: string;
-          file?: (number | null) | Media;
-          url?: string | null;
-          id?: string | null;
+          nome: string
+          file?: (number | null) | Media
+          url?: string | null
+          id?: string | null
         }[]
-      | null;
-  };
+      | null
+  }
   biennio?: {
     /**
      * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza biennio).
      */
-    attivo?: boolean | null;
+    attivo?: boolean | null
     /**
      * Es. Obiettivi formativi, Prospettive occupazionali, Requisiti di accesso, Prova di accesso, Prova finale.
      */
     sezioni?:
       | {
-          titolo: string;
+          titolo: string
           testo?: {
             root: {
-              type: string;
+              type: string
               children: {
-                type: any;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          } | null;
-          id?: string | null;
+                type: any
+                version: number
+                [k: string]: unknown
+              }[]
+              direction: ('ltr' | 'rtl') | null
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+              indent: number
+              version: number
+            }
+            [k: string]: unknown
+          } | null
+          id?: string | null
         }[]
-      | null;
+      | null
     /**
      * Uno per coorte, es. “Immatricolati dall’A.A. 2025/2026”.
      */
@@ -603,24 +623,24 @@ export interface Scuola {
           /**
            * Es. “Bando di selezione – scadenza 18/12/2026” o “Graduatoria definitiva”.
            */
-          nome: string;
-          file?: (number | null) | Media;
-          url?: string | null;
-          id?: string | null;
+          nome: string
+          file?: (number | null) | Media
+          url?: string | null
+          id?: string | null
         }[]
-      | null;
-  };
-  coordinatoreDipartimento?: (number | null) | Docente;
+      | null
+  }
+  coordinatoreDipartimento?: (number | null) | Docente
   /**
    * Gli altri docenti si prendono dai loro profili (Docenti → Scuole): non serve elencarli qui.
    */
-  coordinatoreScuola?: (number | null) | Docente;
+  coordinatoreScuola?: (number | null) | Docente
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  slug?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Profili pubblici dei docenti, in /docenti e nelle schede dei corsi.
@@ -629,54 +649,54 @@ export interface Scuola {
  * via the `definition` "docenti".
  */
 export interface Docente {
-  id: number;
-  nome: string;
-  cognome: string;
-  nomeCompleto?: string | null;
-  email?: string | null;
-  ruolo?: ('tempo-indeterminato' | 'tempo-determinato' | 'contratto') | null;
+  id: number
+  nome: string
+  cognome: string
+  nomeCompleto?: string | null
+  email?: string | null
+  ruolo?: ('tempo-indeterminato' | 'tempo-determinato' | 'contratto') | null
   /**
    * La prima è la scuola di afferenza principale, le altre sono pro-afferenze. Trascina per cambiare l’ordine.
    */
-  scuole?: (number | Scuola)[] | null;
+  scuole?: (number | Scuola)[] | null
   /**
    * Facoltativa. Formato quadrato o verticale.
    */
-  foto?: (number | null) | Media;
+  foto?: (number | null) | Media
   /**
    * Es. “Mercoledì 16–17, su appuntamento via email”. Se vuoto: su appuntamento.
    */
-  ricevimento?: string | null;
+  ricevimento?: string | null
   biografia?: {
     root: {
-      type: string;
+      type: string
       children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  cv?: (number | null) | Media;
+        type: any
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  } | null
+  cv?: (number | null) | Media
   /**
    * Togli la spunta per chi non insegna più: il profilo resta per i corsi passati.
    */
-  attivo?: boolean | null;
+  attivo?: boolean | null
   /**
    * L’utente che può modificare questo profilo e il programma dei suoi corsi.
    */
-  account?: (number | null) | User;
+  account?: (number | null) | User
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  slug?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Il catalogo della casa editrice Albertina Press, in /accademia/albertina-press.
@@ -685,46 +705,46 @@ export interface Docente {
  * via the `definition` "pubblicazioni".
  */
 export interface Pubblicazione {
-  id: number;
-  titolo: string;
+  id: number
+  titolo: string
   /**
    * Come sul frontespizio, es. “a cura di Alberto Cottino; testi di…”.
    */
-  autori?: string | null;
-  copertina?: (number | null) | Media;
-  descrizione?: string | null;
+  autori?: string | null
+  copertina?: (number | null) | Media
+  descrizione?: string | null
   /**
    * Facoltativo. Una voce per capitolo o saggio.
    */
   indice?:
     | {
-        pagina?: string | null;
-        titolo: string;
-        autori?: string | null;
-        id?: string | null;
+        pagina?: string | null
+        titolo: string
+        autori?: string | null
+        id?: string | null
       }[]
-    | null;
-  numero?: number | null;
-  collana?: ('arcate' | 'galleria' | 'hbitat' | 'quaderni' | 'r-esistenze' | 'visioni') | null;
-  anno?: number | null;
+    | null
+  numero?: number | null
+  collana?: ('arcate' | 'galleria' | 'hbitat' | 'quaderni' | 'r-esistenze' | 'visioni') | null
+  anno?: number | null
   /**
    * Es. “Torino, Milano (Silvana Editoriale), 2017”.
    */
-  luogoAnno?: string | null;
-  pagine?: number | null;
+  luogoAnno?: string | null
+  pagine?: number | null
   /**
    * Es. “24 cm”.
    */
-  dimensioni?: string | null;
-  lingua?: string | null;
-  isbn?: string | null;
-  prezzo?: number | null;
+  dimensioni?: string | null
+  lingua?: string | null
+  isbn?: string | null
+  prezzo?: number | null
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  slug?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Corsi e programmi per anno accademico. Vicedirezione e admin creano i corsi e assegnano i docenti; il docente aggiorna il programma.
@@ -733,104 +753,104 @@ export interface Pubblicazione {
  * via the `definition` "corsi".
  */
 export interface Corso {
-  id: number;
+  id: number
   /**
    * Solo il nome della materia, senza [T] o [B]: il livello si sceglie sotto.
    */
-  titolo: string;
-  livelli: ('triennio' | 'biennio')[];
-  annoAccademico: string;
+  titolo: string
+  livelli: ('triennio' | 'biennio')[]
+  annoAccademico: string
   /**
    * Più di un docente solo in caso di co-docenza.
    */
-  docenti: (number | Docente)[];
-  scuole?: (number | Scuola)[] | null;
-  crediti?: number | null;
+  docenti: (number | Docente)[]
+  scuole?: (number | Scuola)[] | null
+  crediti?: number | null
   /**
    * Es. ABPR19 o il nome del settore.
    */
-  settore?: string | null;
-  areaDisciplinare?: string | null;
+  settore?: string | null
+  areaDisciplinare?: string | null
   descrizione?: {
     root: {
-      type: string;
+      type: string
       children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+        type: any
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  } | null
   bibliografia?: {
     root: {
-      type: string;
+      type: string
       children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  esoneri?: boolean | null;
-  revisioni?: boolean | null;
+        type: any
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  } | null
+  esoneri?: boolean | null
+  revisioni?: boolean | null
   altreInformazioni?: {
     root: {
-      type: string;
+      type: string
       children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+        type: any
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  } | null
   /**
    * Una riga per ogni giorno di lezione.
    */
   orari?:
     | {
-        semestre: 'primo' | 'secondo' | 'annuale';
-        giorno: 'lunedi' | 'martedi' | 'mercoledi' | 'giovedi' | 'venerdi' | 'sabato';
-        dalle: string;
-        alle: string;
-        aula?: string | null;
-        id?: string | null;
+        semestre: 'primo' | 'secondo' | 'annuale'
+        giorno: 'lunedi' | 'martedi' | 'mercoledi' | 'giovedi' | 'venerdi' | 'sabato'
+        dalle: string
+        alle: string
+        aula?: string | null
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Semestre in cui si aprono le iscrizioni. I corsi annuali seguono il primo.
    */
-  periodoIscrizione?: ('primo' | 'secondo') | null;
+  periodoIscrizione?: ('primo' | 'secondo') | null
   /**
    * Facoltativo. Vale solo se è dopo la chiusura fissata dalla segreteria; poi premi “Pubblica modifiche”.
    */
-  prorogaIscrizioni?: string | null;
+  prorogaIscrizioni?: string | null
   iscritti?: {
-    docs?: (number | IscrizioneCorso)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
+    docs?: (number | IscrizioneCorso)[]
+    hasNextPage?: boolean
+    totalDocs?: number
+  }
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  slug?: string | null
+  updatedAt: string
+  createdAt: string
+  _status?: ('draft' | 'published') | null
 }
 /**
  * Chi si è iscritto a quale corso. Gli studenti si iscrivono dalla pagina del corso.
@@ -839,18 +859,18 @@ export interface Corso {
  * via the `definition` "iscrizioni-corsi".
  */
 export interface IscrizioneCorso {
-  id: number;
-  corso: number | Corso;
+  id: number
+  corso: number | Corso
   /**
    * Lo sceglie la segreteria solo per un’iscrizione aggiunta a mano.
    */
-  studente: number | User;
-  nominativo?: string | null;
-  matricola?: string | null;
-  livello?: ('triennio' | 'biennio') | null;
-  email?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  studente: number | User
+  nominativo?: string | null
+  matricola?: string | null
+  livello?: ('triennio' | 'biennio') | null
+  email?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Profili dei dottorandi, in /dottorati/albertina/dottorandi.
@@ -859,70 +879,70 @@ export interface IscrizioneCorso {
  * via the `definition` "dottorandi".
  */
 export interface Dottorando {
-  id: number;
-  nome: string;
-  cognome: string;
-  nomeCompleto?: string | null;
-  email?: string | null;
+  id: number
+  nome: string
+  cognome: string
+  nomeCompleto?: string | null
+  email?: string | null
   /**
    * In numeri romani, es. XLI.
    */
-  ciclo?: string | null;
-  curriculum?: ('new-media-art' | 'processi-espositivi') | null;
+  ciclo?: string | null
+  curriculum?: ('new-media-art' | 'processi-espositivi') | null
   /**
    * Es. “Prof.ssa Irene Biolchini (Accademia Albertina)”.
    */
-  supervisor?: string | null;
-  cosupervisor?: string | null;
+  supervisor?: string | null
+  cosupervisor?: string | null
   /**
    * Facoltativa. Formato quadrato o verticale.
    */
-  foto?: (number | null) | Media;
-  titoloProgetto?: string | null;
+  foto?: (number | null) | Media
+  titoloProgetto?: string | null
   abstract?: {
     root: {
-      type: string;
+      type: string
       children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+        type: any
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  } | null
   biografia?: {
     root: {
-      type: string;
+      type: string
       children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+        type: any
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  } | null
   /**
    * Togli la spunta a dottorato concluso: il profilo esce dall’elenco.
    */
-  attivo?: boolean | null;
+  attivo?: boolean | null
   /**
    * L’utente con ruolo Dottorando che può modificare questo profilo.
    */
-  account?: (number | null) | User;
+  account?: (number | null) | User
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  slug?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Orario delle lezioni, esami e presentazioni: si compilano a tabella, il sito li mostra con filtri e li fa stampare.
@@ -931,42 +951,42 @@ export interface Dottorando {
  * via the `definition` "calendari".
  */
 export interface Calendario {
-  id: number;
-  tipo: 'lezioni' | 'esami' | 'presentazioni';
-  annoAccademico: string;
-  titolo: string;
+  id: number
+  tipo: 'lezioni' | 'esami' | 'presentazioni'
+  annoAccademico: string
+  titolo: string
   /**
    * Facoltativo, es. “Sessione estiva” o “Secondo semestre”.
    */
-  sottotitolo?: string | null;
+  sottotitolo?: string | null
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
-  slug?: string | null;
+  slug?: string | null
   /**
    * Mostrate in un riquadro sopra la tabella, es. “Le aule potrebbero cambiare”. Una per riga.
    */
-  avvertenze?: string | null;
+  avvertenze?: string | null
   /**
    * Una per riga, es. “Sede centrale: via Accademia Albertina 6, Torino”.
    */
-  sedi?: string | null;
+  sedi?: string | null
   righe?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
+    | null
   /**
    * Facoltativo: il sito permette già di stampare la tabella.
    */
-  pdf?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  pdf?: (number | null) | Media
+  updatedAt: string
+  createdAt: string
+  _status?: ('draft' | 'published') | null
 }
 /**
  * Quando gli studenti possono iscriversi ai corsi di un semestre e agli esami di una sessione.
@@ -975,25 +995,25 @@ export interface Calendario {
  * via the `definition` "finestre-iscrizione".
  */
 export interface FinestraIscrizione {
-  id: number;
-  titolo?: string | null;
-  tipo: 'corsi' | 'esami';
-  annoAccademico: string;
+  id: number
+  titolo?: string | null
+  tipo: 'corsi' | 'esami'
+  annoAccademico: string
   /**
    * Semestre per i corsi, sessione per gli esami. I corsi annuali seguono il primo semestre.
    */
-  periodo: 'primo' | 'secondo' | 'invernale' | 'estiva' | 'autunnale';
-  apertura: string;
+  periodo: 'primo' | 'secondo' | 'invernale' | 'estiva' | 'autunnale'
+  apertura: string
   /**
    * Da qui gli studenti non si iscrivono e non annullano più. Il docente può prolungarla sul suo corso o appello; per gli esami chiude comunque una settimana prima di ogni appello.
    */
-  chiusura: string;
+  chiusura: string
   /**
    * Se attivo, all’appello si iscrive solo chi risulta iscritto al corso. Per ora lascialo spento: le iscrizioni ai corsi partono con questa piattaforma.
    */
-  soloIscrittiAlCorso?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
+  soloIscrittiAlCorso?: boolean | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Le date d’esame di ogni corso, sessione per sessione. Gli studenti si iscrivono dal sito; il docente vede gli iscritti nella scheda “Iscritti”.
@@ -1002,38 +1022,38 @@ export interface FinestraIscrizione {
  * via the `definition` "appelli".
  */
 export interface Appello {
-  id: number;
-  titolo?: string | null;
+  id: number
+  titolo?: string | null
   /**
    * Il docente viene dal corso.
    */
-  corso: number | Corso;
-  annoAccademico: string;
-  sessione: 'invernale' | 'estiva' | 'autunnale';
+  corso: number | Corso
+  annoAccademico: string
+  sessione: 'invernale' | 'estiva' | 'autunnale'
   /**
    * Vuoto = quelli del corso. Usalo per dividere triennio e biennio in date diverse.
    */
-  livelli?: ('triennio' | 'biennio')[] | null;
-  data: string;
-  ora: string;
-  aula?: string | null;
+  livelli?: ('triennio' | 'biennio')[] | null
+  data: string
+  ora: string
+  aula?: string | null
   /**
    * Cognomi separati da virgole. La vedono anche gli studenti.
    */
-  commissione?: string | null;
-  note?: string | null;
+  commissione?: string | null
+  note?: string | null
   /**
    * Facoltativo. Vale solo se è dopo la chiusura fissata dalla segreteria; le iscrizioni chiudono comunque una settimana prima dell’esame.
    */
-  prorogaIscrizioni?: string | null;
+  prorogaIscrizioni?: string | null
   iscritti?: {
-    docs?: (number | IscrizioneEsame)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
-  creatoDa?: (number | null) | User;
-  updatedAt: string;
-  createdAt: string;
+    docs?: (number | IscrizioneEsame)[]
+    hasNextPage?: boolean
+    totalDocs?: number
+  }
+  creatoDa?: (number | null) | User
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Chi si è iscritto a quale appello. Gli studenti si iscrivono dal sito.
@@ -1042,21 +1062,21 @@ export interface Appello {
  * via the `definition` "iscrizioni-esami".
  */
 export interface IscrizioneEsame {
-  id: number;
-  appello: number | Appello;
+  id: number
+  appello: number | Appello
   /**
    * Lo sceglie la segreteria solo per un’iscrizione aggiunta a mano.
    */
-  studente: number | User;
-  nominativo?: string | null;
-  matricola?: string | null;
-  livello?: ('triennio' | 'biennio') | null;
-  email?: string | null;
-  corso?: (number | null) | Corso;
-  annoAccademico?: string | null;
-  sessione?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  studente: number | User
+  nominativo?: string | null
+  matricola?: string | null
+  livello?: ('triennio' | 'biennio') | null
+  email?: string | null
+  corso?: (number | null) | Corso
+  annoAccademico?: string | null
+  sessione?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Bandi, procedure e comunicazioni dell’Albo online. Aggiungi i nuovi documenti (nomina, verbali, graduatoria) allo stesso atto.
@@ -1065,41 +1085,48 @@ export interface IscrizioneEsame {
  * via the `definition` "albo".
  */
 export interface AttoAlbo {
-  id: number;
-  titolo: string;
-  sezione: 'bandi-di-concorso' | 'bandi-generici' | 'bandi-di-gara' | 'sindacale';
+  id: number
+  titolo: string
+  sezione: 'bandi-di-concorso' | 'bandi-generici' | 'bandi-di-gara' | 'sindacale'
   /**
    * Usa una categoria già esistente, es. “Personale docente a contratto”, “Servizi”, “Scioperi”.
    */
-  categoria: string;
-  pubblicatoIl: string;
+  categoria: string
+  pubblicatoIl: string
   /**
    * Facoltativa: termine per presentare la domanda.
    */
-  scadenza?: string | null;
-  annoAccademico?: string | null;
+  scadenza?: string | null
+  annoAccademico?: string | null
   /**
    * Facoltativa: due righe per spiegare l’atto, se il titolo non basta.
    */
-  descrizione?: string | null;
+  descrizione?: string | null
   documenti?:
     | {
         /**
          * Es. “Bando di selezione – scadenza 18/12/2026” o “Graduatoria definitiva”.
          */
-        nome: string;
-        file?: (number | null) | Media;
-        url?: string | null;
-        id?: string | null;
+        nome: string
+        file?: (number | null) | Media
+        url?: string | null
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  slug?: string | null
+  wpId?: string | null
+  wpModificato?: string | null
+  wpImpronta?: string | null
+  /**
+   * La sincronizzazione da WordPress non sovrascrive questo contenuto. Togli la spunta e salva per riallinearlo alla versione di WordPress.
+   */
+  modificatoNelPannello?: boolean | null
+  updatedAt: string
+  createdAt: string
+  _status?: ('draft' | 'published') | null
 }
 /**
  * Sottosezioni dell’Amministrazione trasparente. Aggiorna i documenti qui: la data di aggiornamento sul sito cambia da sola.
@@ -1108,8 +1135,8 @@ export interface AttoAlbo {
  * via the `definition` "trasparenza".
  */
 export interface Trasparenza {
-  id: number;
-  titolo: string;
+  id: number
+  titolo: string
   sezione:
     | 'Disposizioni generali'
     | 'Organizzazione'
@@ -1134,34 +1161,41 @@ export interface Trasparenza {
     | 'Strutture sanitarie private accreditate'
     | 'Interventi straordinari e di emergenza'
     | 'Altri contenuti'
-    | 'Informative sito istituzionale';
+    | 'Informative sito istituzionale'
   /**
    * Facoltativo. Un paragrafo per riga vuota; gli indirizzi web diventano link.
    */
-  testo?: string | null;
+  testo?: string | null
   documenti?:
     | {
         /**
          * Es. “Bando di selezione – scadenza 18/12/2026” o “Graduatoria definitiva”.
          */
-        nome: string;
-        file?: (number | null) | Media;
-        url?: string | null;
+        nome: string
+        file?: (number | null) | Media
+        url?: string | null
         /**
          * Facoltativa, mostrata sotto il documento.
          */
-        nota?: string | null;
-        id?: string | null;
+        nota?: string | null
+        id?: string | null
       }[]
-    | null;
-  aggiornatoIl?: string | null;
+    | null
+  aggiornatoIl?: string | null
   /**
    * Si genera dal titolo. Cambialo solo se serve un indirizzo diverso.
    */
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  slug?: string | null
+  wpId?: string | null
+  wpModificato?: string | null
+  wpImpronta?: string | null
+  /**
+   * La sincronizzazione da WordPress non sovrascrive questo contenuto. Togli la spunta e salva per riallinearlo alla versione di WordPress.
+   */
+  modificatoNelPannello?: boolean | null
+  updatedAt: string
+  createdAt: string
+  _status?: ('draft' | 'published') | null
 }
 /**
  * Le email spedite dal sito negli ultimi 30 giorni, con l’esito. Le più vecchie si cancellano da sole.
@@ -1170,20 +1204,20 @@ export interface Trasparenza {
  * via the `definition` "email-inviate".
  */
 export interface EmailInviate {
-  id: number;
-  destinatario?: string | null;
+  id: number
+  destinatario?: string | null
   /**
    * Indirizzo a cui è partita davvero. In anteprima tutte le email vanno a un solo indirizzo di prova.
    */
-  consegnataA?: string | null;
-  oggetto?: string | null;
-  esito: 'inviata' | 'errore' | 'non-spedita';
-  errore?: string | null;
-  testo?: string | null;
-  idMessaggio?: string | null;
-  risposta?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  consegnataA?: string | null
+  oggetto?: string | null
+  esito: 'inviata' | 'errore' | 'non-spedita'
+  errore?: string | null
+  testo?: string | null
+  idMessaggio?: string | null
+  risposta?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Chi ha creato, modificato, pubblicato o eliminato cosa nel pannello. Le voci si cancellano da sole dopo un anno.
@@ -1192,745 +1226,757 @@ export interface EmailInviate {
  * via the `definition` "registro-attivita".
  */
 export interface VoceRegistro {
-  id: number;
-  createdAt: string;
-  azione: 'creato' | 'modificato' | 'pubblicato' | 'ritirato' | 'eliminato';
-  utente?: (number | null) | User;
-  utenteNome?: string | null;
-  utenteEmail?: string | null;
+  id: number
+  createdAt: string
+  azione: 'creato' | 'modificato' | 'pubblicato' | 'ritirato' | 'eliminato'
+  utente?: (number | null) | User
+  utenteNome?: string | null
+  utenteEmail?: string | null
   /**
    * Nome tecnico (es. avvisi).
    */
-  collezione: string;
-  sezione?: string | null;
-  documentoId?: string | null;
-  titolo?: string | null;
+  collezione: string
+  sezione?: string | null
+  documentoId?: string | null
+  titolo?: string | null
   /**
    * Solo i nomi dei campi, non i valori. “—” per creazioni ed eliminazioni.
    */
-  campi?: string | null;
-  riepilogo?: string | null;
-  updatedAt: string;
+  campi?: string | null
+  riepilogo?: string | null
+  updatedAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: number;
-  key: string;
+  id: number
+  key: string
   data:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
+    | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: number
   document?:
     | ({
-        relationTo: 'pagine';
-        value: number | Pagina;
+        relationTo: 'pagine'
+        value: number | Pagina
       } | null)
     | ({
-        relationTo: 'avvisi';
-        value: number | Avviso;
+        relationTo: 'avvisi'
+        value: number | Avviso
       } | null)
     | ({
-        relationTo: 'pubblicazioni';
-        value: number | Pubblicazione;
+        relationTo: 'pubblicazioni'
+        value: number | Pubblicazione
       } | null)
     | ({
-        relationTo: 'corsi';
-        value: number | Corso;
+        relationTo: 'corsi'
+        value: number | Corso
       } | null)
     | ({
-        relationTo: 'docenti';
-        value: number | Docente;
+        relationTo: 'docenti'
+        value: number | Docente
       } | null)
     | ({
-        relationTo: 'dottorandi';
-        value: number | Dottorando;
+        relationTo: 'dottorandi'
+        value: number | Dottorando
       } | null)
     | ({
-        relationTo: 'calendari';
-        value: number | Calendario;
+        relationTo: 'calendari'
+        value: number | Calendario
       } | null)
     | ({
-        relationTo: 'scuole';
-        value: number | Scuola;
+        relationTo: 'scuole'
+        value: number | Scuola
       } | null)
     | ({
-        relationTo: 'finestre-iscrizione';
-        value: number | FinestraIscrizione;
+        relationTo: 'finestre-iscrizione'
+        value: number | FinestraIscrizione
       } | null)
     | ({
-        relationTo: 'iscrizioni-corsi';
-        value: number | IscrizioneCorso;
+        relationTo: 'iscrizioni-corsi'
+        value: number | IscrizioneCorso
       } | null)
     | ({
-        relationTo: 'appelli';
-        value: number | Appello;
+        relationTo: 'appelli'
+        value: number | Appello
       } | null)
     | ({
-        relationTo: 'iscrizioni-esami';
-        value: number | IscrizioneEsame;
+        relationTo: 'iscrizioni-esami'
+        value: number | IscrizioneEsame
       } | null)
     | ({
-        relationTo: 'albo';
-        value: number | AttoAlbo;
+        relationTo: 'albo'
+        value: number | AttoAlbo
       } | null)
     | ({
-        relationTo: 'trasparenza';
-        value: number | Trasparenza;
+        relationTo: 'trasparenza'
+        value: number | Trasparenza
       } | null)
     | ({
-        relationTo: 'media';
-        value: number | Media;
+        relationTo: 'media'
+        value: number | Media
       } | null)
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'users'
+        value: number | User
       } | null)
     | ({
-        relationTo: 'email-inviate';
-        value: number | EmailInviate;
+        relationTo: 'email-inviate'
+        value: number | EmailInviate
       } | null)
     | ({
-        relationTo: 'registro-attivita';
-        value: number | VoceRegistro;
-      } | null);
-  globalSlug?: string | null;
+        relationTo: 'registro-attivita'
+        value: number | VoceRegistro
+      } | null)
+  globalSlug?: string | null
   user: {
-    relationTo: 'users';
-    value: number | User;
-  };
-  updatedAt: string;
-  createdAt: string;
+    relationTo: 'users'
+    value: number | User
+  }
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: number
   user: {
-    relationTo: 'users';
-    value: number | User;
-  };
-  key?: string | null;
+    relationTo: 'users'
+    value: number | User
+  }
+  key?: string | null
   value?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
-  name?: string | null;
-  batch?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  id: number
+  name?: string | null
+  batch?: number | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pagine_select".
  */
 export interface PagineSelect<T extends boolean = true> {
-  titolo?: T;
-  sommario?: T;
+  titolo?: T
+  sommario?: T
   blocchi?:
     | T
     | {
-        testo?: T | BloccoTestoSelect<T>;
-        immagine?: T | BloccoImmagineSelect<T>;
-        galleria?: T | BloccoGalleriaSelect<T>;
-        link?: T | BloccoLinkSelect<T>;
-        fisarmonica?: T | BloccoFisarmonicaSelect<T>;
-        contatti?: T | BloccoContattiSelect<T>;
-        allegati?: T | BloccoAllegatiSelect<T>;
-      };
-  slug?: T;
-  genitore?: T;
-  percorso?: T;
-  ufficiEditori?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
+        testo?: T | BloccoTestoSelect<T>
+        immagine?: T | BloccoImmagineSelect<T>
+        galleria?: T | BloccoGalleriaSelect<T>
+        link?: T | BloccoLinkSelect<T>
+        fisarmonica?: T | BloccoFisarmonicaSelect<T>
+        contatti?: T | BloccoContattiSelect<T>
+        allegati?: T | BloccoAllegatiSelect<T>
+      }
+  slug?: T
+  genitore?: T
+  percorso?: T
+  ufficiEditori?: T
+  updatedAt?: T
+  createdAt?: T
+  _status?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BloccoTesto_select".
  */
 export interface BloccoTestoSelect<T extends boolean = true> {
-  testo?: T;
-  id?: T;
-  blockName?: T;
+  testo?: T
+  id?: T
+  blockName?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BloccoImmagine_select".
  */
 export interface BloccoImmagineSelect<T extends boolean = true> {
-  immagine?: T;
-  didascalia?: T;
-  larghezza?: T;
-  id?: T;
-  blockName?: T;
+  immagine?: T
+  didascalia?: T
+  larghezza?: T
+  id?: T
+  blockName?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BloccoGalleria_select".
  */
 export interface BloccoGalleriaSelect<T extends boolean = true> {
-  titolo?: T;
+  titolo?: T
   immagini?:
     | T
     | {
-        immagine?: T;
-        didascalia?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
+        immagine?: T
+        didascalia?: T
+        id?: T
+      }
+  id?: T
+  blockName?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BloccoLink_select".
  */
 export interface BloccoLinkSelect<T extends boolean = true> {
-  titolo?: T;
+  titolo?: T
   voci?:
     | T
     | {
-        etichetta?: T;
-        tipo?: T;
-        pagina?: T;
-        url?: T;
-        descrizione?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
+        etichetta?: T
+        tipo?: T
+        pagina?: T
+        url?: T
+        descrizione?: T
+        id?: T
+      }
+  id?: T
+  blockName?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BloccoFisarmonica_select".
  */
 export interface BloccoFisarmonicaSelect<T extends boolean = true> {
-  titolo?: T;
+  titolo?: T
   voci?:
     | T
     | {
-        titolo?: T;
-        testo?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
+        titolo?: T
+        testo?: T
+        id?: T
+      }
+  id?: T
+  blockName?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BloccoContatti_select".
  */
 export interface BloccoContattiSelect<T extends boolean = true> {
-  titolo?: T;
+  titolo?: T
   voci?:
     | T
     | {
-        nome?: T;
-        ruolo?: T;
-        email?: T;
-        telefono?: T;
-        orari?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
+        nome?: T
+        ruolo?: T
+        email?: T
+        telefono?: T
+        orari?: T
+        id?: T
+      }
+  id?: T
+  blockName?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BloccoAllegati_select".
  */
 export interface BloccoAllegatiSelect<T extends boolean = true> {
-  titolo?: T;
+  titolo?: T
   documenti?:
     | T
     | {
-        nome?: T;
-        file?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
+        nome?: T
+        file?: T
+        id?: T
+      }
+  id?: T
+  blockName?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "avvisi_select".
  */
 export interface AvvisiSelect<T extends boolean = true> {
-  titolo?: T;
-  sommario?: T;
-  categorie?: T;
-  scuole?: T;
-  pubblicatoIl?: T;
-  immagine?: T;
-  contenuto?: T;
+  titolo?: T
+  sommario?: T
+  categorie?: T
+  scuole?: T
+  pubblicatoIl?: T
+  immagine?: T
+  contenuto?: T
   allegati?:
     | T
     | {
-        nome?: T;
-        file?: T;
-        id?: T;
-      };
-  slug?: T;
-  autore?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
+        nome?: T
+        file?: T
+        id?: T
+      }
+  slug?: T
+  autore?: T
+  wpId?: T
+  wpModificato?: T
+  wpImpronta?: T
+  modificatoNelPannello?: T
+  updatedAt?: T
+  createdAt?: T
+  _status?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pubblicazioni_select".
  */
 export interface PubblicazioniSelect<T extends boolean = true> {
-  titolo?: T;
-  autori?: T;
-  copertina?: T;
-  descrizione?: T;
+  titolo?: T
+  autori?: T
+  copertina?: T
+  descrizione?: T
   indice?:
     | T
     | {
-        pagina?: T;
-        titolo?: T;
-        autori?: T;
-        id?: T;
-      };
-  numero?: T;
-  collana?: T;
-  anno?: T;
-  luogoAnno?: T;
-  pagine?: T;
-  dimensioni?: T;
-  lingua?: T;
-  isbn?: T;
-  prezzo?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
+        pagina?: T
+        titolo?: T
+        autori?: T
+        id?: T
+      }
+  numero?: T
+  collana?: T
+  anno?: T
+  luogoAnno?: T
+  pagine?: T
+  dimensioni?: T
+  lingua?: T
+  isbn?: T
+  prezzo?: T
+  slug?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "corsi_select".
  */
 export interface CorsiSelect<T extends boolean = true> {
-  titolo?: T;
-  livelli?: T;
-  annoAccademico?: T;
-  docenti?: T;
-  scuole?: T;
-  crediti?: T;
-  settore?: T;
-  areaDisciplinare?: T;
-  descrizione?: T;
-  bibliografia?: T;
-  esoneri?: T;
-  revisioni?: T;
-  altreInformazioni?: T;
+  titolo?: T
+  livelli?: T
+  annoAccademico?: T
+  docenti?: T
+  scuole?: T
+  crediti?: T
+  settore?: T
+  areaDisciplinare?: T
+  descrizione?: T
+  bibliografia?: T
+  esoneri?: T
+  revisioni?: T
+  altreInformazioni?: T
   orari?:
     | T
     | {
-        semestre?: T;
-        giorno?: T;
-        dalle?: T;
-        alle?: T;
-        aula?: T;
-        id?: T;
-      };
-  periodoIscrizione?: T;
-  prorogaIscrizioni?: T;
-  iscritti?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
+        semestre?: T
+        giorno?: T
+        dalle?: T
+        alle?: T
+        aula?: T
+        id?: T
+      }
+  periodoIscrizione?: T
+  prorogaIscrizioni?: T
+  iscritti?: T
+  slug?: T
+  updatedAt?: T
+  createdAt?: T
+  _status?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "docenti_select".
  */
 export interface DocentiSelect<T extends boolean = true> {
-  nome?: T;
-  cognome?: T;
-  nomeCompleto?: T;
-  email?: T;
-  ruolo?: T;
-  scuole?: T;
-  foto?: T;
-  ricevimento?: T;
-  biografia?: T;
-  cv?: T;
-  attivo?: T;
-  account?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  nome?: T
+  cognome?: T
+  nomeCompleto?: T
+  email?: T
+  ruolo?: T
+  scuole?: T
+  foto?: T
+  ricevimento?: T
+  biografia?: T
+  cv?: T
+  attivo?: T
+  account?: T
+  slug?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "dottorandi_select".
  */
 export interface DottorandiSelect<T extends boolean = true> {
-  nome?: T;
-  cognome?: T;
-  nomeCompleto?: T;
-  email?: T;
-  ciclo?: T;
-  curriculum?: T;
-  supervisor?: T;
-  cosupervisor?: T;
-  foto?: T;
-  titoloProgetto?: T;
-  abstract?: T;
-  biografia?: T;
-  attivo?: T;
-  account?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  nome?: T
+  cognome?: T
+  nomeCompleto?: T
+  email?: T
+  ciclo?: T
+  curriculum?: T
+  supervisor?: T
+  cosupervisor?: T
+  foto?: T
+  titoloProgetto?: T
+  abstract?: T
+  biografia?: T
+  attivo?: T
+  account?: T
+  slug?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "calendari_select".
  */
 export interface CalendariSelect<T extends boolean = true> {
-  tipo?: T;
-  annoAccademico?: T;
-  titolo?: T;
-  sottotitolo?: T;
-  slug?: T;
-  avvertenze?: T;
-  sedi?: T;
-  righe?: T;
-  pdf?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
+  tipo?: T
+  annoAccademico?: T
+  titolo?: T
+  sottotitolo?: T
+  slug?: T
+  avvertenze?: T
+  sedi?: T
+  righe?: T
+  pdf?: T
+  updatedAt?: T
+  createdAt?: T
+  _status?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "scuole_select".
  */
 export interface ScuoleSelect<T extends boolean = true> {
-  nome?: T;
-  sigla?: T;
-  dipartimento?: T;
-  descrizione?: T;
-  immagine?: T;
-  video?: T;
+  nome?: T
+  sigla?: T
+  dipartimento?: T
+  descrizione?: T
+  immagine?: T
+  video?: T
   triennio?:
     | T
     | {
-        attivo?: T;
+        attivo?: T
         sezioni?:
           | T
           | {
-              titolo?: T;
-              testo?: T;
-              id?: T;
-            };
+              titolo?: T
+              testo?: T
+              id?: T
+            }
         piani?:
           | T
           | {
-              nome?: T;
-              file?: T;
-              url?: T;
-              id?: T;
-            };
-      };
+              nome?: T
+              file?: T
+              url?: T
+              id?: T
+            }
+      }
   biennio?:
     | T
     | {
-        attivo?: T;
+        attivo?: T
         sezioni?:
           | T
           | {
-              titolo?: T;
-              testo?: T;
-              id?: T;
-            };
+              titolo?: T
+              testo?: T
+              id?: T
+            }
         piani?:
           | T
           | {
-              nome?: T;
-              file?: T;
-              url?: T;
-              id?: T;
-            };
-      };
-  coordinatoreDipartimento?: T;
-  coordinatoreScuola?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
+              nome?: T
+              file?: T
+              url?: T
+              id?: T
+            }
+      }
+  coordinatoreDipartimento?: T
+  coordinatoreScuola?: T
+  slug?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "finestre-iscrizione_select".
  */
 export interface FinestreIscrizioneSelect<T extends boolean = true> {
-  titolo?: T;
-  tipo?: T;
-  annoAccademico?: T;
-  periodo?: T;
-  apertura?: T;
-  chiusura?: T;
-  soloIscrittiAlCorso?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  titolo?: T
+  tipo?: T
+  annoAccademico?: T
+  periodo?: T
+  apertura?: T
+  chiusura?: T
+  soloIscrittiAlCorso?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "iscrizioni-corsi_select".
  */
 export interface IscrizioniCorsiSelect<T extends boolean = true> {
-  corso?: T;
-  studente?: T;
-  nominativo?: T;
-  matricola?: T;
-  livello?: T;
-  email?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  corso?: T
+  studente?: T
+  nominativo?: T
+  matricola?: T
+  livello?: T
+  email?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "appelli_select".
  */
 export interface AppelliSelect<T extends boolean = true> {
-  titolo?: T;
-  corso?: T;
-  annoAccademico?: T;
-  sessione?: T;
-  livelli?: T;
-  data?: T;
-  ora?: T;
-  aula?: T;
-  commissione?: T;
-  note?: T;
-  prorogaIscrizioni?: T;
-  iscritti?: T;
-  creatoDa?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  titolo?: T
+  corso?: T
+  annoAccademico?: T
+  sessione?: T
+  livelli?: T
+  data?: T
+  ora?: T
+  aula?: T
+  commissione?: T
+  note?: T
+  prorogaIscrizioni?: T
+  iscritti?: T
+  creatoDa?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "iscrizioni-esami_select".
  */
 export interface IscrizioniEsamiSelect<T extends boolean = true> {
-  appello?: T;
-  studente?: T;
-  nominativo?: T;
-  matricola?: T;
-  livello?: T;
-  email?: T;
-  corso?: T;
-  annoAccademico?: T;
-  sessione?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  appello?: T
+  studente?: T
+  nominativo?: T
+  matricola?: T
+  livello?: T
+  email?: T
+  corso?: T
+  annoAccademico?: T
+  sessione?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "albo_select".
  */
 export interface AlboSelect<T extends boolean = true> {
-  titolo?: T;
-  sezione?: T;
-  categoria?: T;
-  pubblicatoIl?: T;
-  scadenza?: T;
-  annoAccademico?: T;
-  descrizione?: T;
+  titolo?: T
+  sezione?: T
+  categoria?: T
+  pubblicatoIl?: T
+  scadenza?: T
+  annoAccademico?: T
+  descrizione?: T
   documenti?:
     | T
     | {
-        nome?: T;
-        file?: T;
-        url?: T;
-        id?: T;
-      };
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
+        nome?: T
+        file?: T
+        url?: T
+        id?: T
+      }
+  slug?: T
+  wpId?: T
+  wpModificato?: T
+  wpImpronta?: T
+  modificatoNelPannello?: T
+  updatedAt?: T
+  createdAt?: T
+  _status?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "trasparenza_select".
  */
 export interface TrasparenzaSelect<T extends boolean = true> {
-  titolo?: T;
-  sezione?: T;
-  testo?: T;
+  titolo?: T
+  sezione?: T
+  testo?: T
   documenti?:
     | T
     | {
-        nome?: T;
-        file?: T;
-        url?: T;
-        nota?: T;
-        id?: T;
-      };
-  aggiornatoIl?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
+        nome?: T
+        file?: T
+        url?: T
+        nota?: T
+        id?: T
+      }
+  aggiornatoIl?: T
+  slug?: T
+  wpId?: T
+  wpModificato?: T
+  wpImpronta?: T
+  modificatoNelPannello?: T
+  updatedAt?: T
+  createdAt?: T
+  _status?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  creatoDa?: T;
-  alt?: T;
-  wpId?: T;
-  wpUrl?: T;
-  wpModificato?: T;
-  driveFileId?: T;
-  prefix?: T;
-  _objectKey?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
+  creatoDa?: T
+  alt?: T
+  wpId?: T
+  wpUrl?: T
+  wpModificato?: T
+  driveFileId?: T
+  prefix?: T
+  _objectKey?: T
+  updatedAt?: T
+  createdAt?: T
+  url?: T
+  thumbnailURL?: T
+  filename?: T
+  mimeType?: T
+  filesize?: T
+  width?: T
+  height?: T
+  focalX?: T
+  focalY?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  nome?: T;
-  cognome?: T;
-  roles?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  resetPasswordRequestedAt?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
+  nome?: T
+  cognome?: T
+  roles?: T
+  updatedAt?: T
+  createdAt?: T
+  email?: T
+  resetPasswordToken?: T
+  resetPasswordExpiration?: T
+  salt?: T
+  hash?: T
+  resetPasswordRequestedAt?: T
+  loginAttempts?: T
+  lockUntil?: T
   sessions?:
     | T
     | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
+        id?: T
+        createdAt?: T
+        expiresAt?: T
+      }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "email-inviate_select".
  */
 export interface EmailInviateSelect<T extends boolean = true> {
-  destinatario?: T;
-  consegnataA?: T;
-  oggetto?: T;
-  esito?: T;
-  errore?: T;
-  testo?: T;
-  idMessaggio?: T;
-  risposta?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  destinatario?: T
+  consegnataA?: T
+  oggetto?: T
+  esito?: T
+  errore?: T
+  testo?: T
+  idMessaggio?: T
+  risposta?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "registro-attivita_select".
  */
 export interface RegistroAttivitaSelect<T extends boolean = true> {
-  createdAt?: T;
-  azione?: T;
-  utente?: T;
-  utenteNome?: T;
-  utenteEmail?: T;
-  collezione?: T;
-  sezione?: T;
-  documentoId?: T;
-  titolo?: T;
-  campi?: T;
-  riepilogo?: T;
-  updatedAt?: T;
+  createdAt?: T
+  azione?: T
+  utente?: T
+  utenteNome?: T
+  utenteEmail?: T
+  collezione?: T
+  sezione?: T
+  documentoId?: T
+  titolo?: T
+  campi?: T
+  riepilogo?: T
+  updatedAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T;
-  data?: T;
+  key?: T
+  data?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T;
-  globalSlug?: T;
-  user?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  document?: T
+  globalSlug?: T
+  user?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T;
-  key?: T;
-  value?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  user?: T
+  key?: T
+  value?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T;
-  batch?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  name?: T
+  batch?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * Mega menu, barra in alto e link del footer. Le modifiche sono visibili sul sito appena salvi.
@@ -1939,22 +1985,22 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  * via the `definition` "navigazione".
  */
 export interface Navigazione {
-  id: number;
+  id: number
   /**
    * Prima colonna del menu, in grande.
    */
   inEvidenza?:
     | {
-        etichetta: string;
-        tipo?: ('interno' | 'percorso' | 'esterno') | null;
-        pagina?: (number | null) | Pagina;
+        etichetta: string
+        tipo?: ('interno' | 'percorso' | 'esterno') | null
+        pagina?: (number | null) | Pagina
         /**
          * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
          */
-        url?: string | null;
-        id?: string | null;
+        url?: string | null
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Fino a 5 colonne; una colonna può contenere più gruppi uno sotto l’altro.
    */
@@ -1962,109 +2008,109 @@ export interface Navigazione {
     | {
         gruppi?:
           | {
-              titolo: string;
+              titolo: string
               voci?:
                 | {
-                    etichetta: string;
-                    tipo?: ('interno' | 'percorso' | 'esterno') | null;
-                    pagina?: (number | null) | Pagina;
+                    etichetta: string
+                    tipo?: ('interno' | 'percorso' | 'esterno') | null
+                    pagina?: (number | null) | Pagina
                     /**
                      * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
                      */
-                    url?: string | null;
-                    id?: string | null;
+                    url?: string | null
+                    id?: string | null
                   }[]
-                | null;
-              id?: string | null;
+                | null
+              id?: string | null
             }[]
-          | null;
-        id?: string | null;
+          | null
+        id?: string | null
       }[]
-    | null;
+    | null
   serviziSinistra?:
     | {
-        etichetta: string;
-        tipo?: ('interno' | 'percorso' | 'esterno') | null;
-        pagina?: (number | null) | Pagina;
+        etichetta: string
+        tipo?: ('interno' | 'percorso' | 'esterno') | null
+        pagina?: (number | null) | Pagina
         /**
          * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
          */
-        url?: string | null;
-        id?: string | null;
+        url?: string | null
+        id?: string | null
       }[]
-    | null;
+    | null
   serviziDestra?:
     | {
-        etichetta: string;
-        tipo?: ('interno' | 'percorso' | 'esterno') | null;
-        pagina?: (number | null) | Pagina;
+        etichetta: string
+        tipo?: ('interno' | 'percorso' | 'esterno') | null
+        pagina?: (number | null) | Pagina
         /**
          * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
          */
-        url?: string | null;
-        id?: string | null;
+        url?: string | null
+        id?: string | null
       }[]
-    | null;
+    | null
   footerLink?:
     | {
-        etichetta: string;
-        tipo?: ('interno' | 'percorso' | 'esterno') | null;
-        pagina?: (number | null) | Pagina;
+        etichetta: string
+        tipo?: ('interno' | 'percorso' | 'esterno') | null
+        pagina?: (number | null) | Pagina
         /**
          * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
          */
-        url?: string | null;
-        id?: string | null;
+        url?: string | null
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Il testo del link è il nome del social.
    */
   footerSocial?:
     | {
-        etichetta: string;
-        tipo?: ('interno' | 'percorso' | 'esterno') | null;
-        pagina?: (number | null) | Pagina;
+        etichetta: string
+        tipo?: ('interno' | 'percorso' | 'esterno') | null
+        pagina?: (number | null) | Pagina
         /**
          * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
          */
-        url?: string | null;
-        id?: string | null;
+        url?: string | null
+        id?: string | null
       }[]
-    | null;
+    | null
   /**
    * Barra in fondo alla pagina.
    */
   footerLegale?:
     | {
-        etichetta: string;
-        tipo?: ('interno' | 'percorso' | 'esterno') | null;
-        pagina?: (number | null) | Pagina;
+        etichetta: string
+        tipo?: ('interno' | 'percorso' | 'esterno') | null
+        pagina?: (number | null) | Pagina
         /**
          * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
          */
-        url?: string | null;
-        id?: string | null;
+        url?: string | null
+        id?: string | null
       }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+    | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "drive-connessione".
  */
 export interface DriveConnessione {
-  id: number;
-  email?: string | null;
-  tokenCifrato?: string | null;
-  collegatoIl?: string | null;
-  collegatoDa?: string | null;
-  cartellaMedia?: string | null;
-  cartellaRadice?: string | null;
-  errore?: string | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
+  id: number
+  email?: string | null
+  tokenCifrato?: string | null
+  collegatoIl?: string | null
+  collegatoDa?: string | null
+  cartellaMedia?: string | null
+  cartellaRadice?: string | null
+  errore?: string | null
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2074,96 +2120,96 @@ export interface NavigazioneSelect<T extends boolean = true> {
   inEvidenza?:
     | T
     | {
-        etichetta?: T;
-        tipo?: T;
-        pagina?: T;
-        url?: T;
-        id?: T;
-      };
+        etichetta?: T
+        tipo?: T
+        pagina?: T
+        url?: T
+        id?: T
+      }
   colonne?:
     | T
     | {
         gruppi?:
           | T
           | {
-              titolo?: T;
+              titolo?: T
               voci?:
                 | T
                 | {
-                    etichetta?: T;
-                    tipo?: T;
-                    pagina?: T;
-                    url?: T;
-                    id?: T;
-                  };
-              id?: T;
-            };
-        id?: T;
-      };
+                    etichetta?: T
+                    tipo?: T
+                    pagina?: T
+                    url?: T
+                    id?: T
+                  }
+              id?: T
+            }
+        id?: T
+      }
   serviziSinistra?:
     | T
     | {
-        etichetta?: T;
-        tipo?: T;
-        pagina?: T;
-        url?: T;
-        id?: T;
-      };
+        etichetta?: T
+        tipo?: T
+        pagina?: T
+        url?: T
+        id?: T
+      }
   serviziDestra?:
     | T
     | {
-        etichetta?: T;
-        tipo?: T;
-        pagina?: T;
-        url?: T;
-        id?: T;
-      };
+        etichetta?: T
+        tipo?: T
+        pagina?: T
+        url?: T
+        id?: T
+      }
   footerLink?:
     | T
     | {
-        etichetta?: T;
-        tipo?: T;
-        pagina?: T;
-        url?: T;
-        id?: T;
-      };
+        etichetta?: T
+        tipo?: T
+        pagina?: T
+        url?: T
+        id?: T
+      }
   footerSocial?:
     | T
     | {
-        etichetta?: T;
-        tipo?: T;
-        pagina?: T;
-        url?: T;
-        id?: T;
-      };
+        etichetta?: T
+        tipo?: T
+        pagina?: T
+        url?: T
+        id?: T
+      }
   footerLegale?:
     | T
     | {
-        etichetta?: T;
-        tipo?: T;
-        pagina?: T;
-        url?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+        etichetta?: T
+        tipo?: T
+        pagina?: T
+        url?: T
+        id?: T
+      }
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "drive-connessione_select".
  */
 export interface DriveConnessioneSelect<T extends boolean = true> {
-  email?: T;
-  tokenCifrato?: T;
-  collegatoIl?: T;
-  collegatoDa?: T;
-  cartellaMedia?: T;
-  cartellaRadice?: T;
-  errore?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+  email?: T
+  tokenCifrato?: T
+  collegatoIl?: T
+  collegatoDa?: T
+  cartellaMedia?: T
+  cartellaRadice?: T
+  errore?: T
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2171,18 +2217,17 @@ export interface DriveConnessioneSelect<T extends boolean = true> {
  */
 export interface CollectionsWidget {
   data?: {
-    [k: string]: unknown;
-  };
-  width: 'full';
+    [k: string]: unknown
+  }
+  width: 'full'
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown;
+  [k: string]: unknown
 }
-
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

@@ -89,6 +89,15 @@ Immagini e PDF caricati nel pannello vanno in una cartella Drive dell’account 
 - Un amministratore apre **/admin/drive** (link “Google Drive” nella dashboard), preme “Collega Google Drive” ed entra come noreply@. Il refresh token è salvato nel database cifrato con AES-256-GCM (chiave da `PAYLOAD_SECRET`: se cambia, si ricollega).
 - Senza collegamento, o se Drive non risponde, i file restano sul disco (`MEDIA_DIR`) come prima; “Sposta su Drive” li trasferisce dopo. I file eliminati finiscono nel cestino di Drive (30 giorni).
 
+## Allineamento con il sito WordPress
+
+Fino al passaggio, in **/admin/drive** due sezioni riallineano il nuovo sito ad albertina-academy.it (API REST pubblica, rilanciabili):
+
+- **File dal sito WordPress** (`src/lib/wp-import/`): PDF e immagini su Drive, link riscritti nei contenuti.
+- **Contenuti dal sito WordPress** (`src/lib/wp-import/contenuti/`): Albo online (pagine Breakdance lette dall’HTML), Amministrazione trasparente e avvisi (campi ACF esposti nell’API dal 14/11/2026). Ogni contenuto ha `wpId` e un’impronta: crea i nuovi, aggiorna i cambiati, salta gli invariati. Chi salva dal pannello un contenuto importato accende “Modificato nel pannello” e la sincronizzazione non lo tocca più (un admin può togliere la spunta per riallinearlo). Niente cancellazioni: gli elementi tolti da WordPress sono solo segnalati. Le pagine cambiate su WordPress dopo l’import si elencano, da riportare a mano.
+
+In locale: `pnpm payload run scripts/wp/sincronizza-contenuti.ts [limite]`.
+
 ## Email (TurboSMTP)
 
 Le email (conferme e annullamenti delle iscrizioni, recupero password) partono solo se `SMTP_HOST` è impostata.

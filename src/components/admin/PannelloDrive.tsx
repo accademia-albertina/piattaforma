@@ -5,6 +5,7 @@
  */
 import type { StatoSincronizzazione } from '@/lib/wp-import/sincronizza'
 
+import ContenutiWordPress, { type PropsContenutiWordPress } from './ContenutiWordPress'
 import styles from './Drive.module.css'
 
 export type PropsPannelloDrive = {
@@ -33,6 +34,8 @@ export type PropsPannelloDrive = {
     importati: number
     suWordPress: number | null
   }
+  /** Contenuti dal sito WordPress (Albo, Trasparenza, avvisi). */
+  contenutiWp?: Omit<PropsContenutiWordPress, 'attivo'>
   esito?: string
   errore?: string
 }
@@ -44,6 +47,10 @@ const ESITI: Record<string, string> = {
   sposta: 'Spostamento avviato: ricarica la pagina per vedere a che punto è.',
   'wp-avviata': 'Importazione da WordPress avviata: ricarica la pagina per vedere a che punto è.',
   'wp-gia-in-corso': 'C’è già un’importazione in corso.',
+  'wpc-avviata':
+    'Sincronizzazione dei contenuti avviata: ricarica la pagina per vedere a che punto è.',
+  'wpc-gia-in-corso': 'C’è già una sincronizzazione dei contenuti in corso.',
+  'wpc-fermata': 'La sincronizzazione si ferma dopo il contenuto in corso. Rilanciala quando vuoi.',
   'wp-fermata':
     'L’importazione si ferma dopo il file in corso. Rilanciala quando vuoi: riparte da lì.',
 }
@@ -370,6 +377,7 @@ export default function PannelloDrive(p: PropsPannelloDrive) {
       </section>
 
       {p.wordpress && <SezioneWordPress wp={p.wordpress} attivo={funziona || !configurato} />}
+      {p.contenutiWp && <ContenutiWordPress {...p.contenutiWp} attivo={funziona || !configurato} />}
     </div>
   )
 }
