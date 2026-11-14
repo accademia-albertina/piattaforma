@@ -27,6 +27,29 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.38.0',
+    data: '2026-11-14',
+    titolo: 'Contenuti dal sito WordPress',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'In Google Drive, sezione “Contenuti dal sito WordPress”: allinea Albo online, Amministrazione trasparente e avvisi al sito attuale. Aggiunge i nuovi, aggiorna quelli cambiati e importa i loro file.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Un contenuto modificato nel pannello non viene più sovrascritto: nella colonna a destra compare la spunta “Modificato nel pannello”. Se cambia anche su WordPress finisce nell’elenco da controllare a mano.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Niente cancellazioni automatiche: gli atti tolti da WordPress restano e vengono segnalati. Elenco delle pagine cambiate su WordPress dopo l’importazione, da riportare a mano.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.37.0',
     data: '2026-11-13',
     titolo: 'File dal sito WordPress',

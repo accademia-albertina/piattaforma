@@ -8,6 +8,7 @@ import { isAdmin } from '@/access/roles'
 import { accountDrive, driveConfigurato, idCartellaRadice } from '@/lib/drive/api'
 import { driveCollegato, leggiStato } from '@/lib/drive/connessione'
 import { fileSulDisco, statoSpostamento } from '@/lib/drive/sposta'
+import { statoContenuti } from '@/lib/wp-import/contenuti/sincronizza-contenuti'
 import { statoSincronizzazione } from '@/lib/wp-import/sincronizza'
 import { contaMediaWp } from '@/lib/wp-import/wordpress'
 
@@ -45,9 +46,24 @@ export default async function Drive({
   }
   const suDisco = await fileSulDisco(req.payload)
   const [{ totalDocs: importati }, suWordPress] = await Promise.all([
-    req.payload.count({ collection: 'media', where: { wpId: { exists: true } }, overrideAccess: true }),
+    req.payload.count({
+      collection: 'media',
+      where: { wpId: { exists: true } },
+      overrideAccess: true,
+    }),
     contaMediaWp(),
   ])
+  const collegati = async (collection: 'albo' | 'trasparenza' | 'avvisi') =>
+    (
+      await req.payload.count({
+        collection,
+        where: { wpId: { exists: true } },
+        overrideAccess: true,
+      })
+    ).totalDocs
+  const [albo, trasparenza, avvisi] = await Promise.all(
+    (['albo', 'trasparenza', 'avvisi'] as const).map(collegati),
+  )
 
   return (
     <DefaultTemplate
@@ -78,6 +94,7 @@ export default async function Drive({
           suDisco={suDisco}
           spostamento={statoSpostamento()}
           wordpress={{ stato: statoSincronizzazione(), importati, suWordPress }}
+          contenutiWp={{ stato: statoContenuti(), collegati: { albo, trasparenza, avvisi } }}
           esito={typeof searchParams?.esito === 'string' ? searchParams.esito : undefined}
           errore={typeof searchParams?.errore === 'string' ? searchParams.errore : undefined}
         />

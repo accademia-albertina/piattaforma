@@ -5,6 +5,7 @@ import { soloTrasparenza } from '@/access/albo'
 import { leggiPubblicati } from '@/access/corsi'
 import { documentiField } from '@/fields/documenti'
 import { slugField } from '@/fields/slug'
+import { campiProvenienzaWp, segnaModificaNelPannello } from '@/fields/provenienzaWp'
 import { SEZIONI_TRASPARENZA } from '@/lib/albo'
 import { validaTitolo } from '@/fields/titolo'
 import { linkSulSito } from '@/fields/linkSulSito'
@@ -36,6 +37,7 @@ export const Trasparenza: CollectionConfig = {
   },
   hooks: {
     beforeChange: [
+      segnaModificaNelPannello,
       ({ data, context }) => {
         // L'importazione dal sito attuale conserva la data originale.
         if (!context?.importazione) data.aggiornatoIl = new Date().toISOString()
@@ -78,5 +80,6 @@ export const Trasparenza: CollectionConfig = {
       admin: { position: 'sidebar', readOnly: true, date: { displayFormat: 'd MMM yyyy' } },
     },
     slugField('titolo'),
+    campiProvenienzaWp,
   ],
 }

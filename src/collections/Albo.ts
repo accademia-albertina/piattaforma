@@ -5,6 +5,7 @@ import { soloAlbo } from '@/access/albo'
 import { leggiPubblicati } from '@/access/corsi'
 import { documentiField } from '@/fields/documenti'
 import { slugField } from '@/fields/slug'
+import { campiProvenienzaWp, segnaModificaNelPannello } from '@/fields/provenienzaWp'
 import { SEZIONE_ALBO, SEZIONI_ALBO } from '@/lib/albo'
 import { validaTitolo } from '@/fields/titolo'
 
@@ -28,6 +29,7 @@ export const Albo: CollectionConfig = {
   defaultSort: '-pubblicatoIl',
   versions: { drafts: true, maxPerDoc: 30 },
   access: { read: leggiPubblicati, create: soloAlbo, update: soloAlbo, delete: soloAlbo },
+  hooks: { beforeChange: [segnaModificaNelPannello] },
   fields: [
     {
       name: 'titolo',
@@ -107,5 +109,6 @@ export const Albo: CollectionConfig = {
     },
     documentiField(),
     slugField('titolo'),
+    campiProvenienzaWp,
   ],
 }

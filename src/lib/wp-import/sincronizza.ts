@@ -231,7 +231,7 @@ async function dimensioniImmagine(p: string, mimeType: string) {
   }
 }
 
-async function importaFile(
+export async function importaFile(
   payload: Payload,
   m: MediaWp,
   esistente: DocMedia | undefined,
@@ -293,7 +293,7 @@ async function importaFile(
 /** Indirizzo pubblico di un file della collezione media (come lo genera Payload). */
 export const urlFile = (filename: string) => `/api/media/file/${encodeURIComponent(filename)}`
 
-async function mappaFile(payload: Payload): Promise<MappaFile> {
+export async function mappaFile(payload: Payload): Promise<MappaFile> {
   const { docs } = await payload.find({
     collection: 'media',
     where: { wpUrl: { exists: true } },
