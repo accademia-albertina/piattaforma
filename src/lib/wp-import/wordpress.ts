@@ -113,6 +113,25 @@ export async function elencoMediaWp(o: { fetch?: typeof fetch } = {}): Promise<M
   return tutti
 }
 
+/** Un solo media per ID (null se non esiste o non è pubblico). */
+export async function mediaWpPerId(
+  id: number,
+  o: { fetch?: typeof fetch } = {},
+): Promise<MediaWp | null> {
+  const url = `${SITO_WP}/wp-json/wp/v2/media/${id}?_fields=${CAMPI}`
+  const r = await chiediAWp(
+    url,
+    { headers: { accept: 'application/json' }, timeout: 30_000 },
+    o.fetch,
+  )
+  if (r.status === 404 || r.status === 401 || r.status === 403) {
+    await r.body?.cancel()
+    return null
+  }
+  if (!r.ok) throw new Error(`WordPress ${r.status} sul file ${id}`)
+  return converti((await r.json()) as RigaRest)
+}
+
 /** Solo il numero dei media pubblici (una richiesta): per il confronto nel pannello. */
 export async function contaMediaWp(o: { fetch?: typeof fetch } = {}): Promise<number | null> {
   try {

@@ -16,7 +16,7 @@ import { inFrase } from '@/utilities/maiuscole'
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 const leggi = <T>(nome: string): T => JSON.parse(readFileSync(path.join(dirname, nome), 'utf8'))
 
-type AttoWp = {
+export type AttoWp = {
   sezione: SezioneAlbo
   categoria: string
   anno: string | null
@@ -26,7 +26,8 @@ type AttoWp = {
   documenti: { nome: string; url: string }[]
 }
 
-type VoceWp = {
+export type VoceWp = {
+  wpId: number
   titolo: string
   slug: string
   sezione: string
@@ -39,8 +40,42 @@ const pulito = (s: string) => s.replace(/\r\n?/g, '\n').trim()
 const chiaveAtto = (a: { sezione: string; titolo: string; pubblicatoIl?: string | null }) =>
   `${a.sezione}|${inFrase(a.titolo).slice(0, 300).trim().toLowerCase()}|${(a.pubblicatoIl ?? '').slice(0, 10)}`
 
+/** Dati di un atto come li salva l'importazione (anche la sincronizzazione da WordPress). */
+export const datiAtto = (a: AttoWp) => ({
+  titolo: inFrase(a.titolo).slice(0, 300),
+  sezione: a.sezione,
+  categoria: a.categoria,
+  annoAccademico: a.anno,
+  pubblicatoIl: a.pubblicatoIl ?? '2024-10-01',
+  scadenza: a.scadenza,
+  documenti: a.documenti.map((d) => ({ nome: d.nome.slice(0, 300), url: d.url })),
+})
+
+export const attiSeed = () => leggi<AttoWp[]>('albo-wp.json')
+export const vociSeed = () => leggi<VoceWp[]>('trasparenza-wp.json')
+
+/** Dati di una sottosezione come li salva l'importazione (null se la sezione non esiste). */
+export function datiVoce(v: VoceWp) {
+  if (!(SEZIONI_TRASPARENZA as readonly string[]).includes(v.sezione)) return null
+  // Le righe senza link sono testo: vanno nel campo Testo.
+  const testo = v.documenti
+    .filter((d) => !d.url)
+    .map((d) => [d.nome, pulito(d.nota)].filter(Boolean).join('\n'))
+    .filter(Boolean)
+    .join('\n\n')
+  return {
+    titolo: inFrase(v.titolo),
+    slug: v.slug,
+    sezione: v.sezione as SezioneTrasparenza,
+    testo: testo || null,
+    documenti: v.documenti
+      .filter((d) => d.url)
+      .map((d) => ({ nome: d.nome || 'Documento', url: d.url, nota: pulito(d.nota) || null })),
+  }
+}
+
 export async function importaAlboWp(payload: Payload) {
-  const atti = leggi<AttoWp[]>('albo-wp.json')
+  const atti = attiSeed()
   const esistenti = await payload.find({
     collection: 'albo',
     pagination: false,
@@ -59,16 +94,7 @@ export async function importaAlboWp(payload: Payload) {
   for (const a of mancanti) {
     await payload.create({
       collection: 'albo',
-      data: {
-        titolo: inFrase(a.titolo).slice(0, 300),
-        sezione: a.sezione,
-        categoria: a.categoria,
-        annoAccademico: a.anno,
-        pubblicatoIl: a.pubblicatoIl ?? '2024-10-01',
-        scadenza: a.scadenza,
-        documenti: a.documenti.map((d) => ({ nome: d.nome.slice(0, 300), url: d.url })),
-        _status: 'published',
-      },
+      data: { ...datiAtto(a), _status: 'published' },
       overrideAccess: true,
     })
   }
@@ -76,7 +102,7 @@ export async function importaAlboWp(payload: Payload) {
 }
 
 export async function importaTrasparenzaWp(payload: Payload) {
-  const voci = leggi<VoceWp[]>('trasparenza-wp.json')
+  const voci = vociSeed()
   const esistenti = await payload.find({
     collection: 'trasparenza',
     pagination: false,
@@ -91,23 +117,12 @@ export async function importaTrasparenzaWp(payload: Payload) {
   if (mancanti.length === 0) return
   payload.logger.info(`Importo ${mancanti.length} sottosezioni della trasparenza dal sito attuale…`)
   for (const v of mancanti) {
-    if (!(SEZIONI_TRASPARENZA as readonly string[]).includes(v.sezione)) continue
-    // Le righe senza link sono testo: vanno nel campo Testo.
-    const testo = v.documenti
-      .filter((d) => !d.url)
-      .map((d) => [d.nome, pulito(d.nota)].filter(Boolean).join('\n'))
-      .filter(Boolean)
-      .join('\n\n')
+    const dati = datiVoce(v)
+    if (!dati) continue
     await payload.create({
       collection: 'trasparenza',
       data: {
-        titolo: inFrase(v.titolo),
-        slug: v.slug,
-        sezione: v.sezione as SezioneTrasparenza,
-        testo: testo || null,
-        documenti: v.documenti
-          .filter((d) => d.url)
-          .map((d) => ({ nome: d.nome || 'Documento', url: d.url, nota: pulito(d.nota) || null })),
+        ...dati,
         aggiornatoIl: new Date(v.aggiornatoIl.replace(' ', 'T') + '+01:00').toISOString(),
         _status: 'published',
       },

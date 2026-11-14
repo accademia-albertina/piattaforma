@@ -33,10 +33,14 @@ type AvvisoWp = {
   contenuto: Avviso['contenuto']
 }
 
+const leggiAvvisi = (): AvvisoWp[] =>
+  JSON.parse(gunzipSync(readFileSync(path.join(dirname, 'avvisi-wp.json.gz'))).toString('utf8'))
+
+/** Slug (già ripuliti) degli avvisi dell'importazione iniziale. */
+export const slugAvvisiSeed = () => new Set(leggiAvvisi().map((a) => slugify(a.slug)))
+
 export async function importaAvvisiWp(payload: Payload) {
-  const avvisi: AvvisoWp[] = JSON.parse(
-    gunzipSync(readFileSync(path.join(dirname, 'avvisi-wp.json.gz'))).toString('utf8'),
-  )
+  const avvisi = leggiAvvisi()
 
   const esistenti = await payload.find({
     collection: 'avvisi',

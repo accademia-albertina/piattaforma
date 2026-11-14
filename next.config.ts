@@ -41,6 +41,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // jsdom (conversione dei contenuti da WordPress) si carica da node_modules, non nel bundle
+  serverExternalPackages: ['jsdom'],
   experimental: {
     // Con proxy.ts attivo Next taglia i corpi delle richieste a 10 MB e i caricamenti più grandi
     // finivano in errore. Il tetto vero è in Payload (src/lib/limiti-upload.ts, 50 MB per gli
@@ -56,27 +58,29 @@ const nextConfig: NextConfig = {
   },
   // Indirizzi del sito attuale e dei vecchi menu che ora portano alla pagina dei calendari.
   async redirects() {
-    return ['/didattica/orario-lezioni', '/didattica/calendari', '/orario-lezioni', '/calendario']
-      .map((source) => ({ source, destination: '/calendari', permanent: true }))
-      .concat(
-        // Pagine del sito attuale spostate o con un indirizzo vecchio ancora linkato
-        Object.entries({
-          '/outgoing': '/erasmus/mobilita-studenti',
-          '/incoming': '/erasmus/incoming-students',
-          '/docenti-e-staff': '/erasmus/mobilita-docenti-staff',
-          '/bandi-erasmus': '/erasmus/bandi',
-          '/erasmus/bandi-erasmus': '/erasmus/bandi',
-          '/studente/trasferimenti': '/didattica/trasferimenti',
-          '/didattica/ammissioni-e-iscrizioni': '/didattica/ammissioni',
-          '/didattica/segreteria': '/studente/segreteria-didattica',
-          '/didattica/docenti': '/docenti',
-          '/privacy': '/privacy-policy',
-          '/cookie': '/cookie-policy',
-          '/note-legali': '/termini-e-condizioni',
-        }).map(([source, destination]) => ({ source, destination, permanent: true })),
-      )
-      // Il registro delle versioni ora sta nel pannello (solo con accesso)
-      .concat([{ source: '/novita', destination: '/admin/changelog', permanent: false }])
+    return (
+      ['/didattica/orario-lezioni', '/didattica/calendari', '/orario-lezioni', '/calendario']
+        .map((source) => ({ source, destination: '/calendari', permanent: true }))
+        .concat(
+          // Pagine del sito attuale spostate o con un indirizzo vecchio ancora linkato
+          Object.entries({
+            '/outgoing': '/erasmus/mobilita-studenti',
+            '/incoming': '/erasmus/incoming-students',
+            '/docenti-e-staff': '/erasmus/mobilita-docenti-staff',
+            '/bandi-erasmus': '/erasmus/bandi',
+            '/erasmus/bandi-erasmus': '/erasmus/bandi',
+            '/studente/trasferimenti': '/didattica/trasferimenti',
+            '/didattica/ammissioni-e-iscrizioni': '/didattica/ammissioni',
+            '/didattica/segreteria': '/studente/segreteria-didattica',
+            '/didattica/docenti': '/docenti',
+            '/privacy': '/privacy-policy',
+            '/cookie': '/cookie-policy',
+            '/note-legali': '/termini-e-condizioni',
+          }).map(([source, destination]) => ({ source, destination, permanent: true })),
+        )
+        // Il registro delle versioni ora sta nel pannello (solo con accesso)
+        .concat([{ source: '/novita', destination: '/admin/changelog', permanent: false }])
+    )
   },
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]
