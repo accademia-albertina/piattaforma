@@ -37,7 +37,7 @@ export const CHANGELOG: Versione[] = [
           'La casetta del percorso non è più tagliata. Su telefono il menu e la X sono grandi come la casetta e allineati al titolo della pagina e alle voci del menu.',
       },
     ],
-    pr: [93],
+    pr: [94],
   },
   {
     versione: '0.39.2',
