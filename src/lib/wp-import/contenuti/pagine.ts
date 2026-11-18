@@ -87,6 +87,7 @@ export async function blocchiPagina(
       case 'galleria':
         out.push({
           blockType: 'galleria',
+          aspetto: b.aspetto ?? 'griglia',
           immagini: b.immagini.map((i) => ({
             file: null,
             url: i.url,

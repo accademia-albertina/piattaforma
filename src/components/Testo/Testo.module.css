@@ -1,3 +1,29 @@
+/* Titoli dentro i testi: un gradino sotto quelli di sezione della pagina (Fede 2026-11-18). */
+.testo :where(h2) {
+  font-size: var(--font-size-xl);
+}
+
+.testo :where(h3) {
+  font-size: var(--font-size-lg);
+}
+
+.testo :where(h4, h5, h6) {
+  font-size: var(--font-size-md);
+}
+
+/* Link a una scuola: icona ufficiale della scuola accanto al nome */
+.linkScuola {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  vertical-align: middle;
+}
+
+.iconaScuola {
+  flex: none;
+  color: var(--color-heading);
+}
+
 /* Tabelle nei testi (regolamenti, tasse): scorrono in orizzontale su telefono. */
 .tabella {
   max-width: 100%;

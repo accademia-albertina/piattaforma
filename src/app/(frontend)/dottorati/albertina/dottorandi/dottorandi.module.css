@@ -25,7 +25,7 @@
 
 .gruppoTesta h2 {
   margin: 0;
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-2xl);
   letter-spacing: var(--letter-spacing-tight);
 }
 
@@ -35,10 +35,13 @@
 }
 
 .schede {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
-  gap: var(--gap);
+  max-width: 56rem;
   margin: 0;
   padding: 0;
   list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.schede > li {
+  border-bottom: 1px solid var(--color-border);
 }

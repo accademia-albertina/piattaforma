@@ -122,7 +122,7 @@ export async function seedDemo(payload: Payload) {
   const didattica = await crea({
     titolo: 'Didattica',
     sommario:
-      'Ammissioni, iscrizioni, piani di studio e trasferimenti per i corsi di laurea e di laurea magistrale.',
+      'Ammissioni, iscrizioni, piani di studio e trasferimenti per i corsi di Laurea (Triennio) e di Laurea Magistrale (Biennio).',
     // Le pagine genitore non hanno immagini di testata (Fede, 18/11/2026)
     blocchi: [],
   })
@@ -289,7 +289,8 @@ export async function seedDemo(payload: Payload) {
   await crea({
     titolo: 'Piani di studio',
     genitore: didattica.id,
-    sommario: 'Insegnamenti e crediti dei corsi di Triennio e Biennio, scuola per scuola.',
+    sommario:
+      'Insegnamenti e crediti dei corsi di Laurea (Triennio) e Laurea Magistrale (Biennio), scuola per scuola.',
   })
   await crea({
     titolo: 'Trasferimenti',

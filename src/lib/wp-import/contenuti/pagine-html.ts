@@ -79,7 +79,11 @@ export type BloccoGrezzo =
   | { tipo: 'immagine'; url: string; didascalia?: string | null }
   | { tipo: 'planimetria' }
   | { tipo: 'guidaStudenti'; titolo?: string }
-  | { tipo: 'galleria'; immagini: { url: string; didascalia?: string | null }[] }
+  | {
+      tipo: 'galleria'
+      immagini: { url: string; didascalia?: string | null }[]
+      aspetto?: 'griglia' | 'fascia'
+    }
   | { tipo: 'link'; voci: { etichetta: string; url: string }[] }
   | {
       tipo: 'documento'
@@ -435,7 +439,8 @@ function visita(n: El, p: Pagina, m: MappaPercorsi, annidato = false): void {
     })
     if (immagini.length < 2 || annidato) return
     p.chiudiTesto()
-    p.blocchi.push({ tipo: 'galleria', immagini })
+    // Come sul sito attuale: fascia a tutta larghezza che si apre al passaggio del mouse
+    p.blocchi.push({ tipo: 'galleria', immagini, aspetto: 'fascia' })
     return
   }
 

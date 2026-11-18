@@ -34,7 +34,7 @@ const leggi = (): Contenuti[] =>
     gunzipSync(readFileSync(path.join(dirname, 'scuole-contenuti.json.gz'))).toString('utf8'),
   )
 
-// I testi del sito attuale parlano di «diploma accademico»: qui diventano Laurea / Laurea magistrale.
+// I testi del sito attuale parlano di «diploma accademico»: qui diventano Laurea / Laurea Magistrale.
 const percorso = (p: Percorso, livello: 'triennio' | 'biennio') =>
   ({
     attivo: p.attivo,

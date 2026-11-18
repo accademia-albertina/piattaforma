@@ -16,7 +16,7 @@ const contentSecurityPolicy = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   // Video delle scuole: solo YouTube senza cookie, caricato al clic (VideoYoutube)
-  'frame-src https://www.youtube-nocookie.com',
+  'frame-src https://www.youtube-nocookie.com https://www.google.com https://maps.google.com',
   "font-src 'self'",
   "connect-src 'self'",
   "object-src 'none'",
@@ -61,6 +61,8 @@ const nextConfig: NextConfig = {
     return [
       // Pannello: la pagina Google Drive ora si chiama Integrazioni (Drive e WordPress)
       { source: '/admin/drive', destination: '/admin/integrazioni', permanent: false },
+      // Piani di studio oscurata (Fede 2026-11-18): i piani sono nelle pagine delle scuole
+      { source: '/didattica/piani-di-studio', destination: '/scuole', permanent: false },
     ].concat(
       ['/didattica/orario-lezioni', '/didattica/calendari', '/orario-lezioni', '/calendario']
         .map((source) => ({ source, destination: '/calendari', permanent: true }))

@@ -18,7 +18,7 @@ export const GUIDA_STUDENTI: VoceGuidaStudenti[] = [
     schermata: 'La pagina “Accedi”: il pulsante per entrare con l’account Google dell’Accademia.',
     titolo: 'Accedere',
     passi: [
-      'Premi “Accedi” in alto a destra e scegli “Accedi con Google” con il tuo account istituzionale (12345t@ per la laurea, 12345b@ per la laurea magistrale).',
+      'Premi “Accedi” in alto a destra e scegli “Accedi con Google” con il tuo account istituzionale (12345t@ per la Laurea, 12345b@ per la Laurea Magistrale).',
       'Una volta dentro, in alto a destra compaiono le tue iniziali: da lì apri “La mia area” o esci.',
       'Se non ricordi la password dell’account Google, recuperala dalla mail di benvenuto o dalla pagina di Google: il sito usa lo stesso account.',
     ],

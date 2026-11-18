@@ -4,12 +4,14 @@ import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 
 import { risolviLink } from '@/lib/link'
+import { slugScuolaDaLink } from '@/utilities/linkScuola'
 import type { Media, Pagina } from '@/payload-types'
 
 import { Attachments } from '../Attachments/Attachments'
 import { Documento } from '../Documento/Documento'
 import { Fisarmonica } from '../Fisarmonica/Fisarmonica'
 import { GuidaStudenti } from '../GuidaStudenti/GuidaStudenti'
+import { IconaScuola } from '../IconaScuola/IconaScuola'
 import { Planimetria } from '../Planimetria/Planimetria'
 
 import styles from './Blocchi.module.css'
@@ -83,6 +85,36 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
     }
 
     case 'galleria':
+      if (b.aspetto === 'fascia') {
+        // Foto affiancate da bordo a bordo; al passaggio del mouse una si allarga e mostra il nome
+        return (
+          <section
+            className={styles.fascia}
+            aria-label={b.titolo ? undefined : 'Foto'}
+            aria-labelledby={b.titolo ? `${id}-titolo` : undefined}
+          >
+            {b.titolo ? (
+              <h2 id={`${id}-titolo`} className="visually-hidden">
+                {b.titolo}
+              </h2>
+            ) : null}
+            <ul>
+              {b.immagini.map((im, k) => {
+                const m = media(im.immagine)
+                return m ? (
+                  <li key={im.id ?? k}>
+                    <figure>
+                      {/* eslint-disable-next-line @next/next/no-img-element -- come le altre immagini dei blocchi */}
+                      <img src={m.url!} alt={m.alt ?? ''} loading="lazy" decoding="async" />
+                      {im.didascalia ? <figcaption>{im.didascalia}</figcaption> : null}
+                    </figure>
+                  </li>
+                ) : null
+              })}
+            </ul>
+          </section>
+        )
+      }
       return (
         <Sezione id={id} titolo={b.titolo}>
           <ul className={styles.galleria}>
@@ -105,9 +137,13 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
             {b.voci.map((v, k) => {
               const l = risolviLink(v)
               if (!l) return null
+              const scuola = l.esterno ? null : slugScuolaDaLink(l.href)
               const contenuto = (
                 <>
                   <span className={styles.linkNome}>
+                    {scuola ? (
+                      <IconaScuola scuola={scuola} size={32} className={styles.linkIcona} />
+                    ) : null}
                     {l.label}
                     {l.esterno ? (
                       <>
@@ -250,10 +286,42 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
         </div>
       )
 
+    case 'mappa': {
+      const q = encodeURIComponent(b.indirizzo)
+      const nome = b.nome || b.indirizzo
+      return (
+        <section className={styles.mappa} aria-label={`Mappa: ${nome}`}>
+          <iframe
+            title={`Mappa di Google: ${nome}, ${b.indirizzo}`}
+            src={`https://maps.google.com/maps?q=${q}&t=m&z=16&output=embed&iwloc=near`}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+          <div className="container">
+            <p>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${q}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Apri in Google Maps
+                <ArrowUpRight size={14} strokeWidth={1.75} aria-hidden className={styles.esterno} />
+                <span className="visually-hidden"> (si apre in una nuova scheda)</span>
+              </a>
+            </p>
+          </div>
+        </section>
+      )
+    }
+
     default:
       return null
   }
 }
+
+/** Blocchi che escono dalla colonna del testo e vanno da bordo a bordo, in fondo alla pagina. */
+export const aTuttaLarghezza = (b: Blocco) =>
+  b.blockType === 'mappa' || (b.blockType === 'galleria' && b.aspetto === 'fascia')
 
 /** Contenuto di una pagina composta a blocchi dal pannello. */
 export function Blocchi({
@@ -261,12 +329,16 @@ export function Blocchi({
   variante,
 }: {
   blocchi: Blocco[] | null | undefined
-  /** "scheda": blocchi stretti in colonna laterale (es. contatti), con filetto rosso. */
-  variante?: 'scheda'
+  /**
+   * "scheda": blocchi stretti in colonna laterale (es. contatti), con filetto rosso.
+   * "piena": blocchi a tutta larghezza (fascia di foto, mappa), uno sotto l'altro senza spazi.
+   */
+  variante?: 'scheda' | 'piena'
 }) {
   if (!blocchi?.length) return null
+  const classe = variante === 'scheda' ? styles.scheda : variante === 'piena' ? styles.piene : ''
   return (
-    <div className={`${styles.blocchi} ${variante === 'scheda' ? styles.scheda : ''}`}>
+    <div className={`${styles.blocchi} ${classe}`}>
       {blocchi.map((b, i) => (
         <RenderBlocco key={b.id ?? i} b={b} i={i} />
       ))}

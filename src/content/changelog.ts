@@ -27,6 +27,44 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.41.0',
+    data: '2026-11-18',
+    titolo: 'Revisione delle pagine: menu coerenti, Contatti, sedi e terminologia',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Blocco Mappa (Google Maps a tutta larghezza) e galleria «a fascia» che si allarga al passaggio del mouse, come le sedi sul sito attuale.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Chi riceve il ruolo Docente ha subito il suo profilo in Docenti; nelle pagine delle scuole compare scegliendo la scuola nel profilo.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Menu laterale e pagine di sezione mostrano tutte le voci del menu. Scuole sostituisce Piani di studio (pagina nascosta).',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Sempre «Laurea (Triennio)» e «Laurea Magistrale (Biennio)», con la maiuscola; icone delle scuole accanto ai loro link.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Contatti completa (email, uffici, mappa), Ordinamento corretto, loghi in Dottorati, dottorandi in elenco, titoli del testo più piccoli.',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          'Foto dei docenti che non si vedevano; frecce e testo tagliato nei menu a tendina dei filtri.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.40.0',
     data: '2026-11-18',
     titolo: 'Pagine istituzionali e home modificabile',

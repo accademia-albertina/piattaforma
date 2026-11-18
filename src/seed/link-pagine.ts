@@ -8,10 +8,7 @@ import type { Navigazione } from '@/payload-types'
  */
 export const PERCORSI_PAGINE: Record<string, { url: string; etichetta?: string }> = {
   '/accademia/saluto-del-direttore': { url: '/accademia/il-saluto-del-direttore' },
-  '/didattica/offerta-formativa': {
-    url: '/didattica/piani-di-studio',
-    etichetta: 'Piani di studio',
-  },
+  '/didattica/offerta-formativa': { url: '/scuole', etichetta: 'Scuole' },
   '/studenti/segreteria': { url: '/studente/segreteria-didattica' },
   '/studenti/stage-e-tirocinio': { url: '/studente/stage-tirocinio' },
   '/studenti/modulistica': { url: '/studente/modulistica' },

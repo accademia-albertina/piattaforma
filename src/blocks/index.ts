@@ -59,6 +59,20 @@ export const BloccoGalleria: Block = {
   fields: [
     titoloFacoltativo,
     {
+      name: 'aspetto',
+      label: 'Aspetto',
+      type: 'select',
+      defaultValue: 'griglia',
+      options: [
+        { label: 'Griglia nel testo', value: 'griglia' },
+        { label: 'Fascia a tutta larghezza in fondo alla pagina', value: 'fascia' },
+      ],
+      admin: {
+        description:
+          'Fascia: le foto affiancate da bordo a bordo, si allargano al passaggio del mouse (es. le sedi).',
+      },
+    },
+    {
       name: 'immagini',
       label: 'Immagini',
       type: 'array',
@@ -262,6 +276,32 @@ export const BloccoGuidaStudenti: Block = {
   ],
 }
 
+export const BloccoMappa: Block = {
+  slug: 'mappa',
+  labels: { singular: 'Mappa', plural: 'Mappe' },
+  admin: etichettaBlocco('Mappa'),
+  interfaceName: 'BloccoMappa',
+  fields: [
+    {
+      name: 'indirizzo',
+      label: 'Indirizzo',
+      type: 'text',
+      required: true,
+      defaultValue: 'Via Accademia Albertina 6, 10123 Torino',
+      admin: { description: 'Come lo cercheresti su Google Maps.' },
+    },
+    {
+      name: 'nome',
+      label: 'Nome del luogo',
+      type: 'text',
+      defaultValue: 'Accademia Albertina di Belle Arti',
+      admin: {
+        description: 'Per chi usa il lettore di schermo e per il link “Apri in Google Maps”.',
+      },
+    },
+  ],
+}
+
 export const BLOCCHI: Block[] = [
   BloccoTesto,
   BloccoImmagine,
@@ -273,4 +313,5 @@ export const BLOCCHI: Block[] = [
   BloccoDocumento,
   BloccoPlanimetria,
   BloccoGuidaStudenti,
+  BloccoMappa,
 ]
