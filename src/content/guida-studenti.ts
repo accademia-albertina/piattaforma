@@ -2,13 +2,20 @@
  * Guida breve per gli studenti, in fondo a “La mia area”. Testi semplici, nomi dei pulsanti
  * come compaiono sul sito. Gli studenti non entrano nel pannello: tutto avviene sul sito.
  */
-export type VoceGuidaStudenti = { id: string; titolo: string; passi: string[] }
+export type VoceGuidaStudenti = {
+  id: string
+  titolo: string
+  passi: string[]
+  /** Didascalia della schermata public/guida/studenti-<id>-chiaro.webp, se c'è. */
+  schermata?: string
+}
 
 export const LINK_ISIDATA = 'https://servizi13.isidata.net/SSDidatticheAC/MainGeneraleRes.aspx'
 
 export const GUIDA_STUDENTI: VoceGuidaStudenti[] = [
   {
     id: 'accesso',
+    schermata: 'La pagina “Accedi”: il pulsante per entrare con l’account Google dell’Accademia.',
     titolo: 'Accedere',
     passi: [
       'Premi “Accedi” in alto a destra e scegli “Accedi con Google” con il tuo account istituzionale (12345t@ per la laurea, 12345b@ per la laurea magistrale).',
@@ -18,6 +25,8 @@ export const GUIDA_STUDENTI: VoceGuidaStudenti[] = [
   },
   {
     id: 'iscriversi',
+    schermata:
+      'La pagina di un corso: il riquadro “Iscrizione al corso” con le date e il pulsante.',
     titolo: 'Iscriversi a un corso',
     passi: [
       'Apri il corso da “Corsi” (puoi filtrare per scuola e livello).',
@@ -27,6 +36,7 @@ export const GUIDA_STUDENTI: VoceGuidaStudenti[] = [
   },
   {
     id: 'annullare',
+    schermata: '“La mia area”: i corsi a cui sei iscritto, con il pulsante per annullare.',
     titolo: 'Annullare un’iscrizione',
     passi: [
       'Finché le iscrizioni sono aperte premi “Annulla l’iscrizione” (qui o nella pagina del corso) e conferma.',
@@ -35,6 +45,8 @@ export const GUIDA_STUDENTI: VoceGuidaStudenti[] = [
   },
   {
     id: 'esami',
+    schermata:
+      'La pagina “Esami e iscrizioni”: gli appelli con data, aula e pulsante per iscriversi.',
     titolo: 'Iscriversi a un esame',
     passi: [
       'Apri “Esami e iscrizioni” (da “Orari e calendari”) o la pagina del corso: trovi gli appelli con data, ora, aula e commissione.',

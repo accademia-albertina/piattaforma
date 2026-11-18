@@ -243,6 +243,25 @@ export const BloccoPlanimetria: Block = {
   ],
 }
 
+export const BloccoGuidaStudenti: Block = {
+  slug: 'guidaStudenti',
+  labels: { singular: 'Guida per gli studenti', plural: 'Guide per gli studenti' },
+  admin: etichettaBlocco('Guida per gli studenti'),
+  interfaceName: 'BloccoGuidaStudenti',
+  fields: [
+    {
+      name: 'titolo',
+      label: 'Titolo',
+      type: 'text',
+      maxLength: 120,
+      admin: {
+        description:
+          'Facoltativo, sopra la guida. Passi e schermate sono nel codice del sito (gli stessi di “La mia area”): per cambiarli chiedi a Fede.',
+      },
+    },
+  ],
+}
+
 export const BLOCCHI: Block[] = [
   BloccoTesto,
   BloccoImmagine,
@@ -253,4 +272,5 @@ export const BLOCCHI: Block[] = [
   BloccoAllegati,
   BloccoDocumento,
   BloccoPlanimetria,
+  BloccoGuidaStudenti,
 ]

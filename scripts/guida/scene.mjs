@@ -230,3 +230,124 @@ export const SCENE = [
     ],
   },
 ]
+
+/* ---------- Guida per gli studenti (sito pubblico) ---------- */
+
+const giorni = (n) => new Date(Date.now() + n * 86400000).toISOString()
+const CORSO_STUDENTI = 'anatomia-artistica-pittura-triennio-2026-2027'
+
+/** Finestra di iscrizione aperta adesso (la crea o la riapre). */
+async function finestraAperta(api, tipo, periodo) {
+  const filtro = `where[tipo][equals]=${tipo}&where[periodo][equals]=${periodo}&where[annoAccademico][equals]=2026%2F2027`
+  const { docs } = await api(`/finestre-iscrizione?${filtro}&depth=0&limit=1`)
+  const date = { apertura: giorni(-1), chiusura: giorni(40) }
+  if (docs[0]) await api(`/finestre-iscrizione/${docs[0].id}`, { method: 'PATCH', body: date })
+  else
+    await api('/finestre-iscrizione', {
+      method: 'POST',
+      body: { tipo, periodo, annoAccademico: '2026/2027', ...date },
+    })
+}
+
+/**
+ * Dati per le schermate degli studenti: iscrizioni aperte, un appello e lo studente di prova
+ * iscritto al corso (serve per “La mia area”). Si può rilanciare: non duplica nulla.
+ */
+let studentiPronti
+export function preparaStudenti({ api }) {
+  studentiPronti ??= (async () => {
+    await finestraAperta(api, 'corsi', 'primo')
+    await finestraAperta(api, 'esami', 'invernale')
+    const { docs: corsi } = await api(`/corsi?where[slug][equals]=${CORSO_STUDENTI}&depth=0`)
+    const corso = corsi[0]
+    const { docs: appelli } = await api(`/appelli?where[corso][equals]=${corso.id}&depth=0`)
+    if (!appelli.length)
+      await api('/appelli', {
+        method: 'POST',
+        body: {
+          corso: corso.id,
+          annoAccademico: '2026/2027',
+          sessione: 'invernale',
+          livelli: ['triennio'],
+          data: giorni(30),
+          ora: '10:00',
+          aula: 'A12',
+          commissione: 'Docente del corso e due commissari',
+        },
+      })
+    // L'account esiste già (lo crea l'accesso della scena): qui solo lettura, perché
+    // modificarlo ora chiuderebbe la sessione appena aperta
+    const { docs: utenti } = await api(
+      `/users?where[email][equals]=${encodeURIComponent('99999t@albertina.academy')}&depth=0`,
+    )
+    const { docs: iscrizioni } = await api(
+      `/iscrizioni-corsi?where[corso][equals]=${corso.id}&where[studente][equals]=${utenti[0].id}&depth=0`,
+    )
+    if (!iscrizioni.length)
+      await api('/iscrizioni-corsi', {
+        method: 'POST',
+        body: { corso: corso.id, studente: utenti[0].id },
+      })
+    return corso
+  })()
+  return studentiPronti
+}
+
+const conDati = (url) => async (contesto) => {
+  await preparaStudenti(contesto)
+  return url
+}
+
+// Scene del sito pubblico (`sito: true`): solo tema chiaro, accesso con l'API. Gli id
+// sono studenti-<id della voce> di src/content/guida-studenti.ts.
+SCENE.push(
+  {
+    id: 'studenti-accesso',
+    sito: true,
+    url: '/',
+    altezza: 420,
+    segni: [
+      {
+        n: 1,
+        sel: (page) => page.locator('header').getByRole('link', { name: 'Accedi', exact: true }),
+      },
+    ],
+  },
+  {
+    id: 'studenti-iscriversi',
+    sito: true,
+    ruolo: 'studente',
+    url: conDati('/corsi/anatomia-artistica-2-pittura-triennio-2026-2027'),
+    segni: [
+      { n: 1, sel: 'nav[aria-label="Percorso"] a[href="/corsi"]' },
+      { n: 2, sel: 'section[aria-labelledby^="iscrizione-corso"]' },
+      { n: 3, sel: (page) => page.getByRole('button', { name: /^La mia area/ }) },
+    ],
+  },
+  {
+    id: 'studenti-annullare',
+    sito: true,
+    ruolo: 'studente',
+    url: conDati('/la-mia-area'),
+    segni: [{ n: 1, sel: '#corsi button.btn-secondario' }],
+  },
+  {
+    id: 'studenti-esami',
+    sito: true,
+    ruolo: 'studente',
+    url: conDati('/esami'),
+    // Alta abbastanza da mostrare il primo appello senza scorrere sotto l'intestazione
+    altezza: 980,
+    segni: [
+      { n: 1, sel: (page) => page.locator('main section[class*="giorno"]').first() },
+      {
+        n: 2,
+        sel: (page) =>
+          page
+            .locator('main section[class*="giorno"]')
+            .first()
+            .getByRole('button', { name: 'Iscriviti all’appello' }),
+      },
+    ],
+  },
+)

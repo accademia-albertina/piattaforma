@@ -9,14 +9,13 @@ import { hasRole } from '@/access/roles'
 import { urlAccesso } from '@/auth/google'
 import {
   Breadcrumbs,
-  Fisarmonica,
+  GuidaStudenti,
   IscrizioneCorso,
   SchedaAppello,
   TestataPagina,
 } from '@/components'
 import { appelliConStato, giornoAppello } from '@/lib/appelli'
 import type { Corso } from '@/payload-types'
-import { GUIDA_STUDENTI, LINK_ISIDATA } from '@/content/guida-studenti'
 import { docentiDi, etichettaLivelli } from '@/lib/corsi'
 import { dataIscrizioni, iscrizioniDelCorso } from '@/lib/iscrizioni'
 import { payloadClient } from '@/lib/payload'
@@ -191,28 +190,7 @@ export default async function LaMiaArea() {
       {studente ? (
         <section id="guida" aria-labelledby="guida-titolo" className={styles.sezione}>
           <h2 id="guida-titolo">Guida per gli studenti</h2>
-          <Fisarmonica
-            voci={GUIDA_STUDENTI.map((v) => ({
-              id: v.id,
-              titolo: v.titolo,
-              contenuto: (
-                <>
-                  <ol className={styles.passi}>
-                    {v.passi.map((p) => (
-                      <li key={p}>{p}</li>
-                    ))}
-                  </ol>
-                  {v.id === 'isidata' ? (
-                    <p>
-                      <a href={LINK_ISIDATA} target="_blank" rel="noreferrer">
-                        Vai a Isidata (si apre in una nuova scheda)
-                      </a>
-                    </p>
-                  ) : null}
-                </>
-              ),
-            }))}
-          />
+          <GuidaStudenti />
         </section>
       ) : null}
     </div>

@@ -34,7 +34,12 @@ export const CHANGELOG: Versione[] = [
       {
         tipo: 'nuovo',
         testo:
-          'La home si modifica dal pannello (Impostazioni → Home): accessi rapidi, manifesto, cifre, foto, riquadro avviso e visita virtuale.',
+          'La home si modifica dal pannello (Impostazioni → Home, solo admin): accessi rapidi, manifesto, cifre, foto, riquadro avviso e visita virtuale.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Guida per gli studenti con le schermate del sito e i passi numerati, nella pagina Guide e in “La mia area”.',
       },
       {
         tipo: 'nuovo',

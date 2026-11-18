@@ -5,7 +5,7 @@
  */
 import type { Payload } from 'payload'
 
-import { GUIDA_STUDENTI, LINK_ISIDATA } from '@/content/guida-studenti'
+import { LINK_ISIDATA } from '@/content/guida-studenti'
 import { blocchiPagina } from '@/lib/wp-import/contenuti/pagine'
 import type { BloccoGrezzo } from '@/lib/wp-import/contenuti/pagine-html'
 
@@ -99,16 +99,9 @@ const GUIDE: PaginaNuova = {
   blocchi: [
     {
       tipo: 'testo',
-      html: `<p>Le cose da sapere per usare il sito dell’Accademia: accesso, iscrizioni ai corsi e agli esami, la tua area. Le stesse indicazioni sono anche in fondo a <a href="/la-mia-area">La mia area</a>.</p>
-<h2>Il sito</h2>`,
+      html: `<p>Le cose da sapere per usare il sito dell’Accademia: accesso, iscrizioni ai corsi e agli esami, la tua area. Le stesse indicazioni sono anche in fondo a <a href="/la-mia-area">La mia area</a>.</p>`,
     },
-    {
-      tipo: 'fisarmonica',
-      voci: GUIDA_STUDENTI.map((v) => ({
-        titolo: v.titolo,
-        html: `<ol>${v.passi.map((p) => `<li>${p}</li>`).join('')}</ol>`,
-      })),
-    },
+    { tipo: 'guidaStudenti', titolo: 'Il sito' },
     {
       tipo: 'testo',
       html: `<h2>Altre guide</h2>`,

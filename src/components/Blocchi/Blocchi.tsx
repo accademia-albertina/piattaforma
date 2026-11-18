@@ -9,6 +9,7 @@ import type { Media, Pagina } from '@/payload-types'
 import { Attachments } from '../Attachments/Attachments'
 import { Documento } from '../Documento/Documento'
 import { Fisarmonica } from '../Fisarmonica/Fisarmonica'
+import { GuidaStudenti } from '../GuidaStudenti/GuidaStudenti'
 import { Planimetria } from '../Planimetria/Planimetria'
 
 import styles from './Blocchi.module.css'
@@ -234,6 +235,13 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
         </div>
       )
     }
+
+    case 'guidaStudenti':
+      return (
+        <Sezione id={id} titolo={b.titolo}>
+          <GuidaStudenti livello={b.titolo ? 3 : 2} />
+        </Sezione>
+      )
 
     case 'planimetria':
       return (

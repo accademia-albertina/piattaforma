@@ -97,6 +97,9 @@ export async function blocchiPagina(
       case 'planimetria':
         out.push({ blockType: 'planimetria', titolo: null })
         break
+      case 'guidaStudenti':
+        out.push({ blockType: 'guidaStudenti', titolo: b.titolo ?? null })
+        break
       case 'contatti':
         out.push({ blockType: 'contatti', titolo: b.titolo ?? null, voci: b.voci })
         break

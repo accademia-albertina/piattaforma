@@ -78,6 +78,7 @@ export type BloccoGrezzo =
   | { tipo: 'fisarmonica'; voci: { titolo: string; html: string }[] }
   | { tipo: 'immagine'; url: string; didascalia?: string | null }
   | { tipo: 'planimetria' }
+  | { tipo: 'guidaStudenti'; titolo?: string }
   | { tipo: 'galleria'; immagini: { url: string; didascalia?: string | null }[] }
   | { tipo: 'link'; voci: { etichetta: string; url: string }[] }
   | {

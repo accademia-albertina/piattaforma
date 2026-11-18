@@ -25,6 +25,7 @@ import * as migration_20261118_090022_esiti_importazione from './20261118_090022
 import * as migration_20261118_103717_registro_operazioni from './20261118_103717_registro_operazioni'
 import * as migration_20261118_140434_pagine_wp_documento from './20261118_140434_pagine_wp_documento'
 import * as migration_20261118_141711_home_modificabile from './20261118_141711_home_modificabile'
+import * as migration_20261118_145945_guida_studenti from './20261118_145945_guida_studenti'
 
 export const migrations = [
   {
@@ -161,5 +162,10 @@ export const migrations = [
     up: migration_20261118_141711_home_modificabile.up,
     down: migration_20261118_141711_home_modificabile.down,
     name: '20261118_141711_home_modificabile',
+  },
+  {
+    up: migration_20261118_145945_guida_studenti.up,
+    down: migration_20261118_145945_guida_studenti.down,
+    name: '20261118_145945_guida_studenti',
   },
 ]
