@@ -23,6 +23,7 @@ import * as migration_20261113_162527_media_wordpress from './20261113_162527_me
 import * as migration_20261114_113913_provenienza_wp_contenuti from './20261114_113913_provenienza_wp_contenuti';
 import * as migration_20261118_090022_esiti_importazione from './20261118_090022_esiti_importazione';
 import * as migration_20261118_103717_registro_operazioni from './20261118_103717_registro_operazioni';
+import * as migration_20261118_114549_pagine_wp_documento from './20261118_114549_pagine_wp_documento';
 
 export const migrations = [
   {
@@ -148,6 +149,11 @@ export const migrations = [
   {
     up: migration_20261118_103717_registro_operazioni.up,
     down: migration_20261118_103717_registro_operazioni.down,
-    name: '20261118_103717_registro_operazioni'
+    name: '20261118_103717_registro_operazioni',
+  },
+  {
+    up: migration_20261118_114549_pagine_wp_documento.up,
+    down: migration_20261118_114549_pagine_wp_documento.down,
+    name: '20261118_114549_pagine_wp_documento'
   },
 ];

@@ -13,6 +13,8 @@ import type { Payload } from 'payload'
 
 import type { Docente } from '@/payload-types'
 
+import { slugify } from '@/utilities/slugify'
+
 import { SCUOLE } from './scuole-wp'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -36,6 +38,17 @@ const chiaveNome = (nome: string, cognome: string) =>
     .toLowerCase()
     .replace(/\s+/g, ' ')
     .trim()
+
+/**
+ * Slug WordPress del profilo (a-balzola, dal link /docente/a.balzola) → indirizzo del profilo
+ * sul nuovo sito (andrea-balzola), per riscrivere i link nelle pagine.
+ */
+export function slugDocentiWp(): Map<string, string> {
+  const docenti: DocenteWp[] = JSON.parse(
+    gunzipSync(readFileSync(path.join(dirname, 'docenti-wp.json.gz'))).toString('utf8'),
+  )
+  return new Map(docenti.map((d) => [d.slugWp, slugify(`${d.nome} ${d.cognome}`)]))
+}
 
 export async function importaDocentiWp(payload: Payload) {
   const profili: DocenteWp[] = JSON.parse(

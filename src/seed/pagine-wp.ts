@@ -26,10 +26,14 @@ type PaginaWp = {
   blocchi: NonNullable<Pagina['blocchi']>
 }
 
+const leggi = (): PaginaWp[] =>
+  JSON.parse(gunzipSync(readFileSync(path.join(dirname, 'pagine-wp.json.gz'))).toString('utf8'))
+
+/** Blocchi dell'importazione iniziale per percorso: la sincronizzazione riconosce le pagine intatte. */
+export const blocchiPagineSeed = () => new Map(leggi().map((p) => [p.percorso, p.blocchi]))
+
 export async function importaPagineWp(payload: Payload) {
-  const pagine: PaginaWp[] = JSON.parse(
-    gunzipSync(readFileSync(path.join(dirname, 'pagine-wp.json.gz'))).toString('utf8'),
-  )
+  const pagine = leggi()
   const esistenti = await payload.find({
     collection: 'pagine',
     pagination: false,
@@ -58,8 +62,11 @@ export async function importaPagineWp(payload: Payload) {
         genitore,
         blocchi: p.blocchi,
         _status: 'published',
+        // Collegata subito a WordPress: la sincronizzazione la aggiornerà
+        wpId: String(p.wpId),
       },
       overrideAccess: true,
+      context: { importazione: true },
     })
     id.set(creata.percorso, creata.id)
   }

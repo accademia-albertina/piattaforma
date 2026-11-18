@@ -186,6 +186,35 @@ export const BloccoAllegati: Block = {
   ],
 }
 
+export const BloccoDocumento: Block = {
+  slug: 'documento',
+  labels: { singular: 'Documento in evidenza', plural: 'Documenti in evidenza' },
+  admin: etichettaBlocco('Documento'),
+  interfaceName: 'BloccoDocumento',
+  fields: [
+    {
+      name: 'nome',
+      label: 'Titolo del documento',
+      type: 'text',
+      required: true,
+      maxLength: 200,
+      admin: { description: 'Es. “Regolamento tasse 2026-27”.' },
+    },
+    { name: 'descrizione', label: 'Descrizione breve', type: 'text', maxLength: 240 },
+    {
+      name: 'file',
+      label: 'File',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+      admin: {
+        description:
+          'I PDF si vedono in anteprima nella pagina (da tablet in su), con i pulsanti Apri e Scarica.',
+      },
+    },
+  ],
+}
+
 export const BLOCCHI: Block[] = [
   BloccoTesto,
   BloccoImmagine,
@@ -194,4 +223,5 @@ export const BLOCCHI: Block[] = [
   BloccoFisarmonica,
   BloccoContatti,
   BloccoAllegati,
+  BloccoDocumento,
 ]

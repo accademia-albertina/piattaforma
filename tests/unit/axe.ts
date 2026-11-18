@@ -6,6 +6,8 @@ export async function axeViolations(node: Element) {
     runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
     // jsdom non calcola gli stili: il contrasto è verificato da Storybook e Playwright.
     rules: { 'color-contrast': { enabled: false } },
+    // jsdom non carica le pagine dei riquadri (PDF, video): axe controlla il riquadro, non il contenuto.
+    iframes: false,
   })
   return results.violations.map((v) => `${v.id}: ${v.help}`)
 }

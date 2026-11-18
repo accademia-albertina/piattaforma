@@ -1,6 +1,6 @@
 /**
  * Sezione "Contenuti dal sito WordPress" di /admin/integrazioni: sincronizzazione di Albo online,
- * Amministrazione trasparente e avvisi (src/lib/wp-import/contenuti/). Solo presentazione;
+ * Amministrazione trasparente, avvisi e pagine istituzionali (src/lib/wp-import/contenuti/). Solo presentazione;
  * pulsanti come semplici moduli POST, funzionano anche senza JavaScript.
  */
 import type {
@@ -22,13 +22,14 @@ const NOMI: Record<Raccolta, string> = {
   albo: 'Albo online',
   trasparenza: 'Amministrazione trasparente',
   avvisi: 'Avvisi',
+  pagine: 'Pagine istituzionali',
 }
 
 const FASI: Record<StatoContenuti['fase'], string> = {
   albo: 'Albo online',
   trasparenza: 'Amministrazione trasparente',
   avvisi: 'Avvisi',
-  pagine: 'Controllo delle pagine',
+  pagine: 'Pagine istituzionali',
   finito: '',
 }
 
@@ -106,10 +107,10 @@ export default function ContenutiWordPress({
     <section aria-labelledby="contenuti-wordpress" className={styles.scheda}>
       <h2 id="contenuti-wordpress">Contenuti dal sito WordPress</h2>
       <p>
-        Allinea Albo online, Amministrazione trasparente e avvisi a albertina-academy.it: aggiunge i
-        nuovi, aggiorna quelli cambiati su WordPress e importa i file collegati. Non tocca i
-        contenuti modificati nel pannello e non cancella nulla. Rilanciala quando vuoi, fino al
-        passaggio al nuovo sito.
+        Allinea Albo online, Amministrazione trasparente, avvisi e pagine istituzionali a
+        albertina-academy.it: aggiunge i nuovi, aggiorna quelli cambiati su WordPress e importa i
+        file collegati. Non tocca i contenuti modificati nel pannello e non cancella nulla.
+        Rilanciala quando vuoi, fino al passaggio al nuovo sito.
       </p>
       <dl className={styles.dati}>
         {(Object.keys(NOMI) as Raccolta[]).map((r) => (
@@ -166,8 +167,8 @@ export default function ContenutiWordPress({
           {s.pagineModificate.length > 0 && (
             <details>
               <summary>
-                {numero(s.pagineModificate.length)} pagine modificate su WordPress dopo
-                l’importazione: da riportare a mano
+                {numero(s.pagineModificate.length)} altre pagine di WordPress (non importate)
+                modificate dopo il 21 ottobre: da valutare a mano
               </summary>
               <ul className={styles.elenco}>
                 {s.pagineModificate.map((p) => (

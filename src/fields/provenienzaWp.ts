@@ -3,7 +3,7 @@ import type { CollectionBeforeChangeHook, Field } from 'payload'
 import { isAdmin } from '@/access/roles'
 
 /**
- * Provenienza dal sito WordPress di avvisi, atti dell'Albo e sottosezioni della Trasparenza.
+ * Provenienza dal sito WordPress di avvisi, atti dell'Albo, sottosezioni della Trasparenza e pagine.
  * Serve alla sincronizzazione (src/lib/wp-import/contenuti/): riconosce i contenuti già
  * importati, prende solo quelli nuovi o modificati su WordPress e non tocca quelli che
  * qualcuno ha modificato nel pannello.

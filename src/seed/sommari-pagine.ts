@@ -30,6 +30,8 @@ export const SOMMARI_PAGINE: Record<string, string> = {
     'Come segnalare un problema di accessibilità del sito.',
   'studente/borse-di-studio': 'Borse EDISU Piemonte e altri aiuti allo studio.',
   'studente/consulta': 'L’organo che rappresenta gli studenti: componenti e contatti.',
+  'studente/matricole':
+    'Per chi inizia il primo anno: come funziona l’Accademia e come usare Isidata.',
   'studente/modulistica': 'Moduli per iscrizioni, tasse, esami, certificati ed Erasmus.',
   'studente/sportelli': 'Supporto accademico e personale, anche per studenti con disabilità o DSA.',
   'studente/stage-tirocinio': 'Stage e tirocini presso enti convenzionati, con i relativi crediti.',

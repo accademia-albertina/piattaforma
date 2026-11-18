@@ -187,6 +187,7 @@ export interface Pagina {
         | BloccoFisarmonica
         | BloccoContatti
         | BloccoAllegati
+        | BloccoDocumento
       )[]
     | null
   /**
@@ -202,6 +203,13 @@ export interface Pagina {
    * Oltre a redazione e vicedirezione. Es. la pagina Iscrizioni alla Segreteria didattica.
    */
   ufficiEditori?: ('segreteria' | 'amministrativo' | 'erasmus' | 'biblioteca')[] | null
+  wpId?: string | null
+  wpModificato?: string | null
+  wpImpronta?: string | null
+  /**
+   * La sincronizzazione da WordPress non sovrascrive questo contenuto. Togli la spunta e salva per riallinearlo alla versione di WordPress.
+   */
+  modificatoNelPannello?: boolean | null
   updatedAt: string
   createdAt: string
   _status?: ('draft' | 'published') | null
@@ -438,6 +446,24 @@ export interface BloccoAllegati {
   id?: string | null
   blockName?: string | null
   blockType: 'allegati'
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoDocumento".
+ */
+export interface BloccoDocumento {
+  /**
+   * Es. “Regolamento tasse 2026-27”.
+   */
+  nome: string
+  descrizione?: string | null
+  /**
+   * I PDF si vedono in anteprima nella pagina (da tablet in su), con i pulsanti Apri e Scarica.
+   */
+  file: number | Media
+  id?: string | null
+  blockName?: string | null
+  blockType: 'documento'
 }
 /**
  * Comunicazioni per studenti e docenti, in /avvisi e in homepage.
@@ -1417,11 +1443,16 @@ export interface PagineSelect<T extends boolean = true> {
         fisarmonica?: T | BloccoFisarmonicaSelect<T>
         contatti?: T | BloccoContattiSelect<T>
         allegati?: T | BloccoAllegatiSelect<T>
+        documento?: T | BloccoDocumentoSelect<T>
       }
   slug?: T
   genitore?: T
   percorso?: T
   ufficiEditori?: T
+  wpId?: T
+  wpModificato?: T
+  wpImpronta?: T
+  modificatoNelPannello?: T
   updatedAt?: T
   createdAt?: T
   _status?: T
@@ -1529,6 +1560,17 @@ export interface BloccoAllegatiSelect<T extends boolean = true> {
         file?: T
         id?: T
       }
+  id?: T
+  blockName?: T
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoDocumento_select".
+ */
+export interface BloccoDocumentoSelect<T extends boolean = true> {
+  nome?: T
+  descrizione?: T
+  file?: T
   id?: T
   blockName?: T
 }

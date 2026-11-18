@@ -56,7 +56,7 @@ export default async function Drive({
     }),
     contaMediaWp(),
   ])
-  const collegati = async (collection: 'albo' | 'trasparenza' | 'avvisi') =>
+  const collegati = async (collection: 'albo' | 'trasparenza' | 'avvisi' | 'pagine') =>
     (
       await req.payload.count({
         collection,
@@ -64,8 +64,8 @@ export default async function Drive({
         overrideAccess: true,
       })
     ).totalDocs
-  const [albo, trasparenza, avvisi] = await Promise.all(
-    (['albo', 'trasparenza', 'avvisi'] as const).map(collegati),
+  const [albo, trasparenza, avvisi, pagine] = await Promise.all(
+    (['albo', 'trasparenza', 'avvisi', 'pagine'] as const).map(collegati),
   )
 
   return (
@@ -99,7 +99,7 @@ export default async function Drive({
           wordpress={{ stato: statoSincronizzazione(), importati, suWordPress }}
           contenutiWp={{
             stato: await ultimoStatoContenuti(req.payload),
-            collegati: { albo, trasparenza, avvisi },
+            collegati: { albo, trasparenza, avvisi, pagine },
           }}
           esito={typeof searchParams?.esito === 'string' ? searchParams.esito : undefined}
           errore={typeof searchParams?.errore === 'string' ? searchParams.errore : undefined}

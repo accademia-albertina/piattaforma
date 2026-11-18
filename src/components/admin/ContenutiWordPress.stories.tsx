@@ -40,10 +40,18 @@ const finito: StatoContenuti = {
     nonPiuSuWp: ['Chiusura Biblioteca 13/11 (/admin/collections/avvisi/507)'],
     nonPiuSuWpTotale: 1,
   }),
+  pagine: esito({
+    suWordPress: 39,
+    nuovi: 1,
+    aggiornati: 9,
+    invariati: 28,
+    protetti: 1,
+    daControllare: ['Contatti (/admin/collections/pagine/32)'],
+  }),
   pagineModificate: [
     {
-      titolo: 'Modulistica',
-      url: 'https://albertina-academy.it/studente/modulistica/',
+      titolo: 'Crediti',
+      url: 'https://albertina-academy.it/crediti/',
       modificato: '2026-11-07T18:32:13.000Z',
     },
   ],
@@ -54,7 +62,11 @@ const finito: StatoContenuti = {
 const meta = {
   title: 'Pannello/Contenuti da WordPress',
   component: ContenutiWordPress,
-  args: { stato: finito, collegati: { albo: 419, trasparenza: 94, avvisi: 1203 }, attivo: true },
+  args: {
+    stato: finito,
+    collegati: { albo: 419, trasparenza: 94, avvisi: 1203, pagine: 39 },
+    attivo: true,
+  },
   decorators: [
     (Story) => (
       <div style={{ maxWidth: 880 }}>
@@ -76,6 +88,6 @@ export const InCorso: Story = {
 export const MaiAvviata: Story = {
   args: {
     stato: { ...finito, finitoIl: undefined, avviatoIl: undefined },
-    collegati: { albo: 0, trasparenza: 0, avvisi: 0 },
+    collegati: { albo: 0, trasparenza: 0, avvisi: 0, pagine: 0 },
   },
 }

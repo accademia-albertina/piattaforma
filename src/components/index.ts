@@ -1,6 +1,7 @@
 export { AccessiRapidi } from './AccessiRapidi/AccessiRapidi'
 export { Alert } from './Alert/Alert'
 export { Attachments } from './Attachments/Attachments'
+export { Documento } from './Documento/Documento'
 export { AvvisoCard } from './AvvisoCard/AvvisoCard'
 export { Blocchi } from './Blocchi/Blocchi'
 export { Breadcrumbs } from './Breadcrumbs/Breadcrumbs'

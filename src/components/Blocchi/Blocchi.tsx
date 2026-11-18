@@ -7,6 +7,7 @@ import { risolviLink } from '@/lib/link'
 import type { Media, Pagina } from '@/payload-types'
 
 import { Attachments } from '../Attachments/Attachments'
+import { Documento } from '../Documento/Documento'
 import { Fisarmonica } from '../Fisarmonica/Fisarmonica'
 
 import styles from './Blocchi.module.css'
@@ -213,6 +214,24 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
           />
         </div>
       )
+
+    case 'documento': {
+      const f = media(b.file)
+      if (!f) return null
+      return (
+        <div className={styles.blocco}>
+          <Documento
+            id={`${id}-titolo`}
+            nome={b.nome}
+            descrizione={b.descrizione}
+            url={f.url!}
+            filename={f.filename}
+            mimeType={f.mimeType}
+            filesize={f.filesize}
+          />
+        </div>
+      )
+    }
 
     default:
       return null

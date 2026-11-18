@@ -1,0 +1,69 @@
+.documento {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.intestazione {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-4);
+}
+
+.nome {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-snug);
+}
+
+.descrizione {
+  margin: var(--space-2) 0 0;
+  max-width: var(--measure);
+}
+
+.info {
+  margin: var(--space-1) 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.azione {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-control);
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.azione:hover {
+  border-color: var(--color-text);
+  text-decoration: underline;
+}
+
+/* Sul telefono il lettore PDF del browser non è comodo: restano Apri e Scarica */
+.anteprima {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .anteprima {
+    display: block;
+    width: 100%;
+    height: min(85vh, 60rem);
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+}

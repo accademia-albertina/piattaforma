@@ -1,6 +1,6 @@
 /**
- * Sincronizzazione dei contenuti dal sito WordPress: Albo online, Amministrazione trasparente e
- * avvisi. Si può rilanciare quante volte serve, fino al passaggio al nuovo sito.
+ * Sincronizzazione dei contenuti dal sito WordPress: Albo online, Amministrazione trasparente,
+ * avvisi e pagine istituzionali. Si può rilanciare quante volte serve, fino al passaggio al nuovo sito.
  *
  * - Ogni contenuto importato ricorda l'elemento WordPress da cui viene (wpId) e una sua impronta
  *   (versione della conversione + data di modifica su WP, o hash dell'atto per l'Albo).
@@ -37,6 +37,7 @@ import {
 import {
   decodifica,
   elencoLeggero,
+  paginaCompleta,
   pagine as elencoPagine,
   pagineAlbo,
   perId,
@@ -44,17 +45,22 @@ import {
   type AvvisoRest,
   type TrasparenzaRest,
 } from './fonti'
+import { blocchiPagina, tronca, VERSIONE_PAGINE } from './pagine'
+import { estraiPagina, mappaPercorsi, PAGINE_WP, type MappaPercorsi } from './pagine-html'
 import { riscriviLink, type MappaFile } from '../riscrivi'
 import { importaFile, mappaFile, urlFile } from '../sincronizza'
 import { chiaveWp, elencoMediaWp, mediaWpPerId, type MediaWp } from '../wordpress'
 import { conta, registraOperazione, type Utente } from '@/lib/registro'
 import { OPERAZIONI } from '@/lib/registro/costanti'
 import { attiSeed, datiVoce, vociSeed } from '@/seed/albo-trasparenza-wp'
+import { slugDocentiWp } from '@/seed/docenti-wp'
+import { blocchiPagineSeed } from '@/seed/pagine-wp'
+import { SOMMARI_PAGINE } from '@/seed/sommari-pagine'
 import { slugAvvisiSeed } from '@/seed/avvisi-wp'
 import { inFrase } from '@/utilities/maiuscole'
 import { slugify } from '@/utilities/slugify'
 
-export type Raccolta = 'albo' | 'trasparenza' | 'avvisi'
+export type Raccolta = 'albo' | 'trasparenza' | 'avvisi' | 'pagine'
 
 export type EsitoRaccolta = {
   suWordPress: number
@@ -75,7 +81,7 @@ export type EsitoRaccolta = {
 
 export type StatoContenuti = {
   inCorso: boolean
-  fase: Raccolta | 'pagine' | 'finito'
+  fase: Raccolta | 'finito'
   avviatoIl?: string
   finitoIl?: string
   /** Prova: al massimo N elementi da creare o aggiornare per raccolta. */
@@ -85,7 +91,8 @@ export type StatoContenuti = {
   albo: EsitoRaccolta
   trasparenza: EsitoRaccolta
   avvisi: EsitoRaccolta
-  /** Pagine WordPress modificate dopo l'importazione iniziale: si riportano a mano. */
+  pagine: EsitoRaccolta
+  /** Altre pagine WordPress (non importate) modificate dopo l'importazione iniziale. */
   pagineModificate: { titolo: string; url: string; modificato: string }[]
   fileImportati: number
   errori: string[]
@@ -112,6 +119,7 @@ const vuoto = (): StatoContenuti => ({
   albo: esitoVuoto(),
   trasparenza: esitoVuoto(),
   avvisi: esitoVuoto(),
+  pagine: esitoVuoto(),
   pagineModificate: [],
   fileImportati: 0,
   errori: [],
@@ -119,6 +127,8 @@ const vuoto = (): StatoContenuti => ({
 
 /** Data dell'export del database WordPress usato per l'importazione iniziale delle pagine. */
 export const DATA_IMPORT_PAGINE = '2026-10-21T00:00:00'
+/** Prima importazione delle pagine nell'anteprima: le pagine più vecchie sono dimostrative. */
+const DATA_PAGINE_DIMOSTRATIVE = '2026-11-05T00:00:00Z'
 
 const MAX_ELENCO = 100
 const ERRORI_MAX = 30
@@ -133,6 +143,7 @@ const NOMI_RACCOLTE: Record<Raccolta, string> = {
   albo: 'Albo',
   trasparenza: 'Amministrazione trasparente',
   avvisi: 'Avvisi',
+  pagine: 'Pagine',
 }
 
 /** Esito in poche righe, per il registro attività. */
@@ -152,7 +163,7 @@ export function esitoSincronizzazioneContenuti(s: StatoContenuti) {
   )
   if (s.pagineModificate.length) {
     righe.push(
-      `${conta(s.pagineModificate.length, 'pagina cambiata', 'pagine cambiate')} su WordPress da riportare a mano`,
+      `${conta(s.pagineModificate.length, 'altra pagina cambiata', 'altre pagine cambiate')} su WordPress, non importate`,
     )
   }
   if (s.limite) {
@@ -208,8 +219,8 @@ export function avviaSincronizzazioneContenuti(
     limite: o.limite,
   }
   const titolo = o.limite
-    ? 'Sincronizzazione di Albo, Trasparenza e avvisi (prova)'
-    : 'Sincronizzazione di Albo, Trasparenza e avvisi'
+    ? 'Sincronizzazione di Albo, Trasparenza, avvisi e pagine (prova)'
+    : 'Sincronizzazione di Albo, Trasparenza, avvisi e pagine'
   void registraOperazione(payload, utente, { ...VOCE, azione: 'avviato', titolo })
     .then(() => sincronizza(payload, o))
     .catch((e) => {
@@ -222,7 +233,7 @@ export function avviaSincronizzazioneContenuti(
       const r = (k: Raccolta) =>
         `${k} ${stato[k].nuovi} nuovi, ${stato[k].aggiornati} aggiornati, ${stato[k].protetti} protetti`
       payload.logger.info(
-        `Sincronizzazione contenuti finita: ${r('albo')}; ${r('trasparenza')}; ${r('avvisi')}`,
+        `Sincronizzazione contenuti finita: ${r('albo')}; ${r('trasparenza')}; ${r('avvisi')}; ${r('pagine')}`,
       )
       await salvaEsito(payload)
       await registraOperazione(payload, interrompi ? (fermataDa ?? utente) : utente, {
@@ -251,6 +262,8 @@ export async function attendiSincronizzazioneContenuti() {
 
 type Doc = Record<string, unknown> & {
   id: number
+  createdAt?: string
+  updatedAt?: string
   wpId?: string | null
   wpImpronta?: string | null
   modificatoNelPannello?: boolean | null
@@ -393,6 +406,7 @@ async function docsCollegati(payload: Payload, collection: CollectionSlug) {
       modificatoNelPannello: true,
       _status: true,
       ...(collection === 'avvisi' ? { categorie: true } : {}),
+      ...(collection === 'pagine' ? { percorso: true } : {}),
     },
   })
   return new Map((docs as unknown as Doc[]).map((d) => [d.wpId as string, d]))
@@ -840,16 +854,144 @@ async function datiAvvisoCompleti(
 
 // --- Pagine ----------------------------------------------------------------------------------
 
-async function paginePerControllo(f: typeof fetch) {
+/**
+ * Ultimi ritocchi dopo la riscrittura dei file: un documento incorporato il cui file non c'è
+ * (già rotto su WP) diventa un link; i link a file importati (/media/…) sono indirizzi del sito.
+ */
+function ritocca(blocchi: unknown[]) {
+  return blocchi.map((b) => {
+    const d = b as {
+      blockType: string
+      nome: string
+      file?: number | null
+      url?: string | null
+      voci?: { tipo?: string; url?: string }[]
+    }
+    if (d.blockType === 'documento' && !d.file)
+      return { blockType: 'link', voci: [{ etichetta: d.nome, tipo: 'esterno', url: d.url ?? '' }] }
+    if (d.blockType === 'link')
+      return {
+        ...d,
+        voci: d.voci?.map((v) =>
+          v.tipo === 'esterno' && v.url?.startsWith('/') ? { ...v, tipo: 'percorso' } : v,
+        ),
+      }
+    return b
+  })
+}
+
+/** Pagine WordPress sostituite da sezioni del nuovo sito o non più necessarie: non si segnalano. */
+const PAGINE_WP_IGNORATE = new Set([
+  'docenti',
+  'design-system',
+  'amministrazione-trasparente',
+  'aree-amministrazione-trasparente',
+  'login',
+  'recupero-password',
+  'registrazione-studente',
+  'bozze',
+  'changelog',
+])
+
+async function sincronizzaPagine(payload: Payload, file: File, f: typeof fetch, limite?: number) {
   const tutte = await elencoPagine({ fetch: f })
+  // Le altre pagine (crediti, login…) non si importano: si segnalano se cambiano
   stato.pagineModificate = tutte
-    .filter((p) => p.modified_gmt > DATA_IMPORT_PAGINE)
+    .filter(
+      (p) =>
+        !PAGINE_WP[p.id] &&
+        p.modified_gmt > DATA_IMPORT_PAGINE &&
+        !PAGINE_WP_IGNORATE.has(p.link.replace(/\/+$/, '').split('/').pop() ?? '') &&
+        !p.link.includes('/dottorandi/'),
+    )
     .sort((a, b) => b.modified_gmt.localeCompare(a.modified_gmt))
     .map((p) => ({
       titolo: decodifica(p.title.rendered),
       url: p.link,
       modificato: new Date(`${p.modified_gmt}Z`).toISOString(),
     }))
+  const elenco = tutte.filter((p) => PAGINE_WP[p.id])
+  const mappa: MappaPercorsi = mappaPercorsi(tutte, slugDocentiWp())
+  const collegati = await docsCollegati(payload, 'pagine')
+
+  // Prima volta: collega le pagine già presenti (stesso indirizzo). Una pagina è intatta, e si
+  // aggiornerà, se nessuno l'ha salvata nel pannello (registro attività) e se è ancora uguale a
+  // come è stata importata oppure è uno dei contenuti dimostrativi dell'anteprima, creati prima
+  // dell'importazione delle pagine (5/11/2026) o mai salvati dopo la creazione.
+  const liberi = await docsSenzaWp(payload, 'pagine')
+  if (liberi.length) {
+    const toccati = await toccatiNelPannello(payload, 'pagine')
+    const seed = blocchiPagineSeed()
+    const perPercorso = new Map(liberi.map((d) => [String(d.percorso), d]))
+    for (const r of elenco) {
+      const wpId = String(r.id)
+      if (collegati.has(wpId)) continue
+      const doc = perPercorso.get(PAGINE_WP[r.id])
+      if (!doc) continue
+      const originale = seed.get(PAGINE_WP[r.id])
+      const creata = Date.parse(String(doc.createdAt))
+      const dimostrativa =
+        creata < Date.parse(DATA_PAGINE_DIMOSTRATIVE) ||
+        Math.abs(Date.parse(String(doc.updatedAt)) - creata) < 1000
+      const intatto =
+        !toccati.has(String(doc.id)) &&
+        (dimostrativa || (!!originale && confronta(doc, file.riscriviCome({ blocchi: originale }))))
+      await collega(payload, 'pagine', doc, wpId, intatto, stato.pagine)
+      collegati.set(wpId, doc)
+    }
+  }
+
+  // Nell'ordine di PAGINE_WP: i genitori prima delle sottopagine
+  const ordine = Object.keys(PAGINE_WP).map(Number)
+  elenco.sort((a, b) => ordine.indexOf(a.id) - ordine.indexOf(b.id))
+  const impronta = (r: { modified_gmt: string }) => `${VERSIONE_PAGINE}:${r.modified_gmt}`
+  const elementi: Elemento[] = elenco.map((r) => ({
+    wpId: String(r.id),
+    impronta: impronta(r),
+    modificato: r.modified_gmt,
+    etichetta: String(collegati.get(String(r.id))?.titolo ?? decodifica(r.title.rendered)),
+    dati: async () => {
+      const pagina = await paginaCompleta(r.id, { fetch: f })
+      const { JSDOM } = await import('jsdom')
+      const { window } = new JSDOM(pagina.content.rendered)
+      const titolo = decodifica(pagina.title.rendered)
+      const estratta = estraiPagina(window.document.body as never, mappa, {
+        titolo,
+        senzaContatti: PAGINE_WP[r.id] === 'contatti',
+      })
+      window.close()
+      const blocchi = ritocca(
+        await file.riscrivi(await blocchiPagina(estratta.blocchi, payload.config)),
+      )
+      if (collegati.has(String(r.id))) return { blocchi }
+      // Pagina nuova su WordPress: indirizzo e genitore dalla mappa
+      const percorso = PAGINE_WP[r.id]
+      const parti = percorso.split('/')
+      const genitore = parti.length > 1 ? parti.slice(0, -1).join('/') : null
+      let genitoreId: number | null = null
+      if (genitore) {
+        const { docs } = await payload.find({
+          collection: 'pagine',
+          where: { percorso: { equals: genitore } },
+          limit: 1,
+          depth: 0,
+          draft: true,
+          overrideAccess: true,
+          select: { percorso: true },
+        })
+        if (!docs[0]) throw new Error(`manca la pagina genitore /${genitore}`)
+        genitoreId = docs[0].id
+      }
+      return {
+        titolo: tronca(inFrase(titolo), 120),
+        slug: parti.at(-1),
+        genitore: genitoreId,
+        sommario: SOMMARI_PAGINE[percorso] ?? estratta.sommario,
+        blocchi,
+      }
+    },
+  }))
+  await applica(payload, 'pagine', elementi, collegati, stato.pagine, limite)
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -866,6 +1008,7 @@ async function sincronizza(
     ['albo', () => sincronizzaAlbo(payload, file, f, o.limite)],
     ['trasparenza', () => sincronizzaTrasparenza(payload, file, f, o.limite)],
     ['avvisi', () => sincronizzaAvvisi(payload, file, f, o.limite)],
+    ['pagine', () => sincronizzaPagine(payload, file, f, o.limite)],
   ]
   for (const [r, passo] of passi) {
     if (interrompi || !fa(r)) continue
@@ -875,9 +1018,5 @@ async function sincronizza(
     } catch (e) {
       stato[r].errori.push((e as Error).message)
     }
-  }
-  if (!interrompi && !o.solo) {
-    stato.fase = 'pagine'
-    await paginePerControllo(f).catch((e) => stato.errori.push(`Pagine: ${(e as Error).message}`))
   }
 }

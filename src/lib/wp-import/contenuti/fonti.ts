@@ -1,7 +1,7 @@
 /**
  * Lettura dei contenuti dal sito WordPress attuale tramite l'API REST pubblica: avvisi,
  * sottosezioni dell'Amministrazione trasparente (con i campi ACF, esposti dal 14/11/2026),
- * pagine dell'Albo (HTML già generato da Breakdance) e pagine.
+ * pagine dell'Albo e pagine istituzionali (HTML già generato da Breakdance).
  */
 import { chiediAWp, SITO_WP } from '../wordpress'
 
@@ -120,6 +120,17 @@ export const pagineAlbo = (o: Opzioni = {}) =>
 
 export const pagine = (o: Opzioni = {}) =>
   tutti<PaginaRest>('pages', 'id,modified_gmt,link,title', o)
+
+export type PaginaCompletaRest = PaginaRest & { slug: string; content: { rendered: string } }
+
+/** Una pagina con l'HTML generato da Breakdance (pesante: una alla volta). */
+export async function paginaCompleta(id: number, o: Opzioni = {}) {
+  const { dati } = await json<PaginaCompletaRest>(
+    `pages/${id}?_fields=id,modified_gmt,link,slug,title,content`,
+    o,
+  )
+  return dati
+}
 
 /** Entità HTML più comuni nei titoli restituiti da WordPress. */
 export function decodifica(s: string) {
