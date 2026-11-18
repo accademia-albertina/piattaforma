@@ -27,6 +27,19 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.39.2',
+    data: '2026-11-18',
+    titolo: 'Aggiornamento di sicurezza',
+    voci: [
+      {
+        tipo: 'corretto',
+        testo:
+          'Aggiornato Next.js, il motore del sito, alla 16.4.6: corregge due falle note (dati di una pagina che potevano finire in un’altra).',
+      },
+    ],
+    pr: [92],
+  },
+  {
     versione: '0.39.1',
     data: '2026-11-18',
     titolo: 'Intestazione su telefono e pagina Integrazioni',
