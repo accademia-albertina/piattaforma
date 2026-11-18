@@ -264,9 +264,10 @@
   pointer-events: none;
 }
 
-/* Su telefono e tablet il pannello copre tutto lo schermo sotto la barra */
+/* Su telefono e tablet il pannello aperto copre tutto lo schermo sotto la barra. Solo aperto:
+   chiuso è hidden="until-found", che lascia il riquadro (bianco) in pagina con l'altezza data */
 @media (max-width: 63.99rem) {
-  .panel {
+  .panel:not([hidden]) {
     height: var(--altezza-pannello, calc(100dvh - 100%));
   }
 }
