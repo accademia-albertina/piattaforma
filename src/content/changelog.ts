@@ -47,7 +47,7 @@ export const CHANGELOG: Versione[] = [
           'Ricerca negli elenchi in italiano piano: “Cerca per chi, email o elemento” invece di “Cerca per Chi, Email Oppure Elemento”.',
       },
     ],
-    pr: [89],
+    pr: [90],
   },
   {
     versione: '0.38.0',
