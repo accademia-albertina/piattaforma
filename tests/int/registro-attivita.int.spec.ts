@@ -4,7 +4,7 @@ import config from '@/payload.config'
 
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-import { azioneDaStato } from '@/lib/registro'
+import { azioneDaStato, registraOperazione } from '@/lib/registro'
 import type { User } from '@/payload-types'
 
 let payload: Payload
@@ -34,6 +34,11 @@ describe('Registro attività del pannello', () => {
   beforeAll(async () => {
     payload = await getPayload({ config: await config })
     await payload.delete({ collection: 'users', where: { email: { like: '.registro@' } } })
+    // Voci di prova rimaste da esecuzioni precedenti
+    await payload.delete({
+      collection: 'registro-attivita',
+      where: { titolo: { like: 'Registro prova' } },
+    })
     admin = await utente('admin.registro@albertina.academy', ['admin'])
     redazione = await utente('redazione.registro@albertina.academy', ['redazione'])
     studente = await utente('studente.registro@albertina.academy', ['studente'])
@@ -100,6 +105,53 @@ describe('Registro attività del pannello', () => {
       overrideAccess: false,
     })
     expect(await vociDi('users', studente.id)).toHaveLength(0)
+  })
+
+  it('registra le operazioni: con chi le ha fatte o, se le fa il server, come Sistema', async () => {
+    await registraOperazione(payload, admin, {
+      azione: 'collegato',
+      collezione: 'google-drive',
+      sezione: 'Google Drive',
+      titolo: 'Registro prova Drive collegato',
+    })
+    await registraOperazione(payload, null, {
+      azione: 'concluso',
+      collezione: 'google-drive',
+      sezione: 'Google Drive',
+      titolo: 'Registro prova spostamento',
+      dettagli: '3 di 3 file spostati',
+    })
+    const { docs } = await payload.find({
+      collection: 'registro-attivita',
+      where: { titolo: { like: 'Registro prova' }, collezione: { equals: 'google-drive' } },
+      sort: 'id',
+      overrideAccess: true,
+      depth: 0,
+    })
+    expect(docs.map((v) => [v.azione, v.utente, v.utenteNome])).toEqual([
+      ['collegato', admin.id, 'admin.registro@albertina.academy'],
+      ['concluso', null, 'Sistema'],
+    ])
+    expect(docs[1].dettagli).toBe('3 di 3 file spostati')
+    expect(docs[1].riepilogo).toBe('Sistema · concluso · Registro prova spostamento')
+  })
+
+  it('le operazioni in blocco con senzaRegistro non scrivono una voce per elemento', async () => {
+    const avviso = await payload.create({
+      collection: 'avvisi',
+      data: { titolo: 'Registro prova blocco', pubblicatoIl: ORA, categorie: ['eventi'] },
+      user: admin,
+      overrideAccess: false,
+      context: { senzaRegistro: true },
+    })
+    await payload.delete({
+      collection: 'avvisi',
+      where: { id: { equals: avviso.id } },
+      user: admin,
+      overrideAccess: false,
+      context: { senzaRegistro: true },
+    })
+    expect(await vociDi('avvisi', avviso.id)).toHaveLength(0)
   })
 
   it('riconosce pubblicazione e ritiro delle bozze', () => {

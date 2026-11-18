@@ -2,6 +2,8 @@ import type { Endpoint, PayloadRequest, Where } from 'payload'
 
 import { annoConcluso } from '@/access/corsi'
 import { gestisceIscrizioni } from '@/access/iscrizioni'
+import { conta, registraOperazione } from '@/lib/registro'
+import { SENZA_REGISTRO } from '@/lib/registro/costanti'
 
 /**
  * POST /api/finestre-iscrizione/:id/pulizia — cancella tutte le iscrizioni dello stesso tipo
@@ -39,11 +41,20 @@ export const endpointPulizia: Endpoint = {
       where,
       req,
       depth: 0,
-      context: { senzaEmail: true },
+      // Una voce sola nel registro per tutta la pulizia, non una per iscrizione
+      context: { senzaEmail: true, [SENZA_REGISTRO]: true },
     })
     req.payload.logger.info(
       `Pulizia iscrizioni ${esami ? 'esami' : 'corsi'} ${anno}: ${docs.length} eliminate da ${req.user?.email}`,
     )
+    const collezione = esami ? 'iscrizioni-esami' : 'iscrizioni-corsi'
+    await registraOperazione(req.payload, req.user, {
+      azione: 'eliminato',
+      collezione,
+      sezione: esami ? 'Iscrizioni agli esami' : 'Iscrizioni ai corsi',
+      titolo: `Pulizia annuale delle iscrizioni ${anno}`,
+      dettagli: `${conta(docs.length, 'iscrizione eliminata', 'iscrizioni eliminate')}${errors.length ? `, ${errors.length} non eliminate` : ''}`,
+    })
     return Response.json({ eliminate: docs.length, errori: errors.length })
   },
 }

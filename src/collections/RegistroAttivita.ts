@@ -17,7 +17,7 @@ export const RegistroAttivita: CollectionConfig = {
     hidden: nascostaA('registro-attivita'),
     useAsTitle: 'riepilogo',
     description:
-      'Chi ha creato, modificato, pubblicato o eliminato cosa nel pannello. Le voci si cancellano da sole dopo un anno.',
+      'Chi ha creato, modificato, pubblicato o eliminato cosa nel pannello, e chi ha avviato sincronizzazioni, collegamenti a Drive e pulizie. Le voci si cancellano da sole dopo un anno.',
     defaultColumns: ['createdAt', 'utenteNome', 'azione', 'sezione', 'titolo', 'campi'],
     listSearchableFields: ['titolo', 'utenteNome', 'utenteEmail'],
     group: 'Sistema',
@@ -80,6 +80,16 @@ export const RegistroAttivita: CollectionConfig = {
       admin: {
         readOnly: true,
         description: 'Solo i nomi dei campi, non i valori. “—” per creazioni ed eliminazioni.',
+      },
+    },
+    {
+      name: 'dettagli',
+      label: 'Dettagli',
+      type: 'textarea',
+      admin: {
+        readOnly: true,
+        description: 'Esito delle operazioni (sincronizzazioni, Drive, pulizie): quanti elementi, errori.',
+        condition: (data) => Boolean(data?.dettagli),
       },
     },
     { name: 'riepilogo', label: 'Riepilogo', type: 'text', admin: { readOnly: true } },

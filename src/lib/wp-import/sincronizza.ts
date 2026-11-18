@@ -22,6 +22,8 @@ import sharp from 'sharp'
 import { CAMPO_DRIVE, caricaSuDrive, cartellaLocale } from '@/lib/drive/adattatore'
 import { togliDallaCache } from '@/lib/drive/cache'
 import { driveCollegato } from '@/lib/drive/connessione'
+import { conta, registraOperazione, type Utente } from '@/lib/registro'
+import { OPERAZIONI } from '@/lib/registro/costanti'
 import { altDaNomeFile } from '@/utilities/testoAlternativo'
 
 import { riscriviLink, type MappaFile } from './riscrivi'
@@ -79,6 +81,8 @@ const vuoto = (): StatoSincronizzazione => ({
 
 let stato: StatoSincronizzazione = vuoto()
 let interrompi = false
+/** Chi ha chiesto di fermarla: la voce finale del registro è sua. */
+let fermataDa: Utente | null = null
 
 export const statoSincronizzazione = () => stato
 
@@ -96,12 +100,32 @@ const GLOBALI_ESCLUSI = new Set(['drive-connessione'])
 
 const ERRORI_MAX = 30
 
+/** Esito in una riga, per il registro attività e il log del server. */
+export function esitoSincronizzazione(s: StatoSincronizzazione) {
+  const righe = [
+    [
+      conta(s.nuovi, 'file nuovo', 'file nuovi'),
+      conta(s.aggiornati, 'aggiornato', 'aggiornati'),
+      conta(s.invariati, 'invariato', 'invariati'),
+      conta(s.errori.length, 'errore', 'errori'),
+    ].join(', '),
+    `${conta(s.linkRiscritti, 'link riscritto', 'link riscritti')} in ${conta(s.contenutiAggiornati, 'contenuto', 'contenuti')}`,
+  ]
+  if (s.limite) righe.push(`Prova con al massimo ${s.limite} file`)
+  if (s.errori.length) righe.push(`Primo errore: ${s.errori[0]}`)
+  return righe.join('\n')
+}
+
+const VOCE = { collezione: OPERAZIONI.fileWp.slug, sezione: OPERAZIONI.fileWp.sezione }
+
 export function avviaSincronizzazione(
   payload: Payload,
-  o: { limite?: number; fetch?: typeof fetch } = {},
+  o: { limite?: number; fetch?: typeof fetch; utente?: Utente | null } = {},
 ) {
   if (stato.inCorso) return false
   interrompi = false
+  fermataDa = null
+  const utente = o.utente ?? null
   stato = {
     ...vuoto(),
     inCorso: true,
@@ -109,25 +133,35 @@ export function avviaSincronizzazione(
     avviatoIl: new Date().toISOString(),
     limite: o.limite,
   }
-  void sincronizza(payload, o)
+  const titolo = o.limite ? 'Sincronizzazione file (prova)' : 'Sincronizzazione file'
+  void registraOperazione(payload, utente, { ...VOCE, azione: 'avviato', titolo })
+    .then(() => sincronizza(payload, o))
     .catch((e) => {
       stato.errori.push((e as Error).message)
       payload.logger.error(`Importazione da WordPress: ${(e as Error).message}`)
     })
-    .finally(() => {
-      stato.inCorso = false
+    .finally(async () => {
       stato.fase = 'finito'
       stato.finitoIl = new Date().toISOString()
-      payload.logger.info(
-        `Importazione da WordPress finita: ${stato.nuovi} nuovi, ${stato.aggiornati} aggiornati, ${stato.invariati} invariati, ${stato.errori.length} errori; ${stato.linkRiscritti} link riscritti in ${stato.contenutiAggiornati} contenuti`,
-      )
+      const dettagli = esitoSincronizzazione(stato)
+      payload.logger.info(`Importazione da WordPress finita: ${dettagli.replace(/\n/g, '; ')}`)
+      await registraOperazione(payload, interrompi ? (fermataDa ?? utente) : utente, {
+        ...VOCE,
+        azione: interrompi ? 'fermato' : 'concluso',
+        titolo,
+        dettagli,
+      })
+      // Dopo la voce del registro: chi attende la fine (test, pagina Drive) la trova già scritta
+      stato.inCorso = false
     })
   return true
 }
 
 /** Ferma la sincronizzazione dopo il file in corso (si riprende rilanciandola). */
-export function fermaSincronizzazione() {
-  if (stato.inCorso) interrompi = true
+export function fermaSincronizzazione(utente?: Utente | null) {
+  if (!stato.inCorso) return
+  interrompi = true
+  fermataDa = utente ?? null
 }
 
 /** Per i test: attende la fine della sincronizzazione in corso. */

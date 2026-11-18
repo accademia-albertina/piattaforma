@@ -83,7 +83,7 @@ export default buildConfig({
     // Niente Gravatar: è un servizio esterno (privacy) e la CSP lo blocca.
     avatar: { Component: '/components/admin/Avatar' },
     components: {
-      providers: ['/components/admin/LinguaDate'],
+      providers: ['/components/admin/LinguaDate', '/components/admin/RicercaInMinuscolo'],
       beforeLogin: ['/components/admin/PrimaDelLogin'],
       actions: ['/components/admin/ApriSito'],
       logout: { Button: '/components/admin/PiedeMenu' },
