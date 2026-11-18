@@ -52,7 +52,7 @@ export const CHANGELOG: Versione[] = [
           'Titolo della scheda del browser con il trattino: «Dashboard – Accademia Albertina».',
       },
     ],
-    pr: [95],
+    pr: [96],
   },
   {
     versione: '0.40.0',
