@@ -27,6 +27,7 @@ import { Pubblicazioni } from './collections/Pubblicazioni'
 import { RegistroAttivita } from './collections/RegistroAttivita'
 import { Navigazione } from './globals/Navigazione'
 import { DriveConnessione } from './globals/DriveConnessione'
+import { EsitiImportazione } from './globals/EsitiImportazione'
 import { adattatoreDrive } from './lib/drive/adattatore'
 import { driveConfigurato } from './lib/drive/api'
 import { endpointsDrive } from './lib/drive/endpoints'
@@ -131,7 +132,7 @@ export default buildConfig({
     EmailInviate,
     RegistroAttivita,
   ],
-  globals: [Navigazione, DriveConnessione],
+  globals: [Navigazione, DriveConnessione, EsitiImportazione],
   endpoints: [...endpointsDrive, ...endpointsWp],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

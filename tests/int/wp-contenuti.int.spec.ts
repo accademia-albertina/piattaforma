@@ -7,6 +7,7 @@ import {
   attendiSincronizzazioneContenuti,
   avviaSincronizzazioneContenuti,
   statoContenuti,
+  ultimoStatoContenuti,
 } from '@/lib/wp-import/contenuti/sincronizza-contenuti'
 import type { AttoAlbo, Avviso, Trasparenza, User } from '@/payload-types'
 
@@ -295,10 +296,20 @@ describe('Sincronizzazione dei contenuti da WordPress', () => {
     expect(await trova('avvisi', 'Prova sync WP avviso da WordPress')).toHaveLength(1)
   })
 
+  it('l’esito resta salvato nel database dopo la fine', async () => {
+    const g = await payload.findGlobal({ slug: 'esiti-importazione', overrideAccess: true })
+    const salvato = g.contenuti as ReturnType<typeof statoContenuti>
+    expect(salvato).toMatchObject({ inCorso: false, fase: 'finito' })
+    expect(salvato.finitoIl).toBe(statoContenuti().finitoIl)
+    expect((await ultimoStatoContenuti(payload)).finitoIl).toBe(salvato.finitoIl)
+  })
+
   it('un atto tolto da WordPress resta e viene segnalato', async () => {
+    // altri test possono lasciare atti non su WordPress: l'elenco mostrato si ferma a 100
+    const prima = statoContenuti().albo.nonPiuSuWpTotale
     wp.atti = wp.atti.slice(0, 1)
     const s = await sincronizza()
-    expect(s.albo.nonPiuSuWp.join()).toContain('Prova sync WP – assemblea')
+    expect(s.albo.nonPiuSuWpTotale).toBe(prima + 1)
     expect(await trova('albo', 'Prova sync WP – assemblea')).toHaveLength(1)
   })
 })

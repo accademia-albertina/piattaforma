@@ -13669,6 +13669,43 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
+    },
+    "public.esiti_importazione": {
+      "name": "esiti_importazione",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "contenuti": {
+          "name": "contenuti",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
   "enums": {
@@ -14232,6 +14269,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "15fdda30-a1c3-463f-bc78-7ad21121b9eb",
+  "id": "dd1d59f6-5fca-41dd-bf38-96e327bdbda1",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

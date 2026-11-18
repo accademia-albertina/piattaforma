@@ -21,7 +21,8 @@ import * as migration_20261113_151332_registro_email from './20261113_151332_reg
 import * as migration_20261113_153457_registro_attivita from './20261113_153457_registro_attivita';
 import * as migration_20261113_162527_media_wordpress from './20261113_162527_media_wordpress';
 import * as migration_20261114_113913_provenienza_wp_contenuti from './20261114_113913_provenienza_wp_contenuti';
-import * as migration_20261118_092901_registro_operazioni from './20261118_092901_registro_operazioni';
+import * as migration_20261118_090022_esiti_importazione from './20261118_090022_esiti_importazione';
+import * as migration_20261118_103717_registro_operazioni from './20261118_103717_registro_operazioni';
 
 export const migrations = [
   {
@@ -137,11 +138,16 @@ export const migrations = [
   {
     up: migration_20261114_113913_provenienza_wp_contenuti.up,
     down: migration_20261114_113913_provenienza_wp_contenuti.down,
-    name: '20261114_113913_provenienza_wp_contenuti'
+    name: '20261114_113913_provenienza_wp_contenuti',
   },
   {
-    up: migration_20261118_092901_registro_operazioni.up,
-    down: migration_20261118_092901_registro_operazioni.down,
-    name: '20261118_092901_registro_operazioni'
+    up: migration_20261118_090022_esiti_importazione.up,
+    down: migration_20261118_090022_esiti_importazione.down,
+    name: '20261118_090022_esiti_importazione',
+  },
+  {
+    up: migration_20261118_103717_registro_operazioni.up,
+    down: migration_20261118_103717_registro_operazioni.down,
+    name: '20261118_103717_registro_operazioni'
   },
 ];

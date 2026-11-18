@@ -50,6 +50,19 @@ export const CHANGELOG: Versione[] = [
     pr: [90],
   },
   {
+    versione: '0.38.1',
+    data: '2026-11-18',
+    titolo: 'Esito della sincronizzazione sempre visibile',
+    voci: [
+      {
+        tipo: 'corretto',
+        testo:
+          'L’esito dell’ultima sincronizzazione dei contenuti da WordPress resta visibile anche dopo un riavvio del server.',
+      },
+    ],
+    pr: [89],
+  },
+  {
     versione: '0.38.0',
     data: '2026-11-14',
     titolo: 'Contenuti dal sito WordPress',
