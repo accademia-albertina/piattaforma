@@ -312,6 +312,10 @@ export interface User {
         | 'studente'
       )[]
     | null;
+  /**
+   * Entra con email e password invece che con Google, per vedere il sito come uno studente o un docente. Solo per account finti.
+   */
+  accountDiProva?: boolean | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -2026,6 +2030,7 @@ export interface UsersSelect<T extends boolean = true> {
   nome?: T;
   cognome?: T;
   roles?: T;
+  accountDiProva?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

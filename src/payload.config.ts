@@ -75,7 +75,7 @@ export default buildConfig({
     },
     meta: {
       // Payload mette già lo spazio tra titolo e suffisso
-      titleSuffix: '· Accademia Albertina',
+      titleSuffix: '– Accademia Albertina',
       icons: [
         { rel: 'icon', type: 'image/png', sizes: '32x32', url: '/brand/stemma-favicon-32.png' },
         { rel: 'icon', type: 'image/png', sizes: '192x192', url: '/brand/stemma-favicon-192.png' },

@@ -588,6 +588,12 @@ body {
     align-items: center;
   }
 
+  // La X resta in alto mentre il menu scorre: con lo sfondo le voci le passano sotto
+  .nav__header {
+    z-index: 1;
+    background: var(--theme-bg);
+  }
+
   .nav__mobile-close {
     display: flex;
     align-items: center;
@@ -1066,5 +1072,55 @@ body {
         content: 'Campi:';
       }
     }
+  }
+}
+
+// ——— Menu laterale: sfumatura in fondo finché ci sono altre voci sotto ———
+// L'elemento è appiccicato al fondo dell'area che scorre: copre le voci finché resta altro da
+// scorrere; arrivati in fondo si ferma dopo l'ultima voce, sopra uno spazio vuoto.
+.nav__scroll::after {
+  content: '';
+  position: sticky;
+  bottom: 0;
+  flex: none;
+  display: block;
+  height: 5rem;
+  margin-top: auto;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--theme-bg) 85%);
+}
+
+// ——— Occhio per mostrare la password (vedi GestionePassword) ———
+.field-type.password .field-type__wrap,
+.field-type.confirm-password .field-type__wrap {
+  position: relative;
+
+  input {
+    padding-right: 3rem;
+  }
+}
+
+.mostra-password {
+  position: absolute;
+  top: 50%;
+  right: 0.25rem;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--theme-elevation-800);
+  cursor: pointer;
+  transform: translateY(-50%);
+
+  &:hover {
+    color: var(--theme-text);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--theme-text);
+    outline-offset: -2px;
   }
 }

@@ -27,6 +27,7 @@ import * as migration_20261118_140434_pagine_wp_documento from './20261118_14043
 import * as migration_20261118_141711_home_modificabile from './20261118_141711_home_modificabile'
 import * as migration_20261118_145945_guida_studenti from './20261118_145945_guida_studenti'
 import * as migration_20261118_190532_blocchi_mappa_fascia from './20261118_190532_blocchi_mappa_fascia'
+import * as migration_20261118_203542_account_di_prova from './20261118_203542_account_di_prova'
 
 export const migrations = [
   {
@@ -173,5 +174,10 @@ export const migrations = [
     up: migration_20261118_190532_blocchi_mappa_fascia.up,
     down: migration_20261118_190532_blocchi_mappa_fascia.down,
     name: '20261118_190532_blocchi_mappa_fascia',
+  },
+  {
+    up: migration_20261118_203542_account_di_prova.up,
+    down: migration_20261118_203542_account_di_prova.down,
+    name: '20261118_203542_account_di_prova',
   },
 ]

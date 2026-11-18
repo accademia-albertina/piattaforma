@@ -104,3 +104,11 @@ export const BACKEND_ROLES: Role[] = [
 ]
 
 export const canAccessBackend = (user: MaybeUser) => hasRole(user, ...BACKEND_ROLES)
+
+/**
+ * Con Google attivo, email e password valgono solo per gli admin (accesso di emergenza) e
+ * per gli account di prova, che servono a vedere il sito come uno studente o un docente.
+ */
+export const puoUsareLaPassword = (
+  user: { roles?: (Role | string)[] | null; accountDiProva?: boolean | null } | null | undefined,
+) => isAdmin(user) || user?.accountDiProva === true

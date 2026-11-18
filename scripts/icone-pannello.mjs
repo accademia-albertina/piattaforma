@@ -27,6 +27,7 @@ const ICONE = {
   'nav-email-inviate': 'Mail',
   'nav-registro-attivita': 'History',
   'nav-global-navigazione': 'PanelsTopLeft',
+  'nav-global-home': 'AppWindow',
 }
 
 const svg = (nome) =>
