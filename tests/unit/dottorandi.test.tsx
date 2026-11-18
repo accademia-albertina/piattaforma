@@ -41,7 +41,7 @@ describe('Dottorandi', () => {
     const link = screen.getByRole('link')
     expect(link.getAttribute('href')).toBe('/dottorati/albertina/dottorandi/paola-pietronave')
     expect(screen.getByRole('heading', { level: 2, name: 'Paola Pietronave' })).toBeTruthy()
-    expect(screen.getByText(/Leggi il profilo/)).toBeTruthy()
+    expect(screen.getByText('Lumbung Italia')).toBeTruthy()
     // Senza foto mostra le iniziali, nascoste ai lettori di schermo
     expect(screen.getByText('PP').getAttribute('aria-hidden')).toBe('true')
     expect(await axeViolations(container)).toEqual([])

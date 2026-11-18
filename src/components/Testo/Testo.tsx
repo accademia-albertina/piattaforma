@@ -2,7 +2,9 @@ import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical
 import { type JSXConvertersFunction, RichText } from '@payloadcms/richtext-lexical/react'
 import { Fragment } from 'react'
 
+import { IconaScuola } from '@/components/IconaScuola/IconaScuola'
 import { dividiLink } from '@/utilities/autolink'
+import { slugScuolaDaLink } from '@/utilities/linkScuola'
 import { isPdf } from '@/utilities/pdf'
 
 import styles from './Testo.module.css'
@@ -38,6 +40,17 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
   link: (args) => {
     const base = defaultConverters.link
     if (typeof base !== 'function') return null
+    // Link a una scuola (anche col vecchio indirizzo WordPress): pagina nuova e icona della scuola
+    const scuola =
+      args.node.fields?.linkType !== 'internal' && slugScuolaDaLink(args.node.fields?.url)
+    if (scuola) {
+      return (
+        <a href={`/scuole/${scuola}`} className={styles.linkScuola}>
+          <IconaScuola scuola={scuola} size={28} className={styles.iconaScuola} />
+          <span>{args.nodesToJSX({ nodes: args.node.children })}</span>
+        </a>
+      )
+    }
     const pdf = isPdf(args.node.fields?.url)
     return base(
       pdf
@@ -89,6 +102,10 @@ type Props = { data: SerializedEditorState | Record<string, unknown>; className?
 /** Testo ricco del sito: come RichText di Payload, con gli indirizzi resi cliccabili. */
 export function Testo({ data, className }: Props) {
   return (
-    <RichText data={data as SerializedEditorState} className={className} converters={converters} />
+    <RichText
+      data={data as SerializedEditorState}
+      className={`${styles.testo} ${className ?? ''}`}
+      converters={converters}
+    />
   )
 }

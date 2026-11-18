@@ -23,7 +23,7 @@ export const HOME_PREDEFINITA = {
   slider: { numero: 5 },
   accessiTitolo: 'Da dove vuoi iniziare?',
   accessiTesto:
-    'Accademia Albertina di Belle Arti di Torino: Lauree e Lauree magistrali in arti visive, progettazione e nuove tecnologie.',
+    'Accademia Albertina di Belle Arti di Torino: Lauree e Lauree Magistrali in arti visive, progettazione e nuove tecnologie.',
   accessi: [
     {
       titolo: 'Ammissioni',
@@ -34,7 +34,7 @@ export const HOME_PREDEFINITA = {
     },
     {
       titolo: 'Offerta formativa',
-      testo: 'Dieci scuole, laurea e laurea magistrale.',
+      testo: 'Dieci scuole, Laurea e Laurea Magistrale.',
       icona: 'laurea' as IconaHome,
       tipo: 'percorso' as const,
       url: '/scuole',
@@ -59,10 +59,10 @@ export const HOME_PREDEFINITA = {
   cifre: [
     { valore: 4, etichetta: 'Dipartimenti' },
     { valore: 10, etichetta: 'Scuole' },
-    { valore: 2, etichetta: 'Livelli: Laurea e Laurea magistrale' },
+    { valore: 2, etichetta: 'Livelli: Laurea e Laurea Magistrale' },
   ],
-  scuoleTitolo: 'Laurea e Laurea magistrale',
-  scuoleTesto: 'Lauree e Lauree magistrali con lo stesso valore di quelle universitarie.',
+  scuoleTitolo: 'Laurea e Laurea Magistrale',
+  scuoleTesto: 'Lauree e Lauree Magistrali con lo stesso valore di quelle universitarie.',
   avviso: {
     mostra: true,
     titolo: 'Sito in costruzione',

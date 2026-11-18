@@ -50,6 +50,7 @@ import { editor } from './fields/editor'
 import { correggiLinkWpPagine } from './seed/link-wp-pagine'
 import { aggiornaPagineWp } from './lib/wp-import/contenuti/sincronizza-contenuti'
 import { creaPagineNuove } from './seed/pagine-nuove'
+import { correzioniRevisione } from './seed/correzioni-revisione'
 import { importaAlbertinaPress } from './seed/albertina-press'
 import { completaDipartimentiScuole } from './seed/dipartimenti-scuole'
 import { importaContenutiScuole } from './seed/scuole-contenuti'
@@ -202,6 +203,8 @@ export default buildConfig({
       .then(() => correggiLinkWpPagine(payload))
       .then(() => aggiornaPagineWp(payload))
       .then(() => creaPagineNuove(payload))
+      // Dopo tutto il resto: le correzioni della revisione di Fede (2026-11-18)
+      .then(() => correzioniRevisione(payload))
       .catch((e) =>
         payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
       )

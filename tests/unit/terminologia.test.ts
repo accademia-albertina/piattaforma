@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { aggiornaTerminologia, aggiornaTerminologiaLexical } from '@/lib/terminologia'
 
-describe('terminologia Laurea / Laurea magistrale', () => {
+describe('terminologia Laurea / Laurea Magistrale', () => {
   it('sostituisce i titoli AFAM concordando articoli e preposizioni', () => {
     expect(
       aggiornaTerminologia(
@@ -11,9 +11,9 @@ describe('terminologia Laurea / Laurea magistrale', () => {
     ).toBe('per il conseguimento della Laurea della Scuola')
     expect(
       aggiornaTerminologia('prevede, per il Diploma Accademico di Secondo Livello di Decorazione'),
-    ).toBe('prevede, per la Laurea magistrale in Decorazione')
+    ).toBe('prevede, per la Laurea Magistrale in Decorazione')
     expect(aggiornaTerminologia('Il Corso di Diploma di II Livello si propone')).toBe(
-      'Il Corso di Laurea magistrale si propone',
+      'Il Corso di Laurea Magistrale si propone',
     )
     expect(aggiornaTerminologia('Diploma Accademico di I Livello in “Grafica”')).toBe(
       'Laurea in “Grafica”',
@@ -23,12 +23,12 @@ describe('terminologia Laurea / Laurea magistrale', () => {
   it('accorda il participio e usa il livello per il «diploma» generico', () => {
     expect(
       aggiornaTerminologia('Il Diploma Accademico di Secondo livello viene conseguito una volta'),
-    ).toBe('La Laurea magistrale viene conseguita una volta')
+    ).toBe('La Laurea Magistrale viene conseguita una volta')
     expect(aggiornaTerminologia('Il diploma viene conseguito una volta', 'biennio')).toBe(
-      'La laurea magistrale viene conseguita una volta',
+      'La Laurea Magistrale viene conseguita una volta',
     )
     expect(aggiornaTerminologia('Il diploma viene conseguito', 'triennio')).toBe(
-      'La laurea viene conseguita',
+      'La Laurea viene conseguita',
     )
   })
 

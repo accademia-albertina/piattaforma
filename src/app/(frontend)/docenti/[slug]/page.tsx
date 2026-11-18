@@ -13,6 +13,7 @@ import { lexicalToText } from '@/utilities/lexicalText'
 import { NUOVA_SCHEDA, attributiFile, isPdf } from '@/utilities/pdf'
 
 import styles from './docente.module.css'
+import { srcImmagine } from '@/utilities/srcImmagine'
 
 export const dynamic = 'force-dynamic'
 
@@ -117,7 +118,7 @@ export default async function DocentePage({ params }: Props) {
         media={
           foto?.url ? (
             <Image
-              src={foto.url}
+              src={srcImmagine(foto.url)}
               alt=""
               width={foto.width ?? 600}
               height={foto.height ?? 750}

@@ -39,14 +39,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `Scuola di ${scuola.nome}`,
     description:
       scuola.descrizione ||
-      `Scuola di ${scuola.nome} dell’Accademia Albertina: laurea, laurea magistrale, piani di studio e docenti.`,
+      `Scuola di ${scuola.nome} dell’Accademia Albertina: Laurea, Laurea Magistrale, piani di studio e docenti.`,
     alternates: { canonical: `/scuole/${scuola.slug}` },
   }
 }
 
 type Livello = keyof typeof LIVELLI
 
-/** Contenuto di una scheda Laurea o Laurea magistrale. */
+/** Contenuto di una scheda Laurea o Laurea Magistrale. */
 function Percorso({ scuola, livello }: { scuola: Scuola; livello: Livello }) {
   const p = scuola[livello]
   const info = LIVELLI[livello]
@@ -115,7 +115,8 @@ export default async function ScuolaPage({ params }: Props) {
       <Breadcrumbs
         items={[
           { label: 'Home', href: '/' },
-          { label: 'Offerta formativa', href: '/scuole' },
+          { label: 'Didattica', href: '/didattica' },
+          { label: 'Scuole', href: '/scuole' },
           { label: scuola.nome },
         ]}
       />

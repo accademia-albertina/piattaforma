@@ -52,7 +52,7 @@ export const MENU_PRINCIPALE: GruppoMenu[][] = [
     {
       titolo: 'Didattica',
       voci: [
-        { label: 'Piani di studio', href: '/didattica/piani-di-studio' },
+        { label: 'Scuole', href: '/scuole' },
         { label: 'Manifesto degli studi', href: '/didattica/manifesto-degli-studi' },
         { label: 'Corsi', href: '/corsi' },
         { label: 'Docenti', href: '/docenti' },
@@ -85,6 +85,7 @@ export const MENU_PRINCIPALE: GruppoMenu[][] = [
     {
       titolo: 'Studente',
       voci: [
+        { label: 'Matricole', href: '/studente/matricole' },
         { label: 'Modulistica', href: '/studente/modulistica' },
         { label: 'Tasse', href: '/studente/tasse' },
         { label: 'Consulta', href: '/studente/consulta' },

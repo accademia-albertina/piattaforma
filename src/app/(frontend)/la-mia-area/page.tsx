@@ -91,7 +91,7 @@ export default async function LaMiaArea() {
         titolo="La mia area"
         sommario={
           studente
-            ? `${nome || user.email}, matricola ${studente.matricola}, ${LIVELLO_LABELS[studente.livello].toLowerCase()}.`
+            ? `${nome || user.email}, matricola ${studente.matricola}, ${LIVELLO_LABELS[studente.livello]}.`
             : 'Questa pagina è per gli studenti: si accede con l’account 12345t@ o 12345b@.'
         }
       />

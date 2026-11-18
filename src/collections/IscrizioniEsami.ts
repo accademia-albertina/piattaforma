@@ -85,7 +85,7 @@ export const IscrizioniEsami: CollectionConfig = {
         if (!ufficio) {
           if (!appello.livelli?.includes(dati.livello)) {
             return rifiuta(
-              `Questo appello non è per il ${LIVELLO_LABELS[dati.livello].toLowerCase()}: scegli quello del tuo livello.`,
+              `Questo appello non è per la ${LIVELLO_LABELS[dati.livello]}: scegli quello del tuo livello.`,
             )
           }
           const finestra = await iscrizioniDellAppello(req.payload, appello, req)
