@@ -27,6 +27,19 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.39.3',
+    data: '2026-11-18',
+    titolo: 'Intestazione su telefono, rifiniture',
+    voci: [
+      {
+        tipo: 'corretto',
+        testo:
+          'La casetta del percorso non è più tagliata. Su telefono il menu e la X sono grandi come la casetta e allineati al titolo della pagina e alle voci del menu.',
+      },
+    ],
+    pr: [93],
+  },
+  {
     versione: '0.39.2',
     data: '2026-11-18',
     titolo: 'Aggiornamento di sicurezza',
