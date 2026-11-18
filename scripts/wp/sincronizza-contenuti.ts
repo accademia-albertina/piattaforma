@@ -1,7 +1,7 @@
 /**
  * Sincronizzazione dei contenuti da WordPress da riga di comando (prove in locale):
  *   pnpm payload run scripts/wp/sincronizza-contenuti.ts [limite]
- * Sul sito si avvia da /admin/drive, sezione "Contenuti dal sito WordPress".
+ * Sul sito si avvia da /admin/integrazioni, sezione "Contenuti dal sito WordPress".
  */
 import config from '@payload-config'
 import { getPayload } from 'payload'

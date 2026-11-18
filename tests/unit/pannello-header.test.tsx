@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 
 import ApriSito from '@/components/admin/ApriSito'
 import Avatar from '@/components/admin/Avatar'
+import { toccoFuoriDalMenu } from '@/components/admin/ChiudiMenuFuori'
 import RicercaInMinuscolo, { segnapostoNaturale } from '@/components/admin/RicercaInMinuscolo'
 
 import { axeViolations } from './axe'
@@ -53,5 +54,20 @@ describe('Segnaposto della ricerca negli elenchi', () => {
       </RicercaInMinuscolo>,
     )
     expect(screen.getByRole('textbox').getAttribute('placeholder')).toBe('Cerca per chi o email')
+  })
+})
+
+describe('Menu del pannello su telefono', () => {
+  it('un tocco fuori dal cassetto aperto lo chiude, dentro no', () => {
+    document.body.innerHTML = `
+      <div class="app-header__mobile-nav-toggler"><button id="apri">Menu</button></div>
+      <aside class="nav nav--nav-open"><a id="voce" href="#avvisi">Avvisi</a></aside>
+      <main><p id="velo">Pagina</p></main>`
+    expect(toccoFuoriDalMenu(document.getElementById('velo'))).toBe(true)
+    expect(toccoFuoriDalMenu(document.getElementById('voce'))).toBe(false)
+    expect(toccoFuoriDalMenu(document.getElementById('apri'))).toBe(false)
+    document.querySelector('.nav')!.classList.remove('nav--nav-open')
+    expect(toccoFuoriDalMenu(document.getElementById('velo'))).toBe(false)
+    document.body.innerHTML = ''
   })
 })

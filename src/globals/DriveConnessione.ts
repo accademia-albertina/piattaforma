@@ -3,7 +3,7 @@ import type { GlobalConfig } from 'payload'
 /**
  * Collegamento a Google Drive (account noreply@): refresh token cifrato e stato.
  * Mai leggibile o modificabile dall'API, nemmeno dagli admin: lo usano solo il server
- * (overrideAccess) e la pagina /admin/drive. Nascosto dal menu del pannello.
+ * (overrideAccess) e la pagina /admin/integrazioni. Nascosto dal menu del pannello.
  */
 export const DriveConnessione: GlobalConfig = {
   slug: 'drive-connessione',

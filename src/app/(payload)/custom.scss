@@ -272,8 +272,10 @@ body:has(.prima-del-login--solo-google) form.login__form {
     text-decoration: none;
   }
 
-  &:hover::after {
-    transform: scaleX(1);
+  @media (hover: hover) {
+    &:hover::after {
+      transform: scaleX(1);
+    }
   }
 
   &:focus-visible {
@@ -312,9 +314,14 @@ body:has(.prima-del-login--solo-google) form.login__form {
   }
 }
 
-.app-header__account:hover .azione-header::after,
 .app-header__account:focus-visible .azione-header::after {
   transform: scaleX(1);
+}
+
+@media (hover: hover) {
+  .app-header__account:hover .azione-header::after {
+    transform: scaleX(1);
+  }
 }
 
 .app-header__account:focus-visible {
@@ -500,26 +507,102 @@ body {
   min-height: var(--pulsante-header);
 }
 
-// Pulsante di chiusura dentro il cassetto: stessa misura e stesso bordo di quello che lo apre.
-// Solo da telefono: da computer Payload lo nasconde e c'è già il suo pulsante (prima si
-// vedevano due pulsanti sovrapposti).
+// ——— Menu, chiusura, Sito e Account: icone a filo, senza riquadro ———
+// Come nell'header del sito: niente bordo né sfondo, al passaggio il filetto sottile sotto
+// l'icona; il contorno compare solo con la tastiera.
+.app-header .hamburger,
+.nav__header .hamburger,
+.template-default__nav-toggler .hamburger {
+  position: relative;
+  background: transparent;
+  box-shadow: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(50% - 1rem);
+    bottom: 0;
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  // Solo con il mouse: su telefono il tocco lascerebbe il filetto acceso
+  @media (hover: hover) {
+    &:hover::before {
+      transform: scaleX(1);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--theme-text);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-header .hamburger::before,
+  .nav__header .hamburger::before,
+  .template-default__nav-toggler .hamburger::before {
+    transition: none;
+  }
+}
+
+// Sito e Account vicini (Payload lascia un margine di 20px dopo le azioni).
+.app-header__wrapper {
+  gap: 0.25rem;
+}
+
+.app-header__actions-wrapper {
+  margin-right: 0;
+}
+
+// ——— Intestazione su telefono ———
+// Più alta (56px) così le icone da 44px respirano; la chiusura nel cassetto sta esattamente
+// dove c'era il pulsante del menu, così apri e chiudi con lo stesso gesto.
 @media (max-width: 768px) {
+  :root {
+    --app-header-height: 56px;
+  }
+
+  // Le briciole si accorciano in orizzontale ma non tagliano più la casetta in verticale.
+  .app-header__step-nav-wrapper {
+    align-self: stretch;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .app-header__controls-wrapper {
+    gap: 0.25rem;
+  }
+
+  .nav__header-content {
+    display: flex;
+    align-items: center;
+  }
+
   .nav__mobile-close {
     display: flex;
     align-items: center;
-    height: auto;
+    height: 100%;
     padding: 0;
 
     .hamburger {
       width: 44px;
       height: 44px;
-      border: 1px solid var(--theme-elevation-150);
     }
   }
 
-  // Aria tra il pulsante di chiusura e il primo gruppo del menu.
+  // Il primo gruppo del menu parte sotto l'intestazione, con un po' d'aria.
   .nav__scroll {
-    padding-top: calc(44px + 1.75rem);
+    padding-top: calc(var(--app-header-height) + 1rem);
   }
 }
 

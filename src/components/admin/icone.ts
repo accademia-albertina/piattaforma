@@ -9,7 +9,7 @@ import {
   FileText,
   History,
   GraduationCap,
-  HardDrive,
+  Plug,
   Images,
   Landmark,
   LibraryBig,
@@ -44,7 +44,7 @@ export const ICONE_SEZIONI: Record<string, LucideIcon> = {
   pubblicazioni: LibraryBig,
   users: Users,
   'registro-attivita': History,
-  drive: HardDrive,
+  integrazioni: Plug,
   navigazione: PanelsTopLeft,
   'email-inviate': Mail,
 }

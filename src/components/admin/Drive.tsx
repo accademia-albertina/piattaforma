@@ -15,7 +15,10 @@ import { contaMediaWp } from '@/lib/wp-import/wordpress'
 import PannelloDrive from './PannelloDrive'
 import PassoPannello from './PassoPannello'
 
-/** Pagina /admin/drive: collegamento a Google Drive dei file caricati (solo amministratori). */
+/**
+ * Pagina /admin/integrazioni (solo amministratori): collegamento a Google Drive dei file
+ * caricati, file e contenuti dal sito WordPress attuale.
+ */
 export default async function Drive({
   initPageResult,
   params,
@@ -78,7 +81,7 @@ export default async function Drive({
       viewActions={req.payload.config.admin?.components?.actions}
       visibleEntities={visibleEntities}
     >
-      <PassoPannello etichetta="Google Drive" />
+      <PassoPannello etichetta="Integrazioni" />
       <Gutter>
         <PannelloDrive
           account={accountDrive()}

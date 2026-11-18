@@ -4,7 +4,7 @@
  *   GET  /api/drive/oauth/callback  → torna da Google, salva il refresh token cifrato
  *   POST /api/drive/scollega        → revoca il permesso e cancella il token
  *   POST /api/drive/sposta          → sposta su Drive i file ancora sul disco
- * Ogni endpoint torna a /admin/drive con ?esito= o ?errore= (messaggi nella pagina).
+ * Ogni endpoint torna a /admin/integrazioni con ?esito= o ?errore= (messaggi nella pagina).
  */
 import type { Endpoint, PayloadRequest } from 'payload'
 
@@ -34,7 +34,7 @@ import { avviaSpostamento } from './sposta'
 
 const DIECI_MINUTI = 10 * 60
 const VOCE = { collezione: OPERAZIONI.drive.slug, sezione: OPERAZIONI.drive.sezione }
-const PAGINA = '/admin/drive'
+const PAGINA = '/admin/integrazioni'
 
 const origine = (req: PayloadRequest) =>
   process.env.NEXT_PUBLIC_SERVER_URL || new URL(req.url ?? 'http://localhost').origin
@@ -65,7 +65,7 @@ const soloAdmin = (req: PayloadRequest) => {
 }
 
 /**
- * Ritorno da Google: la catena di redirect parte da un altro sito, quindi anche /admin/drive
+ * Ritorno da Google: la catena di redirect parte da un altro sito, quindi anche /admin/integrazioni
  * verrebbe aperta "cross-site" e Payload non riconoscerebbe la sessione. Una pagina ponte
  * dello stesso sito fa il passaggio finale come navigazione interna.
  */

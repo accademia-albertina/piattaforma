@@ -1,5 +1,5 @@
 /**
- * Sezione "Contenuti dal sito WordPress" di /admin/drive: sincronizzazione di Albo online,
+ * Sezione "Contenuti dal sito WordPress" di /admin/integrazioni: sincronizzazione di Albo online,
  * Amministrazione trasparente e avvisi (src/lib/wp-import/contenuti/). Solo presentazione;
  * pulsanti come semplici moduli POST, funzionano anche senza JavaScript.
  */
