@@ -37,25 +37,19 @@ describe('Home: chi può modificarla', () => {
     await payload.delete({ collection: 'users', where: { email: { like: '.home@' } } })
   })
 
-  it('admin, redazione e vicedirezione modificano la home e il pubblico la legge', async () => {
-    for (const [user, testo] of [
-      [admin, 'Manifesto admin'],
-      [redazione, 'Manifesto redazione'],
-      [vicedirezione, 'Manifesto vicedirezione'],
-    ] as const) {
-      await payload.updateGlobal({
-        slug: 'home',
-        data: { manifesto: testo },
-        user,
-        overrideAccess: false,
-      })
-      const pubblico = await payload.findGlobal({ slug: 'home', overrideAccess: false })
-      expect(pubblico.manifesto).toBe(testo)
-    }
+  it('l’admin modifica la home e il pubblico la legge', async () => {
+    await payload.updateGlobal({
+      slug: 'home',
+      data: { manifesto: 'Manifesto admin' },
+      user: admin,
+      overrideAccess: false,
+    })
+    const pubblico = await payload.findGlobal({ slug: 'home', overrideAccess: false })
+    expect(pubblico.manifesto).toBe('Manifesto admin')
   })
 
-  it('segreteria e docenti non modificano la home', async () => {
-    for (const user of [segreteria, docente]) {
+  it('gli altri ruoli non modificano la home', async () => {
+    for (const user of [redazione, vicedirezione, segreteria, docente]) {
       await expect(
         payload.updateGlobal({
           slug: 'home',

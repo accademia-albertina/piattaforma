@@ -60,7 +60,7 @@ export const VISIBILITA: Record<SezionePannello, Role[]> = {
   'registro-attivita': [],
   integrazioni: [],
   navigazione: [],
-  home: ['vicedirezione', 'redazione'],
+  home: [],
   'email-inviate': [],
   changelog: ['vicedirezione', 'redazione', ...UFFICI, 'docente'],
 }
