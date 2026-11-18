@@ -16,6 +16,8 @@
   --color-link: #202f37;
   --color-link-hover: #5f747f; /* era #657a85 (4,49, non AA): ora 4,89 su bianco, 4,65 su surface */
   --color-text-muted: #5f747f;
+  /* Freccia dei menu a tendina (chevron di Lucide) nel colore del testo, #12191d */
+  --icona-select: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2312191d' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   /* Azioni: i pulsanti sono scuri, mai rossi (in UX il rosso indica un'azione distruttiva) */
   --color-ink: #202f37; /* pulsante primario: bianco sopra 13,79 */
   --color-ink-hover: #12191d; /* bianco sopra 17,76 */

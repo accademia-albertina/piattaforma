@@ -32,8 +32,8 @@ const ASSISTENZA: PaginaNuova = {
           titolo: 'Come accedo?',
           html: `<p>Premi “Accedi” in alto a destra, poi “Accedi con Google”, e scegli il tuo account istituzionale:</p>
 <ul>
-<li>studenti della laurea: numero di matricola seguito da t, ad esempio 12345t@albertina.academy;</li>
-<li>studenti della laurea magistrale: numero di matricola seguito da b, ad esempio 12345b@albertina.academy;</li>
+<li>studenti della Laurea (Triennio): numero di matricola seguito da t, ad esempio 12345t@albertina.academy;</li>
+<li>studenti della Laurea Magistrale (Biennio): numero di matricola seguito da b, ad esempio 12345b@albertina.academy;</li>
 <li>docenti e personale: nome.cognome@albertina.academy.</li>
 </ul>
 <p>Una volta dentro, in alto a destra compaiono le tue iniziali: da lì apri “La mia area” o esci.</p>`,
@@ -69,7 +69,7 @@ const ASSISTENZA: PaginaNuova = {
       voci: [
         {
           titolo: 'Non vedo il pulsante per iscrivermi',
-          html: `<p>Controlla di aver fatto l’accesso con l’account istituzionale e che le iscrizioni siano aperte: le date sono nel riquadro “Iscrizione al corso” o accanto all’appello. Puoi iscriverti solo ai corsi e agli appelli del tuo livello (laurea o laurea magistrale).</p>`,
+          html: `<p>Controlla di aver fatto l’accesso con l’account istituzionale e che le iscrizioni siano aperte: le date sono nel riquadro “Iscrizione al corso” o accanto all’appello. Puoi iscriverti solo ai corsi e agli appelli del tuo livello (Laurea o Laurea Magistrale).</p>`,
         },
         {
           titolo: 'Come so che l’iscrizione è andata a buon fine?',
@@ -77,7 +77,7 @@ const ASSISTENZA: PaginaNuova = {
         },
         {
           titolo: 'Voglio annullare un’iscrizione',
-          html: `<p>Finché le iscrizioni sono aperte premi “Annulla l’iscrizione”, in La mia area o nella pagina del corso. Dopo la chiusura scrivi alla <a href="/studente/segreteria-didattica">Segreteria Didattica</a>.</p>`,
+          html: `<p>Finché le iscrizioni sono aperte premi “Annulla l’iscrizione”, in La mia area o nella pagina del corso.</p>`,
         },
       ],
     },
@@ -145,7 +145,7 @@ const OPEN_DAYS: PaginaNuova = {
   blocchi: [
     {
       tipo: 'testo',
-      html: `<p>Ogni anno, di solito a maggio, le dieci scuole dell’Accademia Albertina aprono aule e laboratori a chi pensa di iscriversi alla laurea o alla laurea magistrale. Docenti e studenti mostrano come si lavora, rispondono alle domande sui piani di studio e sull’esame di ammissione.</p>
+      html: `<p>Ogni anno, di solito a maggio, le dieci scuole dell’Accademia Albertina aprono aule e laboratori a chi pensa di iscriversi alla Laurea (Triennio) o alla Laurea Magistrale (Biennio). Docenti e studenti mostrano come si lavora, rispondono alle domande sui piani di studio e sull’esame di ammissione.</p>
 <h2>Come funzionano</h2>
 <ul>
 <li>Ogni scuola ha le sue date: visite guidate alle aule in via Accademia Albertina 6 (Scenografia anche all’ex INCET) e incontri da remoto su Google Meet, per chi non può venire a Torino.</li>
@@ -172,7 +172,7 @@ const OPEN_DAYS: PaginaNuova = {
       tipo: 'link',
       voci: [
         { etichetta: 'Ammissioni: requisiti e domanda', url: '/didattica/ammissioni' },
-        { etichetta: 'Piani di studio', url: '/didattica/piani-di-studio' },
+        { etichetta: 'Scuole e piani di studio', url: '/scuole' },
         { etichetta: 'Visita virtuale dell’Accademia', url: 'https://tour.albertina-academy.it/' },
         { etichetta: 'Storia e sedi, con la planimetria', url: '/accademia/storia-e-sedi' },
       ],

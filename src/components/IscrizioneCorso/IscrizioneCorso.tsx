@@ -49,14 +49,15 @@ const TESTI = {
     campo: 'corso',
     titolo: 'Iscrizione al corso',
     iscriviti: 'Iscriviti al corso',
-    livello: 'Questo corso non è del tuo livello (laurea o laurea magistrale): non puoi iscriverti.',
+    livello:
+      'Questo corso non è del tuo livello (Laurea o Laurea Magistrale): non puoi iscriverti.',
   },
   esame: {
     endpoint: '/api/iscrizioni-esami',
     campo: 'appello',
     titolo: 'Iscrizione all’esame',
     iscriviti: 'Iscriviti all’appello',
-    livello: 'Questo appello non è per il tuo livello (laurea o laurea magistrale).',
+    livello: 'Questo appello non è per il tuo livello (Laurea o Laurea Magistrale).',
   },
 } as const
 

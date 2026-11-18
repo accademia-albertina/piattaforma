@@ -2,7 +2,13 @@ import { filtroElenco, nascostaA } from '@/access/pannello'
 import { erroreUtente } from '@/lib/errori'
 import { type CollectionConfig, type Field, type FieldAccess } from 'payload'
 
-import { LIVELLI, LIVELLO_LABELS, annoAccademicoCorrente, isAnnoAccademico } from '@/access/corsi'
+import {
+  LIVELLI,
+  LIVELLO_BREVI,
+  LIVELLO_LABELS,
+  annoAccademicoCorrente,
+  isAnnoAccademico,
+} from '@/access/corsi'
 import {
   SESSIONI_ESAMI,
   creaAppello,
@@ -87,7 +93,7 @@ export const Appelli: CollectionConfig = {
           timeZone: 'Europe/Rome',
         })
         data.titolo = `${corso.titolo} (${(d.livelli?.length ? d.livelli : (corso.livelli ?? []))
-          .map((l: string) => LIVELLO_LABELS[l as keyof typeof LIVELLO_LABELS])
+          .map((l: string) => LIVELLO_BREVI[l as keyof typeof LIVELLO_BREVI])
           .join(' e ')}), ${giorno}`
         return data
       },
@@ -140,7 +146,7 @@ export const Appelli: CollectionConfig = {
           admin: {
             width: '34%',
             description:
-              'Vuoto = quelli del corso. Usalo per dividere laurea e laurea magistrale in date diverse.',
+              'Vuoto = quelli del corso. Usalo per dividere Laurea e Laurea Magistrale in date diverse.',
           },
         },
       ],

@@ -11,13 +11,13 @@ import styles from './scuole.module.css'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Offerta formativa',
+  title: 'Scuole',
   description:
-    'Le scuole dell’Accademia Albertina: Lauree e Lauree magistrali con lo stesso valore di quelle universitarie.',
+    'Le scuole dell’Accademia Albertina: Lauree e Lauree Magistrali con lo stesso valore di quelle universitarie.',
   alternates: { canonical: '/scuole' },
 }
 
-/** Come si arriva alla laurea: dal dipartimento ai corsi del piano di studi. */
+/** Come si arriva alla Laurea: dal dipartimento ai corsi del piano di studi. */
 const PERCORSO = [
   {
     termine: 'Dipartimento',
@@ -26,11 +26,11 @@ const PERCORSO = [
   {
     termine: 'Scuola',
     testo:
-      'È il tuo indirizzo di studio, per esempio Pittura o Scultura: equivale al corso di laurea.',
+      'È il tuo indirizzo di studio, per esempio Pittura o Scultura: equivale al corso di Laurea.',
   },
   {
-    termine: 'Laurea e laurea magistrale',
-    testo: `La laurea dura ${LIVELLI.triennio.anni} anni (${LIVELLI.triennio.cfa} CFA), la laurea magistrale ${LIVELLI.biennio.anni} (${LIVELLI.biennio.cfa} CFA).`,
+    termine: 'Laurea e Laurea Magistrale',
+    testo: `La Laurea (Triennio) dura ${LIVELLI.triennio.anni} anni (${LIVELLI.triennio.cfa} CFA), la Laurea Magistrale (Biennio) ${LIVELLI.biennio.anni} (${LIVELLI.biennio.cfa} CFA).`,
   },
   {
     termine: 'Corsi e tesi',
@@ -44,12 +44,18 @@ export default async function ScuolePage() {
 
   return (
     <div className={`container ${styles.page}`}>
-      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Offerta formativa' }]} />
+      <Breadcrumbs
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Didattica', href: '/didattica' },
+          { label: 'Scuole' },
+        ]}
+      />
 
       <TestataPagina
         occhiello="Didattica"
-        titolo="Offerta formativa"
-        sommario="Lauree e Lauree magistrali con lo stesso valore di quelle universitarie: dieci scuole in quattro dipartimenti."
+        titolo="Scuole"
+        sommario="Lauree e Lauree Magistrali con lo stesso valore di quelle universitarie: dieci scuole in quattro dipartimenti."
       >
         <div className={styles.azioni}>
           <Link href="/didattica/ammissioni" className="btn btn-primario">
@@ -63,7 +69,7 @@ export default async function ScuolePage() {
 
       <section aria-labelledby="come-funziona" className={styles.sezione}>
         <h2 id="come-funziona" className={styles.titoloSezione}>
-          Come si arriva alla laurea
+          Come si arriva alla Laurea
         </h2>
         <ol className={styles.percorso}>
           {PERCORSO.map((p) => (
@@ -88,7 +94,7 @@ export default async function ScuolePage() {
                   slug={s.slug ?? ''}
                   href={`/scuole/${s.slug}`}
                   immagine={immagineScuola(s)}
-                  invito={s.biennio?.attivo === false ? 'Laurea' : 'Laurea e laurea magistrale'}
+                  invito={s.biennio?.attivo === false ? 'Laurea' : 'Laurea e Laurea Magistrale'}
                 />
               </li>
             ))}

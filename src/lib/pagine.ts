@@ -50,7 +50,7 @@ export async function antenati(pagina: Pagina): Promise<Pick<Pagina, 'titolo' | 
 }
 
 /** Sottopagine pubblicate, per l'indice in fondo alle pagine "contenitore". */
-export async function sottopagine(pagina: Pagina) {
+export async function sottopagine(pagina: Pick<Pagina, 'id'>) {
   const payload = await payloadClient()
   const res = await payload.find({
     collection: 'pagine',

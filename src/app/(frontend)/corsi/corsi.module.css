@@ -35,9 +35,15 @@
   }
 }
 
+/* Da computer la ricerca ha una riga tutta sua: i menu restano larghi abbastanza da leggere
+   «Laurea Magistrale (Biennio)» senza tagli */
 @media (min-width: 64rem) {
   .filters {
-    grid-template-columns: 2fr repeat(3, 1fr) auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  }
+
+  .filters > :first-child {
+    grid-column: 1 / -1;
   }
 }
 

@@ -191,6 +191,7 @@ export interface Pagina {
         | BloccoDocumento
         | BloccoPlanimetria
         | BloccoGuidaStudenti
+        | BloccoMappa
       )[]
     | null;
   /**
@@ -344,6 +345,10 @@ export interface BloccoGalleria {
    * Facoltativo. Diventa un titolo di livello 2 nella pagina.
    */
   titolo?: string | null;
+  /**
+   * Fascia: le foto affiancate da bordo a bordo, si allargano al passaggio del mouse (es. le sedi).
+   */
+  aspetto?: ('griglia' | 'fascia') | null;
   immagini: {
     immagine: number | Media;
     didascalia?: string | null;
@@ -503,6 +508,23 @@ export interface BloccoGuidaStudenti {
   blockType: 'guidaStudenti';
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoMappa".
+ */
+export interface BloccoMappa {
+  /**
+   * Come lo cercheresti su Google Maps.
+   */
+  indirizzo: string;
+  /**
+   * Per chi usa il lettore di schermo e per il link “Apri in Google Maps”.
+   */
+  nome?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mappa';
+}
+/**
  * Comunicazioni per studenti e docenti, in /avvisi e in homepage.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -603,7 +625,7 @@ export interface Scuola {
   video?: string | null;
   triennio?: {
     /**
-     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza laurea magistrale).
+     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza Laurea Magistrale).
      */
     attivo?: boolean | null;
     /**
@@ -647,7 +669,7 @@ export interface Scuola {
   };
   biennio?: {
     /**
-     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza laurea magistrale).
+     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza Laurea Magistrale).
      */
     attivo?: boolean | null;
     /**
@@ -1090,7 +1112,7 @@ export interface Appello {
   annoAccademico: string;
   sessione: 'invernale' | 'estiva' | 'autunnale';
   /**
-   * Vuoto = quelli del corso. Usalo per dividere laurea e laurea magistrale in date diverse.
+   * Vuoto = quelli del corso. Usalo per dividere Laurea e Laurea Magistrale in date diverse.
    */
   livelli?: ('triennio' | 'biennio')[] | null;
   data: string;
@@ -1477,6 +1499,7 @@ export interface PagineSelect<T extends boolean = true> {
         documento?: T | BloccoDocumentoSelect<T>;
         planimetria?: T | BloccoPlanimetriaSelect<T>;
         guidaStudenti?: T | BloccoGuidaStudentiSelect<T>;
+        mappa?: T | BloccoMappaSelect<T>;
       };
   slug?: T;
   genitore?: T;
@@ -1516,6 +1539,7 @@ export interface BloccoImmagineSelect<T extends boolean = true> {
  */
 export interface BloccoGalleriaSelect<T extends boolean = true> {
   titolo?: T;
+  aspetto?: T;
   immagini?:
     | T
     | {
@@ -1623,6 +1647,16 @@ export interface BloccoPlanimetriaSelect<T extends boolean = true> {
  */
 export interface BloccoGuidaStudentiSelect<T extends boolean = true> {
   titolo?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoMappa_select".
+ */
+export interface BloccoMappaSelect<T extends boolean = true> {
+  indirizzo?: T;
+  nome?: T;
   id?: T;
   blockName?: T;
 }

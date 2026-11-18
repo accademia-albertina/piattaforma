@@ -13,6 +13,7 @@ import { emailSpezzabile } from '@/utilities/email'
 import { lexicalToText } from '@/utilities/lexicalText'
 
 import styles from './dottorando.module.css'
+import { srcImmagine } from '@/utilities/srcImmagine'
 
 export const dynamic = 'force-dynamic'
 
@@ -69,7 +70,7 @@ export default async function DottorandoPage({ params }: Props) {
         media={
           foto?.url ? (
             <Image
-              src={foto.url}
+              src={srcImmagine(foto.url)}
               alt=""
               width={foto.width ?? 600}
               height={foto.height ?? 750}

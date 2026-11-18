@@ -412,6 +412,14 @@
           "primaryKey": false,
           "notNull": false
         },
+        "aspetto": {
+          "name": "aspetto",
+          "type": "enum_pagine_blocks_galleria_aspetto",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'griglia'"
+        },
         "block_name": {
           "name": "block_name",
           "type": "varchar",
@@ -1744,6 +1752,123 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.pagine_blocks_mappa": {
+      "name": "pagine_blocks_mappa",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "indirizzo": {
+          "name": "indirizzo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Via Accademia Albertina 6, 10123 Torino'"
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Accademia Albertina di Belle Arti'"
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "pagine_blocks_mappa_order_idx": {
+          "name": "pagine_blocks_mappa_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pagine_blocks_mappa_parent_id_idx": {
+          "name": "pagine_blocks_mappa_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pagine_blocks_mappa_path_idx": {
+          "name": "pagine_blocks_mappa_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "pagine_blocks_mappa_parent_id_fk": {
+          "name": "pagine_blocks_mappa_parent_id_fk",
+          "tableFrom": "pagine_blocks_mappa",
+          "tableTo": "pagine",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.pagine_uffici_editori": {
       "name": "pagine_uffici_editori",
       "schema": "",
@@ -2470,6 +2595,14 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
+        },
+        "aspetto": {
+          "name": "aspetto",
+          "type": "enum__pagine_v_blocks_galleria_aspetto",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'griglia'"
         },
         "_uuid": {
           "name": "_uuid",
@@ -3858,6 +3991,129 @@
         "_pagine_v_blocks_guida_studenti_parent_id_fk": {
           "name": "_pagine_v_blocks_guida_studenti_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_guida_studenti",
+          "tableTo": "_pagine_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public._pagine_v_blocks_mappa": {
+      "name": "_pagine_v_blocks_mappa",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "indirizzo": {
+          "name": "indirizzo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Via Accademia Albertina 6, 10123 Torino'"
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Accademia Albertina di Belle Arti'"
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_pagine_v_blocks_mappa_order_idx": {
+          "name": "_pagine_v_blocks_mappa_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_pagine_v_blocks_mappa_parent_id_idx": {
+          "name": "_pagine_v_blocks_mappa_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_pagine_v_blocks_mappa_path_idx": {
+          "name": "_pagine_v_blocks_mappa_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_pagine_v_blocks_mappa_parent_id_fk": {
+          "name": "_pagine_v_blocks_mappa_parent_id_fk",
+          "tableFrom": "_pagine_v_blocks_mappa",
           "tableTo": "_pagine_v",
           "columnsFrom": [
             "_parent_id"
@@ -14711,7 +14967,7 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false,
-          "default": "'Accademia Albertina di Belle Arti di Torino: Lauree e Lauree magistrali in arti visive, progettazione e nuove tecnologie.'"
+          "default": "'Accademia Albertina di Belle Arti di Torino: Lauree e Lauree Magistrali in arti visive, progettazione e nuove tecnologie.'"
         },
         "manifesto": {
           "name": "manifesto",
@@ -14731,14 +14987,14 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false,
-          "default": "'Laurea e Laurea magistrale'"
+          "default": "'Laurea e Laurea Magistrale'"
         },
         "scuole_testo": {
           "name": "scuole_testo",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false,
-          "default": "'Lauree e Lauree magistrali con lo stesso valore di quelle universitarie.'"
+          "default": "'Lauree e Lauree Magistrali con lo stesso valore di quelle universitarie.'"
         },
         "avviso_mostra": {
           "name": "avviso_mostra",
@@ -15118,6 +15374,14 @@
         "piena"
       ]
     },
+    "public.enum_pagine_blocks_galleria_aspetto": {
+      "name": "enum_pagine_blocks_galleria_aspetto",
+      "schema": "public",
+      "values": [
+        "griglia",
+        "fascia"
+      ]
+    },
     "public.enum_pagine_blocks_link_voci_tipo": {
       "name": "enum_pagine_blocks_link_voci_tipo",
       "schema": "public",
@@ -15151,6 +15415,14 @@
       "values": [
         "testo",
         "piena"
+      ]
+    },
+    "public.enum__pagine_v_blocks_galleria_aspetto": {
+      "name": "enum__pagine_v_blocks_galleria_aspetto",
+      "schema": "public",
+      "values": [
+        "griglia",
+        "fascia"
       ]
     },
     "public.enum__pagine_v_blocks_link_voci_tipo": {
@@ -15695,6 +15967,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "7dddcf80-23e6-4c23-90ef-90a3483fa561",
+  "id": "c306f6d2-5c16-44dc-b66c-fe7bb478963a",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

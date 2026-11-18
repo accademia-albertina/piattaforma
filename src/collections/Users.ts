@@ -11,6 +11,8 @@ import {
   isAdmin,
   puoUsareLaPassword,
 } from '@/access/roles'
+import { assicuraProfiloDocente } from '@/lib/profilo-docente'
+import type { User } from '@/payload-types'
 
 const adminOnly: Access = ({ req }) => isAdmin(req.user)
 
@@ -77,6 +79,17 @@ export const Users: CollectionConfig = {
           data.roles = defaultRolesForEmail(data.email)
         }
         return data
+      },
+    ],
+    // Ruolo Docente assegnato (o account creato già docente): profilo pubblico garantito
+    afterChange: [
+      async ({ doc, previousDoc, req }) => {
+        const era = (previousDoc as User | undefined)?.roles?.includes('docente')
+        // Solo quando il ruolo lo assegna una persona (pannello o API): import e script restano fuori
+        if (req.user && doc.roles?.includes('docente') && !era) {
+          await assicuraProfiloDocente(req.payload, doc as User, req)
+        }
+        return doc
       },
     ],
   },

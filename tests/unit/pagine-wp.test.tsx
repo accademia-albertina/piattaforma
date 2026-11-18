@@ -159,6 +159,7 @@ describe('Immagini, planimetria e testi dei PDF', () => {
       { tipo: 'planimetria' },
       {
         tipo: 'galleria',
+        aspetto: 'fascia',
         immagini: [
           { url: `${WP}/wp-content/uploads/a.webp`, didascalia: 'Rotonda' },
           { url: `${WP}/wp-content/uploads/b.webp`, didascalia: 'Edificio' },

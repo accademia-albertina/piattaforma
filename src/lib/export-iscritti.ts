@@ -1,6 +1,6 @@
 import type { Endpoint, PayloadRequest, Where } from 'payload'
 
-import { LIVELLO_LABELS, isAnnoAccademico, type Livello } from '@/access/corsi'
+import { LIVELLO_BREVI, isAnnoAccademico, type Livello } from '@/access/corsi'
 import { gestisceIscrizioni } from '@/access/iscrizioni'
 import { hasRole } from '@/access/roles'
 import type { IscrizioneCorso, IscrizioneEsame } from '@/payload-types'
@@ -35,7 +35,7 @@ export function csvIscritti(iscrizioni: Iscrizione[], colonnaRiferimento: 'Corso
       rigaCsv([
         i.nominativo,
         i.matricola,
-        i.livello ? LIVELLO_LABELS[i.livello as Livello] : '',
+        i.livello ? LIVELLO_BREVI[i.livello as Livello] : '',
         i.email,
         'appello' in i ? titoloDi(i.appello) : titoloDi(i.corso),
         ora.format(new Date(i.createdAt)),
