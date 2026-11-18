@@ -27,6 +27,34 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.41.0',
+    data: '2026-11-18',
+    titolo: 'Account di prova e password nel pannello',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Account di prova (Utenti, solo admin): entra con email e password invece che con Google, per vedere La mia area come uno studente o il pannello come un docente.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Nella scheda Utente l’occhio mostra la password mentre la scrivi. «Cambia password» compare solo dove serve: admin e account di prova; gli altri entrano con Google.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Menu laterale: una sfumatura in fondo indica che ci sono altre voci; su telefono le voci scorrono sotto la X senza sovrapporsi. Nuova icona per Impostazioni → Home.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Titolo della scheda del browser con il trattino: «Dashboard – Accademia Albertina».',
+      },
+    ],
+    pr: [95],
+  },
+  {
     versione: '0.40.0',
     data: '2026-11-18',
     titolo: 'Pagine istituzionali e home modificabile',

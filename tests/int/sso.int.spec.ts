@@ -153,4 +153,52 @@ describe('Accesso con Google: account e ruoli', () => {
     })
     expect(senza.token).toBeTruthy()
   })
+  it('con Google attivo un account di prova entra con la password', async () => {
+    const studente = await payload.create({
+      collection: 'users',
+      data: {
+        email: 'prova.sso-prova@albertina.academy',
+        password: PASSWORD,
+        roles: ['studente'],
+        accountDiProva: true,
+      },
+    })
+    vi.stubEnv('GOOGLE_CLIENT_ID', 'id')
+    vi.stubEnv('GOOGLE_CLIENT_SECRET', 'segreto')
+    try {
+      const ok = await payload.login({
+        collection: 'users',
+        data: { email: studente.email, password: PASSWORD },
+      })
+      expect(ok.token).toBeTruthy()
+    } finally {
+      vi.unstubAllEnvs()
+    }
+  })
+
+  it('solo un amministratore segna un account come di prova', async () => {
+    const io = await payload.create({
+      collection: 'users',
+      data: { email: 'io.sso-prova@albertina.academy', password: PASSWORD, roles: ['redazione'] },
+    })
+    // Chi non è admin non può rendersi «di prova» per aggirare Google: il campo viene ignorato
+    const dopo = await payload.update({
+      collection: 'users',
+      id: io.id,
+      data: { accountDiProva: true },
+      user: io,
+      overrideAccess: false,
+    })
+    expect(dopo.accountDiProva).toBeUndefined()
+    const letto = await payload.findByID({ collection: 'users', id: io.id })
+    expect(letto.accountDiProva).toBe(false)
+    const daAdmin = await payload.update({
+      collection: 'users',
+      id: io.id,
+      data: { accountDiProva: true },
+      user: admin,
+      overrideAccess: false,
+    })
+    expect(daAdmin.accountDiProva).toBe(true)
+  })
 })
