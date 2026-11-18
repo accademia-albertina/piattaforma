@@ -7,7 +7,10 @@ import { risolviLink } from '@/lib/link'
 import type { Media, Pagina } from '@/payload-types'
 
 import { Attachments } from '../Attachments/Attachments'
+import { Documento } from '../Documento/Documento'
 import { Fisarmonica } from '../Fisarmonica/Fisarmonica'
+import { GuidaStudenti } from '../GuidaStudenti/GuidaStudenti'
+import { Planimetria } from '../Planimetria/Planimetria'
 
 import styles from './Blocchi.module.css'
 
@@ -211,6 +214,39 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
                 : []
             })}
           />
+        </div>
+      )
+
+    case 'documento': {
+      const f = media(b.file)
+      if (!f) return null
+      return (
+        <div className={styles.blocco}>
+          <Documento
+            id={`${id}-titolo`}
+            nome={b.nome}
+            descrizione={b.descrizione}
+            anteprima={b.anteprima}
+            url={f.url!}
+            filename={f.filename}
+            mimeType={f.mimeType}
+            filesize={f.filesize}
+          />
+        </div>
+      )
+    }
+
+    case 'guidaStudenti':
+      return (
+        <Sezione id={id} titolo={b.titolo}>
+          <GuidaStudenti livello={b.titolo ? 3 : 2} />
+        </Sezione>
+      )
+
+    case 'planimetria':
+      return (
+        <div className={styles.blocco}>
+          <Planimetria titolo={b.titolo || undefined} />
         </div>
       )
 

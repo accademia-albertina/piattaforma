@@ -122,8 +122,9 @@ export async function seedDemo(payload: Payload) {
   const didattica = await crea({
     titolo: 'Didattica',
     sommario:
-      'Ammissioni, iscrizioni, piani di studio e trasferimenti per i corsi di Triennio e Biennio.',
-    blocchi: [{ blockType: 'immagine', immagine: media.id, larghezza: 'piena' }],
+      'Ammissioni, iscrizioni, piani di studio e trasferimenti per i corsi di laurea e di laurea magistrale.',
+    // Le pagine genitore non hanno immagini di testata (Fede, 18/11/2026)
+    blocchi: [],
   })
   const studente = await crea({
     titolo: 'Studente',

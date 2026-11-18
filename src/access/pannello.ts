@@ -31,6 +31,7 @@ export const SEZIONI_PANNELLO = [
   'registro-attivita',
   'integrazioni',
   'navigazione',
+  'home',
   'email-inviate',
   'changelog',
 ] as const
@@ -59,6 +60,7 @@ export const VISIBILITA: Record<SezionePannello, Role[]> = {
   'registro-attivita': [],
   integrazioni: [],
   navigazione: [],
+  home: [],
   'email-inviate': [],
   changelog: ['vicedirezione', 'redazione', ...UFFICI, 'docente'],
 }

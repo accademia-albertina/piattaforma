@@ -92,6 +92,26 @@ export function SiteHeader({
     }
   }, [])
 
+  // Il pannello del menu arriva fino in fondo allo schermo (su telefono la pagina sotto non
+  // deve spuntare): l'altezza disponibile dipende da dove finisce la barra rossa.
+  useEffect(() => {
+    const header = headerRef.current
+    if (!open || !header) return
+    const aggiorna = () =>
+      header.style.setProperty(
+        '--altezza-pannello',
+        `${Math.max(0, window.innerHeight - header.getBoundingClientRect().bottom)}px`,
+      )
+    aggiorna()
+    // La barra si accorcia con una transizione: si ricalcola anche alla fine
+    header.addEventListener('transitionend', aggiorna)
+    window.addEventListener('resize', aggiorna)
+    return () => {
+      header.removeEventListener('transitionend', aggiorna)
+      window.removeEventListener('resize', aggiorna)
+    }
+  }, [open])
+
   const compatto = useCompatto()
   const desktop = useMediaQuery('(min-width: 64rem)', true)
 

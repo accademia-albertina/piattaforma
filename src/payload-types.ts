@@ -129,11 +129,13 @@ export interface Config {
   fallbackLocale: null
   globals: {
     navigazione: Navigazione
+    home: Home
     'drive-connessione': DriveConnessione
     'esiti-importazione': EsitiImportazione
   }
   globalsSelect: {
     navigazione: NavigazioneSelect<false> | NavigazioneSelect<true>
+    home: HomeSelect<false> | HomeSelect<true>
     'drive-connessione': DriveConnessioneSelect<false> | DriveConnessioneSelect<true>
     'esiti-importazione': EsitiImportazioneSelect<false> | EsitiImportazioneSelect<true>
   }
@@ -187,6 +189,9 @@ export interface Pagina {
         | BloccoFisarmonica
         | BloccoContatti
         | BloccoAllegati
+        | BloccoDocumento
+        | BloccoPlanimetria
+        | BloccoGuidaStudenti
       )[]
     | null
   /**
@@ -202,6 +207,13 @@ export interface Pagina {
    * Oltre a redazione e vicedirezione. Es. la pagina Iscrizioni alla Segreteria didattica.
    */
   ufficiEditori?: ('segreteria' | 'amministrativo' | 'erasmus' | 'biblioteca')[] | null
+  wpId?: string | null
+  wpModificato?: string | null
+  wpImpronta?: string | null
+  /**
+   * La sincronizzazione da WordPress non sovrascrive questo contenuto. Togli la spunta e salva per riallinearlo alla versione di WordPress.
+   */
+  modificatoNelPannello?: boolean | null
   updatedAt: string
   createdAt: string
   _status?: ('draft' | 'published') | null
@@ -440,6 +452,54 @@ export interface BloccoAllegati {
   blockType: 'allegati'
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoDocumento".
+ */
+export interface BloccoDocumento {
+  /**
+   * Es. “Regolamento tasse 2026-27”.
+   */
+  nome: string
+  descrizione?: string | null
+  /**
+   * I PDF si vedono in anteprima nella pagina (da tablet in su), con i pulsanti Apri e Scarica.
+   */
+  file: number | Media
+  /**
+   * Toglila quando il contenuto del PDF è già scritto nella pagina.
+   */
+  anteprima?: boolean | null
+  id?: string | null
+  blockName?: string | null
+  blockType: 'documento'
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoPlanimetria".
+ */
+export interface BloccoPlanimetria {
+  /**
+   * Vuoto = “Planimetria della sede”. Aule e uffici dei piani sono nel codice del sito: per cambiarli chiedi a Fede.
+   */
+  titolo?: string | null
+  id?: string | null
+  blockName?: string | null
+  blockType: 'planimetria'
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoGuidaStudenti".
+ */
+export interface BloccoGuidaStudenti {
+  /**
+   * Facoltativo, sopra la guida. Passi e schermate sono nel codice del sito (gli stessi di “La mia area”): per cambiarli chiedi a Fede.
+   */
+  titolo?: string | null
+  id?: string | null
+  blockName?: string | null
+  blockType: 'guidaStudenti'
+}
+/**
  * Comunicazioni per studenti e docenti, in /avvisi e in homepage.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -546,7 +606,7 @@ export interface Scuola {
   video?: string | null
   triennio?: {
     /**
-     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza biennio).
+     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza laurea magistrale).
      */
     attivo?: boolean | null
     /**
@@ -590,7 +650,7 @@ export interface Scuola {
   }
   biennio?: {
     /**
-     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza biennio).
+     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza laurea magistrale).
      */
     attivo?: boolean | null
     /**
@@ -1033,7 +1093,7 @@ export interface Appello {
   annoAccademico: string
   sessione: 'invernale' | 'estiva' | 'autunnale'
   /**
-   * Vuoto = quelli del corso. Usalo per dividere triennio e biennio in date diverse.
+   * Vuoto = quelli del corso. Usalo per dividere laurea e laurea magistrale in date diverse.
    */
   livelli?: ('triennio' | 'biennio')[] | null
   data: string
@@ -1417,11 +1477,18 @@ export interface PagineSelect<T extends boolean = true> {
         fisarmonica?: T | BloccoFisarmonicaSelect<T>
         contatti?: T | BloccoContattiSelect<T>
         allegati?: T | BloccoAllegatiSelect<T>
+        documento?: T | BloccoDocumentoSelect<T>
+        planimetria?: T | BloccoPlanimetriaSelect<T>
+        guidaStudenti?: T | BloccoGuidaStudentiSelect<T>
       }
   slug?: T
   genitore?: T
   percorso?: T
   ufficiEditori?: T
+  wpId?: T
+  wpModificato?: T
+  wpImpronta?: T
+  modificatoNelPannello?: T
   updatedAt?: T
   createdAt?: T
   _status?: T
@@ -1529,6 +1596,36 @@ export interface BloccoAllegatiSelect<T extends boolean = true> {
         file?: T
         id?: T
       }
+  id?: T
+  blockName?: T
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoDocumento_select".
+ */
+export interface BloccoDocumentoSelect<T extends boolean = true> {
+  nome?: T
+  descrizione?: T
+  file?: T
+  anteprima?: T
+  id?: T
+  blockName?: T
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoPlanimetria_select".
+ */
+export interface BloccoPlanimetriaSelect<T extends boolean = true> {
+  titolo?: T
+  id?: T
+  blockName?: T
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoGuidaStudenti_select".
+ */
+export interface BloccoGuidaStudentiSelect<T extends boolean = true> {
+  titolo?: T
   id?: T
   blockName?: T
 }
@@ -2114,6 +2211,78 @@ export interface Navigazione {
   createdAt?: string | null
 }
 /**
+ * Testi, collegamenti e foto della homepage. Le modifiche sono visibili sul sito appena salvi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home".
+ */
+export interface Home {
+  id: number
+  sliderNumero?: number | null
+  accessiTitolo?: string | null
+  accessiTesto?: string | null
+  /**
+   * Da 2 a 6 riquadri sotto lo slider.
+   */
+  accessi?:
+    | {
+        titolo: string
+        testo: string
+        icona:
+          | 'ammissioni'
+          | 'laurea'
+          | 'calendario'
+          | 'segreteria'
+          | 'libro'
+          | 'persone'
+          | 'documento'
+          | 'luogo'
+          | 'email'
+          | 'info'
+        tipo?: ('interno' | 'percorso' | 'esterno') | null
+        pagina?: (number | null) | Pagina
+        /**
+         * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
+         */
+        url?: string | null
+        id?: string | null
+      }[]
+    | null
+  /**
+   * Le parole si accendono una alla volta mentre si scorre.
+   */
+  manifesto?: string | null
+  /**
+   * Si apre dietro il motto. Se vuota: lo scalone. Meglio orizzontale, almeno 2000 px.
+   */
+  fotoGrande?: (number | null) | Media
+  /**
+   * Due foto accanto al manifesto. Se vuoto: sala blu e aula di pittura.
+   */
+  fotoDettagli?: (number | Media)[] | null
+  cifre?:
+    | {
+        valore: number
+        etichetta: string
+        id?: string | null
+      }[]
+    | null
+  scuoleTitolo?: string | null
+  scuoleTesto?: string | null
+  avvisoMostra?: boolean | null
+  avvisoTitolo?: string | null
+  avvisoTesto?: string | null
+  tourTitolo?: string | null
+  tourTesto?: string | null
+  tourUrl?: string | null
+  /**
+   * Se vuota: la facciata. Orizzontale, almeno 2000 px.
+   */
+  tourFoto?: (number | null) | Media
+  updatedAt?: string | null
+  createdAt?: string | null
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "drive-connessione".
  */
@@ -2226,6 +2395,48 @@ export interface NavigazioneSelect<T extends boolean = true> {
         url?: T
         id?: T
       }
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home_select".
+ */
+export interface HomeSelect<T extends boolean = true> {
+  sliderNumero?: T
+  accessiTitolo?: T
+  accessiTesto?: T
+  accessi?:
+    | T
+    | {
+        titolo?: T
+        testo?: T
+        icona?: T
+        tipo?: T
+        pagina?: T
+        url?: T
+        id?: T
+      }
+  manifesto?: T
+  fotoGrande?: T
+  fotoDettagli?: T
+  cifre?:
+    | T
+    | {
+        valore?: T
+        etichetta?: T
+        id?: T
+      }
+  scuoleTitolo?: T
+  scuoleTesto?: T
+  avvisoMostra?: T
+  avvisoTitolo?: T
+  avvisoTesto?: T
+  tourTitolo?: T
+  tourTesto?: T
+  tourUrl?: T
+  tourFoto?: T
   updatedAt?: T
   createdAt?: T
   globalType?: T

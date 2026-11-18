@@ -68,13 +68,20 @@ async function entraComeAdmin() {
 /** Crea (o riporta) l'account di prova di un ruolo e restituisce l'email. */
 async function account(ruolo) {
   if (ruolo === 'admin') return ADMIN.email
+  // Lo studente ha un'email da matricola (12345t@ = laurea), come quelle vere
   const email =
-    ruolo === 'nuovo' ? 'mario.rossi@albertina.academy' : `guida.${ruolo}@albertina.academy`
+    ruolo === 'nuovo'
+      ? 'mario.rossi@albertina.academy'
+      : ruolo === 'studente'
+        ? '99999t@albertina.academy'
+        : `guida.${ruolo}@albertina.academy`
+  const nomi = { nuovo: ['Mario', 'Rossi'], studente: ['Giulia', 'Ferraris'] }
+  const [nome, cognome] = nomi[ruolo] ?? ['Prova', ruolo]
   const dati = {
     email,
     password: PASSWORD,
-    nome: ruolo === 'nuovo' ? 'Mario' : 'Prova',
-    cognome: ruolo === 'nuovo' ? 'Rossi' : ruolo,
+    nome,
+    cognome,
     roles: ruolo === 'nuovo' ? [] : [ruolo],
   }
   const { docs } = await api(`/users?where[email][equals]=${encodeURIComponent(email)}&depth=0`)
@@ -102,8 +109,8 @@ async function collegaDocente(idUtente) {
 
 /* ---------- Browser ---------- */
 
-async function apriSessione(browser, ruolo, tema, { larghezza, altezza }) {
-  const email = await account(ruolo)
+async function apriSessione(browser, ruolo, tema, { larghezza, altezza }, sito) {
+  const email = ruolo ? await account(ruolo) : null
   const context = await browser.newContext({
     viewport: { width: larghezza, height: altezza },
     deviceScaleFactor: SCALA,
@@ -119,6 +126,16 @@ async function apriSessione(browser, ruolo, tema, { larghezza, altezza }) {
     })
   }, CSS_FOTO)
   const page = await context.newPage()
+  // Sito pubblico: si entra con l'API (gli studenti non hanno il pannello); senza ruolo = visitatore
+  if (sito) {
+    if (email) {
+      const res = await context.request.post(`${BASE}/api/users/login`, {
+        data: { email, password: PASSWORD },
+      })
+      if (!res.ok()) throw new Error(`login ${email}: ${res.status()}`)
+    }
+    return { context, page }
+  }
   await page.goto(`${BASE}/admin/login`)
   await page.fill('#field-email', email)
   await page.fill('#field-password', email === ADMIN.email ? ADMIN.password : PASSWORD)
@@ -205,12 +222,18 @@ const dimensioni = (scena) => ({
 })
 
 async function fotografa(browser, scena, tema) {
-  const { context, page } = await apriSessione(browser, scena.ruolo, TEMI[tema], dimensioni(scena))
+  const { context, page } = await apriSessione(
+    browser,
+    scena.ruolo,
+    TEMI[tema],
+    dimensioni(scena),
+    scena.sito,
+  )
   const contesto = { docente: docenteDiProva, api, account }
   const url = typeof scena.url === 'function' ? await scena.url(contesto) : scena.url
   await page.goto(`${BASE}${url}`)
   await page.waitForLoadState('networkidle')
-  await menuAperto(page, Boolean(scena.menu))
+  if (!scena.sito) await menuAperto(page, Boolean(scena.menu))
   if (scena.prima) await scena.prima(page, contesto)
   await page.waitForTimeout(800)
   await inquadra(page, scena, dimensioni(scena))
@@ -241,7 +264,8 @@ const errori = []
 for (const scena of scene) {
   try {
     const segni = await fotografa(browser, scena, 'chiaro')
-    await fotografa(browser, scena, 'scuro')
+    // Il sito pubblico ha solo il tema chiaro
+    if (!scena.sito) await fotografa(browser, scena, 'scuro')
     dati[scena.id] = { ...dimensioni(scena), segni }
     console.log('ok', scena.id)
   } catch (e) {

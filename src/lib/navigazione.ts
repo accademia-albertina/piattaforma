@@ -28,7 +28,7 @@ export const MENU_IN_EVIDENZA: VoceMenu[] = [
   { label: 'Open Days', href: '/open-days' },
   { label: 'Segreteria didattica', href: '/studente/segreteria-didattica' },
   { label: 'Albo online', href: '/albo' },
-  { label: 'Troubleshooting', href: '/troubleshooting' },
+  { label: 'Assistenza', href: '/assistenza' },
   { label: 'Contatti', href: '/contatti' },
 ]
 
@@ -135,7 +135,7 @@ export const MENU_FOOTER: VoceMenu[] = [
     esterno: true,
   },
   { label: 'Virtual tour', href: 'https://tour.albertina-academy.it/', esterno: true },
-  { label: 'Troubleshooting', href: '/troubleshooting' },
+  { label: 'Assistenza', href: '/assistenza' },
   { label: 'Amministrazione trasparente', href: '/amministrazione-trasparente' },
   { label: 'Albo online', href: '/albo' },
 ]

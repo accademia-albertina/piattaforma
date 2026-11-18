@@ -1,0 +1,57 @@
+/*
+ * Riquadri nel blu informativo del Design System, mai rosso (in UX = errore).
+ * Bianco su #2b5a80: 5,92:1.
+ */
+.schermata {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 0;
+}
+
+.cornice {
+  position: relative;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.cornice img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.segno {
+  position: absolute;
+  border: 2px solid var(--color-info-text);
+  box-shadow: 0 0 0 2px var(--color-bg);
+  pointer-events: none;
+}
+
+.numero {
+  position: absolute;
+  bottom: 100%;
+  left: -2px;
+  display: grid;
+  place-items: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  background: var(--color-info-text);
+  box-shadow: 0 0 0 2px var(--color-bg);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-bg);
+}
+
+/* Riquadro attaccato al bordo alto: il numero va a sinistra, sempre fuori */
+.inAlto .numero {
+  top: -2px;
+  right: 100%;
+  bottom: auto;
+  left: auto;
+}
+
+.didascalia {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}

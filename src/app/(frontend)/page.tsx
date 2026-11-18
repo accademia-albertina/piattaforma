@@ -1,5 +1,19 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import {
+  ArrowRight,
+  BookOpen,
+  CalendarDays,
+  ClipboardList,
+  DoorOpen,
+  FileText,
+  GraduationCap,
+  Info,
+  Mail,
+  MapPin,
+  Users,
+  type LucideIcon,
+} from 'lucide-react'
+import type { StaticImageData } from 'next/image'
 
 import aulaPittura from '@/assets/repertorio/aula-pittura.webp'
 import facciata from '@/assets/repertorio/facciata.webp'
@@ -16,7 +30,7 @@ import {
   SchedePercorso,
 } from '@/components'
 import { nomeDipartimento } from '@/collections/Scuole'
-import type { Avviso } from '@/payload-types'
+import type { Avviso, Media } from '@/payload-types'
 import {
   avvisiInEvidenza,
   categorieAvviso,
@@ -25,7 +39,9 @@ import {
   trovaScuole,
   ultimiAvvisi,
 } from '@/lib/avvisi'
-import { ACCESSI_HOME } from '@/lib/accessi-home'
+import { HOME_PREDEFINITA as P, type IconaHome } from '@/lib/home'
+import { risolviLink } from '@/lib/link'
+import { payloadClient } from '@/lib/payload'
 import { IMMAGINI_SCUOLE } from '@/lib/immagini-scuole'
 import { immagineDiRepertorio } from '@/lib/repertorio'
 
@@ -33,10 +49,69 @@ import styles from './home.module.css'
 
 export const dynamic = 'force-dynamic'
 
-const TOUR = 'https://tour.albertina-academy.it/'
+const ICONE: Record<IconaHome, LucideIcon> = {
+  ammissioni: DoorOpen,
+  laurea: GraduationCap,
+  calendario: CalendarDays,
+  segreteria: ClipboardList,
+  libro: BookOpen,
+  persone: Users,
+  documento: FileText,
+  luogo: MapPin,
+  email: Mail,
+  info: Info,
+}
 
-const MANIFESTO =
-  'Dal 1678 Torino ha la sua scuola d’arte. Dieci scuole, dalla pittura al cinema, dalla scultura alle nuove tecnologie. Un palazzo nel centro della città, una pinacoteca, i laboratori. Qui si impara un mestiere antico e si cerca la propria stella.'
+/** Foto caricata nel pannello nel formato di next/image, altrimenti quella di repertorio. */
+function fotoOppure(m: number | Media | null | undefined, predefinita: StaticImageData) {
+  return typeof m === 'object' && m?.url && m.width && m.height
+    ? { src: m.url, width: m.width, height: m.height }
+    : predefinita
+}
+
+/** Contenuti modificabili dal pannello (global Home); senza database restano i predefiniti. */
+async function contenutiHome() {
+  const h = await payloadClient()
+    .then((payload) => payload.findGlobal({ slug: 'home', depth: 1, overrideAccess: false }))
+    .catch(() => null)
+  const accessi = (h?.accessi ?? []).flatMap((a) => {
+    const link = risolviLink({ ...a, etichetta: a.titolo })
+    return link
+      ? [{ titolo: a.titolo, testo: a.testo, href: link.href, icona: ICONE[a.icona] }]
+      : []
+  })
+  const dettagli = (h?.fotoDettagli ?? []).filter(
+    (m): m is Media => typeof m === 'object' && Boolean(m?.url && m.width && m.height),
+  )
+  return {
+    slider: h?.sliderNumero || P.slider.numero,
+    accessiTitolo: h?.accessiTitolo || P.accessiTitolo,
+    accessiTesto: h?.accessiTesto || P.accessiTesto,
+    accessi:
+      accessi.length > 0
+        ? accessi
+        : P.accessi.map((a) => ({ ...a, href: a.url, icona: ICONE[a.icona] })),
+    manifesto: h?.manifesto || P.manifesto,
+    foto: fotoOppure(h?.fotoGrande, scalone),
+    dettagli: (dettagli.length === 2
+      ? dettagli.map((m) => fotoOppure(m, salaBlu))
+      : [salaBlu, aulaPittura]) as [StaticImageData, StaticImageData],
+    cifre: h?.cifre?.length ? h.cifre : P.cifre,
+    scuoleTitolo: h?.scuoleTitolo || P.scuoleTitolo,
+    scuoleTesto: h?.scuoleTesto || P.scuoleTesto,
+    avviso: {
+      mostra: h ? h.avvisoMostra !== false : P.avviso.mostra,
+      titolo: h?.avvisoTitolo || P.avviso.titolo,
+      testo: h?.avvisoTesto || P.avviso.testo,
+    },
+    tour: {
+      titolo: h?.tourTitolo || P.tour.titolo,
+      testo: h?.tourTesto || P.tour.testo,
+      url: h?.tourUrl || P.tour.url,
+      foto: fotoOppure(h?.tourFoto, facciata),
+    },
+  }
+}
 
 /** Griglia di avvisi di una scheda, con un collegamento all'elenco completo. */
 function GrigliaAvvisi({
@@ -82,8 +157,9 @@ function GrigliaAvvisi({
 }
 
 export default async function HomePage() {
+  const home = await contenutiHome()
   const [evidenza, avvisi, didattica, bandi, scuole] = await Promise.all([
-    avvisiInEvidenza(5),
+    avvisiInEvidenza(home.slider),
     ultimiAvvisi(6),
     ultimiAvvisi(6, ['lezioni', 'esami']),
     ultimiAvvisi(6, ['bandi-e-concorsi']),
@@ -114,17 +190,13 @@ export default async function HomePage() {
         }))}
       />
 
-      <AccessiRapidi voci={ACCESSI_HOME} />
+      <AccessiRapidi titolo={home.accessiTitolo} testo={home.accessiTesto} voci={home.accessi} />
 
       <IntroAccademia
-        foto={scalone}
-        dettagli={[salaBlu, aulaPittura]}
-        testo={MANIFESTO}
-        cifre={[
-          { valore: 4, etichetta: 'Dipartimenti' },
-          { valore: 10, etichetta: 'Scuole' },
-          { valore: 2, etichetta: 'Livelli: Laurea e Laurea magistrale' },
-        ]}
+        foto={home.foto}
+        dettagli={home.dettagli}
+        testo={home.manifesto}
+        cifre={home.cifre.map(({ valore, etichetta }) => ({ valore, etichetta }))}
       />
 
       <div className={`container ${styles.page}`}>
@@ -185,24 +257,21 @@ export default async function HomePage() {
               <li className={styles.introScuole}>
                 <p className={styles.occhiello}>Offerta formativa</p>
                 <p className={styles.introTitolo}>
-                  {scuole.length} scuole, Laurea e Laurea magistrale
+                  {scuole.length} scuole, {home.scuoleTitolo}
                 </p>
-                <p>
-                  Lauree e Lauree magistrali con lo stesso valore di quelle universitarie: triennio
-                  e biennio.
-                </p>
+                <p>{home.scuoleTesto}</p>
                 <dl className={styles.cifre}>
                   <div>
-                    <dt>Triennio</dt>
+                    <dt>Laurea</dt>
                     <dd>180 CFA</dd>
                   </div>
                   <div>
-                    <dt>Biennio</dt>
+                    <dt>Laurea magistrale</dt>
                     <dd>120 CFA</dd>
                   </div>
                 </dl>
                 <Link href="/scuole" className={styles.introLink}>
-                  Come si arriva al diploma <ArrowRight size={18} strokeWidth={1.5} aria-hidden />
+                  Come si arriva alla laurea <ArrowRight size={18} strokeWidth={1.5} aria-hidden />
                 </Link>
               </li>
               {scuole.map((s) => {
@@ -228,15 +297,19 @@ export default async function HomePage() {
           </section>
         )}
 
-        <Alert tone="info" title="Sito in costruzione">
-          <p>
-            Il sito ufficiale resta <a href="https://albertina-academy.it">albertina-academy.it</a>{' '}
-            fino al passaggio alla nuova piattaforma.
-          </p>
-        </Alert>
+        {home.avviso.mostra && (
+          <Alert tone="info" title={home.avviso.titolo}>
+            <p>{home.avviso.testo}</p>
+          </Alert>
+        )}
       </div>
 
-      <InvitoTour href={TOUR} immagine={facciata} />
+      <InvitoTour
+        href={home.tour.url}
+        immagine={home.tour.foto}
+        titolo={home.tour.titolo}
+        testo={home.tour.testo}
+      />
     </>
   )
 }

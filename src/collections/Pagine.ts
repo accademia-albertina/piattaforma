@@ -14,6 +14,7 @@ import {
   modificaPagine,
 } from '@/access/pagine'
 import { ROLE_LABELS } from '@/access/roles'
+import { campiProvenienzaWp, segnaModificaNelPannello } from '@/fields/provenienzaWp'
 import { BLOCCHI } from '@/blocks'
 import { slugField } from '@/fields/slug'
 import { validaTitolo } from '@/fields/titolo'
@@ -83,6 +84,8 @@ const aggiornaSottopagine: CollectionAfterChangeHook = async ({ doc, previousDoc
       data: {},
       req,
       overrideAccess: true,
+      // Ricalcolo dell'indirizzo, non una modifica della sottopagina
+      context: { importazione: true },
     })
   }
   return doc
@@ -113,7 +116,7 @@ export const Pagine: CollectionConfig = {
     delete: eliminaPagine,
   },
   hooks: {
-    beforeChange: [calcolaPercorso],
+    beforeChange: [segnaModificaNelPannello, calcolaPercorso],
     afterChange: [aggiornaSottopagine],
   },
   fields: [
@@ -186,5 +189,6 @@ export const Pagine: CollectionConfig = {
           'Oltre a redazione e vicedirezione. Es. la pagina Iscrizioni alla Segreteria didattica.',
       },
     },
+    campiProvenienzaWp,
   ],
 }

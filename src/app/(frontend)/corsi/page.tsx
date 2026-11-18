@@ -24,7 +24,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   return {
     title: `Corsi A.A. ${filtri.anno}`,
     description:
-      'Programmi dei corsi di Triennio e Biennio dell’Accademia Albertina: docenti, crediti, orari e bibliografia.',
+      'Programmi dei corsi di laurea e laurea magistrale dell’Accademia Albertina: docenti, crediti, orari e bibliografia.',
     alternates: { canonical: hrefCorsi({ anno: filtri.anno }) },
   }
 }
@@ -43,7 +43,7 @@ export default async function CorsiPage({ searchParams }: Props) {
       <header className={styles.header}>
         <h1>Corsi</h1>
         <p className={styles.intro}>
-          Programmi dei corsi di Triennio e Biennio
+          Programmi dei corsi di laurea e laurea magistrale
           {archivio ? ` dell’anno accademico ${filtri.anno} (archivio)` : ''}: docenti, crediti,
           orari e bibliografia.
         </p>
@@ -64,7 +64,7 @@ export default async function CorsiPage({ searchParams }: Props) {
         <div className={styles.field}>
           <label htmlFor="corsi-livello">Livello</label>
           <select id="corsi-livello" name="livello" defaultValue={filtri.livello ?? ''}>
-            <option value="">Triennio e Biennio</option>
+            <option value="">Laurea e laurea magistrale</option>
             {LIVELLI.map((l) => (
               <option key={l} value={l}>
                 {LIVELLO_LABELS[l]}
