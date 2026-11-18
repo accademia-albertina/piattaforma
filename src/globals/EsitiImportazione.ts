@@ -2,7 +2,7 @@ import type { GlobalConfig } from 'payload'
 
 /**
  * Esito dell'ultima sincronizzazione dei contenuti da WordPress, salvato perché la pagina
- * /admin/drive lo mostri anche dopo un riavvio del server. Lo scrive e lo legge solo il server
+ * /admin/integrazioni lo mostri anche dopo un riavvio del server. Lo scrive e lo legge solo il server
  * (overrideAccess); nascosto dal menu del pannello.
  */
 export const EsitiImportazione: GlobalConfig = {

@@ -69,7 +69,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      titleSuffix: ' · Accademia Albertina',
+      // Payload mette già lo spazio tra titolo e suffisso
+      titleSuffix: '· Accademia Albertina',
       icons: [
         { rel: 'icon', type: 'image/png', sizes: '32x32', url: '/brand/stemma-favicon-32.png' },
         { rel: 'icon', type: 'image/png', sizes: '192x192', url: '/brand/stemma-favicon-192.png' },
@@ -84,7 +85,11 @@ export default buildConfig({
     // Niente Gravatar: è un servizio esterno (privacy) e la CSP lo blocca.
     avatar: { Component: '/components/admin/Avatar' },
     components: {
-      providers: ['/components/admin/LinguaDate', '/components/admin/RicercaInMinuscolo'],
+      providers: [
+        '/components/admin/LinguaDate',
+        '/components/admin/RicercaInMinuscolo',
+        '/components/admin/ChiudiMenuFuori',
+      ],
       beforeLogin: ['/components/admin/PrimaDelLogin'],
       actions: ['/components/admin/ApriSito'],
       logout: { Button: '/components/admin/PiedeMenu' },
@@ -94,9 +99,19 @@ export default buildConfig({
       },
       views: {
         dashboard: { Component: '/components/admin/Dashboard' },
-        changelog: { Component: '/components/admin/Changelog', path: '/changelog' },
-        guida: { Component: '/components/admin/Guida', path: '/guida' },
-        drive: { Component: '/components/admin/Drive', path: '/drive' },
+        // meta.title: senza, Payload mette "Payload" nel titolo della scheda del browser
+        changelog: {
+          Component: '/components/admin/Changelog',
+          path: '/changelog',
+          meta: { title: 'Changelog' },
+        },
+        guida: { Component: '/components/admin/Guida', path: '/guida', meta: { title: 'Guida' } },
+        // Google Drive e WordPress (prima /admin/drive, che ora rimanda qui: next.config.ts)
+        integrazioni: {
+          Component: '/components/admin/Drive',
+          path: '/integrazioni',
+          meta: { title: 'Integrazioni' },
+        },
       },
     },
   },

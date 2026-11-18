@@ -3,7 +3,7 @@
  *   POST /api/wp-import/avvia  → avvia (campo "limite" facoltativo: prova con pochi file)
  *   POST /api/wp-import/ferma  → si ferma dopo il file in corso
  *   POST /api/wp-import/contenuti/avvia, /contenuti/ferma → lo stesso per Albo, Trasparenza, avvisi
- * Tornano a /admin/drive con ?esito= (messaggi nella pagina).
+ * Tornano a /admin/integrazioni con ?esito= (messaggi nella pagina).
  */
 import type { Endpoint, PayloadRequest } from 'payload'
 
@@ -15,7 +15,7 @@ import {
 } from './contenuti/sincronizza-contenuti'
 import { avviaSincronizzazione, fermaSincronizzazione } from './sincronizza'
 
-const PAGINA = '/admin/drive'
+const PAGINA = '/admin/integrazioni'
 
 function torna(req: PayloadRequest, esito: string, ancora = 'wordpress') {
   const origine =

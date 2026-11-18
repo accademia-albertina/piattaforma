@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import { OPERAZIONI } from '@/lib/registro/costanti'
 
-/** Le operazioni di sincronizzazione e Drive si seguono tutte dalla pagina Google Drive. */
+/** Le operazioni di sincronizzazione e Drive si seguono tutte dalla pagina Integrazioni. */
 const DA_PAGINA_DRIVE = new Set<string>(Object.values(OPERAZIONI).map((o) => o.slug))
 
 /**
@@ -23,7 +23,7 @@ export default function ApriElementoRegistro() {
   const admin = config.routes.admin
   const operazione = DA_PAGINA_DRIVE.has(collezione)
   const href = operazione
-    ? `${admin}/drive`
+    ? `${admin}/integrazioni`
     : typeof id === 'string' && id
       ? `${admin}/collections/${collezione}/${id}`
       : `${admin}/globals/${collezione}`
@@ -31,7 +31,7 @@ export default function ApriElementoRegistro() {
     <div className="link-sul-sito">
       <Link href={href}>
         <ArrowRight size={16} strokeWidth={1.5} aria-hidden />
-        {operazione ? 'Apri la pagina Google Drive' : 'Apri l’elemento'}
+        {operazione ? 'Apri la pagina Integrazioni' : 'Apri l’elemento'}
       </Link>
     </div>
   )

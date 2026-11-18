@@ -1,6 +1,6 @@
 /**
  * Sposta su Drive i file caricati prima del collegamento (ancora sul disco del server).
- * Gira in background, uno alla volta; l'avanzamento si vede in /admin/drive.
+ * Gira in background, uno alla volta; l'avanzamento si vede in /admin/integrazioni.
  */
 import fs from 'node:fs/promises'
 import path from 'node:path'

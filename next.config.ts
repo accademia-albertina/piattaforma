@@ -58,7 +58,10 @@ const nextConfig: NextConfig = {
   },
   // Indirizzi del sito attuale e dei vecchi menu che ora portano alla pagina dei calendari.
   async redirects() {
-    return (
+    return [
+      // Pannello: la pagina Google Drive ora si chiama Integrazioni (Drive e WordPress)
+      { source: '/admin/drive', destination: '/admin/integrazioni', permanent: false },
+    ].concat(
       ['/didattica/orario-lezioni', '/didattica/calendari', '/orario-lezioni', '/calendario']
         .map((source) => ({ source, destination: '/calendari', permanent: true }))
         .concat(
@@ -79,7 +82,7 @@ const nextConfig: NextConfig = {
           }).map(([source, destination]) => ({ source, destination, permanent: true })),
         )
         // Il registro delle versioni ora sta nel pannello (solo con accesso)
-        .concat([{ source: '/novita', destination: '/admin/changelog', permanent: false }])
+        .concat([{ source: '/novita', destination: '/admin/changelog', permanent: false }]),
     )
   },
   async headers() {

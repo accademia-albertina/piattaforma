@@ -64,11 +64,11 @@ const SEZIONI: Sezione[] = [
   { slug: 'registro-attivita', tipo: 'collezione', serve: 'read' },
   { slug: 'email-inviate', tipo: 'collezione', serve: 'read' },
   {
-    slug: 'drive',
+    slug: 'integrazioni',
     tipo: 'vista',
     serve: 'read',
-    titolo: 'Google Drive',
-    descrizione: 'Collegamento alla cartella Drive dove si salvano immagini e PDF.',
+    titolo: 'Integrazioni',
+    descrizione: 'Google Drive per immagini e PDF, file e contenuti dal sito WordPress attuale.',
     gruppo: 'Sistema',
   },
 ]

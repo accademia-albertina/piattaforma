@@ -5,7 +5,7 @@
  *
  * Se Drive non è collegato (sviluppo, test, collegamento revocato) o non risponde, il file
  * resta sul disco del server come prima: il caricamento non fallisce mai per colpa di Drive.
- * I file rimasti sul disco si spostano poi con "Sposta su Drive" in /admin/drive.
+ * I file rimasti sul disco si spostano poi con "Sposta su Drive" in /admin/integrazioni.
  */
 import { createReadStream } from 'node:fs'
 import fs from 'node:fs/promises'

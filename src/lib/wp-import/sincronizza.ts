@@ -7,7 +7,7 @@
  *    Drive a blocchi: in memoria non c'è mai un file intero (server da 512 MB).
  * 3. Riscrive i link a wp-content/uploads nei contenuti (tutte le collezioni e i globali).
  *
- * Gira in background, un file alla volta; l'avanzamento si vede in /admin/drive.
+ * Gira in background, un file alla volta; l'avanzamento si vede in /admin/integrazioni.
  */
 import { createWriteStream } from 'node:fs'
 import fs from 'node:fs/promises'

@@ -1,5 +1,5 @@
 /**
- * Contenuto della pagina /admin/drive (stato del collegamento a Google Drive e pulsanti).
+ * Contenuto della pagina /admin/integrazioni (stato del collegamento a Google Drive e pulsanti).
  * Solo presentazione: i dati li legge la vista Drive.tsx. Pulsanti come semplici link e moduli
  * (POST verso /api/drive/...): funzionano anche senza JavaScript.
  */
@@ -235,11 +235,10 @@ export default function PannelloDrive(p: PropsPannelloDrive) {
   return (
     <div className={styles.drive}>
       <header className={styles.intestazione}>
-        <h1>Google Drive</h1>
+        <h1>Integrazioni</h1>
         <p>
-          Le immagini e i PDF caricati nel pannello si salvano nella cartella Drive dell’Accademia,
-          con l’account <strong>{account}</strong>. Il sito li mostra dalla sua copia veloce, senza
-          link pubblici a Drive.
+          I servizi esterni collegati al pannello: Google Drive, dove si salvano immagini e PDF, e
+          il sito WordPress attuale, da cui arrivano file e contenuti.
         </p>
       </header>
 
@@ -255,7 +254,12 @@ export default function PannelloDrive(p: PropsPannelloDrive) {
       )}
 
       <section aria-labelledby="stato" className={styles.scheda}>
-        <h2 id="stato">Stato</h2>
+        <h2 id="stato">Google Drive</h2>
+        <p>
+          Le immagini e i PDF caricati nel pannello si salvano nella cartella Drive dell’Accademia,
+          con l’account <strong>{account}</strong>. Il sito li mostra dalla sua copia veloce, senza
+          link pubblici a Drive.
+        </p>
         <dl className={styles.dati}>
           <dt>Collegamento</dt>
           <dd>

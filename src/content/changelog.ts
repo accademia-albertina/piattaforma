@@ -27,6 +27,33 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.39.1',
+    data: '2026-11-18',
+    titolo: 'Intestazione su telefono e pagina Integrazioni',
+    voci: [
+      {
+        tipo: 'migliorato',
+        testo:
+          'Su telefono il pulsante del menu e la X di chiusura sono icone a filo, senza riquadro; la casetta del percorso non viene più tagliata; “Sito” e “Account” sono più vicini.',
+      },
+      {
+        tipo: 'migliorato',
+        testo: 'Con il menu aperto su telefono basta toccare la pagina a destra per chiuderlo.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'La pagina “Google Drive” si chiama ora “Integrazioni”: raccoglie Google Drive e i file e i contenuti dal sito WordPress. Il vecchio indirizzo porta alla nuova pagina.',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          'Il titolo della scheda del browser non dice più “Payload” in Guida, Changelog e Integrazioni.',
+      },
+    ],
+    pr: [91],
+  },
+  {
     versione: '0.39.0',
     data: '2026-11-18',
     titolo: 'Registro attività completo',
