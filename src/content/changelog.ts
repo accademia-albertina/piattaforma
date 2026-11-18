@@ -51,6 +51,11 @@ export const CHANGELOG: Versione[] = [
         testo:
           'Titolo della scheda del browser con il trattino: «Dashboard – Accademia Albertina».',
       },
+      {
+        tipo: 'corretto',
+        testo:
+          'Sito su telefono: il menu chiuso lasciava un grande riquadro bianco sopra la pagina mentre si scorreva.',
+      },
     ],
     pr: [96],
   },
