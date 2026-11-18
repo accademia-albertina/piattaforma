@@ -11,7 +11,7 @@ import { htmlInLexical, pulisciHtml } from './converti'
 import type { BloccoGrezzo } from './pagine-html'
 
 /** Cambia quando cambia la conversione delle pagine: quelle non toccate si riallineano. */
-export const VERSIONE_PAGINE = 'p1'
+export const VERSIONE_PAGINE = 'p4'
 
 // I link alle pagine del sito restano relativi: la correzione dei link li renderebbe assoluti.
 // Il prefisso finisce con "/": nessun altro host può corrispondere.
@@ -71,6 +71,29 @@ export async function blocchiPagina(
           })),
         })
         break
+      // `file` + `url` finché l'immagine non è importata: ritocca() li porta nel campo giusto
+      case 'immagine':
+        out.push({
+          blockType: 'immagine',
+          file: null,
+          url: b.url,
+          didascalia: b.didascalia ?? null,
+          larghezza: 'testo',
+        } as never)
+        break
+      case 'galleria':
+        out.push({
+          blockType: 'galleria',
+          immagini: b.immagini.map((i) => ({
+            file: null,
+            url: i.url,
+            didascalia: i.didascalia ?? null,
+          })),
+        } as never)
+        break
+      case 'planimetria':
+        out.push({ blockType: 'planimetria', titolo: null })
+        break
       case 'contatti':
         out.push({ blockType: 'contatti', titolo: b.titolo ?? null, voci: b.voci })
         break
@@ -79,6 +102,8 @@ export async function blocchiPagina(
         out.push({
           blockType: 'documento',
           nome: tronca(b.nome, 200),
+          descrizione: b.descrizione ?? null,
+          anteprima: b.anteprima ?? true,
           file: null,
           url: b.url,
         } as never)

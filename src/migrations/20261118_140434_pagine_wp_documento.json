@@ -1416,6 +1416,13 @@
           "primaryKey": false,
           "notNull": false
         },
+        "anteprima": {
+          "name": "anteprima",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
         "block_name": {
           "name": "block_name",
           "type": "varchar",
@@ -1502,6 +1509,115 @@
         "pagine_blocks_documento_parent_id_fk": {
           "name": "pagine_blocks_documento_parent_id_fk",
           "tableFrom": "pagine_blocks_documento",
+          "tableTo": "pagine",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.pagine_blocks_planimetria": {
+      "name": "pagine_blocks_planimetria",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "titolo": {
+          "name": "titolo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "pagine_blocks_planimetria_order_idx": {
+          "name": "pagine_blocks_planimetria_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pagine_blocks_planimetria_parent_id_idx": {
+          "name": "pagine_blocks_planimetria_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "pagine_blocks_planimetria_path_idx": {
+          "name": "pagine_blocks_planimetria_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "pagine_blocks_planimetria_parent_id_fk": {
+          "name": "pagine_blocks_planimetria_parent_id_fk",
+          "tableFrom": "pagine_blocks_planimetria",
           "tableTo": "pagine",
           "columnsFrom": [
             "_parent_id"
@@ -3304,6 +3420,13 @@
           "primaryKey": false,
           "notNull": false
         },
+        "anteprima": {
+          "name": "anteprima",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
         "_uuid": {
           "name": "_uuid",
           "type": "varchar",
@@ -3396,6 +3519,121 @@
         "_pagine_v_blocks_documento_parent_id_fk": {
           "name": "_pagine_v_blocks_documento_parent_id_fk",
           "tableFrom": "_pagine_v_blocks_documento",
+          "tableTo": "_pagine_v",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public._pagine_v_blocks_planimetria": {
+      "name": "_pagine_v_blocks_planimetria",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "titolo": {
+          "name": "titolo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "_uuid": {
+          "name": "_uuid",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "_pagine_v_blocks_planimetria_order_idx": {
+          "name": "_pagine_v_blocks_planimetria_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_pagine_v_blocks_planimetria_parent_id_idx": {
+          "name": "_pagine_v_blocks_planimetria_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "_pagine_v_blocks_planimetria_path_idx": {
+          "name": "_pagine_v_blocks_planimetria_path_idx",
+          "columns": [
+            {
+              "expression": "_path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "_pagine_v_blocks_planimetria_parent_id_fk": {
+          "name": "_pagine_v_blocks_planimetria_parent_id_fk",
+          "tableFrom": "_pagine_v_blocks_planimetria",
           "tableTo": "_pagine_v",
           "columnsFrom": [
             "_parent_id"
@@ -14653,6 +14891,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "604a3334-dc9b-497c-9534-32f10ebf78da",
+  "id": "384b2669-d1e8-4d45-b487-01f4e851401c",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

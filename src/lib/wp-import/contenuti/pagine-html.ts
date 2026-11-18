@@ -9,6 +9,8 @@
  * I documenti PDF incorporati diventano un blocco Documento.
  */
 
+import { conTestiPdf } from './testi-pdf'
+
 /** ID WordPress → percorso nella nuova piattaforma. L'ordine conta: prima i genitori. */
 export const PAGINE_WP: Record<number, string> = {
   1975: 'accademia',
@@ -74,8 +76,17 @@ const SPOSTATI: Record<string, string> = {
 export type BloccoGrezzo =
   | { tipo: 'testo'; html: string }
   | { tipo: 'fisarmonica'; voci: { titolo: string; html: string }[] }
+  | { tipo: 'immagine'; url: string; didascalia?: string | null }
+  | { tipo: 'planimetria' }
+  | { tipo: 'galleria'; immagini: { url: string; didascalia?: string | null }[] }
   | { tipo: 'link'; voci: { etichetta: string; url: string }[] }
-  | { tipo: 'documento'; nome: string; url: string }
+  | {
+      tipo: 'documento'
+      nome: string
+      url: string
+      descrizione?: string
+      anteprima?: boolean
+    }
   | {
       tipo: 'contatti'
       titolo?: string | null
@@ -113,7 +124,7 @@ export function mappaPercorsi(
   return { vecchi, docenti }
 }
 
-function nuovoPercorso(p: string, m: MappaPercorsi): string | null {
+export function nuovoPercorso(p: string, m: MappaPercorsi): string | null {
   p = p.replace(/^\/+|\/+$/g, '')
   const noto = m.vecchi.get(p)
   if (noto) return noto
@@ -160,9 +171,6 @@ const SEGNAPOSTO =
 const SALTA = [
   'bde-breadcrumbs',
   'bde-table-of-contents',
-  'bde-image',
-  'bde-image2',
-  'bde-image-accordion',
   'bde-post-loop',
   'bde-loop',
   'bde-posts-list',
@@ -252,6 +260,8 @@ class Pagina {
   blocchi: BloccoGrezzo[] = []
   html: string[] = []
   contatti: string[] = []
+  /** Elementi già usati (es. la didascalia di un'immagine). */
+  usati = new Set<El>()
 
   chiudiTesto() {
     const h = this.html.join('').trim()
@@ -384,8 +394,49 @@ function documento(e: El): { nome: string; url: string } | null {
   return null
 }
 
+/** Indirizzo dell'immagine originale (senza il ridimensionamento di WordPress). */
+function urlImmagine(img: El | null): string | null {
+  const src = (img?.getAttribute('src') ?? '')
+    .trim()
+    .replace(/^https?:\/\/(www\.)?newalbertina\.eu/, SITO)
+  if (!/\/wp-content\/uploads\//.test(src) || /\.svg(\?|$)/i.test(src)) return null
+  return src.replace(/-\d+x\d+(\.\w+)$/, '$1')
+}
+
+/** Didascalia di Breakdance: un testo breve subito dopo l'immagine, nello stesso contenitore. */
+function didascalia(n: El, p: Pagina): string | null {
+  const fratelli = n.parentElement ? figli(n.parentElement) : []
+  const dopo = fratelli[fratelli.indexOf(n) + 1]
+  if (!dopo || !ha(dopo, 'bde-text') || dopo.querySelector('a')) return null
+  const t = senzaTag(dopo.innerHTML).replace(/\s+/g, ' ').trim()
+  if (!t || t.length > 160) return null
+  p.usati.add(dopo)
+  return t
+}
+
 function visita(n: El, p: Pagina, m: MappaPercorsi, annidato = false): void {
-  if (SALTA.some((c) => ha(n, c))) return
+  if (SALTA.some((c) => ha(n, c)) || p.usati.has(n)) return
+
+  // Immagini del contenuto (foto, loghi dei finanziamenti); le icone SVG no
+  if (ha(n, 'bde-image2') || ha(n, 'bde-image')) {
+    const url = urlImmagine(n.tagName === 'IMG' ? n : n.querySelector('img'))
+    if (!url || annidato) return
+    p.chiudiTesto()
+    p.blocchi.push({ tipo: 'immagine', url, didascalia: didascalia(n, p) })
+    return
+  }
+  // Fisarmonica di immagini (es. le sedi): galleria con i titoli come didascalie
+  if (ha(n, 'bde-image-accordion')) {
+    const immagini = Array.from(n.querySelectorAll('.ee-image-accordion-item')).flatMap((v) => {
+      const url = urlImmagine(v.querySelector('img'))
+      const titolo = senzaTag(v.querySelector('.ee-image-accordion-title')?.innerHTML ?? '').trim()
+      return url ? [{ url, didascalia: titolo || null }] : []
+    })
+    if (immagini.length < 2 || annidato) return
+    p.chiudiTesto()
+    p.blocchi.push({ tipo: 'galleria', immagini })
+    return
+  }
 
   if (ha(n, 'bde-heading')) {
     const tag = n.tagName.toLowerCase()
@@ -450,6 +501,12 @@ function visita(n: El, p: Pagina, m: MappaPercorsi, annidato = false): void {
   if (ha(n, 'bde-button') || ha(n, 'bde-text-link')) {
     const a = n.tagName === 'A' ? n : n.querySelector('a')
     const u = urlLink(a?.getAttribute('href') ?? null, m)
+    // La pianta della sede (immagine) diventa la planimetria interattiva del sito
+    if (u && /\/piantina\.\w+$/i.test(u) && !annidato) {
+      p.chiudiTesto()
+      p.blocchi.push({ tipo: 'planimetria' })
+      return
+    }
     if (u?.startsWith('mailto:') && !annidato) {
       p.contatti.push(u.slice(7))
       return
@@ -566,6 +623,7 @@ export function estraiPagina(
   else p.html.push(pulisci(radice.innerHTML, m))
   p.chiudiTesto()
   const r = senzaBox(unisciDocumenti(p.blocchi))
+  r.blocchi = conTestiPdf(r.blocchi)
   // Contatti: PEO e PEC sono già nel footer
   const email = o.senzaContatti ? [] : [...new Set(p.contatti)]
   if (email.length)

@@ -14,6 +14,8 @@ export type DocumentoProps = {
   filesize?: number | null
   /** Testo breve sotto il titolo. */
   descrizione?: string | null
+  /** Anteprima del PDF nella pagina (no quando il testo è già nella pagina). */
+  anteprima?: boolean | null
   /** Id del titolo (da cambiare se nella pagina ci sono più documenti). */
   id: string
 }
@@ -30,6 +32,7 @@ export function Documento({
   mimeType,
   filesize,
   descrizione,
+  anteprima = true,
   id,
 }: DocumentoProps) {
   const pdf = isPdf(url, mimeType)
@@ -61,7 +64,7 @@ export function Documento({
           </a>
         </div>
       </div>
-      {pdf ? (
+      {pdf && anteprima !== false ? (
         <iframe
           className={styles.anteprima}
           src={`${url}#view=FitH`}

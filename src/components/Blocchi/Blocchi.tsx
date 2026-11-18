@@ -9,6 +9,7 @@ import type { Media, Pagina } from '@/payload-types'
 import { Attachments } from '../Attachments/Attachments'
 import { Documento } from '../Documento/Documento'
 import { Fisarmonica } from '../Fisarmonica/Fisarmonica'
+import { Planimetria } from '../Planimetria/Planimetria'
 
 import styles from './Blocchi.module.css'
 
@@ -224,6 +225,7 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
             id={`${id}-titolo`}
             nome={b.nome}
             descrizione={b.descrizione}
+            anteprima={b.anteprima}
             url={f.url!}
             filename={f.filename}
             mimeType={f.mimeType}
@@ -232,6 +234,13 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
         </div>
       )
     }
+
+    case 'planimetria':
+      return (
+        <div className={styles.blocco}>
+          <Planimetria titolo={b.titolo || undefined} />
+        </div>
+      )
 
     default:
       return null

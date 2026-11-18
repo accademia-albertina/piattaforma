@@ -1,6 +1,7 @@
 /**
- * Sincronizzazione dei contenuti dal sito WordPress: Albo online, Amministrazione trasparente,
- * avvisi e pagine istituzionali. Si può rilanciare quante volte serve, fino al passaggio al nuovo sito.
+ * Sincronizzazione dei contenuti dal sito WordPress: Albo online, Amministrazione trasparente e
+ * avvisi. Si può rilanciare quante volte serve, fino al passaggio al nuovo sito. Le pagine
+ * istituzionali non sono nel pannello: si riallineano solo su richiesta (aggiornaPagineWp).
  *
  * - Ogni contenuto importato ricorda l'elemento WordPress da cui viene (wpId) e una sua impronta
  *   (versione della conversione + data di modifica su WP, o hash dell'atto per l'Albo).
@@ -60,7 +61,7 @@ import { slugAvvisiSeed } from '@/seed/avvisi-wp'
 import { inFrase } from '@/utilities/maiuscole'
 import { slugify } from '@/utilities/slugify'
 
-export type Raccolta = 'albo' | 'trasparenza' | 'avvisi' | 'pagine'
+export type Raccolta = 'albo' | 'trasparenza' | 'avvisi'
 
 export type EsitoRaccolta = {
   suWordPress: number
@@ -81,7 +82,7 @@ export type EsitoRaccolta = {
 
 export type StatoContenuti = {
   inCorso: boolean
-  fase: Raccolta | 'finito'
+  fase: Raccolta | 'pagine' | 'finito'
   avviatoIl?: string
   finitoIl?: string
   /** Prova: al massimo N elementi da creare o aggiornare per raccolta. */
@@ -91,8 +92,7 @@ export type StatoContenuti = {
   albo: EsitoRaccolta
   trasparenza: EsitoRaccolta
   avvisi: EsitoRaccolta
-  pagine: EsitoRaccolta
-  /** Altre pagine WordPress (non importate) modificate dopo l'importazione iniziale. */
+  /** Pagine WordPress modificate dopo l'importazione iniziale: si riportano a mano. */
   pagineModificate: { titolo: string; url: string; modificato: string }[]
   fileImportati: number
   errori: string[]
@@ -119,7 +119,6 @@ const vuoto = (): StatoContenuti => ({
   albo: esitoVuoto(),
   trasparenza: esitoVuoto(),
   avvisi: esitoVuoto(),
-  pagine: esitoVuoto(),
   pagineModificate: [],
   fileImportati: 0,
   errori: [],
@@ -143,7 +142,6 @@ const NOMI_RACCOLTE: Record<Raccolta, string> = {
   albo: 'Albo',
   trasparenza: 'Amministrazione trasparente',
   avvisi: 'Avvisi',
-  pagine: 'Pagine',
 }
 
 /** Esito in poche righe, per il registro attività. */
@@ -163,7 +161,7 @@ export function esitoSincronizzazioneContenuti(s: StatoContenuti) {
   )
   if (s.pagineModificate.length) {
     righe.push(
-      `${conta(s.pagineModificate.length, 'altra pagina cambiata', 'altre pagine cambiate')} su WordPress, non importate`,
+      `${conta(s.pagineModificate.length, 'pagina cambiata', 'pagine cambiate')} su WordPress da riportare a mano`,
     )
   }
   if (s.limite) {
@@ -219,8 +217,8 @@ export function avviaSincronizzazioneContenuti(
     limite: o.limite,
   }
   const titolo = o.limite
-    ? 'Sincronizzazione di Albo, Trasparenza, avvisi e pagine (prova)'
-    : 'Sincronizzazione di Albo, Trasparenza, avvisi e pagine'
+    ? 'Sincronizzazione di Albo, Trasparenza e avvisi (prova)'
+    : 'Sincronizzazione di Albo, Trasparenza e avvisi'
   void registraOperazione(payload, utente, { ...VOCE, azione: 'avviato', titolo })
     .then(() => sincronizza(payload, o))
     .catch((e) => {
@@ -233,7 +231,7 @@ export function avviaSincronizzazioneContenuti(
       const r = (k: Raccolta) =>
         `${k} ${stato[k].nuovi} nuovi, ${stato[k].aggiornati} aggiornati, ${stato[k].protetti} protetti`
       payload.logger.info(
-        `Sincronizzazione contenuti finita: ${r('albo')}; ${r('trasparenza')}; ${r('avvisi')}; ${r('pagine')}`,
+        `Sincronizzazione contenuti finita: ${r('albo')}; ${r('trasparenza')}; ${r('avvisi')}`,
       )
       await salvaEsito(payload)
       await registraOperazione(payload, interrompi ? (fermataDa ?? utente) : utente, {
@@ -859,57 +857,76 @@ async function datiAvvisoCompleti(
  * (già rotto su WP) diventa un link; i link a file importati (/media/…) sono indirizzi del sito.
  */
 function ritocca(blocchi: unknown[]) {
-  return blocchi.map((b) => {
-    const d = b as {
+  return blocchi.flatMap((b) => {
+    const i = b as {
       blockType: string
-      nome: string
       file?: number | null
       url?: string | null
-      voci?: { tipo?: string; url?: string }[]
+      didascalia?: string | null
+      larghezza?: string
+      immagini?: { file?: number | null; didascalia?: string | null }[]
     }
-    if (d.blockType === 'documento' && !d.file)
-      return { blockType: 'link', voci: [{ etichetta: d.nome, tipo: 'esterno', url: d.url ?? '' }] }
-    if (d.blockType === 'link')
-      return {
-        ...d,
-        voci: d.voci?.map((v) =>
-          v.tipo === 'esterno' && v.url?.startsWith('/') ? { ...v, tipo: 'percorso' } : v,
-        ),
-      }
-    return b
+    // Immagini: il file importato va nel campo `immagine`; senza file l'immagine si toglie
+    if (i.blockType === 'immagine')
+      return i.file
+        ? [
+            {
+              blockType: 'immagine',
+              immagine: i.file,
+              didascalia: i.didascalia,
+              larghezza: i.larghezza,
+            },
+          ]
+        : []
+    if (i.blockType === 'galleria') {
+      const immagini = (i.immagini ?? [])
+        .filter((x) => x.file)
+        .map((x) => ({ immagine: x.file, didascalia: x.didascalia }))
+      return immagini.length >= 2 ? [{ blockType: 'galleria', immagini }] : []
+    }
+    return [ritoccaBlocco(b)]
   })
 }
 
-/** Pagine WordPress sostituite da sezioni del nuovo sito o non più necessarie: non si segnalano. */
-const PAGINE_WP_IGNORATE = new Set([
-  'docenti',
-  'design-system',
-  'amministrazione-trasparente',
-  'aree-amministrazione-trasparente',
-  'login',
-  'recupero-password',
-  'registrazione-studente',
-  'bozze',
-  'changelog',
-])
+function ritoccaBlocco(b: unknown) {
+  const d = b as {
+    blockType: string
+    nome: string
+    file?: number | null
+    url?: string | null
+    voci?: { tipo?: string; url?: string }[]
+  }
+  if (d.blockType === 'documento' && !d.file)
+    return { blockType: 'link', voci: [{ etichetta: d.nome, tipo: 'esterno', url: d.url ?? '' }] }
+  if (d.blockType === 'link')
+    return {
+      ...d,
+      voci: d.voci?.map((v) =>
+        v.tipo === 'esterno' && v.url?.startsWith('/') ? { ...v, tipo: 'percorso' } : v,
+      ),
+    }
+  return b
+}
 
-async function sincronizzaPagine(payload: Payload, file: File, f: typeof fetch, limite?: number) {
+async function paginePerControllo(f: typeof fetch) {
   const tutte = await elencoPagine({ fetch: f })
-  // Le altre pagine (crediti, login…) non si importano: si segnalano se cambiano
   stato.pagineModificate = tutte
-    .filter(
-      (p) =>
-        !PAGINE_WP[p.id] &&
-        p.modified_gmt > DATA_IMPORT_PAGINE &&
-        !PAGINE_WP_IGNORATE.has(p.link.replace(/\/+$/, '').split('/').pop() ?? '') &&
-        !p.link.includes('/dottorandi/'),
-    )
+    .filter((p) => p.modified_gmt > DATA_IMPORT_PAGINE)
     .sort((a, b) => b.modified_gmt.localeCompare(a.modified_gmt))
     .map((p) => ({
       titolo: decodifica(p.title.rendered),
       url: p.link,
       modificato: new Date(`${p.modified_gmt}Z`).toISOString(),
     }))
+}
+
+async function sincronizzaPagine(
+  payload: Payload,
+  file: File,
+  f: typeof fetch,
+  esito: EsitoRaccolta,
+) {
+  const tutte = await elencoPagine({ fetch: f })
   const elenco = tutte.filter((p) => PAGINE_WP[p.id])
   const mappa: MappaPercorsi = mappaPercorsi(tutte, slugDocentiWp())
   const collegati = await docsCollegati(payload, 'pagine')
@@ -936,7 +953,7 @@ async function sincronizzaPagine(payload: Payload, file: File, f: typeof fetch, 
       const intatto =
         !toccati.has(String(doc.id)) &&
         (dimostrativa || (!!originale && confronta(doc, file.riscriviCome({ blocchi: originale }))))
-      await collega(payload, 'pagine', doc, wpId, intatto, stato.pagine)
+      await collega(payload, 'pagine', doc, wpId, intatto, esito)
       collegati.set(wpId, doc)
     }
   }
@@ -991,7 +1008,7 @@ async function sincronizzaPagine(payload: Payload, file: File, f: typeof fetch, 
       }
     },
   }))
-  await applica(payload, 'pagine', elementi, collegati, stato.pagine, limite)
+  await applica(payload, 'pagine', elementi, collegati, esito, undefined)
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -1008,7 +1025,6 @@ async function sincronizza(
     ['albo', () => sincronizzaAlbo(payload, file, f, o.limite)],
     ['trasparenza', () => sincronizzaTrasparenza(payload, file, f, o.limite)],
     ['avvisi', () => sincronizzaAvvisi(payload, file, f, o.limite)],
-    ['pagine', () => sincronizzaPagine(payload, file, f, o.limite)],
   ]
   for (const [r, passo] of passi) {
     if (interrompi || !fa(r)) continue
@@ -1019,4 +1035,48 @@ async function sincronizza(
       stato[r].errori.push((e as Error).message)
     }
   }
+  if (!interrompi && !o.solo) {
+    stato.fase = 'pagine'
+    await paginePerControllo(f).catch((e) => stato.errori.push(`Pagine: ${(e as Error).message}`))
+  }
+}
+
+/**
+ * Pagine istituzionali: riallineamento a WordPress fatto su richiesta (non c'è un pulsante nel
+ * pannello). Parte all'avvio dell'anteprima quando cambia VERSIONE_PAGINE e nessuna pagina ha
+ * ancora l'impronta di quella versione. Le pagine modificate nel pannello non si toccano.
+ */
+let pagineInCorso: Promise<void> | null = null
+
+export function aggiornaPagineWp(payload: Payload, o: { fetch?: typeof fetch } = {}) {
+  // Una sola volta per processo, anche se chiamata due volte (avvio e script)
+  pagineInCorso ??= riallineaPagine(payload, o).finally(() => {
+    pagineInCorso = null
+  })
+  return pagineInCorso
+}
+
+async function riallineaPagine(payload: Payload, o: { fetch?: typeof fetch }) {
+  if (stato.inCorso) return
+  const { totalDocs } = await payload.count({
+    collection: 'pagine',
+    where: { wpImpronta: { like: `${VERSIONE_PAGINE}:` } },
+    overrideAccess: true,
+  })
+  if (totalDocs > 0) return
+  const f = o.fetch ?? fetch
+  const esito = esitoVuoto()
+  payload.logger.info('Pagine istituzionali: riallineamento a WordPress…')
+  const file = new File(payload, await mappaFile(payload), f)
+  await sincronizzaPagine(payload, file, f, esito)
+  const riassunto = `${esito.nuovi} nuove, ${esito.aggiornati} aggiornate, ${esito.protetti} lasciate come sono perché modificate nel pannello`
+  payload.logger.info(`Pagine istituzionali: ${riassunto}.`)
+  if (esito.errori.length)
+    payload.logger.warn(`Pagine istituzionali, errori: ${esito.errori.join('; ')}`)
+  await registraOperazione(payload, null, {
+    ...VOCE,
+    azione: 'concluso',
+    titolo: 'Pagine istituzionali riallineate a WordPress',
+    dettagli: riassunto,
+  }).catch(() => {})
 }

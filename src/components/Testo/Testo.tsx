@@ -5,11 +5,36 @@ import { Fragment } from 'react'
 import { dividiLink } from '@/utilities/autolink'
 import { isPdf } from '@/utilities/pdf'
 
+import styles from './Testo.module.css'
+
 // Gli avvisi importati da WordPress hanno gli indirizzi scritti come testo:
 // qui diventano link, a meno che non siano già dentro un link.
 // I link ai PDF si aprono in una nuova scheda (impostazione “nuova scheda” forzata).
 const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
   ...defaultConverters,
+  // Tabelle con i nostri stili (non quelli in linea di Payload) e intestazioni con scope:
+  // la prima riga di intestazione vale per le colonne, la prima colonna per le righe.
+  table: ({ node, nodesToJSX }) => (
+    // Contenitore scorrevole raggiungibile da tastiera (WCAG 2.1.1)
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+    <div className={styles.tabella} tabIndex={0} role="region" aria-label="Tabella">
+      <table>
+        <tbody>{nodesToJSX({ nodes: node.children })}</tbody>
+      </table>
+    </div>
+  ),
+  tablerow: ({ node, nodesToJSX }) => <tr>{nodesToJSX({ nodes: node.children })}</tr>,
+  tablecell: ({ node, nodesToJSX }) => {
+    const stato = typeof node.headerState === 'number' ? node.headerState : 0
+    const props = {
+      colSpan: node.colSpan && node.colSpan > 1 ? node.colSpan : undefined,
+      rowSpan: node.rowSpan && node.rowSpan > 1 ? node.rowSpan : undefined,
+      children: nodesToJSX({ nodes: node.children }),
+    }
+    if (stato & 1) return <th scope="col" {...props} />
+    if (stato & 2) return <th scope="row" {...props} />
+    return <td {...props} />
+  },
   link: (args) => {
     const base = defaultConverters.link
     if (typeof base !== 'function') return null

@@ -1,6 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { cloudStoragePlugin } from '@payloadcms/plugin-cloud-storage'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { it } from '@payloadcms/translations/languages/it'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -46,6 +45,9 @@ import { importaAlboWp, importaTrasparenzaWp } from './seed/albo-trasparenza-wp'
 import { aggiornaLinkCalendari } from './seed/link-calendari'
 import { aggiornaLinkPagine } from './seed/link-pagine'
 import { importaPagineWp } from './seed/pagine-wp'
+import { editor } from './fields/editor'
+import { correggiLinkWpPagine } from './seed/link-wp-pagine'
+import { aggiornaPagineWp } from './lib/wp-import/contenuti/sincronizza-contenuti'
 import { importaAlbertinaPress } from './seed/albertina-press'
 import { completaDipartimentiScuole } from './seed/dipartimenti-scuole'
 import { importaContenutiScuole } from './seed/scuole-contenuti'
@@ -149,7 +151,7 @@ export default buildConfig({
   ],
   globals: [Navigazione, DriveConnessione, EsitiImportazione],
   endpoints: [...endpointsDrive, ...endpointsWp],
-  editor: lexicalEditor(),
+  editor,
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
   email: adattatoreEmail(),
@@ -194,6 +196,9 @@ export default buildConfig({
       .then(() => completaDipartimentiScuole(payload))
       .then(() => importaAlbertinaPress(payload))
       .then(() => affidaBiblioteca(payload))
+      // Link a WordPress rimasti nelle pagine, poi il riallineamento richiesto (VERSIONE_PAGINE)
+      .then(() => correggiLinkWpPagine(payload))
+      .then(() => aggiornaPagineWp(payload))
       .catch((e) =>
         payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
       )

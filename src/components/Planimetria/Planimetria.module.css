@@ -1,0 +1,166 @@
+.planimetria {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.planimetria h2 {
+  margin: 0;
+}
+
+.intro {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.piano {
+  display: grid;
+  gap: var(--space-4);
+  padding-block-start: var(--space-4);
+}
+
+/* Su telefono la pianta scorre in orizzontale; l'elenco sotto resta leggibile */
+.contenitore {
+  overflow-x: auto;
+}
+
+.pianta {
+  display: block;
+  width: 100%;
+  min-width: 36rem;
+  height: auto;
+  font-family: var(--font-family);
+  font-size: 13px;
+}
+
+.pianta rect {
+  stroke: var(--color-bg);
+  stroke-width: 2;
+}
+
+.aula rect {
+  fill: var(--color-azzurro-200);
+}
+.aula text {
+  fill: var(--color-heading);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Le aule prendono il colore della loro scala */
+.aula[data-zona='P'] rect,
+.campione[data-zona='P'] {
+  background: var(--color-ardesia);
+  fill: var(--color-ardesia);
+}
+.aula[data-zona='S'] rect,
+.campione[data-zona='S'] {
+  background: var(--color-ardesia-dark);
+  fill: var(--color-ardesia-dark);
+}
+.aula[data-zona='C'] rect,
+.campione[data-zona='C'] {
+  background: var(--color-azzurro-100);
+  fill: var(--color-azzurro-100);
+}
+.aula[data-zona='G'] rect,
+.campione[data-zona='G'] {
+  background: var(--color-heading);
+  fill: var(--color-heading);
+}
+.campione[data-zona='A'] {
+  background: var(--color-azzurro-200);
+}
+.aula:is([data-zona='P'], [data-zona='S'], [data-zona='G']) text {
+  fill: var(--color-on-brand);
+}
+
+.ufficio rect {
+  fill: var(--color-surface);
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+.ufficio text {
+  fill: var(--color-text);
+}
+
+.speciale rect {
+  fill: var(--color-bg);
+  stroke: var(--color-heading);
+  stroke-width: 1.5;
+}
+.speciale text {
+  fill: var(--color-heading);
+  font-weight: var(--font-weight-semibold);
+}
+
+.corridoio {
+  fill: var(--color-azzurro-50);
+  stroke: none !important;
+}
+
+.vuoto {
+  fill: var(--color-azzurro-50);
+}
+
+.rotonda {
+  fill: var(--color-azzurro-100);
+}
+
+.cortile {
+  fill: none;
+  stroke: var(--color-border-control);
+  stroke-dasharray: 4 4;
+}
+
+.nota {
+  fill: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.via {
+  fill: var(--color-text-muted);
+  font-size: 12px;
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+}
+
+.scala rect {
+  fill: var(--color-brand-strong);
+  stroke: none;
+}
+.scala text {
+  fill: var(--color-on-brand);
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+}
+
+.elenco {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.elenco > div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: var(--space-3);
+  padding-block: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.elenco dt {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  font-weight: var(--font-weight-semibold);
+}
+
+.elenco dd {
+  margin: 0;
+}
+
+.campione {
+  display: inline-block;
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 1px solid var(--color-border);
+}

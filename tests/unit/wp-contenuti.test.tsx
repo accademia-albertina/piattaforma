@@ -132,11 +132,10 @@ const finito: StatoContenuti = {
     nonPiuSuWp: ['Avviso tolto (/admin/collections/avvisi/9)'],
     nonPiuSuWpTotale: 1,
   },
-  pagine: { ...vuoto, suWordPress: 39, nuovi: 1, aggiornati: 9, invariati: 29 },
   pagineModificate: [
     {
-      titolo: 'Crediti',
-      url: 'https://albertina-academy.it/crediti/',
+      titolo: 'Modulistica',
+      url: 'https://albertina-academy.it/studente/modulistica/',
       modificato: '2026-11-07T18:32:13.000Z',
     },
   ],
@@ -146,7 +145,7 @@ const finito: StatoContenuti = {
 
 describe('Pannello: contenuti dal sito WordPress', () => {
   afterEach(cleanup)
-  const collegati = { albo: 412, trasparenza: 93, avvisi: 1077, pagine: 38 }
+  const collegati = { albo: 412, trasparenza: 93, avvisi: 1077 }
 
   it('mostra l’esito con i contenuti da controllare, accessibile', async () => {
     const { container } = render(<ContenutiWordPress stato={finito} collegati={collegati} attivo />)
@@ -155,8 +154,7 @@ describe('Pannello: contenuti dal sito WordPress', () => {
       '/admin/collections/trasparenza/12',
     )
     expect(screen.getByText(/126 nuovi/)).toBeTruthy()
-    expect(screen.getByText(/altre pagine di WordPress/)).toBeTruthy()
-    expect(screen.getByRole('heading', { name: 'Pagine istituzionali' })).toBeTruthy()
+    expect(screen.getByText(/pagine modificate su WordPress/)).toBeTruthy()
     expect(await axeViolations(container)).toEqual([])
   })
 

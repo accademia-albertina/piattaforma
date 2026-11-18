@@ -212,6 +212,34 @@ export const BloccoDocumento: Block = {
           'I PDF si vedono in anteprima nella pagina (da tablet in su), con i pulsanti Apri e Scarica.',
       },
     },
+    {
+      name: 'anteprima',
+      label: 'Mostra l’anteprima del PDF nella pagina',
+      type: 'checkbox',
+      defaultValue: true,
+      admin: {
+        description: 'Toglila quando il contenuto del PDF è già scritto nella pagina.',
+      },
+    },
+  ],
+}
+
+export const BloccoPlanimetria: Block = {
+  slug: 'planimetria',
+  labels: { singular: 'Planimetria della sede', plural: 'Planimetrie della sede' },
+  admin: etichettaBlocco('Planimetria'),
+  interfaceName: 'BloccoPlanimetria',
+  fields: [
+    {
+      name: 'titolo',
+      label: 'Titolo',
+      type: 'text',
+      maxLength: 120,
+      admin: {
+        description:
+          'Vuoto = “Planimetria della sede”. Aule e uffici dei piani sono nel codice del sito: per cambiarli chiedi a Fede.',
+      },
+    },
   ],
 }
 
@@ -224,4 +252,5 @@ export const BLOCCHI: Block[] = [
   BloccoContatti,
   BloccoAllegati,
   BloccoDocumento,
+  BloccoPlanimetria,
 ]

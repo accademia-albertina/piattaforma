@@ -2,6 +2,7 @@
  * Conversione dei contenuti WordPress nei dati delle collezioni. I link ai file restano
  * indirizzi di WordPress: li sostituisce poi la mappa dei file importati (riscriviLink).
  */
+import { funzioniEditor } from '@/fields/editor'
 import type { SanitizedConfig } from 'payload'
 
 import { datiAtto, datiVoce, type AttoWp } from '@/seed/albo-trasparenza-wp'
@@ -85,7 +86,7 @@ export async function htmlInLexical(html: string, config: SanitizedConfig) {
     import('jsdom'),
     import('@payloadcms/richtext-lexical'),
   ])
-  editor ??= lexical.editorConfigFactory.default({ config })
+  editor ??= lexical.editorConfigFactory.fromFeatures({ config, features: funzioniEditor })
   const contenuto = lexical.convertHTMLToLexical({
     editorConfig: (await editor) as Parameters<
       typeof lexical.convertHTMLToLexical

@@ -2,6 +2,9 @@ import { cleanup, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it } from 'vitest'
 
 import { Documento } from '@/components'
+import { Planimetria } from '@/components/Planimetria/Planimetria'
+import { Testo } from '@/components/Testo/Testo'
+import { conTestiPdf } from '@/lib/wp-import/contenuti/testi-pdf'
 import { estraiPagina, mappaPercorsi, type El } from '@/lib/wp-import/contenuti/pagine-html'
 
 import { axeViolations } from './axe'
@@ -129,5 +132,110 @@ describe('Documento in evidenza', () => {
     )
     expect(container.querySelector('iframe')).toBeNull()
     expect(screen.queryByRole('link', { name: /Apri/ })).toBeNull()
+  })
+})
+
+describe('Immagini, planimetria e testi dei PDF', () => {
+  afterEach(cleanup)
+
+  it('foto con didascalia, fisarmonica di immagini e pianta della sede', () => {
+    const doc = new DOMParser().parseFromString(
+      `<section class="bde-section"><div class="bde-div">
+        <img class="bde-image2" src="${WP}/wp-content/uploads/2025/04/ritratto-300x200.jpg" alt="">
+        <div class="bde-text">Ritratto, fotografia di X</div></div>
+        <div class="bde-button"><a class="bde-button__button" href="${WP}/wp-content/uploads/2024/10/piantina.jpg"><span class="button-atom__text">Visualizza la mappa</span></a></div>
+        <div class="bde-image-accordion">
+          <div class="ee-image-accordion-item"><div class="ee-image-accordion-title">Rotonda</div><img src="${WP}/wp-content/uploads/a.webp"></div>
+          <div class="ee-image-accordion-item"><div class="ee-image-accordion-title">Edificio</div><img src="${WP}/wp-content/uploads/b.webp"></div>
+        </div></section>`,
+      'text/html',
+    ).body as unknown as El
+    expect(estraiPagina(doc, mappa, { titolo: 'Sedi' }).blocchi).toEqual([
+      {
+        tipo: 'immagine',
+        url: `${WP}/wp-content/uploads/2025/04/ritratto.jpg`,
+        didascalia: 'Ritratto, fotografia di X',
+      },
+      { tipo: 'planimetria' },
+      {
+        tipo: 'galleria',
+        immagini: [
+          { url: `${WP}/wp-content/uploads/a.webp`, didascalia: 'Rotonda' },
+          { url: `${WP}/wp-content/uploads/b.webp`, didascalia: 'Edificio' },
+        ],
+      },
+    ])
+  })
+
+  it('il PDF del regolamento tasse diventa testo e il documento resta, senza anteprima', () => {
+    const url = `${WP}/wp-content/uploads/2026/09/Prot.-n.-6267-del-24-09-2026_regolamento_tasse_2026-27.pdf`
+    const out = conTestiPdf([{ tipo: 'documento', nome: 'Regolamento tasse', url }])
+    expect(out.map((b) => b.tipo)).toEqual(['testo', 'fisarmonica', 'documento'])
+    expect(out[2]).toMatchObject({ url, anteprima: false })
+    const titoli = (out[1] as { voci: { titolo: string }[] }).voci.map((v) => v.titolo)
+    expect(titoli[0]).toMatch(/^Titolo I/)
+    expect(titoli).toHaveLength(8)
+  })
+
+  it('documento senza anteprima: niente iframe', () => {
+    const { container } = render(
+      <Documento
+        id="d"
+        nome="Regolamento"
+        url="/media/r.pdf"
+        mimeType="application/pdf"
+        anteprima={false}
+      />,
+    )
+    expect(container.querySelector('iframe')).toBeNull()
+  })
+
+  it('tabelle nei testi: intestazioni con scope, contenitore scorrevole; accessibile', async () => {
+    const cella = (t: string, headerState: number) => ({
+      type: 'tablecell',
+      headerState,
+      children: [
+        {
+          type: 'paragraph',
+          children: [{ type: 'text', text: t, format: 0, version: 1 }],
+          version: 1,
+        },
+      ],
+      version: 1,
+    })
+    const dati = {
+      root: {
+        type: 'root',
+        version: 1,
+        children: [
+          {
+            type: 'table',
+            version: 1,
+            children: [
+              { type: 'tablerow', version: 1, children: [cella('Fascia', 1), cella('Importo', 1)] },
+              { type: 'tablerow', version: 1, children: [cella('1', 0), cella('€ 200,00', 0)] },
+            ],
+          },
+        ],
+      },
+    }
+    const { container } = render(<Testo data={dati} />)
+    expect(screen.getByRole('columnheader', { name: 'Fascia' }).getAttribute('scope')).toBe('col')
+    expect(screen.getByRole('region', { name: 'Tabella' }).getAttribute('tabindex')).toBe('0')
+    expect(await axeViolations(container)).toEqual([])
+  })
+
+  it('planimetria: una scheda per piano, pianta con titolo, elenco delle aule; accessibile', async () => {
+    const { container } = render(<Planimetria />)
+    expect(screen.getAllByRole('tab').map((t) => t.textContent)).toEqual([
+      'Terra',
+      'Primo',
+      'Secondo',
+      'Terzo',
+      'Quarto',
+    ])
+    expect(screen.getByRole('img', { name: /piano terra/ })).toBeTruthy()
+    expect(screen.getByText(/Aula A02, Aula A01/)).toBeTruthy()
+    expect(await axeViolations(container)).toEqual([])
   })
 })

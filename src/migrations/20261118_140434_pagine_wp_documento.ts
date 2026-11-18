@@ -10,6 +10,16 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"nome" varchar,
   	"descrizione" varchar,
   	"file_id" integer,
+  	"anteprima" boolean DEFAULT true,
+  	"block_name" varchar
+  );
+  
+  CREATE TABLE "pagine_blocks_planimetria" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" varchar PRIMARY KEY NOT NULL,
+  	"titolo" varchar,
   	"block_name" varchar
   );
   
@@ -21,6 +31,17 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"nome" varchar,
   	"descrizione" varchar,
   	"file_id" integer,
+  	"anteprima" boolean DEFAULT true,
+  	"_uuid" varchar,
+  	"block_name" varchar
+  );
+  
+  CREATE TABLE "_pagine_v_blocks_planimetria" (
+  	"_order" integer NOT NULL,
+  	"_parent_id" integer NOT NULL,
+  	"_path" text NOT NULL,
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"titolo" varchar,
   	"_uuid" varchar,
   	"block_name" varchar
   );
@@ -35,16 +56,24 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "_pagine_v" ADD COLUMN "version_modificato_nel_pannello" boolean DEFAULT false;
   ALTER TABLE "pagine_blocks_documento" ADD CONSTRAINT "pagine_blocks_documento_file_id_media_id_fk" FOREIGN KEY ("file_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "pagine_blocks_documento" ADD CONSTRAINT "pagine_blocks_documento_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pagine"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "pagine_blocks_planimetria" ADD CONSTRAINT "pagine_blocks_planimetria_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."pagine"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "_pagine_v_blocks_documento" ADD CONSTRAINT "_pagine_v_blocks_documento_file_id_media_id_fk" FOREIGN KEY ("file_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "_pagine_v_blocks_documento" ADD CONSTRAINT "_pagine_v_blocks_documento_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pagine_v"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "_pagine_v_blocks_planimetria" ADD CONSTRAINT "_pagine_v_blocks_planimetria_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."_pagine_v"("id") ON DELETE cascade ON UPDATE no action;
   CREATE INDEX "pagine_blocks_documento_order_idx" ON "pagine_blocks_documento" USING btree ("_order");
   CREATE INDEX "pagine_blocks_documento_parent_id_idx" ON "pagine_blocks_documento" USING btree ("_parent_id");
   CREATE INDEX "pagine_blocks_documento_path_idx" ON "pagine_blocks_documento" USING btree ("_path");
   CREATE INDEX "pagine_blocks_documento_file_idx" ON "pagine_blocks_documento" USING btree ("file_id");
+  CREATE INDEX "pagine_blocks_planimetria_order_idx" ON "pagine_blocks_planimetria" USING btree ("_order");
+  CREATE INDEX "pagine_blocks_planimetria_parent_id_idx" ON "pagine_blocks_planimetria" USING btree ("_parent_id");
+  CREATE INDEX "pagine_blocks_planimetria_path_idx" ON "pagine_blocks_planimetria" USING btree ("_path");
   CREATE INDEX "_pagine_v_blocks_documento_order_idx" ON "_pagine_v_blocks_documento" USING btree ("_order");
   CREATE INDEX "_pagine_v_blocks_documento_parent_id_idx" ON "_pagine_v_blocks_documento" USING btree ("_parent_id");
   CREATE INDEX "_pagine_v_blocks_documento_path_idx" ON "_pagine_v_blocks_documento" USING btree ("_path");
   CREATE INDEX "_pagine_v_blocks_documento_file_idx" ON "_pagine_v_blocks_documento" USING btree ("file_id");
+  CREATE INDEX "_pagine_v_blocks_planimetria_order_idx" ON "_pagine_v_blocks_planimetria" USING btree ("_order");
+  CREATE INDEX "_pagine_v_blocks_planimetria_parent_id_idx" ON "_pagine_v_blocks_planimetria" USING btree ("_parent_id");
+  CREATE INDEX "_pagine_v_blocks_planimetria_path_idx" ON "_pagine_v_blocks_planimetria" USING btree ("_path");
   CREATE UNIQUE INDEX "pagine_wp_id_idx" ON "pagine" USING btree ("wp_id");
   CREATE INDEX "_pagine_v_version_version_wp_id_idx" ON "_pagine_v" USING btree ("version_wp_id");`)
 }
@@ -52,9 +81,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    ALTER TABLE "pagine_blocks_documento" DISABLE ROW LEVEL SECURITY;
+  ALTER TABLE "pagine_blocks_planimetria" DISABLE ROW LEVEL SECURITY;
   ALTER TABLE "_pagine_v_blocks_documento" DISABLE ROW LEVEL SECURITY;
+  ALTER TABLE "_pagine_v_blocks_planimetria" DISABLE ROW LEVEL SECURITY;
   DROP TABLE "pagine_blocks_documento" CASCADE;
+  DROP TABLE "pagine_blocks_planimetria" CASCADE;
   DROP TABLE "_pagine_v_blocks_documento" CASCADE;
+  DROP TABLE "_pagine_v_blocks_planimetria" CASCADE;
   DROP INDEX "pagine_wp_id_idx";
   DROP INDEX "_pagine_v_version_version_wp_id_idx";
   ALTER TABLE "pagine" DROP COLUMN "wp_id";
