@@ -600,6 +600,20 @@ body {
     }
   }
 
+  // Menu e X grandi come la casetta (20px) e a filo del margine sinistro, allineati al
+  // titolo della pagina e alle voci del menu; l'area da toccare resta di 44px.
+  .app-header .hamburger,
+  .nav__mobile-close .hamburger {
+    --hamburger-size: 20px;
+    justify-content: flex-start;
+  }
+
+  .app-header .hamburger::before,
+  .nav__mobile-close .hamburger::before {
+    left: 0;
+    width: 20px;
+  }
+
   // Il primo gruppo del menu parte sotto l'intestazione, con un po' d'aria.
   .nav__scroll {
     padding-top: calc(var(--app-header-height) + 1rem);
@@ -757,6 +771,15 @@ body {
     display: block;
     transform: translateY(2px);
   }
+}
+
+// Casetta del percorso: Payload la chiude in un riquadro di 16px con overflow nascosto, che
+// tagliava l'icona da 20px (tetto e lato destro).
+.step-nav__home,
+.step-nav__home > span {
+  width: auto;
+  height: auto;
+  overflow: visible;
 }
 
 .step-nav {

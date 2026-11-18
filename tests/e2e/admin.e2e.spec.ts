@@ -24,7 +24,7 @@ test.describe('Admin Panel', () => {
     await expect(page.getByRole('heading', { level: 1, name: /^Ciao/ })).toBeVisible()
     const sezioni = page.getByRole('region', { name: 'Contenuti', exact: true })
     await expect(sezioni.getByRole('link', { name: 'Avvisi', exact: true })).toBeVisible()
-    // Il pulsante «Sito» sta nell'intestazione, su tutte le pagine del pannello (etichetta dalla PR #90)
+    // Il pulsante «Sito» sta nell'intestazione, su tutte le pagine del pannello
     await expect(page.getByRole('link', { name: /^Sito/ })).toHaveAttribute('href', '/')
   })
 
