@@ -262,6 +262,26 @@ export const BloccoGuidaStudenti: Block = {
   ],
 }
 
+export const BloccoAvvisiAmmissioni: Block = {
+  slug: 'avvisiAmmissioni',
+  labels: { singular: 'Avvisi di ammissione', plural: 'Avvisi di ammissione' },
+  admin: etichettaBlocco('Avvisi di ammissione'),
+  interfaceName: 'BloccoAvvisiAmmissioni',
+  fields: [
+    {
+      name: 'titolo',
+      label: 'Titolo della sezione',
+      type: 'text',
+      maxLength: 120,
+      defaultValue: 'Avvisi dei coordinatori',
+      admin: {
+        description:
+          'Gli avvisi si aggiornano da soli: li scrivono i coordinatori di scuola in Avvisi, categoria “Ammissioni”. Una voce per ogni scuola che ha avvisi.',
+      },
+    },
+  ],
+}
+
 export const BLOCCHI: Block[] = [
   BloccoTesto,
   BloccoImmagine,
@@ -273,4 +293,5 @@ export const BLOCCHI: Block[] = [
   BloccoDocumento,
   BloccoPlanimetria,
   BloccoGuidaStudenti,
+  BloccoAvvisiAmmissioni,
 ]

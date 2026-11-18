@@ -99,8 +99,21 @@ export function filtroPannello(user: MaybeUser, sezione: SezionePannello): Where
       const uffici = UFFICI_PAGINE.filter((u) => hasRole(user, u))
       return { ufficiEditori: { in: uffici } }
     }
-    case 'avvisi':
-      return { autore: { equals: user.id } }
+    case 'avvisi': {
+      const suoi: Where = { autore: { equals: user.id } }
+      // Il coordinatore vede anche gli avvisi di ammissione della sua scuola scritti da altri
+      // (es. dal coordinatore precedente o dalla vicedirezione)
+      const scuole = (user as { scuoleCoordinate?: number[] | null }).scuoleCoordinate ?? []
+      if (!hasRole(user, 'docente') || scuole.length === 0) return suoi
+      return {
+        or: [
+          suoi,
+          {
+            and: [{ categorie: { contains: 'ammissioni' } }, { scuole: { in: scuole } }],
+          },
+        ],
+      }
+    }
     case 'media':
       return { creatoDa: { equals: user.id } }
     case 'corsi':

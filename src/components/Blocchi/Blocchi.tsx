@@ -7,6 +7,7 @@ import { risolviLink } from '@/lib/link'
 import type { Media, Pagina } from '@/payload-types'
 
 import { Attachments } from '../Attachments/Attachments'
+import { AvvisiAmmissioni } from '../AvvisiAmmissioni/AvvisiAmmissioni'
 import { Documento } from '../Documento/Documento'
 import { Fisarmonica } from '../Fisarmonica/Fisarmonica'
 import { GuidaStudenti } from '../GuidaStudenti/GuidaStudenti'
@@ -62,6 +63,15 @@ function Sezione({
       {children}
     </section>
   )
+}
+
+/**
+ * Legge gli avvisi di ammissione a ogni richiesta (la pagina è dinamica). Import dinamico:
+ * così chi usa Blocchi senza questo blocco (test, Storybook) non carica Payload.
+ */
+async function AvvisiAmmissioniDalDatabase({ livello }: { livello: 2 | 3 }) {
+  const { avvisiAmmissioni } = await import('@/lib/avvisi-ammissioni')
+  return <AvvisiAmmissioni gruppi={await avvisiAmmissioni()} livello={livello} />
 }
 
 function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
@@ -240,6 +250,13 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
       return (
         <Sezione id={id} titolo={b.titolo}>
           <GuidaStudenti livello={b.titolo ? 3 : 2} />
+        </Sezione>
+      )
+
+    case 'avvisiAmmissioni':
+      return (
+        <Sezione id={id} titolo={b.titolo}>
+          <AvvisiAmmissioniDalDatabase livello={b.titolo ? 3 : 2} />
         </Sezione>
       )
 

@@ -3,7 +3,14 @@ import { APIError, type Access, type CollectionConfig, type FieldAccess } from '
 
 import { endpointsGoogle } from '@/auth/endpoints'
 import { ssoAttivo } from '@/auth/google'
-import { ROLES, ROLE_LABELS, canAccessBackend, defaultRolesForEmail, isAdmin } from '@/access/roles'
+import {
+  ROLES,
+  ROLE_LABELS,
+  canAccessBackend,
+  defaultRolesForEmail,
+  hasRole,
+  isAdmin,
+} from '@/access/roles'
 
 const adminOnly: Access = ({ req }) => isAdmin(req.user)
 
@@ -88,6 +95,36 @@ export const Users: CollectionConfig = {
       },
       admin: {
         description: 'Solo un amministratore può assegnare o togliere ruoli.',
+      },
+    },
+    {
+      // Non salvato: si ricalcola a ogni accesso, così se la vicedirezione cambia il
+      // coordinatore di una scuola il permesso sugli avvisi di ammissione passa da solo.
+      name: 'scuoleCoordinate',
+      type: 'number',
+      hasMany: true,
+      virtual: true,
+      admin: { hidden: true },
+      access: { create: () => false, update: () => false },
+      hooks: {
+        afterRead: [
+          async ({ data, req }) => {
+            if (!data?.id || !hasRole(data as { roles?: string[] }, 'docente')) return []
+            // Solo per chi sta entrando (req.user non c'è ancora) o legge sé stesso:
+            // gli elenchi degli utenti non pagano una query per riga.
+            if (req.user && req.user.id !== data.id) return []
+            const { docs } = await req.payload.find({
+              collection: 'scuole',
+              where: { 'coordinatoreScuola.account': { equals: data.id } },
+              depth: 0,
+              limit: 20,
+              pagination: false,
+              overrideAccess: true,
+              select: {},
+            })
+            return docs.map((d) => d.id)
+          },
+        ],
       },
     },
   ],
