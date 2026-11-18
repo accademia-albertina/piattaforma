@@ -36,6 +36,7 @@ import { default as default_91a09b539d3c86b0aebf520e7564ce08 } from '../../../co
 import { default as default_97d3eba8ada3517fe02663f49ec8ede2 } from '../../../components/admin/ApriSito'
 import { default as default_dc33bb259e89928a16a86a5731c2d2e0 } from '../../../components/admin/PrimaDelLogin'
 import { default as default_1d1560386b77fb163758726eb0ecea0b } from '../../../components/admin/LinguaDate'
+import { default as default_5d2f3de2fed4353a9cd101be8ea4d5c4 } from '../../../components/admin/RicercaInMinuscolo'
 import { default as default_16b88e9b8c48e393fa86591406efd08f } from '../../../components/admin/Dashboard'
 import { default as default_c721497151ded15259fac3f312f8e79c } from '../../../components/admin/Changelog'
 import { default as default_8bb67104bfe82c2f1e13622cccef0477 } from '../../../components/admin/Guida'
@@ -82,6 +83,7 @@ export const importMap = {
   "/components/admin/ApriSito#default": default_97d3eba8ada3517fe02663f49ec8ede2,
   "/components/admin/PrimaDelLogin#default": default_dc33bb259e89928a16a86a5731c2d2e0,
   "/components/admin/LinguaDate#default": default_1d1560386b77fb163758726eb0ecea0b,
+  "/components/admin/RicercaInMinuscolo#default": default_5d2f3de2fed4353a9cd101be8ea4d5c4,
   "/components/admin/Dashboard#default": default_16b88e9b8c48e393fa86591406efd08f,
   "/components/admin/Changelog#default": default_c721497151ded15259fac3f312f8e79c,
   "/components/admin/Guida#default": default_8bb67104bfe82c2f1e13622cccef0477,

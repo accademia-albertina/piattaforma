@@ -56,7 +56,10 @@ export const endpointsWp: Endpoint[] = [
     handler: async (req) => {
       const blocco = soloAdmin(req)
       if (blocco) return blocco
-      const avviata = avviaSincronizzazione(req.payload, { limite: await limite(req) })
+      const avviata = avviaSincronizzazione(req.payload, {
+        limite: await limite(req),
+        utente: req.user,
+      })
       req.payload.logger.info(`Importazione da WordPress avviata da ${req.user!.email}`)
       return torna(req, avviata ? 'wp-avviata' : 'wp-gia-in-corso')
     },
@@ -67,7 +70,7 @@ export const endpointsWp: Endpoint[] = [
     handler: async (req) => {
       const blocco = soloAdmin(req)
       if (blocco) return blocco
-      fermaSincronizzazione()
+      fermaSincronizzazione(req.user)
       return torna(req, 'wp-fermata')
     },
   },
@@ -77,7 +80,10 @@ export const endpointsWp: Endpoint[] = [
     handler: async (req) => {
       const blocco = soloAdmin(req)
       if (blocco) return blocco
-      const avviata = avviaSincronizzazioneContenuti(req.payload, { limite: await limite(req) })
+      const avviata = avviaSincronizzazioneContenuti(req.payload, {
+        limite: await limite(req),
+        utente: req.user,
+      })
       req.payload.logger.info(
         `Sincronizzazione contenuti da WordPress avviata da ${req.user!.email}`,
       )
@@ -90,7 +96,7 @@ export const endpointsWp: Endpoint[] = [
     handler: async (req) => {
       const blocco = soloAdmin(req)
       if (blocco) return blocco
-      fermaSincronizzazioneContenuti()
+      fermaSincronizzazioneContenuti(req.user)
       return torna(req, 'wpc-fermata', 'contenuti-wordpress')
     },
   },

@@ -9,6 +9,8 @@
 import type { Endpoint, PayloadRequest } from 'payload'
 
 import { isAdmin } from '@/access/roles'
+import { registraOperazione } from '@/lib/registro'
+import { OPERAZIONI } from '@/lib/registro/costanti'
 
 import {
   accountDrive,
@@ -31,6 +33,7 @@ import {
 import { avviaSpostamento } from './sposta'
 
 const DIECI_MINUTI = 10 * 60
+const VOCE = { collezione: OPERAZIONI.drive.slug, sezione: OPERAZIONI.drive.sezione }
 const PAGINA = '/admin/drive'
 
 const origine = (req: PayloadRequest) =>
@@ -158,6 +161,11 @@ export const endpointsDrive: Endpoint[] = [
         await drive!.info(idCartellaRadice())
         await cartellaMedia(req.payload, drive!)
         req.payload.logger.info(`Drive collegato come ${t.email} da ${admin.email}`)
+        await registraOperazione(req.payload, admin, {
+          ...VOCE,
+          azione: 'collegato',
+          titolo: `Google Drive collegato come ${t.email}`,
+        })
         return ponte('esito=collegato')
       } catch (e) {
         const motivo =
@@ -182,6 +190,11 @@ export const endpointsDrive: Endpoint[] = [
       const token = await rimuoviCollegamento(req.payload)
       if (token) await revocaToken(token)
       req.payload.logger.info(`Drive scollegato da ${req.user!.email}`)
+      await registraOperazione(req.payload, req.user, {
+        ...VOCE,
+        azione: 'scollegato',
+        titolo: 'Google Drive scollegato',
+      })
       return torna(req, 'esito=scollegato')
     },
   },
@@ -192,7 +205,7 @@ export const endpointsDrive: Endpoint[] = [
       const blocco = soloAdmin(req)
       if (blocco) return blocco
       if (!(await driveCollegato(req.payload))) return torna(req, 'errore=non-collegato')
-      avviaSpostamento(req.payload)
+      avviaSpostamento(req.payload, req.user)
       return torna(req, 'esito=sposta')
     },
   },

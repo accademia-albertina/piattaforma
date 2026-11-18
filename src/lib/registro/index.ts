@@ -2,8 +2,13 @@
  * Registro attività del pannello (leggero): per ogni salvataggio o eliminazione fatta da
  * chi lavora nel pannello scrive una voce con chi, cosa, quando e i NOMI dei campi cambiati.
  * Niente valori né diff completi: bastano per capire chi ha toccato cosa senza appesantire
- * il database. Gli studenti (iscrizioni dal sito) e le operazioni del server senza utente
- * (import, migrazioni, Drive) non vengono registrati.
+ * il database.
+ *
+ * Le operazioni che toccano centinaia di elementi in background (sincronizzazioni da
+ * WordPress, spostamento su Drive, pulizia annuale delle iscrizioni) non scrivono una voce
+ * per elemento: chi le avvia le registra con `registraOperazione`, all'avvio e alla fine con
+ * l'esito. Non si registrano gli studenti (iscrizioni dal sito) né gli import automatici
+ * dei contenuti demo all'avvio dell'anteprima.
  */
 import type {
   CollectionAfterChangeHook,
@@ -21,12 +26,13 @@ import {
   type AzioneRegistro,
   ETICHETTE_AZIONE,
   GIORNI_CONSERVAZIONE,
+  NOME_SISTEMA,
   SENZA_REGISTRO,
   SLUG_REGISTRO,
 } from './costanti'
 
 type Doc = Record<string, unknown>
-type Utente = {
+export type Utente = {
   id: number | string
   email?: string | null
   nome?: string | null
@@ -110,6 +116,10 @@ function utenteDaRegistrare(req: PayloadRequest): Utente | null {
   return canAccessBackend(user as never) ? user : null
 }
 
+/** "1 file nuovo", "3 file nuovi": numeri con il plurale giusto, per i dettagli. */
+export const conta = (n: number, singolare: string, plurale: string) =>
+  `${n} ${n === 1 ? singolare : plurale}`
+
 let ultimaPulizia = 0
 
 /** Al massimo una volta al giorno per processo toglie le voci più vecchie di un anno. */
@@ -128,33 +138,33 @@ function pulisciVecchie(payload: Payload) {
     .catch((e) => payload.logger.error(`Pulizia registro attività: ${(e as Error).message}`))
 }
 
-async function scrivi(
-  req: PayloadRequest,
-  utente: Utente,
-  voce: {
-    azione: AzioneRegistro
-    collezione: string
-    sezione: string
-    documentoId?: string
-    titolo: string
-    campi?: string[]
-  },
-) {
-  const chi = nomeUtente(utente)
+type Voce = {
+  azione: AzioneRegistro
+  collezione: string
+  sezione: string
+  documentoId?: string
+  titolo: string
+  campi?: string[]
+  dettagli?: string
+}
+
+async function scrivi(payload: Payload, utente: Utente | null, voce: Voce, req?: PayloadRequest) {
+  const chi = utente ? nomeUtente(utente) : NOME_SISTEMA
   const campi = voce.campi?.length ? voce.campi.join(', ') : '—'
   try {
-    await req.payload.create({
+    await payload.create({
       collection: SLUG_REGISTRO,
       data: {
         azione: voce.azione,
-        utente: typeof utente.id === 'number' ? utente.id : Number(utente.id),
+        utente: utente ? (typeof utente.id === 'number' ? utente.id : Number(utente.id)) : null,
         utenteNome: chi,
-        utenteEmail: utente.email ?? undefined,
+        utenteEmail: utente?.email ?? undefined,
         collezione: voce.collezione,
         sezione: voce.sezione,
         documentoId: voce.documentoId,
         titolo: voce.titolo.slice(0, 300),
         campi: campi.slice(0, 500),
+        dettagli: voce.dettagli?.slice(0, 2000),
         riepilogo: `${chi} · ${ETICHETTE_AZIONE[voce.azione].toLowerCase()} · ${voce.titolo}`.slice(
           0,
           400,
@@ -166,9 +176,22 @@ async function scrivi(
       req,
     })
   } catch (e) {
-    req.payload.logger.error(`Registro attività non scritto: ${(e as Error).message}`)
+    payload.logger.error(`Registro attività non scritto: ${(e as Error).message}`)
   }
-  pulisciVecchie(req.payload)
+  pulisciVecchie(payload)
+}
+
+/**
+ * Registra un'operazione che non è il salvataggio di un singolo elemento: avvio e fine di
+ * una sincronizzazione, collegamento a Drive, pulizia delle iscrizioni. Senza utente la voce
+ * è del "Sistema". Non lancia mai errori: il registro non deve bloccare l'operazione.
+ */
+export async function registraOperazione(
+  payload: Payload,
+  utente: Utente | null | undefined,
+  voce: Omit<Voce, 'campi'>,
+) {
+  await scrivi(payload, utente ?? null, voce)
 }
 
 const titoloDoc = (doc: Doc, useAsTitle: string | undefined, id: unknown) =>
@@ -194,27 +217,37 @@ const dopoSalvataggio: CollectionAfterChangeHook = async ({
   const azione = azioneDaStato(operation, previousDoc, doc, bozza === 'true' || bozza === true)
   // Un salvataggio senza modifiche non è un'attività
   if (azione === 'modificato' && campi.length === 0) return doc
-  await scrivi(req, utente, {
-    azione,
-    collezione: collection.slug,
-    sezione: etichetta(collection.labels?.plural, collection.slug),
-    documentoId: String(doc.id),
-    titolo: titoloDoc(doc, collection.admin?.useAsTitle, doc.id),
-    campi,
-  })
+  await scrivi(
+    req.payload,
+    utente,
+    {
+      azione,
+      collezione: collection.slug,
+      sezione: etichetta(collection.labels?.plural, collection.slug),
+      documentoId: String(doc.id),
+      titolo: titoloDoc(doc, collection.admin?.useAsTitle, doc.id),
+      campi,
+    },
+    req,
+  )
   return doc
 }
 
 const dopoEliminazione: CollectionAfterDeleteHook = async ({ collection, doc, id, req }) => {
   const utente = utenteDaRegistrare(req)
   if (!utente) return doc
-  await scrivi(req, utente, {
-    azione: 'eliminato',
-    collezione: collection.slug,
-    sezione: etichetta(collection.labels?.plural, collection.slug),
-    documentoId: String(id),
-    titolo: titoloDoc((doc ?? {}) as Doc, collection.admin?.useAsTitle, id),
-  })
+  await scrivi(
+    req.payload,
+    utente,
+    {
+      azione: 'eliminato',
+      collezione: collection.slug,
+      sezione: etichetta(collection.labels?.plural, collection.slug),
+      documentoId: String(id),
+      titolo: titoloDoc((doc ?? {}) as Doc, collection.admin?.useAsTitle, id),
+    },
+    req,
+  )
   return doc
 }
 
@@ -224,13 +257,12 @@ const dopoSalvataggioGlobale: GlobalAfterChangeHook = async ({ global, doc, prev
   const campi = campiCambiati(global.flattenedFields, previousDoc, doc)
   if (campi.length === 0) return doc
   const nome = etichetta(global.label, global.slug)
-  await scrivi(req, utente, {
-    azione: 'modificato',
-    collezione: global.slug,
-    sezione: nome,
-    titolo: nome,
-    campi,
-  })
+  await scrivi(
+    req.payload,
+    utente,
+    { azione: 'modificato', collezione: global.slug, sezione: nome, titolo: nome, campi },
+    req,
+  )
   return doc
 }
 

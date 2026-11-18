@@ -7,6 +7,9 @@ import path from 'node:path'
 
 import type { Payload } from 'payload'
 
+import { conta, registraOperazione, type Utente } from '@/lib/registro'
+import { OPERAZIONI } from '@/lib/registro/costanti'
+
 import { CAMPO_DRIVE, caricaSuDrive, cartellaLocale } from './adattatore'
 
 export type Avanzamento = {
@@ -31,14 +34,27 @@ export async function fileSulDisco(payload: Payload) {
   return totalDocs
 }
 
-export function avviaSpostamento(payload: Payload) {
+const VOCE = {
+  collezione: OPERAZIONI.drive.slug,
+  sezione: OPERAZIONI.drive.sezione,
+  titolo: 'Spostamento su Drive dei file sul disco',
+}
+
+export function avviaSpostamento(payload: Payload, utente?: Utente | null) {
   if (avanzamento.inCorso) return false
   avanzamento = { inCorso: true, totale: 0, spostati: 0, mancanti: [], errori: [] }
-  void sposta(payload)
+  void registraOperazione(payload, utente, { ...VOCE, azione: 'avviato' })
+    .then(() => sposta(payload))
     .catch((e) => avanzamento.errori.push((e as Error).message))
-    .finally(() => {
-      avanzamento.inCorso = false
+    .finally(async () => {
       avanzamento.finitoIl = new Date().toISOString()
+      const a = avanzamento
+      await registraOperazione(payload, utente, {
+        ...VOCE,
+        azione: 'concluso',
+        dettagli: `Spostati ${a.spostati} file su ${a.totale}, ${conta(a.mancanti.length, 'mancante', 'mancanti')} sul disco, ${conta(a.errori.length, 'errore', 'errori')}`,
+      })
+      avanzamento.inCorso = false
     })
   return true
 }

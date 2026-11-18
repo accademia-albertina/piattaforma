@@ -112,5 +112,14 @@ describe('Pulizia delle iscrizioni di un anno concluso', () => {
     expect(docs.map((d) => d.corso)).toEqual([attuale.id])
     await new Promise((r) => setTimeout(r, 100))
     expect(email).not.toHaveBeenCalled()
+    // Nel registro una voce sola per tutta la pulizia, con chi l'ha fatta
+    const { docs: voci } = await payload.find({
+      collection: 'registro-attivita',
+      where: { collezione: { equals: 'iscrizioni-corsi' }, utente: { equals: segreteria.id } },
+      depth: 0,
+    })
+    expect(voci.map((v) => [v.azione, v.titolo, v.dettagli])).toEqual([
+      ['eliminato', 'Pulizia annuale delle iscrizioni 2024/2025', '1 iscrizione eliminata'],
+    ])
   })
 })

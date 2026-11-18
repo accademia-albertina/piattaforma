@@ -134,10 +134,35 @@ describe('Importazione dei file da WordPress', () => {
 
   it('rilanciata, prende solo i file modificati su WordPress', async () => {
     scaricati.length = 0
-    avviaSincronizzazione(payload, { fetch: fintoWp as typeof fetch })
+    const admin = await payload.create({
+      collection: 'users',
+      data: {
+        email: 'admin.sync-wp@albertina.academy',
+        password: 'Password-di-prova-1!',
+        roles: ['admin'],
+      },
+    })
+    const daRegistro = new Date().toISOString()
+    avviaSincronizzazione(payload, { fetch: fintoWp as typeof fetch, utente: admin })
     await attendiSincronizzazione()
     expect(statoSincronizzazione().invariati).toBe(2)
     expect(scaricati).toEqual([])
+    // Nel registro attività: chi l'ha avviata e com'è finita, non una voce per file
+    const { docs: voci } = await payload.find({
+      collection: 'registro-attivita',
+      where: {
+        collezione: { equals: 'sincronizzazione-file-wp' },
+        createdAt: { greater_than_equal: daRegistro },
+      },
+      sort: 'id',
+      depth: 0,
+    })
+    expect(voci.map((v) => [v.azione, v.utente, v.sezione])).toEqual([
+      ['avviato', admin.id, 'File da WordPress'],
+      ['concluso', admin.id, 'File da WordPress'],
+    ])
+    expect(voci[1].dettagli).toContain('0 file nuovi, 0 aggiornati, 2 invariati, 0 errori')
+    await payload.delete({ collection: 'users', id: admin.id })
 
     media[0].modified_gmt = '2026-11-20T09:00:00'
     avviaSincronizzazione(payload, { fetch: fintoWp as typeof fetch })

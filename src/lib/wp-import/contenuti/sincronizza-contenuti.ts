@@ -47,6 +47,8 @@ import {
 import { riscriviLink, type MappaFile } from '../riscrivi'
 import { importaFile, mappaFile, urlFile } from '../sincronizza'
 import { chiaveWp, elencoMediaWp, mediaWpPerId, type MediaWp } from '../wordpress'
+import { conta, registraOperazione, type Utente } from '@/lib/registro'
+import { OPERAZIONI } from '@/lib/registro/costanti'
 import { attiSeed, datiVoce, vociSeed } from '@/seed/albo-trasparenza-wp'
 import { slugAvvisiSeed } from '@/seed/avvisi-wp'
 import { inFrase } from '@/utilities/maiuscole'
@@ -127,6 +129,43 @@ let interrompi = false
 
 export const statoContenuti = () => stato
 
+const NOMI_RACCOLTE: Record<Raccolta, string> = {
+  albo: 'Albo',
+  trasparenza: 'Amministrazione trasparente',
+  avvisi: 'Avvisi',
+}
+
+/** Esito in poche righe, per il registro attività. */
+export function esitoSincronizzazioneContenuti(s: StatoContenuti) {
+  const righe = (Object.keys(NOMI_RACCOLTE) as Raccolta[]).map((k) => {
+    const e = s[k]
+    const parti = [
+      conta(e.nuovi, 'nuovo', 'nuovi'),
+      conta(e.aggiornati, 'aggiornato', 'aggiornati'),
+      conta(e.invariati, 'invariato', 'invariati'),
+      conta(e.protetti, 'protetto', 'protetti'),
+    ]
+    return `${NOMI_RACCOLTE[k]}: ${parti.join(', ')}`
+  })
+  righe.push(
+    `${conta(s.fileImportati, 'file importato', 'file importati')}, ${conta(s.errori.length, 'errore', 'errori')}`,
+  )
+  if (s.pagineModificate.length) {
+    righe.push(
+      `${conta(s.pagineModificate.length, 'pagina cambiata', 'pagine cambiate')} su WordPress da riportare a mano`,
+    )
+  }
+  if (s.limite) {
+    righe.push(`Prova con al massimo ${conta(s.limite, 'elemento', 'elementi')} per raccolta`)
+  }
+  if (s.errori.length) righe.push(`Primo errore: ${s.errori[0]}`)
+  return righe.join('\n')
+}
+
+const VOCE = { collezione: OPERAZIONI.contenutiWp.slug, sezione: OPERAZIONI.contenutiWp.sezione }
+/** Chi ha chiesto di fermarla: la voce finale del registro è sua. */
+let fermataDa: Utente | null = null
+
 /**
  * Stato da mostrare nella pagina: quello in memoria se una sincronizzazione è in corso o è
  * finita da quando il server è acceso, altrimenti l'ultimo esito salvato nel database.
@@ -155,10 +194,12 @@ async function salvaEsito(payload: Payload) {
 
 export function avviaSincronizzazioneContenuti(
   payload: Payload,
-  o: { limite?: number; fetch?: typeof fetch; solo?: Raccolta[] } = {},
+  o: { limite?: number; fetch?: typeof fetch; solo?: Raccolta[]; utente?: Utente | null } = {},
 ) {
   if (stato.inCorso) return false
   interrompi = false
+  fermataDa = null
+  const utente = o.utente ?? null
   stato = {
     ...vuoto(),
     inCorso: true,
@@ -166,7 +207,11 @@ export function avviaSincronizzazioneContenuti(
     avviatoIl: new Date().toISOString(),
     limite: o.limite,
   }
-  void sincronizza(payload, o)
+  const titolo = o.limite
+    ? 'Sincronizzazione di Albo, Trasparenza e avvisi (prova)'
+    : 'Sincronizzazione di Albo, Trasparenza e avvisi'
+  void registraOperazione(payload, utente, { ...VOCE, azione: 'avviato', titolo })
+    .then(() => sincronizza(payload, o))
     .catch((e) => {
       stato.errori.push((e as Error).message)
       payload.logger.error(`Sincronizzazione contenuti da WordPress: ${(e as Error).message}`)
@@ -180,13 +225,22 @@ export function avviaSincronizzazioneContenuti(
         `Sincronizzazione contenuti finita: ${r('albo')}; ${r('trasparenza')}; ${r('avvisi')}`,
       )
       await salvaEsito(payload)
+      await registraOperazione(payload, interrompi ? (fermataDa ?? utente) : utente, {
+        ...VOCE,
+        azione: interrompi ? 'fermato' : 'concluso',
+        titolo,
+        dettagli: esitoSincronizzazioneContenuti(stato),
+      })
+      // Dopo la voce del registro: chi attende la fine (test, pagina Drive) la trova già scritta
       stato.inCorso = false
     })
   return true
 }
 
-export function fermaSincronizzazioneContenuti() {
-  if (stato.inCorso) interrompi = true
+export function fermaSincronizzazioneContenuti(utente?: Utente | null) {
+  if (!stato.inCorso) return
+  interrompi = true
+  fermataDa = utente ?? null
 }
 
 export async function attendiSincronizzazioneContenuti() {

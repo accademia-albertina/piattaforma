@@ -226,26 +226,105 @@ body:has(.prima-del-login--solo-google) form.login__form {
   text-transform: uppercase;
 }
 
-// ——— Pulsante «Apri il sito» e account nell'intestazione: icone a filo, senza riquadro ———
+// ——— Pulsanti «Sito» e «Account» nell'intestazione: come l'header del sito ———
+// Icona a filo, etichetta sotto (da computer) e, al passaggio, un filetto sottile che si
+// allarga dal centro (solo transform: animazione fluida). Niente riquadro pieno.
+// Durata e curva uguali a --duration-base / --ease-out di tokens.css (non caricato qui).
 .azione-header {
+  --filetto-durata: 240ms;
+  --filetto-curva: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
   display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
+  min-width: var(--pulsante-header, 40px);
+  height: var(--pulsante-header, 40px);
+  padding: 0 0.25rem;
   color: var(--theme-text);
+  font: inherit;
+  text-decoration: none;
   cursor: pointer;
   background: transparent;
   border: 0;
 
+  svg {
+    display: block;
+    flex: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 1rem);
+    bottom: 0;
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform var(--filetto-durata) var(--filetto-curva);
+  }
+
   &:hover {
-    background: var(--theme-elevation-100);
+    color: var(--theme-text);
+    text-decoration: none;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
   }
 
   &:focus-visible {
     outline: 2px solid var(--theme-text);
     outline-offset: 2px;
+  }
+}
+
+// Etichetta: solo da computer, come nel sito; su telefono basta il nome accessibile.
+.azione-header__etichetta {
+  display: none;
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+@media (min-width: 1025px) {
+  .app-header .azione-header {
+    min-width: 3.5rem;
+    height: 3rem;
+  }
+
+  .azione-header__etichetta {
+    display: block;
+  }
+}
+
+// L'account è dentro il collegamento di Payload: il passaggio si legge sul collegamento,
+// che non deve sottolineare l'etichetta (il segno è solo il filetto).
+.app-header__account {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.app-header__account:hover .azione-header::after,
+.app-header__account:focus-visible .azione-header::after {
+  transform: scaleX(1);
+}
+
+.app-header__account:focus-visible {
+  outline: 2px solid var(--theme-text);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .azione-header::after {
+    transition: none;
   }
 }
 
@@ -390,8 +469,7 @@ body {
 }
 
 .app-header .hamburger,
-.nav__header .hamburger,
-.app-header .azione-header {
+.nav__header .hamburger {
   width: var(--pulsante-header);
   height: var(--pulsante-header);
   border-radius: 0;
@@ -605,29 +683,6 @@ body {
     display: inline-flex;
     align-items: center;
   }
-}
-
-// Account: stessa icona a filo di «Apri il sito», con lo stesso sfondo al passaggio
-.icona-account {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--pulsante-header, 40px);
-  height: var(--pulsante-header, 40px);
-  color: var(--theme-text);
-
-  svg {
-    display: block;
-  }
-}
-
-.app-header__account:hover .icona-account {
-  background: var(--theme-elevation-100);
-}
-
-.app-header__account:focus-visible {
-  outline: 2px solid var(--theme-text);
-  outline-offset: 2px;
 }
 
 .sr-only-pannello {

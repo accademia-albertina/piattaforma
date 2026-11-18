@@ -27,6 +27,29 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.39.0',
+    data: '2026-11-18',
+    titolo: 'Registro attività completo',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Il Registro attività segna anche le sincronizzazioni da WordPress (file e contenuti), il collegamento e lo scollegamento di Google Drive, lo spostamento dei file su Drive e la pulizia annuale delle iscrizioni: chi le ha avviate, quando sono finite e con quale esito (nuovi, aggiornati, errori).',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'In alto nel pannello “Sito” e “Account” hanno l’etichetta sotto l’icona e, al passaggio, il filetto sottile dell’header del sito.',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          'Ricerca negli elenchi in italiano piano: “Cerca per chi, email o elemento” invece di “Cerca per Chi, Email Oppure Elemento”.',
+      },
+    ],
+    pr: [90],
+  },
+  {
     versione: '0.38.1',
     data: '2026-11-18',
     titolo: 'Esito della sincronizzazione sempre visibile',
