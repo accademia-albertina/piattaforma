@@ -1,0 +1,239 @@
+/* Elenco degli appuntamenti allo sportello. Variabili del tema Payload (chiaro e scuro). */
+
+.agenda {
+  padding-block: var(--base) calc(var(--base) * 3);
+}
+
+.intestazione {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--base);
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-block-end: var(--base);
+  border-block-end: 1px solid var(--theme-elevation-150);
+}
+
+.intestazione h1 {
+  margin: 0 0 calc(var(--base) / 4);
+}
+
+.intestazione p {
+  max-width: 44rem;
+  margin: 0;
+  color: var(--theme-elevation-700);
+}
+
+.azioniPagina {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--base) / 2);
+}
+
+.azioniPagina :global(.btn) {
+  margin: 0;
+}
+
+.cerca {
+  display: grid;
+  gap: calc(var(--base) / 4);
+  max-width: 32rem;
+  margin-block: var(--base);
+}
+
+.cerca label {
+  font-weight: 600;
+}
+
+.cerca div,
+.sceltaGiorno {
+  display: flex;
+  gap: calc(var(--base) / 2);
+  align-items: center;
+}
+
+.cerca input,
+.sceltaGiorno input {
+  flex: 1;
+  min-height: 2.25rem;
+  padding: 0 calc(var(--base) / 2);
+  border: 1px solid var(--theme-elevation-250);
+  background: var(--theme-input-bg);
+  color: var(--theme-text);
+  font: inherit;
+}
+
+.cerca :global(.btn),
+.sceltaGiorno :global(.btn) {
+  margin: 0;
+}
+
+.giorni {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--base);
+  align-items: center;
+  padding: calc(var(--base) / 2) 0;
+  border-block: 1px solid var(--theme-elevation-150);
+}
+
+.giorni > a:last-child {
+  justify-self: end;
+}
+
+.titoloGiorno {
+  margin: var(--base) 0 calc(var(--base) / 4);
+  font-size: 1.5rem;
+}
+
+.titoloGiorno::first-letter {
+  text-transform: uppercase;
+}
+
+.oggi {
+  margin-inline-start: calc(var(--base) / 2);
+  padding: 0.1rem 0.5rem;
+  background: var(--theme-elevation-100);
+  font-size: 0.8rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.riepilogo {
+  margin: 0 0 var(--base);
+  color: var(--theme-elevation-700);
+}
+
+.scorri {
+  overflow-x: auto;
+}
+
+.tabella {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabella th,
+.tabella td {
+  padding: calc(var(--base) / 2);
+  border-block-end: 1px solid var(--theme-elevation-150);
+  text-align: start;
+  vertical-align: top;
+}
+
+.tabella th {
+  color: var(--theme-elevation-700);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tabella tr[data-stato='ritirata'] td,
+.tabella tr[data-stato='assente'] td {
+  background: var(--theme-elevation-50);
+}
+
+.ora {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nome {
+  font-weight: 600;
+}
+
+.secondario {
+  display: block;
+  color: var(--theme-elevation-600);
+  font-size: 0.85rem;
+}
+
+.telefono {
+  white-space: nowrap;
+}
+
+.vuoto {
+  padding: var(--base);
+  background: var(--theme-elevation-50);
+}
+
+.annullati {
+  margin-block-start: calc(var(--base) * 1.5);
+}
+
+.annullati summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.agenda :global(.azioni-appuntamento) {
+  display: grid;
+  gap: calc(var(--base) / 4);
+  justify-items: start;
+}
+
+.agenda :global(.azioni-appuntamento__pulsanti) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--base) / 4);
+  align-items: center;
+}
+
+.agenda :global(.azioni-appuntamento .btn) {
+  margin: 0;
+}
+
+.agenda :global(.azioni-appuntamento__link) {
+  padding: 0.25rem;
+  border: 0;
+  background: none;
+  color: var(--theme-text);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.agenda :global(.azioni-appuntamento__annulla) {
+  display: grid;
+  gap: calc(var(--base) / 4);
+  width: 100%;
+  max-width: 22rem;
+}
+
+.agenda :global(.azioni-appuntamento__annulla input) {
+  min-height: 2rem;
+  padding: 0 calc(var(--base) / 2);
+  border: 1px solid var(--theme-elevation-250);
+  background: var(--theme-input-bg);
+  color: var(--theme-text);
+  font: inherit;
+}
+
+.agenda :global(.stato-appuntamento) {
+  font-weight: 600;
+}
+
+.agenda :global(.stato-appuntamento--annullata),
+.agenda :global(.stato-appuntamento--assente) {
+  color: var(--theme-error-500);
+}
+
+@media print {
+  :global(.nav),
+  :global(.app-header),
+  :global(.step-nav),
+  .azioniPagina,
+  .cerca,
+  .giorni,
+  .annullati,
+  .intestazione p,
+  .agenda :global(.azioni-appuntamento__pulsanti),
+  .agenda :global(.azioni-appuntamento__link) {
+    display: none !important;
+  }
+
+  .tabella th,
+  .tabella td {
+    border-color: #999;
+  }
+}
