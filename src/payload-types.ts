@@ -128,11 +128,13 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     navigazione: Navigazione;
+    home: Home;
     'drive-connessione': DriveConnessione;
     'esiti-importazione': EsitiImportazione;
   };
   globalsSelect: {
     navigazione: NavigazioneSelect<false> | NavigazioneSelect<true>;
+    home: HomeSelect<false> | HomeSelect<true>;
     'drive-connessione': DriveConnessioneSelect<false> | DriveConnessioneSelect<true>;
     'esiti-importazione': EsitiImportazioneSelect<false> | EsitiImportazioneSelect<true>;
   };
@@ -2178,6 +2180,78 @@ export interface Navigazione {
   createdAt?: string | null;
 }
 /**
+ * Testi, collegamenti e foto della homepage. Le modifiche sono visibili sul sito appena salvi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home".
+ */
+export interface Home {
+  id: number;
+  sliderNumero?: number | null;
+  accessiTitolo?: string | null;
+  accessiTesto?: string | null;
+  /**
+   * Da 2 a 6 riquadri sotto lo slider.
+   */
+  accessi?:
+    | {
+        titolo: string;
+        testo: string;
+        icona:
+          | 'ammissioni'
+          | 'laurea'
+          | 'calendario'
+          | 'segreteria'
+          | 'libro'
+          | 'persone'
+          | 'documento'
+          | 'luogo'
+          | 'email'
+          | 'info';
+        tipo?: ('interno' | 'percorso' | 'esterno') | null;
+        pagina?: (number | null) | Pagina;
+        /**
+         * Sito esterno: https://… · Indirizzo del sito: /avvisi, /cerca…
+         */
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Le parole si accendono una alla volta mentre si scorre.
+   */
+  manifesto?: string | null;
+  /**
+   * Si apre dietro il motto. Se vuota: lo scalone. Meglio orizzontale, almeno 2000 px.
+   */
+  fotoGrande?: (number | null) | Media;
+  /**
+   * Due foto accanto al manifesto. Se vuoto: sala blu e aula di pittura.
+   */
+  fotoDettagli?: (number | Media)[] | null;
+  cifre?:
+    | {
+        valore: number;
+        etichetta: string;
+        id?: string | null;
+      }[]
+    | null;
+  scuoleTitolo?: string | null;
+  scuoleTesto?: string | null;
+  avvisoMostra?: boolean | null;
+  avvisoTitolo?: string | null;
+  avvisoTesto?: string | null;
+  tourTitolo?: string | null;
+  tourTesto?: string | null;
+  tourUrl?: string | null;
+  /**
+   * Se vuota: la facciata. Orizzontale, almeno 2000 px.
+   */
+  tourFoto?: (number | null) | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "drive-connessione".
  */
@@ -2290,6 +2364,48 @@ export interface NavigazioneSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home_select".
+ */
+export interface HomeSelect<T extends boolean = true> {
+  sliderNumero?: T;
+  accessiTitolo?: T;
+  accessiTesto?: T;
+  accessi?:
+    | T
+    | {
+        titolo?: T;
+        testo?: T;
+        icona?: T;
+        tipo?: T;
+        pagina?: T;
+        url?: T;
+        id?: T;
+      };
+  manifesto?: T;
+  fotoGrande?: T;
+  fotoDettagli?: T;
+  cifre?:
+    | T
+    | {
+        valore?: T;
+        etichetta?: T;
+        id?: T;
+      };
+  scuoleTitolo?: T;
+  scuoleTesto?: T;
+  avvisoMostra?: T;
+  avvisoTitolo?: T;
+  avvisoTesto?: T;
+  tourTitolo?: T;
+  tourTesto?: T;
+  tourUrl?: T;
+  tourFoto?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

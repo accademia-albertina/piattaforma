@@ -27,6 +27,47 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.40.0',
+    data: '2026-11-18',
+    titolo: 'Pagine istituzionali e home modificabile',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'La home si modifica dal pannello (Impostazioni → Home): accessi rapidi, manifesto, cifre, foto, riquadro avviso e visita virtuale.',
+      },
+      {
+        tipo: 'nuovo',
+        testo: 'Nuove pagine Assistenza (al posto di Troubleshooting), Guide e Open Days.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Storia e sedi: foto delle sedi e planimetria ridisegnata, piano per piano. Le pagine importate hanno le loro immagini.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Regolamento tasse e guide per le matricole leggibili nella pagina, con il PDF sempre scaricabile. Tabelle nel testo delle pagine.',
+      },
+      {
+        tipo: 'migliorato',
+        testo: 'In tutto il sito “Laurea” e “Laurea magistrale” al posto di Triennio e Biennio.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Menu da telefono: occupa tutto lo schermo e una sfumatura indica che continua sotto.',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          'I link al sito attuale dentro le pagine portano alle pagine nuove. Tolta la sincronizzazione delle pagine dal pannello.',
+      },
+    ],
+    pr: [93],
+  },
+  {
     versione: '0.39.2',
     data: '2026-11-18',
     titolo: 'Aggiornamento di sicurezza',

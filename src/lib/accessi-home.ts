@@ -12,7 +12,7 @@ export const ACCESSI_HOME: AccessoRapido[] = [
   },
   {
     titolo: 'Offerta formativa',
-    testo: 'Dieci scuole, triennio e biennio.',
+    testo: 'Dieci scuole, laurea e laurea magistrale.',
     href: '/scuole',
     icona: GraduationCap,
   },

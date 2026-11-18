@@ -24,6 +24,7 @@ import * as migration_20261114_113913_provenienza_wp_contenuti from './20261114_
 import * as migration_20261118_090022_esiti_importazione from './20261118_090022_esiti_importazione'
 import * as migration_20261118_103717_registro_operazioni from './20261118_103717_registro_operazioni'
 import * as migration_20261118_140434_pagine_wp_documento from './20261118_140434_pagine_wp_documento'
+import * as migration_20261118_141711_home_modificabile from './20261118_141711_home_modificabile'
 
 export const migrations = [
   {
@@ -155,5 +156,10 @@ export const migrations = [
     up: migration_20261118_140434_pagine_wp_documento.up,
     down: migration_20261118_140434_pagine_wp_documento.down,
     name: '20261118_140434_pagine_wp_documento',
+  },
+  {
+    up: migration_20261118_141711_home_modificabile.up,
+    down: migration_20261118_141711_home_modificabile.down,
+    name: '20261118_141711_home_modificabile',
   },
 ]

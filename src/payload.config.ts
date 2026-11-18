@@ -24,6 +24,7 @@ import { Docenti } from './collections/Docenti'
 import { Dottorandi } from './collections/Dottorandi'
 import { Pubblicazioni } from './collections/Pubblicazioni'
 import { RegistroAttivita } from './collections/RegistroAttivita'
+import { Home } from './globals/Home'
 import { Navigazione } from './globals/Navigazione'
 import { DriveConnessione } from './globals/DriveConnessione'
 import { EsitiImportazione } from './globals/EsitiImportazione'
@@ -150,7 +151,7 @@ export default buildConfig({
     EmailInviate,
     RegistroAttivita,
   ],
-  globals: [Navigazione, DriveConnessione, EsitiImportazione],
+  globals: [Navigazione, Home, DriveConnessione, EsitiImportazione],
   endpoints: [...endpointsDrive, ...endpointsWp],
   editor,
   secret: process.env.PAYLOAD_SECRET || '',

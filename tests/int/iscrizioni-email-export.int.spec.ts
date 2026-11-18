@@ -193,7 +193,7 @@ describe('Email di conferma ed export degli iscritti', () => {
     const csv = (await res.text()).replace(/^\uFEFF/, '')
     expect(csv.startsWith('Cognome e nome;Matricola;Livello;Email;Corso;Iscritto il')).toBe(true)
     expect(csv).toContain(
-      'Ferraris Giulia;33333;Triennio;33333t@albertina.academy;Anatomia artistica;',
+      'Ferraris Giulia;33333;Laurea;33333t@albertina.academy;Anatomia artistica;',
     )
 
     // Corso di un altro docente: elenco vuoto

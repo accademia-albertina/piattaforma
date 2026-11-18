@@ -119,7 +119,7 @@ describe('Appelli e iscrizioni agli esami', () => {
     })
 
   it('l’appello ha un titolo leggibile e i livelli scelti', () => {
-    expect(appelloT.titolo).toMatch(/^Storia dell’arte contemporanea \(Triennio\), /)
+    expect(appelloT.titolo).toMatch(/^Storia dell’arte contemporanea \(Laurea\), /)
     expect(appelloB.livelli).toEqual(['biennio'])
   })
 

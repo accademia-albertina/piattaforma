@@ -333,6 +333,21 @@ export const GUIDE: Guida[] = [
     ],
   },
   {
+    id: 'home',
+    titolo: 'Home del sito',
+    sezione: 'home',
+    intro: 'Testi, collegamenti rapidi e foto della homepage.',
+    passi: [
+      'Apri “Home” dalle impostazioni.',
+      'Scegli la scheda: “Slider”, “Accessi rapidi”, “Presentazione”, “Scuole”, “Avviso” o “Visita virtuale”.',
+      'Cambia testi, collegamenti o foto; un campo lasciato vuoto torna al testo predefinito.',
+      'Premi “Salva”: la home si aggiorna subito.',
+    ],
+    consigli: [
+      'Lo slider mostra gli avvisi in evidenza: per metterne uno in cima apri l’avviso e aggiungi la categoria “In evidenza”.',
+    ],
+  },
+  {
     id: 'menu',
     titolo: 'Menu del sito',
     sezione: 'navigazione',
