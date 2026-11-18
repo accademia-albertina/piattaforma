@@ -247,7 +247,7 @@ export const GUIDE: Guida[] = [
     passi: [
       'Prima apri la finestra della sessione in “Finestre di iscrizione” (tipo “Iscrizioni agli esami”).',
       'In “Appelli d’esame” premi “Nuovo appello”: corso, anno accademico, sessione, data, ora, aula e commissione.',
-      'Se triennio e biennio hanno date diverse, crea un appello per livello scegliendo “Livello”.',
+      'Se laurea e laurea magistrale hanno date diverse, crea un appello per livello scegliendo “Livello”.',
       'Gli iscritti sono in fondo a ogni appello e, tutti insieme, in “Iscrizioni agli esami”.',
     ],
     consigli: [
@@ -300,7 +300,7 @@ export const GUIDE: Guida[] = [
     intro: 'Le dieci scuole con la loro pagina in /scuole.',
     passi: [
       'Nella scheda “Scuola” cambi presentazione, foto e video (solo link YouTube).',
-      'Nelle schede “Triennio” e “Biennio” aggiorni sezioni e piani di studio; togli la spunta al biennio se la scuola non lo prevede.',
+      'Nelle schede “Laurea” e “Laurea magistrale” aggiorni sezioni e piani di studio; togli la spunta alla laurea magistrale se la scuola non la prevede.',
       'In “Persone” scegli i coordinatori tra i docenti. L’elenco dei docenti della scuola viene dai loro profili.',
     ],
     schermate: [{ id: 'scuole', didascalia: 'Una scuola aperta, con le sue schede.' }],

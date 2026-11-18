@@ -39,14 +39,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `Scuola di ${scuola.nome}`,
     description:
       scuola.descrizione ||
-      `Scuola di ${scuola.nome} dell’Accademia Albertina: triennio, biennio, piani di studio e docenti.`,
+      `Scuola di ${scuola.nome} dell’Accademia Albertina: laurea, laurea magistrale, piani di studio e docenti.`,
     alternates: { canonical: `/scuole/${scuola.slug}` },
   }
 }
 
 type Livello = keyof typeof LIVELLI
 
-/** Contenuto di una scheda Triennio o Biennio. */
+/** Contenuto di una scheda Laurea o Laurea magistrale. */
 function Percorso({ scuola, livello }: { scuola: Scuola; livello: Livello }) {
   const p = scuola[livello]
   const info = LIVELLI[livello]
@@ -54,7 +54,7 @@ function Percorso({ scuola, livello }: { scuola: Scuola; livello: Livello }) {
   return (
     <div className={styles.percorso}>
       <p className={styles.livello}>
-        {info.livello} · {info.anni} anni · {info.cfa} CFA
+        {info.anni} anni · {info.cfa} CFA
       </p>
       {(p?.sezioni ?? []).map((s) => (
         <section key={s.id} className={styles.sezione}>

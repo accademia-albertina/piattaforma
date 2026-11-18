@@ -67,6 +67,7 @@ const nextConfig: NextConfig = {
         .concat(
           // Pagine del sito attuale spostate o con un indirizzo vecchio ancora linkato
           Object.entries({
+            '/troubleshooting': '/assistenza',
             '/outgoing': '/erasmus/mobilita-studenti',
             '/incoming': '/erasmus/incoming-students',
             '/docenti-e-staff': '/erasmus/mobilita-docenti-staff',

@@ -188,21 +188,20 @@ export default async function HomePage() {
                   {scuole.length} scuole, Laurea e Laurea magistrale
                 </p>
                 <p>
-                  Lauree e Lauree magistrali con lo stesso valore di quelle universitarie: triennio
-                  e biennio.
+                  Lauree e Lauree magistrali con lo stesso valore di quelle universitarie.
                 </p>
                 <dl className={styles.cifre}>
                   <div>
-                    <dt>Triennio</dt>
+                    <dt>Laurea</dt>
                     <dd>180 CFA</dd>
                   </div>
                   <div>
-                    <dt>Biennio</dt>
+                    <dt>Laurea magistrale</dt>
                     <dd>120 CFA</dd>
                   </div>
                 </dl>
                 <Link href="/scuole" className={styles.introLink}>
-                  Come si arriva al diploma <ArrowRight size={18} strokeWidth={1.5} aria-hidden />
+                  Come si arriva alla laurea <ArrowRight size={18} strokeWidth={1.5} aria-hidden />
                 </Link>
               </li>
               {scuole.map((s) => {

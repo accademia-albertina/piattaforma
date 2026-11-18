@@ -65,7 +65,10 @@ export function isAnnoAccademico(valore: unknown): valore is string {
 
 export const LIVELLI = ['triennio', 'biennio'] as const
 export type Livello = (typeof LIVELLI)[number]
-export const LIVELLO_LABELS: Record<Livello, string> = { triennio: 'Triennio', biennio: 'Biennio' }
+export const LIVELLO_LABELS: Record<Livello, string> = {
+  triennio: 'Laurea',
+  biennio: 'Laurea magistrale',
+}
 
 export const RUOLI_DOCENTE = ['tempo-indeterminato', 'tempo-determinato', 'contratto'] as const
 export type RuoloDocente = (typeof RUOLI_DOCENTE)[number]

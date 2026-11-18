@@ -583,7 +583,7 @@ export interface Scuola {
   video?: string | null;
   triennio?: {
     /**
-     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza biennio).
+     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza laurea magistrale).
      */
     attivo?: boolean | null;
     /**
@@ -627,7 +627,7 @@ export interface Scuola {
   };
   biennio?: {
     /**
-     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza biennio).
+     * Togli la spunta se la scuola non ha questo percorso (es. Cinema senza laurea magistrale).
      */
     attivo?: boolean | null;
     /**
@@ -1070,7 +1070,7 @@ export interface Appello {
   annoAccademico: string;
   sessione: 'invernale' | 'estiva' | 'autunnale';
   /**
-   * Vuoto = quelli del corso. Usalo per dividere triennio e biennio in date diverse.
+   * Vuoto = quelli del corso. Usalo per dividere laurea e laurea magistrale in date diverse.
    */
   livelli?: ('triennio' | 'biennio')[] | null;
   data: string;

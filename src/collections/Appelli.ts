@@ -140,7 +140,7 @@ export const Appelli: CollectionConfig = {
           admin: {
             width: '34%',
             description:
-              'Vuoto = quelli del corso. Usalo per dividere triennio e biennio in date diverse.',
+              'Vuoto = quelli del corso. Usalo per dividere laurea e laurea magistrale in date diverse.',
           },
         },
       ],

@@ -25,6 +25,7 @@ export const PERCORSI_PAGINE: Record<string, { url: string; etichetta?: string }
   '/cookie': { url: '/cookie-policy' },
   '/note-legali': { url: '/termini-e-condizioni' },
   '/segnalazioni-accessibilita': { url: '/segnalazioni-di-accessibilita' },
+  '/troubleshooting': { url: '/assistenza', etichetta: 'Assistenza' },
 }
 
 type Voce = NonNullable<Navigazione['footerLink']>[number]

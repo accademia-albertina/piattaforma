@@ -243,11 +243,32 @@
   position: absolute;
   inset-inline: 0;
   top: 100%;
-  /* 2.25rem: la barra dei servizi, se è ancora visibile sopra */
-  max-height: calc(100dvh - 100% - 2.25rem);
+  /* Altezza fino al fondo dello schermo, calcolata all'apertura (SiteHeader.tsx) */
+  max-height: var(--altezza-pannello, calc(100dvh - 100%));
   overflow-y: auto;
+  overscroll-behavior: contain;
   background: var(--color-bg);
   color: var(--color-text);
+}
+
+/* Sfumatura in fondo: fa capire che il menu continua sotto. Copre solo il margine finale
+   del menu, quindi a fine scorrimento non nasconde nulla. */
+.panel::after {
+  content: '';
+  position: sticky;
+  bottom: 0;
+  display: block;
+  height: var(--space-7);
+  margin-top: calc(-1 * var(--space-7));
+  background: linear-gradient(to bottom, transparent, var(--color-bg) 85%);
+  pointer-events: none;
+}
+
+/* Su telefono e tablet il pannello copre tutto lo schermo sotto la barra */
+@media (max-width: 63.99rem) {
+  .panel {
+    height: var(--altezza-pannello, calc(100dvh - 100%));
+  }
 }
 
 /* Chiuso, il pannello è hidden="until-found": niente bordo, o resta una riga chiara */
@@ -268,7 +289,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
   gap: 0 var(--gap);
-  padding-block: var(--space-5) var(--space-6);
+  padding-block: var(--space-5) var(--space-7);
 }
 
 .column {

@@ -7,11 +7,13 @@ import type { SanitizedConfig } from 'payload'
 
 import type { Pagina } from '@/payload-types'
 
+import { aggiornaTerminologiaLexical } from '@/lib/terminologia'
+
 import { htmlInLexical, pulisciHtml } from './converti'
 import type { BloccoGrezzo } from './pagine-html'
 
 /** Cambia quando cambia la conversione delle pagine: quelle non toccate si riallineano. */
-export const VERSIONE_PAGINE = 'p4'
+export const VERSIONE_PAGINE = 'p5'
 
 // I link alle pagine del sito restano relativi: la correzione dei link li renderebbe assoluti.
 // Il prefisso finisce con "/": nessun altro host può corrispondere.
@@ -30,7 +32,8 @@ async function lexical(html: string, config: SanitizedConfig) {
     .replace(/href="\/(?!\/)/g, `href="${INTERNO}`)
     // ancore interne della vecchia pagina
     .replace(/<a href="#[^"]*"[^>]*>([\s\S]*?)<\/a>/g, '$1')
-  const valore = await htmlInLexical(pulito, config)
+  // Nuovi nomi dei titoli AFAM: laurea e laurea magistrale
+  const valore = aggiornaTerminologiaLexical(await htmlInLexical(pulito, config))
   relativi((valore as unknown as { root: NodoLexical }).root)
   return valore
 }

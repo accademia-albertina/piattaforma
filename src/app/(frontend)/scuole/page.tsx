@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/scuole' },
 }
 
-/** Come si arriva al diploma: dal dipartimento ai corsi del piano di studi. */
+/** Come si arriva alla laurea: dal dipartimento ai corsi del piano di studi. */
 const PERCORSO = [
   {
     termine: 'Dipartimento',
@@ -29,13 +29,13 @@ const PERCORSO = [
       'È il tuo indirizzo di studio, per esempio Pittura o Scultura: equivale al corso di laurea.',
   },
   {
-    termine: 'Triennio e biennio',
-    testo: `Il triennio dura ${LIVELLI.triennio.anni} anni (${LIVELLI.triennio.cfa} CFA). Il biennio specialistico ne dura ${LIVELLI.biennio.anni} (${LIVELLI.biennio.cfa} CFA).`,
+    termine: 'Laurea e laurea magistrale',
+    testo: `La laurea dura ${LIVELLI.triennio.anni} anni (${LIVELLI.triennio.cfa} CFA), la laurea magistrale ${LIVELLI.biennio.anni} (${LIVELLI.biennio.cfa} CFA).`,
   },
   {
     termine: 'Corsi e tesi',
     testo:
-      'Segui i corsi del piano di studi, anche di altre scuole, e discuti la tesi per diplomarti.',
+      'Segui i corsi del piano di studi, anche di altre scuole, e discuti la tesi per laurearti.',
   },
 ]
 
@@ -63,7 +63,7 @@ export default async function ScuolePage() {
 
       <section aria-labelledby="come-funziona" className={styles.sezione}>
         <h2 id="come-funziona" className={styles.titoloSezione}>
-          Come si arriva al diploma
+          Come si arriva alla laurea
         </h2>
         <ol className={styles.percorso}>
           {PERCORSO.map((p) => (
@@ -88,7 +88,7 @@ export default async function ScuolePage() {
                   slug={s.slug ?? ''}
                   href={`/scuole/${s.slug}`}
                   immagine={immagineScuola(s)}
-                  invito={s.biennio?.attivo === false ? 'Triennio' : 'Triennio e biennio'}
+                  invito={s.biennio?.attivo === false ? 'Laurea' : 'Laurea e laurea magistrale'}
                 />
               </li>
             ))}
