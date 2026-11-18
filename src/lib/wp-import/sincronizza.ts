@@ -92,7 +92,7 @@ const ESCLUSE = new Set([
   'finestre-iscrizione',
   'registro-attivita',
 ])
-const GLOBALI_ESCLUSI = new Set(['drive-connessione'])
+const GLOBALI_ESCLUSI = new Set(['drive-connessione', 'esiti-importazione'])
 
 const ERRORI_MAX = 30
 

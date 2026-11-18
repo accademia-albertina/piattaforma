@@ -127,6 +127,32 @@ let interrompi = false
 
 export const statoContenuti = () => stato
 
+/**
+ * Stato da mostrare nella pagina: quello in memoria se una sincronizzazione è in corso o è
+ * finita da quando il server è acceso, altrimenti l'ultimo esito salvato nel database.
+ */
+export async function ultimoStatoContenuti(payload: Payload): Promise<StatoContenuti> {
+  if (stato.inCorso || stato.finitoIl) return stato
+  const g = await payload
+    .findGlobal({ slug: 'esiti-importazione', overrideAccess: true, depth: 0 })
+    .catch(() => null)
+  const salvato = g?.contenuti as StatoContenuti | null | undefined
+  return salvato?.finitoIl ? { ...vuoto(), ...salvato, inCorso: false } : stato
+}
+
+async function salvaEsito(payload: Payload) {
+  await payload
+    .updateGlobal({
+      slug: 'esiti-importazione',
+      data: { contenuti: { ...stato, inCorso: false } },
+      overrideAccess: true,
+      context: CONTESTO,
+    })
+    .catch((e) =>
+      payload.logger.error(`Esito sincronizzazione non salvato: ${(e as Error).message}`),
+    )
+}
+
 export function avviaSincronizzazioneContenuti(
   payload: Payload,
   o: { limite?: number; fetch?: typeof fetch; solo?: Raccolta[] } = {},
@@ -145,8 +171,7 @@ export function avviaSincronizzazioneContenuti(
       stato.errori.push((e as Error).message)
       payload.logger.error(`Sincronizzazione contenuti da WordPress: ${(e as Error).message}`)
     })
-    .finally(() => {
-      stato.inCorso = false
+    .finally(async () => {
       stato.fase = 'finito'
       stato.finitoIl = new Date().toISOString()
       const r = (k: Raccolta) =>
@@ -154,6 +179,8 @@ export function avviaSincronizzazioneContenuti(
       payload.logger.info(
         `Sincronizzazione contenuti finita: ${r('albo')}; ${r('trasparenza')}; ${r('avvisi')}`,
       )
+      await salvaEsito(payload)
+      stato.inCorso = false
     })
   return true
 }

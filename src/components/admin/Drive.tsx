@@ -8,7 +8,7 @@ import { isAdmin } from '@/access/roles'
 import { accountDrive, driveConfigurato, idCartellaRadice } from '@/lib/drive/api'
 import { driveCollegato, leggiStato } from '@/lib/drive/connessione'
 import { fileSulDisco, statoSpostamento } from '@/lib/drive/sposta'
-import { statoContenuti } from '@/lib/wp-import/contenuti/sincronizza-contenuti'
+import { ultimoStatoContenuti } from '@/lib/wp-import/contenuti/sincronizza-contenuti'
 import { statoSincronizzazione } from '@/lib/wp-import/sincronizza'
 import { contaMediaWp } from '@/lib/wp-import/wordpress'
 
@@ -94,7 +94,10 @@ export default async function Drive({
           suDisco={suDisco}
           spostamento={statoSpostamento()}
           wordpress={{ stato: statoSincronizzazione(), importati, suWordPress }}
-          contenutiWp={{ stato: statoContenuti(), collegati: { albo, trasparenza, avvisi } }}
+          contenutiWp={{
+            stato: await ultimoStatoContenuti(req.payload),
+            collegati: { albo, trasparenza, avvisi },
+          }}
           esito={typeof searchParams?.esito === 'string' ? searchParams.esito : undefined}
           errore={typeof searchParams?.errore === 'string' ? searchParams.errore : undefined}
         />
