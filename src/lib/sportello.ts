@@ -26,6 +26,7 @@ const PREDEFINITE: Impostazioni = {
   durataTurno: 5,
   personePerTurno: 1,
   giorniPrenotabili: 60,
+  giorniPreavviso: 2,
   orari: [
     { giorno: '1', dalle: '10:00', alle: '12:00' },
     { giorno: '5', dalle: '10:00', alle: '12:00' },
@@ -58,6 +59,7 @@ export async function leggiImpostazioni(
     durataTurno: g.durataTurno,
     personePerTurno: g.personePerTurno,
     giorniPrenotabili: g.giorniPrenotabili,
+    giorniPreavviso: g.giorniPreavviso ?? 0,
     orari: g.orari ?? [],
     chiusure: g.chiusure ?? [],
     aperture: g.aperture ?? [],

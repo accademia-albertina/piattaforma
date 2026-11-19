@@ -32,6 +32,8 @@ export type ImpostazioniOrari = {
   durataTurno?: number | null
   personePerTurno?: number | null
   giorniPrenotabili?: number | null
+  /** Giorni di anticipo minimo: 2 = da dopodomani. */
+  giorniPreavviso?: number | null
 }
 
 export const ORA_VALIDA = /^([01]\d|2[0-3]):[0-5]\d$/
@@ -225,11 +227,15 @@ export function turniDelGiorno(data: string, imp: ImpostazioniOrari): string[] {
   return [...ore].sort()
 }
 
-/** Giorni con almeno un turno, da oggi (compreso) per `giorniPrenotabili` giorni. */
+/**
+ * Giorni con almeno un turno, da oggi + `giorniPreavviso` fino a oggi + `giorniPrenotabili`.
+ * La finestra scorre con i giorni: ogni mattina se ne aggiunge uno in fondo.
+ */
 export function giorniDiApertura(oggi: string, imp: ImpostazioniOrari, quanti?: number): string[] {
   const n = quanti ?? imp.giorniPrenotabili ?? 60
+  const da = Math.max(0, imp.giorniPreavviso ?? 0)
   const giorni: string[] = []
-  for (let i = 0; i <= n; i++) {
+  for (let i = da; i <= n; i++) {
     const g = aggiungiGiorni(oggi, i)
     if (turniDelGiorno(g, imp).length) giorni.push(g)
   }

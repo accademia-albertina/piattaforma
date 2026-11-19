@@ -53,6 +53,7 @@ describe('Prenotazioni allo sportello della segreteria', () => {
         durataTurno: 5,
         personePerTurno: 1,
         giorniPrenotabili: 60,
+        giorniPreavviso: 0,
         orari: (['1', '2', '3', '4', '5'] as const).map((giorno) => ({
           giorno,
           dalle: '10:00',

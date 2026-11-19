@@ -44,7 +44,12 @@ export const CHANGELOG: Versione[] = [
       {
         tipo: 'nuovo',
         testo:
-          'Orari e documenti dello sportello: giorni, turni, documenti e chiusure (anche di poche ore). Una chiusura annulla le prenotazioni di quei turni e avvisa chi aveva prenotato. Festività già escluse.',
+          'Orari e documenti dello sportello: giorni, turni, documenti e chiusure (anche di poche ore). Una chiusura annulla le prenotazioni di quei turni e avvisa chi aveva prenotato. Festività già escluse. Si prenota da 2 giorni prima fino a 60 giorni avanti (modificabili).',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Pagina Segreteria didattica: collegamento “Prenota in segreteria” in fondo, al posto del modulo Amelia.',
       },
     ],
     pr: [98],

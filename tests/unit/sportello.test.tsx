@@ -67,6 +67,13 @@ describe('Orari dello sportello', () => {
     })
     expect(conApertura).toContain('2026-11-25')
   })
+
+  it('con 2 giorni di preavviso il primo giorno utile è dopodomani', () => {
+    // Giovedì 19: venerdì 20 è troppo vicino, il primo è lunedì 23
+    expect(giorniDiApertura('2026-11-19', { ...AMELIA, giorniPreavviso: 2 })[0]).toBe('2026-11-23')
+    // Mercoledì 18: venerdì 20 è proprio a due giorni, va bene
+    expect(giorniDiApertura('2026-11-18', { ...AMELIA, giorniPreavviso: 2 })[0]).toBe('2026-11-20')
+  })
 })
 
 const giorni = [

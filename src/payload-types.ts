@@ -2436,6 +2436,10 @@ export interface SportelloSegreteria {
   durataTurno: number;
   personePerTurno: number;
   /**
+   * 2 = si prenota al più tardi due giorni prima. 0 = anche per oggi.
+   */
+  giorniPreavviso: number;
+  /**
    * Quanti giorni avanti si vede il calendario.
    */
   giorniPrenotabili: number;
@@ -2662,6 +2666,7 @@ export interface SportelloSegreteriaSelect<T extends boolean = true> {
   avviso?: T;
   durataTurno?: T;
   personePerTurno?: T;
+  giorniPreavviso?: T;
   giorniPrenotabili?: T;
   orari?:
     | T

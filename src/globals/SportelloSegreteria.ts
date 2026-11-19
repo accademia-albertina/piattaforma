@@ -113,7 +113,7 @@ export const SportelloSegreteria: GlobalConfig = {
                   min: 1,
                   max: 120,
                   defaultValue: 5,
-                  admin: { width: '33%' },
+                  admin: { width: '25%' },
                 },
                 {
                   name: 'personePerTurno',
@@ -123,7 +123,21 @@ export const SportelloSegreteria: GlobalConfig = {
                   min: 1,
                   max: 20,
                   defaultValue: 1,
-                  admin: { width: '33%' },
+                  admin: { width: '25%' },
+                },
+                {
+                  name: 'giorniPreavviso',
+                  label: 'Preavviso minimo (giorni)',
+                  type: 'number',
+                  required: true,
+                  min: 0,
+                  max: 30,
+                  defaultValue: 2,
+                  admin: {
+                    width: '25%',
+                    description:
+                      '2 = si prenota al più tardi due giorni prima. 0 = anche per oggi.',
+                  },
                 },
                 {
                   name: 'giorniPrenotabili',
@@ -134,7 +148,7 @@ export const SportelloSegreteria: GlobalConfig = {
                   max: 180,
                   defaultValue: 60,
                   admin: {
-                    width: '33%',
+                    width: '25%',
                     description: 'Quanti giorni avanti si vede il calendario.',
                   },
                 },
