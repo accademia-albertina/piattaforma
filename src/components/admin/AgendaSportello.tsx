@@ -1,11 +1,11 @@
-import type { AdminViewServerProps, Where } from 'payload'
+import type { ListViewServerProps, Where } from 'payload'
 
 import { Gutter } from '@payloadcms/ui'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import { gestisceSportello } from '@/access/sportello'
-import { leggiImpostazioni, STATO_LABELS, type StatoPrenotazione } from '@/lib/sportello'
+import { adesso, leggiImpostazioni, STATO_LABELS, type StatoPrenotazione } from '@/lib/sportello'
 import {
   aggiungiGiorni,
   etichettaAppuntamento,
@@ -32,14 +32,18 @@ const GIORNO = /^\d{4}-\d{2}-\d{2}$/
  * un giorno alla volta, con le azioni Ritirato / Non presentato / Annulla e la stampa.
  * Con la ricerca mostra gli appuntamenti di una persona.
  */
-export default async function AgendaSportello({ initPageResult, searchParams }: AdminViewServerProps) {
-  const { req } = initPageResult
-  const admin = req.payload.config.routes.admin
+export default async function AgendaSportello({
+  payload,
+  user,
+  searchParams,
+}: ListViewServerProps) {
+  const admin = payload.config.routes.admin
   const base = `${admin}/collections/prenotazioni-segreteria`
-  if (!req.user) redirect(`${admin}/login?redirect=${base}`)
-  if (!gestisceSportello(req.user)) redirect(admin)
+  if (!user) redirect(`${admin}/login?redirect=${base}`)
+  if (!gestisceSportello(user)) redirect(admin)
+  // Accesso già verificato qui sopra: le letture sotto (overrideAccess) valgono per la segreteria
 
-  const imp = await leggiImpostazioni(req.payload, req)
+  const imp = await leggiImpostazioni(payload)
   const oggi = giornoRoma(new Date())
   const q = typeof searchParams?.q === 'string' ? searchParams.q.trim() : ''
   const richiesto = typeof searchParams?.giorno === 'string' ? searchParams.giorno : ''
@@ -47,7 +51,7 @@ export default async function AgendaSportello({ initPageResult, searchParams }: 
   // Giorni con turni o con appuntamenti, per scorrere avanti e indietro
   const dal = aggiungiGiorni(richiesto && GIORNO.test(richiesto) ? richiesto : oggi, -90)
   const al = aggiungiGiorni(richiesto && GIORNO.test(richiesto) ? richiesto : oggi, 120)
-  const { docs: vicini } = await req.payload.find({
+  const { docs: vicini } = await payload.find({
     collection: 'prenotazioni-segreteria',
     where: {
       inizio: {
@@ -58,7 +62,7 @@ export default async function AgendaSportello({ initPageResult, searchParams }: 
     select: { inizio: true },
     pagination: false,
     depth: 0,
-    req,
+    overrideAccess: true,
   })
   const conAppuntamenti = new Set(vicini.map((p) => giornoRoma(new Date(p.inizio))))
   const utile = (g: string) => conAppuntamenti.has(g) || turniDelGiorno(g, imp).length > 0
@@ -89,13 +93,13 @@ export default async function AgendaSportello({ initPageResult, searchParams }: 
           less_than: istanteRoma(aggiungiGiorni(giorno, 1), '00:00').toISOString(),
         },
       }
-  const { docs } = (await req.payload.find({
+  const { docs } = (await payload.find({
     collection: 'prenotazioni-segreteria',
     where,
     sort: q ? '-inizio' : 'inizio',
     limit: q ? 50 : 500,
     depth: 0,
-    req,
+    overrideAccess: true,
   })) as { docs: PrenotazioneSegreteria[] }
 
   const attivi = docs.filter((p) => p.stato !== 'annullata')
@@ -128,7 +132,7 @@ export default async function AgendaSportello({ initPageResult, searchParams }: 
           id={p.id}
           stato={(p.stato ?? 'prenotata') as StatoPrenotazione}
           etichette={STATO_LABELS}
-          passato={new Date(p.inizio).getTime() < Date.now()}
+          passato={new Date(p.inizio).getTime() < adesso()}
         />
         {p.noteSegreteria && <span className={styles.secondario}>{p.noteSegreteria}</span>}
       </td>
@@ -167,7 +171,10 @@ export default async function AgendaSportello({ initPageResult, searchParams }: 
           </div>
           <div className={styles.azioniPagina}>
             <StampaAgenda />
-            <Link className="btn btn--style-secondary btn--size-small" href={`${admin}/globals/sportello-segreteria`}>
+            <Link
+              className="btn btn--style-secondary btn--size-small"
+              href={`${admin}/globals/sportello-segreteria`}
+            >
               Orari e chiusure
             </Link>
             <Link className="btn btn--style-primary btn--size-small" href={`${base}/create`}>
@@ -239,11 +246,7 @@ export default async function AgendaSportello({ initPageResult, searchParams }: 
                   : 'Nessun turno in orario questo giorno.'}
             </p>
 
-            {attivi.length ? (
-              tabella(attivi)
-            ) : (
-              <p className={styles.vuoto}>Nessun appuntamento.</p>
-            )}
+            {attivi.length ? tabella(attivi) : <p className={styles.vuoto}>Nessun appuntamento.</p>}
 
             {annullati.length > 0 && (
               <details className={styles.annullati}>

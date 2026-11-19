@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Alert, Breadcrumbs, DisdettaSportello, TestataPagina } from '@/components'
 import { payloadClient } from '@/lib/payload'
-import { codiceDisdettaValido } from '@/lib/sportello'
+import { adesso, codiceDisdettaValido } from '@/lib/sportello'
 import { etichettaAppuntamento } from '@/lib/sportello-orari'
 
 import styles from '../prenotazioni.module.css'
@@ -34,7 +34,7 @@ export default async function Disdici({ searchParams }: Props) {
         .catch(() => null)
     : null
   const valida = prenotazione && codiceDisdettaValido(token, prenotazione.tokenDisdetta)
-  const futura = valida && new Date(prenotazione.inizio).getTime() > Date.now()
+  const futura = valida && new Date(prenotazione.inizio).getTime() > adesso()
 
   return (
     <div className={`container ${styles.pagina}`}>
@@ -51,7 +51,8 @@ export default async function Disdici({ searchParams }: Props) {
           <Alert tone="warning" title="Link non valido">
             <p>
               Il link non corrisponde a un appuntamento. Se hai prenotato con l’account
-              istituzionale puoi disdire da <Link href="/prenotazioni-segreteria">Prenota in segreteria</Link>.
+              istituzionale puoi disdire da{' '}
+              <Link href="/prenotazioni-segreteria">Prenota in segreteria</Link>.
             </p>
           </Alert>
         ) : prenotazione.stato !== 'prenotata' || !futura ? (

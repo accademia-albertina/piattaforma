@@ -196,7 +196,10 @@ export function festivita(data: string): string | null {
 }
 
 /** Fasce orarie di un giorno: orario settimanale più eventuali aperture straordinarie. */
-export function fasceDelGiorno(data: string, imp: ImpostazioniOrari): { dalle: string; alle: string }[] {
+export function fasceDelGiorno(
+  data: string,
+  imp: ImpostazioniOrari,
+): { dalle: string; alle: string }[] {
   if (festivita(data) || giornoChiuso(data, imp.chiusure ?? [])) return []
   const gs = String(giornoSettimana(data))
   const fasce = [

@@ -38,13 +38,15 @@ const testo = (v: unknown, max = 200) => (typeof v === 'string' ? v.trim().slice
 const json = (dati: unknown, status = 200) => Response.json(dati, { status })
 const errore = (e: unknown) => {
   const err = e as { status?: number; message?: string }
-  return json({ errors: [{ message: err.message ?? 'Operazione non riuscita.' }] }, err.status ?? 500)
+  return json(
+    { errors: [{ message: err.message ?? 'Operazione non riuscita.' }] },
+    err.status ?? 500,
+  )
 }
 
 const ISTITUZIONALE = /@albertina\.academy$/i
 
-const TURNO_PRESO =
-  'Qualcuno ha appena prenotato questo turno: scegline un altro.'
+const TURNO_PRESO = 'Qualcuno ha appena prenotato questo turno: scegline un altro.'
 
 /** Le prenotazioni attive dello stesso documento per quella email (una sola alla volta). */
 async function giaPrenotato(req: PayloadRequest, email: string, documento: string) {
@@ -160,11 +162,14 @@ export const PrenotazioniSegreteria: CollectionConfig = {
             overrideAccess: true,
             req,
           })
-          if (tutti.totalDocs >= 300) rifiuta('Troppe richieste in questo momento: riprova più tardi.', 429)
+          if (tutti.totalDocs >= 300)
+            rifiuta('Troppe richieste in questo momento: riprova più tardi.', 429)
 
           await req.payload.delete({
             collection: 'codici-email',
-            where: { scadenza: { less_than: new Date(Date.now() - 24 * 3600 * 1000).toISOString() } },
+            where: {
+              scadenza: { less_than: new Date(Date.now() - 24 * 3600 * 1000).toISOString() },
+            },
             overrideAccess: true,
             req,
           })
@@ -197,7 +202,8 @@ export const PrenotazioniSegreteria: CollectionConfig = {
           const documento = imp.documenti.find((d) => d.attivo && d.id === corpo.documento)
           if (!documento) rifiuta('Scegli il documento da ritirare.')
           const inizio = new Date(testo(corpo.inizio))
-          if (!turnoValido(imp, inizio)) rifiuta('Questo turno non è disponibile: scegline un altro.', 409)
+          if (!turnoValido(imp, inizio))
+            rifiuta('Questo turno non è disponibile: scegline un altro.', 409)
 
           const user = req.user as User | null
           let dati: Omit<Partial<PrenotazioneSegreteria>, 'id' | 'createdAt' | 'updatedAt'> & {
@@ -224,7 +230,12 @@ export const PrenotazioniSegreteria: CollectionConfig = {
             if (ISTITUZIONALE.test(email))
               rifiuta('Con l’email @albertina.academy accedi con Google per prenotare.')
             if (telefono.replace(/\D/g, '').length < 6) rifiuta('Scrivi un numero di telefono.')
-            const esito = await verificaCodiceEmail(req.payload, email, testo(corpo.codice, 10), req)
+            const esito = await verificaCodiceEmail(
+              req.payload,
+              email,
+              testo(corpo.codice, 10),
+              req,
+            )
             if (esito === 'scaduto')
               rifiuta('Il codice è scaduto o già usato: chiedine uno nuovo.', 401)
             if (esito === 'errato') rifiuta('Il codice non è corretto: controlla l’email.', 401)
@@ -246,7 +257,10 @@ export const PrenotazioniSegreteria: CollectionConfig = {
               req,
             })
             .catch((e: { status?: number; message?: string; data?: unknown }) => {
-              if (e?.status === 409 || /posto|unique|univoc/i.test(JSON.stringify(e?.data ?? e?.message ?? '')))
+              if (
+                e?.status === 409 ||
+                /posto|unique|univoc/i.test(JSON.stringify(e?.data ?? e?.message ?? ''))
+              )
                 rifiuta(TURNO_PRESO, 409)
               throw e
             })
@@ -283,9 +297,9 @@ export const PrenotazioniSegreteria: CollectionConfig = {
             ((user && utente === user.id) ||
               codiceDisdettaValido(testo(corpo.token, 100), p.tokenDisdetta))
           if (!p || !autorizzato) rifiuta('Appuntamento non trovato.', 404)
-          if (p!.stato !== 'prenotata') rifiuta('Questo appuntamento è già stato annullato o chiuso.')
-          if (new Date(p!.inizio).getTime() <= Date.now())
-            rifiuta('L’appuntamento è già passato.')
+          if (p!.stato !== 'prenotata')
+            rifiuta('Questo appuntamento è già stato annullato o chiuso.')
+          if (new Date(p!.inizio).getTime() <= Date.now()) rifiuta('L’appuntamento è già passato.')
           await req.payload.update({
             collection: 'prenotazioni-segreteria',
             id: p!.id,
@@ -320,7 +334,8 @@ export const PrenotazioniSegreteria: CollectionConfig = {
 
         const stato = data.stato ?? prima?.stato
         const inizio = new Date(data.inizio ?? prima?.inizio)
-        const spostata = prima && data.inizio && inizio.getTime() !== new Date(prima.inizio).getTime()
+        const spostata =
+          prima && data.inizio && inizio.getTime() !== new Date(prima.inizio).getTime()
         const riattivata = prima?.stato === 'annullata' && stato !== 'annullata'
 
         if (stato === 'annullata') {

@@ -1,15 +1,7 @@
 'use client'
 
-import { useMemo, useState } from 'react'
-import {
-  FieldError,
-  Input,
-  Label,
-  Radio,
-  RadioGroup,
-  Text,
-  TextField,
-} from 'react-aria-components'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { FieldError, Input, Label, Radio, RadioGroup, Text, TextField } from 'react-aria-components'
 
 import type { GiornoDisponibile } from '@/lib/sportello'
 import { etichettaAppuntamento, etichettaGiorno } from '@/lib/sportello-orari'
@@ -80,6 +72,14 @@ export function PrenotazioneSportello({
   const [fatto, setFatto] = useState<AppuntamentoSportello | null>(null)
   const [annuncio, setAnnuncio] = useState<string | null>(null)
 
+  const conferma = useRef<HTMLDivElement>(null)
+  // Dopo la conferma la pagina si accorcia: si torna al messaggio, con il fuoco sopra
+  useEffect(() => {
+    if (!fatto) return
+    conferma.current?.scrollIntoView({ block: 'start' })
+    conferma.current?.focus()
+  }, [fatto])
+
   const anonimo = utente.tipo === 'anonimo'
   const giorno = useMemo(() => giorni.find((g) => g.data === data) ?? null, [giorni, data])
   const nomeDocumento = documenti.find((d) => d.id === documento)?.nome
@@ -128,7 +128,8 @@ export function PrenotazioneSportello({
       }
       const { doc } = (await r.json()) as { doc: AppuntamentoSportello }
       setFatto(doc)
-      if (!anonimo) setAppuntamenti((a) => [...a, doc].sort((x, y) => x.inizio.localeCompare(y.inizio)))
+      if (!anonimo)
+        setAppuntamenti((a) => [...a, doc].sort((x, y) => x.inizio.localeCompare(y.inizio)))
       void aggiornaDisponibilita()
     } catch (e) {
       setErrore((e as Error).message)
@@ -206,7 +207,9 @@ export function PrenotazioneSportello({
         {elencoAppuntamenti}
         {avvisi}
         <Alert tone="warning" title="Prenotazioni sospese">
-          <p>Al momento non si possono prenotare nuovi appuntamenti. Riprova nei prossimi giorni.</p>
+          <p>
+            Al momento non si possono prenotare nuovi appuntamenti. Riprova nei prossimi giorni.
+          </p>
         </Alert>
       </div>
     )
@@ -214,11 +217,11 @@ export function PrenotazioneSportello({
 
   if (fatto) {
     return (
-      <div className={styles.prenotazione}>
+      <div className={`${styles.prenotazione} ${styles.passo}`} ref={conferma} tabIndex={-1}>
         <Alert tone="success" title="Appuntamento confermato" live>
           <p>
-            <strong>{fatto.documento}</strong>, {etichettaAppuntamento(fatto.inizio)}, in
-            segreteria didattica (Via Accademia Albertina 6).
+            <strong>{fatto.documento}</strong>, {etichettaAppuntamento(fatto.inizio)}, in segreteria
+            didattica (Via Accademia Albertina 6).
           </p>
           <p>
             Ti abbiamo mandato un’email di conferma con il link per disdire. Porta un documento
@@ -259,7 +262,9 @@ export function PrenotazioneSportello({
           <div className={styles.chi}>
             <div className={styles.riquadro}>
               <p className={styles.etichettaRiquadro}>Studenti iscritti</p>
-              <p>Accedi con l’account istituzionale (12345t@ o 12345b@): i tuoi dati sono già pronti.</p>
+              <p>
+                Accedi con l’account istituzionale (12345t@ o 12345b@): i tuoi dati sono già pronti.
+              </p>
               <a className={classiPulsante.primary} href={accessoHref}>
                 Accedi con Google
               </a>
@@ -267,8 +272,8 @@ export function PrenotazioneSportello({
             <div className={styles.riquadro}>
               <p className={styles.etichettaRiquadro}>Senza account istituzionale</p>
               <p>
-                Per esempio se sei già diplomato: scegli qui sotto e lascia i tuoi dati. Ti
-                mandiamo un codice via email per confermare.
+                Per esempio se sei già diplomato: scegli qui sotto e lascia i tuoi dati. Ti mandiamo
+                un codice via email per confermare.
               </p>
             </div>
           </div>
@@ -477,10 +482,7 @@ export function PrenotazioneSportello({
 
         {anonimo && !codiceInviatoA ? (
           <div className={styles.azioni}>
-            <Button
-              isDisabled={!pronti || !datiCompleti || inCorso}
-              onPress={inviaCodice}
-            >
+            <Button isDisabled={!pronti || !datiCompleti || inCorso} onPress={inviaCodice}>
               Ricevi il codice via email
             </Button>
             {!pronti && <p className={styles.nota}>Scegli documento, giorno e ora.</p>}

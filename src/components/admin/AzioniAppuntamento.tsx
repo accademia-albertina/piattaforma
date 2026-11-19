@@ -51,7 +51,9 @@ export default function AzioniAppuntamento({ id, stato, etichette, passato = fal
   if (stato !== 'prenotata') {
     return (
       <div className="azioni-appuntamento">
-        <span className={`stato-appuntamento stato-appuntamento--${stato}`}>{etichette[stato]}</span>
+        <span className={`stato-appuntamento stato-appuntamento--${stato}`}>
+          {etichette[stato]}
+        </span>
         {stato !== 'annullata' && (
           <button
             type="button"

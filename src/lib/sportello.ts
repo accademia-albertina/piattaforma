@@ -35,7 +35,10 @@ const PREDEFINITE: Impostazioni = {
   documenti: DOCUMENTI_PREDEFINITI.map((nome, i) => ({ id: `doc-${i + 1}`, nome, attivo: true })),
 }
 
-export async function leggiImpostazioni(payload: Payload, req?: PayloadRequest): Promise<Impostazioni> {
+export async function leggiImpostazioni(
+  payload: Payload,
+  req?: PayloadRequest,
+): Promise<Impostazioni> {
   const g = (await payload.findGlobal({
     slug: 'sportello-segreteria',
     depth: 0,
@@ -250,3 +253,6 @@ export const sito = () =>
 
 export const linkDisdetta = (p: Pick<PrenotazioneSegreteria, 'id'>, codice: string) =>
   `${sito()}/prenotazioni-segreteria/disdici?p=${p.id}&token=${encodeURIComponent(codice)}`
+
+/** Istante attuale in millisecondi (funzione a parte: i componenti server non chiamano Date.now). */
+export const adesso = () => Date.now()

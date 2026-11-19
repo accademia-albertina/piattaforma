@@ -32,6 +32,7 @@ import { default as default_77f2bc3e7bebc101d9ad750066bcad6f } from '@/component
 import { default as default_bc1cceea7e7b9866bf1c762fd5f1e599 } from '../../../components/admin/AgendaSportello'
 import { default as default_7a070dc6a143a6ef7dd16500c7e710c5 } from '../../../components/admin/GestionePassword'
 import { default as default_b1dbfc573c348c3ec517346e4881ddb8 } from '../../../components/admin/ApriElementoRegistro'
+import { EtichettaSportello as EtichettaSportello_08ffe8ee68a77c77a0df4de84c2ae153 } from '../../../components/admin/EtichettaSportello'
 import { default as default_ff2b3aef4ce7bf470d100ee3d53f4ed9 } from '../../../components/admin/Avatar'
 import { default as default_2ebdce80c249808f25895cbe083599fa } from '../../../components/admin/PiedeMenu'
 import { default as default_dfe4008080d895d460898c3a6155e9ba } from '../../../components/admin/Icon'
@@ -83,6 +84,7 @@ export const importMap = {
   "/components/admin/AgendaSportello#default": default_bc1cceea7e7b9866bf1c762fd5f1e599,
   "/components/admin/GestionePassword#default": default_7a070dc6a143a6ef7dd16500c7e710c5,
   "/components/admin/ApriElementoRegistro#default": default_b1dbfc573c348c3ec517346e4881ddb8,
+  "/components/admin/EtichettaSportello#EtichettaSportello": EtichettaSportello_08ffe8ee68a77c77a0df4de84c2ae153,
   "/components/admin/Avatar#default": default_ff2b3aef4ce7bf470d100ee3d53f4ed9,
   "/components/admin/PiedeMenu#default": default_2ebdce80c249808f25895cbe083599fa,
   "/components/admin/Icon#default": default_dfe4008080d895d460898c3a6155e9ba,

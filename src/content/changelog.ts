@@ -27,6 +27,29 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.43.0',
+    data: '2026-11-19',
+    titolo: 'Prenotazioni in segreteria',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Prenota in segreteria (/prenotazioni-segreteria), al posto di Amelia: gli studenti entrano con Google, chi non ha più l’account conferma con un codice via email. Una prenotazione per documento, disdetta dal sito o dal link nell’email.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Pannello della segreteria: appuntamenti del giorno da stampare, “Ritirato”, “Non presentato” e annullamento con email automatica.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Orari e documenti dello sportello: giorni, turni, documenti e chiusure (anche di poche ore). Una chiusura annulla le prenotazioni di quei turni e avvisa chi aveva prenotato. Festività già escluse.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.42.0',
     data: '2026-11-18',
     titolo: 'Account di prova e password nel pannello',

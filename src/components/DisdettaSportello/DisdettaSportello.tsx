@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
 
 import { Alert } from '../Alert/Alert'
@@ -44,7 +45,7 @@ export function DisdettaSportello({ id, token, documento, quando }: DisdettaSpor
       <Alert tone="success" title="Appuntamento disdetto" live>
         <p>
           Il turno è di nuovo libero. Se ti serve ancora il documento{' '}
-          <a href="/prenotazioni-segreteria">prenota un altro giorno</a>.
+          <Link href="/prenotazioni-segreteria">prenota un altro giorno</Link>.
         </p>
       </Alert>
     )
@@ -64,9 +65,9 @@ export function DisdettaSportello({ id, token, documento, quando }: DisdettaSpor
         <Button isDisabled={stato === 'inCorso'} onPress={disdici}>
           Sì, disdici
         </Button>
-        <a className={classiPulsante.ghost} href="/prenotazioni-segreteria">
+        <Link className={classiPulsante.ghost} href="/prenotazioni-segreteria">
           No, tienilo
-        </a>
+        </Link>
       </div>
     </>
   )

@@ -3,6 +3,7 @@ import type { GlobalConfig, TextFieldSingleValidation } from 'payload'
 
 import { nascostaA } from '@/access/pannello'
 import { gestisceSportello } from '@/access/sportello'
+import { rowLabel } from '@/fields/rowLabel'
 import { GIORNI_SETTIMANA, ORA_VALIDA } from '@/lib/sportello-orari'
 
 const ora: TextFieldSingleValidation = (v) =>
@@ -132,7 +133,10 @@ export const SportelloSegreteria: GlobalConfig = {
                   min: 1,
                   max: 180,
                   defaultValue: 60,
-                  admin: { width: '33%', description: 'Quanti giorni avanti si vede il calendario.' },
+                  admin: {
+                    width: '33%',
+                    description: 'Quanti giorni avanti si vede il calendario.',
+                  },
                 },
               ],
             },
@@ -146,8 +150,15 @@ export const SportelloSegreteria: GlobalConfig = {
                 { giorno: '5', dalle: '10:00', alle: '12:00' },
               ],
               admin: {
-                description: 'Una riga per ogni giorno di apertura (anche due righe per lo stesso giorno, es. mattina e pomeriggio).',
-                initCollapsed: false,
+                description:
+                  'Una riga per ogni giorno di apertura (anche due righe per lo stesso giorno, es. mattina e pomeriggio).',
+                initCollapsed: true,
+                components: {
+                  RowLabel: {
+                    path: '/components/admin/EtichettaSportello#EtichettaSportello',
+                    clientProps: { tipo: 'orario' },
+                  },
+                },
               },
               fields: [
                 {
@@ -175,6 +186,13 @@ export const SportelloSegreteria: GlobalConfig = {
               admin: {
                 description:
                   'Giorni straordinari, per esempio quando i turni normali sono tutti pieni.',
+                initCollapsed: true,
+                components: {
+                  RowLabel: {
+                    path: '/components/admin/EtichettaSportello#EtichettaSportello',
+                    clientProps: { tipo: 'apertura' },
+                  },
+                },
               },
               fields: [
                 {
@@ -210,6 +228,13 @@ export const SportelloSegreteria: GlobalConfig = {
               admin: {
                 description:
                   'Nessuno può prenotare in questi giorni. Le festività nazionali e San Giovanni (24 giugno) sono già escluse. Per un solo giorno lascia vuoto “Fino al”; per chiudere solo alcune ore compila “Dalle ore” e “Alle ore”. Quando salvi, le prenotazioni già fatte in quei turni vengono annullate e chi aveva prenotato riceve un’email.',
+                initCollapsed: true,
+                components: {
+                  RowLabel: {
+                    path: '/components/admin/EtichettaSportello#EtichettaSportello',
+                    clientProps: { tipo: 'chiusura' },
+                  },
+                },
               },
               fields: [
                 {
@@ -258,6 +283,8 @@ export const SportelloSegreteria: GlobalConfig = {
               admin: {
                 description:
                   'Cosa si può prenotare, nell’ordine in cui compare sul sito. Togli “Prenotabile” invece di eliminare un documento.',
+                initCollapsed: true,
+                ...rowLabel('nome', 'Documento'),
               },
               fields: [
                 {

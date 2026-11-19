@@ -28,6 +28,7 @@ import * as migration_20261118_141711_home_modificabile from './20261118_141711_
 import * as migration_20261118_145945_guida_studenti from './20261118_145945_guida_studenti'
 import * as migration_20261118_190532_blocchi_mappa_fascia from './20261118_190532_blocchi_mappa_fascia'
 import * as migration_20261118_203542_account_di_prova from './20261118_203542_account_di_prova'
+import * as migration_20261118_235858_prenotazioni_segreteria from './20261118_235858_prenotazioni_segreteria'
 
 export const migrations = [
   {
@@ -179,5 +180,10 @@ export const migrations = [
     up: migration_20261118_203542_account_di_prova.up,
     down: migration_20261118_203542_account_di_prova.down,
     name: '20261118_203542_account_di_prova',
+  },
+  {
+    up: migration_20261118_235858_prenotazioni_segreteria.up,
+    down: migration_20261118_235858_prenotazioni_segreteria.down,
+    name: '20261118_235858_prenotazioni_segreteria',
   },
 ]

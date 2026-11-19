@@ -36,9 +36,7 @@ export function messaggioConferma(p: Dati, codiceDisdetta?: string): Messaggio |
       pulsante: codiceDisdetta
         ? { testo: 'Disdici l’appuntamento', url: linkDisdetta(p, codiceDisdetta) }
         : undefined,
-      note: [
-        'Se non puoi venire, disdici: il turno torna libero per un altro studente.',
-      ],
+      note: ['Se non puoi venire, disdici: il turno torna libero per un altro studente.'],
     },
   }
 }
