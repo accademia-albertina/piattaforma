@@ -47,7 +47,7 @@ export const CHANGELOG: Versione[] = [
           'Il blocco Documento mostra l’anteprima del PDF anche su telefono. Le foto dei blocchi Immagine e Galleria si ingrandiscono col clic.',
       },
     ],
-    pr: [],
+    pr: [100],
   },
   {
     versione: '0.42.0',
