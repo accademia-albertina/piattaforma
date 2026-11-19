@@ -52,3 +52,6 @@ node_modules/
 # Storybook
 /storybook-static
 AGENTS.md
+
+# PDF.js: copiato da node_modules (scripts/pdfjs-risorse.mjs)
+/public/pdfjs/

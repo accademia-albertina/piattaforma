@@ -10,8 +10,14 @@
   border-bottom: 1px solid var(--color-border);
 }
 
+.riga {
+  display: flex;
+}
+
 .link {
   display: flex;
+  flex: 1;
+  min-width: 0;
   flex-wrap: wrap;
   align-items: baseline;
   gap: var(--space-1) var(--space-3);
@@ -59,4 +65,18 @@
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   white-space: pre-line;
+}
+
+.scarica {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--target-min);
+  color: var(--color-heading);
+}
+
+.scarica:hover {
+  background: var(--color-azzurro-100);
+  color: var(--color-heading);
 }

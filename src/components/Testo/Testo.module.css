@@ -60,3 +60,9 @@
 .tabella :where(th, td) > p {
   margin: 0;
 }
+
+/* Immagini nel testo: col clic si aprono ingrandite nel visualizzatore */
+.ingrandisci {
+  display: inline-block;
+  cursor: zoom-in;
+}

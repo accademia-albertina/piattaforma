@@ -43,6 +43,19 @@
   height: auto;
 }
 
+.ingrandisci {
+  display: block;
+  cursor: zoom-in;
+}
+
+.ingrandisci img {
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.ingrandisci:hover img {
+  opacity: 0.92;
+}
+
 .figure figcaption {
   margin-top: var(--space-2);
   color: var(--color-text-muted);
