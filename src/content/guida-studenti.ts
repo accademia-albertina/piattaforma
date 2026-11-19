@@ -56,6 +56,16 @@ export const GUIDA_STUDENTI: VoceGuidaStudenti[] = [
     ],
   },
   {
+    id: 'segreteria',
+    titolo: 'Prenotare in segreteria',
+    passi: [
+      'Per ritirare libretto, pergamena, certificati e gli altri documenti prenota un turno da “Prenota in segreteria”, in fondo alla pagina Segreteria didattica.',
+      'Scegli il documento, il giorno e l’orario, poi premi “Conferma la prenotazione”. Ti arriva un’email di conferma.',
+      'Puoi avere una sola prenotazione per documento. I tuoi appuntamenti compaiono qui, in “Appuntamenti in segreteria”: da qui, dalla pagina della prenotazione o dal link nell’email puoi disdirli.',
+      'Si prenota da due giorni prima fino a due mesi avanti: prenota tenendo conto della scadenza per cui ti serve il documento.',
+    ],
+  },
+  {
     id: 'date',
     titolo: 'Quando ci si iscrive',
     passi: [

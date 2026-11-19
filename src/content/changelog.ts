@@ -41,6 +41,20 @@ export const CHANGELOG: Versione[] = [
         testo:
           'Da telefono la barra dei giorni non esce più dallo schermo e gli appuntamenti si leggono come schede.',
       },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Stampa degli appuntamenti su carta intestata e sempre in tema chiaro, anche con il pannello scuro.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Guida: “Appuntamenti allo sportello” e “Orari, chiusure e documenti dello sportello” per la segreteria, “Prenotare in segreteria” per gli studenti.',
+      },
+      {
+        tipo: 'corretto',
+        testo: 'Account da telefono: niente più spazio bianco a destra.',
+      },
     ],
     pr: [99],
   },

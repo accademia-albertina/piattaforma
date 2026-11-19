@@ -20,6 +20,8 @@ import {
 } from '@/lib/sportello-orari'
 import type { PrenotazioneSegreteria } from '@/payload-types'
 
+import { IntestazioneStampa } from '@/components/IntestazioneStampa/IntestazioneStampa'
+
 import AzioniAppuntamento from './AzioniAppuntamento'
 import PassoPannello from './PassoPannello'
 import StampaAgenda from './StampaAgenda'
@@ -270,6 +272,7 @@ export default async function AgendaSportello({
     <>
       <PassoPannello etichetta="Appuntamenti" />
       <Gutter className={styles.agenda}>
+        <IntestazioneStampa />
         <header className={styles.intestazione}>
           <div>
             <h1>Appuntamenti allo sportello</h1>

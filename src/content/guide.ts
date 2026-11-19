@@ -257,6 +257,50 @@ export const GUIDE: Guida[] = [
     schermate: [{ id: 'appelli', didascalia: 'Un nuovo appello d’esame.' }],
   },
   {
+    id: 'sportello',
+    titolo: 'Appuntamenti allo sportello',
+    sezione: 'prenotazioni-segreteria',
+    intro:
+      'Chi viene in segreteria a ritirare un documento prenota un turno dal sito (/prenotazioni-segreteria). Qui vedi gli appuntamenti e segni chi è passato.',
+    passi: [
+      'Apri “Appuntamenti”: trovi gli appuntamenti di oggi in ordine di orario, con documento, matricola e telefono.',
+      'Scegli “Giorno”, “Settimana” o “Mese”. Le frecce portano al periodo prima o dopo, “Vai al giorno” a una data precisa. Nel mese ogni giorno mostra appuntamenti e posti (es. 23/24): toccalo per aprire l’elenco.',
+      'Quando la persona passa premi “Ritirato”, se non viene “Non presentato”. Uno stato segnato per sbaglio si toglie con “Annulla la segnatura”.',
+      '“Annulla…” disdice l’appuntamento: puoi scrivere il motivo, la persona riceve un’email.',
+      '“Stampa” stampa l’elenco senza menu né pulsanti. “Cerca una persona” trova gli appuntamenti per cognome, email o matricola.',
+    ],
+    consigli: [
+      'Per chi telefona o si presenta senza prenotazione usa “Nuovo appuntamento”.',
+      'Da telefono gli appuntamenti compaiono come schede, uno sotto l’altro.',
+    ],
+    schermate: [{ id: 'sportello', didascalia: 'Gli appuntamenti di un giorno.' }],
+  },
+  {
+    id: 'sportello-orari',
+    titolo: 'Orari, chiusure e documenti dello sportello',
+    sezione: 'sportello-segreteria',
+    intro:
+      'Da qui il sito calcola i turni prenotabili. Le modifiche valgono subito; le prenotazioni già fatte restano, tranne quelle che cadono in una chiusura.',
+    passi: [
+      'Da “Appuntamenti” premi “Orari e chiusure”, oppure apri “Orari e documenti dello sportello” dal menu.',
+      'Scheda “Orari”: durata di un turno, persone per turno, preavviso minimo (2 = si prenota al più tardi due giorni prima) e fino a quanti giorni avanti si prenota. Sotto, l’orario settimanale e le aperture in più.',
+      'Scheda “Chiusure”: aggiungi un giorno, un periodo (“Fino al”) o solo alcune ore (“Dalle ore” e “Alle ore”), con il motivo. Al salvataggio le prenotazioni in quei turni vengono annullate e le persone ricevono un’email con il motivo.',
+      'Scheda “Documenti”: cosa si può prenotare. Per toglierne uno togli la spunta “Prenotabile” invece di eliminarlo.',
+      'Premi “Salva”.',
+    ],
+    consigli: [
+      'Festività nazionali, Pasquetta e San Giovanni (24 giugno) sono già escluse: non serve aggiungerle.',
+      'Per sospendere le prenotazioni senza toccare gli orari togli la spunta “Prenotazioni aperte sul sito”.',
+    ],
+    schermate: [
+      { id: 'sportello-orari', didascalia: 'La scheda “Orari” dello sportello.' },
+      {
+        id: 'sportello-orari-2',
+        didascalia: 'La scheda “Chiusure”: ogni riga riporta giorno, ore e motivo.',
+      },
+    ],
+  },
+  {
     id: 'albo',
     titolo: 'Albo online',
     sezione: 'albo',

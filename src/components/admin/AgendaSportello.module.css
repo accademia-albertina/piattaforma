@@ -115,7 +115,7 @@
   grid-area: scelta;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .giorni {
     grid-template-areas:
       'prec succ'
@@ -205,7 +205,7 @@
   font-size: 0.8rem;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .mese td {
     height: 3.5rem;
   }
@@ -276,7 +276,7 @@
 }
 
 /* Da telefono ogni appuntamento diventa una scheda: niente tabella larga da scorrere */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .tabella thead {
     display: none;
   }
