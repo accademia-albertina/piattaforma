@@ -27,7 +27,7 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
-    versione: '0.45.0',
+    versione: '0.46.0',
     data: '2026-11-19',
     titolo: 'Avvisi di ammissione dei coordinatori',
     voci: [
@@ -48,6 +48,38 @@ export const CHANGELOG: Versione[] = [
       },
     ],
     pr: [95],
+  },
+  {
+    versione: '0.45.0',
+    data: '2026-11-19',
+    titolo: 'Appuntamenti per settimana e mese',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Appuntamenti allo sportello: oltre al giorno, vista per settimana e calendario del mese con i posti occupati.',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          'Da telefono la barra dei giorni non esce più dallo schermo e gli appuntamenti si leggono come schede.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Stampa degli appuntamenti su carta intestata e sempre in tema chiaro, anche con il pannello scuro.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Guida: “Appuntamenti allo sportello” e “Orari, chiusure e documenti dello sportello” per la segreteria, “Prenotare in segreteria” per gli studenti.',
+      },
+      {
+        tipo: 'corretto',
+        testo: 'Account da telefono: niente più spazio bianco a destra.',
+      },
+    ],
+    pr: [99],
   },
   {
     versione: '0.44.0',

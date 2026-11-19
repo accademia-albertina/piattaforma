@@ -1124,3 +1124,49 @@ body {
     outline-offset: -2px;
   }
 }
+
+/* Account: le righe di separazione delle impostazioni di Payload sono larghe 100% + 5 basi
+   e da telefono allargavano la pagina (spazio bianco a destra). Le fermo ai bordi. */
+.payload-settings::before,
+.payload-settings::after {
+  width: auto;
+  right: calc(var(--gutter-h) * -1);
+}
+
+/* Stampa: sempre in tema chiaro, anche con il pannello in tema scuro (meno inchiostro). */
+@media print {
+  html[data-theme='dark'] {
+    color-scheme: light;
+    @each $n in (0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000) {
+      --theme-elevation-#{$n}: var(--color-base-#{$n});
+    }
+    --theme-bg: var(--theme-elevation-0);
+    --theme-input-bg: var(--theme-elevation-0);
+    --theme-text: var(--theme-elevation-800);
+    --theme-border-color: var(--theme-elevation-150);
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  /* Senza menu e intestazione il contenuto prende tutta la pagina */
+  .nav,
+  .app-header,
+  .step-nav,
+  #nav-toggler,
+  .template-default__nav-toggler-wrapper,
+  .app-header__mobile-nav-toggler {
+    display: none !important;
+  }
+
+  .template-default,
+  .template-default__wrap {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

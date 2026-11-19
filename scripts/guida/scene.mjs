@@ -165,6 +165,73 @@ export const SCENE = [
     ],
   },
   {
+    id: 'sportello',
+    ruolo: 'segreteria',
+    url: async (contesto) =>
+      `/admin/collections/prenotazioni-segreteria?giorno=${await preparaSportello(contesto)}`,
+    altezza: 820,
+    segni: [
+      {
+        n: 1,
+        sel: (page) => page.locator('table').first().locator('thead, tbody tr:nth-child(-n+3)'),
+      },
+      { n: 2, sel: 'nav[aria-label="Vista"], nav[aria-label="Scegli il periodo"]' },
+      {
+        n: 3,
+        sel: (page) =>
+          page
+            .locator('table tbody tr')
+            .first()
+            .locator('.azioni-appuntamento__pulsanti button')
+            .filter({ hasNotText: 'Annulla' }),
+      },
+      {
+        n: 4,
+        sel: (page) =>
+          page.locator('table tbody tr').first().getByRole('button', { name: 'Annulla…' }),
+      },
+      { n: 5, sel: (page) => page.getByRole('button', { name: 'Stampa' }) },
+    ],
+  },
+  {
+    id: 'sportello-orari',
+    ruolo: 'segreteria',
+    url: '/admin/globals/sportello-segreteria',
+    altezza: 820,
+    // Payload ricorda l'ultima scheda aperta: si riparte da “Orari”
+    prima: apriScheda('Orari'),
+    segni: [
+      { n: 2, sel: '#field-durataTurno, #field-giorniPrenotabili, #field-orari, #field-aperture' },
+      { n: 3, sel: scheda('Chiusure') },
+      { n: 4, sel: scheda('Documenti') },
+      { n: 5, sel: '#action-save' },
+    ],
+  },
+  {
+    id: 'sportello-orari-2',
+    ruolo: 'segreteria',
+    url: '/admin/globals/sportello-segreteria',
+    altezza: 820,
+    // Righe chiuse: si leggono le etichette (giorno, ore, motivo) una sotto l'altra
+    prima: async (page) => {
+      await apriScheda('Chiusure')(page)
+      const comprimi = page
+        .locator('#field-chiusure')
+        .getByRole('button', { name: 'Comprimi tutto' })
+      if (await comprimi.count()) await comprimi.first().click()
+      await page.waitForTimeout(300)
+    },
+    segni: [
+      {
+        n: 3,
+        sel: (page) =>
+          page.locator(
+            '#field-chiusure .array-field__header, #field-chiusure .array-field__draggable-rows > *:nth-child(-n+6)',
+          ),
+      },
+    ],
+  },
+  {
     id: 'albo',
     ruolo: 'amministrativo',
     url: '/admin/collections/albo/create',
@@ -230,6 +297,64 @@ export const SCENE = [
     ],
   },
 ]
+
+/* ---------- Sportello della segreteria ---------- */
+
+/**
+ * Qualche appuntamento nel primo giorno di apertura, per la schermata dell'elenco, e una
+ * chiusura di poche ore per quella delle impostazioni. Restituisce il giorno. Non duplica.
+ */
+let sportelloPronto
+function preparaSportello({ api }) {
+  sportelloPronto ??= (async () => {
+    const imp = await api('/globals/sportello-segreteria?depth=0')
+    const { giorni: liberi } = await api('/prenotazioni-segreteria/disponibilita')
+    const g = liberi[0]
+    if (!(imp.chiusure ?? []).some((c) => c.dalle)) {
+      await api('/globals/sportello-segreteria', {
+        method: 'POST',
+        body: {
+          chiusure: [
+            ...(imp.chiusure ?? []),
+            {
+              dal: `${liberi.at(-1).data}T12:00:00.000Z`,
+              dalle: '11:00',
+              alle: '12:00',
+              motivo: 'Riunione di servizio',
+            },
+          ],
+        },
+      })
+    }
+    const persone = [
+      ['Rossi', 'Marco', '23411t', '+39 333 1234567', 'Libretto'],
+      ['Ferrero', 'Chiara', '22987b', '', 'Certificato sostitutivo di diploma'],
+      ['Zhang', 'Wei', '23102t', '+39 344 9988776', 'Iscrizione e voti per permesso di soggiorno'],
+      ['Conti', 'Luca', '', '+39 347 5551212', 'Pergamena di laurea'],
+      ['Gallo', 'Sara', '21876t', '', 'Attestato 24 CFA'],
+    ]
+    for (const [i, [cognome, nome, matricola, telefono, documento]] of persone.entries()) {
+      const t = g.turni[i * 2]
+      if (!t || t.liberi < 1) continue
+      await api('/prenotazioni-segreteria', {
+        method: 'POST',
+        body: {
+          inizio: t.inizio,
+          documento,
+          cognome,
+          nome,
+          ...(matricola ? { matricola } : {}),
+          ...(telefono ? { telefono } : {}),
+          email: matricola
+            ? `${matricola}@albertina.academy`
+            : `${nome}.${cognome}@example.com`.toLowerCase(),
+        },
+      }).catch(() => {})
+    }
+    return g.data
+  })()
+  return sportelloPronto
+}
 
 /* ---------- Guida per gli studenti (sito pubblico) ---------- */
 
