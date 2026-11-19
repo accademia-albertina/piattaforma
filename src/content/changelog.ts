@@ -47,7 +47,7 @@ export const CHANGELOG: Versione[] = [
           'Orari e documenti dello sportello: giorni, turni, documenti e chiusure (anche di poche ore). Una chiusura annulla le prenotazioni di quei turni e avvisa chi aveva prenotato. Festività già escluse.',
       },
     ],
-    pr: [],
+    pr: [98],
   },
   {
     versione: '0.42.0',
