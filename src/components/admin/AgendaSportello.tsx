@@ -13,6 +13,7 @@ import {
   festivita,
   giornoChiuso,
   giornoRoma,
+  giornoSettimana,
   istanteRoma,
   oraRoma,
   turniDelGiorno,
@@ -27,9 +28,42 @@ import styles from './AgendaSportello.module.css'
 
 const GIORNO = /^\d{4}-\d{2}-\d{2}$/
 
+type Vista = 'giorno' | 'settimana' | 'mese'
+const VISTE: { id: Vista; etichetta: string }[] = [
+  { id: 'giorno', etichetta: 'Giorno' },
+  { id: 'settimana', etichetta: 'Settimana' },
+  { id: 'mese', etichetta: 'Mese' },
+]
+const INTESTAZIONI_SETTIMANA = ['lun', 'mar', 'mer', 'gio', 'ven', 'sab', 'dom']
+
+const breve = new Intl.DateTimeFormat('it-IT', {
+  weekday: 'short',
+  day: 'numeric',
+  month: 'short',
+  timeZone: 'UTC',
+})
+const meseAnno = new Intl.DateTimeFormat('it-IT', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+})
+const utc = (g: string) => {
+  const [a, m, d] = g.split('-').map(Number)
+  return new Date(Date.UTC(a, m - 1, d))
+}
+/** "lun 16 nov" */
+const etichettaBreve = (g: string) => breve.format(utc(g)).replace(/\./g, '')
+const lunediDi = (g: string) => aggiungiGiorni(g, 1 - giornoSettimana(g))
+const primoDelMese = (g: string) => `${g.slice(0, 8)}01`
+const spostaMese = (g: string, n: number) => {
+  const d = utc(primoDelMese(g))
+  d.setUTCMonth(d.getUTCMonth() + n)
+  return d.toISOString().slice(0, 10)
+}
+
 /**
  * Elenco degli appuntamenti allo sportello (al posto dell'elenco standard della collezione):
- * un giorno alla volta, con le azioni Ritirato / Non presentato / Annulla e la stampa.
+ * per giorno, settimana o mese, con le azioni Ritirato / Non presentato / Annulla e la stampa.
  * Con la ricerca mostra gli appuntamenti di una persona.
  */
 export default async function AgendaSportello({
@@ -47,6 +81,12 @@ export default async function AgendaSportello({
   const oggi = giornoRoma(new Date())
   const q = typeof searchParams?.q === 'string' ? searchParams.q.trim() : ''
   const richiesto = typeof searchParams?.giorno === 'string' ? searchParams.giorno : ''
+  const vista: Vista =
+    searchParams?.vista === 'settimana' || searchParams?.vista === 'mese'
+      ? searchParams.vista
+      : 'giorno'
+  const url = (g: string, v: Vista = vista) =>
+    `${base}?giorno=${g}${v === 'giorno' ? '' : `&vista=${v}`}`
 
   // Giorni con turni o con appuntamenti, per scorrere avanti e indietro
   const dal = aggiungiGiorni(richiesto && GIORNO.test(richiesto) ? richiesto : oggi, -90)
@@ -76,8 +116,48 @@ export default async function AgendaSportello({
 
   const giorno =
     richiesto && GIORNO.test(richiesto) ? richiesto : utile(oggi) ? oggi : (cerca(oggi, 1) ?? oggi)
-  const precedente = cerca(giorno, -1)
-  const successivo = cerca(giorno, 1)
+  // Periodo mostrato e frecce avanti/indietro, secondo la vista
+  const periodo =
+    vista === 'settimana'
+      ? (() => {
+          const da = lunediDi(giorno)
+          const a = aggiungiGiorni(da, 6)
+          return {
+            da,
+            a,
+            precedente: aggiungiGiorni(da, -7),
+            successivo: aggiungiGiorni(da, 7),
+            etichettaPrec: 'Settimana prima',
+            etichettaSucc: 'Settimana dopo',
+          }
+        })()
+      : vista === 'mese'
+        ? (() => {
+            const da = primoDelMese(giorno)
+            const a = aggiungiGiorni(spostaMese(da, 1), -1)
+            const precedente = spostaMese(da, -1)
+            const successivo = spostaMese(da, 1)
+            return {
+              da,
+              a,
+              precedente,
+              successivo,
+              etichettaPrec: meseAnno.format(utc(precedente)),
+              etichettaSucc: meseAnno.format(utc(successivo)),
+            }
+          })()
+        : (() => {
+            const precedente = cerca(giorno, -1)
+            const successivo = cerca(giorno, 1)
+            return {
+              da: giorno,
+              a: giorno,
+              precedente,
+              successivo,
+              etichettaPrec: precedente ? etichettaBreve(precedente) : '',
+              etichettaSucc: successivo ? etichettaBreve(successivo) : '',
+            }
+          })()
 
   const where: Where = q
     ? {
@@ -89,26 +169,47 @@ export default async function AgendaSportello({
       }
     : {
         inizio: {
-          greater_than_equal: istanteRoma(giorno, '00:00').toISOString(),
-          less_than: istanteRoma(aggiungiGiorni(giorno, 1), '00:00').toISOString(),
+          greater_than_equal: istanteRoma(periodo.da, '00:00').toISOString(),
+          less_than: istanteRoma(aggiungiGiorni(periodo.a, 1), '00:00').toISOString(),
         },
       }
   const { docs } = (await payload.find({
     collection: 'prenotazioni-segreteria',
     where,
     sort: q ? '-inizio' : 'inizio',
-    limit: q ? 50 : 500,
+    limit: q ? 50 : 5000,
     depth: 0,
     overrideAccess: true,
   })) as { docs: PrenotazioneSegreteria[] }
 
-  const attivi = docs.filter((p) => p.stato !== 'annullata')
-  const annullati = docs.filter((p) => p.stato === 'annullata')
-  const turni = turniDelGiorno(giorno, imp)
-  const capienza = turni.length * Math.max(1, imp.personePerTurno || 1)
-  const festa = festivita(giorno)
-  const chiuso = festa ? { motivo: festa } : giornoChiuso(giorno, imp.chiusure ?? [])
-  const daRitirare = attivi.filter((p) => p.stato === 'prenotata').length
+  // Appuntamenti per giorno e riepilogo di ogni giorno del periodo
+  const perGiorno = new Map<string, PrenotazioneSegreteria[]>()
+  for (const p of docs) {
+    const g = giornoRoma(new Date(p.inizio))
+    perGiorno.set(g, [...(perGiorno.get(g) ?? []), p])
+  }
+  const datiGiorno = (g: string) => {
+    const tutti = perGiorno.get(g) ?? []
+    const attivi = tutti.filter((p) => p.stato !== 'annullata')
+    const turni = turniDelGiorno(g, imp)
+    const festa = festivita(g)
+    return {
+      attivi,
+      annullati: tutti.filter((p) => p.stato === 'annullata'),
+      turni,
+      capienza: turni.length * Math.max(1, imp.personePerTurno || 1),
+      chiuso: festa ? { motivo: festa } : giornoChiuso(g, imp.chiusure ?? []),
+      daRitirare: attivi.filter((p) => p.stato === 'prenotata').length,
+    }
+  }
+  const riepilogo = (d: ReturnType<typeof datiGiorno>) =>
+    d.chiuso
+      ? `Sportello chiuso${d.chiuso.motivo ? `: ${d.chiuso.motivo}` : ''}.`
+      : d.turni.length
+        ? `${d.attivi.length} appuntamenti su ${d.capienza} posti · ${d.daRitirare} da ricevere · orario ${d.turni[0]}–${oraFine(d.turni, imp.durataTurno || 5)}`
+        : 'Nessun turno in orario questo giorno.'
+  const giorniPeriodo: string[] = []
+  for (let g = periodo.da; g <= periodo.a; g = aggiungiGiorni(g, 1)) giorniPeriodo.push(g)
 
   const riga = (p: PrenotazioneSegreteria, conGiorno = false) => (
     <tr key={p.id} data-stato={p.stato}>
@@ -124,9 +225,17 @@ export default async function AgendaSportello({
           {p.email}
         </span>
       </td>
-      <td>{p.matricola || '—'}</td>
-      <td>{p.documento}</td>
-      <td className={styles.telefono}>{p.telefono || '—'}</td>
+      <td data-etichetta="Matricola" data-vuoto={!p.matricola || undefined}>
+        {p.matricola || '—'}
+      </td>
+      <td data-etichetta="Documento">{p.documento}</td>
+      <td
+        className={styles.telefono}
+        data-etichetta="Telefono"
+        data-vuoto={!p.telefono || undefined}
+      >
+        {p.telefono || '—'}
+      </td>
       <td>
         <AzioniAppuntamento
           id={p.id}
@@ -210,14 +319,29 @@ export default async function AgendaSportello({
             {docs.length ? tabella(docs, true) : <p>Nessun appuntamento trovato.</p>}
           </section>
         ) : (
-          <section aria-labelledby="giorno">
-            <nav className={styles.giorni} aria-label="Scegli il giorno">
-              {precedente ? (
-                <Link href={`${base}?giorno=${precedente}`}>← {etichettaGiorno(precedente)}</Link>
+          <section aria-labelledby="periodo">
+            <nav className={styles.viste} aria-label="Vista">
+              {VISTE.map((v) => (
+                <Link
+                  key={v.id}
+                  href={url(giorno, v.id)}
+                  aria-current={v.id === vista ? 'page' : undefined}
+                >
+                  {v.etichetta}
+                </Link>
+              ))}
+            </nav>
+
+            <nav className={styles.giorni} aria-label="Scegli il periodo">
+              {periodo.precedente ? (
+                <Link className={styles.precedente} href={url(periodo.precedente)}>
+                  ← {periodo.etichettaPrec}
+                </Link>
               ) : (
-                <span />
+                <span className={styles.precedente} />
               )}
               <form action={base} className={styles.sceltaGiorno}>
+                {vista !== 'giorno' && <input type="hidden" name="vista" value={vista} />}
                 <label htmlFor="giorno-agenda" className="visually-hidden">
                   Vai al giorno
                 </label>
@@ -225,34 +349,140 @@ export default async function AgendaSportello({
                 <button type="submit" className="btn btn--style-secondary btn--size-small">
                   Vai
                 </button>
-                {giorno !== oggi && <Link href={`${base}?giorno=${oggi}`}>Oggi</Link>}
+                {!giorniPeriodo.includes(oggi) && <Link href={url(oggi)}>Oggi</Link>}
               </form>
-              {successivo ? (
-                <Link href={`${base}?giorno=${successivo}`}>{etichettaGiorno(successivo)} →</Link>
+              {periodo.successivo ? (
+                <Link className={styles.successivo} href={url(periodo.successivo)}>
+                  {periodo.etichettaSucc} →
+                </Link>
               ) : (
-                <span />
+                <span className={styles.successivo} />
               )}
             </nav>
 
-            <h2 id="giorno" className={styles.titoloGiorno}>
-              {etichettaGiorno(giorno)}
-              {giorno === oggi && <span className={styles.oggi}>Oggi</span>}
-            </h2>
-            <p className={styles.riepilogo}>
-              {chiuso
-                ? `Sportello chiuso${chiuso.motivo ? `: ${chiuso.motivo}` : ''}.`
-                : turni.length
-                  ? `${attivi.length} appuntamenti su ${capienza} posti · ${daRitirare} da ricevere · orario ${turni[0]}–${oraFine(turni, imp.durataTurno || 5)}`
-                  : 'Nessun turno in orario questo giorno.'}
-            </p>
+            {vista === 'giorno' &&
+              (() => {
+                const d = datiGiorno(giorno)
+                return (
+                  <>
+                    <h2 id="periodo" className={styles.titoloGiorno}>
+                      {etichettaGiorno(giorno)}
+                      {giorno === oggi && <span className={styles.oggi}>Oggi</span>}
+                    </h2>
+                    <p className={styles.riepilogo}>{riepilogo(d)}</p>
+                    {d.attivi.length ? (
+                      tabella(d.attivi)
+                    ) : (
+                      <p className={styles.vuoto}>Nessun appuntamento.</p>
+                    )}
+                    {d.annullati.length > 0 && (
+                      <details className={styles.annullati}>
+                        <summary>Annullati ({d.annullati.length})</summary>
+                        {tabella(d.annullati)}
+                      </details>
+                    )}
+                  </>
+                )
+              })()}
 
-            {attivi.length ? tabella(attivi) : <p className={styles.vuoto}>Nessun appuntamento.</p>}
+            {vista === 'settimana' && (
+              <>
+                <h2 id="periodo" className={styles.titoloGiorno}>
+                  Settimana dal {etichettaBreve(periodo.da)} al {etichettaBreve(periodo.a)}
+                </h2>
+                <p className={styles.riepilogo}>
+                  {docs.filter((p) => p.stato !== 'annullata').length} appuntamenti in settimana
+                </p>
+                {giorniPeriodo
+                  .filter((g) => (perGiorno.get(g)?.length ?? 0) > 0 || datiGiorno(g).turni.length)
+                  .map((g) => {
+                    const d = datiGiorno(g)
+                    return (
+                      <section key={g} className={styles.giornoSettimana}>
+                        <h3>
+                          <Link href={url(g, 'giorno')}>{etichettaGiorno(g)}</Link>
+                          {g === oggi && <span className={styles.oggi}>Oggi</span>}
+                        </h3>
+                        <p className={styles.riepilogo}>{riepilogo(d)}</p>
+                        {d.attivi.length ? (
+                          tabella(d.attivi)
+                        ) : (
+                          <p className={styles.vuoto}>Nessun appuntamento.</p>
+                        )}
+                      </section>
+                    )
+                  })}
+                {giorniPeriodo.every(
+                  (g) => !(perGiorno.get(g)?.length ?? 0) && !datiGiorno(g).turni.length,
+                ) && <p className={styles.vuoto}>Sportello chiuso tutta la settimana.</p>}
+              </>
+            )}
 
-            {annullati.length > 0 && (
-              <details className={styles.annullati}>
-                <summary>Annullati ({annullati.length})</summary>
-                {tabella(annullati)}
-              </details>
+            {vista === 'mese' && (
+              <>
+                <h2 id="periodo" className={styles.titoloGiorno}>
+                  {meseAnno.format(utc(periodo.da))}
+                </h2>
+                <p className={styles.riepilogo}>
+                  {docs.filter((p) => p.stato !== 'annullata').length} appuntamenti nel mese. Tocca
+                  un giorno per vedere l’elenco.
+                </p>
+                <table className={styles.mese}>
+                  <thead>
+                    <tr>
+                      {INTESTAZIONI_SETTIMANA.map((n) => (
+                        <th key={n} scope="col">
+                          {n}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Array.from(
+                      {
+                        length: Math.ceil(
+                          (giornoSettimana(periodo.da) - 1 + giorniPeriodo.length) / 7,
+                        ),
+                      },
+                      (_, r) => (
+                        <tr key={r}>
+                          {Array.from({ length: 7 }, (_, c) => {
+                            const g = aggiungiGiorni(lunediDi(periodo.da), r * 7 + c)
+                            if (g < periodo.da || g > periodo.a) return <td key={c} />
+                            const d = datiGiorno(g)
+                            const pieno = d.capienza > 0 && d.attivi.length >= d.capienza
+                            return (
+                              <td
+                                key={c}
+                                data-oggi={g === oggi || undefined}
+                                data-chiuso={(!d.turni.length && !d.attivi.length) || undefined}
+                              >
+                                <Link
+                                  href={url(g, 'giorno')}
+                                  aria-label={`${etichettaGiorno(g)}: ${riepilogo(d)}`}
+                                >
+                                  <span className={styles.numero}>{Number(g.slice(8))}</span>
+                                  {d.chiuso ? (
+                                    <span className={styles.conteggio}>chiuso</span>
+                                  ) : d.turni.length || d.attivi.length ? (
+                                    <span
+                                      className={styles.conteggio}
+                                      data-pieno={pieno || undefined}
+                                    >
+                                      {d.attivi.length}
+                                      <span className={styles.capienza}>/{d.capienza}</span>
+                                    </span>
+                                  ) : null}
+                                </Link>
+                              </td>
+                            )
+                          })}
+                        </tr>
+                      ),
+                    )}
+                  </tbody>
+                </table>
+              </>
             )}
           </section>
         )}

@@ -68,17 +68,160 @@
   margin: 0;
 }
 
+.viste {
+  display: inline-flex;
+  margin-block-end: calc(var(--base) / 2);
+  border: 1px solid var(--theme-elevation-250);
+}
+
+.viste a {
+  padding: 0.35rem 0.9rem;
+  color: var(--theme-text);
+  text-decoration: none;
+}
+
+.viste a + a {
+  border-inline-start: 1px solid var(--theme-elevation-250);
+}
+
+.viste a[aria-current='page'] {
+  background: var(--theme-text);
+  color: var(--theme-bg);
+  font-weight: 600;
+}
+
+/* Frecce e scelta del giorno: su una riga da desktop, su due righe da telefono */
 .giorni {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: var(--base);
+  grid-template-areas: 'prec scelta succ';
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: calc(var(--base) / 2) var(--base);
   align-items: center;
   padding: calc(var(--base) / 2) 0;
   border-block: 1px solid var(--theme-elevation-150);
 }
 
-.giorni > a:last-child {
+.precedente {
+  grid-area: prec;
+}
+
+.successivo {
+  grid-area: succ;
   justify-self: end;
+  text-align: end;
+}
+
+.giorni .sceltaGiorno {
+  grid-area: scelta;
+}
+
+@media (max-width: 768px) {
+  .giorni {
+    grid-template-areas:
+      'prec succ'
+      'scelta scelta';
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .giorni .sceltaGiorno input {
+    min-width: 0;
+  }
+}
+
+.giornoSettimana {
+  margin-block-start: calc(var(--base) * 1.5);
+}
+
+.giornoSettimana h3 {
+  margin: 0 0 calc(var(--base) / 4);
+  font-size: 1.15rem;
+}
+
+.giornoSettimana h3::first-letter {
+  text-transform: uppercase;
+}
+
+.mese {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.mese th {
+  padding: calc(var(--base) / 4);
+  color: var(--theme-elevation-700);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: start;
+}
+
+.mese td {
+  height: 5rem;
+  padding: 0;
+  border: 1px solid var(--theme-elevation-150);
+  vertical-align: top;
+}
+
+.mese td a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  height: 100%;
+  padding: calc(var(--base) / 3);
+  color: var(--theme-text);
+  text-decoration: none;
+}
+
+.mese td a:hover,
+.mese td a:focus-visible {
+  background: var(--theme-elevation-50);
+}
+
+.mese td[data-chiuso] {
+  background: var(--theme-elevation-50);
+  color: var(--theme-elevation-600);
+}
+
+.mese td[data-oggi] {
+  outline: 2px solid var(--theme-text);
+  outline-offset: -2px;
+}
+
+.numero {
+  font-weight: 600;
+}
+
+.conteggio {
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.conteggio[data-pieno] {
+  font-weight: 700;
+}
+
+.capienza {
+  color: var(--theme-elevation-600);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .mese td {
+    height: 3.5rem;
+  }
+
+  .mese td a {
+    padding: 0.25rem;
+  }
+
+  .conteggio {
+    font-size: 0.95rem;
+  }
+
+  .capienza {
+    display: block;
+    font-size: 0.7rem;
+  }
 }
 
 .titoloGiorno {
@@ -130,6 +273,43 @@
 .tabella tr[data-stato='ritirata'] td,
 .tabella tr[data-stato='assente'] td {
   background: var(--theme-elevation-50);
+}
+
+/* Da telefono ogni appuntamento diventa una scheda: niente tabella larga da scorrere */
+@media (max-width: 768px) {
+  .tabella thead {
+    display: none;
+  }
+
+  .tabella,
+  .tabella tbody,
+  .tabella tr,
+  .tabella td {
+    display: block;
+  }
+
+  .tabella tr {
+    padding-block: calc(var(--base) / 2);
+    border-block-end: 1px solid var(--theme-elevation-150);
+  }
+
+  .tabella td {
+    padding: 0.15rem 0;
+    border: 0;
+  }
+
+  .tabella td[data-etichetta]::before {
+    content: attr(data-etichetta) ': ';
+    color: var(--theme-elevation-600);
+  }
+
+  .tabella td[data-vuoto] {
+    display: none;
+  }
+
+  .tabella td:last-child {
+    padding-block-start: calc(var(--base) / 3);
+  }
 }
 
 .ora {
@@ -224,6 +404,7 @@
   :global(.step-nav),
   .azioniPagina,
   .cerca,
+  .viste,
   .giorni,
   .annullati,
   .intestazione p,

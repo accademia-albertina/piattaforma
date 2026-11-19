@@ -27,6 +27,24 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.44.0',
+    data: '2026-11-19',
+    titolo: 'Appuntamenti per settimana e mese',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Appuntamenti allo sportello: oltre al giorno, vista per settimana e calendario del mese con i posti occupati.',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          'Da telefono la barra dei giorni non esce più dallo schermo e gli appuntamenti si leggono come schede.',
+      },
+    ],
+    pr: [],
+  },
+  {
     versione: '0.43.0',
     data: '2026-11-19',
     titolo: 'Prenotazioni in segreteria',
