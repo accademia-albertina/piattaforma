@@ -266,12 +266,12 @@ export default async function HomePage() {
                     <dd>180 CFA</dd>
                   </div>
                   <div>
-                    <dt>Laurea magistrale</dt>
+                    <dt>Laurea Magistrale</dt>
                     <dd>120 CFA</dd>
                   </div>
                 </dl>
                 <Link href="/scuole" className={styles.introLink}>
-                  Come si arriva alla laurea <ArrowRight size={18} strokeWidth={1.5} aria-hidden />
+                  Come si arriva alla Laurea <ArrowRight size={18} strokeWidth={1.5} aria-hidden />
                 </Link>
               </li>
               {scuole.map((s) => {

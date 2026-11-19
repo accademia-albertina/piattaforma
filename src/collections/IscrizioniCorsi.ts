@@ -84,7 +84,7 @@ export const IscrizioniCorsi: CollectionConfig = {
         if (!ufficio) {
           if (!corso.livelli?.includes(dati.livello)) {
             return rifiuta(
-              `Questo corso non è del ${LIVELLO_LABELS[dati.livello].toLowerCase()}: non puoi iscriverti.`,
+              `Questo corso non è della ${LIVELLO_LABELS[dati.livello]}: non puoi iscriverti.`,
             )
           }
           const { stato } = await iscrizioniDelCorso(req.payload, corso, req)

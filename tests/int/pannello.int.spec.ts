@@ -63,8 +63,13 @@ describe('Pannello: cosa vede ogni ruolo', () => {
       'iscrizioni-corsi',
       'appelli',
       'iscrizioni-esami',
+      // Sportello: solo la segreteria (e l'admin)
+      'prenotazioni-segreteria',
+      'sportello-segreteria',
       'changelog',
     ])
+    expect(visibili(['vicedirezione'])).not.toContain('prenotazioni-segreteria')
+    expect(visibili(['docente'])).not.toContain('sportello-segreteria')
     expect(visibili(['vicedirezione'])).not.toContain('users')
     expect(visibili(['vicedirezione'])).not.toContain('navigazione')
     expect(visibili(['vicedirezione'])).not.toContain('pubblicazioni')

@@ -29,7 +29,8 @@ export default function PrimaDelLogin({ searchParams }: Props) {
   const hrefGoogle = torna
     ? `/api/users/google?dopo=${encodeURIComponent(torna)}`
     : '/api/users/google'
-  // Con Google attivo il modulo con la password è nascosto: resta solo per gli admin, in emergenza
+  // Con Google attivo il modulo con la password è nascosto: resta per gli admin, in emergenza,
+  // e per gli account di prova
   const conPassword = !google || searchParams?.password === '1'
   return (
     <div className={`prima-del-login${conPassword ? '' : ' prima-del-login--solo-google'}`}>
@@ -70,14 +71,14 @@ export default function PrimaDelLogin({ searchParams }: Props) {
           </a>
           {conPassword ? (
             <p className="prima-del-login__oppure">
-              Accesso di emergenza con email e password, solo per gli amministratori.
+              Accesso con email e password, solo per gli amministratori e gli account di prova.
             </p>
           ) : (
             <Link
               className="prima-del-login__emergenza"
               href={`/admin/login?password=1${torna ? `&redirect=${encodeURIComponent(torna)}` : ''}`}
             >
-              Accesso di emergenza (solo amministratori)
+              Accesso con password (amministratori e account di prova)
             </Link>
           )}
         </>

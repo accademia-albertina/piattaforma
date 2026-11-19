@@ -12,7 +12,7 @@ const meta = {
       {
         id: 'biennio',
         label: 'Biennio specialistico',
-        contenuto: <p>Laurea magistrale.</p>,
+        contenuto: <p>Laurea Magistrale.</p>,
       },
     ],
   },

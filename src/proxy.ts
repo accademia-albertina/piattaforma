@@ -44,7 +44,8 @@ export const config = {
   // Home diventa una lettera su fondo colorato. Escluse anche le immagini (_next/image,
   // _next/static, file media): l'ottimizzatore di Next le scarica dal server stesso senza
   // password, e con il 401 le immagini non comparivano. Sono file pubblici, nessun dato riservato.
+  // Escluse anche le risorse di PDF.js (worker, font): le scarica il worker del visualizzatore.
   matcher: [
-    '/((?!salute$|_next/static/|_next/image|api/media/file/|pannello/|brand/|icon\\.png|apple-icon\\.png|apple-touch-icon|favicon\\.ico|opengraph-image).*)',
+    '/((?!salute$|_next/static/|_next/image|api/media/file/|pdfjs/|pannello/|brand/|icon\\.png|apple-icon\\.png|apple-touch-icon|favicon\\.ico|opengraph-image).*)',
   ],
 }

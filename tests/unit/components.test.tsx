@@ -173,7 +173,7 @@ describe('componenti accessibili', () => {
       />,
     )
     expect(screen.getByRole('heading', { name: 'Allegati' })).toBeTruthy()
-    expect(screen.getByRole('link', { name: /Bando/ }).getAttribute('href')).toBe(
+    expect(screen.getByRole('link', { name: /^Bando/ }).getAttribute('href')).toBe(
       '/media/bando.pdf',
     )
     expect(await axeViolations(container)).toEqual([])

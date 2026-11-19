@@ -339,7 +339,7 @@ const ACCADEMIA: TestoPdf = {
           titolo: 'Il sito',
           html: `<p>Il sito è uno strumento necessario: consultalo spesso. Qui trovi piani di studio, tasse, avvisi, esami e tutto quello che ti serve.</p>
 <ul>
-<li><strong>Didattica</strong>: <a href="/didattica/piani-di-studio">piani di studio</a>, <a href="/corsi">corsi</a> con i rispettivi docenti, <a href="/calendari">orari e calendari</a> delle lezioni (con le aule), degli esami, delle tesi e dell’anno accademico.</li>
+<li><strong>Didattica</strong>: <a href="/scuole">scuole e piani di studio</a>, <a href="/corsi">corsi</a> con i rispettivi docenti, <a href="/calendari">orari e calendari</a> delle lezioni (con le aule), degli esami, delle tesi e dell’anno accademico.</li>
 <li><strong>Studente</strong>: <a href="/studente/modulistica">modulistica</a>, <a href="/studente/tasse">tasse</a>, <a href="/studente/segreteria-didattica">Segreteria Didattica</a> con gli orari e le richieste dei certificati, <a href="/studente/stage-tirocinio">stage e tirocinio</a> con il riconoscimento dei crediti.</li>
 <li><strong><a href="/avvisi">Avvisi</a></strong>: una delle sezioni più importanti, da guardare ogni giorno. Orari delle lezioni e loro variazioni, convocazioni, esami, tasse, scadenze, bandi: ogni informazione passa da qui.</li>
 <li><strong><a href="/albo">Albo online</a></strong>: i bandi attivi, in corso e scaduti.</li>

@@ -8,6 +8,7 @@ import {
 } from '@/lib/albo'
 import type { AttoAlbo as Atto } from '@/payload-types'
 import { formatData } from '@/utilities/format'
+import { NUOVA_SCHEDA, apreNuovaScheda, attributiFile } from '@/utilities/pdf'
 
 import styles from './albo.module.css'
 
@@ -32,6 +33,8 @@ export function AttoAlbo({
       ? hrefDocumento(documenti[0])
       : null
   const formatoUnico = unico ? formatoDocumento(unico) : null
+  const fileUnico =
+    unico && documenti[0].file && typeof documenti[0].file === 'object' ? documenti[0].file : null
   const aperto = inCorso(atto.scadenza)
   const etichetta = conSezione ? SEZIONE_ALBO[atto.sezione as SezioneAlbo]?.titolo : atto.categoria
   return (
@@ -45,9 +48,19 @@ export function AttoAlbo({
       </p>
       <Titolo id={`atto-${atto.id}`} className={styles.attoTitolo}>
         {unico ? (
-          <a href={unico}>
+          <a
+            href={unico}
+            {...attributiFile(unico, {
+              mimeType: fileUnico?.mimeType,
+              titolo: atto.titolo,
+              info: formatoUnico,
+            })}
+          >
             {atto.titolo}
             {formatoUnico ? <span className={styles.formato}> ({formatoUnico})</span> : null}
+            {apreNuovaScheda(unico, fileUnico?.mimeType) ? (
+              <span className="visually-hidden">{NUOVA_SCHEDA}</span>
+            ) : null}
           </a>
         ) : (
           atto.titolo

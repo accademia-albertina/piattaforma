@@ -18,6 +18,8 @@ import { FinestreIscrizione } from './collections/FinestreIscrizione'
 import { IscrizioniCorsi } from './collections/IscrizioniCorsi'
 import { Appelli } from './collections/Appelli'
 import { IscrizioniEsami } from './collections/IscrizioniEsami'
+import { PrenotazioniSegreteria } from './collections/PrenotazioniSegreteria'
+import { CodiciEmail } from './collections/CodiciEmail'
 import { Calendari } from './collections/Calendari'
 import { Corsi } from './collections/Corsi'
 import { Docenti } from './collections/Docenti'
@@ -25,6 +27,7 @@ import { Dottorandi } from './collections/Dottorandi'
 import { Pubblicazioni } from './collections/Pubblicazioni'
 import { RegistroAttivita } from './collections/RegistroAttivita'
 import { Home } from './globals/Home'
+import { SportelloSegreteria } from './globals/SportelloSegreteria'
 import { Navigazione } from './globals/Navigazione'
 import { DriveConnessione } from './globals/DriveConnessione'
 import { EsitiImportazione } from './globals/EsitiImportazione'
@@ -51,6 +54,7 @@ import { correggiLinkWpPagine } from './seed/link-wp-pagine'
 import { aggiornaPagineWp } from './lib/wp-import/contenuti/sincronizza-contenuti'
 import { creaPagineNuove } from './seed/pagine-nuove'
 import { convertiAvvisiAmmissioni } from './seed/avvisi-ammissioni'
+import { correzioniRevisione } from './seed/correzioni-revisione'
 import { importaAlbertinaPress } from './seed/albertina-press'
 import { completaDipartimentiScuole } from './seed/dipartimenti-scuole'
 import { importaContenutiScuole } from './seed/scuole-contenuti'
@@ -75,7 +79,7 @@ export default buildConfig({
     },
     meta: {
       // Payload mette già lo spazio tra titolo e suffisso
-      titleSuffix: '· Accademia Albertina',
+      titleSuffix: '– Accademia Albertina',
       icons: [
         { rel: 'icon', type: 'image/png', sizes: '32x32', url: '/brand/stemma-favicon-32.png' },
         { rel: 'icon', type: 'image/png', sizes: '192x192', url: '/brand/stemma-favicon-192.png' },
@@ -145,14 +149,16 @@ export default buildConfig({
     IscrizioniCorsi,
     Appelli,
     IscrizioniEsami,
+    PrenotazioniSegreteria,
     Albo,
     Trasparenza,
     Media,
     Users,
     EmailInviate,
     RegistroAttivita,
+    CodiciEmail,
   ],
-  globals: [Navigazione, Home, DriveConnessione, EsitiImportazione],
+  globals: [Navigazione, Home, SportelloSegreteria, DriveConnessione, EsitiImportazione],
   endpoints: [...endpointsDrive, ...endpointsWp],
   editor,
   secret: process.env.PAYLOAD_SECRET || '',
@@ -204,6 +210,8 @@ export default buildConfig({
       .then(() => aggiornaPagineWp(payload))
       .then(() => creaPagineNuove(payload))
       .then(() => convertiAvvisiAmmissioni(payload))
+      // Dopo tutto il resto: le correzioni della revisione di Fede (2026-11-18)
+      .then(() => correzioniRevisione(payload))
       .catch((e) =>
         payload.logger.error(`Importazione pagine non riuscita: ${(e as Error).message}`),
       )

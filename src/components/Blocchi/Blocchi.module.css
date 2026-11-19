@@ -43,6 +43,19 @@
   height: auto;
 }
 
+.ingrandisci {
+  display: block;
+  cursor: zoom-in;
+}
+
+.ingrandisci img {
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.ingrandisci:hover img {
+  opacity: 0.92;
+}
+
 .figure figcaption {
   margin-top: var(--space-2);
   color: var(--color-text-muted);
@@ -94,6 +107,17 @@
 
 .linkNome {
   font-weight: var(--font-weight-semibold);
+}
+
+/* Icona della scuola accanto al nome (link a /scuole/…) */
+.linkNome:has(.linkIcona) {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.linkIcona {
+  flex: none;
 }
 
 .linkDesc {
@@ -205,4 +229,110 @@
   letter-spacing: var(--letter-spacing-caps);
   text-transform: uppercase;
   color: var(--color-ardesia-dark);
+}
+
+/* Blocchi a tutta larghezza in fondo alla pagina (fascia di foto, mappa) */
+.piene {
+  gap: 0;
+}
+
+/* Fascia di foto (es. le sedi): da bordo a bordo; la foto sotto il mouse si allarga e mostra
+   il nome su un velo scuro, come sul sito attuale. Su touch il nome resta sempre visibile. */
+.fascia ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: clamp(14rem, 27vw, 30rem);
+}
+
+.fascia li {
+  flex: 1 1 0;
+  min-width: 0;
+  transition: flex-grow calc(var(--duration-base) * 2) var(--ease-out);
+}
+
+.fascia li:hover {
+  flex-grow: 1.6;
+}
+
+.fascia figure {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.fascia img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fascia figcaption {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  color: var(--color-on-brand);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  background: var(--color-overlay);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.fascia li:hover figcaption {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .fascia figcaption {
+    inset: auto 0 0;
+    padding: var(--space-5) var(--space-3) var(--space-3);
+    font-size: var(--font-size-sm);
+    background: linear-gradient(transparent, var(--color-overlay) 45%);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 40rem) {
+  .fascia ul {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .fascia li {
+    height: 14rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fascia li,
+  .fascia figcaption {
+    transition: none;
+  }
+}
+
+/* Mappa a tutta larghezza */
+.mappa iframe {
+  display: block;
+  width: 100%;
+  height: clamp(20rem, 40vw, 30rem);
+  border: 0;
+}
+
+.mappa p {
+  margin-block: var(--space-3) 0;
+  max-width: none;
+  font-size: var(--font-size-sm);
+}
+
+.mappa a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
 }

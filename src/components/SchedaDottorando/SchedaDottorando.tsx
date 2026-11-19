@@ -1,6 +1,8 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
+import { srcImmagine } from '@/utilities/srcImmagine'
+
 import styles from './SchedaDottorando.module.css'
 
 type Props = {
@@ -22,7 +24,7 @@ const iniziali = (nome: string) =>
     .map((p) => p.charAt(0).toUpperCase())
     .join('')
 
-/** Scheda di un dottorando nell'elenco: ritratto, nome, progetto di ricerca e invito al profilo. */
+/** Riga di un dottorando nell'elenco: piccolo ritratto, nome, progetto di ricerca e freccia al profilo. */
 export function SchedaDottorando({ nome, href, dettaglio, progetto, foto, livello = 3 }: Props) {
   const Titolo = `h${livello}` as const
   return (
@@ -31,7 +33,7 @@ export function SchedaDottorando({ nome, href, dettaglio, progetto, foto, livell
         {foto?.url ? (
           // eslint-disable-next-line @next/next/no-img-element -- l'ottimizzazione arriva con lo storage su Drive
           <img
-            src={foto.url}
+            src={srcImmagine(foto.url)}
             alt=""
             width={foto.width ?? 600}
             height={foto.height ?? 750}
@@ -48,10 +50,8 @@ export function SchedaDottorando({ nome, href, dettaglio, progetto, foto, livell
         {dettaglio ? <p className={styles.dettaglio}>{dettaglio}</p> : null}
         <Titolo className={styles.nome}>{nome}</Titolo>
         {progetto ? <p className={styles.progetto}>{progetto}</p> : null}
-        <span className={styles.apri} aria-hidden="true">
-          Leggi il profilo <ArrowRight size={16} strokeWidth={1.5} />
-        </span>
       </div>
+      <ArrowRight className={styles.freccia} size={20} strokeWidth={1.5} aria-hidden />
     </Link>
   )
 }

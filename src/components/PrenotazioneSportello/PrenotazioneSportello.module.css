@@ -1,0 +1,333 @@
+/* Prenotazione allo sportello. Box pieni, senza bordi arrotondati né accenti rossi. */
+
+.prenotazione {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  max-width: 56rem;
+}
+
+.passo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+  /* Sotto l'intestazione fissa quando ci si arriva con lo scorrimento */
+  scroll-margin-top: calc(var(--sticky-top, 0px) + var(--space-6));
+}
+
+.gruppo {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.titoloSezione {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  margin: 0;
+  font-size: var(--font-size-xl);
+}
+
+.numero {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  background: var(--color-ink);
+  color: var(--color-on-brand);
+  font-size: var(--font-size-sm);
+}
+
+.sottotitolo {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+}
+
+.sottotitolo::first-letter {
+  text-transform: uppercase;
+}
+
+.chi {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+}
+
+.riquadro {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  justify-items: start;
+  padding: var(--space-4);
+  background: var(--color-azzurro-100);
+  color: var(--color-heading);
+}
+
+.riquadro p {
+  margin: 0;
+}
+
+.etichettaRiquadro {
+  font-weight: var(--font-weight-bold);
+}
+
+.chiAccount {
+  margin: 0;
+}
+
+/* Documenti: righe selezionabili */
+.documenti {
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+}
+
+.scelta {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  min-height: var(--target-min);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: background var(--duration-fast);
+}
+
+.scelta[data-hovered] {
+  background: var(--color-azzurro-50);
+}
+
+.scelta[data-selected] {
+  border-color: var(--color-ink);
+  background: var(--color-azzurro-100);
+  box-shadow: inset 0 0 0 1px var(--color-ink);
+}
+
+.scelta[data-focus-visible],
+.giorno[data-focus-visible],
+.orario[data-focus-visible] {
+  box-shadow: var(--focus-ring);
+}
+
+.pallino {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.2rem;
+  border: 2px solid var(--color-border-control);
+  border-radius: 50%;
+}
+
+.scelta[data-selected] .pallino {
+  border: 0.35rem solid var(--color-ink);
+}
+
+.nomeScelta {
+  display: block;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+}
+
+.notaScelta {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Giorni e orari */
+.giorni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.giorno {
+  display: grid;
+  min-width: 7.5rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+}
+
+.dataGiorno {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+}
+
+.liberi {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.giorno[data-hovered],
+.orario[data-hovered] {
+  background: var(--color-azzurro-50);
+}
+
+.giorno[data-selected],
+.orario[data-selected] {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+}
+
+.giorno[data-selected] .dataGiorno,
+.giorno[data-selected] .liberi,
+.orario[data-selected] {
+  color: var(--color-on-brand);
+}
+
+.giorno[data-disabled],
+.orario[data-disabled] {
+  background: var(--color-bg);
+  cursor: not-allowed;
+}
+
+.giorno[data-disabled] .dataGiorno,
+.orario[data-disabled] {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.gruppo[data-disabled] .giorno {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.orari {
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+  max-width: 40rem;
+}
+
+.orario {
+  display: grid;
+  place-items: center;
+  min-height: var(--target-min);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-heading);
+  cursor: pointer;
+}
+
+/* Dati e conferma */
+.riepilogo {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-azzurro-100);
+  color: var(--color-heading);
+}
+
+.campi {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  max-width: 40rem;
+}
+
+.campo {
+  display: grid;
+  gap: var(--space-1);
+  align-content: start;
+}
+
+.campo label {
+  font-weight: var(--font-weight-semibold);
+}
+
+.campo input {
+  min-height: var(--target-min);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-control);
+  border-radius: 0;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.campo input[data-invalid] {
+  border-color: var(--color-error-text);
+}
+
+.campo [slot='description'] {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.campo [slot='errorMessage'] {
+  color: var(--color-error-text);
+  font-size: var(--font-size-sm);
+}
+
+.campoCodice {
+  max-width: 16rem;
+}
+
+.campoCodice input {
+  font-size: var(--font-size-lg);
+  letter-spacing: 0.3em;
+  font-variant-numeric: tabular-nums;
+}
+
+.azioni {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+
+.pulsanti {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.nota {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.avvisi:empty {
+  display: none;
+}
+
+/* I tuoi appuntamenti */
+.miei {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-azzurro-100);
+}
+
+.elencoMiei {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.elencoMiei li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-2);
+  border-top: 1px solid var(--color-azzurro-200);
+}
+
+.elencoMiei li:first-child {
+  border-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scelta {
+    transition: none;
+  }
+}

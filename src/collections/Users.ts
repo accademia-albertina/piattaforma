@@ -10,7 +10,10 @@ import {
   defaultRolesForEmail,
   hasRole,
   isAdmin,
+  puoUsareLaPassword,
 } from '@/access/roles'
+import { assicuraProfiloDocente } from '@/lib/profilo-docente'
+import type { User } from '@/payload-types'
 
 const adminOnly: Access = ({ req }) => isAdmin(req.user)
 
@@ -50,11 +53,12 @@ export const Users: CollectionConfig = {
     delete: adminOnly,
   },
   hooks: {
-    // Con Google configurato, la password vale solo per gli admin (accesso di emergenza).
-    // L'accesso con Google non passa da qui: apre la sessione direttamente (src/auth/sessione.ts).
+    // Con Google configurato, la password vale solo per gli admin (accesso di emergenza) e per
+    // gli account di prova. L'accesso con Google non passa da qui: apre la sessione direttamente
+    // (src/auth/sessione.ts).
     beforeLogin: [
       ({ user }) => {
-        if (ssoAttivo() && !isAdmin(user)) {
+        if (ssoAttivo() && !puoUsareLaPassword(user)) {
           throw new APIError(
             'Usa “Accedi con Google” con il tuo account @albertina.academy.',
             403,
@@ -78,8 +82,33 @@ export const Users: CollectionConfig = {
         return data
       },
     ],
+    // Ruolo Docente assegnato (o account creato già docente): profilo pubblico garantito
+    afterChange: [
+      async ({ doc, previousDoc, req }) => {
+        const era = (previousDoc as User | undefined)?.roles?.includes('docente')
+        // Solo quando il ruolo lo assegna una persona (pannello o API): import e script restano fuori
+        if (req.user && doc.roles?.includes('docente') && !era) {
+          await assicuraProfiloDocente(req.payload, doc as User, req)
+        }
+        return doc
+      },
+    ],
   },
   fields: [
+    {
+      // Occhio sulla password; con Google attivo il pulsante «Cambia password» resta solo
+      // dove la password serve davvero (admin e account di prova)
+      name: 'gestionePassword',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: {
+            path: '/components/admin/GestionePassword',
+            clientProps: { soloGoogle: ssoAttivo() },
+          },
+        },
+      },
+    },
     { name: 'nome', type: 'text' },
     { name: 'cognome', type: 'text' },
     {
@@ -95,6 +124,22 @@ export const Users: CollectionConfig = {
       },
       admin: {
         description: 'Solo un amministratore può assegnare o togliere ruoli.',
+      },
+    },
+    {
+      name: 'accountDiProva',
+      label: 'Account di prova',
+      type: 'checkbox',
+      defaultValue: false,
+      access: {
+        create: adminOnlyField,
+        read: adminOnlyField,
+        update: adminOnlyField,
+      },
+      admin: {
+        position: 'sidebar',
+        description:
+          'Entra con email e password invece che con Google, per vedere il sito come uno studente o un docente. Solo per account finti.',
       },
     },
     {

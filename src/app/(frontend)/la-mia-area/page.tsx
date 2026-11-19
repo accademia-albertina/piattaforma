@@ -19,6 +19,7 @@ import type { Corso } from '@/payload-types'
 import { docentiDi, etichettaLivelli } from '@/lib/corsi'
 import { dataIscrizioni, iscrizioniDelCorso } from '@/lib/iscrizioni'
 import { payloadClient } from '@/lib/payload'
+import { etichettaAppuntamento } from '@/lib/sportello-orari'
 
 import styles from './iscrizioni.module.css'
 
@@ -83,6 +84,22 @@ export default async function LaMiaArea() {
       )
     : []
 
+  // Appuntamenti futuri allo sportello della segreteria
+  const { docs: appuntamenti } = studente
+    ? await payload.find({
+        collection: 'prenotazioni-segreteria',
+        where: {
+          utente: { equals: user.id },
+          stato: { equals: 'prenotata' },
+          inizio: { greater_than: new Date().toISOString() },
+        },
+        sort: 'inizio',
+        depth: 0,
+        pagination: false,
+        overrideAccess: true,
+      })
+    : { docs: [] }
+
   return (
     <div className={`container ${styles.pagina}`}>
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'La mia area' }]} />
@@ -91,7 +108,7 @@ export default async function LaMiaArea() {
         titolo="La mia area"
         sommario={
           studente
-            ? `${nome || user.email}, matricola ${studente.matricola}, ${LIVELLO_LABELS[studente.livello].toLowerCase()}.`
+            ? `${nome || user.email}, matricola ${studente.matricola}, ${LIVELLO_LABELS[studente.livello]}.`
             : 'Questa pagina è per gli studenti: si accede con l’account 12345t@ o 12345b@.'
         }
       />
@@ -182,6 +199,33 @@ export default async function LaMiaArea() {
                   </li>
                 )
               })}
+            </ul>
+          )}
+        </section>
+      ) : null}
+
+      {studente ? (
+        <section id="segreteria" aria-labelledby="segreteria-titolo" className={styles.sezione}>
+          <h2 id="segreteria-titolo">Appuntamenti in segreteria</h2>
+          {appuntamenti.length === 0 ? (
+            <div className={styles.vuoto}>
+              <p>Nessun appuntamento in programma.</p>
+              <p>
+                Per ritirare libretto, pergamena o certificati{' '}
+                <Link href="/prenotazioni-segreteria">prenota in segreteria</Link>.
+              </p>
+            </div>
+          ) : (
+            <ul className={styles.elenco}>
+              {appuntamenti.map((a) => (
+                <li key={a.id} className={styles.riga}>
+                  <div className={styles.corso}>
+                    <h3 className={styles.titoloCorso}>{a.documento}</h3>
+                    <p className={styles.dettagli}>{etichettaAppuntamento(a.inizio)}</p>
+                  </div>
+                  <Link href="/prenotazioni-segreteria">Gestisci o disdici</Link>
+                </li>
+              ))}
             </ul>
           )}
         </section>

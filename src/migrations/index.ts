@@ -26,7 +26,11 @@ import * as migration_20261118_103717_registro_operazioni from './20261118_10371
 import * as migration_20261118_140434_pagine_wp_documento from './20261118_140434_pagine_wp_documento'
 import * as migration_20261118_141711_home_modificabile from './20261118_141711_home_modificabile'
 import * as migration_20261118_145945_guida_studenti from './20261118_145945_guida_studenti'
-import * as migration_20261118_151313_avvisi_ammissioni from './20261118_151313_avvisi_ammissioni'
+import * as migration_20261118_190532_blocchi_mappa_fascia from './20261118_190532_blocchi_mappa_fascia'
+import * as migration_20261118_203542_account_di_prova from './20261118_203542_account_di_prova'
+import * as migration_20261118_235858_prenotazioni_segreteria from './20261118_235858_prenotazioni_segreteria'
+import * as migration_20261119_072115_sportello_preavviso from './20261119_072115_sportello_preavviso'
+import * as migration_20261119_105554_avvisi_ammissioni from './20261119_105554_avvisi_ammissioni'
 
 export const migrations = [
   {
@@ -170,8 +174,28 @@ export const migrations = [
     name: '20261118_145945_guida_studenti',
   },
   {
-    up: migration_20261118_151313_avvisi_ammissioni.up,
-    down: migration_20261118_151313_avvisi_ammissioni.down,
-    name: '20261118_151313_avvisi_ammissioni',
+    up: migration_20261118_190532_blocchi_mappa_fascia.up,
+    down: migration_20261118_190532_blocchi_mappa_fascia.down,
+    name: '20261118_190532_blocchi_mappa_fascia',
+  },
+  {
+    up: migration_20261118_203542_account_di_prova.up,
+    down: migration_20261118_203542_account_di_prova.down,
+    name: '20261118_203542_account_di_prova',
+  },
+  {
+    up: migration_20261118_235858_prenotazioni_segreteria.up,
+    down: migration_20261118_235858_prenotazioni_segreteria.down,
+    name: '20261118_235858_prenotazioni_segreteria',
+  },
+  {
+    up: migration_20261119_072115_sportello_preavviso.up,
+    down: migration_20261119_072115_sportello_preavviso.down,
+    name: '20261119_072115_sportello_preavviso',
+  },
+  {
+    up: migration_20261119_105554_avvisi_ammissioni.up,
+    down: migration_20261119_105554_avvisi_ammissioni.down,
+    name: '20261119_105554_avvisi_ammissioni',
   },
 ]

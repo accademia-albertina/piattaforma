@@ -412,6 +412,14 @@
           "primaryKey": false,
           "notNull": false
         },
+        "aspetto": {
+          "name": "aspetto",
+          "type": "enum_pagine_blocks_galleria_aspetto",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'griglia'"
+        },
         "block_name": {
           "name": "block_name",
           "type": "varchar",
@@ -1744,8 +1752,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.pagine_blocks_avvisi_ammissioni": {
-      "name": "pagine_blocks_avvisi_ammissioni",
+    "public.pagine_blocks_mappa": {
+      "name": "pagine_blocks_mappa",
       "schema": "",
       "columns": {
         "_order": {
@@ -1772,12 +1780,19 @@
           "primaryKey": true,
           "notNull": true
         },
-        "titolo": {
-          "name": "titolo",
+        "indirizzo": {
+          "name": "indirizzo",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false,
-          "default": "'Avvisi dei coordinatori'"
+          "default": "'Via Accademia Albertina 6, 10123 Torino'"
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Accademia Albertina di Belle Arti'"
         },
         "block_name": {
           "name": "block_name",
@@ -1787,8 +1802,8 @@
         }
       },
       "indexes": {
-        "pagine_blocks_avvisi_ammissioni_order_idx": {
-          "name": "pagine_blocks_avvisi_ammissioni_order_idx",
+        "pagine_blocks_mappa_order_idx": {
+          "name": "pagine_blocks_mappa_order_idx",
           "columns": [
             {
               "expression": "_order",
@@ -1802,8 +1817,8 @@
           "method": "btree",
           "with": {}
         },
-        "pagine_blocks_avvisi_ammissioni_parent_id_idx": {
-          "name": "pagine_blocks_avvisi_ammissioni_parent_id_idx",
+        "pagine_blocks_mappa_parent_id_idx": {
+          "name": "pagine_blocks_mappa_parent_id_idx",
           "columns": [
             {
               "expression": "_parent_id",
@@ -1817,8 +1832,8 @@
           "method": "btree",
           "with": {}
         },
-        "pagine_blocks_avvisi_ammissioni_path_idx": {
-          "name": "pagine_blocks_avvisi_ammissioni_path_idx",
+        "pagine_blocks_mappa_path_idx": {
+          "name": "pagine_blocks_mappa_path_idx",
           "columns": [
             {
               "expression": "_path",
@@ -1834,9 +1849,9 @@
         }
       },
       "foreignKeys": {
-        "pagine_blocks_avvisi_ammissioni_parent_id_fk": {
-          "name": "pagine_blocks_avvisi_ammissioni_parent_id_fk",
-          "tableFrom": "pagine_blocks_avvisi_ammissioni",
+        "pagine_blocks_mappa_parent_id_fk": {
+          "name": "pagine_blocks_mappa_parent_id_fk",
+          "tableFrom": "pagine_blocks_mappa",
           "tableTo": "pagine",
           "columnsFrom": [
             "_parent_id"
@@ -2580,6 +2595,14 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
+        },
+        "aspetto": {
+          "name": "aspetto",
+          "type": "enum__pagine_v_blocks_galleria_aspetto",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'griglia'"
         },
         "_uuid": {
           "name": "_uuid",
@@ -3985,8 +4008,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public._pagine_v_blocks_avvisi_ammissioni": {
-      "name": "_pagine_v_blocks_avvisi_ammissioni",
+    "public._pagine_v_blocks_mappa": {
+      "name": "_pagine_v_blocks_mappa",
       "schema": "",
       "columns": {
         "_order": {
@@ -4013,12 +4036,19 @@
           "primaryKey": true,
           "notNull": true
         },
-        "titolo": {
-          "name": "titolo",
+        "indirizzo": {
+          "name": "indirizzo",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false,
-          "default": "'Avvisi dei coordinatori'"
+          "default": "'Via Accademia Albertina 6, 10123 Torino'"
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'Accademia Albertina di Belle Arti'"
         },
         "_uuid": {
           "name": "_uuid",
@@ -4034,8 +4064,8 @@
         }
       },
       "indexes": {
-        "_pagine_v_blocks_avvisi_ammissioni_order_idx": {
-          "name": "_pagine_v_blocks_avvisi_ammissioni_order_idx",
+        "_pagine_v_blocks_mappa_order_idx": {
+          "name": "_pagine_v_blocks_mappa_order_idx",
           "columns": [
             {
               "expression": "_order",
@@ -4049,8 +4079,8 @@
           "method": "btree",
           "with": {}
         },
-        "_pagine_v_blocks_avvisi_ammissioni_parent_id_idx": {
-          "name": "_pagine_v_blocks_avvisi_ammissioni_parent_id_idx",
+        "_pagine_v_blocks_mappa_parent_id_idx": {
+          "name": "_pagine_v_blocks_mappa_parent_id_idx",
           "columns": [
             {
               "expression": "_parent_id",
@@ -4064,8 +4094,8 @@
           "method": "btree",
           "with": {}
         },
-        "_pagine_v_blocks_avvisi_ammissioni_path_idx": {
-          "name": "_pagine_v_blocks_avvisi_ammissioni_path_idx",
+        "_pagine_v_blocks_mappa_path_idx": {
+          "name": "_pagine_v_blocks_mappa_path_idx",
           "columns": [
             {
               "expression": "_path",
@@ -4081,9 +4111,9 @@
         }
       },
       "foreignKeys": {
-        "_pagine_v_blocks_avvisi_ammissioni_parent_id_fk": {
-          "name": "_pagine_v_blocks_avvisi_ammissioni_parent_id_fk",
-          "tableFrom": "_pagine_v_blocks_avvisi_ammissioni",
+        "_pagine_v_blocks_mappa_parent_id_fk": {
+          "name": "_pagine_v_blocks_mappa_parent_id_fk",
+          "tableFrom": "_pagine_v_blocks_mappa",
           "tableTo": "_pagine_v",
           "columnsFrom": [
             "_parent_id"
@@ -4733,12 +4763,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "visibile_fino_al": {
-          "name": "visibile_fino_al",
-          "type": "timestamp(3) with time zone",
-          "primaryKey": false,
-          "notNull": false
-        },
         "pubblicato_il": {
           "name": "pubblicato_il",
           "type": "timestamp(3) with time zone",
@@ -5349,12 +5373,6 @@
         "version_sommario": {
           "name": "version_sommario",
           "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "version_visibile_fino_al": {
-          "name": "version_visibile_fino_al",
-          "type": "timestamp(3) with time zone",
           "primaryKey": false,
           "notNull": false
         },
@@ -10002,6 +10020,280 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.prenotazioni_segreteria": {
+      "name": "prenotazioni_segreteria",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "inizio": {
+          "name": "inizio",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "documento": {
+          "name": "documento",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stato": {
+          "name": "stato",
+          "type": "enum_prenotazioni_segreteria_stato",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'prenotata'"
+        },
+        "motivo_annullamento": {
+          "name": "motivo_annullamento",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cognome": {
+          "name": "cognome",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "matricola": {
+          "name": "matricola",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "telefono": {
+          "name": "telefono",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "note_segreteria": {
+          "name": "note_segreteria",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "enum_prenotazioni_segreteria_tipo",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "utente_id": {
+          "name": "utente_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "annullata_da": {
+          "name": "annullata_da",
+          "type": "enum_prenotazioni_segreteria_annullata_da",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "annullata_il": {
+          "name": "annullata_il",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "nominativo": {
+          "name": "nominativo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "posto": {
+          "name": "posto",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "token_disdetta": {
+          "name": "token_disdetta",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "prenotazioni_segreteria_inizio_idx": {
+          "name": "prenotazioni_segreteria_inizio_idx",
+          "columns": [
+            {
+              "expression": "inizio",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "prenotazioni_segreteria_documento_idx": {
+          "name": "prenotazioni_segreteria_documento_idx",
+          "columns": [
+            {
+              "expression": "documento",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "prenotazioni_segreteria_stato_idx": {
+          "name": "prenotazioni_segreteria_stato_idx",
+          "columns": [
+            {
+              "expression": "stato",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "prenotazioni_segreteria_email_idx": {
+          "name": "prenotazioni_segreteria_email_idx",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "prenotazioni_segreteria_utente_idx": {
+          "name": "prenotazioni_segreteria_utente_idx",
+          "columns": [
+            {
+              "expression": "utente_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "prenotazioni_segreteria_posto_idx": {
+          "name": "prenotazioni_segreteria_posto_idx",
+          "columns": [
+            {
+              "expression": "posto",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "prenotazioni_segreteria_updated_at_idx": {
+          "name": "prenotazioni_segreteria_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "prenotazioni_segreteria_created_at_idx": {
+          "name": "prenotazioni_segreteria_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "prenotazioni_segreteria_utente_id_users_id_fk": {
+          "name": "prenotazioni_segreteria_utente_id_users_id_fk",
+          "tableFrom": "prenotazioni_segreteria",
+          "tableTo": "users",
+          "columnsFrom": [
+            "utente_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.albo_documenti": {
       "name": "albo_documenti",
       "schema": "",
@@ -11977,6 +12269,13 @@
           "primaryKey": false,
           "notNull": false
         },
+        "account_di_prova": {
+          "name": "account_di_prova",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp(3) with time zone",
@@ -12443,6 +12742,117 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.codici_email": {
+      "name": "codici_email",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "impronta": {
+          "name": "impronta",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scadenza": {
+          "name": "scadenza",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tentativi": {
+          "name": "tentativi",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "usato": {
+          "name": "usato",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "codici_email_email_idx": {
+          "name": "codici_email_email_idx",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "codici_email_updated_at_idx": {
+          "name": "codici_email_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "codici_email_created_at_idx": {
+          "name": "codici_email_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.payload_kv": {
       "name": "payload_kv",
       "schema": "",
@@ -12675,6 +13085,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "prenotazioni_segreteria_id": {
+          "name": "prenotazioni_segreteria_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "albo_id": {
           "name": "albo_id",
           "type": "integer",
@@ -12707,6 +13123,12 @@
         },
         "registro_attivita_id": {
           "name": "registro_attivita_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "codici_email_id": {
+          "name": "codici_email_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -12938,6 +13360,21 @@
           "method": "btree",
           "with": {}
         },
+        "payload_locked_documents_rels_prenotazioni_segreteria_id_idx": {
+          "name": "payload_locked_documents_rels_prenotazioni_segreteria_id_idx",
+          "columns": [
+            {
+              "expression": "prenotazioni_segreteria_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "payload_locked_documents_rels_albo_id_idx": {
           "name": "payload_locked_documents_rels_albo_id_idx",
           "columns": [
@@ -13018,6 +13455,21 @@
           "columns": [
             {
               "expression": "registro_attivita_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_locked_documents_rels_codici_email_id_idx": {
+          "name": "payload_locked_documents_rels_codici_email_id_idx",
+          "columns": [
+            {
+              "expression": "codici_email_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -13199,6 +13651,19 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
+        "payload_locked_documents_rels_prenotazioni_segreteria_fk": {
+          "name": "payload_locked_documents_rels_prenotazioni_segreteria_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "prenotazioni_segreteria",
+          "columnsFrom": [
+            "prenotazioni_segreteria_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
         "payload_locked_documents_rels_albo_fk": {
           "name": "payload_locked_documents_rels_albo_fk",
           "tableFrom": "payload_locked_documents_rels",
@@ -13270,6 +13735,19 @@
           "tableTo": "registro_attivita",
           "columnsFrom": [
             "registro_attivita_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_codici_email_fk": {
+          "name": "payload_locked_documents_rels_codici_email_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "codici_email",
+          "columnsFrom": [
+            "codici_email_id"
           ],
           "columnsTo": [
             "id"
@@ -14942,7 +15420,7 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false,
-          "default": "'Accademia Albertina di Belle Arti di Torino: Lauree e Lauree magistrali in arti visive, progettazione e nuove tecnologie.'"
+          "default": "'Accademia Albertina di Belle Arti di Torino: Lauree e Lauree Magistrali in arti visive, progettazione e nuove tecnologie.'"
         },
         "manifesto": {
           "name": "manifesto",
@@ -14962,14 +15440,14 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false,
-          "default": "'Laurea e Laurea magistrale'"
+          "default": "'Laurea e Laurea Magistrale'"
         },
         "scuole_testo": {
           "name": "scuole_testo",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false,
-          "default": "'Lauree e Lauree magistrali con lo stesso valore di quelle universitarie.'"
+          "default": "'Lauree e Lauree Magistrali con lo stesso valore di quelle universitarie.'"
         },
         "avviso_mostra": {
           "name": "avviso_mostra",
@@ -15229,6 +15707,462 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.sportello_segreteria_orari": {
+      "name": "sportello_segreteria_orari",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "giorno": {
+          "name": "giorno",
+          "type": "enum_sportello_segreteria_orari_giorno",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dalle": {
+          "name": "dalle",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alle": {
+          "name": "alle",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "sportello_segreteria_orari_order_idx": {
+          "name": "sportello_segreteria_orari_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "sportello_segreteria_orari_parent_id_idx": {
+          "name": "sportello_segreteria_orari_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "sportello_segreteria_orari_parent_id_fk": {
+          "name": "sportello_segreteria_orari_parent_id_fk",
+          "tableFrom": "sportello_segreteria_orari",
+          "tableTo": "sportello_segreteria",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sportello_segreteria_aperture": {
+      "name": "sportello_segreteria_aperture",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "data": {
+          "name": "data",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dalle": {
+          "name": "dalle",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "alle": {
+          "name": "alle",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "sportello_segreteria_aperture_order_idx": {
+          "name": "sportello_segreteria_aperture_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "sportello_segreteria_aperture_parent_id_idx": {
+          "name": "sportello_segreteria_aperture_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "sportello_segreteria_aperture_parent_id_fk": {
+          "name": "sportello_segreteria_aperture_parent_id_fk",
+          "tableFrom": "sportello_segreteria_aperture",
+          "tableTo": "sportello_segreteria",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sportello_segreteria_chiusure": {
+      "name": "sportello_segreteria_chiusure",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "dal": {
+          "name": "dal",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "al": {
+          "name": "al",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dalle": {
+          "name": "dalle",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "alle": {
+          "name": "alle",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "motivo": {
+          "name": "motivo",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "sportello_segreteria_chiusure_order_idx": {
+          "name": "sportello_segreteria_chiusure_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "sportello_segreteria_chiusure_parent_id_idx": {
+          "name": "sportello_segreteria_chiusure_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "sportello_segreteria_chiusure_parent_id_fk": {
+          "name": "sportello_segreteria_chiusure_parent_id_fk",
+          "tableFrom": "sportello_segreteria_chiusure",
+          "tableTo": "sportello_segreteria",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sportello_segreteria_documenti": {
+      "name": "sportello_segreteria_documenti",
+      "schema": "",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nome": {
+          "name": "nome",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "attivo": {
+          "name": "attivo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "descrizione": {
+          "name": "descrizione",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "sportello_segreteria_documenti_order_idx": {
+          "name": "sportello_segreteria_documenti_order_idx",
+          "columns": [
+            {
+              "expression": "_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "sportello_segreteria_documenti_parent_id_idx": {
+          "name": "sportello_segreteria_documenti_parent_id_idx",
+          "columns": [
+            {
+              "expression": "_parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "sportello_segreteria_documenti_parent_id_fk": {
+          "name": "sportello_segreteria_documenti_parent_id_fk",
+          "tableFrom": "sportello_segreteria_documenti",
+          "tableTo": "sportello_segreteria",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sportello_segreteria": {
+      "name": "sportello_segreteria",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "attivo": {
+          "name": "attivo",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "avviso": {
+          "name": "avviso",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'I documenti si ritirano in segreteria didattica il giorno dell’appuntamento. Prenota tenendo conto della scadenza per cui ti serve il documento.'"
+        },
+        "durata_turno": {
+          "name": "durata_turno",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 5
+        },
+        "persone_per_turno": {
+          "name": "persone_per_turno",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "giorni_prenotabili": {
+          "name": "giorni_prenotabili",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 60
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.drive_connessione": {
       "name": "drive_connessione",
       "schema": "",
@@ -15349,6 +16283,14 @@
         "piena"
       ]
     },
+    "public.enum_pagine_blocks_galleria_aspetto": {
+      "name": "enum_pagine_blocks_galleria_aspetto",
+      "schema": "public",
+      "values": [
+        "griglia",
+        "fascia"
+      ]
+    },
     "public.enum_pagine_blocks_link_voci_tipo": {
       "name": "enum_pagine_blocks_link_voci_tipo",
       "schema": "public",
@@ -15382,6 +16324,14 @@
       "values": [
         "testo",
         "piena"
+      ]
+    },
+    "public.enum__pagine_v_blocks_galleria_aspetto": {
+      "name": "enum__pagine_v_blocks_galleria_aspetto",
+      "schema": "public",
+      "values": [
+        "griglia",
+        "fascia"
       ]
     },
     "public.enum__pagine_v_blocks_link_voci_tipo": {
@@ -15424,8 +16374,7 @@
         "iscrizioni",
         "coordinatori",
         "tasse",
-        "biblioteca",
-        "ammissioni"
+        "biblioteca"
       ]
     },
     "public.enum_avvisi_status": {
@@ -15449,8 +16398,7 @@
         "iscrizioni",
         "coordinatori",
         "tasse",
-        "biblioteca",
-        "ammissioni"
+        "biblioteca"
       ]
     },
     "public.enum__avvisi_v_version_status": {
@@ -15674,6 +16622,35 @@
       "values": [
         "triennio",
         "biennio"
+      ]
+    },
+    "public.enum_prenotazioni_segreteria_stato": {
+      "name": "enum_prenotazioni_segreteria_stato",
+      "schema": "public",
+      "values": [
+        "prenotata",
+        "ritirata",
+        "assente",
+        "annullata"
+      ]
+    },
+    "public.enum_prenotazioni_segreteria_tipo": {
+      "name": "enum_prenotazioni_segreteria_tipo",
+      "schema": "public",
+      "values": [
+        "studente",
+        "personale",
+        "esterno",
+        "segreteria"
+      ]
+    },
+    "public.enum_prenotazioni_segreteria_annullata_da": {
+      "name": "enum_prenotazioni_segreteria_annullata_da",
+      "schema": "public",
+      "values": [
+        "utente",
+        "segreteria",
+        "chiusura"
       ]
     },
     "public.enum_albo_sezione": {
@@ -15916,6 +16893,18 @@
         "percorso",
         "esterno"
       ]
+    },
+    "public.enum_sportello_segreteria_orari_giorno": {
+      "name": "enum_sportello_segreteria_orari_giorno",
+      "schema": "public",
+      "values": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
     }
   },
   "schemas": {},
@@ -15928,6 +16917,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "306dabbf-403a-415e-871f-2b5ebb398e49",
+  "id": "7094eef2-abbc-4f3d-94a9-5534da88910d",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

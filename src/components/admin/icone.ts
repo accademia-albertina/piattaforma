@@ -1,6 +1,8 @@
 import {
   BookOpen,
   CalendarClock,
+  CalendarCheck,
+  Clock,
   CalendarDays,
   ClipboardCheck,
   ClipboardPen,
@@ -38,6 +40,8 @@ export const ICONE_SEZIONI: Record<string, LucideIcon> = {
   'iscrizioni-corsi': ClipboardCheck,
   appelli: NotebookPen,
   'iscrizioni-esami': ClipboardPen,
+  'prenotazioni-segreteria': CalendarCheck,
+  'sportello-segreteria': Clock,
   albo: ClipboardList,
   trasparenza: Scale,
   scuole: Landmark,

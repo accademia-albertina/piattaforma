@@ -46,7 +46,7 @@ const percorso = (name: 'triennio' | 'biennio', label: string, titolo: string): 
       defaultValue: true,
       admin: {
         description:
-          'Togli la spunta se la scuola non ha questo percorso (es. Cinema senza laurea magistrale).',
+          'Togli la spunta se la scuola non ha questo percorso (es. Cinema senza Laurea Magistrale).',
       },
     },
     {
@@ -159,8 +159,8 @@ export const Scuole: CollectionConfig = {
         },
         { label: 'Laurea', fields: [percorso('triennio', 'Laurea', 'Laurea')] },
         {
-          label: 'Laurea magistrale',
-          fields: [percorso('biennio', 'Laurea magistrale', 'Laurea magistrale')],
+          label: 'Laurea Magistrale',
+          fields: [percorso('biennio', 'Laurea Magistrale', 'Laurea Magistrale')],
         },
         {
           label: 'Persone',

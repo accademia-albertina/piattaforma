@@ -27,8 +27,8 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
-    versione: '0.41.0',
-    data: '2026-11-18',
+    versione: '0.45.0',
+    data: '2026-11-19',
     titolo: 'Avvisi di ammissione dei coordinatori',
     voci: [
       {
@@ -48,6 +48,128 @@ export const CHANGELOG: Versione[] = [
       },
     ],
     pr: [95],
+  },
+  {
+    versione: '0.44.0',
+    data: '2026-11-19',
+    titolo: 'Visualizzatore di PDF e immagini',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'PDF e immagini allegati (avvisi, Albo, Amministrazione trasparente, pagine, calendari, curriculum dei docenti) si aprono a schermo intero nel sito, senza scaricarli: pagine sfogliabili, zoom, testo selezionabile, link cliccabili. Il pulsante Scarica resta sempre accanto.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Con più allegati si passa da uno all’altro con le frecce. Su telefono si ingrandisce col pizzico e il tasto Indietro chiude il visualizzatore.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Il blocco Documento mostra l’anteprima del PDF anche su telefono. Le foto dei blocchi Immagine e Galleria si ingrandiscono col clic.',
+      },
+    ],
+    pr: [100],
+  },
+  {
+    versione: '0.43.0',
+    data: '2026-11-19',
+    titolo: 'Prenotazioni in segreteria',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Prenota in segreteria (/prenotazioni-segreteria), al posto di Amelia: gli studenti entrano con Google, chi non ha più l’account conferma con un codice via email. Una prenotazione per documento, disdetta dal sito o dal link nell’email.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Pannello della segreteria: appuntamenti del giorno da stampare, “Ritirato”, “Non presentato” e annullamento con email automatica.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Orari e documenti dello sportello: giorni, turni, documenti e chiusure (anche di poche ore). Una chiusura annulla le prenotazioni di quei turni e avvisa chi aveva prenotato. Festività già escluse. Si prenota da 2 giorni prima fino a 60 giorni avanti (modificabili).',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Pagina Segreteria didattica: collegamento “Prenota in segreteria” in fondo, al posto del modulo Amelia.',
+      },
+    ],
+    pr: [98],
+  },
+  {
+    versione: '0.42.0',
+    data: '2026-11-18',
+    titolo: 'Account di prova e password nel pannello',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Account di prova (Utenti, solo admin): entra con email e password invece che con Google, per vedere La mia area come uno studente o il pannello come un docente.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Nella scheda Utente l’occhio mostra la password mentre la scrivi. «Cambia password» compare solo dove serve: admin e account di prova; gli altri entrano con Google.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Menu laterale: una sfumatura in fondo indica che ci sono altre voci; su telefono le voci scorrono sotto la X senza sovrapporsi. Nuova icona per Impostazioni → Home.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Titolo della scheda del browser con il trattino: «Dashboard – Accademia Albertina».',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          'Sito su telefono: il menu chiuso lasciava un grande riquadro bianco sopra la pagina mentre si scorreva.',
+      },
+    ],
+    pr: [96],
+  },
+  {
+    versione: '0.41.0',
+    data: '2026-11-18',
+    titolo: 'Revisione delle pagine: menu coerenti, Contatti, sedi e terminologia',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Blocco Mappa (Google Maps a tutta larghezza) e galleria «a fascia» che si allarga al passaggio del mouse, come le sedi sul sito attuale.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Chi riceve il ruolo Docente ha subito il suo profilo in Docenti; nelle pagine delle scuole compare scegliendo la scuola nel profilo.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Menu laterale e pagine di sezione mostrano tutte le voci del menu. Scuole sostituisce Piani di studio (pagina nascosta).',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Sempre «Laurea (Triennio)» e «Laurea Magistrale (Biennio)», con la maiuscola; icone delle scuole accanto ai loro link.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Contatti completa (email, uffici, mappa), Ordinamento corretto, loghi in Dottorati, dottorandi in elenco, titoli del testo più piccoli.',
+      },
+      {
+        tipo: 'corretto',
+        testo:
+          'Foto dei docenti che non si vedevano; frecce e testo tagliato nei menu a tendina dei filtri.',
+      },
+    ],
+    pr: [],
   },
   {
     versione: '0.40.0',

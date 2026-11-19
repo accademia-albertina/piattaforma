@@ -2,14 +2,27 @@ import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical
 import { type JSXConvertersFunction, RichText } from '@payloadcms/richtext-lexical/react'
 import { Fragment } from 'react'
 
+import { IconaScuola } from '@/components/IconaScuola/IconaScuola'
 import { dividiLink } from '@/utilities/autolink'
-import { isPdf } from '@/utilities/pdf'
+import { slugScuolaDaLink } from '@/utilities/linkScuola'
+import { attributiFile, isPdf, tipoAnteprima } from '@/utilities/pdf'
 
 import styles from './Testo.module.css'
 
 // Gli avvisi importati da WordPress hanno gli indirizzi scritti come testo:
 // qui diventano link, a meno che non siano già dentro un link.
-// I link ai PDF si aprono in una nuova scheda (impostazione “nuova scheda” forzata).
+// I link a PDF e immagini del sito si aprono nel visualizzatore; i PDF di altri siti in una
+// nuova scheda (impostazione “nuova scheda” forzata).
+
+/** Link a un file del sito che si apre nel visualizzatore: niente nuova scheda. */
+function linkAnteprima(href: string | undefined, children: React.ReactNode) {
+  if (!href || !tipoAnteprima(href)) return null
+  return (
+    <a href={href} {...attributiFile(href)}>
+      {children}
+    </a>
+  )
+}
 const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
   ...defaultConverters,
   // Tabelle con i nostri stili (non quelli in linea di Payload) e intestazioni con scope:
@@ -38,6 +51,21 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
   link: (args) => {
     const base = defaultConverters.link
     if (typeof base !== 'function') return null
+    // Link a una scuola (anche col vecchio indirizzo WordPress): pagina nuova e icona della scuola
+    const scuola =
+      args.node.fields?.linkType !== 'internal' && slugScuolaDaLink(args.node.fields?.url)
+    if (scuola) {
+      return (
+        <a href={`/scuole/${scuola}`} className={styles.linkScuola}>
+          <IconaScuola scuola={scuola} size={28} className={styles.iconaScuola} />
+          <span>{args.nodesToJSX({ nodes: args.node.children })}</span>
+        </a>
+      )
+    }
+    const anteprima =
+      args.node.fields?.linkType !== 'internal' &&
+      linkAnteprima(args.node.fields?.url, args.nodesToJSX({ nodes: args.node.children }))
+    if (anteprima) return anteprima
     const pdf = isPdf(args.node.fields?.url)
     return base(
       pdf
@@ -48,11 +76,56 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
   autolink: (args) => {
     const base = defaultConverters.autolink
     if (typeof base !== 'function') return null
+    const anteprima = linkAnteprima(
+      args.node.fields?.url,
+      args.nodesToJSX({ nodes: args.node.children }),
+    )
+    if (anteprima) return anteprima
     const pdf = isPdf(args.node.fields?.url)
     return base(
       pdf
         ? { ...args, node: { ...args.node, fields: { ...args.node.fields, newTab: true } } }
         : args,
+    )
+  },
+  // File caricati nel testo: le immagini si ingrandiscono nel visualizzatore,
+  // PDF e altri file diventano link con il nome del file.
+  upload: (args) => {
+    const base = defaultConverters.upload
+    const doc = args.node.value as {
+      url?: string | null
+      mimeType?: string | null
+      filename?: string | null
+      alt?: string | null
+    } | null
+    if (typeof doc !== 'object' || !doc?.url) return null
+    const mime = typeof doc.mimeType === 'string' ? doc.mimeType : null
+    const nome = (typeof doc.filename === 'string' && doc.filename) || 'File'
+    if (!mime?.startsWith('image')) {
+      return (
+        <a
+          href={doc.url}
+          {...attributiFile(doc.url, {
+            mimeType: mime,
+            scarica: true,
+            titolo: nome,
+            filename: nome,
+          })}
+        >
+          {nome}
+        </a>
+      )
+    }
+    const alt = (args.node.fields?.alt as string | undefined) || doc.alt || ''
+    return (
+      <a
+        href={doc.url}
+        className={styles.ingrandisci}
+        aria-label={`Ingrandisci: ${alt || nome}`}
+        {...attributiFile(doc.url, { mimeType: mime, titolo: alt || nome, filename: nome })}
+      >
+        {typeof base === 'function' ? base(args) : null}
+      </a>
     )
   },
   text: (args) => {
@@ -67,14 +140,20 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
       <>
         {pezzi.map((p, i) =>
           p.tipo === 'link' ? (
-            <a
-              key={i}
-              href={p.href}
-              rel={p.href.startsWith('http') || isPdf(p.href) ? 'noopener' : undefined}
-              target={isPdf(p.href) ? '_blank' : undefined}
-            >
-              {render(p.testo)}
-            </a>
+            tipoAnteprima(p.href) ? (
+              <a key={i} href={p.href} {...attributiFile(p.href)}>
+                {render(p.testo)}
+              </a>
+            ) : (
+              <a
+                key={i}
+                href={p.href}
+                rel={p.href.startsWith('http') || isPdf(p.href) ? 'noopener' : undefined}
+                target={isPdf(p.href) ? '_blank' : undefined}
+              >
+                {render(p.testo)}
+              </a>
+            )
           ) : (
             <Fragment key={i}>{render(p.testo)}</Fragment>
           ),
@@ -89,6 +168,10 @@ type Props = { data: SerializedEditorState | Record<string, unknown>; className?
 /** Testo ricco del sito: come RichText di Payload, con gli indirizzi resi cliccabili. */
 export function Testo({ data, className }: Props) {
   return (
-    <RichText data={data as SerializedEditorState} className={className} converters={converters} />
+    <RichText
+      data={data as SerializedEditorState}
+      className={`${styles.testo} ${className ?? ''}`}
+      converters={converters}
+    />
   )
 }

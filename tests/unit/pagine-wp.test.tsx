@@ -104,7 +104,7 @@ describe('Pagine istituzionali: lettura dell’HTML di WordPress', () => {
 describe('Documento in evidenza', () => {
   afterEach(cleanup)
 
-  it('PDF: titolo, formato, Apri e Scarica, anteprima con titolo; accessibile', async () => {
+  it('PDF: titolo, formato, Apri nel visualizzatore e Scarica; accessibile', async () => {
     const { container } = render(
       <Documento
         id="doc"
@@ -117,12 +117,13 @@ describe('Documento in evidenza', () => {
     )
     expect(screen.getByRole('heading', { name: 'Regolamento tasse 2026-27' })).toBeTruthy()
     expect(screen.getByText(/PDF · 1,2 MB/)).toBeTruthy()
+    // Apri porta il PDF a schermo intero nel visualizzatore del sito
     const apri = screen.getByRole('link', { name: /Apri Regolamento tasse/ })
-    expect(apri.getAttribute('target')).toBe('_blank')
+    expect(apri.getAttribute('data-anteprima')).toBe('pdf')
+    expect(apri.getAttribute('aria-haspopup')).toBe('dialog')
     expect(screen.getByRole('link', { name: /Scarica Regolamento tasse/ })).toBeTruthy()
-    expect(container.querySelector('iframe')?.getAttribute('title')).toBe(
-      'Anteprima: Regolamento tasse 2026-27',
-    )
+    // Anteprima con PDF.js al posto del lettore del browser (iframe)
+    expect(container.querySelector('iframe')).toBeNull()
     expect(await axeViolations(container)).toEqual([])
   })
 
@@ -159,6 +160,7 @@ describe('Immagini, planimetria e testi dei PDF', () => {
       { tipo: 'planimetria' },
       {
         tipo: 'galleria',
+        aspetto: 'fascia',
         immagini: [
           { url: `${WP}/wp-content/uploads/a.webp`, didascalia: 'Rotonda' },
           { url: `${WP}/wp-content/uploads/b.webp`, didascalia: 'Edificio' },
