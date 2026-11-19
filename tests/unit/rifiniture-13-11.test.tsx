@@ -45,13 +45,13 @@ describe('TornaSu e IntestazioneStampa', () => {
   })
 })
 
-describe('PDF in nuova scheda', () => {
+describe('PDF: visualizzatore per i file del sito, nuova scheda per gli esterni', () => {
   it('riconosce i PDF da tipo o estensione', () => {
     expect(isPdf('/media/bando.pdf')).toBe(true)
     expect(isPdf('/media/bando.PDF?x=1')).toBe(true)
     expect(isPdf('/media/file', 'application/pdf')).toBe(true)
     expect(isPdf('/media/modulo.docx')).toBe(false)
-    expect(attributiFile('/a.pdf', { scarica: true })).toEqual({
+    expect(attributiFile('https://example.org/a.pdf', { scarica: true })).toEqual({
       target: '_blank',
       rel: 'noopener',
     })

@@ -12,7 +12,9 @@ const isDev = process.env.NODE_ENV !== 'production'
 // Il passaggio a CSP con nonce è tracciato come lavoro successivo.
 const contentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
+  // 'wasm-unsafe-eval': i decodificatori WebAssembly di PDF.js (immagini JPEG 2000 e JBIG2 nei
+  // PDF scansionati). Permette solo di compilare WebAssembly, non eval di JavaScript.
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${isDev ? " 'unsafe-eval'" : ''}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   // Video delle scuole: solo YouTube senza cookie, caricato al clic (VideoYoutube)
