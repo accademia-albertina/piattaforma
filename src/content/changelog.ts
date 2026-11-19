@@ -42,7 +42,7 @@ export const CHANGELOG: Versione[] = [
           'Da telefono la barra dei giorni non esce più dallo schermo e gli appuntamenti si leggono come schede.',
       },
     ],
-    pr: [],
+    pr: [99],
   },
   {
     versione: '0.43.0',
