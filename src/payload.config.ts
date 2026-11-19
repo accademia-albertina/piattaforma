@@ -18,6 +18,8 @@ import { FinestreIscrizione } from './collections/FinestreIscrizione'
 import { IscrizioniCorsi } from './collections/IscrizioniCorsi'
 import { Appelli } from './collections/Appelli'
 import { IscrizioniEsami } from './collections/IscrizioniEsami'
+import { PrenotazioniSegreteria } from './collections/PrenotazioniSegreteria'
+import { CodiciEmail } from './collections/CodiciEmail'
 import { Calendari } from './collections/Calendari'
 import { Corsi } from './collections/Corsi'
 import { Docenti } from './collections/Docenti'
@@ -25,6 +27,7 @@ import { Dottorandi } from './collections/Dottorandi'
 import { Pubblicazioni } from './collections/Pubblicazioni'
 import { RegistroAttivita } from './collections/RegistroAttivita'
 import { Home } from './globals/Home'
+import { SportelloSegreteria } from './globals/SportelloSegreteria'
 import { Navigazione } from './globals/Navigazione'
 import { DriveConnessione } from './globals/DriveConnessione'
 import { EsitiImportazione } from './globals/EsitiImportazione'
@@ -145,14 +148,16 @@ export default buildConfig({
     IscrizioniCorsi,
     Appelli,
     IscrizioniEsami,
+    PrenotazioniSegreteria,
     Albo,
     Trasparenza,
     Media,
     Users,
     EmailInviate,
     RegistroAttivita,
+    CodiciEmail,
   ],
-  globals: [Navigazione, Home, DriveConnessione, EsitiImportazione],
+  globals: [Navigazione, Home, SportelloSegreteria, DriveConnessione, EsitiImportazione],
   endpoints: [...endpointsDrive, ...endpointsWp],
   editor,
   secret: process.env.PAYLOAD_SECRET || '',

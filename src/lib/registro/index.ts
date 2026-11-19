@@ -267,7 +267,7 @@ const dopoSalvataggioGlobale: GlobalAfterChangeHook = async ({ global, doc, prev
 }
 
 /** Registri tecnici scritti dal server: registrarli qui sarebbe solo rumore. */
-const ESCLUSE = new Set<string>([SLUG_REGISTRO, 'email-inviate'])
+const ESCLUSE = new Set<string>([SLUG_REGISTRO, 'email-inviate', 'codici-email'])
 
 /** Aggiunge gli hook del registro a tutte le collezioni e ai globali (tranne i registri). */
 export const registroAttivita = (): Plugin => (config) => ({
