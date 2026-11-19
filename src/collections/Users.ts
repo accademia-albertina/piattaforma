@@ -8,6 +8,7 @@ import {
   ROLE_LABELS,
   canAccessBackend,
   defaultRolesForEmail,
+  hasRole,
   isAdmin,
   puoUsareLaPassword,
 } from '@/access/roles'
@@ -139,6 +140,36 @@ export const Users: CollectionConfig = {
         position: 'sidebar',
         description:
           'Entra con email e password invece che con Google, per vedere il sito come uno studente o un docente. Solo per account finti.',
+      },
+    },
+    {
+      // Non salvato: si ricalcola a ogni accesso, così se la vicedirezione cambia il
+      // coordinatore di una scuola il permesso sugli avvisi di ammissione passa da solo.
+      name: 'scuoleCoordinate',
+      type: 'number',
+      hasMany: true,
+      virtual: true,
+      admin: { hidden: true },
+      access: { create: () => false, update: () => false },
+      hooks: {
+        afterRead: [
+          async ({ data, req }) => {
+            if (!data?.id || !hasRole(data as { roles?: string[] }, 'docente')) return []
+            // Solo per chi sta entrando (req.user non c'è ancora) o legge sé stesso:
+            // gli elenchi degli utenti non pagano una query per riga.
+            if (req.user && req.user.id !== data.id) return []
+            const { docs } = await req.payload.find({
+              collection: 'scuole',
+              where: { 'coordinatoreScuola.account': { equals: data.id } },
+              depth: 0,
+              limit: 20,
+              pagination: false,
+              overrideAccess: true,
+              select: {},
+            })
+            return docs.map((d) => d.id)
+          },
+        ],
       },
     },
   ],

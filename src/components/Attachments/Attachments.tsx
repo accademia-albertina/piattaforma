@@ -22,18 +22,22 @@ export function Attachments({
   items,
   title = 'Allegati',
   id = 'allegati-titolo',
+  livello = 2,
 }: {
   items: Allegato[]
   title?: string
+  /** Livello del titolo: 2 nella pagina, più basso dentro una sezione (es. una fisarmonica). */
+  livello?: 2 | 3 | 4 | 5
   /** Da cambiare se nella pagina ci sono più elenchi di allegati. */
   id?: string
 }) {
   if (items.length === 0) return null
+  const Titolo = `h${livello}` as const
   return (
     <section aria-labelledby={id} className={styles.section}>
-      <h2 id={id} className={styles.title}>
+      <Titolo id={id} className={styles.title}>
         {title}
-      </h2>
+      </Titolo>
       <ul className={styles.list} data-anteprime="">
         {items.map((a) => {
           const info = [

@@ -1,6 +1,11 @@
 import type { Where } from 'payload'
 
-import { CATEGORIA_LABELS, isCategoria, type CategoriaAvviso } from '@/access/avvisi'
+import {
+  CATEGORIA_LABELS,
+  CATEGORIE_SOLO_ARCHIVIO,
+  isCategoria,
+  type CategoriaAvviso,
+} from '@/access/avvisi'
 import type { Avviso, Scuola } from '@/payload-types'
 import { senzaLink } from '@/utilities/autolink'
 import { lexicalToText, tronca } from '@/utilities/lexicalText'
@@ -91,12 +96,16 @@ export function categorieAvviso(avviso: Pick<Avviso, 'categorie'>) {
   }))
 }
 
-/** Ultimi avvisi pubblicati, per la homepage; con `categorie`, solo quelli di almeno una. */
+/**
+ * Ultimi avvisi pubblicati, per la homepage; con `categorie`, solo quelli di almeno una.
+ * Gli avvisi di ammissione restano fuori (sono nella pagina Ammissioni e in /avvisi).
+ */
 export async function ultimiAvvisi(limit = 3, categorie?: CategoriaAvviso[]) {
   const payload = await payloadClient()
+  const fuori: Where = { categorie: { not_in: CATEGORIE_SOLO_ARCHIVIO } }
   const res = await payload.find({
     collection: 'avvisi',
-    ...(categorie?.length ? { where: { categorie: { in: categorie } } } : {}),
+    where: categorie?.length ? { and: [{ categorie: { in: categorie } }, fuori] } : fuori,
     sort: '-pubblicatoIl',
     limit,
     overrideAccess: false,

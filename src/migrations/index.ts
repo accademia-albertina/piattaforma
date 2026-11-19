@@ -30,6 +30,7 @@ import * as migration_20261118_190532_blocchi_mappa_fascia from './20261118_1905
 import * as migration_20261118_203542_account_di_prova from './20261118_203542_account_di_prova'
 import * as migration_20261118_235858_prenotazioni_segreteria from './20261118_235858_prenotazioni_segreteria'
 import * as migration_20261119_072115_sportello_preavviso from './20261119_072115_sportello_preavviso'
+import * as migration_20261119_105554_avvisi_ammissioni from './20261119_105554_avvisi_ammissioni'
 
 export const migrations = [
   {
@@ -191,5 +192,10 @@ export const migrations = [
     up: migration_20261119_072115_sportello_preavviso.up,
     down: migration_20261119_072115_sportello_preavviso.down,
     name: '20261119_072115_sportello_preavviso',
+  },
+  {
+    up: migration_20261119_105554_avvisi_ammissioni.up,
+    down: migration_20261119_105554_avvisi_ammissioni.down,
+    name: '20261119_105554_avvisi_ammissioni',
   },
 ]

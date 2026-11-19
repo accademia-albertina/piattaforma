@@ -53,6 +53,7 @@ import { editor } from './fields/editor'
 import { correggiLinkWpPagine } from './seed/link-wp-pagine'
 import { aggiornaPagineWp } from './lib/wp-import/contenuti/sincronizza-contenuti'
 import { creaPagineNuove } from './seed/pagine-nuove'
+import { convertiAvvisiAmmissioni } from './seed/avvisi-ammissioni'
 import { correzioniRevisione } from './seed/correzioni-revisione'
 import { importaAlbertinaPress } from './seed/albertina-press'
 import { completaDipartimentiScuole } from './seed/dipartimenti-scuole'
@@ -208,6 +209,7 @@ export default buildConfig({
       .then(() => correggiLinkWpPagine(payload))
       .then(() => aggiornaPagineWp(payload))
       .then(() => creaPagineNuove(payload))
+      .then(() => convertiAvvisiAmmissioni(payload))
       // Dopo tutto il resto: le correzioni della revisione di Fede (2026-11-18)
       .then(() => correzioniRevisione(payload))
       .catch((e) =>

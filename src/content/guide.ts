@@ -88,6 +88,7 @@ export const GUIDE: Guida[] = [
     consigli: [
       'Il titolo va scritto normalmente, non tutto in maiuscolo.',
       'I docenti vedono e modificano solo gli avvisi che hanno scritto loro.',
+      'Coordinatori di scuola: con la categoria “Ammissioni” l’avviso compare nella pagina Ammissioni, sotto la vostra scuola (si imposta da sola), e in /avvisi, ma non in homepage. Con “Visibile fino al” sparisce dalla pagina Ammissioni dopo quel giorno.',
     ],
     schermate: [{ id: 'avvisi', didascalia: 'Il modulo di un nuovo avviso.' }],
   },

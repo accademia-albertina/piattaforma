@@ -1,3 +1,4 @@
+import { CATEGORIE_SOLO_ARCHIVIO } from '@/access/avvisi'
 import { cache } from 'react'
 
 import { DIPARTIMENTI } from '@/collections/Scuole'
@@ -33,12 +34,12 @@ export async function docentiDellaScuola(id: number) {
   return docs
 }
 
-/** Ultimi avvisi della scuola. */
+/** Ultimi avvisi della scuola, senza quelli di ammissione (sono nella pagina Ammissioni). */
 export async function avvisiDellaScuola(id: number, limit = 6) {
   const payload = await payloadClient()
   const { docs } = await payload.find({
     collection: 'avvisi',
-    where: { scuole: { in: [id] } },
+    where: { and: [{ scuole: { in: [id] } }, { categorie: { not_in: CATEGORIE_SOLO_ARCHIVIO } }] },
     sort: '-pubblicatoIl',
     limit,
     pagination: false,

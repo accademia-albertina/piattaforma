@@ -27,6 +27,29 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
+    versione: '0.46.0',
+    data: '2026-11-19',
+    titolo: 'Avvisi di ammissione dei coordinatori',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nuova categoria di avvisi “Ammissioni”: la usano solo i coordinatori di scuola (per la loro scuola, impostata da sola), la vicedirezione e gli admin.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Nella pagina Ammissioni la sezione “Avvisi dei coordinatori” si aggiorna da sola, con una voce per ogni scuola. Gli avvisi compaiono anche in /avvisi, ma non in homepage né nella pagina della scuola.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Campo “Visibile fino al” per gli avvisi di ammissione: dopo quel giorno spariscono dalla pagina Ammissioni.',
+      },
+    ],
+    pr: [95],
+  },
+  {
     versione: '0.45.0',
     data: '2026-11-19',
     titolo: 'Appuntamenti per settimana e mese',

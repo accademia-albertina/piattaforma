@@ -198,6 +198,7 @@ export interface Pagina {
         | BloccoPlanimetria
         | BloccoGuidaStudenti
         | BloccoMappa
+        | BloccoAvvisiAmmissioni
       )[]
     | null;
   /**
@@ -322,6 +323,7 @@ export interface User {
    * Entra con email e password invece che con Google, per vedere il sito come uno studente o un docente. Solo per account finti.
    */
   accountDiProva?: boolean | null;
+  scuoleCoordinate?: number[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -531,7 +533,20 @@ export interface BloccoMappa {
   blockType: 'mappa';
 }
 /**
- * Comunicazioni per studenti e docenti, in /avvisi e in homepage.
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoAvvisiAmmissioni".
+ */
+export interface BloccoAvvisiAmmissioni {
+  /**
+   * Gli avvisi si aggiornano da soli: li scrivono i coordinatori di scuola in Avvisi, categoria “Ammissioni”. Una voce per ogni scuola che ha avvisi.
+   */
+  titolo?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'avvisiAmmissioni';
+}
+/**
+ * Comunicazioni per studenti e docenti, in /avvisi e in homepage. Gli avvisi di Ammissioni vanno nella pagina Ammissioni e in /avvisi, non in homepage.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "avvisi".
@@ -543,6 +558,9 @@ export interface Avviso {
    * Una o due frasi mostrate negli elenchi e nei risultati di Google. Se vuoto si usa l’inizio del testo.
    */
   sommario?: string | null;
+  /**
+   * Ammissioni: solo coordinatori di scuola e vicedirezione. L’avviso compare nella pagina Ammissioni, sotto la sua scuola, e in /avvisi (non in homepage).
+   */
   categorie: (
     | 'in-evidenza'
     | 'generali'
@@ -554,11 +572,16 @@ export interface Avviso {
     | 'coordinatori'
     | 'tasse'
     | 'biblioteca'
+    | 'ammissioni'
   )[];
   /**
-   * Lascia vuoto se l’avviso riguarda tutta l’Accademia.
+   * Lascia vuoto se l’avviso riguarda tutta l’Accademia. Per Ammissioni è obbligatoria (per i coordinatori si imposta da sola).
    */
   scuole?: (number | Scuola)[] | null;
+  /**
+   * Facoltativa. Dopo questo giorno l’avviso sparisce dalla pagina Ammissioni (resta in /avvisi).
+   */
+  visibileFinoAl?: string | null;
   pubblicatoIl: string;
   /**
    * Facoltativa. Per gli avvisi In evidenza è lo sfondo dello slider in homepage (formato orizzontale, almeno 1920 px).
@@ -1565,6 +1588,7 @@ export interface PagineSelect<T extends boolean = true> {
         planimetria?: T | BloccoPlanimetriaSelect<T>;
         guidaStudenti?: T | BloccoGuidaStudentiSelect<T>;
         mappa?: T | BloccoMappaSelect<T>;
+        avvisiAmmissioni?: T | BloccoAvvisiAmmissioniSelect<T>;
       };
   slug?: T;
   genitore?: T;
@@ -1727,6 +1751,15 @@ export interface BloccoMappaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloccoAvvisiAmmissioni_select".
+ */
+export interface BloccoAvvisiAmmissioniSelect<T extends boolean = true> {
+  titolo?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "avvisi_select".
  */
 export interface AvvisiSelect<T extends boolean = true> {
@@ -1734,6 +1767,7 @@ export interface AvvisiSelect<T extends boolean = true> {
   sommario?: T;
   categorie?: T;
   scuole?: T;
+  visibileFinoAl?: T;
   pubblicatoIl?: T;
   immagine?: T;
   contenuto?: T;
@@ -2121,6 +2155,7 @@ export interface UsersSelect<T extends boolean = true> {
   cognome?: T;
   roles?: T;
   accountDiProva?: T;
+  scuoleCoordinate?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
