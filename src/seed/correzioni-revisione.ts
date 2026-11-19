@@ -419,6 +419,34 @@ async function terminologia(payload: Payload) {
   if (n) payload.logger.info(`Revisione: Laurea / Laurea Magistrale aggiornate in ${n} contenuti.`)
 }
 
+/**
+ * Segreteria didattica: in fondo alla pagina il collegamento alla prenotazione dei turni, al
+ * posto del modulo Amelia del sito attuale (Fede, 2026-11-19).
+ */
+async function prenotazioneSegreteria(payload: Payload) {
+  const p = await paginaDa(payload, 'studente/segreteria-didattica')
+  if (!p) return
+  if (JSON.stringify(p.blocchi ?? []).includes('/prenotazioni-segreteria')) return
+  const link = {
+    blockType: 'link' as const,
+    voci: [
+      {
+        etichetta: 'Prenota in segreteria',
+        tipo: 'percorso' as const,
+        url: '/prenotazioni-segreteria',
+        descrizione:
+          'Appuntamento per ritirare libretto, pergamena, certificati e gli altri documenti.',
+      },
+    ],
+  }
+  await salvaPagina(
+    payload,
+    p,
+    { blocchi: [...(p.blocchi ?? []), link] as Pagina['blocchi'] },
+    'segreteria didattica, link alla prenotazione',
+  )
+}
+
 export async function correzioniRevisione(payload: Payload) {
   for (const passo of [
     menu,
@@ -429,6 +457,7 @@ export async function correzioniRevisione(payload: Payload) {
     loghiDottorati,
     assistenza,
     terminologia,
+    prenotazioneSegreteria,
   ]) {
     await passo(payload).catch((e) =>
       payload.logger.error(`Revisione (${passo.name}) non riuscita: ${(e as Error).message}`),

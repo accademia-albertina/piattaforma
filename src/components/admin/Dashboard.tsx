@@ -38,6 +38,9 @@ type Sezione = {
 /** Sezioni del pannello nell'ordine in cui le vedono i redattori; titoli e descrizioni dalla config. */
 const SEZIONI: Sezione[] = [
   // Ognuno vede le sezioni in cui può modificare qualcosa, non tutte quelle che può leggere
+  // Sportello per primo: per la segreteria è il lavoro di ogni giorno
+  { slug: 'prenotazioni-segreteria', tipo: 'collezione', serve: 'update' },
+  { slug: 'sportello-segreteria', tipo: 'globale', serve: 'update' },
   { slug: 'avvisi', tipo: 'collezione', serve: 'update', nuovo: 'Nuovo avviso' },
   { slug: 'pagine', tipo: 'collezione', serve: 'update', nuovo: 'Nuova pagina' },
   { slug: 'pubblicazioni', tipo: 'collezione', serve: 'update', nuovo: 'Nuovo volume' },

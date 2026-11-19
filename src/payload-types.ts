@@ -79,12 +79,14 @@ export interface Config {
     'iscrizioni-corsi': IscrizioneCorso;
     appelli: Appello;
     'iscrizioni-esami': IscrizioneEsame;
+    'prenotazioni-segreteria': PrenotazioneSegreteria;
     albo: AttoAlbo;
     trasparenza: Trasparenza;
     media: Media;
     users: User;
     'email-inviate': EmailInviate;
     'registro-attivita': VoceRegistro;
+    'codici-email': CodiciEmail;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -111,12 +113,14 @@ export interface Config {
     'iscrizioni-corsi': IscrizioniCorsiSelect<false> | IscrizioniCorsiSelect<true>;
     appelli: AppelliSelect<false> | AppelliSelect<true>;
     'iscrizioni-esami': IscrizioniEsamiSelect<false> | IscrizioniEsamiSelect<true>;
+    'prenotazioni-segreteria': PrenotazioniSegreteriaSelect<false> | PrenotazioniSegreteriaSelect<true>;
     albo: AlboSelect<false> | AlboSelect<true>;
     trasparenza: TrasparenzaSelect<false> | TrasparenzaSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'email-inviate': EmailInviateSelect<false> | EmailInviateSelect<true>;
     'registro-attivita': RegistroAttivitaSelect<false> | RegistroAttivitaSelect<true>;
+    'codici-email': CodiciEmailSelect<false> | CodiciEmailSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -129,12 +133,14 @@ export interface Config {
   globals: {
     navigazione: Navigazione;
     home: Home;
+    'sportello-segreteria': SportelloSegreteria;
     'drive-connessione': DriveConnessione;
     'esiti-importazione': EsitiImportazione;
   };
   globalsSelect: {
     navigazione: NavigazioneSelect<false> | NavigazioneSelect<true>;
     home: HomeSelect<false> | HomeSelect<true>;
+    'sportello-segreteria': SportelloSegreteriaSelect<false> | SportelloSegreteriaSelect<true>;
     'drive-connessione': DriveConnessioneSelect<false> | DriveConnessioneSelect<true>;
     'esiti-importazione': EsitiImportazioneSelect<false> | EsitiImportazioneSelect<true>;
   };
@@ -1160,6 +1166,43 @@ export interface IscrizioneEsame {
   createdAt: string;
 }
 /**
+ * Chi viene allo sportello e quando. Si prenota dal sito.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "prenotazioni-segreteria".
+ */
+export interface PrenotazioneSegreteria {
+  id: number;
+  /**
+   * Se lo cambi, la persona riceve un’email con il nuovo orario.
+   */
+  inizio: string;
+  documento: string;
+  stato?: ('prenotata' | 'ritirata' | 'assente' | 'annullata') | null;
+  /**
+   * Facoltativo: compare nell’email a chi aveva prenotato.
+   */
+  motivoAnnullamento?: string | null;
+  cognome?: string | null;
+  nome?: string | null;
+  matricola?: string | null;
+  email: string;
+  telefono?: string | null;
+  /**
+   * Solo per la segreteria: chi prenota non le vede.
+   */
+  noteSegreteria?: string | null;
+  tipo?: ('studente' | 'personale' | 'esterno' | 'segreteria') | null;
+  utente?: (number | null) | User;
+  annullataDa?: ('utente' | 'segreteria' | 'chiusura') | null;
+  annullataIl?: string | null;
+  nominativo?: string | null;
+  posto?: string | null;
+  tokenDisdetta?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Bandi, procedure e comunicazioni dell’Albo online. Aggiungi i nuovi documenti (nomina, verbali, graduatoria) allo stesso atto.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1343,6 +1386,20 @@ export interface VoceRegistro {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "codici-email".
+ */
+export interface CodiciEmail {
+  id: number;
+  email: string;
+  impronta: string;
+  scadenza: string;
+  tentativi?: number | null;
+  usato?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -1414,6 +1471,10 @@ export interface PayloadLockedDocument {
         value: number | IscrizioneEsame;
       } | null)
     | ({
+        relationTo: 'prenotazioni-segreteria';
+        value: number | PrenotazioneSegreteria;
+      } | null)
+    | ({
         relationTo: 'albo';
         value: number | AttoAlbo;
       } | null)
@@ -1436,6 +1497,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'registro-attivita';
         value: number | VoceRegistro;
+      } | null)
+    | ({
+        relationTo: 'codici-email';
+        value: number | CodiciEmail;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1943,6 +2008,31 @@ export interface IscrizioniEsamiSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "prenotazioni-segreteria_select".
+ */
+export interface PrenotazioniSegreteriaSelect<T extends boolean = true> {
+  inizio?: T;
+  documento?: T;
+  stato?: T;
+  motivoAnnullamento?: T;
+  cognome?: T;
+  nome?: T;
+  matricola?: T;
+  email?: T;
+  telefono?: T;
+  noteSegreteria?: T;
+  tipo?: T;
+  utente?: T;
+  annullataDa?: T;
+  annullataIl?: T;
+  nominativo?: T;
+  posto?: T;
+  tokenDisdetta?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "albo_select".
  */
 export interface AlboSelect<T extends boolean = true> {
@@ -2083,6 +2173,19 @@ export interface RegistroAttivitaSelect<T extends boolean = true> {
   dettagli?: T;
   riepilogo?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "codici-email_select".
+ */
+export interface CodiciEmailSelect<T extends boolean = true> {
+  email?: T;
+  impronta?: T;
+  scadenza?: T;
+  tentativi?: T;
+  usato?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2315,6 +2418,87 @@ export interface Home {
   createdAt?: string | null;
 }
 /**
+ * Giorni, orari e durata dei turni, documenti che si possono prenotare e giorni di chiusura. Le modifiche valgono subito sul sito; le prenotazioni già fatte restano.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sportello-segreteria".
+ */
+export interface SportelloSegreteria {
+  id: number;
+  /**
+   * Togli la spunta per sospendere le nuove prenotazioni (restano quelle fatte).
+   */
+  attivo?: boolean | null;
+  /**
+   * Facoltativo. Lo vede chi prenota, sopra la scelta del documento.
+   */
+  avviso?: string | null;
+  durataTurno: number;
+  personePerTurno: number;
+  /**
+   * 2 = si prenota al più tardi due giorni prima. 0 = anche per oggi.
+   */
+  giorniPreavviso: number;
+  /**
+   * Quanti giorni avanti si vede il calendario.
+   */
+  giorniPrenotabili: number;
+  /**
+   * Una riga per ogni giorno di apertura (anche due righe per lo stesso giorno, es. mattina e pomeriggio).
+   */
+  orari?:
+    | {
+        giorno: '1' | '2' | '3' | '4' | '5' | '6';
+        dalle: string;
+        alle: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Giorni straordinari, per esempio quando i turni normali sono tutti pieni.
+   */
+  aperture?:
+    | {
+        data: string;
+        dalle: string;
+        alle: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Nessuno può prenotare in questi giorni. Le festività nazionali e San Giovanni (24 giugno) sono già escluse. Per un solo giorno lascia vuoto “Fino al”; per chiudere solo alcune ore compila “Dalle ore” e “Alle ore”. Quando salvi, le prenotazioni già fatte in quei turni vengono annullate e chi aveva prenotato riceve un’email.
+   */
+  chiusure?:
+    | {
+        dal: string;
+        al?: string | null;
+        dalle?: string | null;
+        alle?: string | null;
+        /**
+         * Facoltativo. Compare nell’email a chi aveva già prenotato, es. “Chiusura straordinaria per sciopero”.
+         */
+        motivo?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Cosa si può prenotare, nell’ordine in cui compare sul sito. Togli “Prenotabile” invece di eliminare un documento.
+   */
+  documenti?:
+    | {
+        nome: string;
+        attivo?: boolean | null;
+        /**
+         * Facoltativa, es. cosa portare.
+         */
+        descrizione?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "drive-connessione".
  */
@@ -2469,6 +2653,55 @@ export interface HomeSelect<T extends boolean = true> {
   tourTesto?: T;
   tourUrl?: T;
   tourFoto?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sportello-segreteria_select".
+ */
+export interface SportelloSegreteriaSelect<T extends boolean = true> {
+  attivo?: T;
+  avviso?: T;
+  durataTurno?: T;
+  personePerTurno?: T;
+  giorniPreavviso?: T;
+  giorniPrenotabili?: T;
+  orari?:
+    | T
+    | {
+        giorno?: T;
+        dalle?: T;
+        alle?: T;
+        id?: T;
+      };
+  aperture?:
+    | T
+    | {
+        data?: T;
+        dalle?: T;
+        alle?: T;
+        id?: T;
+      };
+  chiusure?:
+    | T
+    | {
+        dal?: T;
+        al?: T;
+        dalle?: T;
+        alle?: T;
+        motivo?: T;
+        id?: T;
+      };
+  documenti?:
+    | T
+    | {
+        nome?: T;
+        attivo?: T;
+        descrizione?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

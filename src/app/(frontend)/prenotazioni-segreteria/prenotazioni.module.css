@@ -1,0 +1,20 @@
+.pagina {
+  padding-block: var(--space-5) var(--section-pad);
+}
+
+.avviso {
+  max-width: 56rem;
+  margin-block-end: var(--space-5);
+}
+
+.piede {
+  margin-top: var(--space-6);
+  color: var(--color-text-muted);
+}
+
+.disdetta {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+  max-width: 40rem;
+}
