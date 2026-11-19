@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import React from 'react'
 
 import { IntestazioneStampa, SiteFooter, SiteHeader, SkipLink, TornaSu } from '@/components'
+import { Visualizzatore } from '@/components/Visualizzatore/Visualizzatore'
 import { menuSito } from '@/lib/menu'
 import '@/styles/global.css'
 
@@ -40,6 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </main>
         <SiteFooter {...menu.footer} />
         <TornaSu />
+        <Visualizzatore />
       </body>
     </html>
   )

@@ -1,7 +1,9 @@
-import { Download, ExternalLink } from 'lucide-react'
+import { Download, ExternalLink, Maximize2 } from 'lucide-react'
 
 import { formatDimensione, formatTipoFile } from '@/utilities/format'
-import { NUOVA_SCHEDA, isPdf } from '@/utilities/pdf'
+import { NUOVA_SCHEDA, attributiFile, isPdf, tipoAnteprima } from '@/utilities/pdf'
+
+import { AnteprimaPdf } from '../Visualizzatore/AnteprimaPdf'
 
 import styles from './Documento.module.css'
 
@@ -22,8 +24,9 @@ export type DocumentoProps = {
 
 /**
  * Documento in evidenza nella pagina (es. il regolamento delle tasse): titolo, formato e peso,
- * pulsanti per aprirlo e scaricarlo e, da tablet in su, l'anteprima del PDF incorporata.
- * L'anteprima usa il lettore PDF del browser, in attesa del visualizzatore del sito.
+ * pulsanti per aprirlo e scaricarlo e l'anteprima del PDF incorporata (visualizzatore del
+ * sito, PDF.js nel browser: funziona anche sul telefono). «Apri» porta il PDF a schermo intero;
+ * i PDF di altri siti si aprono in una nuova scheda e non hanno anteprima.
  */
 export function Documento({
   nome,
@@ -36,6 +39,7 @@ export function Documento({
   id,
 }: DocumentoProps) {
   const pdf = isPdf(url, mimeType)
+  const nelSito = tipoAnteprima(url, mimeType) === 'pdf'
   const info = [formatTipoFile(mimeType, filename), formatDimensione(filesize)].filter(Boolean)
   return (
     <section className={styles.documento} aria-labelledby={id}>
@@ -48,7 +52,21 @@ export function Documento({
           {info.length ? <p className={styles.info}>{info.join(' · ')}</p> : null}
         </div>
         <div className={styles.azioni}>
-          {pdf ? (
+          {nelSito ? (
+            <a
+              className={styles.azione}
+              href={url}
+              {...attributiFile(url, {
+                mimeType,
+                titolo: nome,
+                filename,
+                info: info.join(' · '),
+              })}
+            >
+              <Maximize2 size={18} strokeWidth={1.75} aria-hidden />
+              Apri <span className="visually-hidden">{nome}</span>
+            </a>
+          ) : pdf ? (
             <a className={styles.azione} href={url} target="_blank" rel="noopener">
               <ExternalLink size={18} strokeWidth={1.75} aria-hidden />
               Apri{' '}
@@ -64,14 +82,7 @@ export function Documento({
           </a>
         </div>
       </div>
-      {pdf && anteprima !== false ? (
-        <iframe
-          className={styles.anteprima}
-          src={`${url}#view=FitH`}
-          title={`Anteprima: ${nome}`}
-          loading="lazy"
-        />
-      ) : null}
+      {nelSito && anteprima !== false ? <AnteprimaPdf url={url} nome={nome} /> : null}
     </section>
   )
 }

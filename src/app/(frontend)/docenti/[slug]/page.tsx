@@ -10,7 +10,7 @@ import { Breadcrumbs, Fisarmonica, TestataPagina } from '@/components'
 import { corsiDelDocente, etichettaLivelli, trovaDocente } from '@/lib/corsi'
 import type { Media, Scuola } from '@/payload-types'
 import { lexicalToText } from '@/utilities/lexicalText'
-import { NUOVA_SCHEDA, attributiFile, isPdf } from '@/utilities/pdf'
+import { NUOVA_SCHEDA, apreNuovaScheda, attributiFile } from '@/utilities/pdf'
 
 import styles from './docente.module.css'
 import { srcImmagine } from '@/utilities/srcImmagine'
@@ -148,10 +148,15 @@ export default async function DocentePage({ params }: Props) {
               <dd>
                 <a
                   href={cv.url}
-                  {...attributiFile(cv.url, { mimeType: cv.mimeType, scarica: true })}
+                  {...attributiFile(cv.url, {
+                    mimeType: cv.mimeType,
+                    scarica: true,
+                    titolo: `Curriculum di ${docente.nomeCompleto ?? 'docente'}`,
+                    filename: cv.filename,
+                  })}
                 >
                   Apri il PDF
-                  {isPdf(cv.url, cv.mimeType) ? (
+                  {apreNuovaScheda(cv.url, cv.mimeType) ? (
                     <span className="visually-hidden">{NUOVA_SCHEDA}</span>
                   ) : null}
                 </a>

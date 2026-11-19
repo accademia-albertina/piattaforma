@@ -1,4 +1,4 @@
-import { Download } from 'lucide-react'
+import { FileText } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -16,7 +16,7 @@ import {
 import { trovaCalendario } from '@/lib/calendari-dati'
 import type { Media } from '@/payload-types'
 
-import { NUOVA_SCHEDA } from '@/utilities/pdf'
+import { NUOVA_SCHEDA, apreNuovaScheda, attributiFile } from '@/utilities/pdf'
 
 import styles from './calendario.module.css'
 
@@ -139,9 +139,19 @@ export default async function CalendarioPage({ params, searchParams }: Props) {
           <div className={`${styles.azioni} non-stampare`}>
             <StampaPagina />
             {pdf?.url ? (
-              <a href={pdf.url} className="btn btn-secondario" target="_blank" rel="noopener">
-                <Download size={18} strokeWidth={1.75} aria-hidden /> Apri il PDF
-                <span className="visually-hidden">{NUOVA_SCHEDA}</span>
+              <a
+                href={pdf.url}
+                className="btn btn-secondario"
+                {...attributiFile(pdf.url, {
+                  mimeType: pdf.mimeType,
+                  titolo: c.titolo,
+                  filename: pdf.filename,
+                })}
+              >
+                <FileText size={18} strokeWidth={1.75} aria-hidden /> Apri il PDF
+                {apreNuovaScheda(pdf.url, pdf.mimeType) ? (
+                  <span className="visually-hidden">{NUOVA_SCHEDA}</span>
+                ) : null}
               </a>
             ) : null}
           </div>

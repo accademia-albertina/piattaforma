@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import { risolviLink } from '@/lib/link'
 import { slugScuolaDaLink } from '@/utilities/linkScuola'
+import { attributiFile } from '@/utilities/pdf'
 import type { Media, Pagina } from '@/payload-types'
 
 import { Attachments } from '../Attachments/Attachments'
@@ -21,18 +22,27 @@ export type Blocco = NonNullable<Pagina['blocchi']>[number]
 const media = (m: number | Media | null | undefined) =>
   m && typeof m === 'object' && m.url ? m : null
 
+/** Immagine dei blocchi: col clic si apre ingrandita nel visualizzatore del sito. */
 function Immagine({ m, didascalia }: { m: Media; didascalia?: string | null }) {
+  const titolo = didascalia || m.alt || m.filename || 'Immagine'
   return (
     <figure className={styles.figure}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- l'ottimizzazione arriva con lo storage su Drive */}
-      <img
-        src={m.url!}
-        alt={m.alt ?? ''}
-        width={m.width ?? undefined}
-        height={m.height ?? undefined}
-        loading="lazy"
-        decoding="async"
-      />
+      <a
+        href={m.url!}
+        className={styles.ingrandisci}
+        aria-label={`Ingrandisci: ${m.alt || titolo}`}
+        {...attributiFile(m.url!, { mimeType: m.mimeType, titolo, filename: m.filename })}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element -- l'ottimizzazione arriva con lo storage su Drive */}
+        <img
+          src={m.url!}
+          alt={m.alt ?? ''}
+          width={m.width ?? undefined}
+          height={m.height ?? undefined}
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
       {didascalia ? <figcaption>{didascalia}</figcaption> : null}
     </figure>
   )
@@ -117,7 +127,7 @@ function RenderBlocco({ b, i }: { b: Blocco; i: number }) {
       }
       return (
         <Sezione id={id} titolo={b.titolo}>
-          <ul className={styles.galleria}>
+          <ul className={styles.galleria} data-anteprime="">
             {b.immagini.map((im, k) => {
               const m = media(im.immagine)
               return m ? (

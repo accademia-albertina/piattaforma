@@ -1,0 +1,577 @@
+/*
+ * Visualizzatore di PDF e immagini.
+ * A schermo intero è scuro (barra #1c3038 come il footer, fondo #10191d): il documento
+ * risalta e lo sguardo resta sulla pagina. Nella pagina (Documento) è chiaro, in azzurro-grigio.
+ * Contrasti: bianco su #1c3038 13,73; bianco al 75% su #1c3038 ≈ 8,6; bordi dei controlli
+ * bianco al 60% su #1c3038 ≈ 6 (≥ 3:1). Tema chiaro: #202f37 su #e3eaee 11,3.
+ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--color-footer-dark);
+}
+
+.overlay[data-entering] {
+  animation: comparsa var(--duration-base) var(--ease-out);
+}
+
+.overlay[data-exiting] {
+  animation: comparsa var(--duration-fast) var(--ease-out) reverse;
+}
+
+@keyframes comparsa {
+  from {
+    opacity: 0;
+  }
+}
+
+.modale,
+.dialogo {
+  width: 100%;
+  height: 100%;
+}
+
+.modale {
+  height: 100dvh;
+}
+
+.dialogo {
+  outline: none;
+}
+
+.tastiera {
+  display: contents;
+}
+
+/* --- Struttura: barra e contenuto --------------------------------------------------------- */
+
+.vista {
+  --vis-barra: var(--color-footer);
+  --vis-fondo: var(--color-footer-dark);
+  --vis-testo: #fff;
+  --vis-testo-tenue: rgb(255 255 255 / 0.75);
+  --vis-bordo: rgb(255 255 255 / 0.14);
+  --vis-bordo-controllo: rgb(255 255 255 / 0.6);
+  --vis-hover: rgb(255 255 255 / 0.1);
+  --vis-pagina-ombra: 0 1px 3px rgb(0 0 0 / 0.45), 0 8px 24px rgb(0 0 0 / 0.3);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+    'titolo strumenti chiudi'
+    'contenuto contenuto contenuto';
+  height: 100%;
+  background: var(--vis-fondo);
+  color: var(--vis-testo);
+  font-family: var(--font-family);
+  color-scheme: dark; /* barre di scorrimento scure */
+}
+
+.vista[data-incorporato] {
+  --vis-barra: var(--color-azzurro-100);
+  --vis-fondo: var(--color-azzurro-200);
+  --vis-testo: var(--color-heading);
+  --vis-testo-tenue: var(--color-heading);
+  --vis-bordo: var(--color-border);
+  --vis-bordo-controllo: var(--color-border-control);
+  --vis-hover: var(--color-azzurro-50);
+  --vis-pagina-ombra: 0 1px 2px rgb(18 25 29 / 0.12), 0 4px 12px rgb(18 25 29 / 0.08);
+  color-scheme: light;
+}
+
+.areaTitolo,
+.areaStrumenti,
+.areaChiudi {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  background: var(--vis-barra);
+  border-bottom: 1px solid var(--vis-bordo);
+}
+
+.areaTitolo {
+  grid-area: titolo;
+  min-width: 0;
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4);
+}
+
+.areaStrumenti {
+  grid-area: strumenti;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+}
+
+.areaChiudi {
+  grid-area: chiudi;
+  padding-right: var(--space-2);
+}
+
+.comandi,
+.azioni {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.comandi {
+  gap: var(--space-4);
+}
+
+.contenuto {
+  grid-area: contenuto;
+  touch-action: pan-x pan-y; /* il pizzico lo gestisce il visualizzatore */
+  position: relative;
+  overflow: auto;
+  overscroll-behavior: contain;
+  outline: none;
+}
+
+.contenuto:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--vis-testo);
+}
+
+/* Telefono: titolo e chiudi in alto, strumenti in basso a portata di pollice */
+@media (max-width: 47.99rem) {
+  .vista {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'titolo chiudi'
+      'contenuto contenuto'
+      'strumenti strumenti';
+  }
+
+  .areaTitolo {
+    min-height: 56px;
+    padding-left: var(--space-3);
+  }
+
+  .areaChiudi {
+    min-height: 56px;
+  }
+
+  .areaStrumenti {
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-2) calc(var(--space-1) + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--vis-bordo);
+    border-bottom: 0;
+    overflow-x: auto;
+  }
+
+  .comandi {
+    gap: var(--space-2);
+  }
+
+  .testoAzione {
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+  }
+
+  .azione {
+    width: var(--target-min);
+    padding: 0;
+    justify-content: center;
+  }
+
+  .etichettaPagina {
+    display: none;
+  }
+}
+
+/* --- Titolo --------------------------------------------------------------------------------- */
+
+.titolo {
+  min-width: 0;
+}
+
+.info {
+  margin: 0 0 2px;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  color: var(--vis-testo-tenue);
+}
+
+.etichettaAnteprima {
+  margin: 0;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--vis-testo-tenue);
+}
+
+.nome {
+  margin: 0;
+  overflow: hidden;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--vis-testo);
+}
+
+/* --- Controlli ------------------------------------------------------------------------------ */
+
+.gruppo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.pulsante {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--target-min);
+  height: var(--target-min);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--vis-testo);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.pulsante[data-hovered] {
+  background: var(--vis-hover);
+}
+
+.pulsante[data-disabled] {
+  opacity: 0.4;
+  cursor: default;
+  background: transparent;
+}
+
+/* Il 100% torna ad «adatta»: quando lo è già resta leggibile, non sbiadito */
+.valoreZoom {
+  min-width: 4.25rem;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.valoreZoom[data-disabled] {
+  opacity: 1;
+}
+
+.campoPagina {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+}
+
+.etichettaPagina {
+  color: var(--vis-testo-tenue);
+}
+
+.inputPagina {
+  width: 3.5em;
+  height: 36px;
+  padding: 0 var(--space-1);
+  border: 1px solid var(--vis-bordo-controllo);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--vis-testo);
+  font: inherit;
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.totalePagine {
+  color: var(--vis-testo-tenue);
+  font-variant-numeric: tabular-nums;
+}
+
+.contatore {
+  min-width: 4.5em;
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.azione {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--vis-bordo-controllo);
+  border-radius: var(--radius-sm);
+  color: var(--vis-testo);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.azione:hover {
+  background: var(--vis-hover);
+  color: var(--vis-testo);
+  text-decoration: none;
+}
+
+.soloIcona {
+  width: var(--target-min);
+  padding: 0;
+  justify-content: center;
+}
+
+.chiudi {
+  min-width: 52px;
+  height: 52px;
+}
+
+/* --- Stati: caricamento ed errore ------------------------------------------------------------ */
+
+.messaggio {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  max-width: 44ch;
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-4);
+  color: var(--vis-testo);
+  text-align: center;
+}
+
+.messaggio p {
+  margin: 0;
+}
+
+.progresso {
+  width: min(240px, 60vw);
+  height: 3px;
+  overflow: hidden;
+  background: var(--vis-bordo);
+}
+
+.progresso span {
+  display: block;
+  height: 100%;
+  background: var(--vis-testo);
+  transition: width var(--duration-fast) linear;
+}
+
+.progresso[data-indeterminato] span {
+  width: 35%;
+  animation: avanzamento 1.1s var(--ease-out) infinite;
+}
+
+@keyframes avanzamento {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+
+.alternativa {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+/* --- Pagine del PDF ------------------------------------------------------------------------- */
+
+.pagine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: max-content;
+  min-width: 100%;
+}
+
+.pagina {
+  position: relative;
+  flex: none;
+  background: #fff;
+  box-shadow: var(--vis-pagina-ombra);
+}
+
+.tela {
+  position: absolute;
+  inset: 0;
+}
+
+.tela canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Livello di testo di PDF.js (da pdfjs-dist/web/pdf_viewer.css, solo la parte che serve) */
+.testoPdf {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  line-height: 1;
+  text-align: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-size-adjust: none;
+  forced-color-adjust: none;
+  transform-origin: 0 0;
+  caret-color: CanvasText;
+  z-index: 0;
+  color-scheme: only light;
+
+  --min-font-size: 1;
+  --text-scale-factor: calc(var(--total-scale-factor) * var(--min-font-size));
+  --min-font-size-inv: calc(1 / var(--min-font-size));
+}
+
+.testoPdf :global(:is(span, br)) {
+  position: absolute;
+  color: transparent;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+  user-select: text;
+}
+
+.testoPdf > :global(:not(.markedContent)),
+.testoPdf :global(.markedContent span:not(.markedContent)) {
+  z-index: 1;
+  --font-height: 0;
+  font-size: calc(var(--text-scale-factor) * var(--font-height));
+  --scale-x: 1;
+  --rotate: 0deg;
+  transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv));
+}
+
+.testoPdf :global(.markedContent) {
+  display: contents;
+}
+
+.testoPdf ::selection {
+  background: rgb(43 90 128 / 0.3);
+  color: transparent;
+}
+
+.testoPdf :global(br)::selection {
+  background: transparent;
+}
+
+.testoPdf :global(.endOfContent) {
+  display: block;
+  position: absolute;
+  inset: 100% 0 0;
+  z-index: 0;
+  cursor: default;
+  user-select: none;
+}
+
+.testoPdf:global(.selecting) :global(.endOfContent) {
+  top: 0;
+}
+
+/* Link del PDF: aree trasparenti sopra il testo, evidenziate al passaggio */
+.collegamenti {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.collegamenti > * {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.collegamenti > :hover,
+.collegamenti > [data-hovered] {
+  background: rgb(43 90 128 / 0.14);
+}
+
+/* --- Immagine ------------------------------------------------------------------------------- */
+
+.contenutoImmagine {
+  display: flex;
+}
+
+.cornice {
+  flex: none;
+  margin: auto;
+  padding: 0;
+  user-select: none;
+}
+
+.cornice[data-cursore='ingrandisci'] {
+  cursor: zoom-in;
+}
+
+.cornice[data-cursore='riduci'] {
+  cursor: zoom-out;
+}
+
+.cornice img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+}
+
+.cornice img:not([data-caricata]) {
+  position: absolute;
+  opacity: 0;
+}
+
+/* --- Anteprima nella pagina (Documento) ----------------------------------------------------- */
+
+.incorporata {
+  height: min(70vh, 40rem);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-azzurro-200);
+}
+
+@media (min-width: 48rem) {
+  .incorporata {
+    height: min(85vh, 60rem);
+  }
+}
+
+/* Sul telefono si ingrandisce col pizzico: niente − e + (qui in fondo, dopo .gruppo) */
+@media (max-width: 47.99rem) {
+  .gruppoZoom {
+    display: none;
+  }
+}
+
+/* Lo spazio riservato alla barra di scorrimento della pagina (scrollbar-gutter) non resta
+   una striscia bianca accanto al visualizzatore */
+:global(html):has(.overlay) {
+  background-color: var(--color-footer-dark);
+}
+
+@media print {
+  .overlay {
+    display: none;
+  }
+}
+
+.azione svg {
+  flex: none;
+}

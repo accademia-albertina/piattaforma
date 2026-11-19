@@ -29,6 +29,7 @@ const eslintConfig = [
   {
     ignores: [
       '.next/',
+      'public/pdfjs/',
       'storybook-static/',
       'src/payload-types.ts',
       'src/payload-generated-schema.ts',

@@ -27,7 +27,7 @@ export type Versione = {
 
 export const CHANGELOG: Versione[] = [
   {
-    versione: '0.44.0',
+    versione: '0.45.0',
     data: '2026-11-19',
     titolo: 'Appuntamenti per settimana e mese',
     voci: [
@@ -43,6 +43,29 @@ export const CHANGELOG: Versione[] = [
       },
     ],
     pr: [99],
+  },
+  {
+    versione: '0.44.0',
+    data: '2026-11-19',
+    titolo: 'Visualizzatore di PDF e immagini',
+    voci: [
+      {
+        tipo: 'nuovo',
+        testo:
+          'PDF e immagini allegati (avvisi, Albo, Amministrazione trasparente, pagine, calendari, curriculum dei docenti) si aprono a schermo intero nel sito, senza scaricarli: pagine sfogliabili, zoom, testo selezionabile, link cliccabili. Il pulsante Scarica resta sempre accanto.',
+      },
+      {
+        tipo: 'nuovo',
+        testo:
+          'Con più allegati si passa da uno all’altro con le frecce. Su telefono si ingrandisce col pizzico e il tasto Indietro chiude il visualizzatore.',
+      },
+      {
+        tipo: 'migliorato',
+        testo:
+          'Il blocco Documento mostra l’anteprima del PDF anche su telefono. Le foto dei blocchi Immagine e Galleria si ingrandiscono col clic.',
+      },
+    ],
+    pr: [100],
   },
   {
     versione: '0.43.0',
